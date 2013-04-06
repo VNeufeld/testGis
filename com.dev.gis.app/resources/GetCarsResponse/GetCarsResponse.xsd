@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="common" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="common" schemaLocation="../Common/common.xsd"/>
+	<xs:element name="RequestorResult">
+		<xs:annotation>
+			<xs:documentation>Enveloping tag</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Administration"/>
+				<xs:element ref="Cars"/>
+				<xs:element ref="Insurances" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="required"/>
+			<xs:attribute name="sessionId" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Administration">
+		<xs:annotation>
+			<xs:documentation>Contain administrative data</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="com:Currency" minOccurs="0"/>
+				<xs:element ref="Errors"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Errors">
+		<xs:annotation>
+			<xs:documentation>Contains Error objects</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Error" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Car">
+		<xs:annotation>
+			<xs:documentation>The Car object</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="com:OperatorId"/>
+				<xs:element ref="com:SupplierId"/>
+				<xs:element ref="com:CompanyName" minOccurs="0"/>
+				<xs:element ref="com:ServiceCatalogId"/>
+				<xs:element ref="com:StationId"/>
+				<xs:element ref="com:DropOffStationId"/>
+				<xs:element ref="com:GroupId"/>
+				<xs:element ref="com:TypeId" minOccurs="0"/>
+				<xs:element ref="com:CategoryId" minOccurs="0"/>
+				<xs:element ref="com:Producer" minOccurs="0"/>
+				<xs:element ref="com:Type" minOccurs="0"/>
+				<xs:element ref="com:Aircondition" minOccurs="0"/>
+				<xs:element ref="com:Doors" minOccurs="0"/>
+				<xs:element ref="com:Transmission" minOccurs="0"/>
+				<xs:element ref="com:Automatic" minOccurs="0"/>
+				<xs:element ref="com:NavigationSystem" minOccurs="0"/>
+				<xs:element ref="com:SnowTires" minOccurs="0"/>
+				<xs:element ref="com:AllWheel" minOccurs="0"/>
+				<xs:element ref="com:Convertible" minOccurs="0"/>
+				<xs:element ref="com:StationWagon" minOccurs="0"/>
+				<xs:element ref="com:Seats" minOccurs="0"/>
+				<xs:element ref="com:Currency"/>
+				<xs:element ref="com:Status"/>
+				<xs:element ref="com:ACRISS" minOccurs="0"/>
+				<xs:element ref="com:HorsePower" minOccurs="0"/>
+				<xs:element ref="com:TrunkSize" minOccurs="0"/>
+				<xs:element ref="com:Adults" minOccurs="0"/>
+				<xs:element ref="com:Children" minOccurs="0"/>
+				<xs:element ref="com:LuggageLarge" minOccurs="0"/>
+				<xs:element ref="com:LuggageSmall" minOccurs="0"/>
+				<xs:element ref="com:FuelType" minOccurs="0"/>
+				<xs:element ref="com:CommonCarInformation" minOccurs="0"/>
+				<xs:element ref="com:FormId" minOccurs="0"/>
+				<xs:element ref="com:Form" minOccurs="0"/>
+				<xs:element ref="com:SupplierCategory" minOccurs="0"/>
+				<xs:element ref="OutOfHour" minOccurs="0"/>
+				<xs:element ref="Excess" minOccurs="0"/>
+				<xs:element ref="com:Picture" minOccurs="0"/>
+				<xs:element ref="Tariffs"/>
+				<xs:element ref="Inclusives" minOccurs="0"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Cars">
+		<xs:annotation>
+			<xs:documentation>Contains Car objects</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="com:Quantity"/>
+				<xs:element ref="Car" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OutOfHour">
+		<xs:annotation>
+			<xs:documentation>Out of hour information</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="com:CurrencyId" minOccurs="0"/>
+				<xs:element ref="com:Currency" minOccurs="0"/>
+				<xs:element ref="com:Fee" minOccurs="0"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Excess">
+		<xs:annotation>
+			<xs:documentation>Excess information</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="com:CurrencyId" minOccurs="0"/>
+				<xs:element ref="com:Currency" minOccurs="0"/>
+				<xs:element ref="com:ExcessAmount" minOccurs="0"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Error">
+		<xs:annotation>
+			<xs:documentation>Contains error related data</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="com:ErrorType"/>
+				<xs:element ref="com:ErrorText"/>
+				<xs:element ref="com:ErrorNo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Tariffs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Tariff" maxOccurs="2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Tariff">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="com:Price"/>
+				<xs:element ref="com:PriceStd" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The standard price of the car to indicate a discount. This is only shown if Price value is lower than this value</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="com:PromoText" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="CommissionType" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="1"/>
+						<xs:pattern value="2"/>
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="GroupName" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Insurances">
+		<xs:annotation>
+			<xs:documentation>contains insurances</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Insurance" maxOccurs="2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Inclusives">
+		<xs:annotation>
+			<xs:documentation>contains inclusive Items</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Inclusive" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Inclusive">
+		<xs:annotation>
+			<xs:documentation>Information about inclusive item</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="com:Id"/>
+				<xs:element ref="com:Code"/>
+				<xs:element ref="com:Description"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Insurance">
+		<xs:annotation>
+			<xs:documentation>Information about insurance. IDs used: 1=CancelInsurance, 2=SCDW</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="com:Id"/>
+				<xs:element ref="com:Price"/>
+				<xs:element ref="com:Inclusive"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
