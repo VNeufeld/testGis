@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_3T6f4J9dEeKQv4cu-KuFAg">
+  <ownedComment xmi:id="_-GyTIJ9jEeKQv4cu-KuFAg" annotatedElement="_3T6f4J9dEeKQv4cu-KuFAg">
+    <body>start Task and show View</body>
+  </ownedComment>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LEo4YJ9eEeKQv4cu-KuFAg" name="TaskProjectModel">
+    <generalization xmi:id="_HNGwsJ9fEeKQv4cu-KuFAg" general="_qB2XcJ9eEeKQv4cu-KuFAg"/>
+    <ownedAttribute xmi:id="_Ks3cIJ9fEeKQv4cu-KuFAg" name="groups">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ks3cIZ9fEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ks3cIp9fEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_qB2XcJ9eEeKQv4cu-KuFAg" name="TaskItemBase">
+    <ownedAttribute xmi:id="_3-pCcJ9eEeKQv4cu-KuFAg" name="id">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3-yzcJ9eEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3-yzcZ9eEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_8iiEYJ9eEeKQv4cu-KuFAg" name="name">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8ir1YJ9eEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8ir1YZ9eEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_-LHy0J9eEeKQv4cu-KuFAg" name="iconName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-LRj0J9eEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-LRj0Z9eEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_A5ongJ9fEeKQv4cu-KuFAg" name="description">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_A5xxcJ9fEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_A5xxcZ9fEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Pf7igJ9fEeKQv4cu-KuFAg" name="TaskGroup">
+    <generalization xmi:id="_TxOYkJ9fEeKQv4cu-KuFAg" general="_qB2XcJ9eEeKQv4cu-KuFAg"/>
+    <ownedAttribute xmi:id="_z_q2AJ9fEeKQv4cu-KuFAg" name="tasks">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_z_0nAJ9fEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_z_0nAZ9fEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Vlt1AJ9fEeKQv4cu-KuFAg" name="" memberEnd="_Vlt1AZ9fEeKQv4cu-KuFAg _Vlt1BJ9fEeKQv4cu-KuFAg" navigableOwnedEnd="_Vlt1AZ9fEeKQv4cu-KuFAg _Vlt1BJ9fEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_Vlt1AZ9fEeKQv4cu-KuFAg" name="parent" type="_LEo4YJ9eEeKQv4cu-KuFAg" association="_Vlt1AJ9fEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Vlt1Ap9fEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Vlt1A59fEeKQv4cu-KuFAg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_Vlt1BJ9fEeKQv4cu-KuFAg" name="taskGroups" type="_Pf7igJ9fEeKQv4cu-KuFAg" association="_Vlt1AJ9fEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Vlt1BZ9fEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Vlt1Bp9fEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wIRGoJ9fEeKQv4cu-KuFAg" name="TaskItem">
+    <generalization xmi:id="_5aUg0J9fEeKQv4cu-KuFAg" general="_qB2XcJ9eEeKQv4cu-KuFAg"/>
+    <ownedOperation xmi:id="_LsVYQJ9jEeKQv4cu-KuFAg" name="createTask" isStatic="true"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_3uAwAJ9fEeKQv4cu-KuFAg" name="" memberEnd="_3uAwAZ9fEeKQv4cu-KuFAg _3uAwBJ9fEeKQv4cu-KuFAg" navigableOwnedEnd="_3uAwBJ9fEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_3uAwAZ9fEeKQv4cu-KuFAg" name="taskGroups" type="_Pf7igJ9fEeKQv4cu-KuFAg" aggregation="shared" association="_3uAwAJ9fEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3uAwAp9fEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3uAwA59fEeKQv4cu-KuFAg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_3uAwBJ9fEeKQv4cu-KuFAg" name="taskItems" type="_wIRGoJ9fEeKQv4cu-KuFAg" association="_3uAwAJ9fEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3uAwBZ9fEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3uAwBp9fEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_269tAJ9gEeKQv4cu-KuFAg" name="TaskContentProvider">
+    <ownedOperation xmi:id="_6w41sJ9gEeKQv4cu-KuFAg" name="getObservableListFactory"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_BGu9cJ9hEeKQv4cu-KuFAg" name="" memberEnd="_BGu9cZ9hEeKQv4cu-KuFAg _BGu9dJ9hEeKQv4cu-KuFAg" navigableOwnedEnd="_BGu9dJ9hEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_BGu9cZ9hEeKQv4cu-KuFAg" name="" type="_269tAJ9gEeKQv4cu-KuFAg" association="_BGu9cJ9hEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BGu9cp9hEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BGu9c59hEeKQv4cu-KuFAg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_BGu9dJ9hEeKQv4cu-KuFAg" name="" type="_LEo4YJ9eEeKQv4cu-KuFAg" association="_BGu9cJ9hEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BGu9dZ9hEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BGu9dp9hEeKQv4cu-KuFAg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_NDAiMJ9hEeKQv4cu-KuFAg" name="TaskTreeView">
+    <ownedAttribute xmi:id="_V7LcwJ9hEeKQv4cu-KuFAg" name="treeViewer">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Element"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_V7UmsJ9hEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_V7UmsZ9hEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_5faKQJ9hEeKQv4cu-KuFAg" name="hookDoubleClick"/>
+    <ownedOperation xmi:id="_7qqg4J9hEeKQv4cu-KuFAg" name="hookContextMenu"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_S7jp8J9hEeKQv4cu-KuFAg" name="" memberEnd="_S7jp8Z9hEeKQv4cu-KuFAg _S7jp9J9hEeKQv4cu-KuFAg" navigableOwnedEnd="_S7jp8Z9hEeKQv4cu-KuFAg _S7jp9J9hEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_S7jp8Z9hEeKQv4cu-KuFAg" name="taskTreeViews" type="_NDAiMJ9hEeKQv4cu-KuFAg" association="_S7jp8J9hEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_S7jp8p9hEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_S7jp859hEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_S7jp9J9hEeKQv4cu-KuFAg" name="taskContentProviders" type="_269tAJ9gEeKQv4cu-KuFAg" association="_S7jp8J9hEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_S7jp9Z9hEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_S7jp9p9hEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_H_wOQJ9iEeKQv4cu-KuFAg" name="TaskExecutionView">
+    <ownedComment xmi:id="_yEQx4J9iEeKQv4cu-KuFAg" annotatedElement="_H_wOQJ9iEeKQv4cu-KuFAg">
+      <body>Show results of the Task</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_gq1n8J9iEeKQv4cu-KuFAg" name="Table">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gq_Y8J9iEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gq_Y8Z9iEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_wPBukJ9iEeKQv4cu-KuFAg" name="TableView">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wPK4gJ9iEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wPK4gZ9iEeKQv4cu-KuFAg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_b6Lf4J9jEeKQv4cu-KuFAg" name="TaskProjectDialog">
+    <ownedComment xmi:id="_fgCMQJ9jEeKQv4cu-KuFAg" annotatedElement="_b6Lf4J9jEeKQv4cu-KuFAg">
+      <body>Define task properies for presentation and data provider for task execution</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_tMTvAJ9jEeKQv4cu-KuFAg" name="" memberEnd="_tMTvAZ9jEeKQv4cu-KuFAg _tMdgAJ9jEeKQv4cu-KuFAg" navigableOwnedEnd="_tMdgAJ9jEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_tMTvAZ9jEeKQv4cu-KuFAg" name="" type="_b6Lf4J9jEeKQv4cu-KuFAg" association="_tMTvAJ9jEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tMTvAp9jEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tMTvA59jEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_tMdgAJ9jEeKQv4cu-KuFAg" name="" type="_wIRGoJ9fEeKQv4cu-KuFAg" association="_tMTvAJ9jEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tMdgAZ9jEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_tMdgAp9jEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_1xI20J9jEeKQv4cu-KuFAg" name="" memberEnd="_1xI20Z9jEeKQv4cu-KuFAg _1xI21J9jEeKQv4cu-KuFAg" navigableOwnedEnd="_1xI21J9jEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_1xI20Z9jEeKQv4cu-KuFAg" name="" type="_NDAiMJ9hEeKQv4cu-KuFAg" association="_1xI20J9jEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1xI20p9jEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1xI2059jEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_1xI21J9jEeKQv4cu-KuFAg" name="" type="_b6Lf4J9jEeKQv4cu-KuFAg" association="_1xI20J9jEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1xI21Z9jEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1xI21p9jEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_IvuAsJ9kEeKQv4cu-KuFAg" name="TaskExecutor"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_M0YI8J9kEeKQv4cu-KuFAg" name="" memberEnd="_M0YI8Z9kEeKQv4cu-KuFAg _M0YI9J9kEeKQv4cu-KuFAg" navigableOwnedEnd="_M0YI9J9kEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_M0YI8Z9kEeKQv4cu-KuFAg" name="taskTreeViews" type="_NDAiMJ9hEeKQv4cu-KuFAg" association="_M0YI8J9kEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M0YI8p9kEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M0YI859kEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_M0YI9J9kEeKQv4cu-KuFAg" name="taskExecutors" type="_IvuAsJ9kEeKQv4cu-KuFAg" association="_M0YI8J9kEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_M0YI9Z9kEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_M0YI9p9kEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Nvu98J9kEeKQv4cu-KuFAg" name="TaskItems" memberEnd="_Nvu98Z9kEeKQv4cu-KuFAg _Nvu99J9kEeKQv4cu-KuFAg" navigableOwnedEnd="_Nvu99J9kEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_Nvu98Z9kEeKQv4cu-KuFAg" name="taskItems" type="_wIRGoJ9fEeKQv4cu-KuFAg" association="_Nvu98J9kEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Nvu98p9kEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Nvu9859kEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_Nvu99J9kEeKQv4cu-KuFAg" name="taskExecutors" type="_IvuAsJ9kEeKQv4cu-KuFAg" association="_Nvu98J9kEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Nvu99Z9kEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Nvu99p9kEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Qc5u0J9kEeKQv4cu-KuFAg" name="" memberEnd="_Qc5u0Z9kEeKQv4cu-KuFAg _Qc5u1J9kEeKQv4cu-KuFAg" navigableOwnedEnd="_Qc5u1J9kEeKQv4cu-KuFAg">
+    <ownedEnd xmi:id="_Qc5u0Z9kEeKQv4cu-KuFAg" name="" type="_IvuAsJ9kEeKQv4cu-KuFAg" association="_Qc5u0J9kEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Qc5u0p9kEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Qc5u059kEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_Qc5u1J9kEeKQv4cu-KuFAg" name="" type="_H_wOQJ9iEeKQv4cu-KuFAg" association="_Qc5u0J9kEeKQv4cu-KuFAg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Qc5u1Z9kEeKQv4cu-KuFAg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Qc5u1p9kEeKQv4cu-KuFAg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jv1acJ-YEeKXveoTGXhd3Q" name="ProjectXmlPersistentProvider">
+    <generalization xmi:id="_JZbR8J-ZEeKXveoTGXhd3Q" general="_2tYpkJ-YEeKXveoTGXhd3Q"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_2tYpkJ-YEeKXveoTGXhd3Q" name="IProjectPersistensProvider">
+    <ownedAttribute xmi:id="_8Ns3gJ-YEeKXveoTGXhd3Q" name="">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8N4dsJ-YEeKXveoTGXhd3Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8N4dsZ-YEeKXveoTGXhd3Q" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_7cyX8J-YEeKXveoTGXhd3Q" name="load"/>
+    <ownedOperation xmi:id="_Cb44EJ-ZEeKXveoTGXhd3Q" name="save"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_IXodwJ-ZEeKXveoTGXhd3Q" name="TaskTreeViews" memberEnd="_IXodwZ-ZEeKXveoTGXhd3Q _IXpE0p-ZEeKXveoTGXhd3Q" navigableOwnedEnd="_IXpE0p-ZEeKXveoTGXhd3Q">
+    <ownedEnd xmi:id="_IXodwZ-ZEeKXveoTGXhd3Q" name="taskTreeViews" type="_NDAiMJ9hEeKQv4cu-KuFAg" association="_IXodwJ-ZEeKXveoTGXhd3Q">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IXpE0J-ZEeKXveoTGXhd3Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IXpE0Z-ZEeKXveoTGXhd3Q" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_IXpE0p-ZEeKXveoTGXhd3Q" name="iProjectPersistensProviders" type="_2tYpkJ-YEeKXveoTGXhd3Q" association="_IXodwJ-ZEeKXveoTGXhd3Q">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IXpr4J-ZEeKXveoTGXhd3Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IXpr4Z-ZEeKXveoTGXhd3Q" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZLjt8J-ZEeKXveoTGXhd3Q" name="TestHsgwGetVehicleTask">
+    <ownedOperation xmi:id="_-MLrgJ-aEeKXveoTGXhd3Q" name="execute"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_7ZTUMJ-aEeKXveoTGXhd3Q" name="" memberEnd="_7ZT7QJ-aEeKXveoTGXhd3Q _7ZUiUJ-aEeKXveoTGXhd3Q" navigableOwnedEnd="_7ZT7QJ-aEeKXveoTGXhd3Q _7ZUiUJ-aEeKXveoTGXhd3Q">
+    <ownedEnd xmi:id="_7ZT7QJ-aEeKXveoTGXhd3Q" name="taskExecutors" type="_IvuAsJ9kEeKQv4cu-KuFAg" association="_7ZTUMJ-aEeKXveoTGXhd3Q">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7ZT7QZ-aEeKXveoTGXhd3Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7ZT7Qp-aEeKXveoTGXhd3Q" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_7ZUiUJ-aEeKXveoTGXhd3Q" name="testHsgwGetVehicleTasks" type="_ZLjt8J-ZEeKXveoTGXhd3Q" association="_7ZTUMJ-aEeKXveoTGXhd3Q">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7ZUiUZ-aEeKXveoTGXhd3Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7ZUiUp-aEeKXveoTGXhd3Q" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Lqqp4J-bEeKXveoTGXhd3Q" name="ProtocolView"/>
+  <packagedElement xmi:type="uml:AssociationClass" xmi:id="_SObR0J-bEeKXveoTGXhd3Q" name="" memberEnd="_SOcf8J-bEeKXveoTGXhd3Q _SOdHAp-bEeKXveoTGXhd3Q" navigableOwnedEnd="_SOcf8J-bEeKXveoTGXhd3Q _SOdHAp-bEeKXveoTGXhd3Q">
+    <ownedEnd xmi:id="_SOcf8J-bEeKXveoTGXhd3Q" name="protocolViews" type="_Lqqp4J-bEeKXveoTGXhd3Q" association="_SObR0J-bEeKXveoTGXhd3Q">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SOdHAJ-bEeKXveoTGXhd3Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SOdHAZ-bEeKXveoTGXhd3Q" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_SOdHAp-bEeKXveoTGXhd3Q" name="taskExecutors" type="_IvuAsJ9kEeKQv4cu-KuFAg" association="_SObR0J-bEeKXveoTGXhd3Q">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SOdHA5-bEeKXveoTGXhd3Q"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SOduEJ-bEeKXveoTGXhd3Q" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
