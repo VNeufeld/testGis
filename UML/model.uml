@@ -214,4 +214,5 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SOduEJ-bEeKXveoTGXhd3Q" value="*"/>
     </ownedEnd>
   </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wadP8J-5EeKXveoTGXhd3Q" name="LoggingService"/>
 </uml:Model>
