@@ -84,10 +84,13 @@ public class TaskTreeView extends ViewPart {
 				
 				System.out.println(" dblkl :"+event);
 				
+				// Start task
+				
 				TaskExecutonResultModel.getInstance().addItem("Item 1 ");
 				new Thread(new TaskRunning()).start();
 				
 				try {
+					// Show protocol, show results
 					IViewPart viewPart = getSite().getWorkbenchWindow().getActivePage(). /*showView(TaskExecutionView.ID); */
 					showView(TaskExecutionView.ID, Integer.toString(instanceNum), IWorkbenchPage.VIEW_ACTIVATE);
 					

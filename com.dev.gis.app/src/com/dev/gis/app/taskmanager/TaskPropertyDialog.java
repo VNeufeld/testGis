@@ -66,7 +66,6 @@ public class TaskPropertyDialog extends Dialog {
 			new XmlUtils().loadXml(file);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
