@@ -27,12 +27,15 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.task.model.TaskItem;
 import com.dev.gis.app.xmlutils.XmlUtils;
+import com.dev.gis.task.execution.api.ITaskDataProvider;
 
 public class TaskPropertyDialog extends Dialog {
 
-	private TaskItem currentItem = new TaskItem();
-	private TaskItem tempItem = new TaskItem();
+//	private TaskItem currentItem = new TaskItem();
+//	private TaskItem tempItem = new TaskItem();
 	private String  requestPath = null;
+	private ITaskDataProvider dataProvider;
+	private String taskName = "x";
 
 	public TaskPropertyDialog(Shell parentShell) {
 		super(parentShell);
@@ -43,9 +46,10 @@ public class TaskPropertyDialog extends Dialog {
 		// setBlockOnOpen(false);
 	}
 
-	public void setData(TaskItem currentItem) {
-		this.currentItem = currentItem;
-		requestPath = currentItem.getRequestPath();
+	public void setData(ITaskDataProvider dataProvider) {
+		this.dataProvider = dataProvider;
+		
+		//requestPath = this.dataProvider.
 		
 		checkResource();
 		
@@ -77,11 +81,10 @@ public class TaskPropertyDialog extends Dialog {
 	@Override
 	protected void okPressed() {
 		super.okPressed();
-		if (!tempItem.getName().equals(currentItem.getName()))
-			currentItem.setName(tempItem.getName());
-		if ( !StringUtils.isEmpty(requestPath)) {
-			currentItem.setRequestPath(requestPath);
-		}
+//		currentItem.setName(taskName);
+//		if ( !StringUtils.isEmpty(requestPath)) {
+//			currentItem.setRequestPath(requestPath);
+//		}
 //		if (!tempItem.getRequestPath().equals(currentItem.getRequestPath()))
 //			currentItem.setRequestPath(tempItem.getRequestPath());
 
@@ -114,11 +117,10 @@ public class TaskPropertyDialog extends Dialog {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
-				tempItem.setName(tName.getText());
+				taskName = tName.getText();
 			}
 		});
-		if (currentItem.getName() != null)
-			tName.setText(currentItem.getName());
+		tName.setText(taskName);
 
 		Button bPath = new Button(gGeneral, SWT.PUSH);
 		bPath.setText("Pfad ändern");
@@ -131,9 +133,9 @@ public class TaskPropertyDialog extends Dialog {
 				requestPath = tPath.getText();
 			}
 		});
-		if (currentItem.getRequestPath()!= null) {
-			tPath.setText(currentItem.getRequestPath().toString());
-		}
+//		if (currentItem.getRequestPath()!= null) {
+//			tPath.setText(currentItem.getRequestPath().toString());
+//		}
 		GridData gdPath = new GridData();
 		gdPath.horizontalSpan = 1;
 		gdPath.horizontalAlignment = SWT.FILL;

@@ -31,7 +31,7 @@ public class EditTaskHandler extends AbstractHandler implements IHandler {
 				System.out.println(" Edit : "+taskItem);
 				
 				TaskPropertyDialog mpd = new TaskPropertyDialog(shell);
-				mpd.setData(taskItem);
+				mpd.setData(taskItem.getDataProvider());
 				if (mpd.open() == Dialog.OK) {
 					
 				}

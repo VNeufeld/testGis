@@ -215,4 +215,101 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_wadP8J-5EeKXveoTGXhd3Q" name="LoggingService"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_VG0DoKqxEeKGX8C-4mHWQw" name="JoiTask"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_i6w7sKqxEeKGX8C-4mHWQw" name="LocationSearchTask">
+    <generalization xmi:id="_3uqL8KqyEeKGX8C-4mHWQw" general="_VG0DoKqxEeKGX8C-4mHWQw"/>
+    <ownedAttribute xmi:id="_8zbi0KqxEeKGX8C-4mHWQw" name="location">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8zd_EKqxEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8zd_EaqxEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Ks3-4KqyEeKGX8C-4mHWQw" name="country">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ks50EKqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ks50EaqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_ObWbwKqyEeKGX8C-4mHWQw" name="resultFilter">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ObXp4KqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ObXp4aqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_rAByoKqxEeKGX8C-4mHWQw" name="GetVehicleTask">
+    <generalization xmi:id="_2skc0KqyEeKGX8C-4mHWQw" general="_VG0DoKqxEeKGX8C-4mHWQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_u91E8KqxEeKGX8C-4mHWQw" name="URL"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_y42wEKqxEeKGX8C-4mHWQw" name="tasksToURLs" memberEnd="_y43XIKqxEeKGX8C-4mHWQw _y44lQKqxEeKGX8C-4mHWQw" navigableOwnedEnd="_y44lQKqxEeKGX8C-4mHWQw">
+    <ownedEnd xmi:id="_y43XIKqxEeKGX8C-4mHWQw" name="tasks" type="_VG0DoKqxEeKGX8C-4mHWQw" aggregation="composite" association="_y42wEKqxEeKGX8C-4mHWQw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_y43-MKqxEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_y43-MaqxEeKGX8C-4mHWQw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_y44lQKqxEeKGX8C-4mHWQw" name="uRLs" type="_u91E8KqxEeKGX8C-4mHWQw" association="_y42wEKqxEeKGX8C-4mHWQw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_y45MUKqxEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_y45MUaqxEeKGX8C-4mHWQw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_T4YFIKqyEeKGX8C-4mHWQw" name="Filter">
+    <ownedAttribute xmi:id="_WxnjIKqyEeKGX8C-4mHWQw" name="carGroupId">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WxpYUKqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WxpYUaqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_bIJegKqyEeKGX8C-4mHWQw" name="supplier">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bIL6wKqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bIMh0KqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_ejAb0KqyEeKGX8C-4mHWQw" name="stationId">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ejBC4KqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ejBC4aqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_he_r0KqyEeKGX8C-4mHWQw" name="serviceCatalogId">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hfA58KqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hfA58aqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lWLYwKqyEeKGX8C-4mHWQw" name="commisionTypeId">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lWMm4KqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lWMm4aqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_pfvPIKqyEeKGX8C-4mHWQw" name="Location">
+    <ownedAttribute xmi:id="_r9RokKqyEeKGX8C-4mHWQw" name="cityId">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_r9TdwKqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_r9TdwaqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_teQTIKqyEeKGX8C-4mHWQw" name="airportId">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_teSIUKqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_teSIUaqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vlqrkKqyEeKGX8C-4mHWQw" name="aptCode">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vlsgwKqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vltH0KqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_-Oy4IKqyEeKGX8C-4mHWQw" name="getVehicleTasksToLocations" memberEnd="_-OzfMKqyEeKGX8C-4mHWQw _-O0GQaqyEeKGX8C-4mHWQw" navigableOwnedEnd="_-O0GQaqyEeKGX8C-4mHWQw">
+    <ownedEnd xmi:id="_-OzfMKqyEeKGX8C-4mHWQw" name="getVehicleTasks" type="_rAByoKqxEeKGX8C-4mHWQw" aggregation="composite" association="_-Oy4IKqyEeKGX8C-4mHWQw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-OzfMaqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-O0GQKqyEeKGX8C-4mHWQw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_-O0GQaqyEeKGX8C-4mHWQw" name="locations" type="_pfvPIKqyEeKGX8C-4mHWQw" association="_-Oy4IKqyEeKGX8C-4mHWQw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-O0GQqqyEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-O0tUKqyEeKGX8C-4mHWQw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_D6xjgKqzEeKGX8C-4mHWQw" name="getVehicleTasksToFilters" memberEnd="_D6yKkKqzEeKGX8C-4mHWQw _D6yxoaqzEeKGX8C-4mHWQw" navigableOwnedEnd="_D6yxoaqzEeKGX8C-4mHWQw">
+    <ownedEnd xmi:id="_D6yKkKqzEeKGX8C-4mHWQw" name="getVehicleTasks" type="_rAByoKqxEeKGX8C-4mHWQw" aggregation="composite" association="_D6xjgKqzEeKGX8C-4mHWQw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_D6yKkaqzEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_D6yxoKqzEeKGX8C-4mHWQw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_D6yxoaqzEeKGX8C-4mHWQw" name="filters" type="_T4YFIKqyEeKGX8C-4mHWQw" association="_D6xjgKqzEeKGX8C-4mHWQw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_D6yxoqqzEeKGX8C-4mHWQw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_D6zYsKqzEeKGX8C-4mHWQw" value="*"/>
+    </ownedEnd>
+  </packagedElement>
 </uml:Model>

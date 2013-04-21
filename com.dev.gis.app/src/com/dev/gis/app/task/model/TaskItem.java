@@ -7,6 +7,9 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.dev.gis.task.execution.api.ITaskDataProvider;
+import com.dev.gis.task.execution.api.TaskDataProviderFactory;
+
 /**
  * @author Valeri
  *
@@ -14,6 +17,7 @@ import java.util.Map;
 public class TaskItem extends TaskItemBase {
 	private TaskGroup group;
 	
+	private ITaskDataProvider dataProvider;
 	private String requestPath;
 	private Map<String,String> customValues = new HashMap<String,String>();
 	
@@ -23,6 +27,11 @@ public class TaskItem extends TaskItemBase {
 	public TaskItem(String name, String description, String icon) {
 		super(name, description, icon);
 	}
+	private TaskItem(String name, String description, String icon, ITaskDataProvider dataProvider) {
+		super(name, description, icon);
+		this.dataProvider = dataProvider;
+	}
+
 	public TaskItem(String name) {
 		super(name);
 	}
@@ -42,8 +51,8 @@ public class TaskItem extends TaskItemBase {
 
 	
 	public static TaskItem createTask(String name, String icon, String decription) {
-		
-		return new TaskItem(name,decription,icon);
+		ITaskDataProvider dataProvider = TaskDataProviderFactory.createDefaultTaskDataProvider();
+		return new TaskItem(name,decription,icon,dataProvider);
 	}
 	/**
 	 * @return the group
@@ -56,6 +65,18 @@ public class TaskItem extends TaskItemBase {
 	 */
 	public void setGroup(TaskGroup group) {
 		this.group = group;
+	}
+	/**
+	 * @return the dataProvider
+	 */
+	public ITaskDataProvider getDataProvider() {
+		return dataProvider;
+	}
+	/**
+	 * @param dataProvider the dataProvider to set
+	 */
+	public void setDataProvider(ITaskDataProvider dataProvider) {
+		this.dataProvider = dataProvider;
 	}
 	
 }
