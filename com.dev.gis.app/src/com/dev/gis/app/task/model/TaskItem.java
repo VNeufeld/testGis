@@ -51,7 +51,8 @@ public class TaskItem extends TaskItemBase {
 
 	
 	public static TaskItem createTask(String name, String icon, String decription) {
-		ITaskDataProvider dataProvider = TaskDataProviderFactory.createDefaultTaskDataProvider();
+		ITaskDataProvider dataProvider = TaskDataProviderFactory.createTaskDataProvider(name);
+		dataProvider.loadTask();
 		return new TaskItem(name,decription,icon,dataProvider);
 	}
 	/**

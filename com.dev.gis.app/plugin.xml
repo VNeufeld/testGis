@@ -90,6 +90,11 @@
             id="com.dev.gis.app.deleteTask"
             name="deleteTask">
       </command>
+      <command
+            defaultHandler="com.dev.gis.app.task.handlers.EditTaskDetailsHandler"
+            id="com.dev.gis.app.editTaskDetails"
+            name="edit task details">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -166,6 +171,12 @@
                commandId="com.dev.gis.app.deleteTask"
                icon="icons/email_delete.png"
                label="Delete"
+               style="push">
+         </command>
+         <command
+               commandId="com.dev.gis.app.editTaskDetails"
+               icon="icons/email_edit.png"
+               label="Edit task details"
                style="push">
          </command>
       </menuContribution>

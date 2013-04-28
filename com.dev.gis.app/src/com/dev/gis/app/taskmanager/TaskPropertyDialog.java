@@ -25,8 +25,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.dev.gis.app.task.model.TaskItem;
 import com.dev.gis.app.xmlutils.XmlUtils;
+import com.dev.gis.task.dialogs.TaskDialogAbstract;
+import com.dev.gis.task.dialogs.TaskDialogFactory;
+import com.dev.gis.task.dialogs.TaskLocationSearchDialog;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
 
 public class TaskPropertyDialog extends Dialog {
@@ -163,6 +165,29 @@ public class TaskPropertyDialog extends Dialog {
 				widgetSelected(e);
 			}
 		});
+		
+		Button bDetailDialog = new Button(gGeneral, SWT.PUSH);
+		bDetailDialog.setText("Detailsdialog");
+		bDetailDialog.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TaskDialogAbstract dialog = TaskDialogFactory.createTaskDialog(dataProvider,getShell());
+				if ( dialog != null) {
+					dialog.setData(dataProvider);
+					dialog.open();
+				}
+				
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+		});
+		
 
 
 

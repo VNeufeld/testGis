@@ -9,4 +9,5 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Export-Package: com.dev.gis.task.execution.api
+Export-Package: com.dev.gis.task.dialogs,
+ com.dev.gis.task.execution.api

@@ -9,6 +9,8 @@ public class TaskProjectModelFactory {
 		model.setName("TaskProjectModel");
 		
 		model.getGroups().getFirst().getTasks().
+			add(TaskItem.createTask("locationSearch", "folder_edit.png", "test json http request locationSearch"));
+		model.getGroups().getFirst().getTasks().
 			add(TaskItem.createTask("joiGetVehicle", "folder_edit.png", "test json http request GetVehicle"));
 		model.getGroups().getFirst().getTasks().
 			add(TaskItem.createTask("joiGetVehicleRecalculate", "folder_edit.png", "test json http request Recalculate"));

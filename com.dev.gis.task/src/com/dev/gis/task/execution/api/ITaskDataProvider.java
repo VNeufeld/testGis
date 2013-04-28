@@ -4,5 +4,9 @@ public interface ITaskDataProvider {
 	final String TASK_ID =  "HSGW_GETCARS";
 	
 	String getRequest();
+	
+	JoiTask   getTask();
+	
+	void  loadTask();
 
 }
