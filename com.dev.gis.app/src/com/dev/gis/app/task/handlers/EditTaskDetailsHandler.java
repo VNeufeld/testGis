@@ -10,6 +10,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.bpcs.mdcars.protocol.LocationSearchResult;
 import com.dev.gis.app.task.model.TaskGroup;
 import com.dev.gis.app.task.model.TaskItem;
 import com.dev.gis.task.dialogs.TaskLocationSearchDialog;
@@ -43,6 +44,7 @@ public class EditTaskDetailsHandler extends AbstractHandler implements IHandler 
 				
 			}
 		}
+		LocationSearchResult result = new LocationSearchResult();
 		return null;
 	}
 

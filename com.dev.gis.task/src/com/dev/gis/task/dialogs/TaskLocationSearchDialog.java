@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.bpcs.mdcars.protocol.LocationSearchResult;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
 import com.dev.gis.task.execution.api.LocationSearchTask;
 import com.dev.gis.task.execution.impl.LocationSearchTaskDataProvider;
@@ -82,6 +83,8 @@ public class TaskLocationSearchDialog extends TaskDialogAbstract {
 	@Override
 	public void setData(ITaskDataProvider dataProvider) {
 		super.setData(dataProvider);
+		LocationSearchResult result = new LocationSearchResult();
+
 		
 		if ( this.dataProvider instanceof LocationSearchTaskDataProvider )
 			this.locationSearchTask = (LocationSearchTask) ((LocationSearchTaskDataProvider) dataProvider).getTask();
