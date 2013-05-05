@@ -8,8 +8,9 @@ public class TaskProjectModelFactory {
 		
 		model.setName("TaskProjectModel");
 		
-		model.getGroups().getFirst().getTasks().
-			add(TaskItem.createTask("locationSearch", "folder_edit.png", "test json http request locationSearch"));
+		TaskItem taskItem = TaskItem.createTask("locationSearch", "folder_edit.png", "test json http request locationSearch");
+		if ( taskItem != null)
+			model.getGroups().getFirst().getTasks().add(taskItem);
 		model.getGroups().getFirst().getTasks().
 			add(TaskItem.createTask("joiGetVehicle", "folder_edit.png", "test json http request GetVehicle"));
 		model.getGroups().getFirst().getTasks().

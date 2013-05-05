@@ -1,11 +1,26 @@
 package com.dev.gis.task.execution.impl;
 
+import java.io.IOException;
+
+import javax.xml.bind.JAXBException;
+
 import com.dev.gis.task.execution.api.ITaskDataProvider;
 import com.dev.gis.task.execution.api.JoiTask;
 import com.dev.gis.task.execution.api.LocationSearchTask;
+import com.dev.gis.task.execution.api.TaskDataProviderException;
+import com.dev.gis.task.persistance.impl.LocationSearchPersistanceXmlProvider;
 
-public class LocationSearchTaskDataProvider implements ITaskDataProvider {
+public class LocationSearchTaskDataProvider extends AbstractDataProvider implements ITaskDataProvider {
 	private LocationSearchTask task = null;
+
+	public LocationSearchTaskDataProvider(LocationSearchTask task) {
+		super(new LocationSearchPersistanceXmlProvider());
+		this.task = task;
+	}
+
+	public LocationSearchTaskDataProvider() {
+		super(new LocationSearchPersistanceXmlProvider());
+	}
 
 	@Override
 	public String getRequest() {
@@ -19,9 +34,20 @@ public class LocationSearchTaskDataProvider implements ITaskDataProvider {
 	}
 
 	@Override
-	public void loadTask() {
-		task = new LocationSearchTask("lon");
+	public void loadTask(String name) throws JAXBException  {
 		
+		task = persistanceProvider.load(name,LocationSearchTask.class);
+		
+	}
+
+	@Override
+	public void saveTask() {
+		
+		try {
+			persistanceProvider.save(task);
+		} catch (JAXBException | IOException e) {
+			throw new TaskDataProviderException(e);
+		}
 	}
 
 }

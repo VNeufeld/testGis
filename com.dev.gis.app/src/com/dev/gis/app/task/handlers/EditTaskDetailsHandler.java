@@ -33,18 +33,16 @@ public class EditTaskDetailsHandler extends AbstractHandler implements IHandler 
 			else if (element instanceof TaskItem) {
 				TaskItem taskItem = (TaskItem) element;
 				System.out.println(" Edit : "+taskItem);
-				ITaskDataProvider dataProvider = taskItem.getDataProvider();
 				TaskLocationSearchDialog mpd = new TaskLocationSearchDialog(shell);
 				mpd.setData(taskItem.getDataProvider());
 				if (mpd.open() == Dialog.OK) {
-					
-					
+					taskItem.getDataProvider().saveTask();
 				}
 				
 				
 			}
 		}
-		LocationSearchResult result = new LocationSearchResult();
+		//LocationSearchResult result = new LocationSearchResult();
 		return null;
 	}
 

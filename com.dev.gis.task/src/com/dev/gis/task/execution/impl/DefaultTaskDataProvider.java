@@ -15,8 +15,15 @@ public class DefaultTaskDataProvider implements ITaskDataProvider {
 		return null;
 	}
 
+
 	@Override
-	public void loadTask() {
+	public void loadTask(String name) {
+		
+	}
+
+	@Override
+	public void saveTask() {
+		// TODO Auto-generated method stub
 		
 	}
 

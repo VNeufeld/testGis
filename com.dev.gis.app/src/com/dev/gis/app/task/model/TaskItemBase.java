@@ -1,9 +1,13 @@
 package com.dev.gis.app.task.model;
 
 import java.util.Random;
-import java.util.UUID;
+
+import org.apache.log4j.Logger;
 
 public abstract class TaskItemBase extends ModelObject {
+	
+	protected Logger logger = Logger.getLogger(getClass().getName());
+	
 	private long id;
 	private String name;
 	private String description;

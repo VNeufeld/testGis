@@ -1,14 +1,23 @@
 package com.dev.gis.task.execution.api;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="locationSearchTask")
 public class LocationSearchTask extends JoiTask {
+	
+	private static String TASKNAME_DEFAULT = "locationSearch";
 	
 	private String location;
 	private Integer country;
 	private String resultFilter;
 
+
+	public LocationSearchTask() {
+		super(TASKNAME_DEFAULT);
+	}
 	
 	public LocationSearchTask(String location) {
-		super();
+		super(TASKNAME_DEFAULT);
 		this.location = location;
 	}
 	
@@ -47,5 +56,17 @@ public class LocationSearchTask extends JoiTask {
 	 */
 	public void setResultFilter(String resultFilter) {
 		this.resultFilter = resultFilter;
+	}
+
+	public static LocationSearchTask getDefaultTask() {
+		return new LocationSearchTask("lon");
+	}
+
+	@Override
+	public String toString() {
+		return "LocationSearchTask [location=" + location + ", country="
+				+ country + ", resultFilter=" + resultFilter
+				+ ", haJoiServiceLink=" + haJoiServiceLink + ", name=" + name
+				+ "]";
 	}
 }

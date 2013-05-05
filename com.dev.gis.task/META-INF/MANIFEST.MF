@@ -7,7 +7,9 @@ Bundle-Activator: com.dev.gis.task.Activator
 Bundle-Vendor: DEV
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.dev.gis.libs;bundle-version="1.0.0"
+ org.apache.commons.io;bundle-version="2.0.1",
+ org.apache.commons.lang;bundle-version="2.6.0",
+ org.apache.log4j;bundle-version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.dev.gis.task.dialogs,

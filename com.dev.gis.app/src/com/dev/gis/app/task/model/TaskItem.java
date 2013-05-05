@@ -3,11 +3,15 @@
  */
 package com.dev.gis.app.task.model;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.JAXBException;
+
+import org.apache.log4j.Logger;
+
 import com.dev.gis.task.execution.api.ITaskDataProvider;
+import com.dev.gis.task.execution.api.TaskDataProviderException;
 import com.dev.gis.task.execution.api.TaskDataProviderFactory;
 
 /**
@@ -15,6 +19,8 @@ import com.dev.gis.task.execution.api.TaskDataProviderFactory;
  *
  */
 public class TaskItem extends TaskItemBase {
+	private static Logger taskItemlogger = Logger.getLogger(TaskItem.class.getName());
+
 	private TaskGroup group;
 	
 	private ITaskDataProvider dataProvider;
@@ -51,9 +57,14 @@ public class TaskItem extends TaskItemBase {
 
 	
 	public static TaskItem createTask(String name, String icon, String decription) {
-		ITaskDataProvider dataProvider = TaskDataProviderFactory.createTaskDataProvider(name);
-		dataProvider.loadTask();
-		return new TaskItem(name,decription,icon,dataProvider);
+		try {
+			ITaskDataProvider dataProvider = TaskDataProviderFactory.createTaskDataProvider(name);
+			return new TaskItem(name,decription,icon,dataProvider);
+		}
+		catch ( TaskDataProviderException | JAXBException tdpe) {
+			taskItemlogger.error("error in create task ",tdpe);
+		}
+		return null;
 	}
 	/**
 	 * @return the group
