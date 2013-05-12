@@ -21,33 +21,27 @@ public class LocationSearchConnector extends HttpConnectorImpl {
 		URI uri = createLocationSearchUri(searchString);
 		
 		try {
-			JsonUtils.saveDummyResultAsJson();
+//			JsonUtils.saveDummyResultAsJson();
 			
 			String response =  httpClient.sendGetRequest(uri);
 			logger.info("response = "+response);
 			
 			// dummy
 			response = createDummyResponse("DummyLocationSearchResult.json");
-
-			String RESOURCE_FOLDER= "/resource/json";
-			String resource = RESOURCE_FOLDER+ "/DummyLocationSearchResult.json";
-
-			XmlUtils.readResource(Activator.getDefault().getBundle().getResource(resource));
 			
 			return JsonUtils.createResponseClassFromJson(response, LocationSearchResult.class);
 			
 		} catch ( IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return null;
 		
 	}
 
-	private String createDummyResponse(String file) {
+	private String createDummyResponse(String file) throws IOException {
 		String RESOURCE_FOLDER= "/resource/json";
-		String resource = new JsonUtils().readResource(RESOURCE_FOLDER+ "/"+file);
-		
-		return resource;
+		String resource = RESOURCE_FOLDER+ "/"+file;
+		return  XmlUtils.readResource(Activator.getDefault().getBundle().getResource(resource));
 	}
 	
 	

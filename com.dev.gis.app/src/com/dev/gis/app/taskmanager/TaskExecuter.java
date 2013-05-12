@@ -1,6 +1,6 @@
 package com.dev.gis.app.taskmanager;
 
-import com.dev.gis.app.task.execution.TaskRunning;
+import com.dev.gis.app.task.execution.LocationSearchTaskRunnable;
 import com.dev.gis.task.execution.api.GetVehicleTask;
 import com.dev.gis.task.execution.api.JoiTask;
 import com.dev.gis.task.execution.api.LocationSearchTask;
@@ -16,7 +16,7 @@ public class TaskExecuter {
 	
 	private Runnable createRunnableTask(JoiTask task, IResultView resultView) {
 		if ( task instanceof LocationSearchTask) 
-			return new TaskRunning(task,resultView);
+			return new LocationSearchTaskRunnable(task,resultView);
 		
 		if ( task instanceof GetVehicleTask) {
 		}

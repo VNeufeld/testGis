@@ -34,22 +34,13 @@ public class XmlUtils {
 
 	}
 	
-	public static String readResource(URL url){
+	public static String readResource(URL url) throws IOException{
 		
 		StringWriter writer = new StringWriter();
 
-		try {
-			InputStream is = url.openStream();
-			IOUtils.copy(is, writer, "utf-8");
-			String result = writer.toString();
-			System.out.println("result = " + result);
-			return result;
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		InputStream is = url.openStream();
+		IOUtils.copy(is, writer, "utf-8");
+		return  writer.toString();
 	}
 	
 
