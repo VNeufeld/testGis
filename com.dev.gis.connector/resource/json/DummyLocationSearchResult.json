@@ -1,0 +1,28 @@
+{
+"nrTotalHits": 1,
+	"nrGroups": 1,
+	"groupedList": [{
+		"nr": 1,
+		"totalHits": 0,
+		"hitGroup": [
+		{
+			"identifier": "London",
+			"id": 12345,
+			"type": null,
+			"subResult": [],
+			"countryId": 49,
+			"country": null
+		},
+		{
+			"identifier": "München",
+			"id": 12347,
+			"type": "2",
+			"subResult": [],
+			"countryId": 49,
+			"country": "Germany"
+		}
+		
+		],
+		"type": "2"
+	}]
+	}

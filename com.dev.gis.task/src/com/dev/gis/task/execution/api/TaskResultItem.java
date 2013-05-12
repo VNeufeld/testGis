@@ -1,4 +1,4 @@
-package com.dev.gis.app.task.model;
+package com.dev.gis.task.execution.api;
 
 import java.util.Date;
 

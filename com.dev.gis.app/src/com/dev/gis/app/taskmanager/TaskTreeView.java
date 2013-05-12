@@ -3,6 +3,7 @@ package com.dev.gis.app.taskmanager;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.databinding.viewers.ObservableListTreeContentProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -14,22 +15,24 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 
-import com.dev.gis.app.task.execution.TaskRunning;
 import com.dev.gis.app.task.model.Model;
 import com.dev.gis.app.task.model.TaskExecutonResultModel;
+import com.dev.gis.app.task.model.TaskItem;
 import com.dev.gis.app.task.model.TaskProjectModel;
+import com.dev.gis.task.execution.api.JoiTask;
 
 
 public class TaskTreeView extends ViewPart {
+	
+	private Logger logger = Logger.getLogger(TaskTreeView.class);
+
 	public static final String ID = "com.dev.gis.app.taskTreeView";
 	private TreeViewer treeViewer;
-	private int instanceNum = 1;
-	
 	private ModelUpdater modelUpdater = null;
+	private TaskExecuter taskExecuter = new TaskExecuter();
+	
 	
 	public static Map<String,IViewPart> executionTaskViews = new HashMap<String,IViewPart>();
 
@@ -80,39 +83,30 @@ public class TaskTreeView extends ViewPart {
 
 		treeViewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
+				Long startTime = System.currentTimeMillis();
+				
 				IStructuredSelection sel = (IStructuredSelection) treeViewer.getSelection();
 				
-				System.out.println(" dblkl :"+event);
+				// get task
+				TaskItem  taskItem = (TaskItem) sel.getFirstElement();
+				JoiTask task = taskItem.getDataProvider().getTask();
+
+				logger.info(" start task :"+task);
 				
-				// Start task
-				
-				TaskExecutonResultModel.getInstance().addItem("Item 1 ");
-				new Thread(new TaskRunning()).start();
-				
-				try {
-					// Show protocol, show results
-					IViewPart viewPart = getSite().getWorkbenchWindow().getActivePage(). /*showView(TaskExecutionView.ID); */
-					showView(TaskExecutionView.ID, Integer.toString(instanceNum), IWorkbenchPage.VIEW_ACTIVATE);
-					
-					executionTaskViews.put("task "+instanceNum , viewPart);
-					instanceNum++;
-					
-					System.out.println(" add view :"+viewPart.getTitle());
-					
-					
-					
-				} catch (PartInitException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				// execute task
+				taskExecuter.startExecutionTask(task);
+
+				logger.info("task is running in "+(System.currentTimeMillis() - startTime) + " ms.");
 
 
 			}
+
 		}
 
 		);
 		
 	}
+
 
 	// it is important to implement setFocus()!
 	public void setFocus() {

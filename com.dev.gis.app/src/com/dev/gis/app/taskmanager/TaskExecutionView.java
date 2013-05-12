@@ -31,7 +31,8 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.dev.gis.app.task.model.Task;
 import com.dev.gis.app.task.model.TaskExecutonResultModel;
-import com.dev.gis.app.task.model.TaskResultItem;
+import com.dev.gis.task.execution.api.ITaskResult;
+import com.dev.gis.task.execution.api.TaskResultItem;
 
 public class TaskExecutionView extends ViewPart {
 	public static final String ID = "com.dev.gis.app.view.taskExecution";
@@ -59,7 +60,7 @@ public class TaskExecutionView extends ViewPart {
 		initializeMenu();
 		initializeContextMenu();
 
-		refresh();
+		refresh(null);
 
 	}
 
@@ -217,6 +218,18 @@ public class TaskExecutionView extends ViewPart {
 				return input.toArray();
 			}
 			return null;
+		}
+	}
+
+	public void refresh(ITaskResult result) {
+		if ( result != null) {
+			if (tableViewer != null) {
+				if (!tableViewer.getTable().isDisposed())
+	
+					System.out.println("refresh tas execution view "+this.getTitle()+ " thread : "+Thread.currentThread().getName());
+					
+					tableViewer.setInput(result.getTaskList());
+			}
 		}
 	}
 

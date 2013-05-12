@@ -1,8 +1,12 @@
 package com.dev.gis.task.persistance.impl;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -56,9 +60,10 @@ abstract class AbstractPersistanceXmlProvider {
 		marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
 		File file = createFileRequest(task.getName());
-
-		FileWriter writer = new FileWriter(file);
-		marshaller.marshal(task, writer);
+		
+		Writer out = new BufferedWriter(new OutputStreamWriter(
+			    	new FileOutputStream(file), "UTF-8"));		
+		marshaller.marshal(task, out);
 		
 	}
 	
@@ -83,6 +88,8 @@ abstract class AbstractPersistanceXmlProvider {
 	
 	protected  LocationSearchTask loadTask(String name,
 			Class<?> class1) throws JAXBException {
+
+		logger.info(" loadTask "+ name);
 
 		JAXBContext context = JAXBContext.newInstance(class1);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
