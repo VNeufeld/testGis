@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivityHome" >
+
+    <TextView
+        android:id="@+id/puLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pickupLocation" />
+
+    <EditText
+        android:id="@+id/puLocationEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/puLocationLabel"
+        android:layout_below="@+id/puLocationLabel"
+        android:layout_marginTop="21dp"
+        android:ems="10" >
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/puLocationEdit"
+        android:layout_alignTop="@+id/puLocationEdit"
+        android:layout_toRightOf="@+id/puLocationEdit"
+        android:text="@string/button_search"
+		android:onClick="selectPuLocation" />        
+
+    <TextView
+        android:id="@+id/dropoffLocaton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/puLocationEdit"
+        android:layout_below="@+id/puLocationEdit"
+        android:layout_marginTop="39dp"
+        android:text="@string/dropOffLocation" />
+
+    <EditText
+        android:id="@+id/doLocationEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dropoffLocaton"
+        android:layout_below="@+id/dropoffLocaton"
+        android:layout_marginTop="26dp"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/doLocationEdit"
+        android:layout_alignLeft="@+id/button1"
+        android:text="@string/button_search"
+		android:onClick="selectDoLocation" />        
+    
+</RelativeLayout>

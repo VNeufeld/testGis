@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CarReservationV2</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="title_activity_display_message">My Message</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="example">Example1!</string>
+    <string name="title_activity_main_activity_home">MainActivityHome</string>
+    <!-- The menu entry that invokes search. -->
+    <string name="menu_search">Search</string>
+    <string name="pickupLocation">pickupLocation</string>
+    <string name="button_search">Search</string>
+    <string name="dropOffLocation">dropOff Location</string>
+    <string name="title_activity_create_reservation">Car Reservation</string>
+    <string name="please">Please select a city and date for car reservation</string>
+    <string name="start">Start reservation</string>
+    <string name="date">Date</string>
+    <string name="button_searchOffer">Search Offer</string>
+    <string name="title_activity_search_offer">SearchOfferActivity</string>
+    <string name="selectLocationText">select location</string>
+    <string name="title_activity_get_offer">Offer</string>
+
+</resources>
