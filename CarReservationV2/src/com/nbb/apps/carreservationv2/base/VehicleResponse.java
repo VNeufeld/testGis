@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 
 public class VehicleResponse extends Response {
 
@@ -133,7 +135,7 @@ public class VehicleResponse extends Response {
 		return offers;
 	}
 	
-
+	@JsonProperty("filterTemplate")
 	public OfferFilterTemplate getOfferFilterTemplate() {
 		return offerFilterTemplate;
 	}
