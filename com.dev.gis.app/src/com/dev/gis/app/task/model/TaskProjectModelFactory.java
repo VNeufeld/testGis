@@ -15,6 +15,9 @@ public class TaskProjectModelFactory {
 			add(TaskItem.createTask("joiGetVehicle", "folder_edit.png", "test json http request GetVehicle"));
 		model.getGroups().getFirst().getTasks().
 			add(TaskItem.createTask("joiGetVehicleRecalculate", "folder_edit.png", "test json http request Recalculate"));
+
+		model.getGroups().getFirst().getTasks().
+		add(TaskItem.createTask("testADAC_App", "folder_edit.png", "test ADAC APP"));
 		
 		TaskGroup taskGroup = new TaskGroup("HSGW");
 		model.getGroups().add(taskGroup);
