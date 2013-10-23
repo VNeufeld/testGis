@@ -17,11 +17,11 @@ public class TaskProjectModelFactory {
 			add(TaskItem.createTask("joiGetVehicleRecalculate", "folder_edit.png", "test json http request Recalculate"));
 
 		model.getGroups().getFirst().getTasks().
-		add(TaskItem.createTask("testADAC_App", "folder_edit.png", "test ADAC APP"));
+			add(TaskItem.createTask("testADAC_App", "folder_edit.png", "test ADAC APP"));
 		
 		TaskGroup taskGroup = new TaskGroup("HSGW");
 		model.getGroups().add(taskGroup);
-		taskGroup.getTasks().add(TaskItem.createTask("HSGW GetCars", "folder.png", "test hsgw http request GetCars"));
+			taskGroup.getTasks().add(TaskItem.createTask("HSGW GetCars", "folder.png", "test hsgw http request GetCars"));
 		
 		for ( TaskGroup group: model.getGroups()) {
 			for ( TaskItem item : group.getTasks())

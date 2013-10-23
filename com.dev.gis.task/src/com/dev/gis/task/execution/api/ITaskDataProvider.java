@@ -7,7 +7,7 @@ public interface ITaskDataProvider {
 	
 	String getRequest();
 	
-	JoiTask   getTask();
+	ITask   getTask();
 	
 	void  loadTask(String name) throws JAXBException;
 	

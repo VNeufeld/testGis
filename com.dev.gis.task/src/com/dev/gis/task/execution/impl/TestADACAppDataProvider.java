@@ -2,6 +2,7 @@ package com.dev.gis.task.execution.impl;
 
 import javax.xml.bind.JAXBException;
 
+import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
 import com.dev.gis.task.execution.api.JoiTask;
 import com.dev.gis.task.execution.api.TestADACAppTask;
@@ -22,7 +23,7 @@ public class TestADACAppDataProvider extends AbstractDataProvider implements ITa
 	}
 
 	@Override
-	public JoiTask getTask() {
+	public ITask getTask() {
 		return task;
 	}
 

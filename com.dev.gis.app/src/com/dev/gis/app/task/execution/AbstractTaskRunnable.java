@@ -6,13 +6,13 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.taskmanager.IResultView;
+import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.JoiTask;
 
 public abstract class AbstractTaskRunnable implements Runnable {
 	protected Logger logger = Logger.getLogger(getClass());
 
-	private JoiTask task;
+	private ITask task;
 	
 	private IResultView resultView;
 
@@ -21,7 +21,7 @@ public abstract class AbstractTaskRunnable implements Runnable {
 	private boolean debugFlag = false;
 	
 
-	public AbstractTaskRunnable(JoiTask task, IResultView resultView) {
+	public AbstractTaskRunnable(ITask task, IResultView resultView) {
 		super();
 		this.task = task;
 		this.resultView = resultView;
@@ -36,7 +36,7 @@ public abstract class AbstractTaskRunnable implements Runnable {
 		showResult(result);
 	}
 
-	protected abstract ITaskResult executeHttpCall(JoiTask task,Date startDate);
+	protected abstract ITaskResult executeHttpCall(ITask task,Date startDate);
 
 	private void showResult(ITaskResult result) {
 		logger.info("showResult result :" +result);
@@ -44,7 +44,7 @@ public abstract class AbstractTaskRunnable implements Runnable {
 	}
 	
 	
-	private ITaskResult executeTask(JoiTask task) {
+	private ITaskResult executeTask(ITask task) {
 		Date startDate = new Date();
 		logger.info("execute task :" +task);		
 		if ( debugFlag)

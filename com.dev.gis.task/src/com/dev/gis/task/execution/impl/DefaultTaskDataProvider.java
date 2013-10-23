@@ -1,5 +1,6 @@
 package com.dev.gis.task.execution.impl;
 
+import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
 import com.dev.gis.task.execution.api.JoiTask;
 
@@ -11,7 +12,7 @@ public class DefaultTaskDataProvider implements ITaskDataProvider {
 	}
 
 	@Override
-	public JoiTask getTask() {
+	public ITask getTask() {
 		return null;
 	}
 

@@ -21,6 +21,9 @@ import com.dev.gis.app.task.model.Model;
 import com.dev.gis.app.task.model.TaskExecutonResultModel;
 import com.dev.gis.app.task.model.TaskItem;
 import com.dev.gis.app.task.model.TaskProjectModel;
+import com.dev.gis.task.execution.api.IEditableTask;
+import com.dev.gis.task.execution.api.IExecutableTask;
+import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.JoiTask;
 
 
@@ -31,7 +34,6 @@ public class TaskTreeView extends ViewPart {
 	public static final String ID = "com.dev.gis.app.taskTreeView";
 	private TreeViewer treeViewer;
 	private ModelUpdater modelUpdater = null;
-	private TaskExecuter taskExecuter = new TaskExecuter();
 	
 	
 	public static Map<String,IViewPart> executionTaskViews = new HashMap<String,IViewPart>();
@@ -89,12 +91,18 @@ public class TaskTreeView extends ViewPart {
 				
 				// get task
 				TaskItem  taskItem = (TaskItem) sel.getFirstElement();
-				JoiTask task = taskItem.getDataProvider().getTask();
+				ITask task = taskItem.getDataProvider().getTask();
 
 				logger.info(" start task :"+task);
 				
 				// execute task
-				taskExecuter.startExecutionTask(task);
+				if (task instanceof IExecutableTask ) {
+					((IExecutableTask)task).execute();
+					TaskExecuter.startExecutionTask(task);
+				}
+				else if ( task instanceof IEditableTask) {
+					// Show formular
+				}
 
 				logger.info("task is running in "+(System.currentTimeMillis() - startTime) + " ms.");
 

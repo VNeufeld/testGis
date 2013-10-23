@@ -3,7 +3,7 @@ package com.dev.gis.task.execution.api;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="locationSearchTask")
-public class LocationSearchTask extends JoiTask {
+public class LocationSearchTask extends JoiTask implements IExecutableTask {
 	
 	private static String TASKNAME_DEFAULT = "locationSearch";
 	
@@ -68,5 +68,17 @@ public class LocationSearchTask extends JoiTask {
 				+ country + ", resultFilter=" + resultFilter
 				+ ", haJoiServiceLink=" + haJoiServiceLink + ", name=" + name
 				+ "]";
+	}
+
+	@Override
+	public void execute() {
+
+		
+	}
+
+	@Override
+	public void editInputParameter() {
+		// TODO Auto-generated method stub
+		
 	}
 }
