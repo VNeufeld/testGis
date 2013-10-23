@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Server settings">
+        <EditTextPreference android:defaultValue="192.168.178.25" android:title="server url" android:key="server"/>
+        <EditTextPreference android:summary="please set path" android:title="path" android:key="path" android:defaultValue="/ha_spring_joi/hajoi"/>
+        <EditTextPreference android:defaultValue="7080" android:title="port" android:key="port"/>
+        <EditTextPreference android:defaultValue="200000" android:title="operator" android:key="operator"/>
+        <EditTextPreference android:defaultValue="1" android:title="language" android:key="language"/>
+    </PreferenceCategory>
+</PreferenceScreen>

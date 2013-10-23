@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.nbb.apps.carreservationv2"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name="com.nbb.apps.carreservationv2.CarReservationApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.nbb.apps.carreservationv2.MainActivity"
+            android:label="@string/app_name" >
+
+            <!--
+            intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter
+            -->
+        </activity>
+        <activity
+            android:name="com.nbb.apps.carreservationv2.DisplayMessageActivity"
+            android:label="@string/title_activity_display_message"
+            android:parentActivityName="com.nbb.apps.carreservationv2.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nbb.apps.carreservationv2.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.nbb.apps.carreservationv2.MainActivityHome"
+            android:label="@string/title_activity_main_activity_home" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.nbb.apps.carreservationv2.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="com.nbb.apps.carreservationv2.CreateReservationActivity"
+            android:label="@string/title_activity_create_reservation" >
+        </activity>
+        <activity
+            android:name="com.nbb.apps.carreservationv2.SearchOfferActivity"
+            android:label="@string/title_activity_search_offer" >
+        </activity>
+        <activity
+            android:name="com.nbb.apps.carreservationv2.GetOfferActivity"
+            android:label="@string/title_activity_get_offer" >
+        </activity>
+    </application>
+
+</manifest>
