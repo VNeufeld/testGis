@@ -1,25 +1,30 @@
-package com.dev.gis.connector;
+package com.dev.gis.task.connector;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import com.bpcs.mdcars.protocol.LocationSearchResult;
-import com.dev.gis.task.execution.api.LocationSearchTask;
-import com.dev.gis.utils.XmlUtils;
+import org.apache.log4j.Logger;
 
-public class LocationSearchConnector extends HttpConnectorImpl {
+import com.bpcs.mdcars.protocol.LocationSearchResult;
+import com.dev.gis.connector.GisHttpClient;
+import com.dev.gis.connector.JsonUtils;
+import com.dev.gis.task.execution.api.LocationSearchTask;
+
+public class LocationSearchConnector  {
 	final LocationSearchTask locationSearchTask;
+	private static Logger logger = Logger.getLogger(LocationSearchConnector.class);
+
 	
 	public LocationSearchConnector(LocationSearchTask locationSearchTask) {
 		this.locationSearchTask = locationSearchTask;
 		
 	}
 
-	@Override
 	public LocationSearchResult joiLocationSearch(String searchString) {
 		URI uri = createLocationSearchUri(searchString);
-		
+		GisHttpClient httpClient = new GisHttpClient();;
+
 		try {
 //			JsonUtils.saveDummyResultAsJson();
 			
@@ -27,7 +32,7 @@ public class LocationSearchConnector extends HttpConnectorImpl {
 			logger.info("response = "+response);
 			
 			// dummy
-			response = createDummyResponse("DummyLocationSearchResult.json");
+			response = JsonUtils.createDummyResponse("DummyLocationSearchResult.json");
 			
 			return JsonUtils.createResponseClassFromJson(response, LocationSearchResult.class);
 			
@@ -37,13 +42,6 @@ public class LocationSearchConnector extends HttpConnectorImpl {
 		return null;
 		
 	}
-
-	private String createDummyResponse(String file) throws IOException {
-		String RESOURCE_FOLDER= "/resource/json";
-		String resource = RESOURCE_FOLDER+ "/"+file;
-		return  XmlUtils.readResource(Activator.getDefault().getBundle().getResource(resource));
-	}
-	
 	
 
 	private URI createLocationSearchUri(String searchString) {

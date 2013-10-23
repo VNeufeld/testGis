@@ -1,11 +1,11 @@
-package com.dev.gis.app.task.execution;
+package com.dev.gis.task.runnable;
 
 import java.util.Date;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
 
-import com.dev.gis.app.taskmanager.IResultView;
+import com.dev.gis.task.execution.api.IResultView;
 import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskResult;
 

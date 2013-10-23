@@ -1,11 +1,10 @@
-package com.dev.gis.app.task.execution;
+package com.dev.gis.task.runnable;
 
 import java.util.Date;
 
 import com.bpcs.mdcars.protocol.LocationSearchResult;
-import com.dev.gis.app.taskmanager.IResultView;
-import com.dev.gis.connector.api.HttpConnectorFactory;
-import com.dev.gis.connector.api.IHttpConnector;
+import com.dev.gis.task.connector.LocationSearchConnector;
+import com.dev.gis.task.execution.api.IResultView;
 import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.LocationSearchTask;
@@ -20,7 +19,7 @@ public class LocationSearchTaskRunnable extends AbstractTaskRunnable  implements
 	@Override
 	protected ITaskResult executeHttpCall(ITask task,Date startDate) {
 		LocationSearchTask locationSearchTask = (LocationSearchTask)task;
-		IHttpConnector httpConnector = HttpConnectorFactory.createLocationSearchConnector( locationSearchTask);
+		LocationSearchConnector httpConnector = new LocationSearchConnector(locationSearchTask);
 		LocationSearchResult result = httpConnector.joiLocationSearch(locationSearchTask.getLocation());
 		return TaskResultFactory.createLocationResult(result,startDate);
 	}

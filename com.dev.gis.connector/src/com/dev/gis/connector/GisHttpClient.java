@@ -22,7 +22,7 @@ public class GisHttpClient {
 	private ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
 	public String sendPostRequest(URI uri, String request)
-			throws ClientProtocolException, IOException {
+			throws IOException {
 
 		httpclient = new DefaultHttpClient();
 		localContext = new BasicHttpContext();
@@ -50,7 +50,7 @@ public class GisHttpClient {
 	}
 	
 	public String sendGetRequest(URI uri)
-			throws ClientProtocolException, IOException {
+			throws IOException {
 
 		httpclient = new DefaultHttpClient();
 		localContext = new BasicHttpContext();

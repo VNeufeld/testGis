@@ -15,6 +15,7 @@ import com.bpcs.mdcars.protocol.Hit;
 import com.bpcs.mdcars.protocol.HitGroup;
 import com.bpcs.mdcars.protocol.HitType;
 import com.bpcs.mdcars.protocol.LocationSearchResult;
+import com.dev.gis.utils.XmlUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -74,5 +75,12 @@ public class JsonUtils {
 		
 		return null;
 	}
+	
+	public static String createDummyResponse(String file) throws IOException {
+		String RESOURCE_FOLDER= "/resource/json";
+		String resource = RESOURCE_FOLDER+ "/"+file;
+		return  XmlUtils.readResource(Activator.getDefault().getBundle().getResource(resource));
+	}
+
 	
 }

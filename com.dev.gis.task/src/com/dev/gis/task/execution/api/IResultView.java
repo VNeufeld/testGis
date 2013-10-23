@@ -1,6 +1,6 @@
-package com.dev.gis.app.taskmanager;
+package com.dev.gis.task.execution.api;
 
-import com.dev.gis.task.execution.api.ITaskResult;
+
 
 public interface IResultView {
 	void showResult(final ITaskResult result);

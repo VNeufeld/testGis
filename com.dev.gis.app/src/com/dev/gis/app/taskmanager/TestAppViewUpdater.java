@@ -8,14 +8,12 @@ import org.eclipse.ui.PlatformUI;
 import com.dev.gis.task.execution.api.IResultView;
 import com.dev.gis.task.execution.api.ITaskResult;
 
-public class TaskExecutionViewUpdater implements IResultView {
-	private Logger logger = Logger.getLogger(TaskExecutionViewUpdater.class);
+public class TestAppViewUpdater implements IResultView {
+	private Logger logger = Logger.getLogger(TestAppViewUpdater.class);
 	private int instanceNum = 1;
 
 	@Override
-	public void showResult(final ITaskResult result) {
-		logger.info(" showResult : " + result);
-		
+	public void showResult(ITaskResult result) {
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			
 			@Override
@@ -24,12 +22,12 @@ public class TaskExecutionViewUpdater implements IResultView {
 					logger.info(" showResult : run instanceNum = "+instanceNum );
 					// Show protocol, show results
 					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					TaskExecutionView viewPart = (TaskExecutionView)  wp.showView(
-								TaskExecutionView.ID, 
+					TestAppView viewPart = (TestAppView)  wp.showView(
+							TestAppView.ID, 
 								Integer.toString(instanceNum), 
 								IWorkbenchPage.VIEW_ACTIVATE);
 					
-					viewPart.refresh(result);
+					//viewPart.refresh(result);
 					
 					//executionTaskViews.put("task "+instanceNum , viewPart);
 					instanceNum++;

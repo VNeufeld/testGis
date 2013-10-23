@@ -1,4 +1,4 @@
-package com.dev.gis.connector.api;
+package com.dev.gis.task.connector;
 
 import com.bpcs.mdcars.protocol.LocationSearchResult;
 

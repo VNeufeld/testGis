@@ -49,6 +49,14 @@
             name="task execution"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.dev.gis.app.taskmanager.TestAppView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.task.TestAppView"
+            name="TestApp"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

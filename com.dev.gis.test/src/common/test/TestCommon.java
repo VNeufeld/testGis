@@ -25,5 +25,14 @@ public class TestCommon {
 		if ( !file.isDirectory())
 			fail("Error URI for file :" + uri);
 	}
+	
+	
+	@Test
+	public void testUri() throws URISyntaxException {
+		
+		URI uri = new URI("http", null,"localhost",7080, "/ha_spring_joi/joi/location/test","operator=1&lang=1&search=m",null);
+		System.out.println(" uri = "  + uri.toString());
+
+	}
 
 }

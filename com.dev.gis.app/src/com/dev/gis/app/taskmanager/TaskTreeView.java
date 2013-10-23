@@ -97,11 +97,11 @@ public class TaskTreeView extends ViewPart {
 				
 				// execute task
 				if (task instanceof IExecutableTask ) {
-					((IExecutableTask)task).execute();
-					TaskExecuter.startExecutionTask(task);
+					TaskExecuter.startExecutionTask((IExecutableTask)task);
 				}
 				else if ( task instanceof IEditableTask) {
-					// Show formular
+					TestAppViewUpdater updater = new TestAppViewUpdater();
+					updater.showResult(null);
 				}
 
 				logger.info("task is running in "+(System.currentTimeMillis() - startTime) + " ms.");
