@@ -57,6 +57,13 @@
             name="TestApp"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.dev.gis.app.taskmanager.googleMapView.GoogleMapView"
+            id="com.dev.gis.app.view.taskGoogleMap"
+            name="task GoogleMap"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

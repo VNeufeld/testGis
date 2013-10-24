@@ -18,6 +18,9 @@ public class TaskProjectModelFactory {
 
 		model.getGroups().getFirst().getTasks().
 			add(TaskItem.createTask("testADAC_App", "folder_edit.png", "test ADAC APP"));
+
+		model.getGroups().getFirst().getTasks().
+		add(TaskItem.createTask("googleMap", "folder_edit.png", "test ADAC APP"));
 		
 		TaskGroup taskGroup = new TaskGroup("HSGW");
 		model.getGroups().add(taskGroup);
