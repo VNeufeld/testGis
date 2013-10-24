@@ -2,7 +2,7 @@ package com.dev.gis.task.execution.impl;
 
 import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
-import com.dev.gis.task.execution.api.JoiTask;
+import com.dev.gis.task.execution.locationSearch.JoiTask;
 
 public class DefaultTaskDataProvider implements ITaskDataProvider {
 

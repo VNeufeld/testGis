@@ -5,8 +5,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchWindow;
 
-import com.dev.gis.app.taskmanager.TaskExecutionView;
 import com.dev.gis.app.taskmanager.TaskTreeView;
+import com.dev.gis.app.taskmanager.executionView.TaskExecutionView;
 
 
 public class MessagePopupAction extends Action {

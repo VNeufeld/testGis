@@ -1,16 +1,16 @@
-package com.dev.gis.task.execution.api;
+package com.dev.gis.task.execution.locationSearch;
 
 import java.net.URI;
 
 public abstract class JoiTask {
-	URI haJoiServiceLink;
-	String name;
+	protected URI haJoiServiceLink;
+	protected String name;
 	
-	JoiTask() {
+	protected JoiTask() {
 		
 	}
 	
-	JoiTask(String name) {
+	protected JoiTask(String name) {
 		this.name = name;
 	}
 	

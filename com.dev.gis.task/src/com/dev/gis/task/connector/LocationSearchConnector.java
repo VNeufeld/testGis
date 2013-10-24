@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import com.bpcs.mdcars.protocol.LocationSearchResult;
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
-import com.dev.gis.task.execution.api.LocationSearchTask;
+import com.dev.gis.task.execution.locationSearch.impl.LocationSearchTask;
 
 public class LocationSearchConnector  {
 	final LocationSearchTask locationSearchTask;

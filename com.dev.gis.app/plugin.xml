@@ -44,14 +44,14 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.dev.gis.app.taskmanager.TaskExecutionView"
+            class="com.dev.gis.app.taskmanager.executionView.TaskExecutionView"
             id="com.dev.gis.app.view.taskExecution"
             name="task execution"
             restorable="true">
       </view>
       <view
             allowMultiple="true"
-            class="com.dev.gis.app.taskmanager.TestAppView"
+            class="com.dev.gis.app.taskmanager.testAppView.TestAppView"
             icon="icons/sample.gif"
             id="com.dev.gis.app.task.TestAppView"
             name="TestApp"

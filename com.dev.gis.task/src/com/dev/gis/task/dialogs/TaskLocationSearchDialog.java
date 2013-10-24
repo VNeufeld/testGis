@@ -14,8 +14,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.task.execution.api.ITaskDataProvider;
-import com.dev.gis.task.execution.api.LocationSearchTask;
 import com.dev.gis.task.execution.impl.LocationSearchTaskDataProvider;
+import com.dev.gis.task.execution.locationSearch.impl.LocationSearchTask;
 
 public class TaskLocationSearchDialog extends TaskDialogAbstract {
 	

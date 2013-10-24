@@ -1,15 +1,16 @@
-package com.dev.gis.task.execution.api;
+package com.dev.gis.task.execution.locationSearch.impl;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.dev.gis.task.execution.api.IExecutableTask;
+import com.dev.gis.task.execution.api.IResultView;
+import com.dev.gis.task.execution.locationSearch.JoiTask;
 import com.dev.gis.task.runnable.LocationSearchTaskRunnable;
 
 @XmlRootElement(name="locationSearchTask")
 public class LocationSearchTask extends JoiTask implements IExecutableTask {
 	
 	private static String TASKNAME_DEFAULT = "locationSearch";
-	
-	private static final String RESULT_VIEW_CLASS_NAME = "com.dev.gis.app.taskmanager.TaskExecutionViewUpdater";
 	
 	private String location;
 	private Integer country;
@@ -91,9 +92,10 @@ public class LocationSearchTask extends JoiTask implements IExecutableTask {
 		return new LocationSearchTaskRunnable(this,resultView);
 	}
 
+
 	@Override
-	public String getResultViewClassName() {
-		return RESULT_VIEW_CLASS_NAME;
+	public String getViewID() {
+		return "com.dev.gis.app.view.taskExecution";
 	}
 
 }

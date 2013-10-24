@@ -1,13 +1,15 @@
-package com.dev.gis.app.taskmanager;
+package com.dev.gis.app.taskmanager.testAppView;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.part.ViewPart;
 
-public class TestAppView extends ViewPart {
+import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.task.execution.api.ITaskResult;
+
+public class TestAppView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.TestAppView";
 
 	@Override
@@ -29,6 +31,18 @@ public class TestAppView extends ViewPart {
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void refresh(ITaskResult result) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

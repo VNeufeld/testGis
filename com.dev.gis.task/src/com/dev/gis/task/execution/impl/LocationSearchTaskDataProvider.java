@@ -6,9 +6,9 @@ import javax.xml.bind.JAXBException;
 
 import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
-import com.dev.gis.task.execution.api.JoiTask;
-import com.dev.gis.task.execution.api.LocationSearchTask;
 import com.dev.gis.task.execution.api.TaskDataProviderException;
+import com.dev.gis.task.execution.locationSearch.JoiTask;
+import com.dev.gis.task.execution.locationSearch.impl.LocationSearchTask;
 import com.dev.gis.task.persistance.impl.LocationSearchPersistanceXmlProvider;
 
 public class LocationSearchTaskDataProvider extends AbstractDataProvider implements ITaskDataProvider {

@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager;
+package com.dev.gis.app.taskmanager.executionView;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -31,10 +31,11 @@ import org.eclipse.ui.part.ViewPart;
 
 import com.dev.gis.app.task.model.Task;
 import com.dev.gis.app.task.model.TaskExecutonResultModel;
+import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.TaskResultItem;
 
-public class TaskExecutionView extends ViewPart {
+public class TaskExecutionView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.view.taskExecution";
 	private Table table;
 	private TableViewer tableViewer;

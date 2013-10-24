@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
+import com.dev.gis.task.execution.locationSearch.JoiTask;
+import com.dev.gis.task.execution.locationSearch.impl.LocationSearchTask;
+
 public interface ITaskPersistanceProvider {
 	
 	void load ( JoiTask task );

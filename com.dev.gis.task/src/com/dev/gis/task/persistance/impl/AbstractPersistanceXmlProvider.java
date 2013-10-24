@@ -18,8 +18,8 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.dev.gis.task.execution.api.JoiTask;
-import com.dev.gis.task.execution.api.LocationSearchTask;
+import com.dev.gis.task.execution.locationSearch.JoiTask;
+import com.dev.gis.task.execution.locationSearch.impl.LocationSearchTask;
 
 abstract class AbstractPersistanceXmlProvider {
 	private static Logger logger = Logger.getLogger(AbstractPersistanceXmlProvider.class.getName());

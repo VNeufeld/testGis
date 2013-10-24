@@ -5,8 +5,8 @@ import java.io.IOException;
 import javax.xml.bind.JAXBException;
 
 import com.dev.gis.task.execution.api.ITaskPersistanceProvider;
-import com.dev.gis.task.execution.api.JoiTask;
-import com.dev.gis.task.execution.api.LocationSearchTask;
+import com.dev.gis.task.execution.locationSearch.JoiTask;
+import com.dev.gis.task.execution.locationSearch.impl.LocationSearchTask;
 
 public class TestADACAppPersistanceProvider extends
 		AbstractPersistanceXmlProvider implements	ITaskPersistanceProvider {

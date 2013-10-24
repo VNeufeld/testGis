@@ -21,10 +21,10 @@ import com.dev.gis.app.task.model.Model;
 import com.dev.gis.app.task.model.TaskExecutonResultModel;
 import com.dev.gis.app.task.model.TaskItem;
 import com.dev.gis.app.task.model.TaskProjectModel;
+import com.dev.gis.app.taskmanager.executionView.TaskExecutionView;
 import com.dev.gis.task.execution.api.IEditableTask;
 import com.dev.gis.task.execution.api.IExecutableTask;
 import com.dev.gis.task.execution.api.ITask;
-import com.dev.gis.task.execution.api.JoiTask;
 
 
 public class TaskTreeView extends ViewPart {
@@ -100,12 +100,10 @@ public class TaskTreeView extends ViewPart {
 					TaskExecuter.startExecutionTask((IExecutableTask)task);
 				}
 				else if ( task instanceof IEditableTask) {
-					TestAppViewUpdater updater = new TestAppViewUpdater();
-					updater.showResult(null);
+					TaskViewUpdater viewUpdater = new TaskViewUpdater(task.getViewID());
+					viewUpdater.showResult(null);
 				}
-
 				logger.info("task is running in "+(System.currentTimeMillis() - startTime) + " ms.");
-
 
 			}
 

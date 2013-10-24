@@ -8,13 +8,19 @@ import org.eclipse.ui.PlatformUI;
 import com.dev.gis.task.execution.api.IResultView;
 import com.dev.gis.task.execution.api.ITaskResult;
 
-public class TaskExecutionViewUpdater implements IResultView {
-	private Logger logger = Logger.getLogger(TaskExecutionViewUpdater.class);
+public class TaskViewUpdater  implements IResultView {
+	private Logger logger = Logger.getLogger(TaskViewUpdater.class);
 	private int instanceNum = 1;
+	
+	private String viewID = null;
+
+	public TaskViewUpdater(String viewID) {
+		this.viewID = viewID;
+	}
 
 	@Override
 	public void showResult(final ITaskResult result) {
-		logger.info(" showResult : " + result);
+		logger.info(" showResult ID = "+viewID + " result : " + result);
 		
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			
@@ -24,23 +30,19 @@ public class TaskExecutionViewUpdater implements IResultView {
 					logger.info(" showResult : run instanceNum = "+instanceNum );
 					// Show protocol, show results
 					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					TaskExecutionView viewPart = (TaskExecutionView)  wp.showView(
-								TaskExecutionView.ID, 
-								Integer.toString(instanceNum), 
-								IWorkbenchPage.VIEW_ACTIVATE);
+					TaskViewAbstract viewPart =  (TaskViewAbstract)wp.showView(
+							viewID, 
+							Integer.toString(instanceNum), 
+							IWorkbenchPage.VIEW_ACTIVATE);
 					
 					viewPart.refresh(result);
 					
-					//executionTaskViews.put("task "+instanceNum , viewPart);
 					instanceNum++;
 					
 					logger.info(" add view :"+viewPart.getTitle());
 					
-					
-					
 				} catch (PartInitException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					logger.error(e.getMessage(),e);
 				}
 			}
 		});
