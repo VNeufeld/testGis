@@ -3,6 +3,7 @@ package com.dev.gis.task.execution.api;
 import javax.xml.bind.JAXBException;
 
 import com.dev.gis.task.execution.impl.DefaultTaskDataProvider;
+import com.dev.gis.task.execution.impl.GoogleMapDataProvider;
 import com.dev.gis.task.execution.impl.LocationSearchTaskDataProvider;
 import com.dev.gis.task.execution.impl.TestADACAppDataProvider;
 
@@ -21,6 +22,9 @@ public class TaskDataProviderFactory {
 		}else if ( name.equals("testADAC_App")) {
 			TestADACAppDataProvider dataProvider = new TestADACAppDataProvider();
 			dataProvider.loadTask(name);
+			return dataProvider;
+		}else if ( name.equals("googleMap")) {
+			GoogleMapDataProvider dataProvider = new GoogleMapDataProvider();
 			return dataProvider;
 		}
 		return createDefaultTaskDataProvider();
