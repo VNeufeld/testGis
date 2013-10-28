@@ -3,12 +3,14 @@ package com.dev.gis.app.taskmanager.testAppView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
@@ -19,9 +21,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.bpcs.mdcars.protocol.Offer;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
@@ -35,11 +41,21 @@ public class TestAppView extends TaskViewAbstract {
 	
 	Calendar checkInDate = Calendar.getInstance();
 	Calendar dropOffDate = Calendar.getInstance();
-	
+
+	private IWorkbenchAction exitAction;
+
 	 private TableViewer viewer;
 	
 	@Override
 	public void createPartControl(Composite parent) {
+		
+//		 exitAction = ActionFactory.QUIT.create(this);
+//	        register(exitAction);
+//	        
+	        
+		//exitAction = new IWorkbenchAction(viewer, parent.getShell());
+
+		
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
 		
@@ -98,6 +114,21 @@ public class TestAppView extends TaskViewAbstract {
 		});
 
 		createViewer(composite);
+		
+		
+//	    final Table table = viewer.getTable();
+//
+//		  Menu menu = new Menu(table);
+//	        MenuItem menuItem = new MenuItem(menu, SWT.NONE);
+//	        menuItem.setText("Print Element");
+//	        menuItem.addSelectionListener(new SelectionAdapter() {
+//	            @Override
+//	            public void widgetSelected(SelectionEvent event) {
+//	                System.out.println(table.getSelection()[0].getText());
+//	            }
+//	        });
+//	        viewer.getControl().setMenu(menu);
+
 
 		
 	}
@@ -196,6 +227,8 @@ public class TestAppView extends TaskViewAbstract {
 	    gridData.grabExcessVerticalSpace = true;
 	    gridData.horizontalAlignment = GridData.FILL;
 	    viewer.getControl().setLayoutData(gridData);
+	    
+	    hookContextMenu();
 	  }
 	
 	private void createColumns(final Composite parent, final TableViewer viewer) {
@@ -288,6 +321,18 @@ public class TestAppView extends TaskViewAbstract {
 		// TODO Auto-generated method stub
 		
 	}
-	
+	private void hookContextMenu() {
+		MenuManager menuMgr = new MenuManager();
+
+		menuMgr.setRemoveAllWhenShown(true);
+
+		Menu menu = menuMgr.createContextMenu(viewer.getControl());
+		viewer.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuMgr, viewer);
+		
+		
+		
+	}
+
 
 }

@@ -195,6 +195,33 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            locationURI="popup:com.dev.gis.app.task.TestAppView">
+         <command
+               commandId="com.dev.gis.app.addTask"
+               label="Add"
+               style="push">
+         </command>
+         <command
+               commandId="com.dev.gis.app.editTask"
+               icon="icons/email_edit.png"
+               label="Edit"
+               style="push"
+               tooltip="Edit Task or Group">
+         </command>
+         <command
+               commandId="com.dev.gis.app.deleteTask"
+               icon="icons/email_delete.png"
+               label="Delete"
+               style="push">
+         </command>
+         <command
+               commandId="com.dev.gis.app.editTaskDetails"
+               icon="icons/email_edit.png"
+               label="Edit task details"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
 
 </plugin>
