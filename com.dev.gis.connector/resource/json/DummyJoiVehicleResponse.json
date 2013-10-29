@@ -1,0 +1,857 @@
+{
+	"requestId": 265674786,
+	"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786",
+	"errors": [{
+		"errorType": 4,
+		"errorNumber": 10099,
+		"errorText": "Failed to validate Response to XSD /home/www/work/ADAC_GW/schema/GetCarsResponse/GetCarsResponse.xsd"
+	}],
+	"remainingCacheSeconds": 60000,
+	"resultList": [{
+		"id": 514179965,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/514179965",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/514179965/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 0,
+			"categoryId": 14,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Nissan Micra",
+			"nrDoors": 2,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 8601,
+				"name": "EBMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/EBMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/EBMR.jpg"
+		},
+		"offerList": [{
+			"id": "997f3136-0fab-4299-9044-cb17745eecb0",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/514179965/offer/997f3136-0fab-4299-9044-cb17745eecb0",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/514179965/offer/997f3136-0fab-4299-9044-cb17745eecb0/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "450,02",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "450,02",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "AIM",
+			"serviceCatalogId": 1
+		}],
+		"module": "1"
+	},
+	{
+		"id": 753074633,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/753074633",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/753074633/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 0,
+			"categoryId": 14,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Nissan Micra",
+			"nrDoors": 2,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 8601,
+				"name": "EBMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/EBMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/EBMR.jpg"
+		},
+		"offerList": [{
+			"id": "6c1b1593-1ecf-411a-b55c-ee6b047d208a",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/753074633/offer/6c1b1593-1ecf-411a-b55c-ee6b047d208a",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/753074633/offer/6c1b1593-1ecf-411a-b55c-ee6b047d208a/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "470,05",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "470,05",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": false,
+			"noMember": true,
+			"serviceCatalogCode": "AINM",
+			"serviceCatalogId": 5
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1560775354,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1560775354",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1560775354/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 0,
+			"categoryId": 33,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Fiat Linea",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 9201,
+				"name": "CCMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/CCMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/CCMR.jpg"
+		},
+		"offerList": [{
+			"id": "37acc208-8582-4d6c-ac44-94998e222e00",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1560775354/offer/37acc208-8582-4d6c-ac44-94998e222e00",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1560775354/offer/37acc208-8582-4d6c-ac44-94998e222e00/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "562,13",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "562,13",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "AIM",
+			"serviceCatalogId": 1
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1115486411,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1115486411",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1115486411/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 0,
+			"categoryId": 1,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Seat Leon",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 8301,
+				"name": "CDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/CDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/CDMR.jpg"
+		},
+		"offerList": [{
+			"id": "326082c9-3b5b-4c59-bca3-47d67f4c652e",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1115486411/offer/326082c9-3b5b-4c59-bca3-47d67f4c652e",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1115486411/offer/326082c9-3b5b-4c59-bca3-47d67f4c652e/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "562,13",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "562,13",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "AIM",
+			"serviceCatalogId": 1
+		}],
+		"module": "1"
+	},
+	{
+		"id": 904256693,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/904256693",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/904256693/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 0,
+			"categoryId": 33,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Fiat Linea",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 9201,
+				"name": "CCMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/CCMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/CCMR.jpg"
+		},
+		"offerList": [{
+			"id": "67d40565-e5d0-41de-926b-ebdf229bd429",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/904256693/offer/67d40565-e5d0-41de-926b-ebdf229bd429",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/904256693/offer/67d40565-e5d0-41de-926b-ebdf229bd429/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "588,05",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "588,05",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": false,
+			"noMember": true,
+			"serviceCatalogCode": "AINM",
+			"serviceCatalogId": 5
+		}],
+		"module": "1"
+	},
+	{
+		"id": 351658457,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/351658457",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/351658457/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 0,
+			"categoryId": 1,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Seat Leon",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 8301,
+				"name": "CDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/CDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/CDMR.jpg"
+		},
+		"offerList": [{
+			"id": "77ca2177-8609-48d2-95c9-3aa9e8493012",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/351658457/offer/77ca2177-8609-48d2-95c9-3aa9e8493012",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/351658457/offer/77ca2177-8609-48d2-95c9-3aa9e8493012/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "588,05",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "588,05",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": false,
+			"noMember": true,
+			"serviceCatalogCode": "AINM",
+			"serviceCatalogId": 5
+		}],
+		"module": "1"
+	},
+	{
+		"id": 759202996,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/759202996",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/759202996/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 0,
+			"categoryId": 6,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Volkswagen Golf",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 9001,
+				"name": "IDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/IDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/IDMR.jpg"
+		},
+		"offerList": [{
+			"id": "d3090b7e-471f-4b85-8eae-75b6523d6ca7",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/759202996/offer/d3090b7e-471f-4b85-8eae-75b6523d6ca7",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/759202996/offer/d3090b7e-471f-4b85-8eae-75b6523d6ca7/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "729,22",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "729,22",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "AIM",
+			"serviceCatalogId": 1
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1271205128,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1271205128",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1271205128/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 0,
+			"categoryId": 6,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Volkswagen Golf",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 9001,
+				"name": "IDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/IDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/IDMR.jpg"
+		},
+		"offerList": [{
+			"id": "9842d351-1d34-4662-8989-bf99157b44f9",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1271205128/offer/9842d351-1d34-4662-8989-bf99157b44f9",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/1271205128/offer/9842d351-1d34-4662-8989-bf99157b44f9/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "763,93",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "763,93",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": false,
+			"noMember": true,
+			"serviceCatalogCode": "AINM",
+			"serviceCatalogId": 5
+		}],
+		"module": "1"
+	},
+	{
+		"id": 280433073,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/280433073",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/280433073/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 0,
+			"categoryId": 3,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Audi A3 Auto",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 8901,
+				"name": "IDAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/IDAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/IDAR.jpg"
+		},
+		"offerList": [{
+			"id": "414499ab-632e-4243-b522-1472282bde6f",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/280433073/offer/414499ab-632e-4243-b522-1472282bde6f",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/280433073/offer/414499ab-632e-4243-b522-1472282bde6f/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "893,92",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "893,92",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 3
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "AIM",
+			"serviceCatalogId": 1
+		}],
+		"module": "1"
+	},
+	{
+		"id": 621808275,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/621808275",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/621808275/recalculate",
+		"pickUpLocation": {
+			"stationId": 169,
+			"cityId": 20,
+			"countryId": 9,
+			"countryCode": "ES"
+		},
+		"dropOffLocation": {
+			"stationId": 169
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 0,
+			"categoryId": 3,
+			"driverMinAge": 0,
+			"cargoInformation": null,
+			"manufacturer": "Audi A3 Auto",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 80,
+			"vehicleGroup": {
+				"id": 8901,
+				"name": "IDAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/large/IDAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/ES/small/IDAR.jpg"
+		},
+		"offerList": [{
+			"id": "a61ba2e5-9b86-429c-b56a-1d32665c6cc8",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/621808275/offer/a61ba2e5-9b86-429c-b56a-1d32665c6cc8",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/265674786/vehicle/621808275/offer/a61ba2e5-9b86-429c-b56a-1d32665c6cc8/book",
+			"supplierId": 80,
+			"price": {
+				"amount": "937,31",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "937,31",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 2,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/2",
+				"description": "Dachgepäckträger",
+				"displayPriority": 99
+			},
+			{
+				"id": 27,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/27",
+				"description": "Navigationssystem auf Anfrage",
+				"displayPriority": 99
+			},
+			{
+				"id": 21,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/21",
+				"description": "Diebstahlversicherung #1/0.00",
+				"displayPriority": 99
+			}],
+			"offeredPayment": "1",
+			"member": false,
+			"noMember": true,
+			"serviceCatalogCode": "AINM",
+			"serviceCatalogId": 5
+		}],
+		"module": "1"
+	}],
+	"summary": {
+		"quantity": 10,
+		"totalQuantity": 14,
+		"minimalPrice": {
+			"amount": "450,02",
+			"currency": "EUR"
+		},
+		"maximalPrice": {
+			"amount": "1.111,25",
+			"currency": "EUR"
+		}
+	},
+	"texts": {
+		"supplierList": [{
+			"id": 80,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/supplier/80",
+			"supplierGroupId": 0,
+			"logo": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/default.png",
+			"name": "Europcar"
+		}],
+		"bodyStyleList": [{
+			"id": 0,
+			"text": "4-Türer"
+		}],
+		"stationList": [{
+			"id": 169,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/station/169",
+			"stationName": "Europcar Mallorca",
+			"stationPriority": 1,
+			"airportStation": true,
+			"airport": "PMI",
+			"cityId": 20,
+			"supplierId": 80,
+			"assignedCityIds": [-1,
+			20],
+			"modules": ["1"],
+			"countryId": 9,
+			"address": {
+				"street": null,
+				"zip": null,
+				"city": null,
+				"country": null
+			}
+		}],
+		"paymentInfoList": [{
+			"paymentType": "4",
+			"provided": true
+		},
+		{
+			"paymentType": "2",
+			"provided": true
+		},
+		{
+			"paymentType": "1",
+			"provided": true
+		}]
+	}
+}

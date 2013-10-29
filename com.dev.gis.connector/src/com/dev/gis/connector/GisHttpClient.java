@@ -79,8 +79,8 @@ public class GisHttpClient {
 	}
 	
 
-	private String startPostRequestAsJson(URI uri, String jsonString)
-			throws ClientProtocolException, IOException {
+	public String startPostRequestAsJson(URI uri, String jsonString)
+			throws  IOException {
 		HttpPost httpPost = new HttpPost(uri);
 
 		StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);

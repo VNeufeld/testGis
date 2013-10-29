@@ -1,0 +1,28 @@
+{
+    "administration": {
+        "language": "de-DE",
+        "operator": 1,
+        "salesChannel": 7,
+        "calledFrom": 9,
+        "broker": false
+    },
+    "travel": {
+        "pickUpTime": {
+            "date": "2013-12-03",
+            "time": "10:00"
+        },
+        "dropOffTime": {
+            "date": "2013-12-26",
+            "time": "10:00"
+        },
+        "pickUpLocation": {
+            "airport": "PMI"
+        },
+        "dropOffLocation": {
+            "airport": "PMI"
+        }
+    },
+    "payment": 1,
+    "module": 1
+
+}

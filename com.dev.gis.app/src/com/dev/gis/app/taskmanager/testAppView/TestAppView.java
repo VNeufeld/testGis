@@ -31,7 +31,9 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.bpcs.mdcars.protocol.Offer;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.ITaskResult;
+import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
 
 public class TestAppView extends TaskViewAbstract {
@@ -102,7 +104,9 @@ public class TestAppView extends TaskViewAbstract {
 
 				System.out.println("Checkindate = "+new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").format(checkInDate.getTime()));
 				
-				changeModel();
+				VehicleResponse response = JoiVehicleConnector.getOffers();
+				
+				changeModel(response);
 				viewer.refresh();
 			}
 
@@ -133,9 +137,9 @@ public class TestAppView extends TaskViewAbstract {
 		
 	}
 	
-	protected void changeModel() {
-		ModelProvider.INSTANCE.update();
-	    viewer.setInput(ModelProvider.INSTANCE.getOffers());
+	protected void changeModel(VehicleResponse response) {
+		//ModelProvider.INSTANCE.update();
+	    viewer.setInput(response.getModelProvider.INSTANCE.getOffers());
 	
 	}
 
@@ -214,7 +218,7 @@ public class TestAppView extends TaskViewAbstract {
 	    viewer.setContentProvider(new ArrayContentProvider());
 	    // get the content for the viewer, setInput will call getElements in the
 	    // contentProvider
-	    viewer.setInput(ModelProvider.INSTANCE.getOffers());
+	    //viewer.setInput(ModelProvider.INSTANCE.getOffers());
 	    // make the selection available to other views
 	    getSite().setSelectionProvider(viewer);
 	    // set the sorter for the table
