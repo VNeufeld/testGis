@@ -32,6 +32,8 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import com.bpcs.mdcars.protocol.Offer;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
+import com.dev.gis.db.api.DaoFactory;
+import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
@@ -104,9 +106,12 @@ public class TestAppView extends TaskViewAbstract {
 
 				System.out.println("Checkindate = "+new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").format(checkInDate.getTime()));
 				
-				VehicleResponse response = JoiVehicleConnector.getOffers();
+				IStationDao stationDao = new DaoFactory().getStationDao();
+				System.out.println(" Stationname = "+stationDao.getStationName());
 				
-				changeModel(response);
+				//VehicleResponse response = JoiVehicleConnector.getOffers();
+				
+				//changeModel(response);
 				viewer.refresh();
 			}
 
@@ -138,8 +143,9 @@ public class TestAppView extends TaskViewAbstract {
 	}
 	
 	protected void changeModel(VehicleResponse response) {
-		//ModelProvider.INSTANCE.update();
-	    viewer.setInput(response.getModelProvider.INSTANCE.getOffers());
+		ModelProvider.INSTANCE.update();
+	    //viewer.setInput(response.getModelProvider.INSTANCE.getOffers());
+	    viewer.setInput(ModelProvider.INSTANCE.getOffers());
 	
 	}
 
