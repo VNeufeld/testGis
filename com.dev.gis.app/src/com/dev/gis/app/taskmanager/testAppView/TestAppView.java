@@ -29,11 +29,11 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
+import com.dev.gis.app.Components;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
-import com.dev.gis.db.api.DaoFactory;
 import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
@@ -107,8 +107,9 @@ public class TestAppView extends TaskViewAbstract {
 
 				System.out.println("Checkindate = "+new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").format(checkInDate.getTime()));
 				
-//				IStationDao stationDao = new DaoFactory().getStationDao();
-//				System.out.println(" Stationname = "+stationDao.getStationName());
+				IStationDao stationDao = Components.getInstance().getDaoFactory().getStationDao();
+				
+				System.out.println(" Stationname = "+stationDao.getStationName());
 				
 				VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				

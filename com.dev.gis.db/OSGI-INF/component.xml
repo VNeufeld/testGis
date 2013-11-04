@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="startup" name="com.dev.gis.db">
+   <implementation class="com.dev.gis.db.impl.DaoFactory"/>
+   <service>
+      <provide interface="com.dev.gis.db.api.IDaoFactory"/>
+   </service>
+</scr:component>
