@@ -38,4 +38,24 @@ public class JoiVehicleConnector {
 
 	}
 
+	public static VehicleResponse getOffersDummy() {
+
+		try {
+			
+			String response = JsonUtils.createDummyResponse("DummyJoiVehicleResponse.json");
+			
+			logger.info("response = "+response);
+			
+			VehicleResponse vh = JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
+			
+
+			return vh;
+			
+		} catch ( IOException e) {
+			logger.error(e);
+		}
+		return null;
+
+	}
+	
 }

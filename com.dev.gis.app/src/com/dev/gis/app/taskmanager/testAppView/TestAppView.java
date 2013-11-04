@@ -29,9 +29,10 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
-import com.bpcs.mdcars.protocol.Offer;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
+import com.dev.gis.connector.joi.protocol.VehicleResult;
 import com.dev.gis.db.api.DaoFactory;
 import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
@@ -106,12 +107,12 @@ public class TestAppView extends TaskViewAbstract {
 
 				System.out.println("Checkindate = "+new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").format(checkInDate.getTime()));
 				
-				IStationDao stationDao = new DaoFactory().getStationDao();
-				System.out.println(" Stationname = "+stationDao.getStationName());
+//				IStationDao stationDao = new DaoFactory().getStationDao();
+//				System.out.println(" Stationname = "+stationDao.getStationName());
 				
-				//VehicleResponse response = JoiVehicleConnector.getOffers();
+				VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				
-				//changeModel(response);
+				changeModel(response);
 				viewer.refresh();
 			}
 
@@ -144,8 +145,8 @@ public class TestAppView extends TaskViewAbstract {
 	
 	protected void changeModel(VehicleResponse response) {
 		ModelProvider.INSTANCE.update();
-	    //viewer.setInput(response.getModelProvider.INSTANCE.getOffers());
-	    viewer.setInput(ModelProvider.INSTANCE.getOffers());
+	    viewer.setInput(response.getResultList());
+	    //viewer.setInput(ModelProvider.INSTANCE.getOffers());
 	
 	}
 
@@ -250,8 +251,8 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	        Offer o = (Offer) element;
-	        return o.getName();
+	        VehicleResult o = (VehicleResult) element;
+	        return String.valueOf(o.getVehicle().getCategoryId());
 	      }
 	    });
 
@@ -260,8 +261,8 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	        Offer o = (Offer) element;
-	        return String.valueOf(o.getSupplierId());
+	    	  VehicleResult o = (VehicleResult) element;
+	        return String.valueOf(o.getVehicle().getSupplierId());
 	      }
 	    });
 
@@ -270,8 +271,8 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	        Offer o = (Offer) element;
-	        return String.valueOf(o.getPickUpStationId());
+	    	  VehicleResult o = (VehicleResult) element;
+	        return String.valueOf(o.getVehicle().getSupplierId());
 	      }
 	    });
 
@@ -280,9 +281,11 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	        Offer o = (Offer) element;
+    	    VehicleResult o = (VehicleResult) element;
+    	    
+	        Offer offer = o.getOfferList().get(0);
 	        
-	        return o.getPrice().getAmount();
+	        return offer.getPrice().getAmount();
 	      }
 
 //	      @Override
