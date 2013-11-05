@@ -8,18 +8,33 @@ import org.apache.log4j.Logger;
 
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
+import com.dev.gis.connector.joi.protocol.Administration;
+import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 
 public class JoiVehicleConnector {
 	private static Logger logger = Logger.getLogger(JoiVehicleConnector.class);
 
-	public static VehicleResponse getOffers() {
+	public static VehicleResponse getOffers(VehicleRequest vehicleRequest) {
 		GisHttpClient httpClient = new GisHttpClient();
 
 		try {
-			URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=10");
+			URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=20");
+			Administration admin = new Administration();
 			
-			String request = JsonUtils.createDummyResponse("DummyJoiVehicleRequest.json");
+			admin.setLanguage("de-DE");
+			admin.setOperator(1);
+			admin.setSalesChannel(7);
+			admin.setCalledFrom(9);
+			admin.setBroker(false);
+
+			vehicleRequest.setAdministration(admin);
+			
+
+			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
+			logger.info("request = "+request);
+			
+//			String request = JsonUtils.createDummyResponse("DummyJoiVehicleRequest.json");
 			
 			String response =  httpClient.startPostRequestAsJson(uri, request);
 			logger.info("response = "+response);

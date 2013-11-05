@@ -1,11 +1,14 @@
 package com.dev.gis.task.execution.api;
 
 import java.math.BigDecimal;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.bpcs.mdcars.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.VehicleResponse;
+import com.dev.gis.connector.joi.protocol.VehicleResult;
 
 public enum ModelProvider {
 	INSTANCE;
@@ -27,7 +30,7 @@ public enum ModelProvider {
 		return offers;
 	}
 	
-	private static Offer createOffer(String name, int supplierId, int stationId, String price) {
+	private static Offer createOffer(String name, long supplierId, long stationId, String price) {
 		Offer offer = new Offer();
 		offer.setName(name);
 		offer.setPickUpStationId(stationId);
@@ -42,6 +45,29 @@ public enum ModelProvider {
 		}
 
 		offers.add(createOffer("BMW 7 ",12, 13, "223,32"));
+		
+	}
+
+	public void update(VehicleResponse response) {
+		offers.clear();
+		List<VehicleResult> results = response.getResultList();
+		for ( VehicleResult vr : results) {
+			if ( vr.getOfferList().size() > 0 ) {
+				URI bookLink = vr.getOfferList().get(0).getBookLink();
+				long supplierId = vr.getOfferList().get(0).getSupplierId();
+				long stationId = -1;
+				if ( vr.getPickUpLocation() != null )
+					stationId = vr.getPickUpLocation().getStationId();
+				String preis = "";
+				if ( vr.getOfferList().get(0).getPrice() != null)
+					preis = vr.getOfferList().get(0).getPrice().getAmount();
+				
+				Offer offer = createOffer(vr.getVehicle().getManufacturer(),supplierId, stationId, preis);
+				offer.setBookLink(bookLink);
+				
+				offers.add(offer);
+			}
+		}
 		
 	}
 

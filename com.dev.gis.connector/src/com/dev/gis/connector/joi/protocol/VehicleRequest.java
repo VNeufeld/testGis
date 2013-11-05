@@ -31,13 +31,13 @@ public class VehicleRequest extends Request {
 	 */
 	private Integer serviceCatalogId = null;
 
-	private TravelInformation travelSpecification;
+	private TravelInformation travel;
 	
-	private PayType payment;
+	private int payment;
 
 	private VehicleRequestFilter filter;
 	
-	private Module module;
+	private int module;
 
 	
 	
@@ -51,8 +51,7 @@ public class VehicleRequest extends Request {
 		return filter;
 	}
 
-	@XmlElement(required=false)
-	public PayType getPayment() {
+	public int getPayment() {
 		return payment;
 	}
 
@@ -72,8 +71,8 @@ public class VehicleRequest extends Request {
 	}
 
 	@XmlElement(name="travel")
-	public TravelInformation getTravelSpecification() {
-		return travelSpecification;
+	public TravelInformation getTravel() {
+		return travel;
 	}
 
 	public void setCustomer(Customer customer) {
@@ -84,7 +83,7 @@ public class VehicleRequest extends Request {
 		this.filter = filter;
 	}
 
-	public void setPayment(PayType payment) {
+	public void setPayment(int payment) {
 		this.payment= payment;
 	}
 	
@@ -100,15 +99,15 @@ public class VehicleRequest extends Request {
 		this.specialId = specialId;
 	}
 	
-	public void setTravelSpecification(TravelInformation travelSpecification) {
-		this.travelSpecification = travelSpecification;
+	public void setTravel(TravelInformation travelSpecification) {
+		this.travel = travelSpecification;
 	}
 	
-	public Module getModule() {
+	public int getModule() {
 		return module;
 	}
 	
-	public void setModule(Module module) {
+	public void setModule(int module) {
 		this.module = module;
 	}
 }

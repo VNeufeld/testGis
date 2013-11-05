@@ -31,7 +31,11 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.Components;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.DayAndHour;
+import com.dev.gis.connector.joi.protocol.Location;
+import com.dev.gis.connector.joi.protocol.Module;
+import com.dev.gis.connector.joi.protocol.TravelInformation;
+import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 import com.dev.gis.db.api.IStationDao;
@@ -111,7 +115,32 @@ public class TestAppView extends TaskViewAbstract {
 				
 				System.out.println(" Stationname = "+stationDao.getStationName());
 				
-				VehicleResponse response = JoiVehicleConnector.getOffersDummy();
+				VehicleRequest request = new VehicleRequest();
+				TravelInformation ti = new TravelInformation();
+				Location pickUpLocation = new Location() ;
+				pickUpLocation.setAirport("PMI");
+
+				Location dropOffLocation = new Location() ;
+				dropOffLocation.setAirport("PMI");
+				
+				ti.setPickUpLocation(pickUpLocation);
+				ti.setDropOffLocation(dropOffLocation);
+				
+				DayAndHour dh = new DayAndHour();
+				dh.setDate("2013-12-03");
+				dh.setTime("10:00");
+				ti.setPickUpTime(dh);
+
+				dh = new DayAndHour();
+				dh.setDate("2013-12-13");
+				dh.setTime("10:00");
+				ti.setDropOffTime(dh);
+				
+				request.setTravel(ti);
+				
+				request.setModule(1);
+				
+				VehicleResponse response = JoiVehicleConnector.getOffers(request);
 				
 				changeModel(response);
 				viewer.refresh();
@@ -145,9 +174,9 @@ public class TestAppView extends TaskViewAbstract {
 	}
 	
 	protected void changeModel(VehicleResponse response) {
-		ModelProvider.INSTANCE.update();
-	    viewer.setInput(response.getResultList());
-	    //viewer.setInput(ModelProvider.INSTANCE.getOffers());
+		ModelProvider.INSTANCE.update(response);
+	    //viewer.setInput(response.getResultList());
+	    viewer.setInput(ModelProvider.INSTANCE.getOffers());
 	
 	}
 
@@ -252,41 +281,36 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	        VehicleResult o = (VehicleResult) element;
-	        return String.valueOf(o.getVehicle().getCategoryId());
+	    	com.bpcs.mdcars.protocol.Offer o = (com.bpcs.mdcars.protocol.Offer) element;
+	        return o.getName();
 	      }
 	    });
 
-	    // second column is for the last name
+	    // second column is supplierId
 	    col = createTableViewerColumn(titles[1], bounds[1], 1);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	  VehicleResult o = (VehicleResult) element;
-	        return String.valueOf(o.getVehicle().getSupplierId());
+	    	com.bpcs.mdcars.protocol.Offer o = (com.bpcs.mdcars.protocol.Offer) element;
+	        return String.valueOf(o.getSupplierId());
 	      }
 	    });
 
-	    // now the gender
 	    col = createTableViewerColumn(titles[2], bounds[2], 2);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	  VehicleResult o = (VehicleResult) element;
-	        return String.valueOf(o.getVehicle().getSupplierId());
+			com.bpcs.mdcars.protocol.Offer o = (com.bpcs.mdcars.protocol.Offer) element;
+			return String.valueOf(o.getPickUpStationId());
 	      }
 	    });
 
-	    // now the status married
 	    col = createTableViewerColumn(titles[3], bounds[3], 3);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-    	    VehicleResult o = (VehicleResult) element;
-    	    
-	        Offer offer = o.getOfferList().get(0);
-	        
-	        return offer.getPrice().getAmount();
+			com.bpcs.mdcars.protocol.Offer o = (com.bpcs.mdcars.protocol.Offer) element;
+			return o.getPrice().getAmount();
 	      }
 
 //	      @Override
