@@ -7,6 +7,9 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -31,6 +34,7 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.Components;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Location;
 import com.dev.gis.connector.joi.protocol.Module;
@@ -42,6 +46,7 @@ import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
+import com.dev.gis.task.execution.api.OfferDo;
 
 public class TestAppView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.TestAppView";
@@ -140,7 +145,8 @@ public class TestAppView extends TaskViewAbstract {
 				
 				request.setModule(1);
 				
-				VehicleResponse response = JoiVehicleConnector.getOffers(request);
+				//VehicleResponse response = JoiVehicleConnector.getOffers(request);
+				VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				
 				changeModel(response);
 				viewer.refresh();
@@ -174,9 +180,9 @@ public class TestAppView extends TaskViewAbstract {
 	}
 	
 	protected void changeModel(VehicleResponse response) {
-		ModelProvider.INSTANCE.update(response);
+		ModelProvider.INSTANCE.updateOffers(response);
 	    //viewer.setInput(response.getResultList());
-	    viewer.setInput(ModelProvider.INSTANCE.getOffers());
+	    viewer.setInput(ModelProvider.INSTANCE.getOfferDos());
 	
 	}
 
@@ -269,8 +275,30 @@ public class TestAppView extends TaskViewAbstract {
 	    gridData.horizontalAlignment = GridData.FILL;
 	    viewer.getControl().setLayoutData(gridData);
 	    
+	    viewer.addDoubleClickListener(new DoubleClickListener());
+	    
 	    hookContextMenu();
-	  }
+	}
+	
+	private static class DoubleClickListener implements IDoubleClickListener 
+	{
+
+		@Override
+		public void doubleClick(DoubleClickEvent event) {
+			
+			TableViewer viewer = (TableViewer) event.getViewer();
+	        IStructuredSelection thisSelection = (IStructuredSelection) event
+	            .getSelection();
+	        Object selectedNode = thisSelection.getFirstElement();
+	        
+	    	OfferDo offer = (OfferDo) selectedNode;
+ 
+	        new OfferViewUpdater().showOffer(offer);
+	        System.out.println("selectedNode "+offer);
+	        
+		}
+		
+	}
 	
 	private void createColumns(final Composite parent, final TableViewer viewer) {
 	    String[] titles = { "Name", "Supplier", "Station", "Price" };
@@ -281,7 +309,7 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	com.bpcs.mdcars.protocol.Offer o = (com.bpcs.mdcars.protocol.Offer) element;
+	    	OfferDo o = (OfferDo) element;
 	        return o.getName();
 	      }
 	    });
@@ -291,7 +319,7 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	com.bpcs.mdcars.protocol.Offer o = (com.bpcs.mdcars.protocol.Offer) element;
+	    	OfferDo o = (OfferDo) element;
 	        return String.valueOf(o.getSupplierId());
 	      }
 	    });
@@ -300,7 +328,7 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-			com.bpcs.mdcars.protocol.Offer o = (com.bpcs.mdcars.protocol.Offer) element;
+	    	OfferDo o = (OfferDo) element;
 			return String.valueOf(o.getPickUpStationId());
 	      }
 	    });
@@ -309,7 +337,7 @@ public class TestAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-			com.bpcs.mdcars.protocol.Offer o = (com.bpcs.mdcars.protocol.Offer) element;
+	    	OfferDo o = (OfferDo) element;
 			return o.getPrice().getAmount();
 	      }
 

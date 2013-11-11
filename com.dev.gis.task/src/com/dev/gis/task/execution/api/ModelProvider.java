@@ -15,8 +15,11 @@ public enum ModelProvider {
 
 	private List<Offer> offers;
 
+	private List<OfferDo> offerDos;
+
 	private ModelProvider() {
 		offers = new ArrayList<Offer>();
+		offerDos = new ArrayList<OfferDo>();
 		// Image here some fancy database access to read the persons and to
 		// put them into the model
 		offers.add(createOffer("BMW 7 ",12, 13, "223,32"));
@@ -47,6 +50,19 @@ public enum ModelProvider {
 		offers.add(createOffer("BMW 7 ",12, 13, "223,32"));
 		
 	}
+	public void updateOffers(VehicleResponse response) {
+		offerDos.clear();
+		List<VehicleResult> results = response.getResultList();
+		for ( VehicleResult vr : results) {
+			if ( vr.getOfferList().size() > 0 ) {
+				
+				OfferDo offer = new OfferDo(vr);
+				
+				offerDos.add(offer);
+			}
+		}
+		
+	}
 
 	public void update(VehicleResponse response) {
 		offers.clear();
@@ -69,6 +85,10 @@ public enum ModelProvider {
 			}
 		}
 		
+	}
+
+	public List<OfferDo> getOfferDos() {
+		return offerDos;
 	}
 
 }

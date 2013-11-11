@@ -22,6 +22,14 @@
    <extension
          point="org.eclipse.ui.views">
       <view
+            allowMultiple="true"
+            class="com.dev.gis.app.taskmanager.testAppView.TestAppView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.task.TestAppView"
+            name="TestApp"
+            restorable="true">
+      </view>
+      <view
             name="Message"
             allowMultiple="true"
             icon="icons/sample2.gif"
@@ -50,11 +58,11 @@
             restorable="true">
       </view>
       <view
-            allowMultiple="true"
-            class="com.dev.gis.app.taskmanager.testAppView.TestAppView"
+            allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.offerDetailView.OfferDetailView"
             icon="icons/sample.gif"
-            id="com.dev.gis.app.task.TestAppView"
-            name="TestApp"
+            id="com.dev.gis.app.view.OfferDetailView"
+            name="Offer Details"
             restorable="true">
       </view>
       <view
