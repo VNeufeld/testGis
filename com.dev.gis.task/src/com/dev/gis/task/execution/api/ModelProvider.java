@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.bpcs.mdcars.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.PaymentInformation;
+import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 
@@ -16,7 +18,13 @@ public enum ModelProvider {
 	private List<Offer> offers;
 
 	private List<OfferDo> offerDos;
+	
+	private Person driver;
 
+	private Person customer;
+	
+	private PaymentInformation  paymentInformation;
+	
 	private ModelProvider() {
 		offers = new ArrayList<Offer>();
 		offerDos = new ArrayList<OfferDo>();

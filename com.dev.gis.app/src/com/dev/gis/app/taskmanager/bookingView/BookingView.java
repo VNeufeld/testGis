@@ -1,8 +1,9 @@
-package com.dev.gis.app.taskmanager.offerDetailView;
+package com.dev.gis.app.taskmanager.bookingView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -29,13 +30,17 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.bpcs.mdcars.protocol.Offer;
 import com.dev.gis.app.Components;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.taskmanager.bookingView.BookingView;
+import com.dev.gis.app.taskmanager.offerDetailView.OfferDetailView;
+import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Location;
 import com.dev.gis.connector.joi.protocol.Module;
@@ -48,8 +53,13 @@ import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
 
-public class OfferDetailView extends TaskViewAbstract {
-	public static final String ID = "com.dev.gis.app.view.OfferDetailView";
+public class BookingView extends TaskViewAbstract {
+	
+	private static Logger logger = Logger.getLogger(BookingView.class);
+	
+	private static int instanceNum = 1;
+
+	public static final String ID = "com.dev.gis.app.view.BookingView";
 	private StringFieldEditor city;
 	private StringFieldEditor airport;
 	
@@ -75,20 +85,27 @@ public class OfferDetailView extends TaskViewAbstract {
 
 		
 		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(1, false));
+		composite.setLayout(new GridLayout(2, false));
 		
+		final Group groupDriver = new Group(composite, SWT.TITLE);
+		groupDriver.setText("Driver:");
+		groupDriver.setLayout(new GridLayout(4, true));
+		groupDriver.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		
+		
+
 		final Group groupStamp = new Group(composite, SWT.TITLE);
-		groupStamp.setText("Offer:");
+		groupStamp.setText("Customer:");
 		groupStamp.setLayout(new GridLayout(4, true));
 		groupStamp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
+		
 		GridData gdFirm = new GridData();
 		gdFirm.grabExcessHorizontalSpace = true;
 		gdFirm.horizontalAlignment = SWT.FILL;
 		gdFirm.horizontalSpan = 3;
 
 		Label cityLabel = new Label(groupStamp, SWT.NONE);
-		cityLabel.setText("Offer");
+		cityLabel.setText("Booking");
 		cityText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		cityText.setLayoutData(gdFirm);
 		
@@ -106,17 +123,15 @@ public class OfferDetailView extends TaskViewAbstract {
 		groupButtons.setText("Offer:");
 		groupButtons.setLayout(new GridLayout(4, true));
 		groupButtons.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
-		final Button buttonGetOffer = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
-		buttonGetOffer.setText("Get PickupStations");
 
-		final Button buttonBooking = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
-		buttonBooking.setText("Booking");
-		
-		buttonBooking.addSelectionListener(new SelectionListener() {
+		final Button buttonVerify = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
+		buttonVerify.setText("Verify");
+		buttonVerify.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				// createBookingRequest - Driver, Customer
+				//StartVerify
 				BookingView.updateView();
 				
 			}
@@ -127,8 +142,6 @@ public class OfferDetailView extends TaskViewAbstract {
 				
 			}
 		});
-
-
 	}
 	
 	private void initDates() {
@@ -228,5 +241,36 @@ public class OfferDetailView extends TaskViewAbstract {
 //		vehicleResult.getServiceCatalogCode();
 		
 	}
+	
+	public static void  updateView() {
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					logger.info(" showResult : run instanceNum = "+instanceNum );
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					BookingView viewPart =  (BookingView)wp.showView(
+							BookingView.ID, 
+							Integer.toString(instanceNum), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					
+					//viewPart.showOffer(offer.getModel());
+					
+					instanceNum++;
+					
+					logger.info(" add view :"+viewPart.getTitle());
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+
+		
+	}
+	
 
 }
