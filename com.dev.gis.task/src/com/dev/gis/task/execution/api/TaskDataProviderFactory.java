@@ -5,6 +5,7 @@ import javax.xml.bind.JAXBException;
 import com.dev.gis.task.execution.impl.DefaultTaskDataProvider;
 import com.dev.gis.task.execution.impl.GoogleMapDataProvider;
 import com.dev.gis.task.execution.impl.LocationSearchTaskDataProvider;
+import com.dev.gis.task.execution.impl.LoggingDataProvider;
 import com.dev.gis.task.execution.impl.TestADACAppDataProvider;
 
 public class TaskDataProviderFactory {
@@ -27,6 +28,11 @@ public class TaskDataProviderFactory {
 			GoogleMapDataProvider dataProvider = new GoogleMapDataProvider();
 			return dataProvider;
 		}
+		else if ( name.equals("Splitt")) {
+			LoggingDataProvider dataProvider = new LoggingDataProvider();
+			return dataProvider;
+		}
+
 		return createDefaultTaskDataProvider();
 	}
 

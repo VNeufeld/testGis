@@ -25,6 +25,11 @@ public class TaskProjectModelFactory {
 		TaskGroup taskGroup = new TaskGroup("HSGW");
 		model.getGroups().add(taskGroup);
 			taskGroup.getTasks().add(TaskItem.createTask("HSGW GetCars", "folder.png", "test hsgw http request GetCars"));
+			
+		taskGroup = new TaskGroup("Logging");
+		model.getGroups().add(taskGroup);
+		taskGroup.getTasks().add(TaskItem.createTask("Splitt", "folder_edit.png", "Splitt Logging"));
+			
 		
 		for ( TaskGroup group: model.getGroups()) {
 			for ( TaskItem item : group.getTasks())
