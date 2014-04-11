@@ -1,7 +1,11 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -158,9 +162,21 @@ public class LoggingAppView extends TaskViewAbstract {
 			public void widgetSelected(SelectionEvent e) {
 				
 				
-				
 				File file = new File ( logFileText.getText());
 				logger.info("  size = "+FileUtils.sizeOf(file));
+
+				int countLines = splitFileOld(file);
+				
+				logger.info(" lines  = "+ countLines );
+
+
+				
+//				changeModel(null);
+//				viewer.refresh();
+			}
+
+
+			private int splitFile(File file) {
 				
 				int count = 0;
 				int size = 0;
@@ -185,54 +201,78 @@ public class LoggingAppView extends TaskViewAbstract {
 					}
 					
 					writeFile(file,counter,rows);
+					return count;
+					
 					
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
+				return -1;
 				
-				logger.info(" lines  = "+ count );
 				
-				
-//				InputStream fis = null;
-//				 try {
-//				   fis = new FileInputStream(file);
-//				   InputStreamReader inR = new InputStreamReader(fis);
-//				   BufferedReader buf = new BufferedReader( inR );
-//				   String line;
-//				   while ( ( line = buf.readLine() ) != null ) {
-//				     System.out.println( line );
-//				   }
-//				 } catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				} finally {
-//					 try {
-//						fis.close();
-//					} catch (IOException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-//				 }
-
-				
-//				changeModel(null);
-//				viewer.refresh();
 			}
+			
+			private int splitFileOld(File file) {
+				
+				int count = 0;
+				int size = 0;
+				int counter = 1;
+				int maxSize = 10000000;
+				List<String> rows = new ArrayList<String>();
+				
+				InputStream fis = null;
+				 try {
+				   fis = new FileInputStream(file);
+				   InputStreamReader inR = new InputStreamReader(fis);
+				   BufferedReader buf = new BufferedReader( inR );
+				   String line;
+				   while ( ( line = buf.readLine() ) != null ) {
+						rows.add(line);
+						count++;
+						size = size + line.length();
+						if ( size > maxSize ) {
+							writeFile(file,counter,rows);
+							rows.clear();
+							size = 0;
+							counter++;
+						}
+					   
+				   }
+					writeFile(file,counter,rows);
+					return count;
+				   
+				 } catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} finally {
+					 try {
+						fis.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				 }
+				 return -1;
+			}
+
 
 
 			private void writeFile(File original, int counter,
 					List<String> rows) throws IOException {
-				
 				String ext = FilenameUtils.getExtension(original.getAbsolutePath());
 				String path = FilenameUtils.getFullPath(original.getAbsolutePath());
 				String name = FilenameUtils.getBaseName(original.getAbsolutePath())+ "_" + counter + ".plog";
 				
 				String newFile = FilenameUtils.concat(path,name);
+				logger.info("write file "+newFile + " rows = "+ rows.size());
 
 				File of = new File(newFile);
 				
 				FileUtils.writeLines(of, rows);
+				
+				logger.info("exit write file "+newFile + " ");
+				
 				
 			}
 

@@ -88,6 +88,14 @@
             name="Offer Details"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.dev.gis.app.taskmanager.loggingView.LoggingAppView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.task.LoggingAppView"
+            name="LoggingView"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
