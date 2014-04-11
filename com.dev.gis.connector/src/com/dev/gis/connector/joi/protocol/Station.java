@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "station")
 @XmlType(propOrder =
 	{ "id", "link", "stationName", "stationPriority", "airportStation", "airport", "cityId", "supplierId", "supplierGroupId",
-			"supplierPriority", "assignedCityIds", "modules", "area", "countryId", "address", "info", "phone", "fax" })
+			"supplierPriority", "assignedCityIds", "modules", "area", "countryId", "address", "info", "phone", "fax", "flightNoMandatory" })
 public class Station extends BasicProtocol {
 
 	private long id;
@@ -56,6 +56,7 @@ public class Station extends BasicProtocol {
 
 	private PhoneNumber fax = null;
 	
+	private Boolean flightNoMandatory;
 
 
 
@@ -225,5 +226,13 @@ public class Station extends BasicProtocol {
 
 	public void setSupplierPriority(Integer supplierPriority) {
 		this.supplierPriority = supplierPriority;
+	}
+
+	public Boolean getFlightNoMandatory() {
+		return flightNoMandatory;
+	}
+
+	public void setFlightNoMandatory(Boolean flightNoMandatory) {
+		this.flightNoMandatory = flightNoMandatory;
 	}
 }

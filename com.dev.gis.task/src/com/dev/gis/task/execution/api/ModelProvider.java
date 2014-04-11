@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.bpcs.mdcars.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.Extra;
+import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.PaymentInformation;
 import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
@@ -18,6 +20,9 @@ public enum ModelProvider {
 	private List<Offer> offers;
 
 	private List<OfferDo> offerDos;
+	
+	private List<Extra> extraDos = new ArrayList<Extra>();
+	
 	
 	private Person driver;
 
@@ -49,6 +54,18 @@ public enum ModelProvider {
 		offer.setSupplierId(supplierId);
 		return offer;
 	}
+	
+	private static Offer createOffer(String name, long supplierId, long stationId, String price, String servCatCode, long servCatId) {
+		Offer offer = new Offer();
+		offer.setName(name);
+		offer.setPickUpStationId(stationId);
+		offer.setPrice(new MoneyAmount(price, "EUR"));
+		offer.setSupplierId(supplierId);
+		offer.setServiceCatalogCode(servCatCode);
+		offer.setServiceCatalogId(servCatId);;
+		return offer;
+	}
+
 
 	public void update() {
 		for ( Offer offer : offers) {
@@ -71,6 +88,22 @@ public enum ModelProvider {
 		}
 		
 	}
+	
+	public void updateExtras(ExtraResponse response) {
+		extraDos.clear();
+		for ( Extra vr : response.getExtras()) {
+				
+			Extra extra = new Extra();
+			extra.setName(vr.getName());
+			extra.setCode(vr.getCode());
+			extra.setId(vr.getId());
+			extra.setPrice(vr.getPrice());
+				
+			extraDos.add(extra);
+		}
+		
+	}
+	
 
 	public void update(VehicleResponse response) {
 		offers.clear();
@@ -86,7 +119,10 @@ public enum ModelProvider {
 				if ( vr.getOfferList().get(0).getPrice() != null)
 					preis = vr.getOfferList().get(0).getPrice().getAmount();
 				
-				Offer offer = createOffer(vr.getVehicle().getManufacturer(),supplierId, stationId, preis);
+				String servCatCode = vr.getOfferList().get(0).getServiceCatalogCode();
+				Long servCatId = vr.getOfferList().get(0).getServiceCatalogId();
+						
+				Offer offer = createOffer(vr.getVehicle().getManufacturer(),supplierId, stationId, preis,servCatCode,servCatId);
 				offer.setBookLink(bookLink);
 				
 				offers.add(offer);
@@ -97,6 +133,14 @@ public enum ModelProvider {
 
 	public List<OfferDo> getOfferDos() {
 		return offerDos;
+	}
+
+	public List<Extra> getExtraDos() {
+		return extraDos;
+	}
+
+	public void setExtraDos(List<Extra> extraDos) {
+		this.extraDos = extraDos;
 	}
 
 }

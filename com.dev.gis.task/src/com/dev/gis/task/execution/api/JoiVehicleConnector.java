@@ -3,12 +3,25 @@ package com.dev.gis.task.execution.api;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
+import com.dev.gis.connector.joi.protocol.Address;
 import com.dev.gis.connector.joi.protocol.Administration;
+import com.dev.gis.connector.joi.protocol.BookingRequest;
+import com.dev.gis.connector.joi.protocol.BookingResponse;
+import com.dev.gis.connector.joi.protocol.Customer;
+import com.dev.gis.connector.joi.protocol.Extra;
+import com.dev.gis.connector.joi.protocol.ExtraResponse;
+import com.dev.gis.connector.joi.protocol.MoneyAmount;
+import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.Payment;
+import com.dev.gis.connector.joi.protocol.PaymentType;
+import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 
@@ -19,11 +32,11 @@ public class JoiVehicleConnector {
 		GisHttpClient httpClient = new GisHttpClient();
 
 		try {
-			URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=20");
+			URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=200");
 			Administration admin = new Administration();
 			
 			admin.setLanguage("de-DE");
-			admin.setOperator(1);
+			admin.setOperator(152573);
 			admin.setSalesChannel(7);
 			admin.setCalledFrom(9);
 			admin.setBroker(false);
@@ -52,6 +65,108 @@ public class JoiVehicleConnector {
 		return null;
 
 	}
+	
+	public static ExtraResponse getExtras(Offer offer) {
+		GisHttpClient httpClient = new GisHttpClient();
+
+		try {
+			String link = offer.getBookLink().toString();
+			int pos = link.indexOf("/vehicleRe");
+			link = link.substring(pos);
+			link = link.replace("/book","/extras");
+			//URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=200");
+			URI uri = new URI("http://localhost:8080/joi"+link);
+			
+			logger.info("GetExtra Request = "+uri);
+			
+			
+			String response =  httpClient.sendGetRequest(uri);
+			logger.info("response = "+response);
+			
+			ExtraResponse extraResponse = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
+			
+
+			return extraResponse;
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+
+	}
+	
+	public static BookingResponse verifyOffers(Offer offer) {
+		GisHttpClient httpClient = new GisHttpClient();
+
+		try {
+			
+			BookingRequest bookingRequest = new BookingRequest();
+			String link = offer.getBookLink().toString();
+			int pos = link.indexOf("/vehicleRe");
+			link = link.substring(pos);
+			URI uri = new URI("http://localhost:8080/joi"+link);
+			
+			logger.info("GetExtra Request = "+uri);
+			
+			//URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=200");
+
+			Customer customer = new Customer();
+			Person person = new Person();
+			person.setName("Meier");
+			person.setFirstName("Anton");
+			customer.setPerson(person);
+			Address address = new Address();
+			address.setCity("München");
+			address.setStreet("Street");
+			address.setZip("81543");
+			address.setCountry("DE");
+			address.setCountryId(Long.valueOf(49));
+			customer.setAddress(address);
+			
+			bookingRequest.setCustomer(customer);
+			
+			Person driver = new Person();
+			driver.setName("Meier");
+			driver.setFirstName("Anton");
+			
+			bookingRequest.setDriver(driver);
+			Payment payment = new Payment();
+			payment.setPaymentType("1");
+			
+			//payment.setPaymentType(PaymentType.PAYPAL_PAYMENT);
+			
+			bookingRequest.setAcceptedAvailability("13");
+			bookingRequest.setFlightNo("LH4711");
+			bookingRequest.setTransferType("1");
+			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
+			//bookingRequest.setPayment(payment);
+			
+			List<Extra> extras = new ArrayList<Extra>();
+			bookingRequest.setExtras(extras);
+
+			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
+			logger.info("request = "+request);
+			
+			String response =  httpClient.startPutRequestAsJson(uri, request);
+			logger.info("response = "+response);
+			
+			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
+			
+
+			return vh;
+			
+		} catch ( IOException e) {
+			logger.error(e);
+		} catch (URISyntaxException e) {
+			logger.error(e);
+		}
+		return null;
+
+	}
+
+	
 
 	public static VehicleResponse getOffersDummy() {
 

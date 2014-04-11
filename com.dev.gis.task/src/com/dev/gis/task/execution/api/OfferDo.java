@@ -20,6 +20,9 @@ public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
 			preis = vr.getOfferList().get(0).getPrice().getAmount();
 		this.setPrice(new MoneyAmount(preis, "EUR"));
 		
+		this.setServiceCatalogCode(vr.getOfferList().get(0).getServiceCatalogCode());
+		this.setServiceCatalogId(vr.getOfferList().get(0).getServiceCatalogId());
+		
 	}
 
 	public VehicleResult getModel() {

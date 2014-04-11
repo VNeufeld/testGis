@@ -14,7 +14,7 @@ public class Payment extends BasicProtocol {
 	
 	private BankAccount account;
 	
-	PaymentType paymentType;
+	String paymentType;
 	
 	private PaypalTransactionInfo paypalTransactionInfo;
 	
@@ -29,7 +29,7 @@ public class Payment extends BasicProtocol {
 		return card;
 	}
 	
-	public PaymentType getPaymentType() {
+	public String getPaymentType() {
 		return paymentType;
 	}
 	
@@ -46,7 +46,7 @@ public class Payment extends BasicProtocol {
 		this.card = card;
 	}
 
-	public void setPaymentType(PaymentType paymentType) {
+	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
 	}
 

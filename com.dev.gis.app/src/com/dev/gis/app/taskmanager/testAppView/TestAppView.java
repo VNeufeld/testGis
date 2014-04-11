@@ -3,6 +3,7 @@ package com.dev.gis.app.taskmanager.testAppView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -13,10 +14,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -25,11 +24,9 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.Components;
@@ -37,11 +34,9 @@ import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Location;
-import com.dev.gis.connector.joi.protocol.Module;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
-import com.dev.gis.connector.joi.protocol.VehicleResult;
 import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
@@ -54,11 +49,18 @@ public class TestAppView extends TaskViewAbstract {
 	private StringFieldEditor airport;
 	
 	Calendar checkInDate = Calendar.getInstance();
-	Calendar dropOffDate = Calendar.getInstance();
+	
+	DateTime pickupDate = null;
+	DateTime pickupTime = null;
 
+	DateTime dropOffDate = null;
+	DateTime dropOffTime = null;
+	
 	private IWorkbenchAction exitAction;
 
-	 private TableViewer viewer;
+	private TableViewer viewer;
+	
+	private Text countVehicles = null;
 	
 	@Override
 	public void createPartControl(Composite parent) {
@@ -81,16 +83,20 @@ public class TestAppView extends TaskViewAbstract {
 		GridData gdFirm = new GridData();
 		gdFirm.grabExcessHorizontalSpace = true;
 		gdFirm.horizontalAlignment = SWT.FILL;
+		//gdFirm.horizontalSpan = 2;
+		
+		GridData gridData = new GridData();
+		gridData.horizontalSpan = 3;
 
 		Label cityLabel = new Label(groupStamp, SWT.NONE);
-		cityLabel.setText("Stadt");
+		cityLabel.setText("City ID");
 		final Text cityText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		cityText.setLayoutData(gdFirm);
+		cityText.setLayoutData(gridData);
 
 		Label aptLabel = new Label(groupStamp, SWT.NONE);
-		aptLabel.setText("Airport");
+		aptLabel.setText("APT CODE");
 		final Text aptText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		aptText.setLayoutData(gdFirm);
+		aptText.setLayoutData(gridData);
 		
 		
 //		final Button buttonPrintDate = new Button(groupStamp, SWT.CHECK | SWT.LEFT);
@@ -99,14 +105,20 @@ public class TestAppView extends TaskViewAbstract {
 		
 		initDates();
 		
-		addDateControl("pickupDate:",groupStamp,checkInDate);
+		addPickupDateControl("pickupDate:",groupStamp);
 
-		addDateControl("dropOffDate:",groupStamp,dropOffDate);
-		
-
+		addDropOffDateControl("dropOffDate:",groupStamp);
 		
 		final Button buttonGetOffer = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
 		buttonGetOffer.setText("Get Offers");
+		GridData gridData4 = new GridData();
+		gridData4.horizontalSpan = 4;
+		
+		buttonGetOffer.setLayoutData(gridData4);
+		
+		new Label(groupStamp, SWT.NONE).setText("Count of Vehicles");
+		countVehicles = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		countVehicles.setLayoutData(gdFirm);
 
 		
 		buttonGetOffer.addSelectionListener(new SelectionListener() {
@@ -123,33 +135,50 @@ public class TestAppView extends TaskViewAbstract {
 				VehicleRequest request = new VehicleRequest();
 				TravelInformation ti = new TravelInformation();
 				Location pickUpLocation = new Location() ;
-				pickUpLocation.setAirport("PMI");
+				pickUpLocation.setAirport(aptText.getText());
+				if ( StringUtils.isNotEmpty(cityText.getText()))
+					pickUpLocation.setCityId(Long.valueOf(cityText.getText()));
+				else
+					pickUpLocation.setAirport(aptText.getText());
 
 				Location dropOffLocation = new Location() ;
-				dropOffLocation.setAirport("PMI");
+				if ( StringUtils.isNotEmpty(cityText.getText()))
+					dropOffLocation.setCityId(Long.valueOf(cityText.getText()));
+				else
+					dropOffLocation.setAirport(aptText.getText());
 				
 				ti.setPickUpLocation(pickUpLocation);
 				ti.setDropOffLocation(dropOffLocation);
 				
-				DayAndHour dh = new DayAndHour();
-				dh.setDate("2013-12-03");
-				dh.setTime("10:00");
+				DayAndHour dh = createDate(pickupDate,pickupTime);
 				ti.setPickUpTime(dh);
 
-				dh = new DayAndHour();
-				dh.setDate("2013-12-13");
-				dh.setTime("10:00");
+				dh = createDate(dropOffDate,dropOffTime);
 				ti.setDropOffTime(dh);
 				
 				request.setTravel(ti);
 				
 				request.setModule(1);
+				request.setPayment(1);
 				
-				//VehicleResponse response = JoiVehicleConnector.getOffers(request);
-				VehicleResponse response = JoiVehicleConnector.getOffersDummy();
+				VehicleResponse response = JoiVehicleConnector.getOffers(request);
+				//VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				
+				countVehicles.setText(String.valueOf(response.getResultList().size()));
 				changeModel(response);
 				viewer.refresh();
+			}
+
+
+			private DayAndHour createDate(DateTime pickupDate, DateTime pickupTime) {
+				String sday = String.format("%4d-%02d-%02d", pickupDate.getYear(), pickupDate.getMonth()+1, pickupDate.getDay());
+				String sTime = String.format("%02d:%02d", pickupTime.getHours(), pickupTime.getMinutes());
+				
+				DayAndHour dh = new DayAndHour();
+				dh.setDate(sday);
+				
+				dh.setTime(sTime);
+				return dh;
 			}
 
 
@@ -181,7 +210,6 @@ public class TestAppView extends TaskViewAbstract {
 	
 	protected void changeModel(VehicleResponse response) {
 		ModelProvider.INSTANCE.updateOffers(response);
-	    //viewer.setInput(response.getResultList());
 	    viewer.setInput(ModelProvider.INSTANCE.getOfferDos());
 	
 	}
@@ -192,53 +220,53 @@ public class TestAppView extends TaskViewAbstract {
 		checkInDate.set(Calendar.MINUTE, 30);
 		checkInDate.set(Calendar.SECOND, 0);
 
-		dropOffDate.set(Calendar.HOUR_OF_DAY, 18);
-		dropOffDate.set(Calendar.MINUTE, 0);
-		dropOffDate.set(Calendar.SECOND, 0);	
 	}
 
-	private void addDateControl(String label,Composite composite,final Calendar resultDate ) {
-		GridData gdDate = new GridData();
-		gdDate.grabExcessHorizontalSpace = true;
-		gdDate.horizontalAlignment = SWT.FILL;
+	private void addPickupDateControl(String label,Composite composite) {
 
 		new Label(composite, SWT.NONE).setText(label);
 
-		final DateTime dateTime = new DateTime(composite, SWT.DATE);
-		dateTime.setLayoutData(gdDate);
+		pickupDate = createDateControl(composite);
+
+		pickupTime = createTimeControl(composite);
 		
+	}
+	
+	private void addDropOffDateControl(String label,Composite composite) {
+
+		new Label(composite, SWT.NONE).setText(label);
+
+		dropOffDate = createDateControl(composite);
+
+		dropOffTime = createTimeControl(composite);
+
+		
+	}
+	
+	
+	private DateTime createTimeControl(Composite composite) {
+		
+		final Calendar resultDate = Calendar.getInstance();
 		
 		GridData gridData = new GridData();
 		gridData.horizontalSpan = 2;
 
-		final DateTime dateTime2 = new DateTime(composite, SWT.TIME);
-		dateTime2.setLayoutData(gridData);
+		DateTime time = new DateTime(composite, SWT.TIME);
+		time.setLayoutData(gridData);
 		
 		
-		dateTime2.setHours(resultDate.get(Calendar.HOUR_OF_DAY));
-		dateTime2.setMinutes(resultDate.get(Calendar.MINUTE));
-		dateTime2.setSeconds(resultDate.get(Calendar.SECOND));
+		time.setHours(10);
+		time.setMinutes(0);
+		time.setSeconds(0);
 
-		dateTime.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				resultDate.set(dateTime.getYear(), dateTime.getMonth(), dateTime.getDay());
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
 		
-		
-		dateTime2.addSelectionListener(new SelectionListener() {
+		time.addSelectionListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				resultDate.set(Calendar.HOUR_OF_DAY, dateTime2.getHours());
-				resultDate.set(Calendar.MINUTE, dateTime2.getMinutes());
-				resultDate.set(Calendar.SECOND, dateTime2.getSeconds());
+//				resultDate.set(Calendar.HOUR_OF_DAY, pickupTime.getHours());
+//				resultDate.set(Calendar.MINUTE, pickupTime.getMinutes());
+//				resultDate.set(Calendar.SECOND, pickupTime.getSeconds());
 			}
 
 			@Override
@@ -247,8 +275,37 @@ public class TestAppView extends TaskViewAbstract {
 			}
 		});
 
+		return time;
 		
 	}
+
+	
+	private DateTime createDateControl(Composite composite) {
+
+		DateTime date = new DateTime(composite, SWT.DATE);
+		
+		GridData gdDate = new GridData();
+		gdDate.grabExcessHorizontalSpace = true;
+		gdDate.horizontalAlignment = SWT.FILL;
+
+		date.setLayoutData(gdDate);
+
+		date.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				//resultDate.set(pickupDate.getYear(), pickupDate.getMonth(), pickupDate.getDay());
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
+		
+		return date;
+		
+	}
+
 	
 	private void createViewer(Composite parent) {
 	    viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
@@ -301,8 +358,8 @@ public class TestAppView extends TaskViewAbstract {
 	}
 	
 	private void createColumns(final Composite parent, final TableViewer viewer) {
-	    String[] titles = { "Name", "Supplier", "Station", "Price" };
-	    int[] bounds = { 100, 100, 100, 100 };
+	    String[] titles = { "Name", "Supplier", "Station", "Service Catalog",  "Price" };
+	    int[] bounds = { 200, 100, 100, 200,  100 };
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -334,6 +391,16 @@ public class TestAppView extends TaskViewAbstract {
 	    });
 
 	    col = createTableViewerColumn(titles[3], bounds[3], 3);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	OfferDo o = (OfferDo) element;
+			return o.getServiceCatalogCode() + " : "+ String.valueOf(o.getServiceCatalogId());
+	      }
+	    });
+	    
+	    
+	    col = createTableViewerColumn(titles[4], bounds[4], 4);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {

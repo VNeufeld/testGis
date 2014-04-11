@@ -8,6 +8,7 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -101,6 +102,30 @@ public class GisHttpClient {
 
 		return response;
 	}
+	
+	public String startPutRequestAsJson(URI uri, String jsonString)
+			throws  IOException {
+		HttpPut httput = new HttpPut(uri);
+
+		StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
+
+		httput.setEntity(entity);
+		httput.addHeader("Accept", "application/json");
+		httput.setHeader("Content-Type", "application/json");
+
+		String response = httpclient.execute(httput, responseHandler,
+				localContext);
+
+		System.out.println("response = " + response);
+		System.out.println("localContext " + localContext.toString());
+
+		CookieStore cookieStore = httpclient.getCookieStore();
+		System.out.println("cookieStore " + cookieStore);
+		System.out.println("----------------------------------------");
+
+		return response;
+	}
+
 
 	private String startGetRequest(URI uri) throws ClientProtocolException,
 			IOException {

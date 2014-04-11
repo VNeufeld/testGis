@@ -1,57 +1,28 @@
 package com.dev.gis.app.taskmanager.bookingView;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.preference.StringFieldEditor;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
-import com.bpcs.mdcars.protocol.Offer;
-import com.dev.gis.app.Components;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferDetailView;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
-import com.dev.gis.connector.joi.protocol.DayAndHour;
-import com.dev.gis.connector.joi.protocol.Location;
-import com.dev.gis.connector.joi.protocol.Module;
-import com.dev.gis.connector.joi.protocol.TravelInformation;
-import com.dev.gis.connector.joi.protocol.VehicleRequest;
+import com.dev.gis.connector.joi.protocol.BookingResponse;
+import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
-import com.dev.gis.connector.joi.protocol.VehicleResult;
-import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
-import com.dev.gis.task.execution.api.ModelProvider;
 
 public class BookingView extends TaskViewAbstract {
 	
@@ -60,8 +31,6 @@ public class BookingView extends TaskViewAbstract {
 	private static int instanceNum = 1;
 
 	public static final String ID = "com.dev.gis.app.view.BookingView";
-	private StringFieldEditor city;
-	private StringFieldEditor airport;
 	
 	Calendar checkInDate = Calendar.getInstance();
 	Calendar dropOffDate = Calendar.getInstance();
@@ -72,16 +41,12 @@ public class BookingView extends TaskViewAbstract {
 
 	private Text carDescription = null;
 	
-	private IWorkbenchAction exitAction;
+	private Offer selectedOffer = null;
+
+	
 
 	@Override
 	public void createPartControl(Composite parent) {
-		
-//		 exitAction = ActionFactory.QUIT.create(this);
-//	        register(exitAction);
-//	        
-	        
-		//exitAction = new IWorkbenchAction(viewer, parent.getShell());
 
 		
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -132,7 +97,10 @@ public class BookingView extends TaskViewAbstract {
 			public void widgetSelected(SelectionEvent e) {
 				// createBookingRequest - Driver, Customer
 				//StartVerify
-				BookingView.updateView();
+				BookingResponse response = JoiVehicleConnector.verifyOffers(selectedOffer);
+				carDescription.setText(response.getBookingId());
+				
+				//BookingView.updateView(selectedOffer);
 				
 			}
 
@@ -144,71 +112,6 @@ public class BookingView extends TaskViewAbstract {
 		});
 	}
 	
-	private void initDates() {
-		
-		checkInDate.set(Calendar.HOUR_OF_DAY, 11);
-		checkInDate.set(Calendar.MINUTE, 30);
-		checkInDate.set(Calendar.SECOND, 0);
-
-		dropOffDate.set(Calendar.HOUR_OF_DAY, 18);
-		dropOffDate.set(Calendar.MINUTE, 0);
-		dropOffDate.set(Calendar.SECOND, 0);	
-	}
-
-	private void addDateControl(String label,Composite composite,final Calendar resultDate ) {
-		GridData gdDate = new GridData();
-		gdDate.grabExcessHorizontalSpace = true;
-		gdDate.horizontalAlignment = SWT.FILL;
-
-		new Label(composite, SWT.NONE).setText(label);
-
-		final DateTime dateTime = new DateTime(composite, SWT.DATE);
-		dateTime.setLayoutData(gdDate);
-		
-		
-		GridData gridData = new GridData();
-		gridData.horizontalSpan = 2;
-
-		final DateTime dateTime2 = new DateTime(composite, SWT.TIME);
-		dateTime2.setLayoutData(gridData);
-		
-		
-		dateTime2.setHours(resultDate.get(Calendar.HOUR_OF_DAY));
-		dateTime2.setMinutes(resultDate.get(Calendar.MINUTE));
-		dateTime2.setSeconds(resultDate.get(Calendar.SECOND));
-
-		dateTime.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				resultDate.set(dateTime.getYear(), dateTime.getMonth(), dateTime.getDay());
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-		
-		
-		dateTime2.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
-				resultDate.set(Calendar.HOUR_OF_DAY, dateTime2.getHours());
-				resultDate.set(Calendar.MINUTE, dateTime2.getMinutes());
-				resultDate.set(Calendar.SECOND, dateTime2.getSeconds());
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-
-		
-	}
-	
-
 
 
 	
@@ -230,10 +133,11 @@ public class BookingView extends TaskViewAbstract {
 		
 	}
 
-	public void showOffer(VehicleResult vehicleResult) {
-		cityText.setText(vehicleResult.getOfferList().get(0).getBookLink().toString());
-		priceText.setText(vehicleResult.getOfferList().get(0).getPrice().getAmount());
-		carDescription.setText(vehicleResult.getVehicle().getManufacturer() + " Group : "+vehicleResult.getVehicle().getCategoryId());
+	public void showOffer(final Offer selectedOffer) {
+		this.selectedOffer = selectedOffer;
+		cityText.setText(selectedOffer.getBookLink().toString());
+		priceText.setText(selectedOffer.getPrice().getAmount());
+		//carDescription.setText(vehicleResult.getVehicle().getManufacturer() + " Group : "+vehicleResult.getVehicle().getCategoryId());
 		
 //		vehicleResult.getSupplierId();
 //		vehicleResult.getPickUpStationId();
@@ -242,7 +146,7 @@ public class BookingView extends TaskViewAbstract {
 		
 	}
 	
-	public static void  updateView() {
+	public static void  updateView(final Offer selectedOffer) {
 		
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			
@@ -257,7 +161,7 @@ public class BookingView extends TaskViewAbstract {
 							Integer.toString(instanceNum), 
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
-					//viewPart.showOffer(offer.getModel());
+					viewPart.showOffer(selectedOffer);
 					
 					instanceNum++;
 					
