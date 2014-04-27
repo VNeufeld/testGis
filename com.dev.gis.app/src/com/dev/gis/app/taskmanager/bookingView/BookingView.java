@@ -1,6 +1,7 @@
 package com.dev.gis.app.taskmanager.bookingView;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -19,8 +20,8 @@ import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
+import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.Offer;
-import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 
@@ -42,7 +43,7 @@ public class BookingView extends TaskViewAbstract {
 	private Text carDescription = null;
 	
 	private Offer selectedOffer = null;
-
+	private List<Extra> selectedExtras = null;
 	
 
 	@Override
@@ -97,7 +98,7 @@ public class BookingView extends TaskViewAbstract {
 			public void widgetSelected(SelectionEvent e) {
 				// createBookingRequest - Driver, Customer
 				//StartVerify
-				BookingResponse response = JoiVehicleConnector.verifyOffers(selectedOffer);
+				BookingResponse response = JoiVehicleConnector.verifyOffers(selectedOffer,selectedExtras);
 				carDescription.setText(response.getBookingId());
 				
 				//BookingView.updateView(selectedOffer);
@@ -133,8 +134,9 @@ public class BookingView extends TaskViewAbstract {
 		
 	}
 
-	public void showOffer(final Offer selectedOffer) {
+	public void showOffer(final Offer selectedOffer, List<Extra> extras) {
 		this.selectedOffer = selectedOffer;
+		this.selectedExtras = extras;
 		cityText.setText(selectedOffer.getBookLink().toString());
 		priceText.setText(selectedOffer.getPrice().getAmount());
 		//carDescription.setText(vehicleResult.getVehicle().getManufacturer() + " Group : "+vehicleResult.getVehicle().getCategoryId());
@@ -146,7 +148,7 @@ public class BookingView extends TaskViewAbstract {
 		
 	}
 	
-	public static void  updateView(final Offer selectedOffer) {
+	public static void  updateView(final Offer selectedOffer, final List<Extra> extras) {
 		
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			
@@ -161,7 +163,7 @@ public class BookingView extends TaskViewAbstract {
 							Integer.toString(instanceNum), 
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
-					viewPart.showOffer(selectedOffer);
+					viewPart.showOffer(selectedOffer,extras);
 					
 					instanceNum++;
 					

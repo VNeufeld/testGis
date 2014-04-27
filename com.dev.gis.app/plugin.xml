@@ -96,6 +96,14 @@
             name="LoggingView"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.testAppView.TestAppPaymentView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.task.TestAppPaymentView"
+            name="TestAppPayment"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

@@ -7,6 +7,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.task.model.TaskProjectModelFactory;
+import com.dev.gis.task.execution.api.TaskProperties;
 
 /**
  * This class controls all aspects of the application's execution
@@ -21,6 +22,8 @@ public class Application implements IApplication {
 		Display display = PlatformUI.createDisplay();
 		try {
 			TaskProjectModelFactory.createExampleModel();
+			
+			TaskProperties.getTaskProperties().readProperty();
 			
 			int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
 			if (returnCode == PlatformUI.RETURN_RESTART) {
@@ -38,6 +41,9 @@ public class Application implements IApplication {
 	public void stop() {
 		if (!PlatformUI.isWorkbenchRunning())
 			return;
+		
+		TaskProperties.getTaskProperties().readProperty();
+		
 		final IWorkbench workbench = PlatformUI.getWorkbench();
 		final Display display = workbench.getDisplay();
 		display.syncExec(new Runnable() {

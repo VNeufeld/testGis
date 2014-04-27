@@ -7,6 +7,7 @@ import com.dev.gis.task.execution.impl.GoogleMapDataProvider;
 import com.dev.gis.task.execution.impl.LocationSearchTaskDataProvider;
 import com.dev.gis.task.execution.impl.LoggingDataProvider;
 import com.dev.gis.task.execution.impl.TestADACAppDataProvider;
+import com.dev.gis.task.execution.impl.TestADACAppPaymentDataProvider;
 
 public class TaskDataProviderFactory {
 
@@ -20,8 +21,12 @@ public class TaskDataProviderFactory {
 			LocationSearchTaskDataProvider dataProvider = new LocationSearchTaskDataProvider();
 			dataProvider.loadTask(name);
 			return dataProvider;
-		}else if ( name.equals("testADAC_App")) {
+		}else if ( name.equals(ITaskDataProvider.TASK_APP_BOOKING)) {
 			TestADACAppDataProvider dataProvider = new TestADACAppDataProvider();
+			dataProvider.loadTask(name);
+			return dataProvider;
+		}else if ( name.equals(ITaskDataProvider.TASK_APP_PAYMENT)) {
+			TestADACAppPaymentDataProvider dataProvider = new TestADACAppPaymentDataProvider();
 			dataProvider.loadTask(name);
 			return dataProvider;
 		}else if ( name.equals("googleMap")) {

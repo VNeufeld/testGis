@@ -14,6 +14,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -26,10 +28,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
-import com.dev.gis.app.Components;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
@@ -37,14 +39,16 @@ import com.dev.gis.connector.joi.protocol.Location;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
-import com.dev.gis.db.api.IStationDao;
+import com.dev.gis.task.execution.api.IEditableTask;
+//import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
 import com.dev.gis.task.execution.api.OfferDo;
+import com.dev.gis.task.execution.api.TaskProperties;
 
 public class TestAppView extends TaskViewAbstract {
-	public static final String ID = "com.dev.gis.app.task.TestAppView";
+	public static final String ID = IEditableTask.ID_TestAppView;
 	private StringFieldEditor city;
 	private StringFieldEditor airport;
 	
@@ -84,9 +88,40 @@ public class TestAppView extends TaskViewAbstract {
 		gdFirm.grabExcessHorizontalSpace = true;
 		gdFirm.horizontalAlignment = SWT.FILL;
 		//gdFirm.horizontalSpan = 2;
+
+		GridData gdFirm2 = new GridData();
+		gdFirm2.grabExcessHorizontalSpace = true;
+		gdFirm2.horizontalAlignment = SWT.FILL;
+		gdFirm2.horizontalSpan = 3;
 		
 		GridData gridData = new GridData();
 		gridData.horizontalSpan = 3;
+		
+		new Label(groupStamp, SWT.NONE).setText("Server");
+		final Text serverUrl = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		serverUrl.setLayoutData(gdFirm2);
+		serverUrl.setText(TaskProperties.getTaskProperties().getServerProperty());
+		serverUrl.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if ( arg0.character == '\r') {
+					TaskProperties.getTaskProperties().setServerProperty(serverUrl.getText());
+					TaskProperties.getTaskProperties().saveProperty();
+				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		new Label(groupStamp, SWT.NONE).setText("Operator");
+		final Text operator = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		operator.setLayoutData(gdFirm2);
+		operator.setText(String.valueOf(TaskProperties.getTaskProperties().getOperator()));
 
 		Label cityLabel = new Label(groupStamp, SWT.NONE);
 		cityLabel.setText("City ID");
@@ -127,10 +162,22 @@ public class TestAppView extends TaskViewAbstract {
 			public void widgetSelected(SelectionEvent e) {
 
 				System.out.println("Checkindate = "+new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").format(checkInDate.getTime()));
+//				
+//				IStationDao stationDao = Components.getInstance().getDaoFactory().getStationDao();
+//				
+//				System.out.println(" Stationname = "+stationDao.getStationName());
 				
-				IStationDao stationDao = Components.getInstance().getDaoFactory().getStationDao();
+				TaskProperties.getTaskProperties().setServerProperty(serverUrl.getText());
+				TaskProperties.getTaskProperties().setOperator(Long.valueOf(operator.getText()));
+				TaskProperties.getTaskProperties().saveProperty();
 				
-				System.out.println(" Stationname = "+stationDao.getStationName());
+				TableItem[] selection = viewer.getTable().getSelection();
+				if ( selection != null && selection.length > 0) {
+					for ( TableItem item : selection) {
+						System.out.println(" item = "+item.getData());
+						
+					}
+				}
 				
 				VehicleRequest request = new VehicleRequest();
 				TravelInformation ti = new TravelInformation();
@@ -161,8 +208,8 @@ public class TestAppView extends TaskViewAbstract {
 				request.setModule(1);
 				request.setPayment(1);
 				
-				VehicleResponse response = JoiVehicleConnector.getOffers(request);
-				//VehicleResponse response = JoiVehicleConnector.getOffersDummy();
+				//VehicleResponse response = JoiVehicleConnector.getOffers(request);
+				VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				
 				countVehicles.setText(String.valueOf(response.getResultList().size()));
 				changeModel(response);
@@ -468,4 +515,5 @@ public class TestAppView extends TaskViewAbstract {
 	}
 
 
+	
 }

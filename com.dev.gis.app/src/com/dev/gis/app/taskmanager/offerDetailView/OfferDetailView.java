@@ -1,6 +1,8 @@
 package com.dev.gis.app.taskmanager.offerDetailView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -19,6 +21,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
@@ -99,7 +102,9 @@ public class OfferDetailView extends TaskViewAbstract {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				BookingView.updateView(selectedOffer);
+				List<Extra> extras = getSelectedExtras();
+				
+				BookingView.updateView(selectedOffer,extras);
 				
 			}
 
@@ -117,12 +122,16 @@ public class OfferDetailView extends TaskViewAbstract {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				
+				
+				
 				ExtraResponse response = JoiVehicleConnector.getExtras(selectedOffer);
 				changeModel(response);
 				tableExtras.refresh();
 				
 				
 			}
+
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
@@ -134,6 +143,20 @@ public class OfferDetailView extends TaskViewAbstract {
 		createTableExtras(composite);
 
 	}
+	
+	private List<Extra> getSelectedExtras() {
+		List<Extra> extras = new ArrayList<Extra>();
+		TableItem[] selection = tableExtras.getTable().getSelection();
+		if ( selection != null && selection.length > 0) {
+			for ( TableItem item : selection) {
+				extras.add((Extra)item.getData());
+				
+			}
+		}
+		
+		return extras;
+	}
+
 	
 	protected void changeModel(ExtraResponse response) {
 		ModelProvider.INSTANCE.updateExtras(response);

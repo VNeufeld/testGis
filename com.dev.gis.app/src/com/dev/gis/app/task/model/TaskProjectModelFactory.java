@@ -1,5 +1,7 @@
 package com.dev.gis.app.task.model;
 
+import com.dev.gis.task.execution.api.ITaskDataProvider;
+
 public class TaskProjectModelFactory {
 	
 	public static TaskProjectModel createExampleModel() {
@@ -17,14 +19,17 @@ public class TaskProjectModelFactory {
 			add(TaskItem.createTask("joiGetVehicleRecalculate", "folder_edit.png", "test json http request Recalculate"));
 
 		model.getGroups().getFirst().getTasks().
-			add(TaskItem.createTask("testADAC_App", "folder_edit.png", "test ADAC APP"));
+			add(TaskItem.createTask(ITaskDataProvider.TASK_APP_PAYMENT, "folder_edit.png", "Payments"));
 
+		model.getGroups().getFirst().getTasks().
+		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
+		
 		model.getGroups().getFirst().getTasks().
 		add(TaskItem.createTask("googleMap", "folder_edit.png", "test ADAC APP"));
 		
 		TaskGroup taskGroup = new TaskGroup("HSGW");
 		model.getGroups().add(taskGroup);
-			taskGroup.getTasks().add(TaskItem.createTask("HSGW GetCars", "folder.png", "test hsgw http request GetCars"));
+		taskGroup.getTasks().add(TaskItem.createTask("HSGW GetCars", "folder.png", "test hsgw http request GetCars"));
 			
 		taskGroup = new TaskGroup("Logging");
 		model.getGroups().add(taskGroup);

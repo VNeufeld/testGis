@@ -32,14 +32,9 @@ public class JoiVehicleConnector {
 		GisHttpClient httpClient = new GisHttpClient();
 
 		try {
-			URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=200");
-			Administration admin = new Administration();
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+TaskProperties.VEHICLE_REQUEST_PARAM);
 			
-			admin.setLanguage("de-DE");
-			admin.setOperator(152573);
-			admin.setSalesChannel(7);
-			admin.setCalledFrom(9);
-			admin.setBroker(false);
+			Administration admin = createAdministrator();
 
 			vehicleRequest.setAdministration(admin);
 			
@@ -65,6 +60,17 @@ public class JoiVehicleConnector {
 		return null;
 
 	}
+
+	private static Administration createAdministrator() {
+		Administration admin = new Administration();
+		
+		admin.setLanguage(TaskProperties.LANGUAGE_CODE);
+		admin.setOperator(TaskProperties.getTaskProperties().getOperator());
+		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
+		admin.setCalledFrom(TaskProperties.CALLED_FROM);
+		admin.setBroker(false);
+		return admin;
+	}
 	
 	public static ExtraResponse getExtras(Offer offer) {
 		GisHttpClient httpClient = new GisHttpClient();
@@ -75,7 +81,7 @@ public class JoiVehicleConnector {
 			link = link.substring(pos);
 			link = link.replace("/book","/extras");
 			//URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=200");
-			URI uri = new URI("http://localhost:8080/joi"+link);
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
 			
 			logger.info("GetExtra Request = "+uri);
 			
@@ -97,7 +103,7 @@ public class JoiVehicleConnector {
 
 	}
 	
-	public static BookingResponse verifyOffers(Offer offer) {
+	public static BookingResponse verifyOffers(Offer offer, List<Extra> selectedExtras) {
 		GisHttpClient httpClient = new GisHttpClient();
 
 		try {
@@ -106,11 +112,9 @@ public class JoiVehicleConnector {
 			String link = offer.getBookLink().toString();
 			int pos = link.indexOf("/vehicleRe");
 			link = link.substring(pos);
-			URI uri = new URI("http://localhost:8080/joi"+link);
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
 			
 			logger.info("GetExtra Request = "+uri);
-			
-			//URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=200");
 
 			Customer customer = new Customer();
 			Person person = new Person();
@@ -143,8 +147,7 @@ public class JoiVehicleConnector {
 			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
 			//bookingRequest.setPayment(payment);
 			
-			List<Extra> extras = new ArrayList<Extra>();
-			bookingRequest.setExtras(extras);
+			bookingRequest.setExtras(selectedExtras);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
 			logger.info("request = "+request);
