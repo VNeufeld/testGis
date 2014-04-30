@@ -1,0 +1,50 @@
+{
+	"promoCode": null,
+	"acceptedAvailability": "13",
+	"transferType": "1",
+	"flightNo": "LH4711",
+	"pickUpService": null,
+	"dropDownService": null,
+	"travelAgent": false,
+	"driver": {
+		"salutation": null,
+		"gender": null,
+		"firstName": "Anton",
+		"name": "Meier"
+	},
+	"priceLimit": {
+		"currency": "EUR",
+		"amount": "1.000,00",
+		"decimalAmount": 1000
+	},
+	"earliestDocumentPrintDate": null,
+	"customer": {
+		"customerNo": null,
+		"externalCustomerNo": null,
+		"person": {
+			"salutation": null,
+			"gender": null,
+			"firstName": "Anton",
+			"name": "Meier"
+		},
+		"address": {
+			"signee": null,
+			"street": "Street",
+			"country": "DE",
+			"countryId": 49,
+			"zip": "81543",
+			"city": "München"
+		},
+		"phone": null,
+		"officePhone": null,
+		"mobile": null,
+		"fax": null,
+		"sendDocToEndCustomer": false,
+		"partnerProgram": null,
+		"email": null
+	},
+	"insurances": null,
+	"extras": [],
+	"incentiveCard": null,
+	"payment": null
+}

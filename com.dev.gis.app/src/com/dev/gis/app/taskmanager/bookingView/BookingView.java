@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -22,6 +23,7 @@ import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 
@@ -41,6 +43,14 @@ public class BookingView extends TaskViewAbstract {
 	private Text priceText = null;
 
 	private Text carDescription = null;
+	
+	private Text bookingRequestId = null;
+
+	private Text paypalUrl = null;
+	private Link paypalUrlLink = null;
+	
+	private Text paypalToken = null;
+	private Text paypalError = null;
 	
 	private Offer selectedOffer = null;
 	private List<Extra> selectedExtras = null;
@@ -84,6 +94,27 @@ public class BookingView extends TaskViewAbstract {
 		carDescriptionLabel.setText("Fahrzeug:");
 		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		carDescription.setLayoutData(new GridData());
+		
+		new Label(groupStamp, SWT.NONE).setText("RequestId:");
+		bookingRequestId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		bookingRequestId.setLayoutData(new GridData());
+
+		new Label(groupStamp, SWT.NONE).setText("Paypal:");
+		paypalUrl = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		paypalUrl.setLayoutData(new GridData());
+
+		new Label(groupStamp, SWT.NONE).setText("PaypalToken:");
+		paypalToken = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		paypalToken.setLayoutData(new GridData());
+
+		new Label(groupStamp, SWT.NONE).setText("PaypalError:");
+		paypalError = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		paypalError.setLayoutData(new GridData());
+		
+		new Label(groupStamp, SWT.NONE).setText("PaypalLink:");
+		paypalUrlLink = new Link(groupStamp, SWT.BORDER | SWT.SINGLE);
+		paypalUrlLink.setSize(140, 40);
+		paypalUrlLink.setLayoutData(new GridData());
 
 		final Group groupButtons = new Group(composite, SWT.TITLE);
 		groupButtons.setText("Offer:");
@@ -99,7 +130,9 @@ public class BookingView extends TaskViewAbstract {
 				// createBookingRequest - Driver, Customer
 				//StartVerify
 				BookingResponse response = JoiVehicleConnector.verifyOffers(selectedOffer,selectedExtras);
-				carDescription.setText(response.getBookingId());
+				if ( response.getBookingId() != null)
+					carDescription.setText(response.getBookingId());
+				bookingRequestId.setText(String.valueOf(response.getRequestId()));
 				
 				//BookingView.updateView(selectedOffer);
 				
@@ -111,6 +144,33 @@ public class BookingView extends TaskViewAbstract {
 				
 			}
 		});
+		
+		final Button buttonPayPal = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
+		buttonPayPal.setText("PayPal ");
+		buttonPayPal.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				PaypalSetCheckoutResponse response = JoiVehicleConnector.getPaypalUrl(selectedOffer,bookingRequestId.getText());
+				if ( response != null) {
+					paypalUrl.setText(response.getPaypalUrl());
+					paypalUrlLink.setText(response.getPaypalUrl());
+					paypalToken.setText(response.getToken());
+					if ( response.getError() != null )
+						paypalError.setText(response.getError());
+				}
+				else
+					paypalError.setText(" Unknown PayPal Error" );
+				
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+				
+			}
+		});
+		
 	}
 	
 

@@ -1,0 +1,48 @@
+{
+	"administration": {
+		"language": "de-DE",
+		"operator": 152573,
+		"salesChannel": 7,
+		"broker": false,
+		"brokerId": null,
+		"calledFrom": 9,
+		"sessionId": null,
+		"requestPaymentInformation": true
+	},
+	"demandedObject": 0,
+	"customer": null,
+	"promoCode": null,
+	"specialId": null,
+	"serviceCatalogId": null,
+	"travel": {
+		"pickUpTime": {
+			"date": "2014-05-02",
+			"time": "10:00"
+		},
+		"pickUpLocation": {
+			"station": null,
+			"stationId": 0,
+			"airport": "MUC",
+			"cityId": null,
+			"countryId": null,
+			"countryCode": null,
+			"area": null
+		},
+		"dropOffTime": {
+			"date": "2014-05-09",
+			"time": "10:00"
+		},
+		"dropOffLocation": {
+			"station": null,
+			"stationId": 0,
+			"airport": "MUC",
+			"cityId": null,
+			"countryId": null,
+			"countryCode": null,
+			"area": null
+		}
+	},
+	"payment": 1,
+	"filter": null,
+	"module": 1
+}

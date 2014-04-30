@@ -1,0 +1,10 @@
+{
+	"link": "http://www.adac.de/mobile/vehicle-rental/booking/1531467247",
+	"requestId": 1531467247,
+	"errors": [],
+	"confirmed": false,
+	"price": {
+		"amount": "245,76",
+		"currency": "EUR"
+	}
+}

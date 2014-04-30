@@ -1,0 +1,103 @@
+{
+	"promoCode": null,
+	"acceptedAvailability": "13",
+	"transferType": "1",
+	"flightNo": "LH4711",
+	"pickUpService": null,
+	"dropDownService": null,
+	"travelAgent": false,
+	"driver": {
+		"salutation": null,
+		"gender": null,
+		"firstName": "Anton",
+		"name": "Meier"
+	},
+	"priceLimit": {
+		"currency": "EUR",
+		"amount": "1.000,00",
+		"decimalAmount": 1000
+	},
+	"earliestDocumentPrintDate": null,
+	"customer": {
+		"customerNo": null,
+		"externalCustomerNo": null,
+		"person": {
+			"salutation": null,
+			"gender": null,
+			"firstName": "Anton",
+			"name": "Meier"
+		},
+		"address": {
+			"signee": null,
+			"street": "Street",
+			"country": "DE",
+			"countryId": 49,
+			"zip": "81543",
+			"city": "München"
+		},
+		"phone": null,
+		"officePhone": null,
+		"mobile": null,
+		"fax": null,
+		"sendDocToEndCustomer": false,
+		"partnerProgram": null,
+		"email": null
+	},
+	"insurances": null,
+	"extras": [{
+		"id": 58,
+		"link": null,
+		"status": null,
+		"code": "BO",
+		"name": "Sitzpolster (4-12 Jahre)",
+		"totalPrice": null,
+		"requiredItems": null,
+		"requiredItemsString": null,
+		"competingItems": null,
+		"competingItemsString": null,
+		"mandatory": false,
+		"payType": null,
+		"insurance": false,
+		"extraClass": null,
+		"price": {
+			"currency": "EUR",
+			"amount": "10,98",
+			"decimalAmount": 10.98
+		},
+		"value1": null,
+		"value2": null,
+		"value3": null,
+		"value4": null,
+		"dimension1": null,
+		"dimension2": null
+	},
+	{
+		"id": 51,
+		"link": null,
+		"status": null,
+		"code": "BS",
+		"name": "Babysitz (bis 12 Monate)",
+		"totalPrice": null,
+		"requiredItems": null,
+		"requiredItemsString": null,
+		"competingItems": null,
+		"competingItemsString": null,
+		"mandatory": false,
+		"payType": null,
+		"insurance": false,
+		"extraClass": null,
+		"price": {
+			"currency": "EUR",
+			"amount": "10,98",
+			"decimalAmount": 10.98
+		},
+		"value1": null,
+		"value2": null,
+		"value3": null,
+		"value4": null,
+		"dimension1": null,
+		"dimension2": null
+	}],
+	"incentiveCard": null,
+	"payment": null
+}

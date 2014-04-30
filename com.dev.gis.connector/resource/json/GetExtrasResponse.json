@@ -1,0 +1,82 @@
+{
+	"requestId": 0,
+	"errors": [],
+	"extras": [{
+		"id": 58,
+		"code": "BO",
+		"name": "Sitzpolster (4-12 Jahre)",
+		"payType": "2",
+		"status": "0",
+		"insurance": false,
+		"mandatory": false,
+		"price": {
+			"amount": "10,98",
+			"currency": "EUR"
+		},
+		"totalPrice": {
+			"amount": "54,90",
+			"currency": "EUR"
+		},
+		"dimension1": "11"
+	},
+	{
+		"id": 51,
+		"code": "BS",
+		"name": "Babysitz (bis 12 Monate)",
+		"payType": "2",
+		"status": "0",
+		"insurance": false,
+		"mandatory": false,
+		"price": {
+			"amount": "10,98",
+			"currency": "EUR"
+		},
+		"totalPrice": {
+			"amount": "54,90",
+			"currency": "EUR"
+		},
+		"dimension1": "11"
+	},
+	{
+		"id": 54,
+		"code": "CS",
+		"name": "Kindersitz (1 bis ca. 4 Jahre)",
+		"payType": "2",
+		"status": "0",
+		"insurance": false,
+		"mandatory": false,
+		"price": {
+			"amount": "10,98",
+			"currency": "EUR"
+		},
+		"totalPrice": {
+			"amount": "54,90",
+			"currency": "EUR"
+		},
+		"dimension1": "11"
+	},
+	{
+		"id": 6,
+		"code": "NAG",
+		"name": "Navigationssystem (nach Verfügbarkeit)",
+		"payType": "2",
+		"status": "0",
+		"insurance": false,
+		"mandatory": false,
+		"price": {
+			"amount": "8,54",
+			"currency": "EUR"
+		},
+		"totalPrice": {
+			"amount": "59,78",
+			"currency": "EUR"
+		},
+		"competingItems": [64,
+		65,
+		77,
+		78,
+		41],
+		"dimension1": "11"
+	}],
+	"remainingCacheSeconds": 6000000
+}

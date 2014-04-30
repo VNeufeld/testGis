@@ -1,0 +1,14 @@
+{
+	"link": "http://www.adac.de/mobile/vehicle-rental/booking/415502101",
+	"requestId": 415502101,
+	"errors": [{
+		"errorType": 3,
+		"errorNumber": 12008,
+		"errorText": "Status of the booking has changed (Extra ID: 51)"
+	}],
+	"confirmed": false,
+	"price": {
+		"amount": "245,76",
+		"currency": "EUR"
+	}
+}

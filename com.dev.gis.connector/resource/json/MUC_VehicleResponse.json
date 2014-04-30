@@ -1,0 +1,4119 @@
+{
+	"requestId": 1099240394,
+	"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394",
+	"errors": [{
+		"errorType": 4,
+		"errorNumber": 10099,
+		"errorText": "Failed to validate Response to XSD /home/www/work/ADAC_GW/schema/GetCarsResponse/GetCarsResponse.xsd"
+	}],
+	"remainingCacheSeconds": 6000000,
+	"resultList": [{
+		"id": 1311794564,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1311794564",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1311794564/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 1,
+			"categoryId": 101,
+			"driverMinAge": 18,
+			"manufacturer": "Volkswagen Polo",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100901,
+				"name": "ECMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/ECMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/ECMR.jpg"
+		},
+		"offerList": [{
+			"id": "a662373a-9c8f-434b-ae98-f02a3cad26a0",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1311794564/offer/a662373a-9c8f-434b-ae98-f02a3cad26a0",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1311794564/offer/a662373a-9c8f-434b-ae98-f02a3cad26a0/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "207,07",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "207,07",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1831099941,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1831099941",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1831099941/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 2,
+			"categoryId": 115,
+			"driverMinAge": 21,
+			"manufacturer": "Volkswagen Golf",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100601,
+				"name": "CDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CDMR.jpg"
+		},
+		"offerList": [{
+			"id": "5d86e798-4335-48bc-8865-35c9221d2803",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1831099941/offer/5d86e798-4335-48bc-8865-35c9221d2803",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1831099941/offer/5d86e798-4335-48bc-8865-35c9221d2803/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "234,14",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "234,14",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 7122983,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/7122983",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/7122983/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 118,
+			"driverMinAge": 21,
+			"manufacturer": "Ford Focus Turnier",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100701,
+				"name": "CWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CWMR.jpg"
+		},
+		"offerList": [{
+			"id": "2e6d4540-c0ad-4ade-a164-ea89410db156",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/7122983/offer/2e6d4540-c0ad-4ade-a164-ea89410db156",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/7122983/offer/2e6d4540-c0ad-4ade-a164-ea89410db156/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "245,76",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "245,76",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1898957182,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1898957182",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1898957182/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 1,
+			"categoryId": 101,
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "VW Polo Benziner",
+			"nrDoors": 2,
+			"nrLargeLuggage": 1,
+			"nrSeats": 0,
+			"nrSmallLuggage": 1,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 91501,
+				"name": "ECMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/ECMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/ECMR.jpg"
+		},
+		"offerList": [{
+			"id": "57aec4dd-17c1-4a80-bdd4-fb0dfbae99fc",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1898957182/offer/57aec4dd-17c1-4a80-bdd4-fb0dfbae99fc",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1898957182/offer/57aec4dd-17c1-4a80-bdd4-fb0dfbae99fc/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "251,90",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "251,90",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,18 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 153627004,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/153627004",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/153627004/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 1,
+			"categoryId": 101,
+			"driverMinAge": 18,
+			"manufacturer": "Volkswagen Polo",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100901,
+				"name": "ECMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/ECMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/ECMR.jpg"
+		},
+		"offerList": [{
+			"id": "792ac1fa-6724-4425-baa6-30f0f34b4d55",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/153627004/offer/792ac1fa-6724-4425-baa6-30f0f34b4d55",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/153627004/offer/792ac1fa-6724-4425-baa6-30f0f34b4d55/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "253,65",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "253,65",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1998472549,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1998472549",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1998472549/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 2,
+			"categoryId": 201,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes A Klasse Navigation",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100801,
+				"name": "CXMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CXMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CXMR.jpg"
+		},
+		"offerList": [{
+			"id": "a74b132b-93e7-4357-90b2-bd8357be1107",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1998472549/offer/a74b132b-93e7-4357-90b2-bd8357be1107",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1998472549/offer/a74b132b-93e7-4357-90b2-bd8357be1107/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "257,39",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "257,39",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 2110745389,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/2110745389",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/2110745389/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 129,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes B Class",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101201,
+				"name": "IDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/IDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/IDMR.jpg"
+		},
+		"offerList": [{
+			"id": "f30945e7-368a-41d8-8a93-01fe3c7bfa60",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/2110745389/offer/f30945e7-368a-41d8-8a93-01fe3c7bfa60",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/2110745389/offer/f30945e7-368a-41d8-8a93-01fe3c7bfa60/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "265,13",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "265,13",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 710291812,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/710291812",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/710291812/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 2,
+			"categoryId": 117,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes A Klasse",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100501,
+				"name": "CDAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CDAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CDAR.jpg"
+		},
+		"offerList": [{
+			"id": "113f41c4-89e6-44ef-a12a-a29c16efe7b9",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/710291812/offer/113f41c4-89e6-44ef-a12a-a29c16efe7b9",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/710291812/offer/113f41c4-89e6-44ef-a12a-a29c16efe7b9/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "274,79",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "274,79",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 118341160,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/118341160",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/118341160/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 145,
+			"driverMinAge": 21,
+			"manufacturer": "VW Passat Variant",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101301,
+				"name": "IWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/IWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/IWMR.jpg"
+		},
+		"offerList": [{
+			"id": "8ea4ff6d-1ba2-4989-b1a2-37bdec826123",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/118341160/offer/8ea4ff6d-1ba2-4989-b1a2-37bdec826123",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/118341160/offer/8ea4ff6d-1ba2-4989-b1a2-37bdec826123/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "278,64",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "278,64",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 261189196,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/261189196",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/261189196/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 2,
+			"categoryId": 115,
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Ford Focus",
+			"nrDoors": 4,
+			"nrLargeLuggage": 1,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 91601,
+				"name": "CDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CDMR.jpg"
+		},
+		"offerList": [{
+			"id": "9d7316a8-c5c0-4c38-b9fc-756a00dc341a",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/261189196/offer/9d7316a8-c5c0-4c38-b9fc-756a00dc341a",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/261189196/offer/9d7316a8-c5c0-4c38-b9fc-756a00dc341a/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "282,89",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "282,89",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 421631039,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/421631039",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/421631039/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 2,
+			"categoryId": 114,
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "VW Golf",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 1,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 91701,
+				"name": "CLMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CLMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CLMR.jpg"
+		},
+		"offerList": [{
+			"id": "0c0a932f-ee28-47d2-a6c2-09dceb11a13f",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/421631039/offer/0c0a932f-ee28-47d2-a6c2-09dceb11a13f",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/421631039/offer/0c0a932f-ee28-47d2-a6c2-09dceb11a13f/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "283,99",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "283,99",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 748255691,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/748255691",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/748255691/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 118,
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Ford Focus Turnier",
+			"nrDoors": 5,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 91801,
+				"name": "CWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CWMR.jpg"
+		},
+		"offerList": [{
+			"id": "f7af605f-0f04-453f-8029-6b7af1b73b43",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/748255691/offer/f7af605f-0f04-453f-8029-6b7af1b73b43",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/748255691/offer/f7af605f-0f04-453f-8029-6b7af1b73b43/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "305,90",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "305,90",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 901820047,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/901820047",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/901820047/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 129,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "Citroen C5",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 1,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 91901,
+				"name": "IDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/IDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/IDMR.jpg"
+		},
+		"offerList": [{
+			"id": "526c8690-8385-43a8-82a6-12ca0b3a5949",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/901820047/offer/526c8690-8385-43a8-82a6-12ca0b3a5949",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/901820047/offer/526c8690-8385-43a8-82a6-12ca0b3a5949/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "312,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "312,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1265811209,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1265811209",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1265811209/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 2,
+			"categoryId": 447,
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "BMW 1er",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 1,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95001,
+				"name": "CPMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CPMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CPMR.jpg"
+		},
+		"offerList": [{
+			"id": "46eea047-13e8-42ce-a942-7ed5053b34da",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1265811209/offer/46eea047-13e8-42ce-a942-7ed5053b34da",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1265811209/offer/46eea047-13e8-42ce-a942-7ed5053b34da/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "312,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "312,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1178001803,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1178001803",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1178001803/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 147,
+			"driverMinAge": 21,
+			"manufacturer": "BMW 3 Series (gps)",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 102701,
+				"name": "FXMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FXMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FXMR.jpg"
+		},
+		"offerList": [{
+			"id": "953c436c-48ed-446d-952d-cfa05fc987cf",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1178001803/offer/953c436c-48ed-446d-952d-cfa05fc987cf",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1178001803/offer/953c436c-48ed-446d-952d-cfa05fc987cf/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "315,44",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "315,44",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1317679994,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1317679994",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1317679994/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 448,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "VW Passat",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95101,
+				"name": "ILMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/ILMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/ILMR.jpg"
+		},
+		"offerList": [{
+			"id": "0bf7031b-1e42-4512-b97a-1ee36c47a778",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1317679994/offer/0bf7031b-1e42-4512-b97a-1ee36c47a778",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1317679994/offer/0bf7031b-1e42-4512-b97a-1ee36c47a778/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "316,89",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "316,89",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 202434112,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/202434112",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/202434112/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 10,
+			"categoryId": 167,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "VW Touran",
+			"nrDoors": 5,
+			"nrLargeLuggage": 1,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92901,
+				"name": "IVMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/IVMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/IVMR.jpg"
+		},
+		"offerList": [{
+			"id": "bd614e9e-029c-4154-943d-41e874976f19",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/202434112/offer/bd614e9e-029c-4154-943d-41e874976f19",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/202434112/offer/bd614e9e-029c-4154-943d-41e874976f19/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "316,89",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "316,89",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1108557349,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1108557349",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1108557349/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 145,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "VW Passat Variant",
+			"nrDoors": 5,
+			"nrLargeLuggage": 3,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92001,
+				"name": "IWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/IWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/IWMR.jpg"
+		},
+		"offerList": [{
+			"id": "85027451-562b-49c4-9983-03afcaa1a309",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1108557349/offer/85027451-562b-49c4-9983-03afcaa1a309",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1108557349/offer/85027451-562b-49c4-9983-03afcaa1a309/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "319,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "319,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 185602520,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/185602520",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/185602520/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 138,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "VW CC",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92101,
+				"name": "SDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/SDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/SDMR.jpg"
+		},
+		"offerList": [{
+			"id": "bb55d8e3-8dbb-4745-869d-c92cd51702dd",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/185602520/offer/bb55d8e3-8dbb-4745-869d-c92cd51702dd",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/185602520/offer/bb55d8e3-8dbb-4745-869d-c92cd51702dd/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "327,95",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "327,95",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,21 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1422809104,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1422809104",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1422809104/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 2,
+			"categoryId": 115,
+			"driverMinAge": 21,
+			"manufacturer": "Volkswagen Golf",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100601,
+				"name": "CDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CDMR.jpg"
+		},
+		"offerList": [{
+			"id": "590aed9c-134f-47e5-9ce6-cf6502b99a4e",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1422809104/offer/590aed9c-134f-47e5-9ce6-cf6502b99a4e",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1422809104/offer/590aed9c-134f-47e5-9ce6-cf6502b99a4e/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "330,58",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "330,58",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 229051138,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/229051138",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/229051138/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 5,
+			"categoryId": 175,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes C Klasse Navigation (gps)",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101101,
+				"name": "FXAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FXAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FXAR.jpg"
+		},
+		"offerList": [{
+			"id": "fbaa41f4-5e0c-4bf0-8457-85993576b3a9",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/229051138/offer/fbaa41f4-5e0c-4bf0-8457-85993576b3a9",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/229051138/offer/fbaa41f4-5e0c-4bf0-8457-85993576b3a9/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "336,71",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "336,71",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 645565267,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/645565267",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/645565267/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 135,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "Skoda Superb Combi",
+			"nrDoors": 5,
+			"nrLargeLuggage": 3,
+			"nrSeats": 0,
+			"nrSmallLuggage": 3,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 102301,
+				"name": "SWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/SWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/SWMR.jpg"
+		},
+		"offerList": [{
+			"id": "f521f0c3-aeca-46d3-8db0-db9e8e4a44fd",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/645565267/offer/f521f0c3-aeca-46d3-8db0-db9e8e4a44fd",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/645565267/offer/f521f0c3-aeca-46d3-8db0-db9e8e4a44fd/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "336,94",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "336,94",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,21 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1827525747,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1827525747",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1827525747/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 118,
+			"driverMinAge": 21,
+			"manufacturer": "Ford Focus Turnier",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100701,
+				"name": "CWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CWMR.jpg"
+		},
+		"offerList": [{
+			"id": "efa7d2e8-a65f-4f25-85d1-37f0094946d5",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1827525747/offer/efa7d2e8-a65f-4f25-85d1-37f0094946d5",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1827525747/offer/efa7d2e8-a65f-4f25-85d1-37f0094946d5/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "346,53",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "346,53",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1944424330,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1944424330",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1944424330/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 129,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes B Class",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101201,
+				"name": "IDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/IDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/IDMR.jpg"
+		},
+		"offerList": [{
+			"id": "20266fba-34ff-401c-ab10-351f038c33be",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1944424330/offer/20266fba-34ff-401c-ab10-351f038c33be",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1944424330/offer/20266fba-34ff-401c-ab10-351f038c33be/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "348,84",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "348,84",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1338719391,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1338719391",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1338719391/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 2,
+			"categoryId": 117,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes A Klasse",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100501,
+				"name": "CDAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CDAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CDAR.jpg"
+		},
+		"offerList": [{
+			"id": "6f20f649-b967-4f09-b278-3078fd08760b",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1338719391/offer/6f20f649-b967-4f09-b278-3078fd08760b",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1338719391/offer/6f20f649-b967-4f09-b278-3078fd08760b/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "352,26",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "352,26",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1282115941,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1282115941",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1282115941/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 2,
+			"categoryId": 201,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes A Klasse Navigation",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100801,
+				"name": "CXMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CXMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CXMR.jpg"
+		},
+		"offerList": [{
+			"id": "d1e6cafb-3c63-47c0-8ea5-8c866823cef6",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1282115941/offer/d1e6cafb-3c63-47c0-8ea5-8c866823cef6",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1282115941/offer/d1e6cafb-3c63-47c0-8ea5-8c866823cef6/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "356,82",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "356,82",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 910671855,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/910671855",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/910671855/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 145,
+			"driverMinAge": 21,
+			"manufacturer": "VW Passat Variant",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101301,
+				"name": "IWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/IWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/IWMR.jpg"
+		},
+		"offerList": [{
+			"id": "3e4b0e94-a55c-47fa-aee8-1537faaac257",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/910671855/offer/3e4b0e94-a55c-47fa-aee8-1537faaac257",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/910671855/offer/3e4b0e94-a55c-47fa-aee8-1537faaac257/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "363,65",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "363,65",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 509746312,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/509746312",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/509746312/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 139,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "BMW 3er",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92201,
+				"name": "FDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FDMR.jpg"
+		},
+		"offerList": [{
+			"id": "9882bc80-74cc-4a2f-81e2-975bb4f167f0",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/509746312/offer/9882bc80-74cc-4a2f-81e2-975bb4f167f0",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/509746312/offer/9882bc80-74cc-4a2f-81e2-975bb4f167f0/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "371,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "371,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,23 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1629574518,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1629574518",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1629574518/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 444,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "VW Scirocco",
+			"nrDoors": 2,
+			"nrLargeLuggage": 1,
+			"nrSeats": 0,
+			"nrSmallLuggage": 1,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95301,
+				"name": "SSMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/SSMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/SSMR.jpg"
+		},
+		"offerList": [{
+			"id": "04f9ab1c-d6ac-42b0-9ea7-7b4a7a0f3894",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1629574518/offer/04f9ab1c-d6ac-42b0-9ea7-7b4a7a0f3894",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1629574518/offer/04f9ab1c-d6ac-42b0-9ea7-7b4a7a0f3894/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "371,92",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "371,92",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,26 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "SSCPP",
+			"serviceCatalogId": 9
+		}],
+		"module": "1"
+	},
+	{
+		"id": 823054421,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/823054421",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/823054421/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 213,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "Ford Kuga",
+			"nrDoors": 5,
+			"nrLargeLuggage": 4,
+			"nrSeats": 0,
+			"nrSmallLuggage": 3,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 93701,
+				"name": "SFMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/SFMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/SFMR.jpg"
+		},
+		"offerList": [{
+			"id": "2e84c2f7-9dcb-42b8-9d34-d4c198b870bf",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/823054421/offer/2e84c2f7-9dcb-42b8-9d34-d4c198b870bf",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/823054421/offer/2e84c2f7-9dcb-42b8-9d34-d4c198b870bf/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "371,92",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "371,92",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,26 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "SSCPP",
+			"serviceCatalogId": 9
+		}],
+		"module": "1"
+	},
+	{
+		"id": 303240875,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/303240875",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/303240875/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 148,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "BMW 3er Touring",
+			"nrDoors": 5,
+			"nrLargeLuggage": 3,
+			"nrSeats": 0,
+			"nrSmallLuggage": 3,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92301,
+				"name": "FWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FWMR.jpg"
+		},
+		"offerList": [{
+			"id": "b2cf92f6-0195-4784-8052-924aa13a054c",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/303240875/offer/b2cf92f6-0195-4784-8052-924aa13a054c",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/303240875/offer/b2cf92f6-0195-4784-8052-924aa13a054c/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "378,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "378,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,23 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1608392396,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1608392396",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1608392396/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 147,
+			"driverMinAge": 21,
+			"manufacturer": "BMW 3 Series (gps)",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 102701,
+				"name": "FXMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FXMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FXMR.jpg"
+		},
+		"offerList": [{
+			"id": "74f1c2eb-d36b-4456-a2c3-7cb97dbf2c33",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1608392396/offer/74f1c2eb-d36b-4456-a2c3-7cb97dbf2c33",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1608392396/offer/74f1c2eb-d36b-4456-a2c3-7cb97dbf2c33/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "397,88",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "397,88",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1080569873,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1080569873",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1080569873/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 5,
+			"categoryId": 183,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "BMW X1",
+			"nrDoors": 5,
+			"nrLargeLuggage": 3,
+			"nrSeats": 0,
+			"nrSmallLuggage": 3,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 93801,
+				"name": "FFMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FFMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FFMR.jpg"
+		},
+		"offerList": [{
+			"id": "c0459904-a1d6-4e67-a1dd-3dc864beb7e4",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1080569873/offer/c0459904-a1d6-4e67-a1dd-3dc864beb7e4",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1080569873/offer/c0459904-a1d6-4e67-a1dd-3dc864beb7e4/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "415,89",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "415,89",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "SSCPP",
+			"serviceCatalogId": 9
+		}],
+		"module": "1"
+	},
+	{
+		"id": 783444340,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/783444340",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/783444340/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 10,
+			"categoryId": 168,
+			"driverMinAge": 21,
+			"manufacturer": "Ford Galaxy",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 7,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101001,
+				"name": "FVMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FVMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FVMR.jpg"
+		},
+		"offerList": [{
+			"id": "625d0ee6-d164-4c8a-b501-75130df1a249",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/783444340/offer/625d0ee6-d164-4c8a-b501-75130df1a249",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/783444340/offer/625d0ee6-d164-4c8a-b501-75130df1a249/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "429,60",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "429,60",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1822299293,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1822299293",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1822299293/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 7,
+			"categoryId": 188,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes E Klasse Navigation (gps)",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101601,
+				"name": "PXAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/PXAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/PXAR.jpg"
+		},
+		"offerList": [{
+			"id": "f2b9c497-845a-4602-bfc2-f40b9b8e1036",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1822299293/offer/f2b9c497-845a-4602-bfc2-f40b9b8e1036",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1822299293/offer/f2b9c497-845a-4602-bfc2-f40b9b8e1036/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "431,56",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "431,56",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 294317980,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/294317980",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/294317980/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 5,
+			"categoryId": 175,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes C Klasse Navigation (gps)",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101101,
+				"name": "FXAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FXAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FXAR.jpg"
+		},
+		"offerList": [{
+			"id": "6c740025-638d-4d78-b097-ebf533207782",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/294317980/offer/6c740025-638d-4d78-b097-ebf533207782",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/294317980/offer/6c740025-638d-4d78-b097-ebf533207782/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "438,79",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "438,79",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1072287883,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1072287883",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1072287883/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 7,
+			"categoryId": 170,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "BMW 520 *NAVI*",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92401,
+				"name": "PDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/PDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/PDMR.jpg"
+		},
+		"offerList": [{
+			"id": "8f346cc7-8860-4dd5-b145-132be750c1d2",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1072287883/offer/8f346cc7-8860-4dd5-b145-132be750c1d2",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1072287883/offer/8f346cc7-8860-4dd5-b145-132be750c1d2/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "450,97",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "450,97",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,24 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 353852002,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/353852002",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/353852002/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 11,
+			"categoryId": 154,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "BMW 520 Touring *NAVI*",
+			"nrDoors": 5,
+			"nrLargeLuggage": 3,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92501,
+				"name": "PWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/PWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/PWMR.jpg"
+		},
+		"offerList": [{
+			"id": "33934bd0-f770-46be-8bda-38100c023cf7",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/353852002/offer/33934bd0-f770-46be-8bda-38100c023cf7",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/353852002/offer/33934bd0-f770-46be-8bda-38100c023cf7/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "459,95",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "459,95",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,24 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1748592096,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1748592096",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1748592096/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 10,
+			"categoryId": 172,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "Ford Galaxy",
+			"nrDoors": 5,
+			"nrLargeLuggage": 1,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 93001,
+				"name": "SVMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/SVMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/SVMR.jpg"
+		},
+		"offerList": [{
+			"id": "de18bd59-04de-4ff5-91d8-ef1c65a0239c",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1748592096/offer/de18bd59-04de-4ff5-91d8-ef1c65a0239c",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1748592096/offer/de18bd59-04de-4ff5-91d8-ef1c65a0239c/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "471,93",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "471,93",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,18 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1572188888,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1572188888",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1572188888/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 7,
+			"categoryId": 186,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "BMW 5er Gran Turismo *NAVI*",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92601,
+				"name": "LDAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/LDAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/LDAR.jpg"
+		},
+		"offerList": [{
+			"id": "7a062864-3092-4ff1-87c1-9f2d106a79a4",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1572188888/offer/7a062864-3092-4ff1-87c1-9f2d106a79a4",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1572188888/offer/7a062864-3092-4ff1-87c1-9f2d106a79a4/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "477,00",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "477,00",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1029047129,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1029047129",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1029047129/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 11,
+			"categoryId": 164,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "BMW 525/530 Touring*NAVI*",
+			"nrDoors": 5,
+			"nrLargeLuggage": 3,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 92701,
+				"name": "LWAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/LWAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/LWAR.jpg"
+		},
+		"offerList": [{
+			"id": "0b6629da-e579-479f-90c6-f63644f394ed",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1029047129/offer/0b6629da-e579-479f-90c6-f63644f394ed",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1029047129/offer/0b6629da-e579-479f-90c6-f63644f394ed/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "483,96",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "483,96",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1165518553,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1165518553",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1165518553/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 7,
+			"categoryId": 199,
+			"driverMinAge": 25,
+			"licenseMinTime": "3",
+			"manufacturer": "Mercedes-Benz GLK 220 *NAVI*",
+			"nrDoors": 5,
+			"nrLargeLuggage": 4,
+			"nrSeats": 0,
+			"nrSmallLuggage": 3,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 93901,
+				"name": "PFMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/PFMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/PFMR.jpg"
+		},
+		"offerList": [{
+			"id": "b85f8c8c-2c12-4777-a977-ee74704f3c5b",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1165518553/offer/b85f8c8c-2c12-4777-a977-ee74704f3c5b",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1165518553/offer/b85f8c8c-2c12-4777-a977-ee74704f3c5b/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "498,92",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "498,92",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,30 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "SSCPP",
+			"serviceCatalogId": 9
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1207356286,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1207356286",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1207356286/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 9,
+			"categoryId": 324,
+			"driverMinAge": 25,
+			"licenseMinTime": "3",
+			"manufacturer": "Mercedes-Benz SLK Roadster *NAVI*",
+			"nrDoors": 2,
+			"nrLargeLuggage": 1,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 93501,
+				"name": "PTMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/PTMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/PTMR.jpg"
+		},
+		"offerList": [{
+			"id": "d4e81333-635b-4c15-b424-3be1e6476cdf",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1207356286/offer/d4e81333-635b-4c15-b424-3be1e6476cdf",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1207356286/offer/d4e81333-635b-4c15-b424-3be1e6476cdf/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "520,95",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "520,95",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,30 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "SSCPP",
+			"serviceCatalogId": 9
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1652074903,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1652074903",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1652074903/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 10,
+			"categoryId": 187,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes Vito",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 9,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101501,
+				"name": "PVMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/PVMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/PVMR.jpg"
+		},
+		"offerList": [{
+			"id": "39f8da73-3dd2-42b0-aadb-6f7a9ab43c2b",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1652074903/offer/39f8da73-3dd2-42b0-aadb-6f7a9ab43c2b",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1652074903/offer/39f8da73-3dd2-42b0-aadb-6f7a9ab43c2b/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "555,40",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "555,40",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 197408766,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/197408766",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/197408766/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 7,
+			"categoryId": 162,
+			"driverMinAge": 25,
+			"manufacturer": "Mercedes S Klasse Navigation (gps)",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101401,
+				"name": "LXAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/LXAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/LXAR.jpg"
+		},
+		"offerList": [{
+			"id": "d6b758e2-8950-40f2-87c8-42c73819f1d6",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/197408766/offer/d6b758e2-8950-40f2-87c8-42c73819f1d6",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/197408766/offer/d6b758e2-8950-40f2-87c8-42c73819f1d6/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "579,60",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "579,60",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050,00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "1"
+	},
+	{
+		"id": 54667139,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/54667139",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/54667139/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 7,
+			"categoryId": 188,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes E Klasse Navigation (gps)",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101601,
+				"name": "PXAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/PXAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/PXAR.jpg"
+		},
+		"offerList": [{
+			"id": "d71cfeef-fcbf-4143-a61b-6d67400c6e95",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/54667139/offer/d71cfeef-fcbf-4143-a61b-6d67400c6e95",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/54667139/offer/d71cfeef-fcbf-4143-a61b-6d67400c6e95/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "580,68",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "580,68",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 303638465,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/303638465",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/303638465/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 10,
+			"categoryId": 168,
+			"driverMinAge": 21,
+			"manufacturer": "Ford Galaxy",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 7,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101001,
+				"name": "FVMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/FVMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/FVMR.jpg"
+		},
+		"offerList": [{
+			"id": "544de86a-5343-4cab-b282-f4abdd5fd92f",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/303638465/offer/544de86a-5343-4cab-b282-f4abdd5fd92f",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/303638465/offer/544de86a-5343-4cab-b282-f4abdd5fd92f/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "591,66",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "591,66",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 61299972,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/61299972",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/61299972/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 7,
+			"categoryId": 459,
+			"driverMinAge": 21,
+			"licenseMinTime": "2",
+			"manufacturer": "BMW 4er Coupé *NAVI*",
+			"nrDoors": 2,
+			"nrLargeLuggage": 1,
+			"nrSeats": 0,
+			"nrSmallLuggage": 2,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 102501,
+				"name": "LSMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/LSMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/LSMR.jpg"
+		},
+		"offerList": [{
+			"id": "5d8896fb-36fe-4520-a3ad-d83d21909bbe",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/61299972/offer/5d8896fb-36fe-4520-a3ad-d83d21909bbe",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/61299972/offer/5d8896fb-36fe-4520-a3ad-d83d21909bbe/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "682,94",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "682,94",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,40 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "SSCPP",
+			"serviceCatalogId": 9
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1648996833,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1648996833",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1648996833/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 10,
+			"categoryId": 187,
+			"driverMinAge": 21,
+			"manufacturer": "Mercedes Vito",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 9,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101501,
+				"name": "PVMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/PVMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/PVMR.jpg"
+		},
+		"offerList": [{
+			"id": "8b253839-6fc4-413e-b23b-bf5e8c45544d",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1648996833/offer/8b253839-6fc4-413e-b23b-bf5e8c45544d",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1648996833/offer/8b253839-6fc4-413e-b23b-bf5e8c45544d/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "762,66",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "762,66",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1705282409,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1705282409",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1705282409/recalculate",
+		"pickUpLocation": {
+			"stationId": 167982,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 167982
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 7,
+			"categoryId": 182,
+			"driverMinAge": 25,
+			"licenseMinTime": "3",
+			"manufacturer": "Mercedes-Benz ML 350 *NAVI*",
+			"nrDoors": 5,
+			"nrLargeLuggage": 4,
+			"nrSeats": 0,
+			"nrSmallLuggage": 4,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94101,
+				"name": "XFAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/XFAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/XFAR.jpg"
+		},
+		"offerList": [{
+			"id": "f46f140f-ac23-41bc-9a97-8555733a6dd9",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1705282409/offer/f46f140f-ac23-41bc-9a97-8555733a6dd9",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1705282409/offer/f46f140f-ac23-41bc-9a97-8555733a6dd9/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "810,94",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "810,94",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 61,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/61",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,35 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 1050.00 EUR Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 48,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 45,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "SSCPP",
+			"serviceCatalogId": 9
+		}],
+		"module": "1"
+	},
+	{
+		"id": 1787300344,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1787300344",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1787300344/recalculate",
+		"pickUpLocation": {
+			"stationId": 171387,
+			"cityId": 3424,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171387
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": true,
+			"bodyStyle": 7,
+			"categoryId": 162,
+			"driverMinAge": 25,
+			"manufacturer": "Mercedes S Klasse Navigation (gps)",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 101401,
+				"name": "LXAR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/LXAR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/LXAR.jpg"
+		},
+		"offerList": [{
+			"id": "80f65fb7-a65b-40aa-bc75-7c527dc94560",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1787300344/offer/80f65fb7-a65b-40aa-bc75-7c527dc94560",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/1099240394/vehicle/1787300344/offer/80f65fb7-a65b-40aa-bc75-7c527dc94560/book",
+			"supplierId": 158037,
+			"price": {
+				"amount": "2.138,31",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "2.138,31",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1
+			},
+			{
+				"id": 47,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 0 Euro Selbstbehalt",
+				"displayPriority": 2
+			},
+			{
+				"id": 102,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 118,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/118",
+				"description": "wintertaugliche Bereifung für Anmietungen  1.11.-15.3.",
+				"displayPriority": 6
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogCode": "A360PP",
+			"serviceCatalogId": 8
+		}],
+		"module": "1"
+	}],
+	"summary": {
+		"quantity": 51,
+		"totalQuantity": 51,
+		"minimalPrice": {
+			"amount": "207,07",
+			"currency": "EUR"
+		},
+		"maximalPrice": {
+			"amount": "2.138,31",
+			"currency": "EUR"
+		}
+	},
+	"texts": {
+		"supplierList": [{
+			"id": 158036,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/supplier/158036",
+			"supplierGroupId": 0,
+			"logo": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/default.png",
+			"name": "Sixt Deutschland"
+		},
+		{
+			"id": 158037,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/supplier/158037",
+			"supplierGroupId": 0,
+			"logo": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/default.png",
+			"name": "Avis Deutschland"
+		}],
+		"bodyStyleList": [{
+			"id": 1,
+			"text": "Kleinwagen"
+		},
+		{
+			"id": 2,
+			"text": "Kompaktklasse"
+		},
+		{
+			"id": 5,
+			"text": "Mittelklasse"
+		},
+		{
+			"id": 7,
+			"text": "Luxusklasse"
+		},
+		{
+			"id": 9,
+			"text": "Cabrio"
+		},
+		{
+			"id": 10,
+			"text": "Van"
+		},
+		{
+			"id": 11,
+			"text": "Kombi"
+		}],
+		"stationList": [{
+			"id": 167982,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/station/167982",
+			"stationName": "München Flughafen (MUC)",
+			"stationPriority": 1,
+			"airportStation": true,
+			"airport": "MUC",
+			"cityId": 3424,
+			"supplierId": 158036,
+			"assignedCityIds": [3424],
+			"modules": ["1"],
+			"area": 269,
+			"countryId": 1,
+			"address": {
+				"street": null,
+				"zip": null,
+				"city": null,
+				"country": null
+			},
+			"flightNoMandatory": true
+		},
+		{
+			"id": 171387,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/station/171387",
+			"stationName": "München Flughafen (MUC)",
+			"stationPriority": 1,
+			"airportStation": true,
+			"airport": "MUC",
+			"cityId": 3424,
+			"supplierId": 158037,
+			"assignedCityIds": [3424],
+			"modules": ["1"],
+			"area": 269,
+			"countryId": 1,
+			"address": {
+				"street": null,
+				"zip": null,
+				"city": null,
+				"country": null
+			},
+			"flightNoMandatory": false
+		}],
+		"paymentInfoList": [{
+			"paymentType": "1",
+			"provided": true
+		},
+		{
+			"paymentType": "8",
+			"provided": true
+		}]
+	}
+}

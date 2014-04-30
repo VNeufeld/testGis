@@ -1,0 +1,2 @@
+http://10.10.2.96:8090/bpcs-payment-paypal/PayPal/appSetCheckout jsonString 
+{"puDate":"2014-05-02","doDate":"2014-05-09","amount":"245,76","currency":"EUR","groupId":100701,"stationId":171387,"groupName":"CWMR"}

@@ -208,8 +208,8 @@ public class TestAppView extends TaskViewAbstract {
 				request.setModule(1);
 				request.setPayment(1);
 				
-				//VehicleResponse response = JoiVehicleConnector.getOffers(request);
-				VehicleResponse response = JoiVehicleConnector.getOffersDummy();
+				VehicleResponse response = JoiVehicleConnector.getOffers(request);
+				//VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				
 				countVehicles.setText(String.valueOf(response.getResultList().size()));
 				changeModel(response);

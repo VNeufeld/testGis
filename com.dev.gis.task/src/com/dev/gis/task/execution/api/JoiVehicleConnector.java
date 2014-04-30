@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
@@ -21,6 +22,7 @@ import com.dev.gis.connector.joi.protocol.MoneyAmount;
 import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.Payment;
 import com.dev.gis.connector.joi.protocol.PaymentType;
+import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
@@ -102,6 +104,32 @@ public class JoiVehicleConnector {
 		return null;
 
 	}
+	public static PaypalSetCheckoutResponse getPaypalUrl(Offer offer, String bookingRequestId) {
+		GisHttpClient httpClient = new GisHttpClient();
+
+		try {
+			String link = "/booking/"+bookingRequestId+"/payPaypal";
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
+			
+			logger.info("GetPaypal URL Request = "+uri);
+			
+			
+			String response =  httpClient.sendGetRequest(uri);
+			logger.info("response = "+response);
+			
+			PaypalSetCheckoutResponse paypalResponse = JsonUtils.createResponseClassFromJson(response, PaypalSetCheckoutResponse.class);
+
+			return paypalResponse;
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+		
+	}
+	
 	
 	public static BookingResponse verifyOffers(Offer offer, List<Extra> selectedExtras) {
 		GisHttpClient httpClient = new GisHttpClient();
@@ -114,7 +142,7 @@ public class JoiVehicleConnector {
 			link = link.substring(pos);
 			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
 			
-			logger.info("GetExtra Request = "+uri);
+			logger.info("Verify Request URI = "+uri);
 
 			Customer customer = new Customer();
 			Person person = new Person();
@@ -150,10 +178,10 @@ public class JoiVehicleConnector {
 			bookingRequest.setExtras(selectedExtras);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
-			logger.info("request = "+request);
+			logger.info("Verify Request = "+request);
 			
 			String response =  httpClient.startPutRequestAsJson(uri, request);
-			logger.info("response = "+response);
+			logger.info("Verify Response = "+response);
 			
 			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
 			
