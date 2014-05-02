@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="vehicleResponse")
-@XmlType(propOrder = {"requestId", "link", "errors", "remainingCacheSeconds", "resultList", "summary", "texts" })
+@XmlType(propOrder = {"requestId", "link", "errors", "sessionId", "remainingCacheSeconds", "resultList", "summary", "texts" })
 public class VehicleResponse extends Response {
 
 	private VehicleSummary summary;

@@ -2,9 +2,11 @@ package com.dev.gis.app.taskmanager.testAppView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -14,6 +16,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -35,6 +38,7 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
+import com.dev.gis.connector.joi.protocol.Inclusive;
 import com.dev.gis.connector.joi.protocol.Location;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
@@ -65,6 +69,10 @@ public class TestAppView extends TaskViewAbstract {
 	private TableViewer viewer;
 	
 	private Text countVehicles = null;
+
+	private Text sessionId = null;
+
+	private Text requestId = null;
 	
 	@Override
 	public void createPartControl(Composite parent) {
@@ -133,6 +141,21 @@ public class TestAppView extends TaskViewAbstract {
 		final Text aptText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		aptText.setLayoutData(gridData);
 		
+		final Button buttonCar = new Button(groupStamp, SWT.RADIO);
+		buttonCar.setSelection(true);
+		buttonCar.setText("Car");
+		
+		final Button buttonTruck = new Button(groupStamp, SWT.RADIO);
+		buttonTruck.setSelection(false);
+		buttonTruck.setText("Truck");
+
+		Composite emptyComposite=new Composite(groupStamp, SWT.NONE);
+		GridDataFactory.fillDefaults().span(2, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(emptyComposite);
+		final StackLayout sl=new StackLayout();
+		emptyComposite.setLayout(sl);
+		
+		
+		
 		
 //		final Button buttonPrintDate = new Button(groupStamp, SWT.CHECK | SWT.LEFT);
 //		buttonPrintDate.setText("Pickup-Datum");
@@ -155,6 +178,20 @@ public class TestAppView extends TaskViewAbstract {
 		countVehicles = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		countVehicles.setLayoutData(gdFirm);
 
+		emptyComposite=new Composite(groupStamp, SWT.NONE);
+		GridDataFactory.fillDefaults().span(2, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(emptyComposite);
+		
+		new Label(groupStamp, SWT.NONE).setText("Request ID");
+		requestId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		requestId.setLayoutData(gdFirm);
+
+		emptyComposite=new Composite(groupStamp, SWT.NONE);
+		GridDataFactory.fillDefaults().span(2, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(emptyComposite);
+		
+		new Label(groupStamp, SWT.NONE).setText("Session ID");
+		sessionId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		sessionId.setLayoutData(gdFirm);
+		
 		
 		buttonGetOffer.addSelectionListener(new SelectionListener() {
 
@@ -205,13 +242,21 @@ public class TestAppView extends TaskViewAbstract {
 				
 				request.setTravel(ti);
 				
-				request.setModule(1);
+				if ( buttonTruck.getSelection())
+					request.setModule(2);
+				else
+					request.setModule(1);
 				request.setPayment(1);
 				
 				VehicleResponse response = JoiVehicleConnector.getOffers(request);
 				//VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				
 				countVehicles.setText(String.valueOf(response.getResultList().size()));
+				
+				sessionId.setText(response.getSessionId());
+				
+				requestId.setText(String.valueOf(response.getRequestId()));				
+				
 				changeModel(response);
 				viewer.refresh();
 			}
@@ -405,8 +450,8 @@ public class TestAppView extends TaskViewAbstract {
 	}
 	
 	private void createColumns(final Composite parent, final TableViewer viewer) {
-	    String[] titles = { "Name", "Supplier", "Station", "Service Catalog",  "Price" };
-	    int[] bounds = { 200, 100, 100, 200,  100 };
+	    String[] titles = { "Name", "Group", "Supplier", "Station", "Service Catalog",  "Price", "Incl. km.", "Prepaid" };
+	    int[] bounds = { 200, 150, 100, 100, 100,  200, 100, 100 };
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -417,9 +462,19 @@ public class TestAppView extends TaskViewAbstract {
 	        return o.getName();
 	      }
 	    });
+	    
+	    col = createTableViewerColumn(titles[1], bounds[1], 1);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	OfferDo o = (OfferDo) element;
+	        return o.getGroup();
+	      }
+	    });
+	    
 
 	    // second column is supplierId
-	    col = createTableViewerColumn(titles[1], bounds[1], 1);
+	    col = createTableViewerColumn(titles[2], bounds[2], 2);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
@@ -428,7 +483,7 @@ public class TestAppView extends TaskViewAbstract {
 	      }
 	    });
 
-	    col = createTableViewerColumn(titles[2], bounds[2], 2);
+	    col = createTableViewerColumn(titles[3], bounds[3], 3);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
@@ -437,7 +492,7 @@ public class TestAppView extends TaskViewAbstract {
 	      }
 	    });
 
-	    col = createTableViewerColumn(titles[3], bounds[3], 3);
+	    col = createTableViewerColumn(titles[4], bounds[4], 4);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
@@ -447,7 +502,7 @@ public class TestAppView extends TaskViewAbstract {
 	    });
 	    
 	    
-	    col = createTableViewerColumn(titles[4], bounds[4], 4);
+	    col = createTableViewerColumn(titles[5], bounds[5], 5);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
@@ -455,19 +510,32 @@ public class TestAppView extends TaskViewAbstract {
 			return o.getPrice().getAmount();
 	      }
 
-//	      @Override
-//	      public Image getImage(Object element) {
-//	        if (((Person) element).isMarried()) {
-//	          return CHECKED;
-//	        } else {
-//	          return UNCHECKED;
-//	        }
-//	      }
 	    });
+	    
+	    col = createTableViewerColumn(titles[6], bounds[6], 6);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	OfferDo o = (OfferDo) element;
+	    	String incl = o.getInclusiveKm();
+			return incl;
+	      }
+	    });
+
+	    col = createTableViewerColumn(titles[7], bounds[7], 7);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	OfferDo o = (OfferDo) element;
+	    	return  o.getPrepaid();
+	    	
+	      }
+	    });
+	    
 
 	  }
 
-	  private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
+	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
 	    final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,
 	        SWT.NONE);
 	    final TableColumn column = viewerColumn.getColumn();

@@ -1,10 +1,14 @@
 package com.dev.gis.task.execution.api;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
+import com.dev.gis.connector.joi.protocol.Inclusive;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 
 public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
 	private VehicleResult  model;
+	private String         inclusiveKm = "";
+	private String         group = "";
+	private String         prepaid = "prepaid";
 
 	public OfferDo ( VehicleResult vr) {
 		model = vr;
@@ -20,12 +24,35 @@ public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
 			preis = vr.getOfferList().get(0).getPrice().getAmount();
 		this.setPrice(new MoneyAmount(preis, "EUR"));
 		
+		if ( "2".equals(vr.getOfferList().get(0).getOfferedPayment()))
+			prepaid = " poa ";
+		
 		this.setServiceCatalogCode(vr.getOfferList().get(0).getServiceCatalogCode());
 		this.setServiceCatalogId(vr.getOfferList().get(0).getServiceCatalogId());
+		
+		for ( Inclusive incl : vr.getOfferList().get(0).getInclusives()) {
+			if ( incl.getId() == 73) {
+				inclusiveKm = incl.getDescription();
+			}
+		}
+		
+		group = vr.getVehicle().getVehicleGroup().getName() + "_" + vr.getVehicle().getVehicleGroup().getId();  
 		
 	}
 
 	public VehicleResult getModel() {
 		return model;
+	}
+
+	public String getInclusiveKm() {
+		return inclusiveKm;
+	}
+
+	public String getGroup() {
+		return group;
+	}
+
+	public String getPrepaid() {
+		return prepaid;
 	}
 }

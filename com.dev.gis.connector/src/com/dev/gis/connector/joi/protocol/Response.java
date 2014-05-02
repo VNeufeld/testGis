@@ -19,6 +19,9 @@ public class Response extends BasicProtocol {
 	private URI link;
 
 	private long requestId;
+	
+	private String sessionId;
+
 
 	private List<Error> errors = new ArrayList<>();
 
@@ -48,4 +51,14 @@ public class Response extends BasicProtocol {
 	public void setRequestId(long requestId) {
 		this.requestId = requestId;
 	}
+	
+	@XmlElement(required=false)
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	
 }

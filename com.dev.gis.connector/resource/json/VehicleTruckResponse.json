@@ -1,0 +1,1757 @@
+{
+	"requestId": 935242720,
+	"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720",
+	"errors": [{
+		"errorType": 4,
+		"errorNumber": 10099,
+		"errorText": "Failed to validate Response to XSD /home/www/work/ADAC_GW/schema/GetCarsResponse/GetCarsResponse.xsd"
+	}],
+	"sessionId": "4AE4B392ACA810AA6E7D71A7ED53137B",
+	"remainingCacheSeconds": 6000000,
+	"resultList": [{
+		"id": 282511171,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/282511171",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/282511171/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2353 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1230 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": ["Ladebordwand 2000 kg"],
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94301,
+				"name": "V"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/V.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/V.jpg"
+		},
+		"offerList": [{
+			"id": "ee9ea566-4d08-4bdb-a902-dd604f9d9b27",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/282511171/offer/ee9ea566-4d08-4bdb-a902-dd604f9d9b27",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/282511171/offer/ee9ea566-4d08-4bdb-a902-dd604f9d9b27/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "219,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "219,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,15 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 610560103,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/610560103",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/610560103/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "9 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94401,
+				"name": "B"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/B.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/B.jpg"
+		},
+		"offerList": [{
+			"id": "af2fd52f-dbfe-4aa9-b5a5-064d9bbdaa2c",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/610560103/offer/af2fd52f-dbfe-4aa9-b5a5-064d9bbdaa2c",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/610560103/offer/af2fd52f-dbfe-4aa9-b5a5-064d9bbdaa2c/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "234,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "234,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,17 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1320058917,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1320058917",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1320058917/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95401,
+				"name": "S"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/S.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/S.jpg"
+		},
+		"offerList": [{
+			"id": "27a77f07-e821-4543-a5d5-4f1359bd4444",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1320058917/offer/27a77f07-e821-4543-a5d5-4f1359bd4444",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1320058917/offer/27a77f07-e821-4543-a5d5-4f1359bd4444/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "249,98",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "249,98",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 578073473,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/578073473",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/578073473/recalculate",
+		"pickUpLocation": {
+			"stationId": 171827,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171827
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 16,
+			"categoryId": 449,
+			"driverMinAge": 0,
+			"manufacturer": "A4 Mercedes Benz Vito 115",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 3,
+			"nrSmallLuggage": 0,
+			"supplierId": 158039,
+			"vehicleGroup": {
+				"id": 102801,
+				"name": "MKMN"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/MKMN.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/MKMN.jpg"
+		},
+		"offerList": [{
+			"id": "d87e8530-d64f-40c8-b0ff-5326fe9875ba",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/578073473/offer/d87e8530-d64f-40c8-b0ff-5326fe9875ba",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/578073473/offer/d87e8530-d64f-40c8-b0ff-5326fe9875ba/book",
+			"supplierId": 158039,
+			"price": {
+				"amount": "283,97",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "283,97",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 1400 Km frei (Zusatzkilometer 0,12 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 84,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/84",
+				"description": "Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 3
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 71,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1175537237,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1175537237",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1175537237/recalculate",
+		"pickUpLocation": {
+			"stationId": 171827,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171827
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 16,
+			"categoryId": 450,
+			"driverMinAge": 0,
+			"manufacturer": "B4 Ford Transit FT 300 L",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 3,
+			"nrSmallLuggage": 0,
+			"supplierId": 158039,
+			"vehicleGroup": {
+				"id": 99701,
+				"name": "EKMN"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/EKMN.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/EKMN.jpg"
+		},
+		"offerList": [{
+			"id": "4ca7848e-ee5e-4dca-bed3-f43aa71436ec",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1175537237/offer/4ca7848e-ee5e-4dca-bed3-f43aa71436ec",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1175537237/offer/4ca7848e-ee5e-4dca-bed3-f43aa71436ec/book",
+			"supplierId": 158039,
+			"price": {
+				"amount": "314,04",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "314,04",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 1400 Km frei (Zusatzkilometer 0,14 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 84,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/84",
+				"description": "Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 3
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 71,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 123850808,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/123850808",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/123850808/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2353 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1230 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": ["Ladebordwand 2000 kg"],
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94302,
+				"name": "V"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/V.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/V.jpg"
+		},
+		"offerList": [{
+			"id": "1667582c-76f7-4c67-a380-f2d00a717bf4",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/123850808/offer/1667582c-76f7-4c67-a380-f2d00a717bf4",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/123850808/offer/1667582c-76f7-4c67-a380-f2d00a717bf4/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "339,95",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "339,95",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,15 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 97707232,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/97707232",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/97707232/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "9 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94402,
+				"name": "B"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/B.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/B.jpg"
+		},
+		"offerList": [{
+			"id": "98b0f36b-3e61-434f-9c64-1791c053391f",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/97707232/offer/98b0f36b-3e61-434f-9c64-1791c053391f",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/97707232/offer/98b0f36b-3e61-434f-9c64-1791c053391f/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "367,94",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "367,94",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,17 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1895673505,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1895673505",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1895673505/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95501,
+				"name": "P"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/P.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/P.jpg"
+		},
+		"offerList": [{
+			"id": "330a6a9a-9d2c-44a7-997f-667f1aece821",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1895673505/offer/330a6a9a-9d2c-44a7-997f-667f1aece821",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1895673505/offer/330a6a9a-9d2c-44a7-997f-667f1aece821/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "386,93",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "386,93",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 769516280,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/769516280",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/769516280/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94701,
+				"name": "D"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/D.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/D.jpg"
+		},
+		"offerList": [{
+			"id": "8b7631ed-c530-4d01-8872-f0f6404408cc",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/769516280/offer/8b7631ed-c530-4d01-8872-f0f6404408cc",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/769516280/offer/8b7631ed-c530-4d01-8872-f0f6404408cc/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "386,93",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "386,93",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1654341334,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1654341334",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1654341334/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95402,
+				"name": "S"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/S.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/S.jpg"
+		},
+		"offerList": [{
+			"id": "2f9363a3-f432-44fd-a63c-7927768450a4",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1654341334/offer/2f9363a3-f432-44fd-a63c-7927768450a4",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1654341334/offer/2f9363a3-f432-44fd-a63c-7927768450a4/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "408,92",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "408,92",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1019879890,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1019879890",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1019879890/recalculate",
+		"pickUpLocation": {
+			"stationId": 171827,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171827
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 17,
+			"categoryId": 455,
+			"driverMinAge": 0,
+			"manufacturer": "K4 Ford Transit 350 EL",
+			"nrDoors": 5,
+			"nrLargeLuggage": 0,
+			"nrSeats": 3,
+			"nrSmallLuggage": 0,
+			"supplierId": 158039,
+			"vehicleGroup": {
+				"id": 100201,
+				"name": "CKMN"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/CKMN.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/CKMN.jpg"
+		},
+		"offerList": [{
+			"id": "43e4f403-53ef-4a77-a6e1-e174c396a12f",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1019879890/offer/43e4f403-53ef-4a77-a6e1-e174c396a12f",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1019879890/offer/43e4f403-53ef-4a77-a6e1-e174c396a12f/book",
+			"supplierId": 158039,
+			"price": {
+				"amount": "412,00",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "412,00",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 1400 Km frei (Zusatzkilometer 0,17 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 84,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/84",
+				"description": "Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 3
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 71,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1788041494,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1788041494",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1788041494/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2353 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1230 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": ["Ladebordwand 2000 kg"],
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94303,
+				"name": "V"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/V.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/V.jpg"
+		},
+		"offerList": [{
+			"id": "3a903310-a1d5-4159-9b2c-1d748cc56edb",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1788041494/offer/3a903310-a1d5-4159-9b2c-1d748cc56edb",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1788041494/offer/3a903310-a1d5-4159-9b2c-1d748cc56edb/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "459,98",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "459,98",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,15 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 244161807,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/244161807",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/244161807/recalculate",
+		"pickUpLocation": {
+			"stationId": 171827,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171827
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 17,
+			"categoryId": 451,
+			"driverMinAge": 0,
+			"manufacturer": "C4 Mercedes Sprinter 313 Koff",
+			"nrDoors": 2,
+			"nrLargeLuggage": 0,
+			"nrSeats": 3,
+			"nrSmallLuggage": 0,
+			"supplierId": 158039,
+			"vehicleGroup": {
+				"id": 99801,
+				"name": "IKMN"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/IKMN.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/IKMN.jpg"
+		},
+		"offerList": [{
+			"id": "54a333c3-2d88-4bbb-927e-709e78f7bd94",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/244161807/offer/54a333c3-2d88-4bbb-927e-709e78f7bd94",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/244161807/offer/54a333c3-2d88-4bbb-927e-709e78f7bd94/book",
+			"supplierId": 158039,
+			"price": {
+				"amount": "471,48",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "471,48",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 1400 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 84,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/84",
+				"description": "Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 3
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 71,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1758500613,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1758500613",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1758500613/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "9 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94403,
+				"name": "B"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/B.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/B.jpg"
+		},
+		"offerList": [{
+			"id": "c3312292-be24-4922-92e1-47bbe14eb6a4",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1758500613/offer/c3312292-be24-4922-92e1-47bbe14eb6a4",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1758500613/offer/c3312292-be24-4922-92e1-47bbe14eb6a4/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "500,97",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "500,97",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,17 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1785409253,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1785409253",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1785409253/recalculate",
+		"pickUpLocation": {
+			"stationId": 171827,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171827
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 18,
+			"categoryId": 452,
+			"driverMinAge": 0,
+			"manufacturer": "D4 Mercedes Atego 816 Koff",
+			"nrDoors": 2,
+			"nrLargeLuggage": 0,
+			"nrSeats": 3,
+			"nrSmallLuggage": 0,
+			"supplierId": 158039,
+			"vehicleGroup": {
+				"id": 99901,
+				"name": "SKMN"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/SKMN.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/SKMN.jpg"
+		},
+		"offerList": [{
+			"id": "e9b484d5-61aa-4c53-8c62-f676657f3cc4",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1785409253/offer/e9b484d5-61aa-4c53-8c62-f676657f3cc4",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1785409253/offer/e9b484d5-61aa-4c53-8c62-f676657f3cc4/book",
+			"supplierId": 158039,
+			"price": {
+				"amount": "537,29",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "537,29",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 1400 Km frei (Zusatzkilometer 0,21 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 84,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/84",
+				"description": "Vollkasko- und Diebstahlschutz mit 1100,00 EUR Selbstbehalt",
+				"displayPriority": 3
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 71,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 695445265,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/695445265",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/695445265/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95403,
+				"name": "S"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/S.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/S.jpg"
+		},
+		"offerList": [{
+			"id": "ad15e501-ce3d-43e2-a93c-3fa171ba4b40",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/695445265/offer/ad15e501-ce3d-43e2-a93c-3fa171ba4b40",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/695445265/offer/ad15e501-ce3d-43e2-a93c-3fa171ba4b40/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "568,94",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "568,94",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,20 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1130736095,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1130736095",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1130736095/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94702,
+				"name": "D"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/D.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/D.jpg"
+		},
+		"offerList": [{
+			"id": "35364a6d-17ab-483c-a353-cfdda8ca5308",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1130736095/offer/35364a6d-17ab-483c-a353-cfdda8ca5308",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1130736095/offer/35364a6d-17ab-483c-a353-cfdda8ca5308/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "645,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "645,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 772142903,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/772142903",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/772142903/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95502,
+				"name": "P"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/P.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/P.jpg"
+		},
+		"offerList": [{
+			"id": "55f371d0-23be-4828-bd31-77d0a5fe1b1e",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/772142903/offer/55f371d0-23be-4828-bd31-77d0a5fe1b1e",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/772142903/offer/55f371d0-23be-4828-bd31-77d0a5fe1b1e/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "645,91",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "645,91",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 1608829204,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1608829204",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1608829204/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94703,
+				"name": "D"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/D.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/D.jpg"
+		},
+		"offerList": [{
+			"id": "3c61c733-874b-421e-b500-fdf15c926f42",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1608829204/offer/3c61c733-874b-421e-b500-fdf15c926f42",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/1608829204/offer/3c61c733-874b-421e-b500-fdf15c926f42/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "904,97",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "904,97",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	},
+	{
+		"id": 2076265822,
+		"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/2076265822",
+		"recalculateLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/2076265822/recalculate",
+		"pickUpLocation": {
+			"stationId": 168304,
+			"cityId": 3586,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168304
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95503,
+				"name": "P"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/large/P.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/DE/small/P.jpg"
+		},
+		"offerList": [{
+			"id": "069b30a8-bd6b-4ce3-b86e-374d4d1216e7",
+			"link": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/2076265822/offer/069b30a8-bd6b-4ce3-b86e-374d4d1216e7",
+			"bookLink": "http://www.adac.de/mobile/vehicle-rental/vehicleRequest/935242720/vehicle/2076265822/offer/069b30a8-bd6b-4ce3-b86e-374d4d1216e7/book",
+			"supplierId": 158036,
+			"price": {
+				"amount": "904,97",
+				"currency": "EUR"
+			},
+			"stdPrice": {
+				"amount": "904,97",
+				"currency": "EUR"
+			},
+			"status": "13",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1
+			},
+			{
+				"id": 101,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2
+			},
+			{
+				"id": 87,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4
+			},
+			{
+				"id": 79,
+				"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/inclusive/79",
+				"description": "Personeninsassenschutz",
+				"displayPriority": 5
+			}],
+			"offeredPayment": "1",
+			"member": true,
+			"noMember": false,
+			"serviceCatalogId": 17,
+			"serviceCatalogCode": "TRDE"
+		}],
+		"module": "11"
+	}],
+	"summary": {
+		"quantity": 20,
+		"totalQuantity": 20,
+		"minimalPrice": {
+			"amount": "219,91",
+			"currency": "EUR"
+		},
+		"maximalPrice": {
+			"amount": "904,97",
+			"currency": "EUR"
+		}
+	},
+	"texts": {
+		"supplierList": [{
+			"id": 158036,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/supplier/158036",
+			"supplierGroupId": 0,
+			"logo": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/default.png",
+			"name": "Sixt Deutschland"
+		},
+		{
+			"id": 158039,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/supplier/158039",
+			"supplierGroupId": 0,
+			"logo": "http://10.10.2.37:8080/carimages/anotherFoler/moreFolder/lastFolder/Default/default.png",
+			"name": "Hertz Deutschland"
+		}],
+		"bodyStyleList": [{
+			"id": 17,
+			"text": "Mittlere LKW (bis 3,5t)"
+		},
+		{
+			"id": 16,
+			"text": "Kleine LKW & Transporter"
+		},
+		{
+			"id": 18,
+			"text": "Gro�?e LKW"
+		}],
+		"stationList": [{
+			"id": 171827,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/station/171827",
+			"stationName": "Aachen Stadtbüro",
+			"stationPriority": 1,
+			"airportStation": false,
+			"cityId": 3586,
+			"supplierId": 158039,
+			"assignedCityIds": [3586],
+			"modules": ["1",
+			"11"],
+			"area": 269,
+			"countryId": 1,
+			"address": {
+				"street": null,
+				"zip": null,
+				"city": null,
+				"country": null
+			},
+			"flightNoMandatory": false
+		},
+		{
+			"id": 168304,
+			"link": "http://www.adac.de/mobile/vehicle-rental/masterdata/station/168304",
+			"stationName": "Aachen - Lkw Center",
+			"stationPriority": 1,
+			"airportStation": false,
+			"cityId": 3586,
+			"supplierId": 158036,
+			"assignedCityIds": [3586],
+			"modules": ["11"],
+			"area": 269,
+			"countryId": 1,
+			"address": {
+				"street": null,
+				"zip": null,
+				"city": null,
+				"country": null
+			},
+			"flightNoMandatory": false
+		}],
+		"paymentInfoList": [{
+			"paymentType": "2",
+			"provided": true
+		},
+		{
+			"paymentType": "1",
+			"provided": true
+		},
+		{
+			"paymentType": "8",
+			"provided": true
+		}]
+	}
+}
