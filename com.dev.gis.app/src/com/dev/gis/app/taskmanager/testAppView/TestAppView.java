@@ -105,6 +105,10 @@ public class TestAppView extends TaskViewAbstract {
 		GridData gridData = new GridData();
 		gridData.horizontalSpan = 3;
 		
+		GridData gridData2 = new GridData();
+		gridData2.horizontalSpan = 2;
+		
+		
 		new Label(groupStamp, SWT.NONE).setText("Server");
 		final Text serverUrl = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		serverUrl.setLayoutData(gdFirm2);
@@ -131,10 +135,19 @@ public class TestAppView extends TaskViewAbstract {
 		operator.setLayoutData(gdFirm2);
 		operator.setText(String.valueOf(TaskProperties.getTaskProperties().getOperator()));
 
+//		Composite cityComposite=new Composite(groupStamp, SWT.NONE);
+//		cityComposite.setLayout(new GridLayout(2, false));
+//		cityComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		
+
+		//GridDataFactory.fillDefaults().span(3, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(cityComposite);
+		
 		Label cityLabel = new Label(groupStamp, SWT.NONE);
 		cityLabel.setText("City ID");
 		final Text cityText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		cityText.setLayoutData(gridData);
+		cityText.setLayoutData(gridData2);
+		new Label(groupStamp, SWT.NONE).setText("( 3586 for SIXT Truck");
+		//span(groupStamp,2);
 
 		Label aptLabel = new Label(groupStamp, SWT.NONE);
 		aptLabel.setText("APT CODE");
@@ -154,12 +167,6 @@ public class TestAppView extends TaskViewAbstract {
 		final StackLayout sl=new StackLayout();
 		emptyComposite.setLayout(sl);
 		
-		
-		
-		
-//		final Button buttonPrintDate = new Button(groupStamp, SWT.CHECK | SWT.LEFT);
-//		buttonPrintDate.setText("Pickup-Datum");
-//		buttonPrintDate.setSelection(true);
 		
 		initDates();
 		
@@ -582,6 +589,9 @@ public class TestAppView extends TaskViewAbstract {
 		
 	}
 
+	private void span(Composite parent, int x ) {
+		GridDataFactory.fillDefaults().span(x, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(parent);
+	}
 
 	
 }

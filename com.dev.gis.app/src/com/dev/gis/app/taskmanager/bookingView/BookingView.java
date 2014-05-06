@@ -23,6 +23,7 @@ import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
@@ -145,6 +146,8 @@ public class BookingView extends TaskViewAbstract {
 			}
 		});
 		
+
+		
 		final Button buttonPayPal = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
 		buttonPayPal.setText("PayPal ");
 		buttonPayPal.addSelectionListener(new SelectionListener() {
@@ -161,6 +164,54 @@ public class BookingView extends TaskViewAbstract {
 				}
 				else
 					paypalError.setText(" Unknown PayPal Error" );
+				
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+				
+			}
+		});
+
+		final Button buttonPayPalResult = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
+		buttonPayPalResult.setText("PayPal Result ");
+		buttonPayPalResult.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				PaypalDoCheckoutResponse response = JoiVehicleConnector.getPaypalResult(selectedOffer,bookingRequestId.getText(),paypalToken.getText());
+				if ( response != null) {
+					if ( response.getError() != null )
+						paypalError.setText(response.getError());
+				}
+				else
+					paypalError.setText(" Unknown PayPal Error" );
+				
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+				
+			}
+		});
+		
+		
+		final Button buttonBook = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
+		buttonBook.setText("Book");
+		buttonBook.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// createBookingRequest - Driver, Customer
+				//StartVerify
+				BookingResponse response = JoiVehicleConnector.bookOffers(selectedOffer,bookingRequestId.getText(),selectedExtras);
+				if ( response.getBookingId() != null)
+					carDescription.setText(response.getBookingId());
+				bookingRequestId.setText(String.valueOf(response.getRequestId()));
+				
+				//BookingView.updateView(selectedOffer);
 				
 			}
 
