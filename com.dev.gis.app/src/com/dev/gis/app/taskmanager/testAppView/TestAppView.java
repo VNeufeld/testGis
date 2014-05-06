@@ -2,7 +2,6 @@ package com.dev.gis.app.taskmanager.testAppView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.action.MenuManager;
@@ -16,7 +15,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -38,7 +36,6 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
-import com.dev.gis.connector.joi.protocol.Inclusive;
 import com.dev.gis.connector.joi.protocol.Location;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
@@ -90,29 +87,17 @@ public class TestAppView extends TaskViewAbstract {
 		final Group groupStamp = new Group(composite, SWT.TITLE);
 		groupStamp.setText("Inputs:");
 		groupStamp.setLayout(new GridLayout(4, true));
-		groupStamp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-		GridData gdFirm = new GridData();
-		gdFirm.grabExcessHorizontalSpace = true;
-		gdFirm.horizontalAlignment = SWT.FILL;
-		//gdFirm.horizontalSpan = 2;
-
-		GridData gdFirm2 = new GridData();
-		gdFirm2.grabExcessHorizontalSpace = true;
-		gdFirm2.horizontalAlignment = SWT.FILL;
-		gdFirm2.horizontalSpan = 3;
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(groupStamp);
 		
 		GridData gridData = new GridData();
 		gridData.horizontalSpan = 3;
 		
-		GridData gridData2 = new GridData();
-		gridData2.horizontalSpan = 2;
-		
-		
 		new Label(groupStamp, SWT.NONE).setText("Server");
 		final Text serverUrl = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		serverUrl.setLayoutData(gdFirm2);
+		//serverUrl.setLayoutData(gdFirm2);
 		serverUrl.setText(TaskProperties.getTaskProperties().getServerProperty());
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).span(3, 1).hint(300, 16).applyTo(serverUrl);
+		
 		serverUrl.addKeyListener(new KeyListener() {
 			
 			@Override
@@ -132,41 +117,18 @@ public class TestAppView extends TaskViewAbstract {
 		
 		new Label(groupStamp, SWT.NONE).setText("Operator");
 		final Text operator = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		operator.setLayoutData(gdFirm2);
 		operator.setText(String.valueOf(TaskProperties.getTaskProperties().getOperator()));
-
-//		Composite cityComposite=new Composite(groupStamp, SWT.NONE);
-//		cityComposite.setLayout(new GridLayout(2, false));
-//		cityComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).span(3, 1).hint(100, 16).applyTo(operator);
 		
 
-		//GridDataFactory.fillDefaults().span(3, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(cityComposite);
-		
-		Label cityLabel = new Label(groupStamp, SWT.NONE);
-		cityLabel.setText("City ID");
-		final Text cityText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		cityText.setLayoutData(gridData2);
-		new Label(groupStamp, SWT.NONE).setText("( 3586 for SIXT Truck");
-		//span(groupStamp,2);
+		final Text cityText = createCityText(groupStamp);
 
 		Label aptLabel = new Label(groupStamp, SWT.NONE);
 		aptLabel.setText("APT CODE");
 		final Text aptText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		aptText.setLayoutData(gridData);
 		
-		final Button buttonCar = new Button(groupStamp, SWT.RADIO);
-		buttonCar.setSelection(true);
-		buttonCar.setText("Car");
-		
-		final Button buttonTruck = new Button(groupStamp, SWT.RADIO);
-		buttonTruck.setSelection(false);
-		buttonTruck.setText("Truck");
-
-		Composite emptyComposite=new Composite(groupStamp, SWT.NONE);
-		GridDataFactory.fillDefaults().span(2, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(emptyComposite);
-		final StackLayout sl=new StackLayout();
-		emptyComposite.setLayout(sl);
-		
+		final Button buttonTruck = createRadioButtonsCarAndTruck(groupStamp);
 		
 		initDates();
 		
@@ -174,30 +136,15 @@ public class TestAppView extends TaskViewAbstract {
 
 		addDropOffDateControl("dropOffDate:",groupStamp);
 		
-		final Button buttonGetOffer = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-		buttonGetOffer.setText("Get Offers");
-		GridData gridData4 = new GridData();
-		gridData4.horizontalSpan = 4;
+		// GetOffer - Button
+		final Button buttonGetOffer = createGetOffersButton(composite);
+		GridDataFactory.fillDefaults().align(SWT.LEFT, SWT.BEGINNING).grab(false, false).applyTo(buttonGetOffer);
 		
-		buttonGetOffer.setLayoutData(gridData4);
+		// Result - Group
+		Composite groupResult = createResultComposite(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).span(4, 1).applyTo(groupResult);
 		
-		new Label(groupStamp, SWT.NONE).setText("Count of Vehicles");
-		countVehicles = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		countVehicles.setLayoutData(gdFirm);
-
-		emptyComposite=new Composite(groupStamp, SWT.NONE);
-		GridDataFactory.fillDefaults().span(2, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(emptyComposite);
-		
-		new Label(groupStamp, SWT.NONE).setText("Request ID");
-		requestId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		requestId.setLayoutData(gdFirm);
-
-		emptyComposite=new Composite(groupStamp, SWT.NONE);
-		GridDataFactory.fillDefaults().span(2, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(emptyComposite);
-		
-		new Label(groupStamp, SWT.NONE).setText("Session ID");
-		sessionId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		sessionId.setLayoutData(gdFirm);
+		createViewer(composite);
 		
 		
 		buttonGetOffer.addSelectionListener(new SelectionListener() {
@@ -287,7 +234,6 @@ public class TestAppView extends TaskViewAbstract {
 			}
 		});
 
-		createViewer(composite);
 		
 		
 //	    final Table table = viewer.getTable();
@@ -306,6 +252,78 @@ public class TestAppView extends TaskViewAbstract {
 
 		
 	}
+
+	private Text createCityText(final Group groupStamp) {
+
+		Composite composite=new Composite(groupStamp, SWT.NONE);
+		composite.setLayout(new GridLayout(4, true));
+		GridDataFactory.fillDefaults().span(4, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(composite);
+		
+		Label cityLabel = new Label(composite, SWT.NONE);
+		cityLabel.setText("City ID");
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(true, false).applyTo(cityLabel);
+		
+		final Text cityText = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(true, false).applyTo(cityText);
+
+		
+		new Label(composite, SWT.NONE).setText("( 3586 for SIXT Truck");
+
+		Composite emptyComposite=new Composite(composite, SWT.NONE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(1, 1).grab(true, true).applyTo(emptyComposite);
+		
+		//span(groupStamp,2);
+		return cityText;
+	}
+
+	private Button createRadioButtonsCarAndTruck(final Group groupStamp) {
+		Composite rbComposite=new Composite(groupStamp, SWT.NONE);
+		rbComposite.setLayout(new GridLayout(2, true));
+		GridDataFactory.fillDefaults().span(4, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(rbComposite);
+
+		final Button buttonCar = new Button(rbComposite, SWT.RADIO);
+		buttonCar.setSelection(true);
+		buttonCar.setText("Car");
+		
+		final Button buttonTruck = new Button(rbComposite, SWT.RADIO);
+		buttonTruck.setSelection(false);
+		buttonTruck.setText("Truck");
+
+		return buttonTruck;
+	}
+
+	private Button createGetOffersButton(Composite composite) {
+		final Button buttonGetOffer = new Button(composite, SWT.PUSH | SWT.LEFT);
+		buttonGetOffer.setText("Get Offers");
+		return buttonGetOffer;
+	}
+
+	private Composite createResultComposite(Composite composite) {
+		
+		GridData gdFirm = new GridData();
+//		gdFirm.grabExcessHorizontalSpace = true;
+//		gdFirm.horizontalAlignment = SWT.FILL;
+		
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Result:");
+		groupResult.setLayout(new GridLayout(4, true));
+		
+		new Label(groupResult, SWT.NONE).setText("Count of Vehicles");
+		countVehicles = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		countVehicles.setLayoutData(gdFirm);
+
+		new Label(groupResult, SWT.NONE).setText("Request ID");
+		requestId = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.CENTER).hint(100, 16).grab(false,false).applyTo(requestId);
+		
+		new Label(groupResult, SWT.NONE).setText("Session ID");
+		sessionId = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		//sessionId.setLayoutData(gdFirm);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.CENTER).hint(300, 16).grab(false,false).span(3, 1).applyTo(sessionId);
+		
+		
+		return groupResult;
+	}
 	
 	protected void changeModel(VehicleResponse response) {
 		ModelProvider.INSTANCE.updateOffers(response);
@@ -321,7 +339,12 @@ public class TestAppView extends TaskViewAbstract {
 
 	}
 
-	private void addPickupDateControl(String label,Composite composite) {
+	private void addPickupDateControl(String label,Composite groupStamp) {
+		
+		Composite composite=new Composite(groupStamp, SWT.NONE);
+		composite.setLayout(new GridLayout(3, true));
+		GridDataFactory.fillDefaults().span(4, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(composite);
+		
 
 		new Label(composite, SWT.NONE).setText(label);
 
@@ -331,8 +354,11 @@ public class TestAppView extends TaskViewAbstract {
 		
 	}
 	
-	private void addDropOffDateControl(String label,Composite composite) {
-
+	private void addDropOffDateControl(String label,Composite groupStamp) {
+		Composite composite=new Composite(groupStamp, SWT.NONE);
+		composite.setLayout(new GridLayout(3, true));
+		GridDataFactory.fillDefaults().span(4, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(composite);
+		
 		new Label(composite, SWT.NONE).setText(label);
 
 		dropOffDate = createDateControl(composite);
@@ -351,7 +377,7 @@ public class TestAppView extends TaskViewAbstract {
 		gridData.horizontalSpan = 2;
 
 		DateTime time = new DateTime(composite, SWT.TIME);
-		time.setLayoutData(gridData);
+//		time.setLayoutData(gridData);
 		
 		
 		time.setHours(10);
@@ -387,7 +413,10 @@ public class TestAppView extends TaskViewAbstract {
 		gdDate.grabExcessHorizontalSpace = true;
 		gdDate.horizontalAlignment = SWT.FILL;
 
-		date.setLayoutData(gdDate);
+		//date.setLayoutData(gdDate);
+
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.CENTER).grab(false,false).applyTo(date);
+		
 
 		date.addSelectionListener(new SelectionListener() {
 			@Override
@@ -407,6 +436,7 @@ public class TestAppView extends TaskViewAbstract {
 
 	
 	private void createViewer(Composite parent) {
+		
 	    viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
 	        | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 	    createColumns(parent, viewer);
