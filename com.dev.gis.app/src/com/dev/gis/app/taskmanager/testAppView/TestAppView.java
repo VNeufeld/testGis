@@ -71,6 +71,10 @@ public class TestAppView extends TaskViewAbstract {
 
 	private Text requestId = null;
 	
+	private Button buttonOfferTest = null;
+	
+	private Button buttonGetOffer = null;	
+	
 	@Override
 	public void createPartControl(Composite parent) {
 		
@@ -137,14 +141,26 @@ public class TestAppView extends TaskViewAbstract {
 		addDropOffDateControl("dropOffDate:",groupStamp);
 		
 		// GetOffer - Button
-		final Button buttonGetOffer = createGetOffersButton(composite);
-		GridDataFactory.fillDefaults().align(SWT.LEFT, SWT.BEGINNING).grab(false, false).applyTo(buttonGetOffer);
+		createGetOffersButton(composite);
 		
 		// Result - Group
 		Composite groupResult = createResultComposite(composite);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).span(4, 1).applyTo(groupResult);
 		
 		createViewer(composite);
+		
+		buttonOfferTest.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+		        new OfferViewUpdater().showOffer(null);
+			}
+		});
+
 		
 		
 		buttonGetOffer.addSelectionListener(new SelectionListener() {
@@ -292,10 +308,18 @@ public class TestAppView extends TaskViewAbstract {
 		return buttonTruck;
 	}
 
-	private Button createGetOffersButton(Composite composite) {
-		final Button buttonGetOffer = new Button(composite, SWT.PUSH | SWT.LEFT);
+	private Composite createGetOffersButton(Composite composite) {
+		Composite bComposite=new Composite(composite, SWT.NONE);
+		bComposite.setLayout(new GridLayout(2, true));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(bComposite);
+		
+		buttonGetOffer = new Button(bComposite, SWT.PUSH | SWT.LEFT);
 		buttonGetOffer.setText("Get Offers");
-		return buttonGetOffer;
+		
+		buttonOfferTest = new Button(bComposite, SWT.PUSH | SWT.LEFT);
+		buttonOfferTest.setText("OfferTest");
+		
+		return bComposite;
 	}
 
 	private Composite createResultComposite(Composite composite) {

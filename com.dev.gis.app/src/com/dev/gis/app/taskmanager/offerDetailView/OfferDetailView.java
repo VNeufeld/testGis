@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -44,7 +46,7 @@ public class OfferDetailView extends TaskViewAbstract {
 	Calendar checkInDate = Calendar.getInstance();
 	Calendar dropOffDate = Calendar.getInstance();
 
-	private Text cityText = null;
+	private Text textOfferLink = null;
 
 	private Text priceText = null;
 
@@ -62,30 +64,10 @@ public class OfferDetailView extends TaskViewAbstract {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
 		
-		final Group groupStamp = new Group(composite, SWT.TITLE);
-		groupStamp.setText("Offer:");
-		groupStamp.setLayout(new GridLayout(4, true));
-		groupStamp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-		GridData gdFirm = new GridData();
-		gdFirm.grabExcessHorizontalSpace = true;
-		gdFirm.horizontalAlignment = SWT.FILL;
-		gdFirm.horizontalSpan = 3;
-
-		Label cityLabel = new Label(groupStamp, SWT.NONE);
-		cityLabel.setText("Offer");
-		cityText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		cityText.setLayoutData(gdFirm);
+		Composite offerGroup = createOfferGroup(composite);
 		
-		Label priceLabel = new Label(groupStamp, SWT.NONE);
-		priceLabel.setText("Preis:");
-		priceText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		priceText.setLayoutData(gdFirm);
-		
-		Label carDescriptionLabel = new Label(groupStamp, SWT.NONE);
-		carDescriptionLabel.setText("Fahrzeug:");
-		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		carDescription.setLayoutData(new GridData());
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(offerGroup);
+
 
 		final Group groupButtons = new Group(composite, SWT.TITLE);
 		groupButtons.setText("Offer:");
@@ -143,6 +125,39 @@ public class OfferDetailView extends TaskViewAbstract {
 		createTableExtras(composite);
 
 	}
+
+	private Composite createOfferGroup(Composite composite) {
+		
+		final Group groupStamp = new Group(composite, SWT.TITLE);
+		groupStamp.setText("Offer:");
+		//groupStamp.setLayout(new GridLayout(2, true));
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true).applyTo(groupStamp);
+
+		GridData gdFirm = new GridData();
+		gdFirm.grabExcessHorizontalSpace = true;
+		gdFirm.horizontalAlignment = SWT.FILL;
+		gdFirm.horizontalSpan = 2;
+
+		Label cityLabel = new Label(groupStamp, SWT.NONE);
+		cityLabel.setText("Offer");
+		textOfferLink = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(textOfferLink);
+		
+		//cityText.setLayoutData(gdFirm);
+		
+		Label priceLabel = new Label(groupStamp, SWT.NONE);
+		priceLabel.setText("Preis:");
+		priceText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		//priceText.setLayoutData(gdFirm);
+		
+		Label carDescriptionLabel = new Label(groupStamp, SWT.NONE);
+		carDescriptionLabel.setText("Fahrzeug:");
+		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		//carDescription.setLayoutData(new GridData());
+		
+		return groupStamp;
+	}
 	
 	private List<Extra> getSelectedExtras() {
 		List<Extra> extras = new ArrayList<Extra>();
@@ -183,7 +198,7 @@ public class OfferDetailView extends TaskViewAbstract {
 	}
 
 	public void showOffer(VehicleResult vehicleResult) {
-		cityText.setText(vehicleResult.getOfferList().get(0).getBookLink().toString());
+		textOfferLink.setText(vehicleResult.getOfferList().get(0).getBookLink().toString());
 		priceText.setText(vehicleResult.getOfferList().get(0).getPrice().getAmount());
 		carDescription.setText(vehicleResult.getVehicle().getManufacturer() + " Group : "+vehicleResult.getVehicle().getCategoryId());
 		
