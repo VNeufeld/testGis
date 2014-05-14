@@ -31,6 +31,7 @@ import com.dev.gis.app.taskmanager.bookingView.BookingView;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 import com.dev.gis.task.execution.api.ITaskResult;
@@ -56,6 +57,16 @@ public class OfferDetailView extends TaskViewAbstract {
 	
 	private Offer selectedOffer = null;
 	
+	private TravelInformation travelInformation;
+	
+	private Text pickUpCityId;
+
+	private Text dropOffCityId;
+	
+	private Text pickupStationsResponse;
+
+	private Text recalculateResponse;
+	
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -70,12 +81,13 @@ public class OfferDetailView extends TaskViewAbstract {
 
 
 		final Group groupButtons = new Group(composite, SWT.TITLE);
-		groupButtons.setText("Offer:");
-		groupButtons.setLayout(new GridLayout(4, true));
+		groupButtons.setText("Requests:");
+		groupButtons.setLayout(new GridLayout(1, true));
 		groupButtons.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		
-		final Button buttonGetOffer = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
-		buttonGetOffer.setText("Get PickupStations");
+		
+		createRequestButtons(groupButtons);
+
 
 		final Button buttonBooking = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
 		buttonBooking.setText("Booking");
@@ -122,8 +134,70 @@ public class OfferDetailView extends TaskViewAbstract {
 			}
 		});
 		
+
+		
 		createTableExtras(composite);
 
+	}
+
+	private Composite createRequestButtons(final Group parent) {
+		
+		Composite composite = new Composite(parent, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(composite);
+		
+		final Button buttonRecalculate = new Button(composite, SWT.PUSH | SWT.LEFT);
+		buttonRecalculate.setText("POST Recalculate");
+
+		buttonRecalculate.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				recalculateResponse.setText("running....");
+				String response = JoiVehicleConnector.recalculate(selectedOffer, travelInformation);
+				recalculateResponse.setText(response);
+				
+				
+			}
+
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+				
+			}
+		});
+		
+		recalculateResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(recalculateResponse);
+		
+		final Button buttonGetPickupStations = new Button(composite, SWT.PUSH | SWT.LEFT);
+		buttonGetPickupStations.setText("Get PickupStations");
+		buttonGetPickupStations.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				pickupStationsResponse.setText("running....");
+				String response = JoiVehicleConnector.getPickupStations(selectedOffer);
+				pickupStationsResponse.setText(response);
+			}
+
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+				
+			}
+		});
+		
+				
+		pickupStationsResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(pickupStationsResponse);
+		
+		return composite;
+
+		
 	}
 
 	private Composite createOfferGroup(Composite composite) {
@@ -142,7 +216,7 @@ public class OfferDetailView extends TaskViewAbstract {
 		cityLabel.setText("Offer");
 		textOfferLink = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(false, false).applyTo(textOfferLink);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(400, 16).grab(false, false).applyTo(textOfferLink);
 		
 		//cityText.setLayoutData(gdFirm);
 		
@@ -154,7 +228,15 @@ public class OfferDetailView extends TaskViewAbstract {
 		Label carDescriptionLabel = new Label(groupStamp, SWT.NONE);
 		carDescriptionLabel.setText("Fahrzeug:");
 		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		//carDescription.setLayoutData(new GridData());
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(200, 16).grab(false, false).applyTo(carDescription);
+		
+		Label pickUpCityIdLabel = new Label(groupStamp, SWT.NONE);
+		pickUpCityIdLabel.setText("PickUpCityId:");
+		pickUpCityId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+
+		Label dropOffCityIdLabel = new Label(groupStamp, SWT.NONE);
+		dropOffCityIdLabel.setText("DropOff CityId:");
+		dropOffCityId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		
 		return groupStamp;
 	}
@@ -210,6 +292,25 @@ public class OfferDetailView extends TaskViewAbstract {
 //		vehicleResult.getServiceCatalogCode();
 		
 	}
+	
+	public void showOffer(OfferDo offerDo) {
+		VehicleResult vehicleResult = offerDo.getModel();
+		textOfferLink.setText(vehicleResult.getOfferList().get(0).getBookLink().toString());
+		priceText.setText(vehicleResult.getOfferList().get(0).getPrice().getAmount());
+		carDescription.setText(vehicleResult.getVehicle().getManufacturer() + " Group : "+vehicleResult.getVehicle().getCategoryId());
+		
+		this.selectedOffer = vehicleResult.getOfferList().get(0);
+		
+		this.travelInformation = offerDo.getTravelInformation();
+		
+		this.travelInformation.setPickUpLocation(vehicleResult.getPickUpLocation());
+		this.travelInformation.setDropOffLocation(vehicleResult.getDropOffLocation());
+		
+		pickUpCityId.setText(String.valueOf(this.travelInformation.getPickUpLocation().getCityId()));
+		dropOffCityId.setText(String.valueOf(this.travelInformation.getDropOffLocation().getCityId()));
+		
+	}
+	
 	
 	private void createTableExtras(Composite parent) {
 		tableExtras = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL

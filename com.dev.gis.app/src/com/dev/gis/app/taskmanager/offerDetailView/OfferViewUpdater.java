@@ -36,7 +36,7 @@ public class OfferViewUpdater  {
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
 					if ( offer != null)
-						viewPart.showOffer(offer.getModel());
+						viewPart.showOffer(offer);
 					
 					instanceNum++;
 					

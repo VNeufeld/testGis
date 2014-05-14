@@ -75,6 +75,8 @@ public class TestAppView extends TaskViewAbstract {
 	
 	private Button buttonGetOffer = null;	
 	
+	private static TravelInformation travelInformation;
+	
 	@Override
 	public void createPartControl(Composite parent) {
 		
@@ -217,6 +219,8 @@ public class TestAppView extends TaskViewAbstract {
 				else
 					request.setModule(1);
 				request.setPayment(1);
+				
+				travelInformation = ti;
 				
 				VehicleResponse response = JoiVehicleConnector.getOffers(request);
 				//VehicleResponse response = JoiVehicleConnector.getOffersDummy();
@@ -502,6 +506,7 @@ public class TestAppView extends TaskViewAbstract {
 	        Object selectedNode = thisSelection.getFirstElement();
 	        
 	    	OfferDo offer = (OfferDo) selectedNode;
+	    	offer.setTravelInformation(travelInformation);
  
 	        new OfferViewUpdater().showOffer(offer);
 	        System.out.println("selectedNode "+offer);

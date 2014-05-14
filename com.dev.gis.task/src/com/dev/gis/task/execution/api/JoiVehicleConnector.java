@@ -26,6 +26,7 @@ import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.PhoneNumber;
+import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 
@@ -316,6 +317,69 @@ public class JoiVehicleConnector {
 			logger.error(e);
 		} catch (URISyntaxException e) {
 			logger.error(e);
+		}
+		return null;
+	}
+
+	public static String recalculate(Offer selectedOffer, TravelInformation travelInformation) {
+		GisHttpClient httpClient = new GisHttpClient();
+		
+		try {
+			String link = selectedOffer.getBookLink().toString();
+			int pos = link.indexOf("/vehicleRe");
+			link = link.substring(pos);
+			pos = link.indexOf("/offer");
+			link = link.substring(0,pos);
+			link = link + "/recalculate";
+			//URI uri = new URI("https://avm-mobile.adac.de/test/vehicleRequest/1162967122/vehicle/77345424/recalculate");
+			// http://localhost:8080/joi/vehicleRequest/1127497613/vehicle/899766814/offer/fc3763ab-b892-4f60-b3f7-fbe72fe91525/recalculate
+			
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
+			
+			logger.info("recalculate Request = "+uri);
+			
+			
+			String request = JsonUtils.convertRequestToJsonString(travelInformation);
+			logger.info("request = "+request);
+			
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("response = "+response);
+			
+			return response;
+			
+		} catch ( IOException e) {
+			logger.error(e);
+		} catch (URISyntaxException e) {
+			logger.error(e);
+		}
+		return null;
+	}
+
+	public static String getPickupStations(Offer selectedOffer) {
+		GisHttpClient httpClient = new GisHttpClient();
+
+		try {
+			String link = selectedOffer.getBookLink().toString();
+			int pos = link.indexOf("/vehicleRe");
+			link = link.substring(pos);
+			pos = link.indexOf("/offer");
+			link = link.substring(0,pos);
+			link = link + "/pickUp";
+
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
+			
+			logger.info("getPickupStations Request = "+uri);
+			
+			
+			String response =  httpClient.sendGetRequest(uri);
+			logger.info("response = "+response);
+
+			return response;
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
 		}
 		return null;
 	}

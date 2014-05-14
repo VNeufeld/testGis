@@ -2,6 +2,7 @@ package com.dev.gis.task.execution.api;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.dev.gis.connector.joi.protocol.Inclusive;
+import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 
 public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
@@ -9,6 +10,8 @@ public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
 	private String         inclusiveKm = "";
 	private String         group = "";
 	private String         prepaid = "prepaid";
+	
+	private TravelInformation travelInformation;
 
 	public OfferDo ( VehicleResult vr) {
 		model = vr;
@@ -54,5 +57,13 @@ public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
 
 	public String getPrepaid() {
 		return prepaid;
+	}
+
+	public TravelInformation getTravelInformation() {
+		return travelInformation;
+	}
+
+	public void setTravelInformation(TravelInformation travelInformation) {
+		this.travelInformation = travelInformation;
 	}
 }
