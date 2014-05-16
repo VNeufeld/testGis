@@ -92,7 +92,6 @@ public class GisHttpClient {
 
 		String response = httpclient.execute(httpPost, responseHandler,
 				localContext);
-
 		System.out.println("response = " + response);
 		System.out.println("localContext " + localContext.toString());
 

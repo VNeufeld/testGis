@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.preference.StringFieldEditor;
@@ -18,7 +19,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
@@ -32,7 +32,6 @@ import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
-import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
@@ -62,6 +61,8 @@ public class OfferDetailView extends TaskViewAbstract {
 	private Text pickUpCityId;
 
 	private Text dropOffCityId;
+
+	private Text dropOffStationId;
 	
 	private Text pickupStationsResponse;
 
@@ -155,6 +156,10 @@ public class OfferDetailView extends TaskViewAbstract {
 			public void widgetSelected(SelectionEvent e) {
 				
 				recalculateResponse.setText("running....");
+				if ( StringUtils.isNotEmpty(dropOffStationId.getText()) && StringUtils.isNumeric(dropOffStationId.getText()))
+						travelInformation.getDropOffLocation().setStationId(Long.valueOf(dropOffStationId.getText()));
+				//travelInformation.getDropOffLocation().setStationId(167956);420222
+
 				String response = JoiVehicleConnector.recalculate(selectedOffer, travelInformation);
 				recalculateResponse.setText(response);
 				
@@ -204,21 +209,13 @@ public class OfferDetailView extends TaskViewAbstract {
 		
 		final Group groupStamp = new Group(composite, SWT.TITLE);
 		groupStamp.setText("Offer:");
-		//groupStamp.setLayout(new GridLayout(2, true));
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true).applyTo(groupStamp);
-
-		GridData gdFirm = new GridData();
-		gdFirm.grabExcessHorizontalSpace = true;
-		gdFirm.horizontalAlignment = SWT.FILL;
-		gdFirm.horizontalSpan = 2;
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(groupStamp);
 
 		Label cityLabel = new Label(groupStamp, SWT.NONE);
 		cityLabel.setText("Offer");
 		textOfferLink = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(400, 16).grab(false, false).applyTo(textOfferLink);
-		
-		//cityText.setLayoutData(gdFirm);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(600, 16).grab(false, false).applyTo(textOfferLink);
 		
 		Label priceLabel = new Label(groupStamp, SWT.NONE);
 		priceLabel.setText("Preis:");
@@ -237,6 +234,10 @@ public class OfferDetailView extends TaskViewAbstract {
 		Label dropOffCityIdLabel = new Label(groupStamp, SWT.NONE);
 		dropOffCityIdLabel.setText("DropOff CityId:");
 		dropOffCityId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+
+		Label dropOffStation = new Label(groupStamp, SWT.NONE);
+		dropOffStation.setText("DropOff StationId:");
+		dropOffStationId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		
 		return groupStamp;
 	}

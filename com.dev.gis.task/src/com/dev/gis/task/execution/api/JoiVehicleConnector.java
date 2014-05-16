@@ -344,6 +344,8 @@ public class JoiVehicleConnector {
 			
 			String response =  httpClient.startPostRequestAsJson(uri, request);
 			logger.info("response = "+response);
+			if ( response == null)
+				response = " no cars found ";
 			
 			return response;
 			
