@@ -4,13 +4,15 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
@@ -20,12 +22,12 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
-import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 
 public class BookingView extends TaskViewAbstract {
@@ -39,13 +41,16 @@ public class BookingView extends TaskViewAbstract {
 	Calendar checkInDate = Calendar.getInstance();
 	Calendar dropOffDate = Calendar.getInstance();
 
-	private Text cityText = null;
+	private Text bookingText = null;
 
 	private Text priceText = null;
 
 	private Text carDescription = null;
 	
 	private Text bookingRequestId = null;
+	
+	private Text bookingId = null;
+	
 
 	private Text paypalUrl = null;
 	private Link paypalUrlLink = null;
@@ -55,6 +60,85 @@ public class BookingView extends TaskViewAbstract {
 	
 	private Offer selectedOffer = null;
 	private List<Extra> selectedExtras = null;
+
+	protected class AddVerifyListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			
+			bookingRequestId.setText("running....");
+			
+			BookingRequest  request =  BookingRequestCreator.createBookingRequest(selectedOffer, selectedExtras);
+			
+			//StartVerify
+			BookingResponse response = JoiVehicleConnector.verifyOffers(request,selectedOffer);
+			bookingRequestId.setText(String.valueOf(response.getRequestId()));
+			priceText.setText(response.getPrice().getAmount());
+
+		}
+
+	}
+	
+	protected class AddPaypalListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			
+			paypalUrl.setText("running....");
+			
+			PaypalSetCheckoutResponse response = JoiVehicleConnector.getPaypalUrl(selectedOffer,bookingRequestId.getText());
+			if ( response != null) {
+				paypalUrl.setText(response.getPaypalUrl());
+				paypalUrlLink.setText(response.getPaypalUrl());
+				paypalToken.setText(response.getToken());
+				if ( response.getError() != null )
+					paypalError.setText(response.getError());
+			}
+			else
+				paypalError.setText(" Unknown PayPal Error" );
+
+		}
+
+	}
+
+	protected class AddPaypalResultListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			//paypalUrl.setText("running....");
+			
+			PaypalDoCheckoutResponse response = JoiVehicleConnector.getPaypalResult(selectedOffer,bookingRequestId.getText(),paypalToken.getText());
+			if ( response != null) {
+				if ( response.getError() != null )
+					paypalError.setText(response.getError());
+			}
+			else
+				paypalError.setText(" Unknown PayPal Error" );
+
+		}
+
+	}
+
+	protected class AddBookingCompleteListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			bookingId.setText("running....");
+			
+			//BookingRequestCreater 
+			
+			BookingResponse response = JoiVehicleConnector.bookOffers(selectedOffer,bookingRequestId.getText(),selectedExtras);
+			if ( response.getBookingId() != null)
+				bookingId.setText(response.getBookingId());
+			bookingRequestId.setText(String.valueOf(response.getRequestId()));
+
+		}
+
+	}
+
 	
 
 	@Override
@@ -62,60 +146,15 @@ public class BookingView extends TaskViewAbstract {
 
 		
 		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(2, false));
+		composite.setLayout(new GridLayout(1, false));
 		
-		final Group groupDriver = new Group(composite, SWT.TITLE);
-		groupDriver.setText("Driver:");
-		groupDriver.setLayout(new GridLayout(4, true));
-		groupDriver.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		Composite bookingGroup = createBookingGroup(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(bookingGroup);
 		
+		//GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createRequestId(composite));
 		
 
-		final Group groupStamp = new Group(composite, SWT.TITLE);
-		groupStamp.setText("Customer:");
-		groupStamp.setLayout(new GridLayout(4, true));
-		groupStamp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
-		GridData gdFirm = new GridData();
-		gdFirm.grabExcessHorizontalSpace = true;
-		gdFirm.horizontalAlignment = SWT.FILL;
-		gdFirm.horizontalSpan = 3;
-
-		Label cityLabel = new Label(groupStamp, SWT.NONE);
-		cityLabel.setText("Booking");
-		cityText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		cityText.setLayoutData(gdFirm);
-		
-		Label priceLabel = new Label(groupStamp, SWT.NONE);
-		priceLabel.setText("Preis:");
-		priceText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		priceText.setLayoutData(gdFirm);
-		
-		Label carDescriptionLabel = new Label(groupStamp, SWT.NONE);
-		carDescriptionLabel.setText("Fahrzeug:");
-		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		carDescription.setLayoutData(new GridData());
-		
-		new Label(groupStamp, SWT.NONE).setText("RequestId:");
-		bookingRequestId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		bookingRequestId.setLayoutData(new GridData());
-
-		new Label(groupStamp, SWT.NONE).setText("Paypal:");
-		paypalUrl = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		paypalUrl.setLayoutData(new GridData());
-
-		new Label(groupStamp, SWT.NONE).setText("PaypalToken:");
-		paypalToken = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		paypalToken.setLayoutData(new GridData());
-
-		new Label(groupStamp, SWT.NONE).setText("PaypalError:");
-		paypalError = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		paypalError.setLayoutData(new GridData());
-		
-		new Label(groupStamp, SWT.NONE).setText("PaypalLink:");
-		paypalUrlLink = new Link(groupStamp, SWT.BORDER | SWT.SINGLE);
-		paypalUrlLink.setSize(140, 40);
-		paypalUrlLink.setLayoutData(new GridData());
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createPaypalGroup(composite));
 
 		final Group groupButtons = new Group(composite, SWT.TITLE);
 		groupButtons.setText("Offer:");
@@ -124,139 +163,124 @@ public class BookingView extends TaskViewAbstract {
 
 		final Button buttonVerify = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
 		buttonVerify.setText("Verify");
-		buttonVerify.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				// createBookingRequest - Driver, Customer
-				//StartVerify
-				BookingResponse response = JoiVehicleConnector.verifyOffers(selectedOffer,selectedExtras);
-				if ( response.getBookingId() != null)
-					carDescription.setText(response.getBookingId());
-				bookingRequestId.setText(String.valueOf(response.getRequestId()));
-				
-				//BookingView.updateView(selectedOffer);
-				
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-				
-			}
-		});
-		
+		buttonVerify.addSelectionListener(new AddVerifyListener());
 
 		
 		final Button buttonPayPal = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
 		buttonPayPal.setText("PayPal ");
-		buttonPayPal.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				PaypalSetCheckoutResponse response = JoiVehicleConnector.getPaypalUrl(selectedOffer,bookingRequestId.getText());
-				if ( response != null) {
-					paypalUrl.setText(response.getPaypalUrl());
-					paypalUrlLink.setText(response.getPaypalUrl());
-					paypalToken.setText(response.getToken());
-					if ( response.getError() != null )
-						paypalError.setText(response.getError());
-				}
-				else
-					paypalError.setText(" Unknown PayPal Error" );
-				
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-				
-			}
-		});
+		buttonPayPal.addSelectionListener(new AddPaypalListener());
 
 		final Button buttonPayPalResult = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
 		buttonPayPalResult.setText("PayPal Result ");
-		buttonPayPalResult.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				PaypalDoCheckoutResponse response = JoiVehicleConnector.getPaypalResult(selectedOffer,bookingRequestId.getText(),paypalToken.getText());
-				if ( response != null) {
-					if ( response.getError() != null )
-						paypalError.setText(response.getError());
-				}
-				else
-					paypalError.setText(" Unknown PayPal Error" );
-				
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-				
-			}
-		});
-		
+		buttonPayPalResult.addSelectionListener(new AddPaypalResultListener());
 		
 		final Button buttonBook = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
 		buttonBook.setText("Book");
-		buttonBook.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				// createBookingRequest - Driver, Customer
-				//StartVerify
-				BookingResponse response = JoiVehicleConnector.bookOffers(selectedOffer,bookingRequestId.getText(),selectedExtras);
-				if ( response.getBookingId() != null)
-					carDescription.setText(response.getBookingId());
-				bookingRequestId.setText(String.valueOf(response.getRequestId()));
-				
-				//BookingView.updateView(selectedOffer);
-				
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-				
-			}
-		});
-		
+		buttonBook.addSelectionListener(new AddBookingCompleteListener() );
 	}
 	
 
 
 	
-	@Override
-	public void setFocus() {
-		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void refresh() {
-		// TODO Auto-generated method stub
+	private Control createPaypalGroup(Composite parent) {
 		
+		final Group groupStamp = new Group(parent, SWT.TITLE);
+		groupStamp.setText("Paypal:");
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(groupStamp);
+		
+		// TODO Auto-generated method stub
+		new Label(groupStamp, SWT.NONE).setText("Paypal Url:");
+		paypalUrl = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(paypalUrl);
+		
+
+		new Label(groupStamp, SWT.NONE).setText("PaypalToken:");
+		paypalToken = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).
+		hint(300, 16).
+		applyTo(paypalToken);
+
+		new Label(groupStamp, SWT.NONE).setText("PaypalError:");
+		paypalError = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(paypalError);
+		
+		new Label(groupStamp, SWT.NONE).setText("PaypalLink:");
+		paypalUrlLink = new Link(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(paypalUrlLink);
+		
+		return groupStamp;
 	}
 
-	@Override
-	public void refresh(ITaskResult result) {
-		// TODO Auto-generated method stub
+
+
+
+
+	private Control createRequestId(Composite parent) {
+		Composite composite = new Composite(parent, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(composite);
 		
+		new Label(composite, SWT.NONE).setText("RequestId:");
+		bookingRequestId = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).hint(300, 16).grab(false, false).applyTo(bookingRequestId);
+
+		return composite;
 	}
+
+
+
+
+
+	private Composite createBookingGroup(Composite parent) {
+		final Group groupStamp = new Group(parent, SWT.TITLE);
+		groupStamp.setText("Booking:");
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(groupStamp);
+
+		Label label = new Label(groupStamp, SWT.NONE);
+		label.setText("Booking link");
+		Text textOfferLink = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(textOfferLink);
+
+		label = new Label(groupStamp, SWT.NONE);
+		label.setText("Preis:");
+		priceText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).
+		hint(300, 16).
+		applyTo(priceText);
+
+		label = new Label(groupStamp, SWT.NONE);
+		label.setText("Car:");
+		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).
+			hint(300, 16).
+			applyTo(carDescription);
+
+		if (selectedOffer != null ) {
+			textOfferLink.setText(selectedOffer.getBookLink().toString());
+			priceText.setText(selectedOffer.getPrice().getAmount());
+		}
+
+		//carDescription.setText(vehicleResult.getVehicle().getManufacturer() + " Group : "+vehicleResult.getVehicle().getCategoryId());
+		
+		new Label(groupStamp, SWT.NONE).setText("RequestId:");
+		this.bookingRequestId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).hint(300, 16).grab(false, false).applyTo(bookingRequestId);
+		
+		new Label(groupStamp, SWT.NONE).setText("bookingId:");
+		this.bookingId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).hint(300, 16).grab(false, false).applyTo(bookingId);
+		
+
+		return groupStamp;
+	}
+
+
+
+
 
 	public void showOffer(final Offer selectedOffer, List<Extra> extras) {
 		this.selectedOffer = selectedOffer;
 		this.selectedExtras = extras;
-		cityText.setText(selectedOffer.getBookLink().toString());
-		priceText.setText(selectedOffer.getPrice().getAmount());
-		//carDescription.setText(vehicleResult.getVehicle().getManufacturer() + " Group : "+vehicleResult.getVehicle().getCategoryId());
-		
-//		vehicleResult.getSupplierId();
-//		vehicleResult.getPickUpStationId();
-//		vehicleResult.getSupplierId();
-//		vehicleResult.getServiceCatalogCode();
-		
 	}
 	
 	public static void  updateView(final Offer selectedOffer, final List<Extra> extras) {
