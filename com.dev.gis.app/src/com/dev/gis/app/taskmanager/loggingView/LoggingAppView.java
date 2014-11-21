@@ -1,11 +1,7 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -15,7 +11,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.preference.StringFieldEditor;
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -31,6 +28,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -52,51 +50,223 @@ public class LoggingAppView extends TaskViewAbstract {
 	
 	private Logger logger = Logger.getLogger(LoggingAppView.class);
 	
-	
-	private StringFieldEditor city;
-	private StringFieldEditor airport;
-	
-	Calendar checkInDate = Calendar.getInstance();
-	Calendar dropOffDate = Calendar.getInstance();
+	Calendar loggingFromDate = Calendar.getInstance();
+	Calendar loggingToDate = Calendar.getInstance();
 
 	private IWorkbenchAction exitAction;
 	
 	private Text logFileText;
+	private Text logDirText;
+	private Text outputDirText;
 	private Text sessionIdText;
+	private Text bookingIdText;
+	private Text maxFileSizeText;
 
-	 private TableViewer viewer;
+	private TableViewer viewer;
 	
 	@Override
 	public void createPartControl(final Composite parent) {
 		
-//		 exitAction = ActionFactory.QUIT.create(this);
-//	        register(exitAction);
-//	        
-	        
-		//exitAction = new IWorkbenchAction(viewer, parent.getShell());
+		final Group group = new Group(parent, SWT.TITLE);
+		group.setText("Check Logging:");
+		group.setLayout(new GridLayout(1, false));
+
+		createGroupFiles(group);
+
+		createGroupSearch(group);
+
+		createButtons(group);
+		
+	}
+	
+
+	private void createGroupFiles(Group group) {
+		final Group groupFiles = new Group(group, SWT.TITLE);
+		groupFiles.setText("Files and Dirs:");
+		groupFiles.setLayout(new GridLayout(1, false));
+		
+		
+		Composite composite = new Composite(groupFiles, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(composite);
+
+		createSelectDirComposite(composite);
+
+		createSelectFilesComposite(composite);
+		createMaxFileSizeComposite(composite);
+
+		createOutputDirComposite(composite);
 
 		
+	}
+
+
+
+
+	private void createGroupSearch(Group group) {
+		final Group groupSearch = new Group(group, SWT.TITLE);
+		groupSearch.setText("Search criteria:");
+		groupSearch.setLayout(new GridLayout(1, false));
+
+		Composite composite = new Composite(groupSearch, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(composite);
+
+		createSessionComposite(composite);
+
+		createBookingComposite(composite);
+		
+		createDates(composite);
+		
+	}
+	
+	private void createButtons(Composite parent) {
+		
+		GridData gdButton = new GridData();
+		gdButton.grabExcessHorizontalSpace = false;
+		gdButton.horizontalAlignment = SWT.NONE;
+		gdButton.widthHint = 150;
+
+
+		GridData gdDate = new GridData();
+		gdDate.grabExcessHorizontalSpace = false;
+		gdDate.horizontalAlignment = SWT.NONE;
+		gdDate.horizontalSpan = 3;
+
 		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(1, false));
-		
-		final Group groupStamp = new Group(composite, SWT.TITLE);
-		groupStamp.setText("Inputs:");
-		groupStamp.setLayout(new GridLayout(4, true));
-		groupStamp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		composite.setLayoutData(gdDate);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(composite);
 
-		GridData gdFirm = new GridData();
-		gdFirm.grabExcessHorizontalSpace = true;
-		gdFirm.horizontalAlignment = SWT.FILL;
-		//gdFirm.minimumWidth = 500;
 
-		Label cityLabel = new Label(groupStamp, SWT.NONE);
-		cityLabel.setText("LogFile");
-		logFileText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		logFileText.setLayoutData(gdFirm);
+		final Button buttonSession = new Button(composite, SWT.PUSH | SWT.CENTER);
+		buttonSession.setText("Split to session");
+		buttonSession.setLayoutData(gdButton);
 		
-		final Button fileDialog = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-		fileDialog.setText("File");
+		final Button buttonSplit = new Button(composite, SWT.PUSH | SWT.CENTER | SWT.COLOR_BLUE);
+		buttonSplit.setText("Split to Files");
+		buttonSplit.setLayoutData(gdButton);
+
+
+		buttonSession.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				File file = new File ( logFileText.getText());
+				
+				SplittFileToSession splittFileToSession = new SplittFileToSession(logFileText.getText(),
+						logDirText.getText(),outputDirText.getText(), 
+						sessionIdText.getText(),bookingIdText.getText(),
+						maxFileSizeText.getText(),
+						loggingFromDate,loggingToDate);
+				
+				splittFileToSession.splitToSession();
+	
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
 		
+		
+		buttonSplit.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				
+				File file = new File ( logFileText.getText());
+				logger.info("  size = "+FileUtils.sizeOf(file));
+
+				int countLines = SplitFile.splitFileOld(file);
+				
+				logger.info(" lines  = "+ countLines );
+				
+			}
+
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
+		
+	}
+	
+	private void createBookingComposite(Composite composite) {
+		GridData gdDateSession = new GridData();
+		gdDateSession.grabExcessHorizontalSpace = false;
+		gdDateSession.horizontalAlignment = SWT.NONE;
+		gdDateSession.horizontalSpan = 2;
+		gdDateSession.widthHint = 300;
+
+		new Label(composite, SWT.NONE).setText("BookingId");
+		
+		bookingIdText = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		bookingIdText.setLayoutData(gdDateSession);
+		
+	}
+
+
+	private void createSessionComposite(Composite composite) {
+		GridData gdDateSession = new GridData();
+		gdDateSession.grabExcessHorizontalSpace = false;
+		gdDateSession.horizontalAlignment = SWT.NONE;
+		gdDateSession.horizontalSpan = 2;
+		gdDateSession.widthHint = 300;
+
+		new Label(composite, SWT.NONE).setText("SessionId");
+		
+		sessionIdText = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		sessionIdText.setLayoutData(gdDateSession);
+		
+	}
+	
+	private void createMaxFileSizeComposite(Composite parent) {
+
+		new Label(parent, SWT.NONE).setText("maxFileSize");
+		
+		GridData gdTextComposite = new GridData();
+		gdTextComposite.grabExcessHorizontalSpace = false;
+		gdTextComposite.horizontalAlignment = SWT.NONE;
+		gdTextComposite.horizontalSpan = 2;
+		
+		Composite textComposite = new Composite(parent, SWT.NONE);
+		textComposite.setLayoutData(gdTextComposite);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(textComposite);
+
+		GridData gdMaxFileSize = new GridData();
+		gdMaxFileSize.grabExcessHorizontalSpace = false;
+		gdMaxFileSize.horizontalAlignment = SWT.NONE;
+		gdMaxFileSize.widthHint = 150;
+		
+		maxFileSizeText = new Text(textComposite, SWT.BORDER | SWT.SINGLE);
+		maxFileSizeText.setLayoutData(gdMaxFileSize);
+
+		new Label(textComposite, SWT.NONE).setText("( mB )");
+		
+	}
+
+
+	private void createDates(Composite parent) {
+		initDates();
+		
+		addDateControl("fromDate:",parent,loggingFromDate);
+
+		addDateControl("toDate:",parent,loggingToDate);
+
+	}
+
+	private void createSelectFilesComposite(final Composite parent) {
+		
+		
+		Label label = new Label(parent, SWT.NONE);
+		label.setText("LogFile");
+		logFileText = new Text(parent, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(600, 16).grab(false, false).applyTo(logFileText);
+
+		final Button fileDialog = new Button(parent, SWT.PUSH | SWT.LEFT);
+		fileDialog.setText("Select File");
+
 		fileDialog.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -112,276 +282,82 @@ public class LoggingAppView extends TaskViewAbstract {
 				widgetSelected(e);
 			}
 		});
+		
+	}
 
+	private void createSelectDirComposite(final Composite composite) {
+		
+		Label logDirLabel = new Label(composite, SWT.NONE);
+		logDirLabel.setText("LogDir");
+		
+		logDirText = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(400, 16).grab(false, false).applyTo(logDirText);
 
+		final Button dirDialogBtn = new Button(composite, SWT.PUSH | SWT.LEFT);
+		dirDialogBtn.setText("Select DIR");
 		
-		new Label(groupStamp, SWT.NONE).setText("test");
-		
-		initDates();
-		
-		addDateControl("pickupDate:",groupStamp,checkInDate);
+		dirDialogBtn.addSelectionListener(new SelectionListener() {
 
-		addDateControl("dropOffDate:",groupStamp,dropOffDate);
-		
-
-		new Label(groupStamp, SWT.NONE).setText("SessionId");
-		sessionIdText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		sessionIdText.setLayoutData(gdFirm);
-		new Label(groupStamp, SWT.NONE).setText("1");
-		new Label(groupStamp, SWT.NONE).setText("2");
-		
-		
-		final Button buttonSession = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-		buttonSession.setText("Split To session");
-		
-		buttonSession.addSelectionListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				File file = new File ( logFileText.getText());
-				logger.info("  size = "+FileUtils.sizeOf(file));
-				
-				splitToSession(file,sessionIdText.getText());
-	
+				DirectoryDialog dirDialog = new DirectoryDialog(composite.getShell());
+				    // Set the text
+				dirDialog.setText("Select Log. File");				
+				logDirText.setText(dirDialog.open());
+
 			}
-			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 			}
 		});
+				
+	}
+	
+	private void createOutputDirComposite(final Composite composite) {
+		Label logDirLabel = new Label(composite, SWT.NONE);
+		logDirLabel.setText("OutputDir");
+		
+		outputDirText = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(400, 16).grab(false, false).applyTo(outputDirText);
 
+		final Button dirDialogBtn = new Button(composite, SWT.PUSH | SWT.LEFT);
+		dirDialogBtn.setText("Select DIR");
 		
-
-		
-		final Button buttonSplit = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-		buttonSplit.setText("Split");
-		
-		buttonSplit.addSelectionListener(new SelectionListener() {
+		dirDialogBtn.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
-				
-				File file = new File ( logFileText.getText());
-				logger.info("  size = "+FileUtils.sizeOf(file));
+				DirectoryDialog dirDialog = new DirectoryDialog(composite.getShell());
+				    // Set the text
+				dirDialog.setText("Select Log. File");				
+				outputDirText.setText(dirDialog.open());
 
-				int countLines = splitFileOld(file);
-				
-				logger.info(" lines  = "+ countLines );
-
-
-				
-//				changeModel(null);
-//				viewer.refresh();
 			}
-
-
-			private int splitFile(File file) {
-				
-				int count = 0;
-				int size = 0;
-				int counter = 1;
-				int maxSize = 10000000;
-				LineIterator li;
-				List<String> rows = new ArrayList<String>();
-				try {
-					li = FileUtils.lineIterator(file);
-					while ( li.hasNext()) {
-						String s  = li.nextLine();
-						rows.add(s);
-						count++;
-						size = size + s.length();
-						if ( size > maxSize ) {
-							writeFile(file,counter,rows);
-							rows.clear();
-							size = 0;
-							counter++;
-						}
-						
-					}
-					
-					writeFile(file,counter,rows);
-					return count;
-					
-					
-				} catch (IOException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-				return -1;
-				
-				
-			}
-			
-			private int splitFileOld(File file) {
-				
-				int count = 0;
-				int size = 0;
-				int counter = 1;
-				int maxSize = 10000000;
-				List<String> rows = new ArrayList<String>();
-				
-				InputStream fis = null;
-				 try {
-				   fis = new FileInputStream(file);
-				   InputStreamReader inR = new InputStreamReader(fis);
-				   BufferedReader buf = new BufferedReader( inR );
-				   String line;
-				   while ( ( line = buf.readLine() ) != null ) {
-						rows.add(line);
-						count++;
-						size = size + line.length();
-						if ( size > maxSize ) {
-							writeFile(file,counter,rows);
-							rows.clear();
-							size = 0;
-							counter++;
-						}
-					   
-				   }
-					writeFile(file,counter,rows);
-					return count;
-				   
-				 } catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} finally {
-					 try {
-						fis.close();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				 }
-				 return -1;
-			}
-
-
-
-			private void writeFile(File original, int counter,
-					List<String> rows) throws IOException {
-				String ext = FilenameUtils.getExtension(original.getAbsolutePath());
-				String path = FilenameUtils.getFullPath(original.getAbsolutePath());
-				String name = FilenameUtils.getBaseName(original.getAbsolutePath())+ "_" + counter + ".plog";
-				
-				String newFile = FilenameUtils.concat(path,name);
-				logger.info("write file "+newFile + " rows = "+ rows.size());
-
-				File of = new File(newFile);
-				
-				FileUtils.writeLines(of, rows);
-				
-				logger.info("exit write file "+newFile + " ");
-				
-				
-			}
-
-
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 			}
 		});
-
-		createViewer(composite);
-		
-		
-//	    final Table table = viewer.getTable();
-//
-//		  Menu menu = new Menu(table);
-//	        MenuItem menuItem = new MenuItem(menu, SWT.NONE);
-//	        menuItem.setText("Print Element");
-//	        menuItem.addSelectionListener(new SelectionAdapter() {
-//	            @Override
-//	            public void widgetSelected(SelectionEvent event) {
-//	                System.out.println(table.getSelection()[0].getText());
-//	            }
-//	        });
-//	        viewer.getControl().setMenu(menu);
-
-
 		
 	}
+
 	
-	protected void splitToSession(File file, String sessionId) {
-
-		int count = 0;
-		int size = 0;
-		int counter = 1;
-		int maxSize = 10000000;
-		LineIterator li;
-		List<String> rows = new ArrayList<String>();
-		try {
-			li = FileUtils.lineIterator(file);
-			while ( li.hasNext()) {
-				String s  = li.nextLine();
-				if (s.contains(sessionId) )
-				{
-					rows.add(s);
-					count++;
-					size = size + s.length();
-				}
-				
-			}
-			
-			writeFile(file,sessionId,rows);
-			
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+	private void addDateControl(String label,Composite parent,final Calendar resultDate ) {
 		
-		logger.info(" lines  = "+ count );
-		
-	}
 
-	private void writeFile(File original, String sessionId, List<String> rows) throws IOException {
-		String ext = FilenameUtils.getExtension(original.getAbsolutePath());
-		String path = FilenameUtils.getFullPath(original.getAbsolutePath());
-		String name = FilenameUtils.getBaseName(original.getAbsolutePath())+ "_" + sessionId + ".plog";
-		
-		String newFile = FilenameUtils.concat(path,name);
-
-		File of = new File(newFile);
-		
-		FileUtils.writeLines(of, rows);
-		
-	}
-
-	protected void changeModel(VehicleResponse response) {
-		ModelProvider.INSTANCE.updateOffers(response);
-	    //viewer.setInput(response.getResultList());
-	    viewer.setInput(ModelProvider.INSTANCE.getOfferDos());
-	
-	}
-
-	private void initDates() {
-		
-		checkInDate.set(Calendar.HOUR_OF_DAY, 11);
-		checkInDate.set(Calendar.MINUTE, 30);
-		checkInDate.set(Calendar.SECOND, 0);
-
-		dropOffDate.set(Calendar.HOUR_OF_DAY, 18);
-		dropOffDate.set(Calendar.MINUTE, 0);
-		dropOffDate.set(Calendar.SECOND, 0);	
-	}
-
-	private void addDateControl(String label,Composite composite,final Calendar resultDate ) {
 		GridData gdDate = new GridData();
-		gdDate.grabExcessHorizontalSpace = true;
-		gdDate.horizontalAlignment = SWT.FILL;
+		gdDate.grabExcessHorizontalSpace = false;
+		gdDate.horizontalAlignment = SWT.NONE;
+		gdDate.widthHint = 100;
 
-		new Label(composite, SWT.NONE).setText(label);
+		new Label(parent, SWT.NONE).setText(label);
 
-		final DateTime dateTime = new DateTime(composite, SWT.DATE);
+		final DateTime dateTime = new DateTime(parent, SWT.DATE);
 		dateTime.setLayoutData(gdDate);
 		
-		
-		GridData gridData = new GridData();
-		gridData.horizontalSpan = 2;
-
-		final DateTime dateTime2 = new DateTime(composite, SWT.TIME);
-		dateTime2.setLayoutData(gridData);
+		final DateTime dateTime2 = new DateTime(parent, SWT.TIME);
+		dateTime2.setLayoutData(gdDate);
 		
 		
 		dateTime2.setHours(resultDate.get(Calendar.HOUR_OF_DAY));
@@ -418,6 +394,28 @@ public class LoggingAppView extends TaskViewAbstract {
 
 		
 	}
+
+
+
+
+	protected void changeModel(VehicleResponse response) {
+		ModelProvider.INSTANCE.updateOffers(response);
+	    //viewer.setInput(response.getResultList());
+	    viewer.setInput(ModelProvider.INSTANCE.getOfferDos());
+	
+	}
+
+	private void initDates() {
+		
+		loggingFromDate.set(Calendar.HOUR_OF_DAY, 11);
+		loggingFromDate.set(Calendar.MINUTE, 30);
+		loggingFromDate.set(Calendar.SECOND, 0);
+
+		loggingToDate.set(Calendar.HOUR_OF_DAY, 18);
+		loggingToDate.set(Calendar.MINUTE, 0);
+		loggingToDate.set(Calendar.SECOND, 0);	
+	}
+
 	
 	private void createViewer(Composite parent) {
 	    viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
