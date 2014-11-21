@@ -165,38 +165,17 @@ public class JoiVehicleConnector {
 	}
 	
 	
-	public static BookingResponse verifyOffers(Offer offer, List<Extra> selectedExtras) {
+	public static BookingResponse verifyOffers(BookingRequest bookingRequest, Offer selectedOffer) {
 		GisHttpClient httpClient = new GisHttpClient();
 
 		try {
 			
-			BookingRequest bookingRequest = new BookingRequest();
-			String link = offer.getBookLink().toString();
+			String link = selectedOffer.getBookLink().toString();
 			int pos = link.indexOf("/vehicleRe");
 			link = link.substring(pos);
 			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
 			
 			logger.info("Verify Request URI = "+uri);
-
-			Customer customer = createCustomer();
-			
-			bookingRequest.setCustomer(customer);
-			
-			Person driver = createDriver();
-			
-			bookingRequest.setDriver(driver);
-			Payment payment = new Payment();
-			payment.setPaymentType("1");
-			
-			//payment.setPaymentType(PaymentType.PAYPAL_PAYMENT);
-			
-			bookingRequest.setAcceptedAvailability("13");
-			bookingRequest.setFlightNo("LH4711");
-			bookingRequest.setTransferType("1");
-			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
-			//bookingRequest.setPayment(payment);
-			
-			bookingRequest.setExtras(selectedExtras);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
 			logger.info("Verify Request = "+request);
@@ -217,6 +196,60 @@ public class JoiVehicleConnector {
 		return null;
 
 	}
+	
+//	public static BookingResponse verifyOffers(Offer offer,) {
+//		GisHttpClient httpClient = new GisHttpClient();
+//
+//		try {
+//			
+//			BookingRequest bookingRequest = new BookingRequest();
+//			String link = offer.getBookLink().toString();
+//			int pos = link.indexOf("/vehicleRe");
+//			link = link.substring(pos);
+//			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
+//			
+//			logger.info("Verify Request URI = "+uri);
+//
+//			Customer customer = createCustomer();
+//			
+//			bookingRequest.setCustomer(customer);
+//			
+//			Person driver = createDriver();
+//			
+//			bookingRequest.setDriver(driver);
+//			Payment payment = new Payment();
+//			payment.setPaymentType("1");
+//			
+//			//payment.setPaymentType(PaymentType.PAYPAL_PAYMENT);
+//			
+//			bookingRequest.setAcceptedAvailability("13");
+//			bookingRequest.setFlightNo("LH4711");
+//			bookingRequest.setTransferType("1");
+//			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
+//			//bookingRequest.setPayment(payment);
+//			
+//			bookingRequest.setExtras(selectedExtras);
+//
+//			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
+//			logger.info("Verify Request = "+request);
+//			
+//			String response =  httpClient.startPutRequestAsJson(uri, request);
+//			logger.info("Verify Response = "+response);
+//			
+//			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
+//			
+//
+//			return vh;
+//			
+//		} catch ( IOException e) {
+//			logger.error(e);
+//		} catch (URISyntaxException e) {
+//			logger.error(e);
+//		}
+//		return null;
+//
+//	}
+
 
 	private static Person createDriver() {
 		Person driver = new Person();
@@ -267,6 +300,27 @@ public class JoiVehicleConnector {
 		return null;
 
 	}
+	
+	public static ExtraResponse getExtrasDummy() {
+
+		try {
+			
+			String response = JsonUtils.createDummyResponse("GetExtrasResponse.json");
+			
+			logger.info("response = "+response);
+			
+			ExtraResponse vh = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
+			
+
+			return vh;
+			
+		} catch ( IOException e) {
+			logger.error(e);
+		}
+		return null;
+
+	}
+
 
 	public static BookingResponse bookOffers(Offer selectedOffer,String bookingRequestId,
 			List<Extra> selectedExtras) {
