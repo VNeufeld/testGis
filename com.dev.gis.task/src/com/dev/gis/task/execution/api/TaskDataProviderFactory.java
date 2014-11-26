@@ -33,8 +33,12 @@ public class TaskDataProviderFactory {
 			GoogleMapDataProvider dataProvider = new GoogleMapDataProvider();
 			return dataProvider;
 		}
+		else if ( name.equals("SearchSession")) {
+			LoggingDataProvider dataProvider = new LoggingDataProvider(1);
+			return dataProvider;
+		}
 		else if ( name.equals("Splitt")) {
-			LoggingDataProvider dataProvider = new LoggingDataProvider();
+			LoggingDataProvider dataProvider = new LoggingDataProvider(2);
 			return dataProvider;
 		}
 

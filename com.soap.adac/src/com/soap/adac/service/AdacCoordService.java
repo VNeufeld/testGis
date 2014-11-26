@@ -31,17 +31,17 @@ public class AdacCoordService {
 		System.out.println("OK");
 	      try {
 	            // Create SOAP Connection	
-	       SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-           SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-
-           // Send SOAP Message to SOAP Server
-           String url = "http://www.webservicex.net/geoipservice.asmx";
-           SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(), url);
-
-           // Process the SOAP Response
-           printSOAPResponse(soapResponse);
-
-           soapConnection.close();
+//	       SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+//           SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+//
+//           // Send SOAP Message to SOAP Server
+//           String url = "http://www.webservicex.net/geoipservice.asmx";
+//           SOAPMessage soapResponse = soapConnection.call(createSOAPRequest(), url);
+//
+//           // Process the SOAP Response
+//           printSOAPResponse(soapResponse);
+//
+//           soapConnection.close();
            
            long startTime = System.currentTimeMillis();
            GeocodeService service = new GeocodeService();
@@ -55,7 +55,7 @@ public class AdacCoordService {
            postAdr.setStrasse("Keltenring");
            postAdr.setHausNr("9");
            postAdr.setQuality(Quality.PERFECT);
-           postAdr.setKoordinatenformat(KoordinatenFormat.MERCATOR);
+           postAdr.setKoordinatenformat(KoordinatenFormat.GEODEZIMAL);
            postAdr.setLKZ("DE");
            
            Holder<String>  fehlerText = new Holder<String>();
@@ -75,7 +75,7 @@ public class AdacCoordService {
            ArrayOfPostAdresse result = vlist.value;
            if ( result != null) {
 	           for (PostAdresse pa :  result.getPostAdresse()) {
-	        	   System.out.println("Adresse "+pa.getOrt()+ "/"+pa.getStrasse()+ "/"+pa.getHausNr()+ ":   Koord "+ pa.getX()+ "," + pa.getY());
+	        	   System.out.println("Adresse "+pa.getOrt()+ "/"+pa.getStrasse()+ "/"+pa.getHausNr()+ ":   Koord "+ pa.getX()+ "," + pa.getY() + " proj : "+pa.getKoordinatenformat());
 	           }
            }
            

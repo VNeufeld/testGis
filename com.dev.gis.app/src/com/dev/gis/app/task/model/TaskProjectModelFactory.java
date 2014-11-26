@@ -34,6 +34,7 @@ public class TaskProjectModelFactory {
 		taskGroup = new TaskGroup("Logging");
 		model.getGroups().add(taskGroup);
 		taskGroup.getTasks().add(TaskItem.createTask("Splitt", "folder_edit.png", "Splitt Logging"));
+		taskGroup.getTasks().add(TaskItem.createTask("SearchSession", "folder_edit.png", "Search session"));
 			
 		
 		for ( TaskGroup group: model.getGroups()) {

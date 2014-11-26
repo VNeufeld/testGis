@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 public class LoggingUtils {
@@ -46,7 +47,7 @@ public class LoggingUtils {
 			Collection<File> files = FileUtils.listFiles(dir,null, true);
 			for ( File f : files) {
 				String fileName = f.getName();
-				if ( fileNameMatch(fileName, from, to))
+				if ( fileNameMatch2(fileName, from, to))
 					list.add(f);
 			}
 			
@@ -87,5 +88,53 @@ public class LoggingUtils {
 		}
 		return false;
 	}
+	
+	private static boolean fileNameMatch2(String fileName, Calendar from, Calendar to) {
+		SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
+		SimpleDateFormat stf2 = new SimpleDateFormat("yyyyMMdd");
+		
+		if ( StringUtils.endsWithIgnoreCase(fileName, ".log")) {
+			try {
+				String matchDate = stf2.format(from.getTime());
+				if (StringUtils.contains(fileName, matchDate))
+					return true;
+				else
+					return false;
+			}
+			catch(Exception err) {
+				logger.error(err.getMessage(),err);
+			}
+			return true;
+		}
+		int pos = fileName.indexOf(".log.");
+		if ( pos > 0 ) {
+			String log_ext = fileName.substring(pos+5);
+			Date logDate = null;
+			try {
+				logDate = stf.parse(log_ext);
+			}
+			catch(ParseException e) {
+				logger.info("can't parse "+e.getMessage());
+			}
+			
+			if (logDate != null ) {
+				Calendar c = Calendar.getInstance();
+				c.setTime(logDate);
+				c.set(Calendar.MINUTE,10);
+				from.set(Calendar.MINUTE,0);
+				from.set(Calendar.SECOND,0);
+				to.set(Calendar.MINUTE,0);
+				to.set(Calendar.SECOND,0);
+				
+				logger.info("file : "+stf.format(c.getTime())+ " from : "+stf.format(from.getTime())+ " to : "+ stf.format(to.getTime()));
+				
+				if ( c.before(to) && c.after(from))
+					return true;
+			}
+			
+		}
+		return false;
+	}
+
 
 }

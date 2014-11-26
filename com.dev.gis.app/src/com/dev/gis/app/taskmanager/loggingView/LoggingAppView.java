@@ -1,28 +1,13 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -32,28 +17,17 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.DirectoryDialog;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.ProgressBar;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
+import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.taskmanager.bookingView.BookingView;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
-import com.dev.gis.connector.joi.protocol.Extra;
-import com.dev.gis.connector.joi.protocol.Offer;
-import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.ModelProvider;
-import com.dev.gis.task.execution.api.OfferDo;
 
 public class LoggingAppView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.LoggingAppView";
@@ -63,56 +37,102 @@ public class LoggingAppView extends TaskViewAbstract {
 	Calendar loggingFromDate = Calendar.getInstance();
 	Calendar loggingToDate = Calendar.getInstance();
 
-	private IWorkbenchAction exitAction;
 	
 	private static int instanceNum = 1;
 
 	
-	private Text logFileText;
 	private Text logDirText;
 	private Text outputDirText;
 	private Text sessionIdText;
 	private Text bookingIdText;
-	private Text maxFileSizeText;
+	private Text maxThreadsText;
+	
 	private Button buttonSession;
+	private Button buttonStop;
+	private Button buttonBooking;
+	
+	private Text pbText;
 	private ProgressBar pb;
 
 	private Text currentFileName;
 	
-	private TableViewer viewer;
+	//private TableViewer viewer;
+	
+	private LogTable  logTable;
+
+	private LogFilesTable  logFilesTable;
+
+	private Text filesCount;
+	
+	private CursorManager  cursorManager;
+	
+	private SplittFileToSession splittFileToSession = null;
+	
+	private FindBooking findBooking = null;
+	
+	private ExecutorService executor = Executors.newSingleThreadExecutor();
+	
 	
 	@Override
 	public void createPartControl(final Composite parent) {
 		
+		cursorManager = new CursorManager(parent);
+		
 		final Group group = new Group(parent, SWT.TITLE);
-		group.setText("Check Logging:");
+		group.setText("Session Logging:");
 		group.setLayout(new GridLayout(1, false));
 
 		createGroupFiles(group);
 
 		createGroupSearch(group);
 
-		createButtons(group);
+		//createButtons(group);
 
 		createOutputText(group);
 		
+		logTable = new LogTable(group,getSite());
+		
+		
 	}
+	
+	
 	
 
 	private void createOutputText(Group group) {
-		GridData gdDateSession = new GridData();
-		gdDateSession.grabExcessHorizontalSpace = false;
-		gdDateSession.horizontalAlignment = SWT.NONE;
-		gdDateSession.horizontalSpan = 3;
-		gdDateSession.widthHint = 800;
 
+		Composite composite = new Composite(group, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true).applyTo(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(composite);
+
+		GridData gdText = new GridData();
+		gdText.grabExcessHorizontalSpace = true;
+		gdText.grabExcessVerticalSpace = false;
+		gdText.horizontalAlignment = SWT.FILL;
+		gdText.verticalAlignment = SWT.FILL;
+		gdText.widthHint = 400;
 		
-		currentFileName = new Text(group, SWT.BORDER | SWT.SINGLE);
-		currentFileName.setLayoutData(gdDateSession);
-		
-		pb = new  ProgressBar(group, SWT.NULL);
+		pbText = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		pbText.setEnabled(false);
+		pbText.setText(".");
+		pbText.setLayoutData(gdText);
+
+		pb = new  ProgressBar(composite, SWT.NULL);
 		pb.setSelection(0);
-		pb.setLayoutData(gdDateSession);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(pb);
+
+		GridData gdMultiText = new GridData();
+		gdMultiText.grabExcessHorizontalSpace = true;
+		gdMultiText.grabExcessVerticalSpace = false;
+		gdMultiText.horizontalAlignment = SWT.FILL;
+		gdMultiText.verticalAlignment = SWT.FILL;
+		gdMultiText.horizontalSpan = 2;
+		//gdMultiText.widthHint = 800;
+		gdMultiText.heightHint = 50;
+
+		currentFileName = new Text(composite, SWT.BORDER | SWT.MULTI | /* SWT.WRAP |*/ SWT.V_SCROLL);
+		currentFileName.setLayoutData(gdMultiText);
+		
+		//GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(false, true).applyTo(currentFileName);
 
 		
 	}
@@ -120,7 +140,7 @@ public class LoggingAppView extends TaskViewAbstract {
 
 	private void createGroupFiles(Group group) {
 		final Group groupFiles = new Group(group, SWT.TITLE);
-		groupFiles.setText("Files and Dirs:");
+		groupFiles.setText("Directory:");
 		groupFiles.setLayout(new GridLayout(1, false));
 		
 		
@@ -129,40 +149,81 @@ public class LoggingAppView extends TaskViewAbstract {
 
 		createSelectDirComposite(composite);
 
-		createSelectFilesComposite(composite);
-		createMaxFileSizeComposite(composite);
+		createMaxThreadComposite(composite);
 
 		createOutputDirComposite(composite);
-
 		
 	}
 
 
-
-
 	private void createGroupSearch(Group group) {
-		final Group groupSearch = new Group(group, SWT.TITLE);
+
+		Composite compositeSearch = new Composite(group, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(compositeSearch);
+
+		
+		final Group groupSearch = new Group(compositeSearch, SWT.TITLE);
 		groupSearch.setText("Search criteria:");
 		groupSearch.setLayout(new GridLayout(1, false));
 
 		Composite composite = new Composite(groupSearch, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(composite);
 
+		createDates(composite);
+
 		createSessionComposite(composite);
 
 		createBookingComposite(composite);
 		
-		createDates(composite);
 		
+		addFilesTable(compositeSearch);
+		
+		
+	}
+
+
+
+
+	private void addFilesTable(Composite compositeSearch) {
+		final Group groupTable = new Group(compositeSearch, SWT.TITLE);
+		groupTable.setText("File list:");
+		
+		GridData gridData = new GridData();
+		gridData.verticalAlignment = GridData.FILL;
+		gridData.horizontalAlignment = GridData.FILL;
+//		gridData.heightHint = 200;
+//		gridData.widthHint  = 800;
+		gridData.horizontalSpan = 1;
+		gridData.grabExcessHorizontalSpace = true;
+		gridData.grabExcessVerticalSpace = true;
+
+		groupTable.setLayoutData(gridData);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(groupTable);
+
+		GridData gridData2 = new GridData();
+		//gridData2.verticalAlignment = GridData.FILL;
+		gridData.horizontalAlignment = GridData.FILL;
+//		gridData.heightHint = 200;
+//		gridData.widthHint  = 800;
+		gridData2.horizontalSpan = 1;
+		//gridData.grabExcessHorizontalSpace = true;
+		//gridData2.grabExcessVerticalSpace = true;
+
+		Composite composite = new Composite(groupTable, SWT.NONE);
+		composite.setLayoutData(gridData2);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(composite);
+
+
+		addSearchFilesButton(composite);
+		
+		filesCount = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		filesCount.setEnabled(false);
+		filesCount.setText("files : 0");
+
+		logFilesTable = new LogFilesTable(groupTable, getSite());
 	}
 	
 	private void createButtons(Composite parent) {
-		
-		GridData gdButton = new GridData();
-		gdButton.grabExcessHorizontalSpace = false;
-		gdButton.horizontalAlignment = SWT.NONE;
-		gdButton.widthHint = 150;
-
 
 		GridData gdDate = new GridData();
 		gdDate.grabExcessHorizontalSpace = false;
@@ -173,16 +234,57 @@ public class LoggingAppView extends TaskViewAbstract {
 		composite.setLayoutData(gdDate);
 		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(composite);
 
+		//addButtonSession(composite);
+		
+		addButtonStopJob(composite);
+		
+	}
 
+
+	private void addButtonStopJob(Composite composite) {
+		GridData gdButton = new GridData();
+		gdButton.grabExcessHorizontalSpace = false;
+		gdButton.horizontalAlignment = SWT.NONE;
+		gdButton.widthHint = 150;
+
+		buttonStop = new Button(composite, SWT.PUSH | SWT.CENTER | SWT.COLOR_BLUE);
+		buttonStop.setText("Stop job");
+		buttonStop.setLayoutData(gdButton);
+		
+		buttonStop.setEnabled(false);
+
+		
+		buttonStop.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if ( splittFileToSession != null)
+					splittFileToSession.setCanceled(true);
+				
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
+		
+	}
+
+
+	private void addButtonSession(final Composite composite) {
+		
+		GridData gdButton = new GridData();
+		gdButton.grabExcessHorizontalSpace = false;
+		gdButton.horizontalAlignment = SWT.NONE;
+		gdButton.widthHint = 150;
+
+		
 		buttonSession = new Button(composite, SWT.PUSH | SWT.CENTER);
 		buttonSession.setText("Split to session");
 		buttonSession.setLayoutData(gdButton);
+
 		
-		final Button buttonSplit = new Button(composite, SWT.PUSH | SWT.CENTER | SWT.COLOR_BLUE);
-		buttonSplit.setText("Split to Files");
-		buttonSplit.setLayoutData(gdButton);
-
-
 		buttonSession.addSelectionListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -192,16 +294,17 @@ public class LoggingAppView extends TaskViewAbstract {
 				buttonSession.setEnabled(false);
 				buttonSession.setText(" Wait ....");
 				
-				SplittFileToSession splittFileToSession = new SplittFileToSession(logFileText.getText(),
-						logDirText.getText(),outputDirText.getText(), 
+				buttonStop.setEnabled(true);
+				
+				splittFileToSession = new SplittFileToSession(logDirText.getText(),outputDirText.getText(), 
 						sessionIdText.getText(),bookingIdText.getText(),
-						maxFileSizeText.getText(),
+						maxThreadsText.getText(),
 						loggingFromDate,loggingToDate);
 				
-				ExecutorService executor = Executors.newSingleThreadExecutor();
 				executor.submit(splittFileToSession);
 				
 				logger.info(" executer started ");
+				
 	
 			}
 			
@@ -211,42 +314,19 @@ public class LoggingAppView extends TaskViewAbstract {
 				widgetSelected(e);
 			}
 		});
-		
-		
-		buttonSplit.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
-				saveInput();
-
-				File file = new File ( logFileText.getText());
-				logger.info("  size = "+FileUtils.sizeOf(file));
-
-				int countLines = SplitFile.splitFileOld(file);
-				
-				logger.info(" lines  = "+ countLines );
-				
-			}
-
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-		
 	}
 	
+
+	
 	private void saveInput() {
-		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_MAX_FILE_SIZE_PROPERTY,maxFileSizeText.getText());
+		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_MAX_THREADS_PROPERTY,maxThreadsText.getText());
 		
-		LoggingSettings.saveTimeProperty(loggingFromDate, loggingFromDate);
+		LoggingSettings.saveTimeProperty(loggingFromDate, loggingToDate);
 
 		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_INPUT_DIR_PROPERTY,logDirText.getText());
 
 		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_SESSION_PROPERTY,sessionIdText.getText());
-		
+
 		
 	}
 
@@ -255,13 +335,56 @@ public class LoggingAppView extends TaskViewAbstract {
 		GridData gdDateSession = new GridData();
 		gdDateSession.grabExcessHorizontalSpace = false;
 		gdDateSession.horizontalAlignment = SWT.NONE;
-		gdDateSession.horizontalSpan = 2;
+		gdDateSession.horizontalSpan = 1;
 		gdDateSession.widthHint = 300;
 
 		new Label(composite, SWT.NONE).setText("BookingId");
 		
 		bookingIdText = new Text(composite, SWT.BORDER | SWT.SINGLE);
 		bookingIdText.setLayoutData(gdDateSession);
+		
+
+		GridData gdButton = new GridData();
+		gdButton.grabExcessHorizontalSpace = false;
+		gdButton.horizontalAlignment = SWT.NONE;
+		gdButton.widthHint = 150;
+
+		buttonBooking = new Button(composite, SWT.PUSH | SWT.CENTER);
+		buttonBooking.setText("Search booking");
+		buttonBooking.setLayoutData(gdButton);
+		
+		
+		buttonBooking.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				saveInput();
+				
+				buttonBooking.setEnabled(false);
+				buttonBooking.setText(" Wait ....");
+				
+				FileNameEntryModel.getInstance().getEntries().clear();
+				
+				//buttonStop.setEnabled(true);
+				
+				findBooking = new FindBooking(logDirText.getText(),outputDirText.getText(), 
+						bookingIdText.getText(),
+						maxThreadsText.getText(),
+						loggingFromDate,loggingToDate);
+				
+				executor.submit(findBooking);
+				
+				logger.info(" executer started ");
+				
+	
+			}
+			
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				widgetSelected(e);
+			}
+		});
 		
 	}
 
@@ -273,7 +396,7 @@ public class LoggingAppView extends TaskViewAbstract {
 		GridData gdDateSession = new GridData();
 		gdDateSession.grabExcessHorizontalSpace = false;
 		gdDateSession.horizontalAlignment = SWT.NONE;
-		gdDateSession.horizontalSpan = 2;
+		gdDateSession.horizontalSpan = 1;
 		gdDateSession.widthHint = 300;
 
 		new Label(composite, SWT.NONE).setText("SessionId");
@@ -282,14 +405,16 @@ public class LoggingAppView extends TaskViewAbstract {
 		sessionIdText.setLayoutData(gdDateSession);
 		sessionIdText.setText(saved);
 		
+		addButtonSession(composite);
+		
 	}
 	
-	private void createMaxFileSizeComposite(Composite parent) {
+	private void createMaxThreadComposite(Composite parent) {
 
-		String maxFileSizeSaved = LoggingSettings.readProperty(LoggingSettings.PREFERENCE_MAX_FILE_SIZE_PROPERTY,"100");
+		String maxThreadsSaved = LoggingSettings.readProperty(LoggingSettings.PREFERENCE_MAX_THREADS_PROPERTY,"1");
 
 
-		new Label(parent, SWT.NONE).setText("maxFileSize");
+		new Label(parent, SWT.NONE).setText("maxThreadPoolSize");
 		
 		GridData gdTextComposite = new GridData();
 		gdTextComposite.grabExcessHorizontalSpace = false;
@@ -305,12 +430,12 @@ public class LoggingAppView extends TaskViewAbstract {
 		gdMaxFileSize.horizontalAlignment = SWT.NONE;
 		gdMaxFileSize.widthHint = 150;
 		
-		maxFileSizeText = new Text(textComposite, SWT.BORDER | SWT.SINGLE);
-		maxFileSizeText.setLayoutData(gdMaxFileSize);
+		maxThreadsText = new Text(textComposite, SWT.BORDER | SWT.SINGLE);
+		maxThreadsText.setLayoutData(gdMaxFileSize);
 		
-		maxFileSizeText.setText(maxFileSizeSaved);
+		maxThreadsText.setText(maxThreadsSaved);
 
-		new Label(textComposite, SWT.NONE).setText("( mB )");
+		new Label(textComposite, SWT.NONE).setText("( 1 : 10 )");
 		
 	}
 
@@ -323,40 +448,52 @@ public class LoggingAppView extends TaskViewAbstract {
 		loggingFromDate = cals[0];
 		loggingToDate = cals[1];
 		
-		addDateControl("fromDate:",parent,loggingFromDate);
-
-		addDateControl("toDate:",parent,loggingToDate);
+		addDateControl("fromDate:",parent,loggingFromDate,2);
+		
+		addDateControl("toDate:",parent,loggingToDate,2);
 
 	}
 
-	private void createSelectFilesComposite(final Composite parent) {
+
+	private void addSearchFilesButton(Composite parent) {
+		GridData gdButton = new GridData();
+		gdButton.grabExcessHorizontalSpace = false;
+		gdButton.horizontalAlignment = SWT.NONE;
+		gdButton.widthHint = 150;
 		
+		final Button dirDialogBtn = new Button(parent, SWT.PUSH | SWT.CENTER);
+		dirDialogBtn.setText("Show files");
+		dirDialogBtn.setLayoutData(gdButton);
 		
-		Label label = new Label(parent, SWT.NONE);
-		label.setText("LogFile");
-		logFileText = new Text(parent, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(600, 16).grab(false, false).applyTo(logFileText);
-
-		final Button fileDialog = new Button(parent, SWT.PUSH | SWT.LEFT);
-		fileDialog.setText("Select File");
-
-		fileDialog.addSelectionListener(new SelectionListener() {
-
+		dirDialogBtn.addSelectionListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				 FileDialog fileDialog = new FileDialog(parent.getShell());
-				    // Set the text
-				 fileDialog.setText("Select Log. File");				
-				 logFileText.setText(fileDialog.open());
-
+				
+				logFilesTable.update();
+				FileNameEntryModel.getInstance().getEntries().clear();
+				
+				FindFilesToSession ff = new FindFilesToSession(logDirText.getText(),
+						loggingFromDate,loggingToDate);
+				
+				executor.submit(ff);
+				
+				logger.info(" executer started ");
+				
+	
 			}
+			
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 			}
 		});
 		
+		
 	}
+
+
+
 
 	private void createSelectDirComposite(final Composite composite) {
 
@@ -448,7 +585,7 @@ public class LoggingAppView extends TaskViewAbstract {
 	}
 
 	
-	private void addDateControl(String label,Composite parent,final Calendar resultDate ) {
+	private void addDateControl(String label,Composite parent,final Calendar resultDate, int span ) {
 		
 
 		GridData gdDate = new GridData();
@@ -457,11 +594,21 @@ public class LoggingAppView extends TaskViewAbstract {
 		gdDate.widthHint = 100;
 
 		new Label(parent, SWT.NONE).setText(label);
+		
+		GridData gdTextComposite = new GridData();
+		gdTextComposite.grabExcessHorizontalSpace = true;
+		gdTextComposite.horizontalAlignment = SWT.NONE;
+		gdTextComposite.horizontalSpan = span;
+		
+		Composite dateComposite = new Composite(parent, SWT.NONE);
+		dateComposite.setLayoutData(gdTextComposite);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(dateComposite);
 
-		final DateTime dateTime = new DateTime(parent, SWT.DATE);
+
+		final DateTime dateTime = new DateTime(dateComposite, SWT.DATE);
 		dateTime.setLayoutData(gdDate);
 		
-		final DateTime dateTime2 = new DateTime(parent, SWT.TIME);
+		final DateTime dateTime2 = new DateTime(dateComposite, SWT.TIME);
 		dateTime2.setLayoutData(gdDate);
 		
 		dateTime.setYear(resultDate.get(Calendar.YEAR));
@@ -504,15 +651,6 @@ public class LoggingAppView extends TaskViewAbstract {
 	}
 
 
-
-
-	protected void changeModel(VehicleResponse response) {
-		ModelProvider.INSTANCE.updateOffers(response);
-	    //viewer.setInput(response.getResultList());
-	    viewer.setInput(ModelProvider.INSTANCE.getOfferDos());
-	
-	}
-
 	private void initDates() {
 		
 		loggingFromDate.set(Calendar.HOUR_OF_DAY, 11);
@@ -523,126 +661,6 @@ public class LoggingAppView extends TaskViewAbstract {
 		loggingToDate.set(Calendar.MINUTE, 0);
 		loggingToDate.set(Calendar.SECOND, 0);	
 	}
-
-	
-	private void createViewer(Composite parent) {
-	    viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-	        | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-	    createColumns(parent, viewer);
-	    final Table table = viewer.getTable();
-	    table.setHeaderVisible(true);
-	    table.setLinesVisible(true);
-
-	    viewer.setContentProvider(new ArrayContentProvider());
-	    // get the content for the viewer, setInput will call getElements in the
-	    // contentProvider
-	    //viewer.setInput(ModelProvider.INSTANCE.getOffers());
-	    // make the selection available to other views
-	    getSite().setSelectionProvider(viewer);
-	    // set the sorter for the table
-
-	    // define layout for the viewer
-	    GridData gridData = new GridData();
-	    gridData.verticalAlignment = GridData.FILL;
-	    gridData.horizontalSpan = 2;
-	    gridData.grabExcessHorizontalSpace = true;
-	    gridData.grabExcessVerticalSpace = true;
-	    gridData.horizontalAlignment = GridData.FILL;
-	    viewer.getControl().setLayoutData(gridData);
-	    
-	    viewer.addDoubleClickListener(new DoubleClickListener());
-	    
-	    hookContextMenu();
-	}
-	
-	private static class DoubleClickListener implements IDoubleClickListener 
-	{
-
-		@Override
-		public void doubleClick(DoubleClickEvent event) {
-			
-			TableViewer viewer = (TableViewer) event.getViewer();
-	        IStructuredSelection thisSelection = (IStructuredSelection) event
-	            .getSelection();
-	        Object selectedNode = thisSelection.getFirstElement();
-	        
-	    	OfferDo offer = (OfferDo) selectedNode;
- 
-	        new OfferViewUpdater().showOffer(offer);
-	        System.out.println("selectedNode "+offer);
-	        
-		}
-		
-	}
-	
-	private void createColumns(final Composite parent, final TableViewer viewer) {
-	    String[] titles = { "Name", "Supplier", "Station", "Price" };
-	    int[] bounds = { 100, 100, 100, 100 };
-
-	    // first column is for the first name
-	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
-	        return o.getName();
-	      }
-	    });
-
-	    // second column is supplierId
-	    col = createTableViewerColumn(titles[1], bounds[1], 1);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
-	        return String.valueOf(o.getSupplierId());
-	      }
-	    });
-
-	    col = createTableViewerColumn(titles[2], bounds[2], 2);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
-			return String.valueOf(o.getPickUpStationId());
-	      }
-	    });
-
-	    col = createTableViewerColumn(titles[3], bounds[3], 3);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
-			return o.getPrice().getAmount();
-	      }
-
-//	      @Override
-//	      public Image getImage(Object element) {
-//	        if (((Person) element).isMarried()) {
-//	          return CHECKED;
-//	        } else {
-//	          return UNCHECKED;
-//	        }
-//	      }
-	    });
-
-	  }
-
-	  private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
-	    final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,
-	        SWT.NONE);
-	    final TableColumn column = viewerColumn.getColumn();
-	    column.setText(title);
-	    column.setWidth(bound);
-	    column.setResizable(true);
-	    column.setMoveable(true);
-	    return viewerColumn;
-	  }
-
-
-	  public TableViewer getViewer() {
-	    return viewer;
-	  }
 
 	
 	@Override
@@ -662,19 +680,6 @@ public class LoggingAppView extends TaskViewAbstract {
 		// TODO Auto-generated method stub
 		
 	}
-	private void hookContextMenu() {
-		MenuManager menuMgr = new MenuManager();
-
-		menuMgr.setRemoveAllWhenShown(true);
-
-		Menu menu = menuMgr.createContextMenu(viewer.getControl());
-		viewer.getControl().setMenu(menu);
-		getSite().registerContextMenu(menuMgr, viewer);
-		
-		
-		
-	}
-	
 	
 	public static void  updateView(final String text ) {
 		
@@ -698,21 +703,195 @@ public class LoggingAppView extends TaskViewAbstract {
 				}
 			}
 		});
+	}
+	
+	public static void  updateView(final LogEntry entry ) {
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					LoggingAppView viewPart =  (LoggingAppView)wp.showView(
+							LoggingAppView.ID, 
+							Integer.toString(instanceNum), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					
+					viewPart.outputText(entry.getEntry().get(0));
+
+					viewPart.refreshCriteria(entry.getBookingId(), entry.getSessionId());
+					
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+
+		
+	}
+	
+	public static void  updateFileModel() {
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					LoggingAppView viewPart =  (LoggingAppView)wp.showView(
+							LoggingAppView.ID, 
+							Integer.toString(instanceNum), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					
+					viewPart.updateFileTable();
+					
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+
+		
+	}
+
+	
+	
+	protected void updateFileTable() {
+		logFilesTable.update();
+		
+		filesCount.setText("files :"+ FileNameEntryModel.getInstance().getEntries().size());
 
 		
 	}
 
 
+
+
+	protected void refreshCriteria(String bookingId, String sessionId) {
+		sessionIdText.setText(sessionId);
+		bookingIdText.setText(bookingId);
+		
+	}
+
+
+
+
+	public static void  updateProgressBar(final long size, final long maxSize ) {
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					LoggingAppView viewPart =  (LoggingAppView)wp.showView(
+							LoggingAppView.ID, 
+							Integer.toString(instanceNum), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					
+					viewPart.updateProgressb(size, maxSize);
+					
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+
+		
+	}
+
+	protected void updateProgressb(final long size, final long maxSize) {
+		int imax = (int) ( maxSize / 1000 );
+		int isize = (int) ( size / 1000 );
+		pb.setMaximum(imax);
+		pb.setSelection(isize);
+
+	}
+
+
 	protected void outputText(String text) {
-		if ( "exit".equals(text)) {
-			buttonSession.setEnabled(true);
-			buttonSession.setText("Split to session");
-			currentFileName.setText(" completed ");
+		if ( text.startsWith("error") || text.startsWith("session")) {
+
+			resetButtons();
+
+			if ( text.startsWith("error"))
+				currentFileName.setText(text);
+			else
+				logTable.update();
+
+		}
+		
+		if ( "exit".equals(text) || "canceled".equals(text)) {
+			resetButtons();
+			
+			if ("exit".equals(text) )
+				currentFileName.setText(" completed ");
+			else
+				currentFileName.setText(" canceled");
+			
+			
 		}
 		else
 			currentFileName.setText(text);
 	}
 
 
+
+	private void resetButtons() {
+		buttonSession.setEnabled(true);
+		buttonSession.setText("Split to session");
+		
+		splittFileToSession = null;
+		
+		findBooking = null;
+		
+		//buttonStop.setEnabled(false);
+
+		buttonBooking.setEnabled(true);
+		
+		buttonBooking.setText("Search booking");
+		
+		pb.setSelection(0);
+	}
+
+
+
+
+	public static void updateFileName(final String text) {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					LoggingAppView viewPart =  (LoggingAppView)wp.showView(
+							LoggingAppView.ID, 
+							Integer.toString(instanceNum), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					
+					viewPart.updateProgressText(text);
+					
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+		
+	}
+
+	protected void updateProgressText(String text) {
+		// TODO Auto-generated method stub
+		pbText.setText(text);
+		
+	}
 
 }

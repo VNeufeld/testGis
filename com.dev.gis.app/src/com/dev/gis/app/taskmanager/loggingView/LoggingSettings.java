@@ -18,9 +18,11 @@ public class LoggingSettings {
 
 	public static final String PREFERENCE_PATH = "com.dev.gis.app/logging";
 	
+	public static final String PREFERENCE_MAX_THREADS_PROPERTY = "maxThreads"; 
 	public static final String PREFERENCE_MAX_FILE_SIZE_PROPERTY = "maxFileSize"; 
 	public static final String PREFERENCE_OUTPUT_DIR_PROPERTY = "logging.output.dir"; 
 	public static final String PREFERENCE_INPUT_DIR_PROPERTY = "logging.input.dir";
+	public static final String PREFERENCE_INPUT_FILE_PROPERTY = "logging.input.file";
 	public static final String PREFERENCE_SESSION_PROPERTY = "logging.input.session"; 
 	
 	public static final String PREFERENCE_START_TIME_PROPERTY = "startTimeProperty"; 

@@ -1,75 +1,61 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.LineIterator;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-public class SplitFile {
+public class SplitFile implements Callable<String> {
 	private static Logger logger = Logger.getLogger(SplitFile.class);
 
-	public static int splitFileOld(File file) {
+	private final File logFile;
+	private final String outputDir;
+	private long maxFileSize;
+	
+	private boolean canceled = false;
+
+	public SplitFile(String fileName, String outputDir,
+			String maxFileSizeText) {
+
+		if (StringUtils.isNotEmpty(fileName)) {
+			logFile = new File(fileName);
+			logger.info("  size = " + FileUtils.sizeOf(logFile));
+		} else {
+			logFile = null;
+		}
+
+		this.outputDir = outputDir;
 		
-		int count = 0;
-		int size = 0;
-		int counter = 1;
-		int maxSize = 100000000;
-		List<String> rows = new ArrayList<String>();
 		
-		InputStream fis = null;
-		 try {
-		   fis = new FileInputStream(file);
-		   InputStreamReader inR = new InputStreamReader(fis);
-		   BufferedReader buf = new BufferedReader( inR );
-		   String line;
-		   while ( ( line = buf.readLine() ) != null ) {
-				rows.add(line);
-				count++;
-				size = size + line.length();
-				if ( size > maxSize ) {
-					writeFile(file,counter,rows);
-					rows.clear();
-					size = 0;
-					counter++;
-				}
-			   
-		   }
-			writeFile(file,counter,rows);
-			return count;
-		   
-		 } catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} finally {
-			 try {
-				fis.close();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		 }
-		 return -1;
+		if (StringUtils.isNotEmpty(maxFileSizeText))
+			maxFileSize = Integer.valueOf(maxFileSizeText);
+		else
+			maxFileSize = 100;
+		
+		maxFileSize = maxFileSize * 1000000;
+		
+		canceled = false;
+
 	}
 
 
-
-	private static void writeFile(File original, int counter,
-			List<String> rows) throws IOException {
-		String ext = FilenameUtils.getExtension(original.getAbsolutePath());
-		String path = FilenameUtils.getFullPath(original.getAbsolutePath());
-		String name = FilenameUtils.getBaseName(original.getAbsolutePath())+ "_" + counter + ".plog";
+	private void writeFile(File original, int counter,List<String> rows) 
+			throws IOException {
+//		String ext = FilenameUtils.getExtension(logFile.getAbsolutePath());
+//		String path = FilenameUtils.getFullPath(logFile.getAbsolutePath());
+		String name = FilenameUtils.getName(logFile.getAbsolutePath())+ "_" + counter + ".plog";
 		
-		String newFile = FilenameUtils.concat(path,name);
+		String newFile = FilenameUtils.concat(outputDir,name);
 		logger.info("write file "+newFile + " rows = "+ rows.size());
+
+		LoggingSplittFileView.updateView("write file "+newFile + " rows = "+ rows.size());					
 
 		File of = new File(newFile);
 		
@@ -77,25 +63,32 @@ public class SplitFile {
 		
 		logger.info("exit write file "+newFile + " ");
 		
-		
 	}
 	
-	private int splitFile(File file) {
+	public int splitFile(File file) {
 		
 		int count = 0;
 		int size = 0;
+		int allsize = 0;
 		int counter = 1;
-		int maxSize = 100000000;
 		LineIterator li;
-		List<String> rows = new ArrayList<String>();
+		long fileSize = file.length();
+		List<String> rows = new ArrayList<String>(50000);
 		try {
 			li = FileUtils.lineIterator(file);
 			while ( li.hasNext()) {
+				if ( canceled )
+					break;
 				String s  = li.nextLine();
 				rows.add(s);
-				count++;
+
+				if ( ++count % 1000 == 0 ) {
+					LoggingSplittFileView.updateProgressBar(allsize,fileSize);					
+				}
+				
 				size = size + s.length();
-				if ( size > maxSize ) {
+				allsize += s.length();
+				if ( size > maxFileSize ) {
 					writeFile(file,counter,rows);
 					rows.clear();
 					size = 0;
@@ -105,16 +98,40 @@ public class SplitFile {
 			}
 			
 			writeFile(file,counter,rows);
+			LoggingSplittFileView.updateProgressBar(999,1000);					
 			return count;
 			
 			
 		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			logger.error(e2.getMessage(), e2);
 		}
 		return -1;
 		
 		
+	}
+
+
+	@Override
+	public String call() throws Exception {
+		long start = System.currentTimeMillis();
+		logger.info("start splitt file  " + logFile.getAbsolutePath());
+		splitFile(logFile);
+		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
+		if ( canceled)
+			LoggingSplittFileView.updateView("canceled");
+		else
+			LoggingSplittFileView.updateView("exit");					
+		return null;
+	}
+
+
+	public boolean isCanceled() {
+		return canceled;
+	}
+
+
+	public void setCanceled(boolean canceled) {
+		this.canceled = canceled;
 	}
 
 }

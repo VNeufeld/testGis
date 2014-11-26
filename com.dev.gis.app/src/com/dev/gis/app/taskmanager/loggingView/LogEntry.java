@@ -7,6 +7,10 @@ import java.util.List;
 public class LogEntry implements Comparable<LogEntry> {
 	
 	private Date date;
+	private String sessionId;
+	private String bookingId;
+	private String price;
+	
 	private List<String> entry = new ArrayList<String>();
 	
 	public LogEntry(Date time) {
@@ -35,6 +39,24 @@ public class LogEntry implements Comparable<LogEntry> {
 	public int compareTo(LogEntry arg) {
 		// TODO Auto-generated method stub
 		return date.compareTo(arg.date);
+	}
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public String getBookingId() {
+		return bookingId;
+	}
+	public void setBookingId(String bookingId) {
+		this.bookingId = bookingId;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
 	}
 	
 	

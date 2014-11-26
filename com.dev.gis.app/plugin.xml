@@ -98,6 +98,14 @@
       </view>
       <view
             allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.loggingView.LoggingSplittFileView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.task.LoggingSplittView"
+            name="LoggingSplittFileView"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="false"
             class="com.dev.gis.app.taskmanager.testAppView.TestAppPaymentView"
             icon="icons/sample.gif"
             id="com.dev.gis.app.task.TestAppPaymentView"

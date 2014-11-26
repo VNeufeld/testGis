@@ -90,20 +90,22 @@ public class TaskTreeView extends ViewPart {
 				IStructuredSelection sel = (IStructuredSelection) treeViewer.getSelection();
 				
 				// get task
-				TaskItem  taskItem = (TaskItem) sel.getFirstElement();
-				ITask task = taskItem.getDataProvider().getTask();
-
-				logger.info(" start task :"+task);
-				
-				// execute task
-				if (task instanceof IExecutableTask ) {
-					TaskExecuter.startExecutionTask((IExecutableTask)task);
+				if ( sel.getFirstElement() instanceof TaskItem) {
+					TaskItem  taskItem = (TaskItem) sel.getFirstElement();
+					ITask task = taskItem.getDataProvider().getTask();
+	
+					logger.info(" start task :"+task);
+					
+					// execute task
+					if (task instanceof IExecutableTask ) {
+						TaskExecuter.startExecutionTask((IExecutableTask)task);
+					}
+					else if ( task instanceof IEditableTask) {
+						TaskViewUpdater viewUpdater = new TaskViewUpdater(task.getViewID());
+						viewUpdater.showResult(null);
+					}
+					logger.info("task is running in "+(System.currentTimeMillis() - startTime) + " ms.");
 				}
-				else if ( task instanceof IEditableTask) {
-					TaskViewUpdater viewUpdater = new TaskViewUpdater(task.getViewID());
-					viewUpdater.showResult(null);
-				}
-				logger.info("task is running in "+(System.currentTimeMillis() - startTime) + " ms.");
 
 			}
 
