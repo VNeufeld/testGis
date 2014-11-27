@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.loggingView;
+package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
 

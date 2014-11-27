@@ -1,7 +1,6 @@
-package com.dev.gis.app.taskmanager.loggingView;
+package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -10,7 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 import java.util.concurrent.Callable;
 
 import org.apache.commons.io.FileUtils;
@@ -18,17 +16,20 @@ import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-public class SplitterFileService implements Callable<List<LogEntry>> {
+import com.dev.gis.app.task.model.FileNameEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
+
+class SessionFileService implements Callable<List<LogEntry>> {
 
 	private final static Logger logger = Logger
-			.getLogger(SplitterFileService.class);
+			.getLogger(SessionFileService.class);
 
 	private Deque<String> savedLines = new ArrayDeque<String>();
 
 	private final File logFile;
 	private final String sessionId;
 
-	public SplitterFileService(File file, String sessionId) {
+	public SessionFileService(File file, String sessionId) {
 		this.logFile = file;
 		this.sessionId = sessionId;
 
@@ -40,8 +41,15 @@ public class SplitterFileService implements Callable<List<LogEntry>> {
 		logger.info("start splitter session " + sessionId + " in file "
 				+ logFile.getAbsolutePath());
 		logger.info("File size = " + logFile.length());
+		
+		FileNameEntryModel.getInstance().setStatus(logFile, "running");
+		LoggingAppView.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
+		
 
 		List<LogEntry> r = readLogEntries(logFile, this.sessionId);
+		
+		FileNameEntryModel.getInstance().setStatus(logFile, "completed");
+		LoggingAppView.updateFileModel();					
 
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start)
 				+ " ms.");
@@ -69,8 +77,8 @@ public class SplitterFileService implements Callable<List<LogEntry>> {
 				readedSize = readedSize + s.length();
 				if (++count % 1000 == 0) {
 					//logger.info("check " + count + " lines");
-					LoggingAppView.updateView("check " + count + " lines");
-					LoggingAppView.updateProgressBar(readedSize, fileSize);
+					LoggingAppView.updateProgressBar(readedSize,fileSize);
+					
 				}
 
 				boolean sessionFlagFound = s.contains(sessionId);

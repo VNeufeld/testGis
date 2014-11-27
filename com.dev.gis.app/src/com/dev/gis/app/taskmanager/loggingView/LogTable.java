@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
 
 public class LogTable {
 	private TableViewer viewer;

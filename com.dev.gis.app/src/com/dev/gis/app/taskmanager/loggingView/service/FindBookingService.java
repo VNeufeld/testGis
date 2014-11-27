@@ -1,7 +1,6 @@
-package com.dev.gis.app.taskmanager.loggingView;
+package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -12,18 +11,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-public class SplittFileToSession implements Callable<String> {
+import com.dev.gis.app.task.model.FileNameEntryModel;
+import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 
-	private static Logger logger = Logger.getLogger(SplittFileToSession.class);
+public class FindBookingService implements Callable<String> {
 
-	private final String outputDir;
+	private static Logger logger = Logger.getLogger(FindBookingService.class);
+
 	private final String logDir;
-	private final String sessionId;
 	private final String bookingId;
 	private final int maxThreads;
 	private final Calendar loggingFromDate;
@@ -34,8 +33,8 @@ public class SplittFileToSession implements Callable<String> {
 
 	private List<LogEntry> entries = new ArrayList<LogEntry>();
 
-	public SplittFileToSession(String dirName,
-			String outputDir, String sessionId, String bookingId,
+	public FindBookingService(String dirName,
+			String bookingId,
 			String maxThreadsText, Calendar loggingFromDate,
 			Calendar loggingToDate) {
 
@@ -45,8 +44,6 @@ public class SplittFileToSession implements Callable<String> {
 			logDir = null;
 		}
 
-		this.outputDir = outputDir;
-		this.sessionId = sessionId;
 		this.bookingId = bookingId;
 		this.loggingFromDate = loggingFromDate;
 		this.loggingToDate = loggingToDate;
@@ -66,26 +63,34 @@ public class SplittFileToSession implements Callable<String> {
 	}
 
 
-	private void splitToSession() {
+	private void searchBooking() {
 		try {
 
 			File[] files = LoggingUtils.getAllFilesRecurisive(logDir, loggingFromDate,
 					loggingToDate);
+			
+			if (files.length == 0 ) {
+				LoggingAppView.updateView("error: no files found for this search criteria.");					
+				return;
+			}
+			
+			FileNameEntryModel.getInstance().create(files);
+			LoggingAppView.updateFileModel();					
+			
 			entries.clear();
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);
 			
-			List<SplitterFileService> splitterServicers = new ArrayList<SplitterFileService>();
+			List<SearchBookingFileService> services = new ArrayList<SearchBookingFileService>();
 			
 			for (File file : files) {
 				logger.info("check file :"+file.getAbsolutePath());
 
-				SplitterFileService ss = new SplitterFileService(file,this.sessionId);
-				splitterServicers.add(ss);
+				SearchBookingFileService ss = new SearchBookingFileService(file,this.bookingId);
+				services.add(ss);
 			}
 				
-			List<Future< List<LogEntry>>> results = executor
-					.invokeAll(splitterServicers);
+			List<Future< List<LogEntry>>> results = executor.invokeAll(services);
 			
 			for (Future<List<LogEntry>> fc : results) {
 				List<LogEntry> le = fc.get();
@@ -93,44 +98,36 @@ public class SplittFileToSession implements Callable<String> {
 			}
 		
 		
-			logger.info(" sort " + entries.size()+ " entries");
 			Collections.sort(entries);
 
-			logger.info(" save " + entries.size()+ " entries");
-			writeEntries();
+			//writeEntries();
+
 			logger.info(" save " + entries.size()+ " entries successfull");
 			
-			LoggingAppView.updateView("exit");					
+			String possibleSessionId = null;
+			if (entries.size() > 0 && entries.get(0).getEntry().size() > 0) {
+				possibleSessionId =  entries.get(0).getEntry().get(0);
+				LogEntryModel.getInstance().clear();
+				LogEntryModel.getInstance().getEntries().addAll(entries);
+				LogEntryModel.getInstance().interprete();
+				
+			}
+			else
+				possibleSessionId = "booking not found";
+			
+			LoggingAppView.updateView("session: "+possibleSessionId);					
 			
 			
-		} catch (IOException | InterruptedException | ExecutionException ioe) {
+		} catch (InterruptedException | ExecutionException ioe) {
 			logger.info(ioe.getMessage(), ioe);
 		}
-	}
-
-	private void writeEntries() throws IOException {
-
-		String name = FilenameUtils.getName("log_hsgw_" + sessionId + ".plog");
-
-		String newFile = FilenameUtils.concat(outputDir, name);
-
-		File of = new File(newFile);
-
-		logger.info("write sessions to :"+newFile);
-
-		List<String> list = new ArrayList<String>();
-		for (LogEntry entry : entries) {
-			list.addAll(entry.getEntry());
-		}
-		FileUtils.writeLines(of, list);
-
 	}
 
 	@Override
 	public String call() throws Exception {
 		long start = System.currentTimeMillis();
-		logger.info("start splitter session " + sessionId);
-		splitToSession();
+		logger.info("start searching booking " + bookingId);
+		searchBooking();
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
 		return null;
 	}

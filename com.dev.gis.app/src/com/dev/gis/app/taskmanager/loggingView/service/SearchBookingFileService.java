@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.loggingView;
+package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,16 +14,17 @@ import org.apache.commons.io.LineIterator;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 
-public class FindBookingService implements Callable<List<LogEntry>> {
+class SearchBookingFileService implements Callable<List<LogEntry>> {
 	
-	private final static Logger logger = Logger.getLogger(FindBookingService.class);
+	private final static Logger logger = Logger.getLogger(SearchBookingFileService.class);
 	
 	
 	private final File  logFile;
 	private final String bookingId;
 
-	public FindBookingService(File file, String bookingId) {
+	public SearchBookingFileService(File file, String bookingId) {
 		this.logFile = file;
 		this.bookingId = bookingId;
 		

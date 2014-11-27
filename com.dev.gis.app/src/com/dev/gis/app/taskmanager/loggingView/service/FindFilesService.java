@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.loggingView;
+package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
 import java.util.Calendar;
@@ -8,17 +8,18 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 
-public class FindFilesToSession implements Callable<String> {
+public class FindFilesService implements Callable<String> {
 
-	private static Logger logger = Logger.getLogger(FindFilesToSession.class);
+	private static Logger logger = Logger.getLogger(FindFilesService.class);
 
 	private final String logDir;
 	private final Calendar loggingFromDate;
 	private final Calendar loggingToDate;
 	
 
-	public FindFilesToSession(String dirName,	
+	public FindFilesService(String dirName,	
 			Calendar loggingFromDate,
 			Calendar loggingToDate) {
 

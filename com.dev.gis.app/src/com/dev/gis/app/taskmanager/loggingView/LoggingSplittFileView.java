@@ -44,6 +44,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.app.taskmanager.loggingView.service.SplitToFileService;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.ITaskResult;
@@ -77,7 +78,7 @@ public class LoggingSplittFileView extends TaskViewAbstract {
 	
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
 	
-	SplitFile splittFile = null;
+	SplitToFileService splittFile = null;
 
 	
 	@Override
@@ -218,7 +219,7 @@ public class LoggingSplittFileView extends TaskViewAbstract {
 				buttonSplit.setEnabled(false);
 				buttonSplit.setText(" Wait ....");
 				
-				splittFile = new SplitFile(logFileText.getText(),outputDirText.getText(), 
+				splittFile = new SplitToFileService(logFileText.getText(),outputDirText.getText(), 
 						maxFileSizeText.getText());
 				
 				executor.submit(splittFile);

@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.loggingView;
+package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,15 +18,15 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
-import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 
-public class FindBooking implements Callable<String> {
+public class WriteSessionService implements Callable<String> {
 
-	private static Logger logger = Logger.getLogger(FindBooking.class);
+	private static Logger logger = Logger.getLogger(WriteSessionService.class);
 
 	private final String outputDir;
 	private final String logDir;
-	private final String bookingId;
+	private final String sessionId;
 	private final int maxThreads;
 	private final Calendar loggingFromDate;
 	private final Calendar loggingToDate;
@@ -36,8 +36,8 @@ public class FindBooking implements Callable<String> {
 
 	private List<LogEntry> entries = new ArrayList<LogEntry>();
 
-	public FindBooking(String dirName,
-			String outputDir, String bookingId,
+	public WriteSessionService(String dirName,
+			String outputDir, String sessionId,
 			String maxThreadsText, Calendar loggingFromDate,
 			Calendar loggingToDate) {
 
@@ -48,7 +48,7 @@ public class FindBooking implements Callable<String> {
 		}
 
 		this.outputDir = outputDir;
-		this.bookingId = bookingId;
+		this.sessionId = sessionId;
 		this.loggingFromDate = loggingFromDate;
 		this.loggingToDate = loggingToDate;
 		if (StringUtils.isBlank(maxThreadsText))
@@ -67,34 +67,29 @@ public class FindBooking implements Callable<String> {
 	}
 
 
-	private void searchBooking() {
+	private void splitToSession() {
 		try {
 
 			File[] files = LoggingUtils.getAllFilesRecurisive(logDir, loggingFromDate,
 					loggingToDate);
-			
-			if (files.length == 0 ) {
-				LoggingAppView.updateView("error: no files found for this search criteria.");					
-				return;
-			}
-			
+			entries.clear();
+
 			FileNameEntryModel.getInstance().create(files);
 			LoggingAppView.updateFileModel();					
-			
-			entries.clear();
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);
 			
-			List<FindBookingService> services = new ArrayList<FindBookingService>();
+			List<SessionFileService> splitterServicers = new ArrayList<SessionFileService>();
 			
 			for (File file : files) {
 				logger.info("check file :"+file.getAbsolutePath());
 
-				FindBookingService ss = new FindBookingService(file,this.bookingId);
-				services.add(ss);
+				SessionFileService ss = new SessionFileService(file,this.sessionId);
+				splitterServicers.add(ss);
 			}
 				
-			List<Future< List<LogEntry>>> results = executor.invokeAll(services);
+			List<Future< List<LogEntry>>> results = executor
+					.invokeAll(splitterServicers);
 			
 			for (Future<List<LogEntry>> fc : results) {
 				List<LogEntry> le = fc.get();
@@ -102,34 +97,24 @@ public class FindBooking implements Callable<String> {
 			}
 		
 		
+			logger.info(" sort " + entries.size()+ " entries");
 			Collections.sort(entries);
 
-			//writeEntries();
-
+			logger.info(" save " + entries.size()+ " entries");
+			writeEntries();
 			logger.info(" save " + entries.size()+ " entries successfull");
 			
-			String possibleSessionId = null;
-			if (entries.size() > 0 && entries.get(0).getEntry().size() > 0) {
-				possibleSessionId =  entries.get(0).getEntry().get(0);
-				LogEntryModel.getInstance().clear();
-				LogEntryModel.getInstance().getEntries().addAll(entries);
-				LogEntryModel.getInstance().interprete();
-				
-			}
-			else
-				possibleSessionId = "booking not found";
-			
-			LoggingAppView.updateView("session: "+possibleSessionId);					
+			LoggingAppView.updateView("exit");					
 			
 			
-		} catch (InterruptedException | ExecutionException ioe) {
+		} catch (IOException | InterruptedException | ExecutionException ioe) {
 			logger.info(ioe.getMessage(), ioe);
 		}
 	}
 
 	private void writeEntries() throws IOException {
 
-		String name = FilenameUtils.getName("log_hsgw_" + bookingId + ".plog");
+		String name = FilenameUtils.getName("log_hsgw_" + sessionId + ".plog");
 
 		String newFile = FilenameUtils.concat(outputDir, name);
 
@@ -142,14 +127,17 @@ public class FindBooking implements Callable<String> {
 			list.addAll(entry.getEntry());
 		}
 		FileUtils.writeLines(of, list);
+		
+		LoggingAppView.updateFileName("write result in " + newFile);
+
 
 	}
 
 	@Override
 	public String call() throws Exception {
 		long start = System.currentTimeMillis();
-		logger.info("start searching booking " + bookingId);
-		searchBooking();
+		logger.info("start splitter session " + sessionId);
+		splitToSession();
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
 		return null;
 	}

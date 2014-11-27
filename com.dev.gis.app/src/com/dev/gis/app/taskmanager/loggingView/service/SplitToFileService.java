@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.loggingView;
+package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +12,10 @@ import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-public class SplitFile implements Callable<String> {
-	private static Logger logger = Logger.getLogger(SplitFile.class);
+import com.dev.gis.app.taskmanager.loggingView.LoggingSplittFileView;
+
+public class SplitToFileService implements Callable<String> {
+	private static Logger logger = Logger.getLogger(SplitToFileService.class);
 
 	private final File logFile;
 	private final String outputDir;
@@ -21,7 +23,7 @@ public class SplitFile implements Callable<String> {
 	
 	private boolean canceled = false;
 
-	public SplitFile(String fileName, String outputDir,
+	public SplitToFileService(String fileName, String outputDir,
 			String maxFileSizeText) {
 
 		if (StringUtils.isNotEmpty(fileName)) {

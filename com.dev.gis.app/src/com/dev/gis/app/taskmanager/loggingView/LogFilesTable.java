@@ -25,6 +25,7 @@ import org.eclipse.ui.IWorkbenchPartSite;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.service.FileNameEntry;
 
 public class LogFilesTable {
 	private TableViewer viewer;

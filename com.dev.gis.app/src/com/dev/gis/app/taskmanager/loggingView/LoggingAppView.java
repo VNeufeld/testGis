@@ -27,6 +27,10 @@ import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.app.taskmanager.loggingView.service.FindBookingService;
+import com.dev.gis.app.taskmanager.loggingView.service.FindFilesService;
+import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
+import com.dev.gis.app.taskmanager.loggingView.service.WriteSessionService;
 import com.dev.gis.task.execution.api.ITaskResult;
 
 public class LoggingAppView extends TaskViewAbstract {
@@ -64,11 +68,11 @@ public class LoggingAppView extends TaskViewAbstract {
 
 	private Text filesCount;
 	
-	private CursorManager  cursorManager;
+	//private CursorManager  cursorManager;
 	
-	private SplittFileToSession splittFileToSession = null;
+	private WriteSessionService splittFileToSession = null;
 	
-	private FindBooking findBooking = null;
+	private FindBookingService findBooking = null;
 	
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
 	
@@ -76,7 +80,7 @@ public class LoggingAppView extends TaskViewAbstract {
 	@Override
 	public void createPartControl(final Composite parent) {
 		
-		cursorManager = new CursorManager(parent);
+		//cursorManager = new CursorManager(parent);
 		
 		final Group group = new Group(parent, SWT.TITLE);
 		group.setText("Session Logging:");
@@ -294,10 +298,11 @@ public class LoggingAppView extends TaskViewAbstract {
 				buttonSession.setEnabled(false);
 				buttonSession.setText(" Wait ....");
 				
-				buttonStop.setEnabled(true);
+				//buttonStop.setEnabled(true);
+				FileNameEntryModel.getInstance().getEntries().clear();
 				
-				splittFileToSession = new SplittFileToSession(logDirText.getText(),outputDirText.getText(), 
-						sessionIdText.getText(),bookingIdText.getText(),
+				splittFileToSession = new WriteSessionService(logDirText.getText(),outputDirText.getText(), 
+						sessionIdText.getText(),
 						maxThreadsText.getText(),
 						loggingFromDate,loggingToDate);
 				
@@ -367,7 +372,7 @@ public class LoggingAppView extends TaskViewAbstract {
 				
 				//buttonStop.setEnabled(true);
 				
-				findBooking = new FindBooking(logDirText.getText(),outputDirText.getText(), 
+				findBooking = new FindBookingService(logDirText.getText(), 
 						bookingIdText.getText(),
 						maxThreadsText.getText(),
 						loggingFromDate,loggingToDate);
@@ -472,7 +477,7 @@ public class LoggingAppView extends TaskViewAbstract {
 				logFilesTable.update();
 				FileNameEntryModel.getInstance().getEntries().clear();
 				
-				FindFilesToSession ff = new FindFilesToSession(logDirText.getText(),
+				FindFilesService ff = new FindFilesService(logDirText.getText(),
 						loggingFromDate,loggingToDate);
 				
 				executor.submit(ff);

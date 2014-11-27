@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.loggingView;
+package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
 import java.text.ParseException;
@@ -13,7 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-public class LoggingUtils {
+class LoggingUtils {
 	
 	private static Logger logger = Logger.getLogger(LoggingUtils.class);
 
