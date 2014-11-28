@@ -5,6 +5,7 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
 import com.dev.gis.app.taskmanager.TaskTreeView;
+import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 
 public class Perspective implements IPerspectiveFactory {
 
@@ -18,16 +19,17 @@ public class Perspective implements IPerspectiveFactory {
 		layout.setEditorAreaVisible(false);
 		
 		IFolderLayout navFolder = layout.createFolder("projects",
-				IPageLayout.LEFT, 0.25f, editorArea);
-		navFolder.addView(NavigationView.ID);
+				IPageLayout.LEFT, 0.1f, editorArea);
+		//navFolder.addView(NavigationView.ID);
 		navFolder.addView(TaskTreeView.ID);
 		
 		
 		//layout.addStandaloneView(NavigationView.ID,  false, IPageLayout.LEFT, 0.25f, editorArea);
-		IFolderLayout folder = layout.createFolder("messages", IPageLayout.TOP, 0.5f, editorArea);
-		folder.addPlaceholder(View.ID + ":*");
-		folder.addView(View.ID);
+		IFolderLayout folder = layout.createFolder("BPCS Tools", IPageLayout.TOP, 0.5f, editorArea);
+		folder.addPlaceholder(LoggingAppView.ID + ":*");
+		folder.addView(LoggingAppView.ID);
 		
-		layout.getViewLayout(NavigationView.ID).setCloseable(false);
+		//layout.getViewLayout(NavigationView.ID).setCloseable(false);
+		layout.getViewLayout(TaskTreeView.ID).setCloseable(false);
 	}
 }

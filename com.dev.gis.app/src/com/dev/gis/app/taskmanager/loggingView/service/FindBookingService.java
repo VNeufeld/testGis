@@ -16,7 +16,9 @@ import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
+import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 
 public class FindBookingService implements Callable<String> {
 
@@ -27,7 +29,8 @@ public class FindBookingService implements Callable<String> {
 	private final int maxThreads;
 	private final Calendar loggingFromDate;
 	private final Calendar loggingToDate;
-	
+	private final String   filePattern;
+
 	private boolean canceled = false;
 
 
@@ -35,7 +38,9 @@ public class FindBookingService implements Callable<String> {
 
 	public FindBookingService(String dirName,
 			String bookingId,
-			String maxThreadsText, Calendar loggingFromDate,
+			String maxThreadsText,
+			String   filePattern,
+			Calendar loggingFromDate,
 			Calendar loggingToDate) {
 
 		if (StringUtils.isNotEmpty(dirName)) {
@@ -44,6 +49,7 @@ public class FindBookingService implements Callable<String> {
 			logDir = null;
 		}
 
+		this.filePattern = filePattern;
 		this.bookingId = bookingId;
 		this.loggingFromDate = loggingFromDate;
 		this.loggingToDate = loggingToDate;
@@ -66,16 +72,17 @@ public class FindBookingService implements Callable<String> {
 	private void searchBooking() {
 		try {
 
-			File[] files = LoggingUtils.getAllFilesRecurisive(logDir, loggingFromDate,
+			File[] files = LoggingUtils.getAllFilesRecurisive(logDir, filePattern, loggingFromDate,
 					loggingToDate);
 			
 			if (files.length == 0 ) {
-				LoggingAppView.updateView("error: no files found for this search criteria.");					
+				LogViewUpdater.updateView("error: no files found for this search criteria.");					
 				return;
 			}
 			
 			FileNameEntryModel.getInstance().create(files);
-			LoggingAppView.updateFileModel();					
+			LogFileTableUpdater.showResult();					
+			
 			
 			entries.clear();
 
@@ -115,7 +122,7 @@ public class FindBookingService implements Callable<String> {
 			else
 				possibleSessionId = "booking not found";
 			
-			LoggingAppView.updateView("session: "+possibleSessionId);					
+			LogViewUpdater.updateView("session: "+possibleSessionId);					
 			
 			
 		} catch (InterruptedException | ExecutionException ioe) {

@@ -18,6 +18,8 @@ import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
+import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
+import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
 
 class SessionFileService implements Callable<List<LogEntry>> {
 
@@ -43,13 +45,15 @@ class SessionFileService implements Callable<List<LogEntry>> {
 		logger.info("File size = " + logFile.length());
 		
 		FileNameEntryModel.getInstance().setStatus(logFile, "running");
-		LoggingAppView.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
+		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
 		
 
 		List<LogEntry> r = readLogEntries(logFile, this.sessionId);
 		
 		FileNameEntryModel.getInstance().setStatus(logFile, "completed");
-		LoggingAppView.updateFileModel();					
+		//LoggingAppView.updateFileModel();
+		LogFileTableUpdater.showResult();					
+		
 
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start)
 				+ " ms.");
@@ -77,7 +81,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 				readedSize = readedSize + s.length();
 				if (++count % 1000 == 0) {
 					//logger.info("check " + count + " lines");
-					LoggingAppView.updateProgressBar(readedSize,fileSize);
+					ProgressBarElement.updateProgressBar(readedSize,fileSize);
 					
 				}
 

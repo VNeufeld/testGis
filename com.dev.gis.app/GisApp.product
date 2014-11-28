@@ -6,7 +6,8 @@
    <aboutInfo>
       <image path="product_lg.gif"/>
       <text>
-         RCP Mail template created by PDE
+         BPCS Tool
+Copyright 2015
       </text>
    </aboutInfo>
 
@@ -19,10 +20,20 @@
 
    <windowImages i16="icons/sample2.gif"/>
 
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+
    <plugins>
       <plugin id="com.dev.gis.app"/>
       <plugin id="com.dev.gis.connector"/>
-      <plugin id="com.dev.gis.db"/>
       <plugin id="com.dev.gis.libs"/>
       <plugin id="com.dev.gis.task"/>
       <plugin id="com.dev.gis.utils"/>

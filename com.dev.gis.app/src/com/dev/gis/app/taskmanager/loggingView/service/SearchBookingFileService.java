@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
+import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
+import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
 
 class SearchBookingFileService implements Callable<List<LogEntry>> {
 	
@@ -38,13 +40,15 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 
 		FileNameEntryModel.getInstance().setStatus(logFile, "running");
 
-		LoggingAppView.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
+		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
 		
 		List<LogEntry> r = readLogEntries(logFile, this.bookingId);
 		
 
 		FileNameEntryModel.getInstance().setStatus(logFile, "completed");
-		LoggingAppView.updateFileModel();					
+		//LoggingAppView.updateFileModel();					
+		LogFileTableUpdater.showResult();					
+		
 
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
 		return r;
@@ -72,7 +76,7 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 				if (++count % 1000 == 0) {
 					//logger.info("check "+count + " lines");
 					//LoggingAppView.updateView("check "+count + " lines");
-					LoggingAppView.updateProgressBar(readedSize,fileSize);
+					ProgressBarElement.updateProgressBar(readedSize,fileSize);
 				}
 				
 				Date time = getTimeString(s);

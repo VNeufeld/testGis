@@ -4,6 +4,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskTreeView;
 import com.dev.gis.app.taskmanager.executionView.TaskExecutionView;
@@ -30,8 +31,11 @@ public class MessagePopupAction extends Action {
 			((TaskExecutionView)viewPart).refresh();
 			
 		}
+		
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow() 
+		.getActivePage().resetPerspective(); 
     	
     	
-        //MessageDialog.openInformation(window.getShell(), "Open", "Open Message Dialog!");
+        MessageDialog.openInformation(window.getShell(), "Open", "Open Message Dialog!");
     }
 }

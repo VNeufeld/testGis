@@ -18,7 +18,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
-import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
+import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
+import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
+import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
 
 public class WriteSessionService implements Callable<String> {
 
@@ -27,6 +29,7 @@ public class WriteSessionService implements Callable<String> {
 	private final String outputDir;
 	private final String logDir;
 	private final String sessionId;
+	private final String filePattern;
 	private final int maxThreads;
 	private final Calendar loggingFromDate;
 	private final Calendar loggingToDate;
@@ -38,7 +41,9 @@ public class WriteSessionService implements Callable<String> {
 
 	public WriteSessionService(String dirName,
 			String outputDir, String sessionId,
-			String maxThreadsText, Calendar loggingFromDate,
+			String maxThreadsText,
+			String filePattern,
+			Calendar loggingFromDate,
 			Calendar loggingToDate) {
 
 		if (StringUtils.isNotEmpty(dirName)) {
@@ -47,6 +52,7 @@ public class WriteSessionService implements Callable<String> {
 			logDir = null;
 		}
 
+		this.filePattern = filePattern;
 		this.outputDir = outputDir;
 		this.sessionId = sessionId;
 		this.loggingFromDate = loggingFromDate;
@@ -70,12 +76,14 @@ public class WriteSessionService implements Callable<String> {
 	private void splitToSession() {
 		try {
 
-			File[] files = LoggingUtils.getAllFilesRecurisive(logDir, loggingFromDate,
+			File[] files = LoggingUtils.getAllFilesRecurisive(logDir,filePattern, loggingFromDate,
 					loggingToDate);
 			entries.clear();
 
 			FileNameEntryModel.getInstance().create(files);
-			LoggingAppView.updateFileModel();					
+			//LoggingAppView.updateFileModel();		
+			LogFileTableUpdater.showResult();					
+			
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);
 			
@@ -104,7 +112,7 @@ public class WriteSessionService implements Callable<String> {
 			writeEntries();
 			logger.info(" save " + entries.size()+ " entries successfull");
 			
-			LoggingAppView.updateView("exit");					
+			LogViewUpdater.updateView("exit");					
 			
 			
 		} catch (IOException | InterruptedException | ExecutionException ioe) {
@@ -128,7 +136,7 @@ public class WriteSessionService implements Callable<String> {
 		}
 		FileUtils.writeLines(of, list);
 		
-		LoggingAppView.updateFileName("write result in " + newFile);
+		ProgressBarElement.updateFileName("write result in " + newFile);
 
 
 	}

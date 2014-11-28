@@ -9,7 +9,7 @@ public class TaskProjectModelFactory {
 		TaskProjectModel model = TaskProjectModel.getInstance();
 		
 		model.setName("TaskProjectModel");
-		
+/*		
 		TaskItem taskItem = TaskItem.createTask("locationSearch", "folder_edit.png", "test json http request locationSearch");
 		if ( taskItem != null)
 			model.getGroups().getFirst().getTasks().add(taskItem);
@@ -30,8 +30,8 @@ public class TaskProjectModelFactory {
 		TaskGroup taskGroup = new TaskGroup("HSGW");
 		model.getGroups().add(taskGroup);
 		taskGroup.getTasks().add(TaskItem.createTask("HSGW GetCars", "folder.png", "test hsgw http request GetCars"));
-			
-		taskGroup = new TaskGroup("Logging");
+*/			
+		TaskGroup taskGroup = new TaskGroup("Logging");
 		model.getGroups().add(taskGroup);
 		taskGroup.getTasks().add(TaskItem.createTask("Splitt", "folder_edit.png", "Splitt Logging"));
 		taskGroup.getTasks().add(TaskItem.createTask("SearchSession", "folder_edit.png", "Search session"));

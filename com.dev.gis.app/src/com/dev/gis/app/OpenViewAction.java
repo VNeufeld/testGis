@@ -25,12 +25,12 @@ public class OpenViewAction extends Action {
 	}
 	
 	public void run() {
-		if(window != null) {	
-			try {
-				window.getActivePage().showView(viewId, Integer.toString(instanceNum++), IWorkbenchPage.VIEW_ACTIVATE);
-			} catch (PartInitException e) {
-				MessageDialog.openError(window.getShell(), "Error", "Error opening view:" + e.getMessage());
-			}
-		}
+//		if(window != null) {	
+//			try {
+//				window.getActivePage().showView(viewId, Integer.toString(instanceNum++), IWorkbenchPage.VIEW_ACTIVATE);
+//			} catch (PartInitException e) {
+//				MessageDialog.openError(window.getShell(), "Error", "Error opening view:" + e.getMessage());
+//			}
+//		}
 	}
 }

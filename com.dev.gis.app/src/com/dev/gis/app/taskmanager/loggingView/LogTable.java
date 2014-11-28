@@ -26,10 +26,10 @@ import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
 
 public class LogTable {
 	private TableViewer viewer;
-	private final Group parent;
+	private final Composite parent;
 	private final IWorkbenchPartSite site;
 
-	public LogTable(Group group, IWorkbenchPartSite site) {
+	public LogTable(Composite group, IWorkbenchPartSite site) {
 		this.parent = group;
 		this.site = site;
 		createViewer(parent);
@@ -151,17 +151,6 @@ public class LogTable {
 		column.setMoveable(true);
 		return viewerColumn;
 	}
-
-	private TableViewerColumn createTableViewerTextColumn(String title, int bound,
-			final int colNumber) {
-		final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,SWT.NONE);
-		final TableColumn column = viewerColumn.getColumn();
-		column.setText(title);
-		//column.setWidth(bound);
-		column.setResizable(true);
-		column.setMoveable(true);
-		return viewerColumn;
-	}
 	
 	private static class DoubleClickListener implements IDoubleClickListener {
 
@@ -175,7 +164,7 @@ public class LogTable {
 			
 			LogEntry o = (LogEntry) selectedNode;
 			
-			LoggingAppView.updateView(o);
+			LogViewUpdater.updateView(o);
 
 		}
 

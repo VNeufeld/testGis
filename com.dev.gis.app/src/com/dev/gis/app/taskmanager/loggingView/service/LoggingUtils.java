@@ -40,15 +40,25 @@ class LoggingUtils {
 		return list.toArray(new File[0]);
 	}
 	
-	public static File[] getAllFilesRecurisive(String dirName, Calendar from, Calendar to) {
+	public static File[] getAllFilesRecurisive(String dirName, String filePattern, Calendar from, Calendar to) {
 		List<File> list = new ArrayList<File>();
 		File dir = new File(dirName);
 		if ( dir.exists() && dir.isDirectory()) {
 			Collection<File> files = FileUtils.listFiles(dir,null, true);
 			for ( File f : files) {
 				String fileName = f.getName();
-				if ( fileNameMatch2(fileName, from, to))
-					list.add(f);
+				boolean flag = true;
+				if ( StringUtils.isNotBlank(filePattern)) {
+					if (StringUtils.containsIgnoreCase(fileName,filePattern))
+						flag = true;
+					else
+						flag = false;
+					
+				}
+				if ( flag ) {
+					if ( fileNameMatch2(fileName, from, to))
+						list.add(f);
+				}
 			}
 			
 		}
@@ -79,7 +89,7 @@ class LoggingUtils {
 				to.set(Calendar.MINUTE,0);
 				to.set(Calendar.SECOND,0);
 				
-				logger.info("file : "+stf.format(c.getTime())+ " from : "+stf.format(from.getTime())+ " to : "+ stf.format(to.getTime()));
+				//logger.info("file : "+stf.format(c.getTime())+ " from : "+stf.format(from.getTime())+ " to : "+ stf.format(to.getTime()));
 				
 				if ( c.before(to) && c.after(from))
 					return true;
@@ -126,7 +136,7 @@ class LoggingUtils {
 				to.set(Calendar.MINUTE,0);
 				to.set(Calendar.SECOND,0);
 				
-				logger.info("file : "+stf.format(c.getTime())+ " from : "+stf.format(from.getTime())+ " to : "+ stf.format(to.getTime()));
+				//logger.info("file : "+stf.format(c.getTime())+ " from : "+stf.format(from.getTime())+ " to : "+ stf.format(to.getTime()));
 				
 				if ( c.before(to) && c.after(from))
 					return true;

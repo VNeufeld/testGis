@@ -30,15 +30,15 @@
             restorable="true">
       </view>
       <view
-            name="Message"
-            allowMultiple="true"
+            name="Message TT"
+            allowMultiple="false"
             icon="icons/sample2.gif"
             class="com.dev.gis.app.View"
             id="com.dev.gis.app.view">
       </view>
       <view
-            name="Mailboxes"
-            allowMultiple="true"
+            name="Mailboxes X"
+            allowMultiple="false"
             icon="icons/sample3.gif"
             class="com.dev.gis.app.NavigationView"
             id="com.dev.gis.app.navigationView">
@@ -93,11 +93,11 @@
             class="com.dev.gis.app.taskmanager.loggingView.LoggingAppView"
             icon="icons/sample.gif"
             id="com.dev.gis.app.task.LoggingAppView"
-            name="LoggingView"
+            name="Session Logging"
             restorable="true">
       </view>
       <view
-            allowMultiple="false"
+            allowMultiple="true"
             class="com.dev.gis.app.taskmanager.loggingView.LoggingSplittFileView"
             icon="icons/sample.gif"
             id="com.dev.gis.app.task.LoggingSplittView"
@@ -117,18 +117,18 @@
          point="org.eclipse.ui.commands">
       <category
             name="Mail"
-            id="com.dev.gis.app.category">
+            id="com.dev.gis.app.category1">
       </category>
       <command
             name="Open Mailbox"
             description="Opens a mailbox"
-            categoryId="com.dev.gis.app.category"
+            categoryId="com.dev.gis.app.category1"
             id="com.dev.gis.app.open">
       </command>
       <command
             name="Open Message Dialog"
             description="Open a message dialog"
-            categoryId="com.dev.gis.app.category"
+            categoryId="com.dev.gis.app.category1"
             id="com.dev.gis.app.openMessage">
       </command>
       <category
@@ -185,7 +185,7 @@
             name="GisAppProduct">
          <property
                name="aboutText"
-               value="RCP Mail template created by PDE">
+               value="BPCS Tool&#x0A;Copyright 2015">
          </property>
          <property
                name="windowImages"

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.dev.gis.app.taskmanager.loggingView.LogEntry;
+import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
 
 public class LogEntryModel  extends ModelObject {
 	private static LogEntryModel  instance = null;

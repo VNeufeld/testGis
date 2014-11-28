@@ -2,10 +2,10 @@ package com.dev.gis.app.taskmanager.loggingView;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -14,7 +14,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Menu;
@@ -24,13 +27,14 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
-import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.service.FileNameEntry;
+import com.dev.gis.app.taskmanager.loggingView.service.FindFilesService;
 
 public class LogFilesTable {
 	private TableViewer viewer;
 	private final Composite parent;
 	private final IWorkbenchPartSite site;
+
 
 	public LogFilesTable(Composite group, IWorkbenchPartSite site) {
 		this.parent = group;
@@ -57,10 +61,10 @@ public class LogFilesTable {
 		// define layout for the viewer
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 2;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
 		gridData.horizontalAlignment = GridData.FILL;
+		//gridData.horizontalSpan = 2;
+		gridData.grabExcessHorizontalSpace = false;
+		gridData.grabExcessVerticalSpace = true;
 		viewer.getControl().setLayoutData(gridData);
 
 		viewer.addDoubleClickListener(new DoubleClickListener());
@@ -82,8 +86,8 @@ public class LogFilesTable {
 		final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
 		final SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
 		
-		String[] titles = { "FileName", "size", "Dir", "Status" };
-		int[] bounds = { 400, 80, 400, 200 };
+		String[] titles = { "FileName", "Size", "Dir", "Status" };
+		int[] bounds = { 350, 100, 300, 80 };
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);

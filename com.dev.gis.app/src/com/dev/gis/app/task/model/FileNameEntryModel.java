@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.dev.gis.app.taskmanager.loggingView.FileNameEntry;
+import com.dev.gis.app.taskmanager.loggingView.service.FileNameEntry;
 
 public class FileNameEntryModel {
 	private static FileNameEntryModel  instance = null;

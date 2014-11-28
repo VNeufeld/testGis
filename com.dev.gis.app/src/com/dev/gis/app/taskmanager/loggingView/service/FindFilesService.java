@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
+import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 
 public class FindFilesService implements Callable<String> {
 
@@ -17,9 +18,11 @@ public class FindFilesService implements Callable<String> {
 	private final String logDir;
 	private final Calendar loggingFromDate;
 	private final Calendar loggingToDate;
+	private final String   filePattern;
 	
 
 	public FindFilesService(String dirName,	
+			String filePattern,
 			Calendar loggingFromDate,
 			Calendar loggingToDate) {
 
@@ -31,13 +34,14 @@ public class FindFilesService implements Callable<String> {
 
 		this.loggingFromDate = loggingFromDate;
 		this.loggingToDate = loggingToDate;
+		this.filePattern = filePattern;
 
 	}
 
 
 	private void findFileToSession() {
 
-			File[] files = LoggingUtils.getAllFilesRecurisive(logDir, loggingFromDate,
+			File[] files = LoggingUtils.getAllFilesRecurisive(logDir,filePattern, loggingFromDate,
 					loggingToDate);
 			
 			FileNameEntryModel.getInstance().create(files);
@@ -50,7 +54,7 @@ public class FindFilesService implements Callable<String> {
 		long start = System.currentTimeMillis();
 		logger.info("start FindFiles ");
 		findFileToSession();
-		LoggingAppView.updateFileModel();					
+		LogFileTableUpdater.showResult();					
 
 		logger.info("end FindFiles  " + (System.currentTimeMillis() - start) + " ms.");
 		return null;

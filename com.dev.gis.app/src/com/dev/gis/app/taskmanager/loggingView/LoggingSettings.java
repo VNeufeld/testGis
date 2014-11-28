@@ -24,6 +24,8 @@ public class LoggingSettings {
 	public static final String PREFERENCE_INPUT_DIR_PROPERTY = "logging.input.dir";
 	public static final String PREFERENCE_INPUT_FILE_PROPERTY = "logging.input.file";
 	public static final String PREFERENCE_SESSION_PROPERTY = "logging.input.session"; 
+	public static final String PREFERENCE_FILE_MATCH = "logging.input.matching"; 
+	
 	
 	public static final String PREFERENCE_START_TIME_PROPERTY = "startTimeProperty"; 
 	public static final String PREFERENCE_END_TIME_PROPERTY = "endTimeProperty"; 

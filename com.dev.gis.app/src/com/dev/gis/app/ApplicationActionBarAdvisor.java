@@ -51,11 +51,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         aboutAction = ActionFactory.ABOUT.create(window);
         register(aboutAction);
         
-        newWindowAction = ActionFactory.OPEN_NEW_WINDOW.create(window);
-        register(newWindowAction);
-        
-        openViewAction = new OpenViewAction(window, "Open Another Message View", View.ID);
-        register(openViewAction);
+//        newWindowAction = ActionFactory.OPEN_NEW_WINDOW.create(window);
+//        register(newWindowAction);
+//        
+//        openViewAction = new OpenViewAction(window, "Open Another Message View", View.ID);
+//        register(openViewAction);
         
         messagePopupAction = new MessagePopupAction("Open Message", window);
         register(messagePopupAction);
@@ -71,11 +71,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         menuBar.add(helpMenu);
         
         // File
-        fileMenu.add(newWindowAction);
-        fileMenu.add(new Separator());
-        fileMenu.add(messagePopupAction);
-        fileMenu.add(openViewAction);
-        fileMenu.add(new Separator());
+        //fileMenu.add(newWindowAction);
+        //fileMenu.add(new Separator());
+        //fileMenu.add(messagePopupAction);
+        //fileMenu.add(openViewAction);
+        //fileMenu.add(new Separator());
         fileMenu.add(exitAction);
         
         // Help
@@ -85,7 +85,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     protected void fillCoolBar(ICoolBarManager coolBar) {
         IToolBarManager toolbar = new ToolBarManager(SWT.FLAT | SWT.RIGHT);
         coolBar.add(new ToolBarContributionItem(toolbar, "main"));   
-        toolbar.add(openViewAction);
+        //toolbar.add(openViewAction);
         toolbar.add(messagePopupAction);
     }
 }
