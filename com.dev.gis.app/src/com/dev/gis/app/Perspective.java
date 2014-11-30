@@ -6,6 +6,7 @@ import org.eclipse.ui.IPerspectiveFactory;
 
 import com.dev.gis.app.taskmanager.TaskTreeView;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
+import com.dev.gis.app.taskmanager.loggingView.LoggingTableView;
 
 public class Perspective implements IPerspectiveFactory {
 
@@ -31,5 +32,10 @@ public class Perspective implements IPerspectiveFactory {
 		
 		//layout.getViewLayout(NavigationView.ID).setCloseable(false);
 		layout.getViewLayout(TaskTreeView.ID).setCloseable(false);
+		
+		IFolderLayout tabFolder = layout.createFolder("tables",
+				IPageLayout.BOTTOM, 0.3f, editorArea);
+		tabFolder.addView(LoggingTableView.ID);
+
 	}
 }
