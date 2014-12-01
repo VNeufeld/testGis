@@ -11,5 +11,6 @@ public interface ICommandIds {
 
     public static final String CMD_OPEN = "com.dev.gis.app.open";
     public static final String CMD_OPEN_MESSAGE = "com.dev.gis.app.openMessage";
+    public static final String CMD_STOP_PROCESS = "com.dev.gis.app.stopProcess";
     
 }

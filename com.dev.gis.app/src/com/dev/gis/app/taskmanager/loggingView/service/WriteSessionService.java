@@ -18,6 +18,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
+import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LogEntryTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
@@ -83,6 +85,9 @@ public class WriteSessionService implements Callable<String> {
 			FileNameEntryModel.getInstance().create(files);
 			//LoggingAppView.updateFileModel();		
 			LogFileTableUpdater.showResult();					
+			
+			LogEntryModel.getInstance().getLoggingEntries().clear();
+			LogEntryTableUpdater.showResult();
 			
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);

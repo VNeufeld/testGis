@@ -17,6 +17,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
+import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LogEntryTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
@@ -51,9 +53,10 @@ class SessionFileService implements Callable<List<LogEntry>> {
 		List<LogEntry> r = readLogEntries(logFile, this.sessionId);
 		
 		FileNameEntryModel.getInstance().setStatus(logFile, "completed");
-		//LoggingAppView.updateFileModel();
 		LogFileTableUpdater.showResult();					
 		
+		LogEntryModel.getInstance().getLoggingEntries().addAll(r);
+		LogEntryTableUpdater.showResult();
 
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start)
 				+ " ms.");

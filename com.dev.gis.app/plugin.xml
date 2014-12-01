@@ -114,10 +114,18 @@
       </view>
       <view
             allowMultiple="true"
-            class="com.dev.gis.app.taskmanager.loggingView.LoggingTableView"
+            class="com.dev.gis.app.taskmanager.loggingView.LogBookingEntryView"
             icon="icons/sample.gif"
             id="com.dev.gis.app.task.LoggingTableView"
-            name="Tables"
+            name="Booking list"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="true"
+            class="com.dev.gis.app.taskmanager.loggingView.LogEntryTableView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.task.LogEntryTableView"
+            name="LogEntries"
             restorable="true">
       </view>
    </extension>

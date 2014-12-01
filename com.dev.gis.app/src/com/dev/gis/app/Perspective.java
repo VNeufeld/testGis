@@ -5,8 +5,9 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
 import com.dev.gis.app.taskmanager.TaskTreeView;
+import com.dev.gis.app.taskmanager.loggingView.LogEntryTableView;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
-import com.dev.gis.app.taskmanager.loggingView.LoggingTableView;
+import com.dev.gis.app.taskmanager.loggingView.LogBookingEntryView;
 
 public class Perspective implements IPerspectiveFactory {
 
@@ -28,14 +29,17 @@ public class Perspective implements IPerspectiveFactory {
 		//layout.addStandaloneView(NavigationView.ID,  false, IPageLayout.LEFT, 0.25f, editorArea);
 		IFolderLayout folder = layout.createFolder("BPCS Tools", IPageLayout.TOP, 0.5f, editorArea);
 		folder.addPlaceholder(LoggingAppView.ID + ":*");
-		folder.addView(LoggingAppView.ID);
+		//folder.addView(LoggingAppView.ID);
 		
 		//layout.getViewLayout(NavigationView.ID).setCloseable(false);
 		layout.getViewLayout(TaskTreeView.ID).setCloseable(false);
 		
 		IFolderLayout tabFolder = layout.createFolder("tables",
 				IPageLayout.BOTTOM, 0.3f, editorArea);
-		tabFolder.addView(LoggingTableView.ID);
+		tabFolder.addPlaceholder(LogBookingEntryView.ID + ":*");
+		tabFolder.addPlaceholder(LogEntryTableView.ID + ":*");
+//		tabFolder.addView(LoggingTableView.ID);
+//		tabFolder.addView(LogEntryTableView.ID);
 
 	}
 }

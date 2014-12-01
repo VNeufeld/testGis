@@ -8,20 +8,18 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
-public class LoggingTableView extends ViewPart {
-	public static final String ID = "com.dev.gis.app.task.LoggingTableView";
+public class LogEntryTableView extends ViewPart {
+	public static final String ID = "com.dev.gis.app.task.LogEntryTableView";
 	
-	private final static Logger logger = Logger.getLogger(LoggingTableView.class);
+	private final static Logger logger = Logger.getLogger(LogEntryTableView.class);
 	
-	
-	private LogTable  logTable;
+	private LogEntryTable  logEntryTable;
 	
 	
 	
 	@Override
 	public void createPartControl(final Composite parent) {
 		
-		//cursorManager = new CursorManager(parent);
 		
 		final Composite group = new Composite(parent, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true).applyTo(group);
@@ -29,7 +27,7 @@ public class LoggingTableView extends ViewPart {
 
 		Composite compositeLogTable = createCompositeLogTable(group);
 
-		logTable = new LogTable(compositeLogTable,getSite());
+		logEntryTable = new LogEntryTable(compositeLogTable,getSite());
 		
 	}
 
@@ -54,8 +52,6 @@ public class LoggingTableView extends ViewPart {
 
 
 
-
-
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
@@ -65,5 +61,8 @@ public class LoggingTableView extends ViewPart {
 
 
 
+	public void update() {
+		logEntryTable.update();
+	}
 
 }

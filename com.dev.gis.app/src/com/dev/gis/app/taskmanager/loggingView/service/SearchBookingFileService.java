@@ -14,6 +14,7 @@ import org.apache.commons.io.LineIterator;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
+import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
@@ -34,6 +35,13 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 
 	@Override
 	public List<LogEntry> call() throws Exception {
+		
+		if ( !LogEntryModel.getInstance().isProcessRunning())
+		{
+			return  new ArrayList<LogEntry>();
+		}
+
+		
 		long start = System.currentTimeMillis();
 		logger.info("start search booking " + bookingId+ " in file "+logFile.getAbsolutePath());
 		logger.info("File size = " + logFile.length());
@@ -41,7 +49,7 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 		FileNameEntryModel.getInstance().setStatus(logFile, "running");
 
 		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
-		
+
 		List<LogEntry> r = readLogEntries(logFile, this.bookingId);
 		
 
@@ -71,12 +79,15 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 			LogEntry entry = null;
 
 			while (li.hasNext()) {
+				
+				
 				String s = li.nextLine();
 				readedSize = readedSize + s.length();
-				if (++count % 1000 == 0) {
-					//logger.info("check "+count + " lines");
-					//LoggingAppView.updateView("check "+count + " lines");
+				if (++count % 10000 == 0) {
 					ProgressBarElement.updateProgressBar(readedSize,fileSize);
+					if ( !LogEntryModel.getInstance().isProcessRunning())
+						break;
+					
 				}
 				
 				Date time = getTimeString(s);
@@ -88,6 +99,8 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 							entries.add(entry);
 						
 						entry = new LogEntry(time,s);
+						
+						LogEntryModel.getInstance().addTempEntry(entry);
 					}
 					
 				} else if (entry != null && sessionFound) {

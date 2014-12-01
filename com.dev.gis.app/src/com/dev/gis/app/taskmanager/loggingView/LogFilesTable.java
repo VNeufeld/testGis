@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -43,9 +44,11 @@ public class LogFilesTable {
 	}
 
 	private void createViewer(Composite parent) {
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+		viewer = new TableViewer(parent, SWT.SINGLE | SWT.H_SCROLL
 				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-		createColumns(parent, viewer);
+		
+		createColumns( viewer);
+		
 		final Table table = viewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -62,10 +65,12 @@ public class LogFilesTable {
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.horizontalAlignment = GridData.FILL;
-		//gridData.horizontalSpan = 2;
-		gridData.grabExcessHorizontalSpace = false;
+//		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		viewer.getControl().setLayoutData(gridData);
+		
+//		TableColumnLayout tableLayout = new TableColumnLayout();
+//		parent.setLayout(tableLayout);
 
 		viewer.addDoubleClickListener(new DoubleClickListener());
 
@@ -82,7 +87,7 @@ public class LogFilesTable {
 		site.registerContextMenu(menuMgr, viewer);
 	}
 
-	private void createColumns(final Composite parent, final TableViewer viewer) {
+	private void createColumns( final TableViewer viewer) {
 		final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
 		final SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
 		

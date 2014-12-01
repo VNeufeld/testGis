@@ -28,10 +28,7 @@ public class LoggingAppView extends TaskViewAbstract {
 	private Text outputDirText;
 	private Text maxThreadsText;
 	
-
 	private Text currentFileName;
-	
-	private LogTable  logTable;
 	
 	LogFilesTableComposite logFilesTableComposite ;
 	
@@ -47,7 +44,7 @@ public class LoggingAppView extends TaskViewAbstract {
 		
 		final Group group = new Group(parent, SWT.TITLE);
 		group.setText("Session Logging:");
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true).applyTo(group);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(group);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(group);
 		
 		Composite composite1 = createCompositeRowLeft(group);
@@ -67,29 +64,9 @@ public class LoggingAppView extends TaskViewAbstract {
 
 		createOutputText(group);
 
-		Composite compositeLogTable = createCompositeLogTable(group);
-
-		logTable = new LogTable(compositeLogTable,getSite());
 		
-	}
-
-
-
-
-	private Composite createCompositeLogTable(final Group group) {
-		Composite compositeLogTable = new Composite(group, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compositeLogTable);
-
-		GridData gdLogTable = new GridData();
-		gdLogTable.grabExcessHorizontalSpace = true;
-		//gdLogTable.grabExcessVerticalSpace = true;
-		gdLogTable.horizontalAlignment = SWT.FILL;
-		gdLogTable.verticalAlignment = SWT.FILL;
-		gdLogTable.heightHint = 800;
-		gdLogTable.horizontalSpan = 2;
-
-		compositeLogTable.setLayoutData(gdLogTable);
-		return compositeLogTable;
+		LogViewUpdater.updateTempView();
+		
 	}
 
 
@@ -100,7 +77,7 @@ public class LoggingAppView extends TaskViewAbstract {
 		gdComposite1.grabExcessVerticalSpace = false;
 		gdComposite1.horizontalAlignment = SWT.FILL;
 		gdComposite1.verticalAlignment = SWT.FILL;
-		//gdComposite1.widthHint = 800;
+		gdComposite1.widthHint = 550;
 		
 		Composite composite = new Composite(group, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
@@ -330,8 +307,6 @@ public class LoggingAppView extends TaskViewAbstract {
 
 			if ( text.startsWith("error"))
 				currentFileName.setText(text);
-			else
-				logTable.update();
 
 		}
 		

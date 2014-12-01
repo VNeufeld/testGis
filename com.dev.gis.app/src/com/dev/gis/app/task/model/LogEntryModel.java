@@ -5,12 +5,18 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
 import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
 
 public class LogEntryModel  extends ModelObject {
 	private static LogEntryModel  instance = null;
 	
 	private List<LogEntry> entries = new ArrayList<LogEntry>();
+	private List<LogEntry> tempEntries = new ArrayList<LogEntry>();
+
+	private List<LogEntry> loggingEntries = new ArrayList<LogEntry>();
+	
+	private boolean processRunning = false;
 
 	public static LogEntryModel getInstance() {
 		if (instance == null) {
@@ -21,6 +27,7 @@ public class LogEntryModel  extends ModelObject {
 	
 	public void clear() {
 		entries.clear();
+		tempEntries.clear();
 	}
 
 	public List<LogEntry> getEntries() {
@@ -49,6 +56,39 @@ public class LogEntryModel  extends ModelObject {
 	}
 	private String getPrice(String text) {
 		return StringUtils.substringBetween(text, "<TotalPrice>", "</TotalPrice>");
+	}
+
+	public void addTempEntry(LogEntry entry) {
+		String s = getBooking(entry.getEntry().get(0));
+		if ( StringUtils.isNotBlank(s)) {
+			entry.setBookingId(s);
+			entry.setSessionId(getSession(entry.getEntry().get(0)));
+			entry.setPrice(getPrice(entry.getEntry().get(0)));
+			tempEntries.add(entry);
+			
+			LogViewUpdater.updateTempView();
+		}
+			
+	}
+
+	public List<LogEntry> getTempEntries() {
+		return tempEntries;
+	}
+
+	public void setProcessRunning() {
+		processRunning = true;		
+	}
+
+	public boolean isProcessRunning() {
+		return processRunning;
+	}
+
+	public void stopProcess() {
+		processRunning =false;;
+	}
+
+	public List<LogEntry> getLoggingEntries() {
+		return loggingEntries;
 	}
 
 }

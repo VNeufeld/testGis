@@ -24,12 +24,12 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
 
-public class LogTable {
+public class LogEntryTable {
 	private TableViewer viewer;
 	private final Composite parent;
 	private final IWorkbenchPartSite site;
 
-	public LogTable(Composite group, IWorkbenchPartSite site) {
+	public LogEntryTable(Composite group, IWorkbenchPartSite site) {
 		this.parent = group;
 		this.site = site;
 		createViewer(parent);
@@ -54,7 +54,7 @@ public class LogTable {
 		// define layout for the viewer
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 2;
+		gridData.horizontalSpan = 1;
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		gridData.horizontalAlignment = GridData.FILL;
@@ -79,8 +79,8 @@ public class LogTable {
 		final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
 		final SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
 		
-		String[] titles = { "Date", "BookingId", "Session", "Price", "LogEntry" };
-		int[] bounds = { 140, 100, 280, 80, 800 };
+		String[] titles = { "Date", "Request", "LogEntry" };
+		int[] bounds = { 140, 200, 1800 };
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -103,33 +103,6 @@ public class LogTable {
 		});
 
 		col = createTableViewerColumn(titles[2], bounds[2], 2);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				LogEntry o = (LogEntry) element;
-				return o.getSessionId();
-			}
-		});
-
-		col = createTableViewerColumn(titles[3], bounds[3], 3);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				LogEntry o = (LogEntry) element;
-				return o.getPrice();
-			}
-
-			// @Override
-			// public Image getImage(Object element) {
-			// if (((Person) element).isMarried()) {
-			// return CHECKED;
-			// } else {
-			// return UNCHECKED;
-			// }
-			// }
-		});
-
-		col = createTableViewerColumn(titles[4], bounds[4], 4);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -164,30 +137,15 @@ public class LogTable {
 			
 			LogEntry o = (LogEntry) selectedNode;
 			
-			LogViewUpdater.updateView(o);
+			//LogViewUpdater.updateView(o);
 
 		}
 
 	}
 
 	public void update() {
-		updateModel();
-	}
-	
-	public void updateTemp() {
 		LogEntryModel model = LogEntryModel.getInstance();
-		viewer.setInput(model.getTempEntries());
+		viewer.setInput(model.getLoggingEntries());
 	}
-
-	
-	private void updateModel() {
-		LogEntryModel model = LogEntryModel.getInstance();
-		List<LogEntry> entries = model.getEntries();
-		for ( LogEntry entry : entries) {
-		}
-		viewer.setInput(entries);
-		
-	}
-
 
 }

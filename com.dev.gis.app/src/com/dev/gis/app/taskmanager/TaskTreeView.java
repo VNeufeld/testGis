@@ -22,6 +22,7 @@ import com.dev.gis.app.task.model.TaskExecutonResultModel;
 import com.dev.gis.app.task.model.TaskItem;
 import com.dev.gis.app.task.model.TaskProjectModel;
 import com.dev.gis.app.taskmanager.executionView.TaskExecutionView;
+import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
 import com.dev.gis.task.execution.api.IEditableTask;
 import com.dev.gis.task.execution.api.IExecutableTask;
 import com.dev.gis.task.execution.api.ITask;
@@ -65,10 +66,11 @@ public class TaskTreeView extends ViewPart {
 		
 //		startChangeModelThread();
 		//startRefreshViewsThread();
+
+		// INIT Main View
+		LogViewUpdater.updateView("");
 		
 	}
-
-
 
 
 	private void hookContextMenu() {

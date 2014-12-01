@@ -32,6 +32,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private IWorkbenchAction newWindowAction;
     private OpenViewAction openViewAction;
     private Action messagePopupAction;
+    private Action stopProcessAction;
     
 
     public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
@@ -56,9 +57,12 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 //        
 //        openViewAction = new OpenViewAction(window, "Open Another Message View", View.ID);
 //        register(openViewAction);
-        
+
         messagePopupAction = new MessagePopupAction("Open Message", window);
         register(messagePopupAction);
+        
+        stopProcessAction = new StopProcessAction("Stop Process", window);
+        register(stopProcessAction);
     }
     
     protected void fillMenuBar(IMenuManager menuBar) {
@@ -87,5 +91,6 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         coolBar.add(new ToolBarContributionItem(toolbar, "main"));   
         //toolbar.add(openViewAction);
         toolbar.add(messagePopupAction);
+        toolbar.add(stopProcessAction);
     }
 }

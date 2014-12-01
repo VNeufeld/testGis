@@ -8,6 +8,7 @@ import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskTreeView;
 import com.dev.gis.app.taskmanager.executionView.TaskExecutionView;
+import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
 
 
 public class MessagePopupAction extends Action {
@@ -26,15 +27,16 @@ public class MessagePopupAction extends Action {
 
     public void run() {
     	
-		for (IViewPart viewPart : TaskTreeView.executionTaskViews.values() ) {
-			System.out.println("refresh "+viewPart.getTitle()+ " thread : "+Thread.currentThread().getName());
-			((TaskExecutionView)viewPart).refresh();
-			
-		}
+//		for (IViewPart viewPart : TaskTreeView.executionTaskViews.values() ) {
+//			System.out.println("refresh "+viewPart.getTitle()+ " thread : "+Thread.currentThread().getName());
+//			((TaskExecutionView)viewPart).refresh();
+//			
+//		}
 		
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow() 
 		.getActivePage().resetPerspective(); 
-    	
+		
+		LogViewUpdater.updateView("");
     	
         MessageDialog.openInformation(window.getShell(), "Open", "Open Message Dialog!");
     }

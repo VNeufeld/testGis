@@ -1,6 +1,8 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
 import org.apache.log4j.Logger;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -60,8 +62,52 @@ public class LogViewUpdater  {
 			}
 		});
 
+	}
+	
+	public static void  updateTempView( ) {
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					
+					final int instanceNum = 8;//the number of instances that are created
+					for (int index = 0; index < instanceNum; index++) {
+					    final IViewReference viewReference = wp.findViewReference(
+					    		LogBookingEntryView.ID, Integer.toString(index));
+					
+					    if (viewReference != null) {
+					        final IViewPart view = viewReference.getView(true);
+					        if (view instanceof LogBookingEntryView) {
+					            final LogBookingEntryView graphView = (LogBookingEntryView) view;
+								System.out.println("viewPart = "+graphView);
+					            graphView.updateTempView();
+					            break;
+					        }
+					    }
+					}
+					
+					
+					LogBookingEntryView viewPart =  (LogBookingEntryView)wp.showView(
+							LogBookingEntryView.ID, 
+							Integer.toString(0), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					System.out.println("viewPart = "+viewPart);
+//					viewPart.updateTempView();
+					
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+
 		
 	}
+	
 
 
 }

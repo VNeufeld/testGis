@@ -19,6 +19,7 @@ import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
+import com.dev.gis.app.taskmanager.loggingView.LogBookingEntryView;
 
 public class FindBookingService implements Callable<String> {
 
@@ -90,6 +91,8 @@ public class FindBookingService implements Callable<String> {
 			
 			List<SearchBookingFileService> services = new ArrayList<SearchBookingFileService>();
 			
+			LogEntryModel.getInstance().setProcessRunning();
+			
 			for (File file : files) {
 				logger.info("check file :"+file.getAbsolutePath());
 
@@ -123,6 +126,7 @@ public class FindBookingService implements Callable<String> {
 				possibleSessionId = "booking not found";
 			
 			LogViewUpdater.updateView("session: "+possibleSessionId);					
+			LogBookingEntryView.updateView();					
 			
 			
 		} catch (InterruptedException | ExecutionException ioe) {

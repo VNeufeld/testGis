@@ -52,7 +52,7 @@ public class LogFilesTableComposite {
 		//gdComposite2.widthHint = 800;
 
 
-		Composite composite = new Composite(parent, SWT.NONE);
+		Composite composite = new Composite(parent, SWT.RIGHT);
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
 		composite.setLayoutData(gdComposite2);
 		
@@ -69,9 +69,9 @@ public class LogFilesTableComposite {
 		gridDataGroupTable.verticalAlignment = GridData.FILL;
 		gridDataGroupTable.horizontalAlignment = GridData.FILL;
 //		gridData.heightHint = 200;
-		gridDataGroupTable.widthHint  = 900;
-		gridDataGroupTable.horizontalSpan = 1;
-		gridDataGroupTable.grabExcessHorizontalSpace = false;
+//		gridDataGroupTable.widthHint  = 900;
+//		gridDataGroupTable.horizontalSpan = 1;
+		gridDataGroupTable.grabExcessHorizontalSpace = true;
 		gridDataGroupTable.grabExcessVerticalSpace = true;
 
 //		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(false, true).applyTo(groupTable);
@@ -95,16 +95,16 @@ public class LogFilesTableComposite {
 		filesCount.setEnabled(false);
 		filesCount.setText("files : 0");
 
-		Composite compositeTable = new Composite(groupTable, SWT.NONE);
+		Composite compositeTable = new Composite(groupTable, SWT.RIGHT);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(compositeTable);
 		
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.horizontalAlignment = GridData.FILL;
 		gridData.heightHint = 220;
-		gridData.widthHint  = 900;
-		gridData.horizontalSpan = 1;
-		gridData.grabExcessHorizontalSpace = true;
+		//gridData.widthHint  = 900;
+		//gridData.horizontalSpan = 1;
+		//gridData.grabExcessHorizontalSpace = true;
 		//gridData.grabExcessVerticalSpace = true;
 		compositeTable.setLayoutData(gridData);
 
