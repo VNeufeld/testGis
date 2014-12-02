@@ -52,6 +52,8 @@ import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.OfferDo;
+import com.dev.http.server.HttpServer;
+import com.dev.http.server.ServerCallback;
 
 public class EmlView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.EmlView";
@@ -74,9 +76,13 @@ public class EmlView extends TaskViewAbstract {
 	
 	private TableViewer viewer;
 	
+	private HttpServer server;
+	
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
 	
 	EmlService sevice = null;
+	
+	ServerCallback callback  =new ServerCallback();
 
 	
 	@Override
@@ -93,6 +99,7 @@ public class EmlView extends TaskViewAbstract {
 		createButtons(group);
 
 		createOutputText(group);
+		
 		
 	}
 	
@@ -174,20 +181,25 @@ public class EmlView extends TaskViewAbstract {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				if ( !checkInputs(logFileText,outputDirText,maxFileSizeText))
-					return;
-				
-				saveInput();
-			    File[] attachments = new File[] { new File("H:\\_TRANSFER\\neu\\pom.xml"), new File("H:\\_TRANSFER\\neu\\Avis_fleet280414.xls") };
+//				if ( !checkInputs(logFileText,outputDirText,maxFileSizeText))
+//					return;
+//				
+//				saveInput();
+			    //File[] attachments = new File[] { new File("H:\\_TRANSFER\\neu\\pom.xml"), new File("H:\\_TRANSFER\\neu\\Avis_fleet280414.xls") };
 
 				   String to = "abcd@gmail.com";
 
 				      // Sender's email ID needs to be mentioned
 				      String from = "web@gmail.com";
+				      
+						server  = new HttpServer();
+						server.startup(callback);
+
 					
 					
 					 try {
-						createMessage(to, from, "test", " body", attachments);
+						//createMessage(to, from, "test", " body", attachments);
+						 
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -634,6 +646,15 @@ public class EmlView extends TaskViewAbstract {
 		}
 		else
 			currentFileName.setText(text);
+	}
+
+
+	@Override
+	public void dispose() {
+		if( server != null)
+			server.shutdown();
+		// TODO Auto-generated method stub
+		super.dispose();
 	}
 
 
