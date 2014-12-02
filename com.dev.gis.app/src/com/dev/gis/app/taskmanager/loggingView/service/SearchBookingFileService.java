@@ -13,9 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.log4j.Logger;
 
-import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.task.model.LogEntryModel;
-import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
 
@@ -40,22 +38,18 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 		{
 			return  new ArrayList<LogEntry>();
 		}
-
 		
 		long start = System.currentTimeMillis();
 		logger.info("start search booking " + bookingId+ " in file "+logFile.getAbsolutePath());
 		logger.info("File size = " + logFile.length());
 
-		FileNameEntryModel.getInstance().setStatus(logFile, "running");
+		LogFileTableUpdater.updateFileStatus(logFile,"running");					
 
 		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
 
 		List<LogEntry> r = readLogEntries(logFile, this.bookingId);
-		
 
-		FileNameEntryModel.getInstance().setStatus(logFile, "completed");
-		//LoggingAppView.updateFileModel();					
-		LogFileTableUpdater.showResult();					
+		LogFileTableUpdater.updateFileStatus(logFile,"completed");					
 		
 
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");

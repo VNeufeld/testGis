@@ -42,25 +42,24 @@ class SessionFileService implements Callable<List<LogEntry>> {
 	@Override
 	public List<LogEntry> call() throws Exception {
 		long start = System.currentTimeMillis();
-		logger.info("start splitter session " + sessionId + " in file "
-				+ logFile.getAbsolutePath());
-		logger.info("File size = " + logFile.length());
+		logger.info("start search session " + sessionId + " in file "
+				+ logFile.getAbsolutePath() + ". File size =  "+ logFile.length());
 		
-		FileNameEntryModel.getInstance().setStatus(logFile, "running");
+		LogFileTableUpdater.updateFileStatus(logFile,"running");					
+		
 		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
 		
-
-		List<LogEntry> r = readLogEntries(logFile, this.sessionId);
+		List<LogEntry> logEntries = readLogEntries(logFile, this.sessionId);
 		
-		FileNameEntryModel.getInstance().setStatus(logFile, "completed");
-		LogFileTableUpdater.showResult();					
 		
-		LogEntryModel.getInstance().getLoggingEntries().addAll(r);
-		LogEntryTableUpdater.showResult();
+		
+		LogEntryTableUpdater.showResult(logEntries);
+		
+		LogFileTableUpdater.updateFileStatus(logFile,"completed");					
+		
 
-		logger.info("end splitt in  " + (System.currentTimeMillis() - start)
-				+ " ms.");
-		return r;
+		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
+		return logEntries;
 
 	}
 

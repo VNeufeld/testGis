@@ -3,6 +3,7 @@ package com.dev.gis.task.execution.api;
 import javax.xml.bind.JAXBException;
 
 import com.dev.gis.task.execution.impl.DefaultTaskDataProvider;
+import com.dev.gis.task.execution.impl.EmlDataProvider;
 import com.dev.gis.task.execution.impl.GoogleMapDataProvider;
 import com.dev.gis.task.execution.impl.LocationSearchTaskDataProvider;
 import com.dev.gis.task.execution.impl.LoggingDataProvider;
@@ -39,6 +40,10 @@ public class TaskDataProviderFactory {
 		}
 		else if ( name.equals("Splitt")) {
 			LoggingDataProvider dataProvider = new LoggingDataProvider(2);
+			return dataProvider;
+		}
+		else if ( name.equals("EML_Creator")) {
+			EmlDataProvider dataProvider = new EmlDataProvider();
 			return dataProvider;
 		}
 

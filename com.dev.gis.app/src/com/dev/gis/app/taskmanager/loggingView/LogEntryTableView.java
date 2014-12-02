@@ -40,10 +40,10 @@ public class LogEntryTableView extends ViewPart {
 
 		GridData gdLogTable = new GridData();
 		gdLogTable.grabExcessHorizontalSpace = true;
-		//gdLogTable.grabExcessVerticalSpace = true;
+		gdLogTable.grabExcessVerticalSpace = true;
 		gdLogTable.horizontalAlignment = SWT.FILL;
 		gdLogTable.verticalAlignment = SWT.FILL;
-		gdLogTable.heightHint = 800;
+		//gdLogTable.heightHint = 800;
 		gdLogTable.horizontalSpan = 1;
 
 		compositeLogTable.setLayoutData(gdLogTable);

@@ -10,6 +10,7 @@ public class LogEntry implements Comparable<LogEntry> {
 	private String sessionId;
 	private String bookingId;
 	private String price;
+	private String demandedObject;
 	
 	private List<String> entry = new ArrayList<String>();
 	
@@ -57,6 +58,12 @@ public class LogEntry implements Comparable<LogEntry> {
 	}
 	public void setPrice(String price) {
 		this.price = price;
+	}
+	public String getDemandedObject() {
+		return demandedObject;
+	}
+	public void setDemandedObject(String demandedObject) {
+		this.demandedObject = demandedObject;
 	}
 	
 	

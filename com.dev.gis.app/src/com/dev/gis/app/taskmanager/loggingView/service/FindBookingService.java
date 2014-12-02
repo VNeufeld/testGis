@@ -81,8 +81,7 @@ public class FindBookingService implements Callable<String> {
 				return;
 			}
 			
-			FileNameEntryModel.getInstance().create(files);
-			LogFileTableUpdater.showResult();					
+			LogFileTableUpdater.updateFileList(files);					
 			
 			
 			entries.clear();

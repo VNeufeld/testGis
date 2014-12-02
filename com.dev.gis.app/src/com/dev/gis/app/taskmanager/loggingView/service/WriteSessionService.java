@@ -82,12 +82,10 @@ public class WriteSessionService implements Callable<String> {
 					loggingToDate);
 			entries.clear();
 
-			FileNameEntryModel.getInstance().create(files);
-			//LoggingAppView.updateFileModel();		
-			LogFileTableUpdater.showResult();					
+			LogFileTableUpdater.updateFileList(files);					
 			
 			LogEntryModel.getInstance().getLoggingEntries().clear();
-			LogEntryTableUpdater.showResult();
+			LogEntryTableUpdater.showResult(null);
 			
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);

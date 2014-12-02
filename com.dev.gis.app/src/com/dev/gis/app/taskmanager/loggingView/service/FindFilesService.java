@@ -44,7 +44,7 @@ public class FindFilesService implements Callable<String> {
 			File[] files = LoggingUtils.getAllFilesRecurisive(logDir,filePattern, loggingFromDate,
 					loggingToDate);
 			
-			FileNameEntryModel.getInstance().create(files);
+			LogFileTableUpdater.updateFileList(files);					
 			
 	}
 
@@ -54,7 +54,6 @@ public class FindFilesService implements Callable<String> {
 		long start = System.currentTimeMillis();
 		logger.info("start FindFiles ");
 		findFileToSession();
-		LogFileTableUpdater.showResult();					
 
 		logger.info("end FindFiles  " + (System.currentTimeMillis() - start) + " ms.");
 		return null;

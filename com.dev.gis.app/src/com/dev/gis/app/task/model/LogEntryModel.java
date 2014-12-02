@@ -1,6 +1,7 @@
 package com.dev.gis.app.task.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -54,6 +55,11 @@ public class LogEntryModel  extends ModelObject {
 		bookingid = StringUtils.substringBetween(text, "<Booking_id>", "</Booking_id>");
 		return bookingid;
 	}
+
+	private String getDamandedObject(String text) {
+		return StringUtils.substringBetween(text, "<DemandedObject>", "</DemandedObject>");
+	}
+	
 	private String getPrice(String text) {
 		return StringUtils.substringBetween(text, "<TotalPrice>", "</TotalPrice>");
 	}
@@ -89,6 +95,25 @@ public class LogEntryModel  extends ModelObject {
 
 	public List<LogEntry> getLoggingEntries() {
 		return loggingEntries;
+	}
+
+	public void updateLoggingEntries(List<LogEntry> entries) {
+		
+		for (LogEntry entry : entries ) {
+			String demandedObject = "-";
+			for ( String str : entry.getEntry()) {
+				String demObj = getDamandedObject(str);
+				if (StringUtils.isNotBlank(demObj)) {
+					demandedObject = demObj;
+					break;
+				}
+			}
+			entry.setDemandedObject(demandedObject);
+		}
+		
+		loggingEntries.addAll(entries);
+		Collections.sort(loggingEntries);
+		
 	}
 
 }

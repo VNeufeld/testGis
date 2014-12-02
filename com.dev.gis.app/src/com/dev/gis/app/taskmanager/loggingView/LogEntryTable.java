@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -22,6 +24,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.TaskPropertyDialog;
 import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
 
 public class LogEntryTable {
@@ -98,7 +101,7 @@ public class LogEntryTable {
 			@Override
 			public String getText(Object element) {
 				LogEntry o = (LogEntry) element;
-				return o.getBookingId();
+				return o.getDemandedObject();
 			}
 		});
 
@@ -137,8 +140,26 @@ public class LogEntryTable {
 			
 			LogEntry o = (LogEntry) selectedNode;
 			
-			//LogViewUpdater.updateView(o);
+			String text = createText ( o );
+			
+	        //MessageDialog.openInformation(viewer.getTable().getShell(), "Open", text);
+	        
+			LogEntryDialog mpd = new LogEntryDialog(viewer.getTable().getShell(), text);
+			if (mpd.open() == Dialog.OK) {
+				
+			}
+	        
 
+		}
+
+		private String createText(LogEntry o) {
+			StringBuilder sb = new StringBuilder();
+			for ( String s : o.getEntry()) {
+				sb.append(s);
+				sb.append('\n');
+			}
+			// TODO Auto-generated method stub
+			return sb.toString();
 		}
 
 	}
