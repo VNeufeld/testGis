@@ -53,7 +53,6 @@ import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.OfferDo;
 import com.dev.http.server.HttpServer;
-import com.dev.http.server.ServerCallback;
 
 public class EmlView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.EmlView";
@@ -82,7 +81,6 @@ public class EmlView extends TaskViewAbstract {
 	
 	EmlService sevice = null;
 	
-	ServerCallback callback  =new ServerCallback();
 
 	
 	@Override
@@ -192,10 +190,6 @@ public class EmlView extends TaskViewAbstract {
 				      // Sender's email ID needs to be mentioned
 				      String from = "web@gmail.com";
 				      
-						server  = new HttpServer();
-						server.startup(callback);
-
-					
 					
 					 try {
 						//createMessage(to, from, "test", " body", attachments);

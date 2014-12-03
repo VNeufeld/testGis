@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="common" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="common" schemaLocation="..\Common\common.xsd"/>
+	<xs:element name="Administration">
+		<xs:annotation>
+			<xs:documentation>Contains administrative data</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Errors"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Errors">
+		<xs:annotation>
+			<xs:documentation>Contains error objects</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Error" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Error">
+		<xs:annotation>
+			<xs:documentation>Contains an error</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="com:ErrorType"/>
+				<xs:element ref="com:ErrorText"/>
+				<xs:element ref="com:ErrorNo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequestorResult">
+		<xs:annotation>
+			<xs:documentation>Enveloping tag</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Administration"/>
+				<xs:element ref="Result" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Result">
+		<xs:annotation>
+			<xs:documentation> Result</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Code" type="xs:string" minOccurs="0"/>
+				<xs:element name="File" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

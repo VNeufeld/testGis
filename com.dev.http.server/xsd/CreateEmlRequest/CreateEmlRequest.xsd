@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:com="common" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="common" schemaLocation="..\Common\common.xsd"/>
+	<xs:element name="Administration">
+		<xs:annotation>
+			<xs:documentation>Contains administrative data</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="com:UserType"/>
+				<xs:element ref="com:LanguageId"/>
+				<xs:element ref="com:OperatorId"/>
+				<xs:element ref="com:SalesChannelId">
+					<xs:annotation>
+						<xs:documentation>ID of saleschannel as defined by MasterData</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Request">
+		<xs:annotation>
+			<xs:documentation>Enveloping tag</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="com:CalledFrom"/>
+				<xs:element ref="DemandedObjects"/>
+				<xs:element ref="Administration"/>
+				<xs:element ref="Mail"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequestorRequest">
+		<xs:annotation>
+			<xs:documentation>Enveloping tag</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RequestorName"/>
+				<xs:element ref="RequestorRequestContent"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequestorName" fixed="XML">
+		<xs:annotation>
+			<xs:documentation>Must be XML</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:attribute name="sessionId" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequestorRequestContent">
+		<xs:annotation>
+			<xs:documentation>Enveloping tag</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Request"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DemandedObjects">
+		<xs:annotation>
+			<xs:documentation>Contains DemandedObject objects</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="DemandedObject"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DemandedObject">
+		<xs:annotation>
+			<xs:documentation>Must be 22030</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="22040"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Mail">
+		<xs:annotation>
+			<xs:documentation>Address info</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="From" type="xs:string"/>
+				<xs:element name="To" type="xs:string"/>
+				<xs:element name="Subject" type="xs:string"/>
+				<xs:element name="Body" type="xs:string"/>
+				<xs:element name="AttachmentDir" type="xs:string"/>
+				<xs:element ref="Attachments"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Attachments">
+		<xs:annotation>
+			<xs:documentation>Container for Extra objects</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Attachment" type="xs:string" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

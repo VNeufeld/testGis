@@ -1,9 +1,10 @@
 package com.dev.http.server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,15 +14,16 @@ import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import com.dev.http.server.services.SessionControllerAdvanced;
+
+
 
 public class RemoteControlHttpHandler extends AbstractHandler {
 
 	protected final static Logger logger = Logger.getLogger(RemoteControlHttpHandler.class);
 
-	private static final String commandKey = "command";
+	private final IServerCallback callback;
 	
-	private final ServerCallback callback;
-
 
 	public RemoteControlHttpHandler() {
 		callback = null;
@@ -29,7 +31,7 @@ public class RemoteControlHttpHandler extends AbstractHandler {
 
 
 
-	public RemoteControlHttpHandler(ServerCallback callback) {
+	public RemoteControlHttpHandler(IServerCallback callback) {
 		// TODO Auto-generated constructor stub
 		this.callback = callback;
 	}
@@ -39,23 +41,108 @@ public class RemoteControlHttpHandler extends AbstractHandler {
 	@Override
 	public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ServletException {
-
-		Map paramMap = request.getParameterMap();
-		String command = ((String[]) paramMap.get(commandKey))[0];
-
-		logger.info("HTTP Request : "+command);
 		
-		callback.receive();
+		String xml = getBpcsXmlRequest(request);
+
+		logger.info("HTTP Request : "+xml);
+		
+		callback.receive(xml);
+		
+		long start = System.currentTimeMillis();
+		
+		LogEntry entry = new LogEntry(new Date());
+		entry.setRequest(xml);
+
+		callback.update(entry);
+		
+		
+		String xmlResponseStr = new SessionControllerAdvanced().executeXmlRequest(request, xml, false);
+		
+		entry.setResponse(xmlResponseStr);
+		entry.setEnd(new Date());
+		entry.setDuration(System.currentTimeMillis() - start);
+		
+		callback.update(entry);
 		
 		response.setStatus(HttpServletResponse.SC_OK);
-		response.setContentType("text/xml");
+		
+		response.setContentType("text/plain;charset=utf-8");
 
-		response.getWriter().write(
-				"{\"RESULTCODE\":0,\"RESULTTEXT\":\"Modulator fertig: " + new SimpleDateFormat("yyyyMMddhhmmss").format(new Date())
-						+ "\"}");
+		response.getWriter().write(new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()) + " Response : "+xmlResponseStr);
 		response.getWriter().flush();
 
-	}
+		callback.receive(" execution completed ");
+		
+		logger.info("Response : "+xmlResponseStr);
 
+	}
+	
+	private String getBpcsXmlRequest(HttpServletRequest request) {
+		
+		String xml = "";
+		String parameterName = "";
+		String[] parameterValues;
+		Enumeration<String> parameterNames = request.getParameterNames();
+
+		if(request.getParameterMap().containsKey("Message")){
+
+			xml = request.getParameter("Message");
+
+		}
+		else if(request.getParameterMap().containsKey("request")){
+			xml = request.getParameter("request");
+		}
+
+		else if(!parameterNames.hasMoreElements()){
+			try {
+				BufferedReader br = request.getReader();
+				String line = null;
+				StringBuffer envelope = new StringBuffer();
+				while((line = br.readLine()) != null){
+					envelope.append(line);
+				}
+				br.close();
+	
+				xml = new String(envelope);
+				if(xml.indexOf("filename=") > 0 && xml.indexOf("Content-Type:") > 0){
+					xml = xml.substring(xml.indexOf("<?xml version"), xml.indexOf("</RequestorRequest>") + 19);
+					logger.info("File Received Request: " + xml);
+				}
+				else{
+					logger.info("Body Received Request: " + xml);
+				}
+			}
+			catch(Exception err) {
+				
+			}
+
+		}
+
+		else{
+
+			while(parameterNames.hasMoreElements()){
+
+				parameterName = parameterNames.nextElement();
+				if(parameterName != null){
+					xml += parameterName;
+					if(request.getParameterValues(parameterName) != null){
+						parameterValues = request.getParameterValues(parameterName);
+						for(int i = 0; i < parameterValues.length; i++){
+
+							xml = xml + parameterValues[i];
+						}
+
+					}
+
+				}
+
+				logger.info("Param as request Received Request: " + xml);
+
+			}
+
+		}
+		return xml;
+
+	}
 
 }

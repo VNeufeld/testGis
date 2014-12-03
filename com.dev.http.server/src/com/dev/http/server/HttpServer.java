@@ -4,6 +4,9 @@ import java.net.InetSocketAddress;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
+
+import com.dev.http.server.services.emlService.CreateEmlService;
+
 // http://wiki.eclipse.org/Jetty/Tutorial/Embedding_Jetty
 public class HttpServer {
 	
@@ -11,16 +14,19 @@ public class HttpServer {
 
 	private Server server;
 	
-	private ServerCallback callback;
-
+	private String outputDir;
 	
-	public void startup(ServerCallback callback) {
+	private RemoteControlHttpHandler remoteControlHttpHandler;
+	
+	public void startup(IServerCallback callback) {
 		try {
-			this.callback = callback;
 			int port = 7777;
+			
+			remoteControlHttpHandler = new RemoteControlHttpHandler(callback);
+			
 			InetSocketAddress address = new InetSocketAddress(port);
 			server = new Server(address);
-			server.setHandler(new RemoteControlHttpHandler(callback));
+			server.setHandler(remoteControlHttpHandler);
 
 			server.start();
 		} catch (Exception e) {
@@ -35,5 +41,15 @@ public class HttpServer {
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
+	}
+
+	public String getOutputDir() {
+		return outputDir;
+	}
+
+	public void setOutputDir(String outputDir) {
+		this.outputDir = outputDir;
+		CreateEmlService.setOutputDir(outputDir);
+
 	}	
 }

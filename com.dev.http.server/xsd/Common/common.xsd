@@ -1,0 +1,1978 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2007 sp2 (http://www.altova.com) von BPCS GmbH (BPCS GmbH) bearbeitet -->
+<xs:schema xmlns:com="common" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="common" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="AirportCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The code of the airport</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AirportName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The name of the airport</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AirportId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The Id of the airport</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AirportStationsOnly">
+		<xs:annotation>
+			<xs:documentation>flag only offers at airportStations</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--xs:element name="Error">
+		<xs:annotation>
+			<xs:documentation>Contains an error</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="com:ErrorType"/>
+				<xs:element ref="com:ErrorText"/>
+				<xs:element ref="com:ErrorNo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element-->
+	<xs:element name="Success">
+		<xs:annotation>
+			<xs:documentation>0 = error, 1 = OK</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:short">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VersionBackend" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The backends version</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="VersionRequestor" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The Requestor version</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="VersionOpenInterface" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The OpenInterface definition version</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SupplierCategory">
+		<xs:annotation>
+			<xs:documentation>The suppliers car category</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Position" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The position from where to start</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AreaId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The id of the area as fetched from GetAreas</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Member">
+		<xs:annotation>
+			<xs:documentation>Boolean if the Service Catalog is valid for Members</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PartnerInfo" type="xs:string"/>
+	<xs:element name="NonMember">
+		<xs:annotation>
+			<xs:documentation>Boolean if the Service Catalog is valid for NonMembers</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SupplierBookNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The booking number of the supplier</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BookingConfirmed">
+		<xs:annotation>
+			<xs:documentation>States if the booking is OK = 1 or RQ = 0</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1|.{0}"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BookingId" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The booking id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BookingNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The booking number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ErrorNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The number of the error. See Documentation for a description</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ErrorText" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The description of the error</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ErrorType" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The type of the error</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CreationUser" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The user who has created the booking</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CreationDate">
+		<xs:annotation>
+			<xs:documentation>The date the booking has been created</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CreationTime">
+		<xs:annotation>
+			<xs:documentation>The time the booking has been created</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{2}:\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StationForceInfo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>If the field is not empty the text must be shown before the booking can be finished. It contains information about the station.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BookDate">
+		<xs:annotation>
+			<xs:documentation>The date when the booking is made. This is not the pick up date</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ServiceCatalogCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The CRS productcode of the service catalog</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ServiceCatalogId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The service catalog id </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Module">
+		<xs:annotation>
+			<xs:documentation>the desired renting Module (1=CAR; 11=TRUCK - default is CAR)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:int">
+					<xs:attribute ref="com:ReferenceStation"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PayType" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>the desired PayType (-1=BOTH; 1=PREPAID; 2=PAY ON ARRIVAL - default is BOTH)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Quantity" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The count of stations</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OneWayCarStatus">
+		<xs:annotation>
+			<xs:documentation>0 = on request, 13 = available.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1|13"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="13"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Status">
+		<xs:annotation>
+			<xs:documentation>0 = on request, 13 = available, 1= Stop</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1|13"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="13"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SupplierDeliveryStatus">
+		<xs:annotation>
+			<xs:documentation>0 = on request, 13 = available, 1= Stop</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1|13"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="13"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Street" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The street</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BrokerId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>A broker id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Broker">
+		<xs:annotation>
+			<xs:documentation>Broker booking flag</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CRCardValidYY">
+		<xs:annotation>
+			<xs:documentation>The credit card valid year</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{4}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CRCardValidMM">
+		<xs:annotation>
+			<xs:documentation>The credit card valid month</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CRCardType" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The credit card type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CRCardVendor" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The credit card vendor</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CRCardNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The credit card number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CRCardTresorNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The credit card PCI save number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CRCardCvc" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The credit card cvc code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BankName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The bank name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BankCity" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The bank city</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="BankCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The bank code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AccountNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The account number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FaxNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The fax extension</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FaxPrefix" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The phone extension</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhoneNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The phone extension</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhonePrefix" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The phone area code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Birth">
+		<xs:annotation>
+			<xs:documentation>The birth date</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Zip" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The zip code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Country" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The country</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Area" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The area name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StreetNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The street no</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SalutationId">
+		<xs:annotation>
+			<xs:documentation>ID of the persons Salutation (i.e. 1=Mrs, 2=Mr)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="1|2"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="TitleId" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The title</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Address" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The address of the driver</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CarPrice">
+		<xs:annotation>
+			<xs:documentation>The total price of the car.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,6},\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ExtraPrice">
+		<xs:annotation>
+			<xs:documentation>The total price of the car.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,6},\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="TotalPrice">
+		<xs:annotation>
+			<xs:documentation>The total price of the booking.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,6},\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DocPrintDate">
+		<xs:annotation>
+			<xs:documentation>The date when the documents will be sent</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="TravelAgentFlag">
+		<xs:annotation>
+			<xs:documentation>Indicates if this is a travel agent booking. 0 = false, 1 = true</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DriverTitleId">
+		<xs:annotation>
+			<xs:documentation>A title id. 1 = dr, 2 = prof, 3 = prof dr</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="1|2|3"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="2"/>
+				<xs:enumeration value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CrsCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A CRS code like 01</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Airport" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>An airport code like LPA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffAirport" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>An airport code like LPA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StationPrio" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>Station priority</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SupplierPrio" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>Supplier priority</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffCity" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off city</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffCountry" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off country</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffFax" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off fax</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffOpeningHours" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off opening hours</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffPhone" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off phone</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffStreet" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off street</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffSupplier" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off supplier id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffZipCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off zip code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpHotelDelivery">
+		<xs:annotation>
+			<xs:documentation>Can be 1 = false or 1 = true or empty = undefined</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DropOffHotelDelivery">
+		<xs:annotation>
+			<xs:documentation>Can be 1 = false or 1 = true or empty = undefined</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PickUpCity" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up city</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpCountry" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up country</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpFax" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up fax</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpOpeningHours" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up opening hours</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpPhone" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up phone</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpStreet" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up street</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CategoryId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>A car category id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FormId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The cars form id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Form" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The cars form</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Children" type="xs:short">
+		<xs:annotation>
+			<xs:documentation>Number of children</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FuelType" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The fuel type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="HorsePower" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The cars horse power</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LuggageLarge" type="xs:short">
+		<xs:annotation>
+			<xs:documentation>The number of suitcases</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LuggageSmall" type="xs:short">
+		<xs:annotation>
+			<xs:documentation>The number of bags</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PriceStd">
+		<xs:annotation>
+			<xs:documentation>The standard price of the car</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,6},\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PromoText" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The promotion text</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Seats" type="xs:short">
+		<xs:annotation>
+			<xs:documentation>Number of seats</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TrunkSize" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The trunks size</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Picture" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The picture filename for this Car Group (if from an external Supplier)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Restriction" type="xs:string"/>
+	<xs:element name="CargoHeight" type="xs:string"/>
+	<xs:element name="CargoLength" type="xs:string"/>
+	<xs:element name="CargoWidth" type="xs:string"/>
+	<xs:element name="CargoVolume" type="xs:string"/>
+	<xs:element name="CargoInformation" type="xs:string"/>
+	<xs:element name="WeightTotal" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Max. overall weight of vehicle</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="WeightUse" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Max. payload</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="WeightInformation" type="xs:string"/>
+	<xs:element name="LoadInformation" type="xs:string"/>
+	<xs:element name="DriverMinAge" type="xs:string"/>
+	<xs:element name="DriverLicense" type="xs:string"/>
+	<xs:element name="DriverLicenseMinAge" type="xs:string"/>
+	<xs:element name="TypeId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The type id of the car</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Doors" type="xs:short">
+		<xs:annotation>
+			<xs:documentation>Number of doors</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CommonCarInformation" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>CommonCarInformation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Adults" type="xs:short">
+		<xs:annotation>
+			<xs:documentation>Number of adults</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ACRISS">
+		<xs:annotation>
+			<xs:documentation>The ACRISS code</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[A-Z]{0,4}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="StationId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>A station id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StationCountryId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>A stations country id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StationCountryCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A stations Country ISO2 Code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StationAreaId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>A stations area id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpSupplier" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up supplier</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpTransfer" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up transer type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpZipCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up zip code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpAptCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up airport codename</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpCrsCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick ups CRS code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffAptCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop offs airport codename</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffCrsCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop offs CRS code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffAreaId" type="xs:integer">
+		<xs:annotation>
+			<xs:documentation> A area id of a drop off satation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffCountryId" type="xs:integer">
+		<xs:annotation>
+			<xs:documentation> A country id of a drop off satation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffCityId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation> A city id of a drop off station</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffOnly">
+		<xs:annotation>
+			<xs:documentation>station is onlxy for dropoff ; 1=yes, 0=no</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PickUpAreaId" type="xs:integer">
+		<xs:annotation>
+			<xs:documentation> A area id of a pick up satation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpCountryId" type="xs:integer">
+		<xs:annotation>
+			<xs:documentation> A country id of a pick up satation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpCityId" type="xs:integer">
+		<xs:annotation>
+			<xs:documentation> A city id of a pick up satation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Fee">
+		<xs:annotation>
+			<xs:documentation>Fee</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,4},\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="City" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The city name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountryId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The country id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SupplierId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The suppliers id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SupplierGroupId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The supplierGroups id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CityId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The city id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CustomerNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The customers number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PartnerProgramNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A number to participat on partners programm (i.e. Hertz #1Club/Gold; SixtCard)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CustomerNoExt" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The external customer number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DateOfBirth">
+		<xs:annotation>
+			<xs:documentation>The date of birth</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Driver" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drivers name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DriverFirstName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The first name of the driver</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffDate">
+		<xs:annotation>
+			<xs:documentation>The drop off date</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DropOffSupplierId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The drop off supplier id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffStationId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The drop off station id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DropOffTime">
+		<xs:annotation>
+			<xs:documentation>The drop off time</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{2}:\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="EMail" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The email address</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhoneArea" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The phone area</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhoneCountry" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The phone country</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ZIP" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The zip code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CurrencyId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>A currency id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Currency">
+		<xs:annotation>
+			<xs:documentation>A currency</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[A-Z]{3}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Inclusive">
+		<xs:annotation>
+			<xs:documentation>is the price Included in Car/TotalPrice (1=yes; 0= no)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="UpperPrice">
+		<xs:annotation>
+			<xs:documentation>An upper price</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,6},\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="LowerPrice">
+		<xs:annotation>
+			<xs:documentation>A lower price</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,6},\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Dim2">
+		<xs:annotation>
+			<xs:documentation>Dimension: 1 = day(s), 2 = km, 9 = hour(s), 10 = total, 11 = per day, 12 = per week, 13 = per person</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="1|2|9|10|11|12|13"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Dim1">
+		<xs:annotation>
+			<xs:documentation>Dimension: 1 = day(s), 2 = km, 9 = hour(s), 10 = total, 11 = per day, 12 = per week, 13 = per person</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="1|2|9|10|11|12|13"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Code" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Amount" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>An amount</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FaxArea" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The fax area code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FaxCountry" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The fax country code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FaxExt" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The fax extension</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FirstName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The first name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GroupId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The group id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GroupName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The group name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LanguageId">
+		<xs:annotation>
+			<xs:documentation>The language id. ISO-639</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[a-z]{2}-[A-Z]{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Number">
+		<xs:annotation>
+			<xs:documentation>The number</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d+"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Producer" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The producer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Holder" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The holder</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PromoCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The promo code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SpecialId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The id of desired special</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Name" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Hotline" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>callcenter number and hints</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OperatorId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The operator id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ModuleId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The module id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Info">
+		<xs:annotation>
+			<xs:documentation>An info</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Mandatory">
+		<xs:annotation>
+			<xs:documentation>mandatory flag</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Prepaid">
+		<xs:annotation>
+			<xs:documentation>prepay flag; 1=prepay, 0=pay on arrival</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Fax" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The fax number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Phone" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The phone number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PUAddress" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The pick up hotel address. Used only if transfer type is hotel delivery.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PUName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The name of the hotel name. Used only if transfer type is hotel delivery.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DOAddress" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off hotel address. Used only if drop off hotel delivery is used.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DOName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The drop off hotel name. Used only if drop off hotel delivery is used.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpDate">
+		<xs:annotation>
+			<xs:documentation>The pick up date</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="FlightNo" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Used only if the transfer type is airport delivery.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Password" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The password</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PhoneExt" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The phone extension</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpStationId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The pick up station id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CarGroupId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The demanded cars group id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpSupplierId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>The pick up supplier id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PickUpTime">
+		<xs:annotation>
+			<xs:documentation>The pick up time</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{2}:\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Price">
+		<xs:annotation>
+			<xs:documentation>The price</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,6},\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Id" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>An id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SalesChannelId">
+		<xs:annotation>
+			<xs:documentation>ID of saleschannel as defined by MasterData</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="\d|-1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CalledFrom">
+		<xs:annotation>
+			<xs:documentation>Identification of calling application type (5=Web, 6=OI, 7=BPCSInhouse, 8=Android, 9=iOS)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:short">
+				<xs:pattern value="5|6|7|8|9"/>
+				<xs:enumeration value="5"/>
+				<xs:enumeration value="6"/>
+				<xs:enumeration value="7"/>
+				<xs:enumeration value="8"/>
+				<xs:enumeration value="9"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="TransferTypeId">
+		<xs:annotation>
+			<xs:documentation>The transfer type id. 1=flight, 2= walkIn, 3=deliver </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="1|2|3"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="2"/>
+				<xs:enumeration value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ZipCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The zip code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IsAirportStation">
+		<xs:annotation>
+			<xs:documentation>1=yes;0=no</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IsCityStation">
+		<xs:annotation>
+			<xs:documentation>1=yes;0=no</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IsRailStation">
+		<xs:annotation>
+			<xs:documentation>1=yes;0=no</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Type" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SendDocToEndCust">
+		<xs:annotation>
+			<xs:documentation>1 = send to end cust, 0 = don't send to end cust </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="UserType">
+		<xs:annotation>
+			<xs:documentation>P = productive, T = test</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="P|T"/>
+				<xs:enumeration value="P"/>
+				<xs:enumeration value="T"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DriverSalutationId">
+		<xs:annotation>
+			<xs:documentation>1 = misses, 2 = mister</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="1|2"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CRCardAliasNo" type="xs:string"/>
+	<xs:element name="OwnerName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The owner name</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OwnerFirstName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The owner number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Transmission" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The transmission. Value submitted by External Suppllier. If there is no information from supplier and there is an ACCRISS-Code one of the following values will occour: "Manual Unspecified Drive", "Manual 4WD", "Manual AWD","Automatic Unspecified Drive", "Automatic 4WD", "Automaticl AWD"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Aircondition">
+		<xs:annotation>
+			<xs:documentation>The aircondition</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Automatic">
+		<xs:annotation>
+			<xs:documentation>Specifies if the Car is automatic or not</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="1|0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ReferenceStation">
+		<xs:annotation>
+			<xs:documentation>Specifies if the station is an reference station or not</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="1|0"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="OffAirportStation">
+		<xs:annotation>
+			<xs:documentation>Specifies if the station is an off-airport station or not</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="1|0"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="UniquePromotionCode">
+		<xs:annotation>
+			<xs:documentation>Indicates if PromotionCode is Unique</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="HappyHourPromotion">
+		<xs:annotation>
+			<xs:documentation>Indicates the Promotion is a HappyHour</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MasterLock">
+		<xs:annotation>
+			<xs:documentation>Indicates no more promotions on higher levels must be used after this one applies </xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BestFit">
+		<xs:annotation>
+			<xs:documentation>Indicates if Promotion uses bestFit even if Code is known</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="VerificationRequired">
+		<xs:annotation>
+			<xs:documentation>Indicates if PromotionCode must be known</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CommentText" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Comment shown on Voucher</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SupplierComment" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Comment for Supplier</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Comment" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Internal Comment</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Contact" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>contact</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ChangePerc">
+		<xs:annotation>
+			<xs:documentation>percentual reduction value</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,5},\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ChangeFix">
+		<xs:annotation>
+			<xs:documentation>fixed reduction value</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,5},\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="FreeDays" type="xs:int"/>
+	<xs:element name="Level" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>the level the Promotion applies to</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="HoursBeforeFrom" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>max hours between checkin and Pickup</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="HoursBeforeTo" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>min hours between checkin and Pickup</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RentalDurationFrom" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>min rental duration</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RentalDurationTo" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>max rental duration</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CheckInFrom">
+		<xs:annotation>
+			<xs:documentation>earliest CheckIn</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CheckInTo">
+		<xs:annotation>
+			<xs:documentation>latest CheckIn</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PickUpFrom">
+		<xs:annotation>
+			<xs:documentation>earliest PickUp</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DropOffFrom">
+		<xs:annotation>
+			<xs:documentation>earliest DropOff</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PickUpTo">
+		<xs:annotation>
+			<xs:documentation>latest PickUp</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="DropOffTo">
+		<xs:annotation>
+			<xs:documentation>latest DropOff</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:pattern value="\d{4}-\d{2}-\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="HappyHourBegin">
+		<xs:annotation>
+			<xs:documentation>start time of happyhour range</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{2}:\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="HappyHourEnd">
+		<xs:annotation>
+			<xs:documentation>end time of happyhour range</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{2}:\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Monday">
+		<xs:annotation>
+			<xs:documentation>Applies on mondays with time value</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref="com:Allowed"/>
+			<xs:attribute ref="com:TimeFrom"/>
+			<xs:attribute ref="com:TimeTo"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Tuesday">
+		<xs:annotation>
+			<xs:documentation>Applies on tuesdays with time value</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref="com:Allowed"/>
+			<xs:attribute ref="com:TimeFrom"/>
+			<xs:attribute ref="com:TimeTo"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Wednesday">
+		<xs:annotation>
+			<xs:documentation>Applies on wednesdays with time value</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref="com:Allowed"/>
+			<xs:attribute ref="com:TimeFrom"/>
+			<xs:attribute ref="com:TimeTo"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Thursday">
+		<xs:annotation>
+			<xs:documentation>Applies on thursdays with time value</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref="com:Allowed"/>
+			<xs:attribute ref="com:TimeFrom"/>
+			<xs:attribute ref="com:TimeTo"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Friday">
+		<xs:annotation>
+			<xs:documentation>Applies on fridays with time value</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref="com:Allowed"/>
+			<xs:attribute ref="com:TimeFrom"/>
+			<xs:attribute ref="com:TimeTo"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Saturday">
+		<xs:annotation>
+			<xs:documentation>Applies on saturdays with time value</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref="com:Allowed"/>
+			<xs:attribute ref="com:TimeFrom"/>
+			<xs:attribute ref="com:TimeTo"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Sunday">
+		<xs:annotation>
+			<xs:documentation>Applies on sundays with time value</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute ref="com:Allowed"/>
+			<xs:attribute ref="com:TimeFrom"/>
+			<xs:attribute ref="com:TimeTo"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Oneway">
+		<xs:annotation>
+			<xs:documentation>Validity of promotion if booking is oneway: 1 = also valid for oneways (and non oneway) - default, 2 = never valid for oneways, 3 = only valid for oneways</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="1|2|3"/>
+				<xs:enumeration value="1"/>
+				<xs:enumeration value="2"/>
+				<xs:enumeration value="3"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MarketingText" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Contains the CustomerComment from Promotion, used to present the promotion to the customer</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PriceType">
+		<xs:annotation>
+			<xs:documentation>Price type 1=sell</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="1"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Cancelled">
+		<xs:annotation>
+			<xs:documentation>Booking cancelled (1-yes; 0-no)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="CancellationFee">
+		<xs:annotation>
+			<xs:documentation>The cancellation fee</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,10},\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Description" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>description of Item</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Value" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>a value</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Value1" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>variable part 1(contained in description)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Value2" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>variable part 2(contained in description)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Value3" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>variable part 3(contained in description)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Value4" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>variable part 4(contained in description)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="IsExtern">
+		<xs:annotation>
+			<xs:documentation>is the Item defined by Supplier (1=yes;0=no)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IsInsurance">
+		<xs:annotation>
+			<xs:documentation>is the Item an insurance (1=yes;0=no)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="IsValid">
+		<xs:annotation>
+			<xs:documentation>1=yes;0=no</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ClassId" type="xs:int">
+		<xs:annotation>
+			<xs:documentation>the Class id</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Class" type="xs:string">
+		<xs:annotation>
+			<xs:documentation> description of the class</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ClassCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DisplayPriority" type="xs:int"/>
+	<xs:attribute name="TimeFrom">
+		<xs:annotation>
+			<xs:documentation>earliestTime</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{2}:\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="TimeTo">
+		<xs:annotation>
+			<xs:documentation>latest time</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{2}:\d{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="Allowed">
+		<xs:annotation>
+			<xs:documentation>weekday is allowed</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:element name="RequiredItems" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Ids of Items that must be selected too if this one is selected ( "|" separated)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ConcurrentItems" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Ids of Items that cannot be selected if this one is selected ( "|" separated)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ExtRequestParameters" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Codes used for supplier requests ( "|" separated)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:attribute name="ReferenceStation">
+		<xs:annotation>
+			<xs:documentation>1=yes;0=no</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:element name="PaymentId">
+		<xs:annotation>
+			<xs:documentation>enumeration of allowed payment ids</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Payment">
+		<xs:annotation>
+			<xs:documentation>enumeration of an payment</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="abc"/>
+				<xs:enumeration value="def"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PaymentType">
+		<xs:annotation>
+			<xs:documentation>desccribes an payment which may be provided to the customer</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="com:PaymentId"/>
+				<xs:element ref="com:Payment"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RequestPaymentInformation">
+		<xs:annotation>
+			<xs:documentation>show the provided ways of payment</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:pattern value="0|1"/>
+				<xs:enumeration value="0"/>
+				<xs:enumeration value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PayAmount">
+		<xs:annotation>
+			<xs:documentation>The paypal price</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d{1,6},\d{2}|.{0}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PayerId" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The payer ID ( Paypal )</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TransactionId" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The transactionID ( Paypal )</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+</xs:schema>

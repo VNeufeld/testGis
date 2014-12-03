@@ -11,7 +11,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jetty.http;bundle-version="8.1.10",
  org.eclipse.jetty.util;bundle-version="8.1.10",
  javax.servlet;bundle-version="3.0.0",
- org.apache.log4j;bundle-version="1.2.15"
+ org.apache.log4j;bundle-version="1.2.15",
+ org.apache.commons.lang;bundle-version="2.6.0",
+ javax.mail;bundle-version="1.4.0",
+ org.apache.commons.io;bundle-version="2.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.dev.http.server
