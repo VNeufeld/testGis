@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EML App
+Bundle-SymbolicName: com.bpcs.eml.app;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.bpcs.eml.app.Activator
+Bundle-Vendor: BPCS
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.apache.log4j;bundle-version="1.2.15",
+ com.dev.http.server;bundle-version="1.0.0",
+ org.apache.commons.io;bundle-version="2.0.1",
+ org.apache.commons.lang;bundle-version="2.6.0",
+ org.apache.commons.logging;bundle-version="1.1.1",
+ javax.mail;bundle-version="1.4.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
