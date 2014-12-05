@@ -1,19 +1,7 @@
 package com.dev.gis.app.taskmanager.emlView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.mail.Session;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -39,7 +27,6 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -52,7 +39,6 @@ import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.OfferDo;
-import com.dev.http.server.HttpServer;
 
 public class EmlView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.EmlView";
@@ -75,12 +61,7 @@ public class EmlView extends TaskViewAbstract {
 	
 	private TableViewer viewer;
 	
-	private HttpServer server;
-	
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
-	
-	EmlService sevice = null;
-	
 
 	
 	@Override
@@ -173,118 +154,6 @@ public class EmlView extends TaskViewAbstract {
 		buttonSplit = new Button(composite, SWT.PUSH | SWT.CENTER | SWT.COLOR_BLUE);
 		buttonSplit.setText("create EML");
 		buttonSplit.setLayoutData(gdButton);
-		
-		buttonSplit.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
-//				if ( !checkInputs(logFileText,outputDirText,maxFileSizeText))
-//					return;
-//				
-//				saveInput();
-			    //File[] attachments = new File[] { new File("H:\\_TRANSFER\\neu\\pom.xml"), new File("H:\\_TRANSFER\\neu\\Avis_fleet280414.xls") };
-
-				   String to = "abcd@gmail.com";
-
-				      // Sender's email ID needs to be mentioned
-				      String from = "web@gmail.com";
-				      
-					
-					 try {
-						//createMessage(to, from, "test", " body", attachments);
-						 
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-//				sevice = new EmlService(logFileText.getText(),outputDirText.getText(), 
-//						maxFileSizeText.getText());
-//				
-//				executor.submit(sevice);
-				
-				
-				logger.info(" executer started ");
-				
-
-				
-			}
-			
-			// http://blog.smartbear.com/how-to/how-to-send-email-with-embedded-images-using-java/
-			private void createMessage(String to, String from, String subject, String body, File[] attachments) throws Exception{
-		    	  // Get system properties
-		        Properties properties = System.getProperties();
-
-		        
-		        // Setup mail server
-		        //properties.setProperty("mail.smtp.host", host);
-
-		        // Get the default Session object.
-		        Session session = Session.getDefaultInstance(properties,null);	    	
-		    	
-		        MimeMessage message = new MimeMessage(Session.getInstance(System.getProperties(),null));
-//		        message.setFrom(new InternetAddress(from));
-//		        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-		        message.setSubject(subject);
-		        // create the message part 
-		        MimeBodyPart content = new MimeBodyPart();
-		        // fill message
-		        content.setText(body);
-		        MimeMultipart multipart = new MimeMultipart();
-		        multipart.addBodyPart(content);
-		        
-//		        MimeBodyPart imagePart = new MimeBodyPart();
-//
-//		        imagePart.attachFile("resources/teapot.jpg");
-		        
-//		        multipart.addBodyPart(imagePart);
-		        
-//		        // add attachments
-		        for(File file : attachments) {
-		            MimeBodyPart attachment = new MimeBodyPart();
-		            attachment.attachFile(file);
-//		            FileDataSource source = new FileDataSource(file);
-//		            attachment.setDataHandler(new DataHandler(source));
-//		            attachment.setFileName(file.getName());
-		            multipart.addBodyPart(attachment);
-		        }
-//		        // integration
-		        message.setContent(multipart);
-		        // store file
-		        message.writeTo(new FileOutputStream(new File("c:/temp/mail.eml")));
-		        
-		}
-
-
-
-			private boolean checkInputs(Text logFileText, Text outputDirText,
-					Text maxFileSizeText) {
-				File f = new File(outputDirText.getText());
-				if ( !f.exists() || !f.isDirectory()) {
-					   MessageBox messageBox = new MessageBox(logFileText.getShell(), SWT.ICON_ERROR | SWT.OK);
-			           messageBox.setText("Error");
-				       messageBox.setMessage("Directory "+ outputDirText.getText() + " not exists!");
-				       messageBox.open();					
-					return false;
-				}
-				f = new File(logFileText.getText());
-				if ( f.exists() && f.canRead() && f.isFile())
-					return true;
-				
-				else {
-				   MessageBox messageBox = new MessageBox(logFileText.getShell(), SWT.ICON_ERROR | SWT.OK);
-		           messageBox.setText("Error");
-			       messageBox.setMessage("File "+ logFileText.getText() + " not exists!");
-			       messageBox.open();					
-				}
-				return false;
-			}
-
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
 
 		
 	}
@@ -645,9 +514,6 @@ public class EmlView extends TaskViewAbstract {
 
 	@Override
 	public void dispose() {
-		if( server != null)
-			server.shutdown();
-		// TODO Auto-generated method stub
 		super.dispose();
 	}
 

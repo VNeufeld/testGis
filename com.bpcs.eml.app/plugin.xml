@@ -85,5 +85,17 @@
          </property>
       </product>
    </extension>
+   <extension
+         id="product1"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="com.bpcs.eml.app.application"
+            name="Eml Server">
+         <property
+               name="appName"
+               value="Eml Server">
+         </property>
+      </product>
+   </extension>
 
 </plugin>

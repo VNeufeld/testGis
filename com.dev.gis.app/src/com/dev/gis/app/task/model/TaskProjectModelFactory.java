@@ -21,8 +21,6 @@ public class TaskProjectModelFactory {
 		model.getGroups().getFirst().getTasks().
 			add(TaskItem.createTask(ITaskDataProvider.TASK_APP_PAYMENT, "folder_edit.png", "Payments"));
 
-		model.getGroups().getFirst().getTasks().
-		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
 		
 		model.getGroups().getFirst().getTasks().
 		add(TaskItem.createTask("googleMap", "folder_edit.png", "test ADAC APP"));
@@ -31,9 +29,13 @@ public class TaskProjectModelFactory {
 		model.getGroups().add(taskGroup);
 		taskGroup.getTasks().add(TaskItem.createTask("HSGW GetCars", "folder.png", "test hsgw http request GetCars"));
 */			
-		TaskGroup taskGroupEml = new TaskGroup("EML");
-		model.getGroups().add(taskGroupEml);
-		taskGroupEml.getTasks().add(TaskItem.createTask("EML_Creator", "folder.png", "test create eml"));
+//		TaskGroup taskGroupEml = new TaskGroup("EML");
+//		model.getGroups().add(taskGroupEml);
+//		taskGroupEml.getTasks().add(TaskItem.createTask("EML_Creator", "folder.png", "test create eml"));
+
+
+		model.getGroups().getFirst().getTasks().
+		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
 		
 		TaskGroup taskGroup = new TaskGroup("Logging");
 		model.getGroups().add(taskGroup);
