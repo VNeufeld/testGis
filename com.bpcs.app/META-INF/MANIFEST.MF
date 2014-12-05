@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: App
+Bundle-SymbolicName: com.bpcs.app;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.bpcs.app.Activator
+Bundle-Vendor: BPCS
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.dev.http.server;bundle-version="1.0.0",
+ org.apache.log4j;bundle-version="1.2.15",
+ org.apache.commons.lang;bundle-version="2.6.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
