@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
@@ -43,32 +44,37 @@ public class RemoteControlHttpHandler extends AbstractHandler {
 			ServletException {
 		
 		String xml = getBpcsXmlRequest(request);
-
+		String xmlResponseStr ="";
 		logger.info("HTTP Request : "+xml);
+		if ( StringUtils.isNotBlank(xml)) {
 		
-		callback.receive(xml);
-		
-		long start = System.currentTimeMillis();
-		
-		LogEntry entry = new LogEntry(new Date());
-		entry.setRequest(xml);
-
-		callback.update(entry);
-		
-		
-		String xmlResponseStr = new SessionControllerAdvanced().executeXmlRequest(request, xml, false);
-		
-		entry.setResponse(xmlResponseStr);
-		entry.setEnd(new Date());
-		entry.setDuration(System.currentTimeMillis() - start);
-		
-		callback.update(entry);
+			callback.receive(xml);
+			
+			long start = System.currentTimeMillis();
+			
+			LogEntry entry = new LogEntry(new Date());
+			entry.setRequest(xml);
+	
+			callback.update(entry);
+			
+			
+			xmlResponseStr = new SessionControllerAdvanced().executeXmlRequest(request, xml, false);
+			
+			entry.setResponse(xmlResponseStr);
+			entry.setEnd(new Date());
+			entry.setDuration(System.currentTimeMillis() - start);
+			
+			callback.update(entry);
+		}
+		else
+			xmlResponseStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()) + " OK for empty request";
 		
 		response.setStatus(HttpServletResponse.SC_OK);
 		
-		response.setContentType("text/plain;charset=utf-8");
+		//response.setContentType("text/plain;charset=utf-8");
+		response.setContentType("text/xml;charset=utf-8");
 
-		response.getWriter().write(new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()) + " Response : "+xmlResponseStr);
+		response.getWriter().write(xmlResponseStr);
 		response.getWriter().flush();
 
 		callback.receive(" execution completed ");

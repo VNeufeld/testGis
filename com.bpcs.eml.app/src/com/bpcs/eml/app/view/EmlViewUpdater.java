@@ -26,7 +26,7 @@ public class EmlViewUpdater {
 				        final IViewPart view = window.getView(true);
 						if ( view instanceof EmlView) {
 				            final EmlView graphView = (EmlView) view;
-				            graphView.outputText(text);
+				            //graphView.outputText(text);
 				            return;
 
 						}

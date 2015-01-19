@@ -54,9 +54,9 @@ public class EmlView extends  ViewPart {
 	private Button buttonSplit;
 	private Button buttonStop;
 	
-	private ProgressBar pb;
+	//private ProgressBar pb;
 
-	private Text currentFileName;
+	//private Text currentFileName;
 	
 	private HttpServer server;
 	
@@ -75,8 +75,6 @@ public class EmlView extends  ViewPart {
 		createGroupFiles(group);
 		
 		createServerStatusComposite(group);
-
-		createOutputText(group);
 		
 		Composite compositeLogTable = createCompositeLogTable(group);
 
@@ -127,31 +125,6 @@ public class EmlView extends  ViewPart {
 	}
 
 
-	private void createOutputText(Group group) {
-		GridData gdDateSession = new GridData();
-		gdDateSession.grabExcessHorizontalSpace = false;
-		gdDateSession.horizontalAlignment = SWT.NONE;
-		gdDateSession.horizontalSpan = 1;
-		gdDateSession.widthHint = 800;
-		gdDateSession.heightHint = 100;
-
-		
-		currentFileName = new Text(group, SWT.BORDER | SWT.MULTI);
-		currentFileName.setLayoutData(gdDateSession);
-
-		GridData gdPb = new GridData();
-		gdPb.grabExcessHorizontalSpace = true;
-		//gdPb.grabExcessVerticalSpace = true;
-		gdPb.horizontalAlignment = SWT.FILL;
-		//gdPb.horizontalSpan = 1;
-		//gdPb.widthHint = 800;
-		
-		pb = new  ProgressBar(group, SWT.NULL);
-		pb.setSelection(0);
-		pb.setLayoutData(gdPb);
-
-		
-	}
 
 
 	private void createGroupFiles(Group group) {
@@ -165,7 +138,7 @@ public class EmlView extends  ViewPart {
 
 		//createSelectDirComposite(composite);
 
-		createSelectFilesComposite(composite);
+		//createSelectFilesComposite(composite);
 
 		createOutputDirComposite(composite);
 		
@@ -284,62 +257,6 @@ public class EmlView extends  ViewPart {
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
-	}
-	
-	
-	public static void  updateProgressBar(final long size, final long maxSize ) {
-		
-		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-			
-			@Override
-			public void run() {
-				try {
-					// Show protocol, show results
-					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					EmlView viewPart =  (EmlView)wp.showView(
-							EmlView.ID, 
-							Integer.toString(instanceNum), 
-							IWorkbenchPage.VIEW_ACTIVATE);
-					
-					viewPart.updateProgressb(size, maxSize);
-					
-					
-				} catch (PartInitException e) {
-					logger.error(e.getMessage(),e);
-				}
-			}
-		});
-
-		
-	}
-
-	protected void updateProgressb(final long size, final long maxSize) {
-		int imax = (int) ( maxSize / 1000 );
-		int isize = (int) ( size / 1000 );
-		pb.setMaximum(imax);
-		pb.setSelection(isize);
-
-	}
-
-
-	protected void outputText(String text) {
-		if ( "exit".equals(text) || "canceled".equals(text)) {
-			
-			buttonSplit.setText("Split to Files");
-			buttonSplit.setEnabled(true);
-			
-			if ("exit".equals(text) )
-				currentFileName.setText(" completed ");
-			else
-				currentFileName.setText(" canceled");
-			
-			
-			buttonStop.setEnabled(false);
-
-			
-		}
-		else
-			currentFileName.setText(text);
 	}
 
 
