@@ -30,6 +30,9 @@ public class CreateEmlServiceFactory  implements HsgwServiceFactory {
 		emlInputTO.setSubject(request.getMail().getSubject());
 		emlInputTO.setAttachmentDir(request.getMail().getAttachmentDir());
 		
+		emlInputTO.setOutputFileName(request.getMail().getOutputFileName());
+		emlInputTO.setBodyFileName(request.getMail().getBodyTextFile());
+		
 		CreateEmlServiceFactory getCamperFactory = new CreateEmlServiceFactory(emlInputTO);
 		
 		return getCamperFactory;

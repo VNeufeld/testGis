@@ -7,6 +7,8 @@ public class EmlInputTO {
 	private String subject;
 	private String body;
 	private String attachmentDir;
+	private String bodyFileName;
+	private String outputFileName;
 	
 	public String getFrom() {
 		return from;
@@ -37,6 +39,18 @@ public class EmlInputTO {
 	}
 	public void setAttachmentDir(String attachmentDir) {
 		this.attachmentDir = attachmentDir;
+	}
+	public String getBodyFileName() {
+		return bodyFileName;
+	}
+	public void setBodyFileName(String bodyFileName) {
+		this.bodyFileName = bodyFileName;
+	}
+	public String getOutputFileName() {
+		return outputFileName;
+	}
+	public void setOutputFileName(String outputFileName) {
+		this.outputFileName = outputFileName;
 	}
 
 }

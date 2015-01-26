@@ -72,7 +72,7 @@
 	</xs:element>
 	<xs:element name="DemandedObject">
 		<xs:annotation>
-			<xs:documentation>Must be 22030</xs:documentation>
+			<xs:documentation>Must be 22040</xs:documentation>
 		</xs:annotation>
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
@@ -90,19 +90,10 @@
 				<xs:element name="To" type="xs:string"/>
 				<xs:element name="Subject" type="xs:string"/>
 				<xs:element name="Body" type="xs:string"/>
+				<xs:element name="BodyTextFile" type="xs:string"/>
+				<xs:element name="OutputFileName" type="xs:string"/>
 				<xs:element name="AttachmentDir" type="xs:string"/>
-				<xs:element ref="Attachments"/>
 			</xs:all>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="Attachments">
-		<xs:annotation>
-			<xs:documentation>Container for Extra objects</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Attachment" type="xs:string" maxOccurs="unbounded"/>
-			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

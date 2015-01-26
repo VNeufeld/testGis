@@ -51,8 +51,6 @@ public class EmlView extends  ViewPart {
 	private Text outputDirText;
 	private Text serverStatus;
 	
-	private Button buttonSplit;
-	private Button buttonStop;
 	
 	//private ProgressBar pb;
 
@@ -72,7 +70,7 @@ public class EmlView extends  ViewPart {
 		group.setText("EML Creator");
 		group.setLayout(new GridLayout(1, false));
 
-		createGroupFiles(group);
+		//createGroupFiles(group);
 		
 		createServerStatusComposite(group);
 		
@@ -106,7 +104,7 @@ public class EmlView extends  ViewPart {
 			ServerCallback callback  =new ServerCallback();
 			server  = new HttpServer();
 			
-			server.setOutputDir(outputDirText.getText());
+			//server.setOutputDir(outputDirText.getText());
 			
 			server.startup(callback);
 			logger.info("Server started " );
@@ -140,7 +138,7 @@ public class EmlView extends  ViewPart {
 
 		//createSelectFilesComposite(composite);
 
-		createOutputDirComposite(composite);
+		//createOutputDirComposite(composite);
 		
 	}
 
@@ -165,7 +163,7 @@ public class EmlView extends  ViewPart {
 		this.serverStatus = new Text(textComposite, SWT.BORDER | SWT.SINGLE);
 		this.serverStatus.setLayoutData(gdMaxFileSize);
 		this.serverStatus.setEditable(false);
-		Color color = new Color(parent.getDisplay(), new RGB(0,255,25));
+		Color color = new Color(parent.getDisplay(), new RGB(0,0,255));
 		this.serverStatus.setForeground(color);
 
 		
