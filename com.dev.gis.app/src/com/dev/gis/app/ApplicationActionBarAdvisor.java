@@ -17,6 +17,10 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
+import com.dev.gis.app.actions.ResetCurrentPerspectiveAction;
+import com.dev.gis.app.actions.SwitchToLogPerspectiveAction;
+import com.dev.gis.app.actions.SwitchToAppPerspectiveAction;
+
 /**
  * An action bar advisor is responsible for creating, adding, and disposing of the
  * actions added to a workbench window. Each window will be populated with
@@ -29,10 +33,10 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     // when fillActionBars is called with FILL_PROXY.
     private IWorkbenchAction exitAction;
     private IWorkbenchAction aboutAction;
-    private IWorkbenchAction newWindowAction;
-    private OpenViewAction openViewAction;
-    private Action messagePopupAction;
     private Action stopProcessAction;
+    private Action switchPerspectiveAction;
+    private Action switchToAppPerspectiveAction;
+    private Action resetCurrentPerspectiveAction;
     
 
     public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
@@ -58,18 +62,31 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 //        openViewAction = new OpenViewAction(window, "Open Another Message View", View.ID);
 //        register(openViewAction);
 
-        messagePopupAction = new MessagePopupAction("Open Message", window);
-        register(messagePopupAction);
+//        messagePopupAction = new MessagePopupAction("Open Message", window);
+//        register(messagePopupAction);
+
+        resetCurrentPerspectiveAction = new ResetCurrentPerspectiveAction("Reset Perspective", window);
+        register(resetCurrentPerspectiveAction);
         
         stopProcessAction = new StopProcessAction("Stop Process", window);
         register(stopProcessAction);
+
+        switchPerspectiveAction = new SwitchToLogPerspectiveAction("Switch to Log Perspective", window);
+        register(switchPerspectiveAction);
+
+    
+        switchToAppPerspectiveAction = new SwitchToAppPerspectiveAction("Switch To App Perspective", window);
+        register(switchToAppPerspectiveAction);
+
     }
     
     protected void fillMenuBar(IMenuManager menuBar) {
         MenuManager fileMenu = new MenuManager("&File", IWorkbenchActionConstants.M_FILE);
+        MenuManager perspectiveMenu = new MenuManager("&Perspective", "Perspective");
         MenuManager helpMenu = new MenuManager("&Help", IWorkbenchActionConstants.M_HELP);
         
         menuBar.add(fileMenu);
+        menuBar.add(perspectiveMenu);
         // Add a group marker indicating where action set menus will appear.
         menuBar.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
         menuBar.add(helpMenu);
@@ -80,6 +97,10 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         //fileMenu.add(messagePopupAction);
         //fileMenu.add(openViewAction);
         //fileMenu.add(new Separator());
+        perspectiveMenu.add(switchPerspectiveAction);
+        perspectiveMenu.add(switchToAppPerspectiveAction);
+        perspectiveMenu.add(new Separator());
+        perspectiveMenu.add(resetCurrentPerspectiveAction);
         fileMenu.add(exitAction);
         
         // Help
@@ -90,7 +111,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         IToolBarManager toolbar = new ToolBarManager(SWT.FLAT | SWT.RIGHT);
         coolBar.add(new ToolBarContributionItem(toolbar, "main"));   
         //toolbar.add(openViewAction);
-        toolbar.add(messagePopupAction);
+        toolbar.add(switchPerspectiveAction);
+        toolbar.add(switchToAppPerspectiveAction);
+        toolbar.add(resetCurrentPerspectiveAction);
         toolbar.add(stopProcessAction);
     }
 }
