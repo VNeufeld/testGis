@@ -14,9 +14,14 @@
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
-            name="RCP Perspective"
+            name="Test App Perspective"
+            class="com.dev.gis.app.TestAppPerspective"
+            id="com.dev.gis.app.testapp.perspective">
+      </perspective>
+      <perspective
             class="com.dev.gis.app.Perspective"
-            id="com.dev.gis.app.perspective">
+            id="com.dev.gis.app.perspective"
+            name="RCP Perspective">
       </perspective>
    </extension>
    <extension
@@ -181,6 +186,24 @@
             defaultHandler="com.dev.gis.app.task.handlers.EditTaskDetailsHandler"
             id="com.dev.gis.app.editTaskDetails"
             name="edit task details">
+      </command>
+      <command
+            categoryId="com.dev.gis.app.category1"
+            description="Switch To Log Perspektive"
+            id="com.dev.gis.app.switch"
+            name="SwitchToLog">
+      </command>
+      <command
+            categoryId="com.dev.gis.app.category1"
+            description="Switch To App Perspektive"
+            id="com.dev.gis.app.switch.app"
+            name="SwitchToApp">
+      </command>
+      <command
+            categoryId="com.dev.gis.app.category1"
+            description="Reset Perspektive"
+            id="com.dev.gis.app.perspective.reset"
+            name="ResetPerspective">
       </command>
    </extension>
    <extension
