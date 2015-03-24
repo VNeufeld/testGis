@@ -21,7 +21,7 @@ public class Application implements IApplication {
 	public Object start(IApplicationContext context) {
 		Display display = PlatformUI.createDisplay();
 		try {
-			TaskProjectModelFactory.createExampleModel();
+			TaskProjectModelFactory.createModel();
 			
 			TaskProperties.getTaskProperties().readProperty();
 			

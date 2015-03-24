@@ -141,6 +141,14 @@
             name="EML View"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.dev.gis.app.taskmanager.SunnyCarsView.SunnyCarsAppView"
+            icon="icons/SunnyCars.gif"
+            id="com.dev.gis.app.task.SunnyCarsAppView"
+            name="SunnyCars Test"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

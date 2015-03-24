@@ -9,6 +9,7 @@ import com.dev.gis.task.execution.impl.LocationSearchTaskDataProvider;
 import com.dev.gis.task.execution.impl.LoggingDataProvider;
 import com.dev.gis.task.execution.impl.TestADACAppDataProvider;
 import com.dev.gis.task.execution.impl.TestADACAppPaymentDataProvider;
+import com.dev.gis.task.execution.sunnycars.SunnyCarsDataProvider;
 
 public class TaskDataProviderFactory {
 
@@ -46,6 +47,11 @@ public class TaskDataProviderFactory {
 			EmlDataProvider dataProvider = new EmlDataProvider();
 			return dataProvider;
 		}
+		else if ( name.contains("3.SunnyCars")) {
+			SunnyCarsDataProvider dataProvider = new SunnyCarsDataProvider();
+			return dataProvider;
+		}
+		
 
 		return createDefaultTaskDataProvider();
 	}

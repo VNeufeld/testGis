@@ -4,12 +4,12 @@ import com.dev.gis.task.execution.api.ITaskDataProvider;
 
 public class TaskProjectModelFactory {
 	
-	public static TaskProjectModel createExampleModel() {
+	public static TaskProjectModel createModel() {
 		
 		TaskProjectModel model = TaskProjectModel.getInstance();
 		
 		model.setName("TaskProjectModel");
-/*		
+		
 		TaskItem taskItem = TaskItem.createTask("locationSearch", "folder_edit.png", "test json http request locationSearch");
 		if ( taskItem != null)
 			model.getGroups().getFirst().getTasks().add(taskItem);
@@ -17,7 +17,11 @@ public class TaskProjectModelFactory {
 			add(TaskItem.createTask("joiGetVehicle", "folder_edit.png", "test json http request GetVehicle"));
 		model.getGroups().getFirst().getTasks().
 			add(TaskItem.createTask("joiGetVehicleRecalculate", "folder_edit.png", "test json http request Recalculate"));
-
+		
+		model.getGroups().getFirst().getTasks().
+		add(TaskItem.createTask("3.SunnyCars Test (Joi)", "folder_edit.png", "test json http request SunnyCars"));
+		
+/*
 		model.getGroups().getFirst().getTasks().
 			add(TaskItem.createTask(ITaskDataProvider.TASK_APP_PAYMENT, "folder_edit.png", "Payments"));
 
