@@ -2,6 +2,8 @@ package com.dev.gis.connector.sunny;
 
 import java.net.URI;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 
 
 public class Extra extends BasicProtocol {

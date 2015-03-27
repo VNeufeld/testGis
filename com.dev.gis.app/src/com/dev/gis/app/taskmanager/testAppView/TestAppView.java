@@ -227,7 +227,8 @@ public class TestAppView extends TaskViewAbstract {
 				
 				countVehicles.setText(String.valueOf(response.getResultList().size()));
 				
-				sessionId.setText(response.getSessionId());
+				if ( response.getSessionId() != null)
+					sessionId.setText(response.getSessionId());
 				
 				requestId.setText(String.valueOf(response.getRequestId()));				
 				

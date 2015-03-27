@@ -1,4 +1,4 @@
-package com.nbb.apps.carreservationv2.base;
+package com.dev.gis.connector.sunny;
 
 public class Text extends BasicProtocol {
 

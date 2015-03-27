@@ -1,5 +1,13 @@
 package com.dev.gis.connector.sunny;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.MutableDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 
 
 
@@ -70,7 +78,7 @@ public class DayAndHour extends BasicProtocol {
 
 	public void setTime(String time) {
 		this.time = time;
-		timeOnly = timeFormatter.parseLocalTime(time);
+		timeOnly = timeFormatter.parseDateTime(time).toLocalTime();
 		if(dateAndTime != null) {
 			addTime();
 		}

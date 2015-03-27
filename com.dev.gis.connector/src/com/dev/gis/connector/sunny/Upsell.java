@@ -1,9 +1,9 @@
-package com.nbb.apps.carreservationv2.base;
+package com.dev.gis.connector.sunny;
 
 import java.net.URI;
 import java.util.UUID;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 public class Upsell {

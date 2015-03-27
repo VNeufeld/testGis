@@ -1,7 +1,7 @@
-package com.nbb.apps.carreservationv2.base;
+package com.dev.gis.connector.sunny;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 public class Payment extends BasicProtocol {
