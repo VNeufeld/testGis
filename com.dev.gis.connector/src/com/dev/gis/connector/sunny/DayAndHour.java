@@ -70,7 +70,7 @@ public class DayAndHour extends BasicProtocol {
 
 	public void setDate(String date) {
 		this.date = date;
-		dateAndTime = MutableDateTime.parse(date, dateFormatter);
+		//dateAndTime = MutableDateTime..parse(date, dateFormatter);
 		if(timeOnly != null) {
 			addTime();
 		}

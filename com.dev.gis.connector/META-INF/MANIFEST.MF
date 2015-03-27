@@ -12,9 +12,9 @@ Require-Bundle: org.eclipse.ui,
  org.apache.commons.io;bundle-version="2.0.1",
  com.dev.gis.utils;bundle-version="1.0.0",
  org.apache.httpcomponents.httpclient;bundle-version="4.1.2",
- org.apache.httpcomponents.httpcore;bundle-version="4.1.4"
+ org.apache.httpcomponents.httpcore;bundle-version="4.1.4",
+ org.joda.time
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.dev.gis.connector,
  com.dev.gis.connector.joi.protocol
-Import-Package: org.joda.time.format
