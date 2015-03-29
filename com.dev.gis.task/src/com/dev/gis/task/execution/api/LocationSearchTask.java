@@ -1,9 +1,7 @@
-package com.dev.gis.task.execution.locationSearch.impl;
+package com.dev.gis.task.execution.api;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.dev.gis.task.execution.api.IExecutableTask;
-import com.dev.gis.task.execution.api.IResultView;
 import com.dev.gis.task.execution.locationSearch.JoiTask;
 import com.dev.gis.task.runnable.LocationSearchTaskRunnable;
 

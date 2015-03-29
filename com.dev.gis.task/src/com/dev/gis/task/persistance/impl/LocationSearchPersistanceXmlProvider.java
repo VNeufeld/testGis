@@ -10,8 +10,8 @@ import javax.xml.bind.JAXBException;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.task.execution.api.ITaskPersistanceProvider;
+import com.dev.gis.task.execution.api.LocationSearchTask;
 import com.dev.gis.task.execution.locationSearch.JoiTask;
-import com.dev.gis.task.execution.locationSearch.impl.LocationSearchTask;
 
 /**
  * @author Valeri

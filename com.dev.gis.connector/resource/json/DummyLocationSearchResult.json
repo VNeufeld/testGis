@@ -8,7 +8,7 @@
 		{
 			"identifier": "Londons",
 			"id": 12345,
-			"type": null,
+			"type": "2",
 			"subResult": [],
 			"countryId": 49,
 			"country": null

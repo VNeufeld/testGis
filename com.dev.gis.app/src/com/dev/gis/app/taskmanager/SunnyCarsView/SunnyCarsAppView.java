@@ -6,6 +6,7 @@ import java.util.Calendar;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -53,6 +54,9 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	private StringFieldEditor city;
 	private StringFieldEditor airport;
 	
+	private Text serverUrl;
+	private Text operator;
+	
 	Calendar checkInDate = Calendar.getInstance();
 	
 	DateTime pickupDate = null;
@@ -92,47 +96,16 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		
 		final Group groupStamp = new Group(composite, SWT.TITLE);
 		groupStamp.setText("Inputs:");
-		groupStamp.setLayout(new GridLayout(4, true));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(groupStamp);
+		groupStamp.setLayout(new GridLayout(4, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).applyTo(groupStamp);
 		
-		GridData gridData = new GridData();
-		gridData.horizontalSpan = 3;
-		
-		new Label(groupStamp, SWT.NONE).setText("Server");
-		final Text serverUrl = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		//serverUrl.setLayoutData(gdFirm2);
-		serverUrl.setText(TaskProperties.getTaskProperties().getServerProperty());
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).span(3, 1).hint(300, 16).applyTo(serverUrl);
-		
-		serverUrl.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				if ( arg0.character == '\r') {
-					TaskProperties.getTaskProperties().setServerProperty(serverUrl.getText());
-					TaskProperties.getTaskProperties().saveProperty();
-				}
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		new Label(groupStamp, SWT.NONE).setText("Operator");
-		final Text operator = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		operator.setText(String.valueOf(TaskProperties.getTaskProperties().getOperator()));
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).span(3, 1).hint(100, 16).applyTo(operator);
-		
+		serverUrl = createServer(groupStamp);
 
+		operator = createOperator(groupStamp);
+		
 		final Text cityText = createCityText(groupStamp);
 
-		Label aptLabel = new Label(groupStamp, SWT.NONE);
-		aptLabel.setText("APT CODE");
-		final Text aptText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		aptText.setLayoutData(gridData);
+		final Text aptText = createAptText(groupStamp);
 		
 		final Button buttonTruck = createRadioButtonsCarAndTruck(groupStamp);
 		
@@ -273,28 +246,10 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		
 	}
 
-	private Text createCityText(final Group groupStamp) {
 
-		Composite composite=new Composite(groupStamp, SWT.NONE);
-		composite.setLayout(new GridLayout(4, true));
-		GridDataFactory.fillDefaults().span(4, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(composite);
-		
-		Label cityLabel = new Label(composite, SWT.NONE);
-		cityLabel.setText("City ID");
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(true, false).applyTo(cityLabel);
-		
-		final Text cityText = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(true, false).applyTo(cityText);
 
-		
-		new Label(composite, SWT.NONE).setText("( 3586 for SIXT Truck");
 
-		Composite emptyComposite=new Composite(composite, SWT.NONE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(1, 1).grab(true, true).applyTo(emptyComposite);
-		
-		//span(groupStamp,2);
-		return cityText;
-	}
+
 
 	private Button createRadioButtonsCarAndTruck(final Group groupStamp) {
 		Composite rbComposite=new Composite(groupStamp, SWT.NONE);
@@ -652,5 +607,124 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		GridDataFactory.fillDefaults().span(x, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(parent);
 	}
 
+	private Text createServer(Group groupStamp) {
+		
+		new Label(groupStamp, SWT.NONE).setText("Server URL");
+		
+		GridData gdComposite1 = new GridData();
+		gdComposite1.grabExcessHorizontalSpace = true;
+		gdComposite1.grabExcessVerticalSpace = false;
+		gdComposite1.horizontalAlignment = SWT.FILL;
+		gdComposite1.verticalAlignment = SWT.FILL;
+		gdComposite1.widthHint = 550;
+		gdComposite1.horizontalSpan=3;
+		
+		Composite composite = new Composite(groupStamp, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
+		composite.setLayoutData(gdComposite1);
+		
+		
+
+		final Text serverUrl = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		serverUrl.setText(TaskProperties.getTaskProperties().getServerProperty());
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).span(1, 1).hint(400, 16).applyTo(serverUrl);
+		
+		serverUrl.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if ( arg0.character == '\r') {
+					TaskProperties.getTaskProperties().setServerProperty(serverUrl.getText());
+					TaskProperties.getTaskProperties().saveProperty();
+				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		return serverUrl;
+		
+	}
+
+	private Text createOperator(Group groupStamp) {
+		GridData gdComposite1 = new GridData();
+		gdComposite1.grabExcessHorizontalSpace = true;
+		gdComposite1.grabExcessVerticalSpace = false;
+		gdComposite1.horizontalAlignment = SWT.FILL;
+		gdComposite1.verticalAlignment = SWT.FILL;
+		gdComposite1.widthHint = 550;
+		gdComposite1.horizontalSpan=3;
+		
+		new Label(groupStamp, SWT.NONE).setText("Operator");
+		
+		
+		Composite composite = new Composite(groupStamp, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
+		composite.setLayoutData(gdComposite1);
+		
+		final Text operator = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		operator.setText(String.valueOf(TaskProperties.getTaskProperties().getOperator()));
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).span(1, 1).hint(100, 16).applyTo(operator);
+		
+		return operator;
+	}
+
+	private Text createCityText(final Group groupStamp) {
+		
+		GridData gdComposite1 = new GridData();
+		gdComposite1.grabExcessHorizontalSpace = true;
+		gdComposite1.grabExcessVerticalSpace = false;
+		gdComposite1.horizontalAlignment = SWT.FILL;
+		gdComposite1.verticalAlignment = SWT.FILL;
+		gdComposite1.widthHint = 550;
+		gdComposite1.horizontalSpan=3;
+
+		new Label(groupStamp, SWT.NONE).setText("City ID");
+		
+		Composite composite=new Composite(groupStamp, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(composite);
+		composite.setLayoutData(gdComposite1);
+//		GridDataFactory.fillDefaults().span(3, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).hint(550, 1).applyTo(composite);
+
+		
+		final Text cityText = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).hint(100, 16).applyTo(cityText);
+		
+		Button buttonSearch = new Button(composite, SWT.PUSH | SWT.LEFT);
+		buttonSearch.setText("Search city");
+		buttonSearch.addSelectionListener (new SearchCitySelectionListener(this.serverUrl.getText(), this.operator.getText(), composite.getShell(), cityText));
+		
+		//new Label(composite, SWT.NONE).setText("( 3586 for SIXT Truck ) ");
+
+		return cityText;
+	}
+
+	
+	private Text createAptText(Group groupStamp) {
+		
+		GridData gdComposite1 = new GridData();
+		gdComposite1.grabExcessHorizontalSpace = true;
+		gdComposite1.grabExcessVerticalSpace = false;
+		gdComposite1.horizontalAlignment = SWT.FILL;
+		gdComposite1.verticalAlignment = SWT.FILL;
+		gdComposite1.widthHint = 550;
+		gdComposite1.horizontalSpan=3;
+		
+		new Label(groupStamp, SWT.NONE).setText("APT CODE");
+		
+
+		Composite composite=new Composite(groupStamp, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
+		composite.setLayoutData(gdComposite1);
+
+		
+		final Text aptText = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).hint(100, 16).applyTo(aptText);
+		return aptText;
+	}
+	
 	
 }
