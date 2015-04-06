@@ -1,4 +1,4 @@
-package com.dev.gis.task.execution.api;
+package com.dev.gis.connector.api;
 
 import java.io.IOException;
 import java.net.URI;
@@ -6,55 +6,36 @@ import java.net.URISyntaxException;
 
 import org.apache.log4j.Logger;
 
-import com.bpcs.mdcars.protocol.HitType;
-import com.bpcs.mdcars.protocol.LocationSearchResult;
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
+import com.dev.gis.connector.sunny.HitType;
+import com.dev.gis.connector.sunny.LocationSearchResult;
 
-public class LocationSearchConnector  {
+public class LocationHttpService {
+	private static Logger logger = Logger.getLogger(LocationHttpService.class);
 	
-	protected  String server;
-	protected  String path;
-	protected  int port = 8080;
-	protected  String operator = "1";
-	protected  String language = "1";
-	protected String schema = "http";
-	LocationSearchTask locationSearchTask;
-	private static Logger logger = Logger.getLogger(LocationSearchConnector.class);
+	private final URI uri;
+	private final Long operator;
+	private final long language;
+	
 
-	
-	public LocationSearchConnector(LocationSearchTask locationSearchTask) {
-		this.locationSearchTask = locationSearchTask;
+	public LocationHttpService(Long operator, URI uri, int language) {
+		this.uri = uri;
+		this.operator = operator;
+		this.language = language;
 		
 	}
-	
-	public LocationSearchConnector() {
-		try {
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty());
-			
-			server = uri.getHost();
-			path = uri.getPath() + "/location";;
-			
-			
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
-	
 
-	public LocationSearchResult joiLocationSearch(String searchString, HitType filter, long operator, long language) {
+	public LocationSearchResult joiLocationSearch(String searchString, HitType filter) {
 		
-
 		GisHttpClient httpClient = new GisHttpClient();;
 
 		try {
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty());
 			
 			String query = "operator=" + operator + "&lang=" + language
 					+ "&search=" + searchString;
+			if ( filter != null && filter != HitType.UNINITIALIZED)
+				query = query + "&filter="+filter.getOrdinal();
 			
 			
 			URI locationServiceUri = createUri(query);
@@ -94,9 +75,9 @@ public class LocationSearchConnector  {
 	}
 
 	protected URI createUri(String query) throws URISyntaxException {
-		
-		return new URI(schema, null, server, port,path,
-				 query, null);
+		String path = uri.getPath() + "/location";;
+
+		return new URI(uri.getScheme(), null, uri.getHost(), uri.getPort(),path, query, null);
 
 	}
 

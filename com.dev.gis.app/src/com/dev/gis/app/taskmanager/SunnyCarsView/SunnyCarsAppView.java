@@ -16,6 +16,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -23,6 +25,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
@@ -36,18 +39,19 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
-import com.dev.gis.connector.joi.protocol.DayAndHour;
-import com.dev.gis.connector.joi.protocol.Location;
-import com.dev.gis.connector.joi.protocol.TravelInformation;
-import com.dev.gis.connector.joi.protocol.VehicleRequest;
-import com.dev.gis.connector.joi.protocol.VehicleResponse;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.LocationHttpService;
+import com.dev.gis.connector.api.TaskProperties;
+import com.dev.gis.connector.api.VehicleHttpService;
+import com.dev.gis.connector.sunny.*;
 import com.dev.gis.task.execution.api.IEditableTask;
 //import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
 import com.dev.gis.task.execution.api.OfferDo;
-import com.dev.gis.task.execution.api.TaskProperties;
+import com.dev.gis.task.execution.api.SunnyModelProvider;
+import com.dev.gis.task.execution.api.SunnyOfferDo;
 
 public class SunnyCarsAppView extends TaskViewAbstract {
 	public static final String ID = IEditableTask.ID_TestSunnyCarsView;
@@ -56,6 +60,9 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	
 	private Text serverUrl;
 	private Text operator;
+	
+	private Combo languageList;
+
 	
 	Calendar checkInDate = Calendar.getInstance();
 	
@@ -102,6 +109,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		serverUrl = createServer(groupStamp);
 
 		operator = createOperator(groupStamp);
+		
+		languageList = createLanguageList(groupStamp);
 		
 		final Text cityText = createCityText(groupStamp);
 
@@ -191,16 +200,19 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 					request.setModule(2);
 				else
 					request.setModule(1);
-				request.setPayment(1);
+				request.setPayment(PayType.PREPAID);
 				
 				travelInformation = ti;
 				
-				VehicleResponse response = JoiVehicleConnector.getOffers(request);
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				VehicleHttpService service = serviceFactory.getVehicleJoiService();
+				
+				VehicleResponse response = service.getOffers(request);
 				//VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				
-				countVehicles.setText(String.valueOf(response.getResultList().size()));
+				countVehicles.setText(String.valueOf(response.getAllOffers().size()));
 				
-				sessionId.setText(response.getSessionId());
+				sessionId.setText(String.valueOf(response.getRequestId()));
 				
 				requestId.setText(String.valueOf(response.getRequestId()));				
 				
@@ -245,7 +257,6 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 		
 	}
-
 
 
 
@@ -309,8 +320,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	}
 	
 	protected void changeModel(VehicleResponse response) {
-		ModelProvider.INSTANCE.updateOffers(response);
-	    viewer.setInput(ModelProvider.INSTANCE.getOfferDos());
+		SunnyModelProvider.INSTANCE.updateOffers(response);
+	    viewer.setInput(SunnyModelProvider.INSTANCE.getOfferDos());
 	
 	}
 
@@ -460,10 +471,10 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	            .getSelection();
 	        Object selectedNode = thisSelection.getFirstElement();
 	        
-	    	OfferDo offer = (OfferDo) selectedNode;
+	        SunnyOfferDo offer = (SunnyOfferDo) selectedNode;
 	    	offer.setTravelInformation(travelInformation);
  
-	        new OfferViewUpdater().showOffer(offer);
+	        new SunnyOfferViewUpdater().showOffer(offer);
 	        System.out.println("selectedNode "+offer);
 	        
 		}
@@ -479,7 +490,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
+	    	  SunnyOfferDo o = (SunnyOfferDo) element;
 	        return o.getName();
 	      }
 	    });
@@ -488,7 +499,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
+	    	  SunnyOfferDo o = (SunnyOfferDo) element;
 	        return o.getGroup();
 	      }
 	    });
@@ -499,7 +510,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
+	    	  SunnyOfferDo o = (SunnyOfferDo) element;
 	        return String.valueOf(o.getSupplierId());
 	      }
 	    });
@@ -508,7 +519,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
+	    	  SunnyOfferDo o = (SunnyOfferDo) element;
 			return String.valueOf(o.getPickUpStationId());
 	      }
 	    });
@@ -517,7 +528,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
+	    	  SunnyOfferDo o = (SunnyOfferDo) element;
 			return o.getServiceCatalogCode() + " : "+ String.valueOf(o.getServiceCatalogId());
 	      }
 	    });
@@ -527,7 +538,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
+	    	  SunnyOfferDo o = (SunnyOfferDo) element;
 			return o.getPrice().getAmount();
 	      }
 
@@ -537,7 +548,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
+	    	  SunnyOfferDo o = (SunnyOfferDo) element;
 	    	String incl = o.getInclusiveKm();
 			return incl;
 	      }
@@ -547,7 +558,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	OfferDo o = (OfferDo) element;
+	    	  SunnyOfferDo o = (SunnyOfferDo) element;
 	    	return  o.getPrepaid();
 	    	
 	      }
@@ -645,9 +656,53 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				
 			}
 		});
+		
+		serverUrl.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				TaskProperties.getTaskProperties().setServerProperty(serverUrl.getText());
+				TaskProperties.getTaskProperties().saveProperty();
+			}
+		});
+		
 		return serverUrl;
 		
 	}
+	
+	private Combo createLanguageList(Group groupStamp) {
+		// TODO Auto-generated method stub
+		GridData gdComposite1 = new GridData();
+		gdComposite1.grabExcessHorizontalSpace = true;
+		gdComposite1.grabExcessVerticalSpace = false;
+		gdComposite1.horizontalAlignment = SWT.FILL;
+		gdComposite1.verticalAlignment = SWT.FILL;
+		gdComposite1.widthHint = 550;
+		gdComposite1.horizontalSpan=3;
+		
+		new Label(groupStamp, SWT.NONE).setText("Language");
+		
+		
+		Composite composite = new Composite(groupStamp, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
+		composite.setLayoutData(gdComposite1);
+		
+		final Combo c = new Combo(composite, SWT.READ_ONLY);
+		String items[] = { "deu ( de-DE )", "eng ( uk-UK) "};
+		c.setItems(items);
+		int lang_id = TaskProperties.getTaskProperties().getLanguage() -1;
+		c.select(lang_id);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).span(1, 1).hint(100, 16).applyTo(c);
+		
+		return c;
+	}
+
 
 	private Text createOperator(Group groupStamp) {
 		GridData gdComposite1 = new GridData();
@@ -695,7 +750,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		
 		Button buttonSearch = new Button(composite, SWT.PUSH | SWT.LEFT);
 		buttonSearch.setText("Search city");
-		buttonSearch.addSelectionListener (new SearchCitySelectionListener(this.serverUrl.getText(), this.operator.getText(), composite.getShell(), cityText));
+		buttonSearch.addSelectionListener (new SearchCitySelectionListener(this.serverUrl, this.operator,this.languageList, composite.getShell(), cityText));
 		
 		//new Label(composite, SWT.NONE).setText("( 3586 for SIXT Truck ) ");
 
@@ -717,12 +772,18 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		
 
 		Composite composite=new Composite(groupStamp, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(composite);
 		composite.setLayoutData(gdComposite1);
 
 		
 		final Text aptText = new Text(composite, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).hint(100, 16).applyTo(aptText);
+		
+		
+		Button buttonSearch = new Button(composite, SWT.PUSH | SWT.LEFT);
+		buttonSearch.setText("Search airport");
+		buttonSearch.addSelectionListener (new SearchCitySelectionListener(this.serverUrl, this.operator,this.languageList, composite.getShell(), aptText));
+		
 		return aptText;
 	}
 	

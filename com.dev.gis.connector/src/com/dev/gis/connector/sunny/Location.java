@@ -60,4 +60,11 @@ public class Location extends BasicProtocol {
 		return "Location [station=" + station + ", stationId=" + stationId
 				+ ", geo=" + geo + ", airport=" + airport + "]";
 	}
+
+	public void setCityId(Long valueOf) {
+		if ( geo == null)
+			geo = new GeoLocation();
+		geo.setCity(valueOf);
+		
+	}
 }

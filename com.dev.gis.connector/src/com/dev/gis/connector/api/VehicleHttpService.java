@@ -1,4 +1,4 @@
-package com.dev.gis.task.execution.api;
+package com.dev.gis.connector.api;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,27 +12,15 @@ import org.eclipse.swt.widgets.Text;
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
 import com.dev.gis.connector.api.TaskProperties;
-import com.dev.gis.connector.joi.protocol.Address;
-import com.dev.gis.connector.joi.protocol.Administration;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
-import com.dev.gis.connector.joi.protocol.Customer;
-import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
-import com.dev.gis.connector.joi.protocol.MoneyAmount;
-import com.dev.gis.connector.joi.protocol.Offer;
-import com.dev.gis.connector.joi.protocol.Payment;
-import com.dev.gis.connector.joi.protocol.PaymentType;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
-import com.dev.gis.connector.joi.protocol.Person;
-import com.dev.gis.connector.joi.protocol.PhoneNumber;
-import com.dev.gis.connector.joi.protocol.TravelInformation;
-import com.dev.gis.connector.joi.protocol.VehicleRequest;
-import com.dev.gis.connector.joi.protocol.VehicleResponse;
+import com.dev.gis.connector.sunny.*;
 
-public class JoiVehicleConnector {
-	private static Logger logger = Logger.getLogger(JoiVehicleConnector.class);
+public class VehicleHttpService {
+	private static Logger logger = Logger.getLogger(VehicleHttpService.class);
 	
 	private static String varPayerId = "G53SL5V9APQV2";
 
@@ -269,7 +257,7 @@ public class JoiVehicleConnector {
 		address.setStreet("Street");
 		address.setZip("81543");
 		address.setCountry("DE");
-		address.setCountryId(Long.valueOf(49));
+		//address.setCountryId(Long.valueOf(49));
 		customer.setAddress(address);
 		customer.setExternalCustomerNo("111111111");
 		customer.setEMail("John-Appleseed@mac.com");
@@ -339,23 +327,23 @@ public class JoiVehicleConnector {
 
 			Customer customer = createCustomer();
 			
-			bookingRequest.setCustomer(customer);
-			
-			Person driver = createDriver();
-			
-			bookingRequest.setDriver(driver);
-			
-			
-			Payment payment = new Payment();
-			payment.setPaymentType("8");   // Paypal
-			bookingRequest.setPayment(payment);
-			
-			bookingRequest.setAcceptedAvailability("13");
-			bookingRequest.setFlightNo("LH4711");
-			bookingRequest.setTransferType("1");
-			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
-			
-			bookingRequest.setExtras(selectedExtras);
+//			bookingRequest.setCustomer(customer);
+//			
+//			Person driver = createDriver();
+//			
+//			bookingRequest.setDriver(driver);
+//			
+//			
+//			Payment payment = new Payment();
+//			payment.setPaymentType("8");   // Paypal
+//			bookingRequest.setPayment(payment);
+//			
+//			bookingRequest.setAcceptedAvailability("13");
+//			bookingRequest.setFlightNo("LH4711");
+//			bookingRequest.setTransferType("1");
+//			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
+//			
+//			bookingRequest.setExtras(selectedExtras);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
 			logger.info("book Request = "+request);

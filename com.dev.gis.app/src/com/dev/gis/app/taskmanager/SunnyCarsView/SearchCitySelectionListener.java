@@ -8,30 +8,32 @@ import javax.xml.bind.JAXBException;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.dev.gis.task.dialogs.TaskLocationSearchDialog;
+import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
 import com.dev.gis.task.execution.api.TaskDataProviderFactory;
-import com.dev.gis.task.execution.api.TaskProperties;
 
 
 public class SearchCitySelectionListener implements SelectionListener {
 
-	private final String serverUrl;
-	private final String operator;
+	private final Text serverUrl;
+	private final Text operator;
 	private final Shell shell;
 	private final Text cityText;
+	private final Combo languageCombo;
 	
 	private String  id;
 
-	public SearchCitySelectionListener(String serverUrl, String operator, final Shell shell, Text cityText) {
+	public SearchCitySelectionListener(Text serverUrl, Text operator, Combo lang, final Shell shell, Text cityText) {
 		super();
 		this.serverUrl = serverUrl;
 		this.operator = operator;
 		this.shell = shell;
 		this.cityText = cityText;
+		this.languageCombo = lang;
 		
 	}
 	
@@ -56,8 +58,11 @@ public class SearchCitySelectionListener implements SelectionListener {
 //		
 //		System.out.println(" Stationname = "+stationDao.getStationName());
 		
-		TaskProperties.getTaskProperties().setServerProperty(serverUrl);
-		TaskProperties.getTaskProperties().setOperator(Long.valueOf(operator));
+		TaskProperties.getTaskProperties().setServerProperty(serverUrl.getText());
+		TaskProperties.getTaskProperties().setOperator(Long.valueOf(operator.getText()));
+		int language = languageCombo.getSelectionIndex() + 1;
+		TaskProperties.getTaskProperties().setLanguage(language);
+		
 		TaskProperties.getTaskProperties().saveProperty();
 		
 		LocationSearchDialog mpd = new LocationSearchDialog(shell);

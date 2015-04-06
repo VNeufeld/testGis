@@ -35,6 +35,7 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Location;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
@@ -46,7 +47,6 @@ import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
 import com.dev.gis.task.execution.api.OfferDo;
-import com.dev.gis.task.execution.api.TaskProperties;
 
 public class TestAppView extends TaskViewAbstract {
 	public static final String ID = IEditableTask.ID_TestAppView;

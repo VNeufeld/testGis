@@ -7,9 +7,9 @@ import com.bpcs.mdcars.protocol.LocationSearchResult;
 import com.dev.gis.task.execution.api.IResultView;
 import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.LocationSearchConnector;
 import com.dev.gis.task.execution.api.LocationSearchTask;
 import com.dev.gis.task.execution.api.TaskResultFactory;
+import com.dev.gis.task.execution.locationSearch.impl.LocationSearchConnector;
 
 public class LocationSearchTaskRunnable extends AbstractTaskRunnable  implements Runnable {
 	

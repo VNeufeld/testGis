@@ -7,7 +7,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.task.model.TaskProjectModelFactory;
-import com.dev.gis.task.execution.api.TaskProperties;
+import com.dev.gis.connector.api.TaskProperties;
 
 /**
  * This class controls all aspects of the application's execution

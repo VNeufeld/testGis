@@ -28,12 +28,10 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.bpcs.mdcars.protocol.Hit;
-import com.bpcs.mdcars.protocol.HitType;
-import com.bpcs.mdcars.protocol.LocationSearchResult;
-import com.dev.gis.task.execution.api.LocationSearchConnector;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.LocationHttpService;
+import com.dev.gis.connector.sunny.*;
 import com.dev.gis.task.execution.api.SunnyModelProvider;
-import com.dev.gis.task.execution.api.TaskProperties;
 
 public class LocationSearchDialog extends Dialog {
 	
@@ -55,7 +53,7 @@ public class LocationSearchDialog extends Dialog {
 	protected Control createDialogArea(Composite parent) {
 		
 		Composite composite = (Composite) super.createDialogArea(parent);
-		composite.getShell().setText("search city");
+		composite.getShell().setText("location search");
 		
 		GridLayout glMain = new GridLayout(1, false);
 		composite.setLayout(glMain);
@@ -94,6 +92,8 @@ public class LocationSearchDialog extends Dialog {
 		String items[] = { "","All", "City", "Airport", "Country" };
 		c.setItems(items);
 		c.select(2);
+		
+		
 		createViewer(composite);
 		
 		GridData gdButton = new GridData();
@@ -116,10 +116,9 @@ public class LocationSearchDialog extends Dialog {
 				if ( filterIndex == 4)
 					type = HitType.COUNTRY;
 
-				Long operator = TaskProperties.getTaskProperties().getOperator();
-				
-				LocationSearchConnector locationSearchConnector = new LocationSearchConnector();
-				LocationSearchResult result = locationSearchConnector.joiLocationSearch(searchString, type, operator, 1l);
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				LocationHttpService service = serviceFactory.getLocationJoiService();
+				LocationSearchResult result = service.joiLocationSearch(searchString, type);
 				
 				SunnyModelProvider.INSTANCE.updateHits(result);
 				
@@ -197,8 +196,8 @@ public class LocationSearchDialog extends Dialog {
 	
 	
 	private void createColumns(final Composite parent, final TableViewer viewer) {
-	    String[] titles = { "Name", "Id", "Type" };
-	    int[] bounds = { 200, 150, 100};
+	    String[] titles = { "Name", "Id", "apt", "Type", "Country" };
+	    int[] bounds = { 200, 150, 150, 100, 200};
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -219,14 +218,32 @@ public class LocationSearchDialog extends Dialog {
 	      }
 	    });
 	    
-
-
 	    col = createTableViewerColumn(titles[2], bounds[2], 2);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	Hit o = (Hit) element;
+	        return String.valueOf(o.getAptCode());
+	      }
+	    });
+
+
+	    col = createTableViewerColumn(titles[3], bounds[3], 3);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
 	    	  Hit o = (Hit) element;
 	    	return  o.getType().name();
+	    	
+	      }
+	    });
+
+	    col = createTableViewerColumn(titles[4], bounds[4], 4);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	  Hit o = (Hit) element;
+	    	return  o.getCountry();
 	    	
 	      }
 	    });

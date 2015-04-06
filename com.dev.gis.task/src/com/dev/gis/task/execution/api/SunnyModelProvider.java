@@ -4,24 +4,15 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bpcs.mdcars.protocol.Hit;
-import com.bpcs.mdcars.protocol.HitGroup;
-import com.bpcs.mdcars.protocol.HitType;
-import com.bpcs.mdcars.protocol.LocationSearchResult;
-import com.bpcs.mdcars.protocol.MoneyAmount;
-import com.bpcs.mdcars.protocol.Offer;
-import com.dev.gis.connector.joi.protocol.Extra;
-import com.dev.gis.connector.joi.protocol.ExtraResponse;
-import com.dev.gis.connector.joi.protocol.PaymentInformation;
-import com.dev.gis.connector.joi.protocol.Person;
-import com.dev.gis.connector.joi.protocol.VehicleResponse;
-import com.dev.gis.connector.joi.protocol.VehicleResult;
+import com.dev.gis.connector.sunny.*;
+
 
 public enum SunnyModelProvider {
 	INSTANCE;
 
 	private List<Hit> locationSearchHits = new ArrayList<Hit>();
-
+	
+	private List<SunnyOfferDo> offerDos = new ArrayList<SunnyOfferDo>();
 	
 	private List<Extra> extraDos = new ArrayList<Extra>();
 	
@@ -30,7 +21,7 @@ public enum SunnyModelProvider {
 
 	private Person customer;
 	
-	private PaymentInformation  paymentInformation;
+	//private PaymentInformation  paymentInformation;
 	
 	private SunnyModelProvider() {
 		Hit hit = new Hit();
@@ -73,57 +64,39 @@ public enum SunnyModelProvider {
 	}
 
 	public void updateOffers(VehicleResponse response) {
-		List<VehicleResult> results = response.getResultList();
-		for ( VehicleResult vr : results) {
-			if ( vr.getOfferList().size() > 0 ) {
-				
-				OfferDo offer = new OfferDo(vr);
-				
-			}
-		}
 		
+		List<Offer> results = response.getAllOffers();
+		response.getVehicles();
+		
+		for ( Offer offer : results) {
+			Vehicle vh = foundVehicle(offer.getVehicleId(),response.getVehicles());
+			SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh);
+			
+			offerDos.add(offerDo);
+		}
 	}
 	
-	public void updateExtras(ExtraResponse response) {
-		extraDos.clear();
-		for ( Extra vr : response.getExtras()) {
-				
-			Extra extra = new Extra();
-			extra.setName(vr.getName());
-			extra.setCode(vr.getCode());
-			extra.setId(vr.getId());
-			extra.setPrice(vr.getPrice());
-				
-			extraDos.add(extra);
-		}
-		
-	}
-	
+//	public void updateExtras(ExtraResponse response) {
+//		extraDos.clear();
+//		for ( Extra vr : response.getExtras()) {
+//				
+//			Extra extra = new Extra();
+//			extra.setName(vr.getName());
+//			extra.setCode(vr.getCode());
+//			extra.setId(vr.getId());
+//			extra.setPrice(vr.getPrice());
+//				
+//			extraDos.add(extra);
+//		}
+//		
+//	}
 
-	public void update(VehicleResponse response) {
-		//offers.clear();
-		List<VehicleResult> results = response.getResultList();
-		for ( VehicleResult vr : results) {
-			if ( vr.getOfferList().size() > 0 ) {
-				URI bookLink = vr.getOfferList().get(0).getBookLink();
-				long supplierId = vr.getOfferList().get(0).getSupplierId();
-				long stationId = -1;
-				if ( vr.getPickUpLocation() != null )
-					stationId = vr.getPickUpLocation().getStationId();
-				String preis = "";
-				if ( vr.getOfferList().get(0).getPrice() != null)
-					preis = vr.getOfferList().get(0).getPrice().getAmount();
-				
-				String servCatCode = vr.getOfferList().get(0).getServiceCatalogCode();
-				Long servCatId = vr.getOfferList().get(0).getServiceCatalogId();
-						
-				Offer offer = createOffer(vr.getVehicle().getManufacturer(),supplierId, stationId, preis,servCatCode,servCatId);
-				offer.setBookLink(bookLink);
-				
-				//offers.add(offer);
-			}
-		}
-		
+
+	private Vehicle foundVehicle(long vehicleId, List<Vehicle> vehicles) {
+		for ( Vehicle v : vehicles)
+			if( v.getId() == vehicleId)
+				return v;
+		return null;
 	}
 
 
@@ -138,6 +111,11 @@ public enum SunnyModelProvider {
 
 	public List<Hit> getLocationSearchHits() {
 		return locationSearchHits;
+	}
+
+
+	public List<SunnyOfferDo> getOfferDos() {
+		return offerDos;
 	}
 
 }
