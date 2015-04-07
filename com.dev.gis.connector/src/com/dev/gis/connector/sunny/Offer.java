@@ -4,9 +4,10 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Offer extends Response {
 	
 	public final String PROMOTION_NOT_REQUIRED = "0";

@@ -141,7 +141,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-		        new OfferViewUpdater().showOffer(null);
+		        new SunnyOfferViewUpdater().showOffer(null);
 			}
 		});
 
@@ -153,27 +153,38 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 			public void widgetSelected(SelectionEvent e) {
 
 				System.out.println("Checkindate = "+new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").format(checkInDate.getTime()));
-//				
-//				IStationDao stationDao = Components.getInstance().getDaoFactory().getStationDao();
-//				
-//				System.out.println(" Stationname = "+stationDao.getStationName());
 				
 				TaskProperties.getTaskProperties().setServerProperty(serverUrl.getText());
 				TaskProperties.getTaskProperties().setOperator(Long.valueOf(operator.getText()));
 				TaskProperties.getTaskProperties().saveProperty();
 				
-				TableItem[] selection = viewer.getTable().getSelection();
-				if ( selection != null && selection.length > 0) {
-					for ( TableItem item : selection) {
-						System.out.println(" item = "+item.getData());
-						
-					}
-				}
+				VehicleRequest request = createVehicleRequest();
 				
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				VehicleHttpService service = serviceFactory.getVehicleJoiService();
+				
+				VehicleResponse response = service.getOffers(request, true);
+				
+				if ( response != null) {
+					countVehicles.setText(String.valueOf(response.getAllOffers().size()));
+					
+					sessionId.setText(String.valueOf(response.getRequestId()));
+					
+					requestId.setText(String.valueOf(response.getRequestId()));				
+					
+					changeModel(response);
+					viewer.refresh();
+					
+				}
+			}
+
+
+			private VehicleRequest createVehicleRequest() {
+
 				VehicleRequest request = new VehicleRequest();
 				TravelInformation ti = new TravelInformation();
+
 				Location pickUpLocation = new Location() ;
-				pickUpLocation.setAirport(aptText.getText());
 				if ( StringUtils.isNotEmpty(cityText.getText()))
 					pickUpLocation.setCityId(Long.valueOf(cityText.getText()));
 				else
@@ -202,25 +213,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 					request.setModule(1);
 				request.setPayment(PayType.PREPAID);
 				
-				travelInformation = ti;
+				return request;
 				
-				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-				VehicleHttpService service = serviceFactory.getVehicleJoiService();
-				
-				VehicleResponse response = service.getOffers(request);
-				//VehicleResponse response = JoiVehicleConnector.getOffersDummy();
-				
-				if ( response != null) {
-					countVehicles.setText(String.valueOf(response.getAllOffers().size()));
-					
-					sessionId.setText(String.valueOf(response.getRequestId()));
-					
-					requestId.setText(String.valueOf(response.getRequestId()));				
-					
-					changeModel(response);
-					viewer.refresh();
-					
-				}
 			}
 
 

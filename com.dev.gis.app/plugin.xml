@@ -149,6 +149,14 @@
             name="SunnyCars Test"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferDetailView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.view.SunnyOfferDetailView"
+            name="Sunny Offer Details"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

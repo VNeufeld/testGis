@@ -16,7 +16,7 @@ public class SunnyOfferViewUpdater  {
 	private Logger logger = Logger.getLogger(SunnyOfferViewUpdater.class);
 	private int instanceNum = 1;
 	
-	private String viewID = OfferDetailView.ID;
+	private String viewID = SunnyOfferDetailView.ID;
 
 	public SunnyOfferViewUpdater() {
 	}
@@ -32,13 +32,13 @@ public class SunnyOfferViewUpdater  {
 					logger.info(" showResult : run instanceNum = "+instanceNum );
 					// Show protocol, show results
 					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					OfferDetailView viewPart =  (OfferDetailView)wp.showView(
+					SunnyOfferDetailView viewPart =  (SunnyOfferDetailView)wp.showView(
 							viewID, 
 							Integer.toString(instanceNum), 
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
-//					if ( offer != null)
-//						viewPart.showOffer(offer);
+					if ( offer != null)
+						viewPart.showOffer(offer);
 					
 					instanceNum++;
 					

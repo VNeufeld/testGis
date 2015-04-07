@@ -27,7 +27,7 @@ public class VehicleHttpService {
 	
 	private static String varPayerId = "G53SL5V9APQV2";
 
-	public VehicleResponse getOffers(VehicleRequest vehicleRequest) {
+	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy) {
 		GisHttpClient httpClient = new GisHttpClient();
 
 		try {
@@ -38,18 +38,19 @@ public class VehicleHttpService {
 			Administration admin = createAdministrator();
 
 			vehicleRequest.setAdministration(admin);
-			
 
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
 			logger.info("request = "+request);
 			
-//			String request = JsonUtils.createDummyResponse("DummyJoiVehicleRequest.json");
+			String response = null;
+			if ( dummy)
+				response = JsonUtils.createDummyResponse("SunnyVehicleResponse");
+			else
+				response =  httpClient.startPostRequestAsJson(uri, request);
 			
-			String response =  httpClient.startPostRequestAsJson(uri, request);
 			logger.info("response = "+response);
 			
 			VehicleResponse vh = JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
-			
 
 			return vh;
 			
