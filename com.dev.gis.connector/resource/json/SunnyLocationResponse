@@ -1,0 +1,50 @@
+{
+  "nrTotalHits": 4,
+  "nrGroups": 2,
+  "groupedList": [
+    {
+      "nr": 1,
+      "totalHits": 2,
+      "type": "6",
+      "hitGroup": [
+        {
+          "identifier": "Monastir Airport",
+          "aptCode": "MIR",
+          "id": 7453,
+          "type": "6",
+          "countryId": 134,
+          "country": "Türkei"
+        },
+        {
+          "identifier": "Palme de Mallorca Airport",
+          "aptCode": "PMI",
+          "id": 15,
+          "type": "6",
+          "countryId": 5,
+          "country": "Spain"
+        }
+      ]
+    },
+    {
+      "nr": 2,
+      "totalHits": 2,
+      "type": "2",
+      "hitGroup": [
+        {
+          "identifier": "Hammamet",
+          "id": 2861,
+          "type": "2",
+          "countryId": 133,
+          "country": "Tunesien"
+        },
+        {
+          "identifier": "Pülma",
+          "id": 6,
+          "type": "2",
+          "countryId": 5,
+          "country": "Spain"
+        }
+      ]
+    }
+  ]
+}

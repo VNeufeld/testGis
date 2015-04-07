@@ -210,14 +210,17 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				VehicleResponse response = service.getOffers(request);
 				//VehicleResponse response = JoiVehicleConnector.getOffersDummy();
 				
-				countVehicles.setText(String.valueOf(response.getAllOffers().size()));
-				
-				sessionId.setText(String.valueOf(response.getRequestId()));
-				
-				requestId.setText(String.valueOf(response.getRequestId()));				
-				
-				changeModel(response);
-				viewer.refresh();
+				if ( response != null) {
+					countVehicles.setText(String.valueOf(response.getAllOffers().size()));
+					
+					sessionId.setText(String.valueOf(response.getRequestId()));
+					
+					requestId.setText(String.valueOf(response.getRequestId()));				
+					
+					changeModel(response);
+					viewer.refresh();
+					
+				}
 			}
 
 

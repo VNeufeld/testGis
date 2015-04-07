@@ -1,0 +1,34 @@
+{
+	"administration": {
+		"calledFrom": 5,	
+		"language": "uk-UK",	
+		"operator": 1,	
+		"salesChannel": 3,	
+		"provider": "Internet",
+		"providerId": 1
+	},
+	"agency": {
+		"agencyNo": "10002"	
+
+	},
+	"travel": {
+
+		"pickUpTime": {
+			"date": "2015-04-20",
+			"time": "10:40"
+		},
+		"dropOffTime": {
+			"date": "2015-04-27",
+			"time": "15:40"
+		},
+		"pickUpLocation": {
+			"airport": "PMI"		
+		},
+		"dropOffLocation": {
+			"airport": "PMI" 		
+		}
+	}
+	"filter": {
+		"minPrice": 150.20,
+		"maxPrice": 200
+	}

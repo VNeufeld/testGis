@@ -1,0 +1,349 @@
+{
+  "requestId": -4837194342598284000,
+  "link": "http://localhost:8080/sunny-joi/joi/request",
+  "pageInfo": "page 1 from 1",
+  "groups": [
+    {
+      "name": "A",
+      "offerList": [
+        {
+          "link": "http://localhost:8080/sunny-joi/joi/request/offer/dd4f7c2a-8b8d-47e5-87b3-f8f7a3c6e83f",
+          "id": "dd4f7c2a-8b8d-47e5-87b3-f8f7a3c6e83f",
+          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/dd4f7c2a-8b8d-47e5-87b3-f8f7a3c6e83f/book",
+          "name": "A",
+          "supplierId": 7,
+          "price": {
+            "amount": "191,40",
+            "currency": "EUR"
+          },
+          "stdPrice": {
+            "amount": "191,40",
+            "currency": "EUR"
+          },
+          "promoValue": {
+            "amount": "0,00",
+            "currency": "EUR"
+          },
+          "cancelFee": null,
+          "status": "13",
+          "inclusives": [
+            {
+              "id": 2,
+              "insurance": false,
+              "itemClassId": 3,
+              "itemClassCode": "TR",
+              "itemClassName": "Tankrule",
+              "description": "Tank Rule full to full",
+              "code": "FF"
+            }
+          ],
+          "extras": null,
+          "pickUpStationId": 4882,
+          "dropOffStationId": 4882,
+          "vehicleId": 766216606,
+          "commissionType": "1",
+          "carUsedPromotion": "0",
+          "carCategoryId": 1,
+          "upsell": null,
+          "extVehicleId": 7480,
+          "extSalesSeasonId": 325889,
+          "serviceCatalogId": 1,
+          "serviceCatalogCode": null
+        }
+      ],
+      "nrOffers": 1
+    },
+    {
+      "name": "C",
+      "offerList": [
+        {
+          "link": "http://localhost:8080/sunny-joi/joi/request/offer/013ee48b-8624-4c77-878c-9dc7e274e15a",
+          "id": "013ee48b-8624-4c77-878c-9dc7e274e15a",
+          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/013ee48b-8624-4c77-878c-9dc7e274e15a/book",
+          "name": "C",
+          "supplierId": 7,
+          "price": {
+            "amount": "244,20",
+            "currency": "EUR"
+          },
+          "stdPrice": {
+            "amount": "244,20",
+            "currency": "EUR"
+          },
+          "promoValue": {
+            "amount": "0,00",
+            "currency": "EUR"
+          },
+          "cancelFee": null,
+          "status": "13",
+          "inclusives": [
+            {
+              "id": 2,
+              "insurance": false,
+              "itemClassId": 3,
+              "itemClassCode": "TR",
+              "itemClassName": "Tankrule",
+              "description": "Tank Rule full to full",
+              "code": "FF"
+            }
+          ],
+          "extras": null,
+          "pickUpStationId": 4882,
+          "dropOffStationId": 4882,
+          "vehicleId": 453160397,
+          "commissionType": "1",
+          "carUsedPromotion": "0",
+          "carCategoryId": 3,
+          "upsell": null,
+          "extVehicleId": 7481,
+          "extSalesSeasonId": 325889,
+          "serviceCatalogId": 1,
+          "serviceCatalogCode": null
+        }
+      ],
+      "nrOffers": 1
+    }
+  ],
+  "vehicles": [
+    {
+      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/453160397",
+      "id": 453160397,
+      "supplierId": 7,
+      "categoryId": 3,
+      "groupId": 13,
+      "manufacturer": "Renault Megane ",
+      "vehicleModel": "Compact-Intermediate Limousine",
+      "type": null,
+      "fuelType": "Unspecified",
+      "supplierCategory": "CDMR|DB",
+      "commonCarInformation": null,
+      "companyName": "Sunny Cars GmbH",
+      "picture": "/img/cars/large/Renault_Megane_4dr.jpg",
+      "nrDoors": 4,
+      "nrSeats": 2,
+      "aircondition": true,
+      "automatic": false,
+      "snowTires": false,
+      "allWheel": false,
+      "navigationSystem": false,
+      "stationWagon": false,
+      "convertible": false,
+      "bodyStyle": 0,
+      "typeId": null,
+      "nrAdults": 4,
+      "nrChildren": null,
+      "fuelTypeId": -1,
+      "nrLargeLuggage": 2,
+      "trunkSize": null,
+      "acriss": "CDMR"
+    },
+    {
+      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/766216606",
+      "id": 766216606,
+      "supplierId": 7,
+      "categoryId": 1,
+      "groupId": 4,
+      "manufacturer": "Daihatsu",
+      "vehicleModel": "Compact",
+      "type": "Materia",
+      "fuelType": "Petrol/gasoline",
+      "supplierCategory": "EDMR|BB",
+      "commonCarInformation": null,
+      "companyName": "Sunny Cars GmbH",
+      "picture": "/img/cars/large/Renault_Clio_3dr.jpg",
+      "nrDoors": 5,
+      "nrSeats": 5,
+      "aircondition": false,
+      "automatic": false,
+      "snowTires": false,
+      "allWheel": false,
+      "navigationSystem": false,
+      "stationWagon": true,
+      "convertible": false,
+      "bodyStyle": 2,
+      "typeId": 1,
+      "nrAdults": 2,
+      "nrChildren": 2,
+      "fuelTypeId": 1,
+      "trunkSize": null,
+      "acriss": "EDMR"
+    }
+  ],
+  "insurances": [
+    {
+      "id": 1,
+      "price": {
+        "amount": "50,00",
+        "currency": "EUR"
+      },
+      "inclusivie": false
+    }
+  ],
+  "operator": 1,
+  "summary": {
+    "quantityVehicles": 2,
+    "totalQuantityVehicles": 2,
+    "quantityOffers": 2,
+    "totalQuantityOffers": 2,
+    "quantityGroups": 2,
+    "totalQuantityGroups": 2,
+    "minimalPrice": {
+      "amount": "191,40",
+      "currency": "EUR"
+    },
+    "maximalPrice": {
+      "amount": "244,20",
+      "currency": "EUR"
+    },
+    "minimalStdPrice": {
+      "amount": "191,40",
+      "currency": "EUR"
+    },
+    "maximalStdPrice": {
+      "amount": "244,20",
+      "currency": "EUR"
+    }
+  },
+  "texts": {
+    "supplierList": [
+      {
+        "id": 7,
+        "link": "http://localhost:8080/sunny-joi/joi/masterdata/supplier/7",
+        "supplierGroupId": 0,
+        "logo": null,
+        "name": "Sunny Cars GmbH"
+      }
+    ],
+    "bodyStyleMap": {
+      "2": {
+        "text": "Compact"
+      }
+    },
+    "stationList": [
+      {
+        "id": 4882,
+        "link": "http://localhost:8080/sunny-joi/joi/masterdata/station/4882/lang/2",
+        "identifier": "Zz/ Palma de Mallorca APT",
+        "supplierId": 7,
+        "supplierGroupId": null,
+        "stationPriority": 1,
+        "supplierPriority": 1,
+        "geo": {
+          "city": 6
+        },
+        "addres": {
+          "street": "Avenida 20 de Abril",
+          "zip": "11300",
+          "city": "La Línea de la Concepción",
+          "latitude": 36.151322,
+          "longitude": -5.349504
+        },
+        "stationLocTypes": [
+          {
+            "code": "APT",
+            "name": "Airport"
+          }
+        ]
+      }
+    ]
+  },
+  "filterTemplate": {
+    "fuelPolicy": [],
+    "stationLocTypes": [
+      {
+        "name": "RAS,Railway Station",
+        "value": "false"
+      },
+      {
+        "name": "APT,Airport",
+        "value": "true"
+      },
+      {
+        "name": "CTY,City",
+        "value": "false"
+      },
+      {
+        "name": "HAR,Harbour",
+        "value": "false"
+      }
+    ],
+    "bodyStyles": [
+      {
+        "name": "1,Sports Car",
+        "value": "false"
+      },
+      {
+        "name": "2,Compact",
+        "value": "true"
+      },
+      {
+        "name": "3,Cabrio",
+        "value": "false"
+      },
+      {
+        "name": "4,Fun Car",
+        "value": "false"
+      },
+      {
+        "name": "5,SUV",
+        "value": "false"
+      },
+      {
+        "name": "6,Luxury Car",
+        "value": "false"
+      },
+      {
+        "name": "7,Pickup",
+        "value": "false"
+      },
+      {
+        "name": "8,Normal",
+        "value": "false"
+      }
+    ],
+    "fuelTypes": [
+      {
+        "name": "1,Petrol/gasoline",
+        "value": "true"
+      },
+      {
+        "name": "2,Diesel",
+        "value": "false"
+      },
+      {
+        "name": "3,Ethanol",
+        "value": "false"
+      },
+      {
+        "name": "4,Hybrid",
+        "value": "false"
+      },
+      {
+        "name": "5,Electro",
+        "value": "false"
+      }
+    ],
+    "suppliers": [
+      {
+        "name": "7,Sunny Cars GmbH",
+        "value": "true"
+      }
+    ],
+    "automatic": {
+      "name": "automatic",
+      "value": "false"
+    },
+    "airCodition": {
+      "name": "aircondition",
+      "value": "true"
+    },
+    "minPrice": {
+      "amount": "191,40",
+      "currency": "EUR"
+    },
+    "maxPrice": {
+      "amount": "244,20",
+      "currency": "EUR"
+    }
+  }
+}

@@ -43,12 +43,12 @@ public class LocationHttpService {
 
 			
 //			JsonUtils.saveDummyResultAsJson();
-			locationServiceUri = createLocationSearchUri("");
+			//locationServiceUri = createLocationSearchUri("");
 			String response =  httpClient.sendGetRequest(locationServiceUri);
 			logger.info("response = "+response);
 			
 			// dummy
-			response = JsonUtils.createDummyResponse("DummyLocationSearchResult.json");
+			//response = JsonUtils.createDummyResponse("DummyLocationSearchResult.json");
 			
 			return JsonUtils.createResponseClassFromJson(response, LocationSearchResult.class);
 			

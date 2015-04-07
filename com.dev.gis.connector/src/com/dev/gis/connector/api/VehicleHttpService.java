@@ -21,14 +21,19 @@ import com.dev.gis.connector.sunny.*;
 
 public class VehicleHttpService {
 	private static Logger logger = Logger.getLogger(VehicleHttpService.class);
+
+	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?pageSize=5&sort=asc";
+
 	
 	private static String varPayerId = "G53SL5V9APQV2";
 
-	public static VehicleResponse getOffers(VehicleRequest vehicleRequest) {
+	public VehicleResponse getOffers(VehicleRequest vehicleRequest) {
 		GisHttpClient httpClient = new GisHttpClient();
 
 		try {
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+TaskProperties.VEHICLE_REQUEST_PARAM);
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+SUNNY_VEHICLE_REQUEST_PARAM);
+			
+			logger.info("VehicleHttpService = "+uri.toString());
 			
 			Administration admin = createAdministrator();
 
@@ -49,7 +54,7 @@ public class VehicleHttpService {
 			return vh;
 			
 		} catch ( IOException e) {
-			logger.error(e);
+			logger.error(e.getMessage(),e);
 		} catch (URISyntaxException e) {
 			logger.error(e);
 		}
