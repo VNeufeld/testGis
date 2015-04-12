@@ -25,16 +25,13 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.taskmanager.bookingView.BookingView;
-import com.dev.gis.connector.joi.protocol.Extra;
-import com.dev.gis.connector.joi.protocol.ExtraResponse;
-import com.dev.gis.connector.joi.protocol.Offer;
-import com.dev.gis.connector.joi.protocol.TravelInformation;
-import com.dev.gis.connector.joi.protocol.VehicleResult;
+import com.dev.gis.connector.sunny.Extra;
+import com.dev.gis.connector.sunny.Inclusive;
+import com.dev.gis.connector.sunny.Offer;
+import com.dev.gis.connector.sunny.TravelInformation;
 import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
-import com.dev.gis.task.execution.api.OfferDo;
+import com.dev.gis.task.execution.api.SunnyModelProvider;
 import com.dev.gis.task.execution.api.SunnyOfferDo;
 
 public class SunnyOfferDetailView extends TaskViewAbstract {
@@ -50,6 +47,9 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	private Text carDescription = null;
 
 	private TableViewer tableExtras;
+	
+	private TableViewer tableInclusives;
+	
 
 	private Offer selectedOffer = null;
 
@@ -79,6 +79,10 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		Composite rbComp = createRequestButtons(composite);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(rbComp);
 
+		
+		// Inclusives
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(addInclusivesGroup(composite));
+		
 		// Extras
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(addExtraGroup(composite));
 		
@@ -129,17 +133,24 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		group.setText("Extras:");
 		group.setLayout(new GridLayout(1, true));
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		
-		final Button buttonExtras = new Button(group, SWT.PUSH	| SWT.LEFT);
-		buttonExtras.setText("Get Extras");
-
-		buttonExtras.addSelectionListener(new AddGetExtrasListener());
 
 		createTableExtras(group);
 		
 		return group;
 	}
+
+	private Composite addInclusivesGroup(Composite composite) {
+		final Group group = new Group(composite, SWT.TITLE);
+		group.setText("Inclusives:");
+		group.setLayout(new GridLayout(1, true));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+
+		createTableInclusives(group);
+		
+		return group;
+	}
 	
+
 	private Composite addBookingButton(Composite parent) {
 		
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -153,27 +164,14 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		return composite;
 	}
 	
-
 	
-	protected class AddGetExtrasListener extends AbstractListener {
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			//ExtraResponse response = JoiVehicleConnector.getExtras(selectedOffer);
-			ExtraResponse response = JoiVehicleConnector.getExtrasDummy();
-			changeModel(response);
-			tableExtras.refresh();
-
-		}
-
-	}
 
 	protected class AddBookingListener extends AbstractListener {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			List<Extra> extras = getSelectedExtras();
-			BookingView.updateView(selectedOffer, extras);
+			//BookingView.updateView(selectedOffer, extras);
 
 		}
 
@@ -190,8 +188,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 					travelInformation.getDropOffLocation().setStationId(Long.valueOf(dropOffStationId.getText()));
 			//travelInformation.getDropOffLocation().setStationId(167956);420222
 
-			String response = JoiVehicleConnector.recalculate(selectedOffer, travelInformation);
-			recalculateResponse.setText(response);
+//			String response = JoiVehicleConnector.recalculate(selectedOffer, travelInformation);
+//			recalculateResponse.setText(response);
 
 		}
 
@@ -203,8 +201,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			pickupStationsResponse.setText("running....");
-			String response = JoiVehicleConnector.getPickupStations(selectedOffer);
-			pickupStationsResponse.setText(response);
+//			String response = JoiVehicleConnector.getPickupStations(selectedOffer);
+//			pickupStationsResponse.setText(response);
 		}
 
 	}
@@ -252,12 +250,6 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		return extras;
 	}
 
-	protected void changeModel(ExtraResponse response) {
-		ModelProvider.INSTANCE.updateExtras(response);
-		tableExtras.setInput(ModelProvider.INSTANCE.getExtraDos());
-
-	}
-
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
@@ -283,6 +275,14 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		
 		carDescription.setText(offer.getName()
 				+ " Group : " + offer.getVehicleId());
+		
+		pickUpCityId.setText(String.valueOf(offer.getPickUpStationId()));
+
+		dropOffCityId.setText(String.valueOf(offer.getDropOffStationId()));
+		
+		changeModelInclusives(offer);
+
+		
 
 		//this.selectedOffer = offer.getOfferList().get(0);
 
@@ -292,36 +292,83 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		// vehicleResult.getServiceCatalogCode();
 
 	}
+	
+	private void changeModelInclusives(SunnyOfferDo offer) {
+		SunnyModelProvider.INSTANCE.updateInclusives(offer);
+		tableInclusives.setInput(SunnyModelProvider.INSTANCE.getInclusives());
+		tableInclusives.refresh();
+		
+		
+	}
 
-	public void showOffer(OfferDo offerDo) {
-		VehicleResult vehicleResult = offerDo.getModel();
-		textOfferLink.setText(vehicleResult.getOfferList().get(0).getBookLink()
-				.toString());
-		priceText.setText(vehicleResult.getOfferList().get(0).getPrice()
-				.getAmount());
-		carDescription.setText(vehicleResult.getVehicle().getManufacturer()
-				+ " Group : " + vehicleResult.getVehicle().getCategoryId());
+	private void createTableInclusives(Composite parent) {
+		tableInclusives = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL // | SWT.CHECK
+				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
+		createColumnsInclusives(parent, tableInclusives);
+		final Table table = tableInclusives.getTable();
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
 
-		this.selectedOffer = vehicleResult.getOfferList().get(0);
+		tableInclusives.setContentProvider(new ArrayContentProvider());
+		// get the content for the viewer, setInput will call getElements in the
+		// contentProvider
+		// viewer.setInput(ModelProvider.INSTANCE.getOffers());
+		// make the selection available to other views
+		getSite().setSelectionProvider(tableInclusives);
+		// set the sorter for the table
 
-		this.travelInformation = offerDo.getTravelInformation();
+		// define layout for the viewer
+		GridData gridData = new GridData();
+		gridData.verticalAlignment = GridData.FILL;
+		gridData.horizontalSpan = 2;
+		gridData.grabExcessHorizontalSpace = true;
+		gridData.grabExcessVerticalSpace = true;
+		gridData.horizontalAlignment = GridData.FILL;
+		tableInclusives.getControl().setLayoutData(gridData);
+		
+	}
+	
+	private void createColumnsExtras(final Composite parent, final TableViewer viewer) {
+		String[] titles = { "Name", "Code", "Preis" };
+		int[] bounds = { 200, 100, 100 };
 
-		this.travelInformation.setPickUpLocation(vehicleResult
-				.getPickUpLocation());
-		this.travelInformation.setDropOffLocation(vehicleResult
-				.getDropOffLocation());
+		// first column is for the first name
+		TableViewerColumn col = createTableViewerColumn(viewer,titles[0], bounds[0], 0);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				return o.getName() + "(" + o.getCode() + ")";
+			}
+		});
 
-		pickUpCityId.setText(String.valueOf(this.travelInformation
-				.getPickUpLocation().getCityId()));
-		dropOffCityId.setText(String.valueOf(this.travelInformation
-				.getDropOffLocation().getCityId()));
+		// second column is supplierId
+		col = createTableViewerColumn(viewer,titles[1], bounds[1], 1);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				return String.valueOf(o.getId());
+			}
+		});
+
+		col = createTableViewerColumn(viewer,titles[2], bounds[2], 2);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				return o.getPrice().getAmount();
+			}
+		});
 
 	}
+
+	
 
 	private void createTableExtras(Composite parent) {
 		tableExtras = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL // | SWT.CHECK
 				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-		createColumns(parent, tableExtras);
+		createColumnsExtras(parent, tableExtras);
 		final Table table = tableExtras.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -345,45 +392,45 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 	}
 
-	private void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Name", "Code", "Preis" };
+	private void createColumnsInclusives(final Composite parent, final TableViewer viewer) {
+		String[] titles = { "Name1", "Code", "Class" };
 		int[] bounds = { 200, 100, 100 };
 
 		// first column is for the first name
-		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
+		TableViewerColumn col = createTableViewerColumn(viewer,titles[0], bounds[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Extra o = (Extra) element;
-				return o.getName() + "(" + o.getCode() + ")";
+				Inclusive o = (Inclusive) element;
+				return o.getDescription() ;
 			}
 		});
 
 		// second column is supplierId
-		col = createTableViewerColumn(titles[1], bounds[1], 1);
+		col = createTableViewerColumn(viewer,titles[1], bounds[1], 1);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Extra o = (Extra) element;
-				return String.valueOf(o.getId());
+				Inclusive o = (Inclusive) element;
+				return o.getCode() + ":"+ String.valueOf(o.getId());
 			}
 		});
 
-		col = createTableViewerColumn(titles[2], bounds[2], 2);
+		col = createTableViewerColumn(viewer,titles[2], bounds[2], 2);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Extra o = (Extra) element;
-				return o.getPrice().getAmount();
+				Inclusive o = (Inclusive) element;
+				return o.getItemClassName() + ":"+ o.getItemClassCode()+":"+ o.getItemClassId();
 			}
 		});
-
+		
 	}
 
-	private TableViewerColumn createTableViewerColumn(String title, int bound,
+	private TableViewerColumn createTableViewerColumn(TableViewer table, String title, int bound,
 			final int colNumber) {
 		final TableViewerColumn viewerColumn = new TableViewerColumn(
-				tableExtras, SWT.NONE);
+				table, SWT.NONE);
 		final TableColumn column = viewerColumn.getColumn();
 		column.setText(title);
 		column.setWidth(bound);

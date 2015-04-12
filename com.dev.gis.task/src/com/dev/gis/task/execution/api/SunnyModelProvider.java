@@ -15,6 +15,8 @@ public enum SunnyModelProvider {
 	private List<SunnyOfferDo> offerDos = new ArrayList<SunnyOfferDo>();
 	
 	private List<Extra> extraDos = new ArrayList<Extra>();
+
+	private List<Inclusive> inclusives = new ArrayList<Inclusive>();
 	
 	
 	private Person driver;
@@ -116,6 +118,19 @@ public enum SunnyModelProvider {
 
 	public List<SunnyOfferDo> getOfferDos() {
 		return offerDos;
+	}
+
+
+	public void updateInclusives(SunnyOfferDo offer) {
+		this.inclusives.clear();
+		if ( offer.getInclusives() != null)
+			this.inclusives.addAll(offer.getInclusives());
+		
+	}
+
+
+	public List<Inclusive> getInclusives() {
+		return inclusives;
 	}
 
 }

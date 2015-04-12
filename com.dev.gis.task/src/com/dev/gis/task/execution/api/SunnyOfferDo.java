@@ -9,20 +9,29 @@ public class SunnyOfferDo extends  Offer {
 	private String         group = "";
 	private String         prepaid = "prepaid";
 	
+	
+	
 	private TravelInformation travelInformation;
+	
+	private final Vehicle vehicle;
 
 	public SunnyOfferDo ( Offer offer, Vehicle vh) {
 		
+		vehicle  = vh;
+		
 		this.setName( vh.getManufacturer());
 		this.setBookLink(offer.getBookLink());
+		this.setLink(offer.getLink());
 		this.setSupplierId(offer.getSupplierId());
 		long stationId = offer.getPickUpStationId();
 		this.setPickUpStationId(stationId);
 		String preis = offer.getPrice().getAmount();
 		this.setPrice(new MoneyAmount(preis, "EUR"));
+		this.setInclusives(offer.getInclusives());
 		
 		if ( "2".equals(offer.getOfferedPayment()))
 			prepaid = " poa ";
+		this.setId(offer.getId());
 		
 		this.setServiceCatalogCode(offer.getServiceCatalogCode());
 		this.setServiceCatalogId(offer.getServiceCatalogId());
@@ -55,5 +64,18 @@ public class SunnyOfferDo extends  Offer {
 
 	public void setTravelInformation(TravelInformation travelInformation) {
 		this.travelInformation = travelInformation;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void addOfferInformation(OfferInformation offerInformation) {
+		this.setExtras(offerInformation.getOffer().getExtras());
+		this.setInclusives(offerInformation.getOffer().getInclusives());
+		this.setServiceCatalogCode(offerInformation.getOffer().getServiceCatalogCode());
+		//this.getSupplierCoditions().(offerInformation.getOffer().getSupplierCoditions());
+		
+		
 	}
 }

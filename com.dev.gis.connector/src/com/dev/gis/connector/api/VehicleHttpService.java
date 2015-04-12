@@ -26,9 +26,15 @@ public class VehicleHttpService {
 
 	
 	private static String varPayerId = "G53SL5V9APQV2";
+	
+	private final GisHttpClient httpClient ;
+
+
+	public VehicleHttpService(GisHttpClient gisHttpClientInstance) {
+		this.httpClient = gisHttpClientInstance;
+	}
 
 	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy) {
-		GisHttpClient httpClient = new GisHttpClient();
 
 		try {
 			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+SUNNY_VEHICLE_REQUEST_PARAM);
@@ -433,6 +439,19 @@ public class VehicleHttpService {
 			logger.error(e,e);
 		}
 		return null;
+	}
+
+	public OfferInformation selectOffer(URI link, boolean b) {
+		try {
+			String response = httpClient.sendGetRequest(link);
+			return  JsonUtils.createResponseClassFromJson(response, OfferInformation.class);
+			
+			
+		} catch (IOException e) {
+			logger.error(e,e);
+		}
+		return null;
+
 	}
 	
 }

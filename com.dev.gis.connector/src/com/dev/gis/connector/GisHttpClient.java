@@ -1,5 +1,9 @@
 package com.dev.gis.connector;
 
+//http://stackoverflow.com/questions/15578429/why-is-httpclient-is-refreshing-the-jsession-id-for-every-request
+//http://stackoverflow.com/questions/4166129/apache-httpclient-4-0-3-how-do-i-set-cookie-with-sessionid-for-post-request
+	
+	
 import java.io.IOException;
 import java.net.URI;
 
