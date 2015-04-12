@@ -55,11 +55,9 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 	private TravelInformation travelInformation;
 
-	private Text pickUpCityId;
+	private Text pickUpStation;
 
-	private Text dropOffCityId;
-
-	private Text dropOffStationId;
+	private Text dropOffStation;
 
 	private Text pickupStationsResponse;
 
@@ -112,17 +110,16 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).hint(300, 16).grab(false, false).applyTo(carDescription);
 
-		Label pickUpCityIdLabel = new Label(groupStamp, SWT.NONE);
-		pickUpCityIdLabel.setText("PickUpCityId:");
-		pickUpCityId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		Label pickUpLabel = new Label(groupStamp, SWT.NONE);
+		pickUpLabel.setText("pickUp:");
+		pickUpStation = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(300, 16).grab(true, false).applyTo(pickUpStation);
 
-		Label dropOffCityIdLabel = new Label(groupStamp, SWT.NONE);
-		dropOffCityIdLabel.setText("DropOff CityId:");
-		dropOffCityId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		Label dropOffLabel = new Label(groupStamp, SWT.NONE);
+		dropOffLabel.setText("DropOff:");
+		dropOffStation = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dropOffStation);
 
-		Label dropOffStation = new Label(groupStamp, SWT.NONE);
-		dropOffStation.setText("DropOff StationId:");
-		dropOffStationId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 
 		return groupStamp;
 	}
@@ -184,8 +181,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		public void widgetSelected(SelectionEvent arg0) {
 			recalculateResponse.setText("running....");
 			
-			if ( StringUtils.isNotEmpty(dropOffStationId.getText()) && StringUtils.isNumeric(dropOffStationId.getText()))
-					travelInformation.getDropOffLocation().setStationId(Long.valueOf(dropOffStationId.getText()));
+//			if ( StringUtils.isNotEmpty(dropOffStationId.getText()) && StringUtils.isNumeric(dropOffStationId.getText()))
+//					travelInformation.getDropOffLocation().setStationId(Long.valueOf(dropOffStationId.getText()));
 			//travelInformation.getDropOffLocation().setStationId(167956);420222
 
 //			String response = JoiVehicleConnector.recalculate(selectedOffer, travelInformation);
@@ -276,9 +273,11 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		carDescription.setText(offer.getName()
 				+ " Group : " + offer.getVehicleId());
 		
-		pickUpCityId.setText(String.valueOf(offer.getPickUpStationId()));
+		
+		pickUpStation.setText(String.valueOf(offer.getPickupStation().getIdentifier()));
 
-		dropOffCityId.setText(String.valueOf(offer.getDropOffStationId()));
+		if ( offer.getDropOffStation() != null)
+			dropOffStation.setText(String.valueOf(offer.getDropOffStation().getIdentifier()));
 		
 		changeModelInclusives(offer);
 

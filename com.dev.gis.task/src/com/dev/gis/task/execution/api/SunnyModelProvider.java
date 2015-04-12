@@ -70,14 +70,28 @@ public enum SunnyModelProvider {
 		List<Offer> results = response.getAllOffers();
 		response.getVehicles();
 		
+		
 		for ( Offer offer : results) {
 			Vehicle vh = foundVehicle(offer.getVehicleId(),response.getVehicles());
-			SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh);
+			Station pickupStation = findStation(offer.getPickUpStationId(), response);
+			Station dropOffStation = findStation(offer.getDropOffStationId(), response);
+			SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh, pickupStation, dropOffStation);
 			
 			offerDos.add(offerDo);
 		}
 	}
 	
+private Station findStation(long pickUpStationId, VehicleResponse response) {
+
+		for ( Station station : response.getTexts().getStationList()) {
+			if ( station.getId() == pickUpStationId )
+				return station;
+		}
+	
+		return null;
+	}
+
+
 //	public void updateExtras(ExtraResponse response) {
 //		extraDos.clear();
 //		for ( Extra vr : response.getExtras()) {

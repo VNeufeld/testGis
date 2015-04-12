@@ -14,10 +14,14 @@ public class SunnyOfferDo extends  Offer {
 	private TravelInformation travelInformation;
 	
 	private final Vehicle vehicle;
+	private final Station pickupStation;
+	private final Station dropOffStation;
 
-	public SunnyOfferDo ( Offer offer, Vehicle vh) {
+	public SunnyOfferDo ( Offer offer, Vehicle vh, Station pickupStation, Station dropOffStation) {
 		
 		vehicle  = vh;
+		this.pickupStation = pickupStation;
+		this.dropOffStation = dropOffStation;
 		
 		this.setName( vh.getManufacturer());
 		this.setBookLink(offer.getBookLink());
@@ -77,5 +81,13 @@ public class SunnyOfferDo extends  Offer {
 		//this.getSupplierCoditions().(offerInformation.getOffer().getSupplierCoditions());
 		
 		
+	}
+
+	public Station getPickupStation() {
+		return pickupStation;
+	}
+
+	public Station getDropOffStation() {
+		return dropOffStation;
 	}
 }
