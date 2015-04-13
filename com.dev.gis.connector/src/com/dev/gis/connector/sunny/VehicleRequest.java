@@ -18,7 +18,7 @@ public class VehicleRequest extends Request {
 	private OfferFilter filter;
 	private Agency agency;
 	
-	private int module;
+	//private int module;
 	
 	public Agency getAgency() {
 		return agency;
@@ -89,12 +89,5 @@ public class VehicleRequest extends Request {
 		this.travel = travel;
 	}
 
-	public int getModule() {
-		return module;
-	}
-
-	public void setModule(int module) {
-		this.module = module;
-	}
 
 }

@@ -163,7 +163,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				VehicleHttpService service = serviceFactory.getVehicleJoiService();
 				
-				VehicleResponse response = service.getOffers(request, true);
+				VehicleResponse response = service.getOffers(request, false);
 				
 				if ( response != null) {
 					countVehicles.setText(String.valueOf(response.getAllOffers().size()));
@@ -207,11 +207,11 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				
 				request.setTravel(ti);
 				
-				if ( buttonTruck.getSelection())
-					request.setModule(2);
-				else
-					request.setModule(1);
-				request.setPayment(PayType.PREPAID);
+//				if ( buttonTruck.getSelection())
+//					request.setModule(2);
+//				else
+//					request.setModule(1);
+				//request.setPayment(PayType.PREPAID);
 				
 				return request;
 				
