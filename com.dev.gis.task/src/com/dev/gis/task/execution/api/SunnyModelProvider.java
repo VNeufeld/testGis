@@ -15,6 +15,8 @@ public enum SunnyModelProvider {
 	private List<SunnyOfferDo> offerDos = new ArrayList<SunnyOfferDo>();
 	
 	private List<Extra> extraDos = new ArrayList<Extra>();
+
+	private List<Inclusive> inclusives = new ArrayList<Inclusive>();
 	
 	
 	private Person driver;
@@ -68,14 +70,28 @@ public enum SunnyModelProvider {
 		List<Offer> results = response.getAllOffers();
 		response.getVehicles();
 		
+		
 		for ( Offer offer : results) {
 			Vehicle vh = foundVehicle(offer.getVehicleId(),response.getVehicles());
-			SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh);
+			Station pickupStation = findStation(offer.getPickUpStationId(), response);
+			Station dropOffStation = findStation(offer.getDropOffStationId(), response);
+			SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh, pickupStation, dropOffStation);
 			
 			offerDos.add(offerDo);
 		}
 	}
 	
+private Station findStation(long pickUpStationId, VehicleResponse response) {
+
+		for ( Station station : response.getTexts().getStationList()) {
+			if ( station.getId() == pickUpStationId )
+				return station;
+		}
+	
+		return null;
+	}
+
+
 //	public void updateExtras(ExtraResponse response) {
 //		extraDos.clear();
 //		for ( Extra vr : response.getExtras()) {
@@ -116,6 +132,19 @@ public enum SunnyModelProvider {
 
 	public List<SunnyOfferDo> getOfferDos() {
 		return offerDos;
+	}
+
+
+	public void updateInclusives(SunnyOfferDo offer) {
+		this.inclusives.clear();
+		if ( offer.getInclusives() != null)
+			this.inclusives.addAll(offer.getInclusives());
+		
+	}
+
+
+	public List<Inclusive> getInclusives() {
+		return inclusives;
 	}
 
 }

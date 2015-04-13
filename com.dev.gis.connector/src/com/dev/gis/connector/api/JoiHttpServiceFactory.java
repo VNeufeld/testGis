@@ -3,7 +3,20 @@ package com.dev.gis.connector.api;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import com.dev.gis.connector.GisHttpClient;
+
 public class JoiHttpServiceFactory {
+	
+	private static GisHttpClient httpClient = null;
+	
+	private static GisHttpClient getGisHttpClientInstance() {
+		if ( httpClient == null)
+			httpClient = new GisHttpClient();
+		
+		return httpClient;
+		
+	}
+
 
 	public LocationHttpService   getLocationJoiService() {
 		try {
@@ -25,7 +38,7 @@ public class JoiHttpServiceFactory {
 
 	public VehicleHttpService getVehicleJoiService() {
 		
-		VehicleHttpService  service = new  VehicleHttpService();
+		VehicleHttpService  service = new  VehicleHttpService(getGisHttpClientInstance());
 		
 		
 		return service;

@@ -12,7 +12,9 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -80,6 +82,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 	private Text sessionId = null;
 
+	private Text offerId = null;
+	
 	private Text requestId = null;
 	
 	private Button buttonOfferTest = null;
@@ -309,8 +313,12 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		
 		new Label(groupResult, SWT.NONE).setText("Session ID");
 		sessionId = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
-		//sessionId.setLayoutData(gdFirm);
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.CENTER).hint(300, 16).grab(false,false).span(3, 1).applyTo(sessionId);
+		
+		new Label(groupResult, SWT.NONE).setText("OfferId");
+		offerId = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.CENTER).hint(300, 16).grab(false,false).span(3, 1).applyTo(offerId);
+		
 		
 		
 		return groupResult;
@@ -453,6 +461,21 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	    viewer.getControl().setLayoutData(gridData);
 	    
 	    viewer.addDoubleClickListener(new DoubleClickListener());
+
+	    viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+		        IStructuredSelection thisSelection = (IStructuredSelection) event
+		            .getSelection();
+		        Object selectedNode = thisSelection.getFirstElement();
+		        
+		        SunnyOfferDo offer = (SunnyOfferDo) selectedNode;
+		        
+		        offerId.setText(offer.getId().toString());
+				
+			}
+		});
 	    
 	    hookContextMenu();
 	}
@@ -469,7 +492,13 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	        Object selectedNode = thisSelection.getFirstElement();
 	        
 	        SunnyOfferDo offer = (SunnyOfferDo) selectedNode;
-	    	offer.setTravelInformation(travelInformation);
+	    	
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			VehicleHttpService service = serviceFactory.getVehicleJoiService();
+			
+			OfferInformation offerInformation = service.selectOffer(offer.getLink(), true);
+			if( offerInformation != null)
+				offer.addOfferInformation(offerInformation);
  
 	        new SunnyOfferViewUpdater().showOffer(offer);
 	        System.out.println("selectedNode "+offer);
