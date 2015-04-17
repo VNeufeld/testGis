@@ -42,6 +42,10 @@ public class VehicleHttpService {
 			logger.info("VehicleHttpService = "+uri.toString());
 			
 			Administration admin = createAdministrator();
+			
+			Agency agency = new Agency();
+			agency.setAgencyId(Long.valueOf(28));
+			vehicleRequest.setAgency(agency);
 
 			vehicleRequest.setAdministration(admin);
 
@@ -56,9 +60,10 @@ public class VehicleHttpService {
 			
 			logger.info("response = "+response);
 			
-			VehicleResponse vh = JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
+			if (response != null ) 
+				return JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
 
-			return vh;
+			return null;
 			
 		} catch ( IOException e) {
 			logger.error(e.getMessage(),e);
@@ -75,7 +80,7 @@ public class VehicleHttpService {
 		admin.setLanguage(TaskProperties.LANGUAGE_CODE);
 		admin.setOperator(TaskProperties.getTaskProperties().getOperator());
 		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
-		admin.setCalledFrom(TaskProperties.CALLED_FROM);
+		admin.setCalledFrom(5);
 		admin.setBroker(false);
 		return admin;
 	}

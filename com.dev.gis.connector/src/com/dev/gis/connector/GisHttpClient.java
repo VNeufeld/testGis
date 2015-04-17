@@ -18,49 +18,23 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.BasicHttpContext;
+import org.apache.log4j.Logger;
+
+import com.dev.gis.connector.api.VehicleHttpService;
 
 public class GisHttpClient {
+	
+	private static Logger logger = Logger.getLogger(GisHttpClient.class);
+	
 	private final static String CHARSET_UTF8 = "UTF-8";
 	private DefaultHttpClient httpclient = new DefaultHttpClient();
 	private BasicHttpContext localContext = new BasicHttpContext();
 	// Create a response handler
 	private ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
-	public String sendPostRequest(URI uri, String request)
-			throws IOException {
-
-		httpclient = new DefaultHttpClient();
-		localContext = new BasicHttpContext();
-		// Create a response handler
-		responseHandler = new BasicResponseHandler();
-		try {
-			HttpPost httpPost = new HttpPost(uri);
-			httpPost.setHeader("Content-Type", "text/plain");
-
-			StringEntity entity = new StringEntity(request, CHARSET_UTF8);
-
-			httpPost.setEntity(entity);
-
-			String response = httpclient.execute(httpPost, responseHandler,
-					localContext);
-
-			return response;
-
-		} finally {
-			// When HttpClient instance is no longer needed,
-			// shut down the connection manager to ensure
-			// immediate deallocation of all system resources
-			httpclient.getConnectionManager().shutdown();
-		}
-	}
-	
 	public String sendGetRequest(URI uri)
 			throws IOException {
 
-		httpclient = new DefaultHttpClient();
-		localContext = new BasicHttpContext();
-		// Create a response handler
-		responseHandler = new BasicResponseHandler();
 		try {
 			
 			HttpGet httpget = new HttpGet(uri);
@@ -75,35 +49,46 @@ public class GisHttpClient {
 					localContext);
 			return response;
 
-		} finally {
-			// When HttpClient instance is no longer needed,
-			// shut down the connection manager to ensure
-			// immediate deallocation of all system resources
-			httpclient.getConnectionManager().shutdown();
+		} 
+		catch(Exception err) {
+			System.out.println("localContext " + localContext.toString());
+			System.out.println("responseHandler " + responseHandler.toString());
+			logger.info(err.getMessage(), err);
+			
 		}
+		return null;
 	}
 	
 
 	public String startPostRequestAsJson(URI uri, String jsonString)
 			throws  IOException {
-		HttpPost httpPost = new HttpPost(uri);
-
-		StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
-
-		httpPost.setEntity(entity);
-		httpPost.addHeader("Accept", "application/json");
-		httpPost.setHeader("Content-Type", "application/json");
-
-		String response = httpclient.execute(httpPost, responseHandler,
-				localContext);
-		System.out.println("response = " + response);
-		System.out.println("localContext " + localContext.toString());
-
-		CookieStore cookieStore = httpclient.getCookieStore();
-		System.out.println("cookieStore " + cookieStore);
-		System.out.println("----------------------------------------");
-
-		return response;
+		try {
+			HttpPost httpPost = new HttpPost(uri);
+	
+			StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
+	
+			httpPost.setEntity(entity);
+			httpPost.addHeader("Accept", "application/json");
+			httpPost.setHeader("Content-Type", "application/json");
+	
+			String response = httpclient.execute(httpPost, responseHandler,
+					localContext);
+			System.out.println("response = " + response);
+			System.out.println("localContext " + localContext.toString());
+	
+			CookieStore cookieStore = httpclient.getCookieStore();
+			System.out.println("cookieStore " + cookieStore);
+			System.out.println("----------------------------------------");
+	
+			return response;
+		}
+		catch(Exception err) {
+			System.out.println("localContext " + localContext.toString());
+			System.out.println("responseHandler " + responseHandler.toString());
+			logger.info(err.getMessage(), err);
+			
+		}
+		return null;
 	}
 	
 	public String startPutRequestAsJson(URI uri, String jsonString)
