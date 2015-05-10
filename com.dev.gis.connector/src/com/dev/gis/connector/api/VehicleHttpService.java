@@ -53,6 +53,8 @@ public class VehicleHttpService {
 			logger.info("request = "+request);
 			
 			String response = null;
+			
+			dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( dummy)
 				response = JsonUtils.createDummyResponse("SunnyVehicleResponse");
 			else

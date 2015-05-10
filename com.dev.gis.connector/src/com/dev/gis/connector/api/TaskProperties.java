@@ -8,6 +8,7 @@ public class TaskProperties {
 	private static final String PREFERENCE_SERVER_PROPERTY = "SERVER_PROPERTY";
 	private static final String PREFERENCE_OPERATOR_PROPERTY = "OPERATOR_PROPERT";
 	private static final String PREFERENCE_LANGUAGE_PROPERTY = "LANGUAGE_PROPERTY";
+	private static final String PREFERENCE_USE_DUMMY_PROPERTY = "USE_DUMMY_PROPERTY";
 	private static String PREFERENCE_PATH = "TASK_PREFERENCE";
 	public static String VEHICLE_REQUEST_PARAM = "/vehicleRequest?pageSize=200";
 	public static String LANGUAGE_CODE = "de-DE";
@@ -26,6 +27,8 @@ public class TaskProperties {
 	private String serverProperty;
 	private Long   operator = 152573l;
 	private int   language = 2;
+	private boolean  useDummy = false;
+	
 	
 	private TaskProperties() {
 		serverProperty = "http://localhost:8080/joi";
@@ -54,6 +57,7 @@ public class TaskProperties {
 		preferences.put(PREFERENCE_SERVER_PROPERTY, serverProperty);
 		preferences.putLong(PREFERENCE_OPERATOR_PROPERTY, operator);
 		preferences.putInt(PREFERENCE_LANGUAGE_PROPERTY, language);
+		preferences.putBoolean(PREFERENCE_USE_DUMMY_PROPERTY, useDummy);
 
 		try {
 			preferences.flush();
@@ -68,6 +72,7 @@ public class TaskProperties {
 		serverProperty = preferences.get(PREFERENCE_SERVER_PROPERTY, serverProperty);
 		operator = preferences.getLong(PREFERENCE_OPERATOR_PROPERTY, operator);
 		language = preferences.getInt(PREFERENCE_LANGUAGE_PROPERTY, language);
+		useDummy = preferences.getBoolean(PREFERENCE_USE_DUMMY_PROPERTY, useDummy);
 
 	}
 
@@ -77,6 +82,14 @@ public class TaskProperties {
 
 	public void setLanguage(int language) {
 		this.language = language;
+	}
+
+	public boolean isUseDummy() {
+		return useDummy;
+	}
+
+	public void setUseDummy(boolean useDummy) {
+		this.useDummy = useDummy;
 	}
 	
 

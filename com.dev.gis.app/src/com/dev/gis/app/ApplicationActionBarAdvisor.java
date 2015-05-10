@@ -37,7 +37,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private Action switchPerspectiveAction;
     private Action switchToAppPerspectiveAction;
     private Action resetCurrentPerspectiveAction;
-    
+    private IWorkbenchAction preferencesAction;
 
     public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
         super(configurer);
@@ -78,6 +78,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         switchToAppPerspectiveAction = new SwitchToAppPerspectiveAction("Switch To App Perspective", window);
         register(switchToAppPerspectiveAction);
 
+        preferencesAction = ActionFactory.PREFERENCES.create(window);
+        register(preferencesAction);        
     }
     
     protected void fillMenuBar(IMenuManager menuBar) {
@@ -105,6 +107,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         
         // Help
         helpMenu.add(aboutAction);
+        helpMenu.add(preferencesAction);
     }
     
     protected void fillCoolBar(ICoolBarManager coolBar) {

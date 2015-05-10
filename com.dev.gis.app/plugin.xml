@@ -334,5 +334,19 @@
          </command>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.dev.gis.app.preferences.SamplePreferencePage"
+            id="com.dev.gis.app.preferences.SamplePreferencePage"
+            name="Sample Preferences">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.dev.gis.app.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
 
 </plugin>
