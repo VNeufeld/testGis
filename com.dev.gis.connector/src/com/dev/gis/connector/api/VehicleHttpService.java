@@ -3,21 +3,29 @@ package com.dev.gis.connector.api;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
-import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
-import com.dev.gis.connector.sunny.*;
+import com.dev.gis.connector.sunny.Address;
+import com.dev.gis.connector.sunny.Administration;
+import com.dev.gis.connector.sunny.Agency;
+import com.dev.gis.connector.sunny.Customer;
+import com.dev.gis.connector.sunny.Extra;
+import com.dev.gis.connector.sunny.Offer;
+import com.dev.gis.connector.sunny.OfferInformation;
+import com.dev.gis.connector.sunny.Person;
+import com.dev.gis.connector.sunny.PhoneNumber;
+import com.dev.gis.connector.sunny.TravelInformation;
+import com.dev.gis.connector.sunny.VehicleRequest;
+import com.dev.gis.connector.sunny.VehicleResponse;
 
 public class VehicleHttpService {
 	private static Logger logger = Logger.getLogger(VehicleHttpService.class);
@@ -448,7 +456,7 @@ public class VehicleHttpService {
 		return null;
 	}
 
-	public OfferInformation selectOffer(URI link, boolean b) {
+	public OfferInformation selectOffer(URI link) {
 		try {
 			String response = httpClient.sendGetRequest(link);
 			return  JsonUtils.createResponseClassFromJson(response, OfferInformation.class);
@@ -460,5 +468,4 @@ public class VehicleHttpService {
 		return null;
 
 	}
-	
 }

@@ -35,23 +35,23 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
-import com.dev.gis.connector.api.LocationHttpService;
 import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.api.VehicleHttpService;
-import com.dev.gis.connector.sunny.*;
+import com.dev.gis.connector.sunny.DayAndHour;
+import com.dev.gis.connector.sunny.Location;
+import com.dev.gis.connector.sunny.OfferInformation;
+import com.dev.gis.connector.sunny.TravelInformation;
+import com.dev.gis.connector.sunny.VehicleRequest;
+import com.dev.gis.connector.sunny.VehicleResponse;
+import com.dev.gis.connector.sunny.VehicleSummary;
 import com.dev.gis.task.execution.api.IEditableTask;
 //import com.dev.gis.db.api.IStationDao;
 import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.JoiVehicleConnector;
-import com.dev.gis.task.execution.api.ModelProvider;
-import com.dev.gis.task.execution.api.OfferDo;
 import com.dev.gis.task.execution.api.SunnyModelProvider;
 import com.dev.gis.task.execution.api.SunnyOfferDo;
 
@@ -78,7 +78,11 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 	private TableViewer viewer;
 	
+	private Text pageInfo = null;
+
 	private Text countVehicles = null;
+	
+	private Text countVehiclesTotal = null;
 
 	private Text sessionId = null;
 
@@ -170,16 +174,27 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				VehicleResponse response = service.getOffers(request, false);
 				
 				if ( response != null) {
-					countVehicles.setText(String.valueOf(response.getAllOffers().size()));
 					
-					sessionId.setText(String.valueOf(response.getRequestId()));
+					pageInfo.setText(response.getPageInfo());
 					
-					requestId.setText(String.valueOf(response.getRequestId()));				
+					//sessionId.setText(String.valueOf(response.getRequestId()));
+					
+					requestId.setText(String.valueOf(response.getRequestId()));		
+					
+					setSummary(response.getSummary());
 					
 					changeModel(response);
 					viewer.refresh();
 					
 				}
+			}
+
+
+			private void setSummary(VehicleSummary summary) {
+				
+				countVehicles.setText(""+summary.getQuantityOffers());
+				countVehiclesTotal.setText(""+summary.getTotalQuantityOffers());
+				
 			}
 
 
@@ -302,11 +317,36 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		final Group groupResult = new Group(composite, SWT.TITLE);
 		groupResult.setText("Result:");
 		groupResult.setLayout(new GridLayout(4, true));
+
+		new Label(groupResult, SWT.NONE).setText("Page");
+		pageInfo = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.CENTER).hint(300, 16).grab(false,false).span(2, 1).applyTo(pageInfo);
 		
-		new Label(groupResult, SWT.NONE).setText("Count of Vehicles");
+		Button nextPage = new Button(groupResult, SWT.PUSH | SWT.LEFT);
+		nextPage.setText("next page");
+		nextPage.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				//nextPage();
+			}
+		});
+
+
+
+		
+		new Label(groupResult, SWT.NONE).setText("Offers on the page");
 		countVehicles = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
 		countVehicles.setLayoutData(gdFirm);
 
+		new Label(groupResult, SWT.NONE).setText("Offers total");
+		countVehiclesTotal = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		countVehiclesTotal.setLayoutData(gdFirm);
+		
 		new Label(groupResult, SWT.NONE).setText("Request ID");
 		requestId = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.CENTER).hint(100, 16).grab(false,false).applyTo(requestId);
@@ -496,9 +536,12 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			VehicleHttpService service = serviceFactory.getVehicleJoiService();
 			
-			OfferInformation offerInformation = service.selectOffer(offer.getLink(), true);
-			if( offerInformation != null)
-				offer.addOfferInformation(offerInformation);
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( !dummy) {
+				OfferInformation offerInformation = service.selectOffer(offer.getLink());
+				if( offerInformation != null)
+					offer.addOfferInformation(offerInformation);
+			}
  
 	        new SunnyOfferViewUpdater().showOffer(offer);
 	        System.out.println("selectedNode "+offer);
