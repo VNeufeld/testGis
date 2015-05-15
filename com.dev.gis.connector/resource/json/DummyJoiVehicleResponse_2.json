@@ -1,0 +1,671 @@
+{
+  "requestId": 9103076130237884000,
+  "link": "http://localhost:8080/sunny-joi/joi/request",
+  "pageInfo": "page 1 from 1",
+  "groups": [
+    {
+      "name": "A",
+      "offerList": [
+        {
+          "link": "http://localhost:8080/sunny-joi/joi/request/offer/fed7ac7b-cd6c-412c-999e-a0ae7dddf8d5",
+          "id": "fed7ac7b-cd6c-412c-999e-a0ae7dddf8d5",
+          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/fed7ac7b-cd6c-412c-999e-a0ae7dddf8d5/book",
+          "name": "A",
+          "supplierId": 14,
+          "price": {
+            "amount": "342,87",
+            "currency": "EUR"
+          },
+          "stdPrice": {
+            "amount": "342,87",
+            "currency": "EUR"
+          },
+          "promoValue": {
+            "amount": "0,00",
+            "currency": "EUR"
+          },
+          "cancelFee": null,
+          "status": "13",
+          "inclusives": [
+            {
+              "id": 2,
+              "insurance": false,
+              "itemClassFilter": true,
+              "itemClassId": 3,
+              "displayPriority": 5,
+              "itemClassCode": "TR",
+              "itemClassName": "Tankrule",
+              "description": "Tank Rule full to full",
+              "code": "FF"
+            },
+            {
+              "id": 6,
+              "insurance": true,
+              "itemClassFilter": false,
+              "itemClassId": -1,
+              "displayPriority": 99,
+              "itemClassCode": "",
+              "itemClassName": "",
+              "description": "Travelbook",
+              "code": "TB"
+            }
+          ],
+          "extras": null,
+          "pickUpStationId": 8482,
+          "dropOffStationId": 8482,
+          "vehicleId": 334939242,
+          "commissionType": "1",
+          "carUsedPromotion": "0",
+          "carCategoryId": 1,
+          "upsell": null,
+          "extVehicleId": null,
+          "extSalesSeasonId": null,
+          "serviceCatalogCode": null,
+          "serviceCatalogId": 1
+        }
+      ],
+      "nrOffers": 1
+    },
+    {
+      "name": "D",
+      "offerList": [
+        {
+          "link": "http://localhost:8080/sunny-joi/joi/request/offer/2e5db792-dc06-40be-b817-d37652ba3513",
+          "id": "2e5db792-dc06-40be-b817-d37652ba3513",
+          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/2e5db792-dc06-40be-b817-d37652ba3513/book",
+          "name": "D",
+          "supplierId": 14,
+          "price": {
+            "amount": "378,39",
+            "currency": "EUR"
+          },
+          "stdPrice": {
+            "amount": "378,39",
+            "currency": "EUR"
+          },
+          "promoValue": {
+            "amount": "0,00",
+            "currency": "EUR"
+          },
+          "cancelFee": null,
+          "status": "13",
+          "inclusives": [
+            {
+              "id": 2,
+              "insurance": false,
+              "itemClassFilter": true,
+              "itemClassId": 3,
+              "displayPriority": 5,
+              "itemClassCode": "TR",
+              "itemClassName": "Tankrule",
+              "description": "Tank Rule full to full",
+              "code": "FF"
+            },
+            {
+              "id": 6,
+              "insurance": true,
+              "itemClassFilter": false,
+              "itemClassId": -1,
+              "displayPriority": 99,
+              "itemClassCode": "",
+              "itemClassName": "",
+              "description": "Travelbook",
+              "code": "TB"
+            }
+          ],
+          "extras": null,
+          "pickUpStationId": 8482,
+          "dropOffStationId": 8482,
+          "vehicleId": 867812265,
+          "commissionType": "1",
+          "carUsedPromotion": "0",
+          "carCategoryId": 4,
+          "upsell": null,
+          "extVehicleId": null,
+          "extSalesSeasonId": null,
+          "serviceCatalogCode": null,
+          "serviceCatalogId": 1
+        }
+      ],
+      "nrOffers": 1
+    },
+    {
+      "name": "B",
+      "offerList": [
+        {
+          "link": "http://localhost:8080/sunny-joi/joi/request/offer/a8264231-3505-43df-868b-b85672f1b75b",
+          "id": "a8264231-3505-43df-868b-b85672f1b75b",
+          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/a8264231-3505-43df-868b-b85672f1b75b/book",
+          "name": "B",
+          "supplierId": 14,
+          "price": {
+            "amount": "402,01",
+            "currency": "EUR"
+          },
+          "stdPrice": {
+            "amount": "402,01",
+            "currency": "EUR"
+          },
+          "promoValue": {
+            "amount": "0,00",
+            "currency": "EUR"
+          },
+          "cancelFee": null,
+          "status": "13",
+          "inclusives": [
+            {
+              "id": 2,
+              "insurance": false,
+              "itemClassFilter": true,
+              "itemClassId": 3,
+              "displayPriority": 5,
+              "itemClassCode": "TR",
+              "itemClassName": "Tankrule",
+              "description": "Tank Rule full to full",
+              "code": "FF"
+            },
+            {
+              "id": 6,
+              "insurance": true,
+              "itemClassFilter": false,
+              "itemClassId": -1,
+              "displayPriority": 99,
+              "itemClassCode": "",
+              "itemClassName": "",
+              "description": "Travelbook",
+              "code": "TB"
+            }
+          ],
+          "extras": null,
+          "pickUpStationId": 8482,
+          "dropOffStationId": 8482,
+          "vehicleId": 737116206,
+          "commissionType": "1",
+          "carUsedPromotion": "0",
+          "carCategoryId": 2,
+          "upsell": null,
+          "extVehicleId": null,
+          "extSalesSeasonId": null,
+          "serviceCatalogCode": null,
+          "serviceCatalogId": 1
+        }
+      ],
+      "nrOffers": 1
+    },
+    {
+      "name": "IMMR",
+      "offerList": [
+        {
+          "link": "http://localhost:8080/sunny-joi/joi/request/offer/10913987-a7fb-4d44-a6cf-c5a86029be93",
+          "id": "10913987-a7fb-4d44-a6cf-c5a86029be93",
+          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/10913987-a7fb-4d44-a6cf-c5a86029be93/book",
+          "name": "IMMR",
+          "supplierId": 14,
+          "price": {
+            "amount": "405,88",
+            "currency": "EUR"
+          },
+          "stdPrice": {
+            "amount": "405,88",
+            "currency": "EUR"
+          },
+          "promoValue": {
+            "amount": "0,00",
+            "currency": "EUR"
+          },
+          "cancelFee": null,
+          "status": "13",
+          "inclusives": [
+            {
+              "id": 2,
+              "insurance": false,
+              "itemClassFilter": true,
+              "itemClassId": 3,
+              "displayPriority": 5,
+              "itemClassCode": "TR",
+              "itemClassName": "Tankrule",
+              "description": "Tank Rule full to full",
+              "code": "FF"
+            },
+            {
+              "id": 6,
+              "insurance": true,
+              "itemClassFilter": false,
+              "itemClassId": -1,
+              "displayPriority": 99,
+              "itemClassCode": "",
+              "itemClassName": "",
+              "description": "Travelbook",
+              "code": "TB"
+            }
+          ],
+          "extras": null,
+          "pickUpStationId": 8482,
+          "dropOffStationId": 8482,
+          "vehicleId": 878485128,
+          "commissionType": "1",
+          "carUsedPromotion": "0",
+          "carCategoryId": 8,
+          "upsell": null,
+          "extVehicleId": null,
+          "extSalesSeasonId": null,
+          "serviceCatalogCode": null,
+          "serviceCatalogId": 1
+        }
+      ],
+      "nrOffers": 1
+    },
+    {
+      "name": "SVMR",
+      "offerList": [
+        {
+          "link": "http://localhost:8080/sunny-joi/joi/request/offer/9b6159bb-5a2e-4ca0-91d1-beb61dba2ec7",
+          "id": "9b6159bb-5a2e-4ca0-91d1-beb61dba2ec7",
+          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/9b6159bb-5a2e-4ca0-91d1-beb61dba2ec7/book",
+          "name": "SVMR",
+          "supplierId": 14,
+          "price": {
+            "amount": "755,62",
+            "currency": "EUR"
+          },
+          "stdPrice": {
+            "amount": "755,62",
+            "currency": "EUR"
+          },
+          "promoValue": {
+            "amount": "0,00",
+            "currency": "EUR"
+          },
+          "cancelFee": null,
+          "status": "13",
+          "inclusives": [
+            {
+              "id": 2,
+              "insurance": false,
+              "itemClassFilter": true,
+              "itemClassId": 3,
+              "displayPriority": 5,
+              "itemClassCode": "TR",
+              "itemClassName": "Tankrule",
+              "description": "Tank Rule full to full",
+              "code": "FF"
+            },
+            {
+              "id": 6,
+              "insurance": true,
+              "itemClassFilter": false,
+              "itemClassId": -1,
+              "displayPriority": 99,
+              "itemClassCode": "",
+              "itemClassName": "",
+              "description": "Travelbook",
+              "code": "TB"
+            }
+          ],
+          "extras": null,
+          "pickUpStationId": 8482,
+          "dropOffStationId": 8482,
+          "vehicleId": 1808290510,
+          "commissionType": "1",
+          "carUsedPromotion": "0",
+          "carCategoryId": 7,
+          "upsell": null,
+          "extVehicleId": null,
+          "extSalesSeasonId": null,
+          "serviceCatalogCode": null,
+          "serviceCatalogId": 1
+        }
+      ],
+      "nrOffers": 1
+    }
+  ],
+  "vehicles": [
+    {
+      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/737116206",
+      "id": 737116206,
+      "supplierId": 14,
+      "categoryId": 2,
+      "groupId": 7,
+      "manufacturer": "Toyota",
+      "vehicleModel": "SUV",
+      "type": "RAV4",
+      "fuelType": "Diesel",
+      "supplierCategory": "IDAR",
+      "commonCarInformation": null,
+      "companyName": null,
+      "picture": null,
+      "nrDoors": 5,
+      "nrSeats": 5,
+      "aircondition": true,
+      "automatic": true,
+      "snowTires": false,
+      "allWheel": false,
+      "navigationSystem": false,
+      "stationWagon": false,
+      "convertible": false,
+      "bodyStyle": 5,
+      "typeId": 3,
+      "nrAdults": 5,
+      "nrChildren": null,
+      "fuelTypeId": 2,
+      "trunkSize": null,
+      "acriss": "IDAR"
+    },
+    {
+      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/878485128",
+      "id": 878485128,
+      "supplierId": 14,
+      "categoryId": 8,
+      "groupId": 31,
+      "manufacturer": "Renault",
+      "vehicleModel": "Compact",
+      "type": "Scenic",
+      "fuelType": "Petrol/gasoline",
+      "supplierCategory": "IMMR",
+      "commonCarInformation": null,
+      "companyName": null,
+      "picture": null,
+      "nrDoors": 5,
+      "nrSeats": 5,
+      "aircondition": true,
+      "automatic": false,
+      "snowTires": false,
+      "allWheel": false,
+      "navigationSystem": false,
+      "stationWagon": false,
+      "convertible": false,
+      "bodyStyle": 2,
+      "typeId": 11,
+      "nrAdults": null,
+      "nrChildren": null,
+      "fuelTypeId": 1,
+      "trunkSize": null,
+      "acriss": "IMMR"
+    },
+    {
+      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/867812265",
+      "id": 867812265,
+      "supplierId": 14,
+      "categoryId": 4,
+      "groupId": 27,
+      "manufacturer": "VW",
+      "vehicleModel": "Compact",
+      "type": "Polo",
+      "fuelType": "Petrol/gasoline",
+      "supplierCategory": "IDMR",
+      "commonCarInformation": null,
+      "companyName": null,
+      "picture": null,
+      "nrDoors": 5,
+      "nrSeats": 5,
+      "aircondition": true,
+      "automatic": false,
+      "snowTires": false,
+      "allWheel": false,
+      "navigationSystem": false,
+      "stationWagon": false,
+      "convertible": false,
+      "bodyStyle": 2,
+      "typeId": 6,
+      "nrAdults": 4,
+      "nrChildren": 1,
+      "fuelTypeId": 1,
+      "trunkSize": null,
+      "acriss": "IDMR"
+    },
+    {
+      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/1808290510",
+      "id": 1808290510,
+      "supplierId": 14,
+      "categoryId": 7,
+      "groupId": 30,
+      "manufacturer": "Mercedes Vito 2.1",
+      "vehicleModel": "statdard van",
+      "type": null,
+      "fuelType": "Unspecified",
+      "supplierCategory": "SVMR",
+      "commonCarInformation": null,
+      "companyName": null,
+      "picture": null,
+      "nrDoors": 3,
+      "nrSeats": null,
+      "aircondition": true,
+      "automatic": false,
+      "snowTires": false,
+      "allWheel": false,
+      "navigationSystem": false,
+      "stationWagon": false,
+      "convertible": false,
+      "bodyStyle": 4,
+      "typeId": null,
+      "nrAdults": null,
+      "nrChildren": null,
+      "fuelTypeId": -1,
+      "trunkSize": 3,
+      "acriss": "SVMR"
+    },
+    {
+      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/334939242",
+      "id": 334939242,
+      "supplierId": 14,
+      "categoryId": 1,
+      "groupId": 6,
+      "manufacturer": "Daihatsu",
+      "vehicleModel": "Compact",
+      "type": "Materia",
+      "fuelType": "Petrol/gasoline",
+      "supplierCategory": "CDMR",
+      "commonCarInformation": null,
+      "companyName": null,
+      "picture": null,
+      "nrDoors": 5,
+      "nrSeats": 5,
+      "aircondition": true,
+      "automatic": false,
+      "snowTires": false,
+      "allWheel": false,
+      "navigationSystem": false,
+      "stationWagon": false,
+      "convertible": false,
+      "bodyStyle": 2,
+      "typeId": 1,
+      "nrAdults": 2,
+      "nrChildren": 2,
+      "fuelTypeId": 1,
+      "trunkSize": null,
+      "acriss": "EDMR"
+    }
+  ],
+  "insurances": [
+    {
+      "id": 1,
+      "price": {
+        "amount": "50,00",
+        "currency": "EUR"
+      },
+      "inclusivie": false
+    }
+  ],
+  "operator": 1,
+  "summary": {
+    "quantityVehicles": 5,
+    "totalQuantityVehicles": 5,
+    "quantityOffers": 5,
+    "totalQuantityOffers": 5,
+    "quantityGroups": 5,
+    "totalQuantityGroups": 5,
+    "minimalPrice": {
+      "amount": "342,87",
+      "currency": "EUR"
+    },
+    "maximalPrice": {
+      "amount": "755,62",
+      "currency": "EUR"
+    },
+    "minimalStdPrice": {
+      "amount": "342,87",
+      "currency": "EUR"
+    },
+    "maximalStdPrice": {
+      "amount": "755,62",
+      "currency": "EUR"
+    }
+  },
+  "texts": {
+    "supplierList": [
+      {
+        "id": 14,
+        "link": "http://localhost:8080/sunny-joi/joi/masterdata/supplier/14",
+        "supplierGroupId": 0,
+        "logo": null,
+        "name": ""
+      }
+    ],
+    "bodyStyleMap": {
+      "2": {
+        "text": "Compact"
+      },
+      "4": {
+        "text": "Fun Car"
+      },
+      "5": {
+        "text": "SUV"
+      }
+    },
+    "stationList": [
+      {
+        "id": 8482,
+        "link": "http://localhost:8080/sunny-joi/joi/masterdata/station/8482/lang/2",
+        "identifier": "Palma de Mallorca",
+        "supplierId": 14,
+        "supplierGroupId": null,
+        "stationPriority": 1,
+        "supplierPriority": 1,
+        "addres": {
+          "city": "München"
+        },
+        "stationLocTypes": [
+          {
+            "code": "CTY",
+            "name": "City"
+          },
+          {
+            "code": "APT",
+            "name": "Airport"
+          }
+        ]
+      }
+    ]
+  },
+  "filterTemplate": {
+    "fuelPolicy": [],
+    "stationLocTypes": [
+      {
+        "name": "RAS,Railway Station",
+        "value": "false"
+      },
+      {
+        "name": "APT,Airport",
+        "value": "true"
+      },
+      {
+        "name": "CTY,City",
+        "value": "true"
+      },
+      {
+        "name": "HAR,Harbour",
+        "value": "false"
+      }
+    ],
+    "bodyStyles": [
+      {
+        "name": "-1,Eco-responsable",
+        "value": "false"
+      },
+      {
+        "name": "1,Sports Car",
+        "value": "false"
+      },
+      {
+        "name": "2,Compact",
+        "value": "true"
+      },
+      {
+        "name": "3,Cabrio",
+        "value": "false"
+      },
+      {
+        "name": "4,Fun Car",
+        "value": "true"
+      },
+      {
+        "name": "5,SUV",
+        "value": "true"
+      },
+      {
+        "name": "6,Luxury Car",
+        "value": "false"
+      },
+      {
+        "name": "7,Pickup",
+        "value": "false"
+      },
+      {
+        "name": "8,Normal",
+        "value": "false"
+      }
+    ],
+    "fuelTypes": [
+      {
+        "name": "1,Petrol/gasoline",
+        "value": "true"
+      },
+      {
+        "name": "2,Diesel",
+        "value": "true"
+      },
+      {
+        "name": "3,Ethanol",
+        "value": "false"
+      },
+      {
+        "name": "4,Hybrid",
+        "value": "false"
+      },
+      {
+        "name": "5,Electro",
+        "value": "false"
+      }
+    ],
+    "suppliers": [
+      {
+        "name": "14,",
+        "value": "true"
+      }
+    ],
+    "inclusivesFilter": {
+      "TR, Tankrule": [
+        {
+          "name": "FF, Tank Rule full to full",
+          "value": "true"
+        }
+      ]
+    },
+    "automatic": {
+      "name": "automatic",
+      "value": "true"
+    },
+    "airCodition": {
+      "name": "aircondition",
+      "value": "true"
+    },
+    "minPrice": {
+      "amount": "342,87",
+      "currency": "EUR"
+    },
+    "maxPrice": {
+      "amount": "755,62",
+      "currency": "EUR"
+    }
+  }
+}
