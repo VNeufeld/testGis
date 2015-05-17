@@ -17,8 +17,9 @@ public class Upsell {
 	private UUID id;
 	private URI link;
 	
-	@JsonDeserialize(using = AvailabilityJsonDesirializer.class)
-	private Availability status;
+//	@JsonDeserialize(using = AvailabilityJsonDesirializer.class)
+//	private Availability status;
+	private String status;
 
 	public Upsell() {
 	}
@@ -61,9 +62,6 @@ public class Upsell {
 	}
 
 
-	public Availability getStatus() {
-		return status;
-	}
 
 	public Long getCarCategoryId() {
 		return carCategoryId;
@@ -84,6 +82,14 @@ public class Upsell {
 
 	public String getCarGroupName() {
 		return carGroupName;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatus() {
+		return status;
 	}
 
 }

@@ -14,7 +14,7 @@ public enum SunnyModelProvider {
 	
 	private List<SunnyOfferDo> offerDos = new ArrayList<SunnyOfferDo>();
 	
-	private List<Extra> extraDos = new ArrayList<Extra>();
+	private List<Extra> extras = new ArrayList<Extra>();
 
 	private List<Inclusive> inclusives = new ArrayList<Inclusive>();
 	
@@ -116,13 +116,6 @@ private Station findStation(long pickUpStationId, VehicleResponse response) {
 	}
 
 
-	public List<Extra> getExtraDos() {
-		return extraDos;
-	}
-
-	public void setExtraDos(List<Extra> extraDos) {
-		this.extraDos = extraDos;
-	}
 
 
 	public List<Hit> getLocationSearchHits() {
@@ -145,6 +138,19 @@ private Station findStation(long pickUpStationId, VehicleResponse response) {
 
 	public List<Inclusive> getInclusives() {
 		return inclusives;
+	}
+
+
+	public void updateExtras(SunnyOfferDo offer) {
+		this.extras.clear();
+		if ( offer.getExtras() != null)
+			this.extras.addAll(offer.getExtras());
+		
+	}
+
+
+	public List<Extra> getExtras() {
+		return extras;
 	}
 
 }

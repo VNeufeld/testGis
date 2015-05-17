@@ -14,7 +14,6 @@ public class PayTypeJsonDesirializer extends JsonDeserializer<PayType>{
 	public PayType deserialize(JsonParser parser, DeserializationContext context)
 			throws IOException, JsonProcessingException {
 		
-		
 		return PayType.parseString(parser.getText());
 	}
 

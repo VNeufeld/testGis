@@ -536,12 +536,9 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			VehicleHttpService service = serviceFactory.getVehicleJoiService();
 			
-			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
-			if ( !dummy) {
-				OfferInformation offerInformation = service.selectOffer(offer.getLink());
-				if( offerInformation != null)
-					offer.addOfferInformation(offerInformation);
-			}
+			OfferInformation offerInformation = service.selectOffer(offer.getLink());
+			if( offerInformation != null)
+				offer.addOfferInformation(offerInformation);
  
 	        new SunnyOfferViewUpdater().showOffer(offer);
 	        System.out.println("selectedNode "+offer);

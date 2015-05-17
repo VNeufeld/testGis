@@ -458,9 +458,15 @@ public class VehicleHttpService {
 
 	public OfferInformation selectOffer(URI link) {
 		try {
-			String response = httpClient.sendGetRequest(link);
-			return  JsonUtils.createResponseClassFromJson(response, OfferInformation.class);
-			
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( !dummy) {
+				String response = httpClient.sendGetRequest(link);
+				return  JsonUtils.createResponseClassFromJson(response, OfferInformation.class);
+			}
+			else {
+				String response = JsonUtils.createDummyResponse("DummyJoiGetOfferResponse.json");
+				return  JsonUtils.createResponseClassFromJson(response, OfferInformation.class);
+			}
 			
 		} catch (IOException e) {
 			logger.error(e,e);

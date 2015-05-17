@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.connector.sunny.Address;
 import com.dev.gis.connector.sunny.Extra;
 import com.dev.gis.connector.sunny.Inclusive;
 import com.dev.gis.connector.sunny.Offer;
@@ -49,12 +50,13 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	private TableViewer tableExtras;
 	
 	private TableViewer tableInclusives;
-	
 
 	private Offer selectedOffer = null;
 
 	private TravelInformation travelInformation;
 
+	private Text serviceCatalog;
+	
 	private Text pickUpStation;
 
 	private Text dropOffStation;
@@ -109,6 +111,11 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		carDescriptionLabel.setText("Fahrzeug:");
 		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).hint(300, 16).grab(false, false).applyTo(carDescription);
+
+		Label servcatLable = new Label(groupStamp, SWT.NONE);
+		servcatLable.setText("Servcat:");
+		serviceCatalog = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).applyTo(serviceCatalog);
 
 		Label pickUpLabel = new Label(groupStamp, SWT.NONE);
 		pickUpLabel.setText("pickUp:");
@@ -268,19 +275,25 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	public void showOffer(SunnyOfferDo offer) {
 		textOfferLink.setText(offer.getBookLink().toString());
 
-		priceText.setText(offer.getPrice().getAmount());
+		priceText.setText(offer.getPrice().toString());
 		
-		carDescription.setText(offer.getName()
-				+ " Group : " + offer.getVehicleId());
+		carDescription.setText(offer.getGroup()+ " : " + offer.getVehicle().getACRISS()
+				+ " Model : " + offer.getVehicle().getVehicleModel());
 		
-		
-		pickUpStation.setText(String.valueOf(offer.getPickupStation().getIdentifier()));
+		String station = "station :"+ offer.getPickUpStationId() + ""+offer.getPickupStation().getIdentifier()+ " supplier : "+offer.getSupplierId() ;
+		Address address = offer.getPickupStation().getAddres();
+		if ( address != null)
+			station = station + " adress : "+address.getCity()+ " "+address.getStreet();	
+		pickUpStation.setText(station);
 
 		if ( offer.getDropOffStation() != null)
 			dropOffStation.setText(String.valueOf(offer.getDropOffStation().getIdentifier()));
 		
+		serviceCatalog.setText(offer.getServiceCatalogCode() + " : "+offer.getServiceCatalogId());
+		
 		changeModelInclusives(offer);
 
+		changeModelExtras(offer);
 		
 
 		//this.selectedOffer = offer.getOfferList().get(0);
@@ -292,6 +305,13 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 	}
 	
+	private void changeModelExtras(SunnyOfferDo offer) {
+		SunnyModelProvider.INSTANCE.updateExtras(offer);
+		tableExtras.setInput(SunnyModelProvider.INSTANCE.getExtras());
+		tableExtras.refresh();
+		
+	}
+
 	private void changeModelInclusives(SunnyOfferDo offer) {
 		SunnyModelProvider.INSTANCE.updateInclusives(offer);
 		tableInclusives.setInput(SunnyModelProvider.INSTANCE.getInclusives());
@@ -356,7 +376,9 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 			@Override
 			public String getText(Object element) {
 				Extra o = (Extra) element;
-				return o.getPrice().getAmount();
+				if ( o.getPrice() != null)
+					return o.getPrice().getAmount();
+				return "";
 			}
 		});
 

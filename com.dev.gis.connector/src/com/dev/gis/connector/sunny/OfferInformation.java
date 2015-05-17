@@ -18,11 +18,11 @@ public class OfferInformation {
 		return offer;
 	}
 
-	public List<Pair<String,String>> getSupplierCoditions() {
-		if ( offer != null && offer.getSupplierCoditions() != null)
-				return offer.getSupplierCoditions().getSupplierConditions();
-		return null;
-	}
+//	public List<Pair<String,String>> getSupplierCoditions() {
+//		if ( offer != null && offer.getSupplierCoditions() != null)
+//				return offer.getSupplierCoditions().getSupplierConditions();
+//		return null;
+//	}
 
 
 }

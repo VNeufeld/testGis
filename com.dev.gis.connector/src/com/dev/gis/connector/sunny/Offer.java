@@ -42,7 +42,7 @@ public class Offer extends Response {
 	
 	private MoneyAmount excessPrice;
 	
-	private Availability status;
+	private String status;
 
 	private List<Inclusive> inclusives;
 	
@@ -61,7 +61,7 @@ public class Offer extends Response {
 	
 	private Long   carCategoryId;
 	
-	private SupplierCoditions supplierCoditions = new SupplierCoditions();
+	//private SupplierCoditions supplierCoditions = new SupplierCoditions();
 	
 	private Upsell  upsell;
 	
@@ -117,9 +117,6 @@ public class Offer extends Response {
 		return ServiceCatalogId;
 	}
 
-	public Availability getStatus() {
-		return status;
-	}
 
 	public MoneyAmount getStdPrice() {
 		return stdPrice;
@@ -187,10 +184,10 @@ public class Offer extends Response {
 		ServiceCatalogId = serviceCatalogId;
 	}
 
-	@JsonDeserialize(using = AvailabilityJsonDesirializer.class)
-	public void setStatus(Availability status) {
-		this.status = status;
-	}
+//	@JsonDeserialize(using = AvailabilityJsonDesirializer.class)
+//	public void setStatus(Availability status) {
+//		this.status = status;
+//	}
 	
 	public void setStdPrice(MoneyAmount stdPrice) {
 		this.stdPrice = stdPrice;
@@ -254,13 +251,13 @@ public class Offer extends Response {
 		this.promoValue = promoValue;
 	}
 
-	public SupplierCoditions getSupplierCoditions() {
-		return supplierCoditions;
-	}
-
-	public void setSupplierCoditions(List<Pair<String, String>> supplierConditions) {
-		supplierCoditions.setSupplierConditions(supplierConditions);
-	}
+//	public SupplierCoditions getSupplierCoditions() {
+//		return supplierCoditions;
+//	}
+//
+//	public void setSupplierCoditions(List<Pair<String, String>> supplierConditions) {
+//		supplierCoditions.setSupplierConditions(supplierConditions);
+//	}
 
 	public String getCarUsedPromotion() {
 		return carUsedPromotion;
@@ -320,6 +317,14 @@ public class Offer extends Response {
 	@Override
 	public String toString() {
 		return "Of: "+name+" price: "+ this.price.getAmount()+ " "+this.price.getCurrency();
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

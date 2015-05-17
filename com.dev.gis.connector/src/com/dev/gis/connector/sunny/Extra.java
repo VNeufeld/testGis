@@ -13,7 +13,7 @@ public class Extra extends BasicProtocol {
 	private URI link;
 
 	
-	private Availability status;
+	private String status;
 	
 	private String code;
 	
@@ -99,9 +99,6 @@ public class Extra extends BasicProtocol {
 		return requiredItems;
 	}
 
-	public Availability getStatus() {
-		return status;
-	}
 
 	public MoneyAmount getTotalPrice() {
 		return totalPrice;
@@ -159,10 +156,10 @@ public class Extra extends BasicProtocol {
 		this.requiredItems = requiredItems;
 	}
 	
-	@JsonDeserialize(using = AvailabilityJsonDesirializer.class)
-	public void setStatus(Availability status) {
-		this.status = status;
-	}
+//	@JsonDeserialize(using = AvailabilityJsonDesirializer.class)
+//	public void setStatus(Availability status) {
+//		this.status = status;
+//	}
 	
 	public void setTotalPrice(MoneyAmount totalPrice) {
 		this.totalPrice = totalPrice;
@@ -230,6 +227,14 @@ public class Extra extends BasicProtocol {
 
 	public void setDependency(String dependency) {
 		this.dependency = dependency;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

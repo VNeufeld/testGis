@@ -7,6 +7,9 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MoneyAmount extends BasicProtocol implements Comparable<MoneyAmount>, Serializable {
 
 	private static final long serialVersionUID = 4918397835320353956L;

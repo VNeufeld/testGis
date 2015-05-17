@@ -28,10 +28,13 @@ public enum PayType {
 	public static PayType parseString(String value) {
 
 		try {
-			int i = Integer.parseInt(value);
-			return parseInt(i);
+			if (value.equals("PAY_ON_ARRIVAL") )
+				return PAY_ON_ARRIVAL;
+			else if (value.equals("PREPAID") )
+				return PREPAID;
+			return PAY_ON_ARRIVAL;
 		} catch (Exception e) {
-			throw new BadValueException("could not interprete value as int" + value);
+			return PAY_ON_ARRIVAL;
 		}
 
 	}

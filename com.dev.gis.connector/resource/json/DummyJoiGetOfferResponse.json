@@ -145,6 +145,5 @@
 		"serviceCatalogCode": "ST",
 		"sunshineTariff": false,
 		"serviceCatalogId": 1
-	},
-	"supplierCoditions": []
+	}
 }
