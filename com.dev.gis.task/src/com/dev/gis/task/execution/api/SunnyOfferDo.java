@@ -8,6 +8,7 @@ public class SunnyOfferDo extends  Offer {
 	private String         inclusiveKm = "";
 	private String         group = "";
 	private String         prepaid = "prepaid";
+	private String 		   carDescription;
 	
 	
 	
@@ -23,7 +24,11 @@ public class SunnyOfferDo extends  Offer {
 		this.pickupStation = pickupStation;
 		this.dropOffStation = dropOffStation;
 		
-		this.setName( vh.getManufacturer());
+		this.setName( offer.getName());
+		if ( vh != null)
+			carDescription = vh.getManufacturer()+ " "+vh.getType()+ " "+vh.getVehicleModel();
+		else 
+			carDescription = "????";
 		this.setBookLink(offer.getBookLink());
 		this.setLink(offer.getLink());
 		this.setSupplierId(offer.getSupplierId());
@@ -36,17 +41,20 @@ public class SunnyOfferDo extends  Offer {
 		if ( "2".equals(offer.getOfferedPayment()))
 			prepaid = " poa ";
 		this.setId(offer.getId());
+		this.setRating(offer.getRating());
 		
 		this.setServiceCatalogCode(offer.getServiceCatalogCode());
 		this.setServiceCatalogId(offer.getServiceCatalogId());
 		
 		for ( Inclusive incl : offer.getInclusives()) {
-			if ( incl.getId() == 73) {
+			if ( incl.getItemClassCode().equals("MIL")) {
 				inclusiveKm = incl.getDescription();
 			}
 		}
-		
-		group = vh.getACRISS();  
+		if ( vh != null)
+			group = vh.getACRISS();
+		else
+			group = offer.getName();
 		
 	}
 
@@ -89,5 +97,9 @@ public class SunnyOfferDo extends  Offer {
 
 	public Station getDropOffStation() {
 		return dropOffStation;
+	}
+
+	public String getCarDescription() {
+		return carDescription;
 	}
 }

@@ -3,7 +3,10 @@ package com.dev.gis.connector.sunny;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Station extends GenericLocation {
 	
 	public Station() {

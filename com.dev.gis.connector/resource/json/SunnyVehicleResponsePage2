@@ -1,0 +1,1331 @@
+{
+	"link": "http://localhost:8080/sunny-joi/joi/request",
+	"requestId": 790336478452760369,
+	"errors": null,
+	"summary": {
+		"quantityVehicles": 2,
+		"totalQuantityVehicles": 4,
+		"quantityOffers": 2,
+		"totalQuantityOffers": 4,
+		"quantityGroups": 2,
+		"totalQuantityGroups": 0,
+		"minimalPrice": {
+			"currency": "EUR",
+			"amount": "438,00",
+			"decimalAmount": 438.00,
+			"amountAsUS": "438.00"
+		},
+		"maximalPrice": {
+			"currency": "EUR",
+			"amount": "477,00",
+			"decimalAmount": 477.00,
+			"amountAsUS": "477.00"
+		},
+		"minimalStdPrice": {
+			"currency": "EUR",
+			"amount": "438,00",
+			"decimalAmount": 438.00,
+			"amountAsUS": "438.00"
+		},
+		"maximalStdPrice": {
+			"currency": "EUR",
+			"amount": "477,00",
+			"decimalAmount": 477.00,
+			"amountAsUS": "477.00"
+		}
+	},
+	"groups": [],
+	"vehicles": [{
+		"link": "http://localhost:8080/sunny-joi/joi/request/vehicle/1321079154",
+		"requestId": null,
+		"errors": null,
+		"id": 1321079154,
+		"supplierId": 5,
+		"categoryId": 51,
+		"groupId": 110,
+		"manufacturer": "Peugeot",
+		"vehicleModel": "Standard",
+		"type": "3008",
+		"fuelType": "Petrol/gasoline",
+		"supplierCategory": "SWMR|FF",
+		"commonCarInformation": null,
+		"companyName": "Sunny Cars",
+		"picture": "/img/cars/large/Skoda_Octavia_4dr.jpg",
+		"nrDoors": 4,
+		"nrSeats": 5,
+		"aircondition": true,
+		"automatic": false,
+		"snowTires": false,
+		"allWheel": false,
+		"navigationSystem": false,
+		"stationWagon": false,
+		"convertible": false,
+		"bodyStyle": 2,
+		"typeId": 64,
+		"nrAdults": null,
+		"nrChildren": null,
+		"fuelTypeId": 1,
+		"nrLargeLuggage": null,
+		"nrSmallLuggage": null,
+		"trunkSize": null,
+		"vehicleSmallImage": null,
+		"vehicleLargeImage": null,
+		"ps": null,
+		"acriss": "SWMR"
+	},
+	{
+		"link": "http://localhost:8080/sunny-joi/joi/request/vehicle/201967929",
+		"requestId": null,
+		"errors": null,
+		"id": 201967929,
+		"supplierId": 5,
+		"categoryId": 4,
+		"groupId": 17,
+		"manufacturer": "Peugeot",
+		"vehicleModel": "Compact",
+		"type": "308 CC",
+		"fuelType": "Petrol/gasoline",
+		"supplierCategory": "CTMR|CJ",
+		"commonCarInformation": null,
+		"companyName": "Sunny Cars",
+		"picture": "/img/cars/large/Peugeot-308-Cabrio-CC.jpg",
+		"nrDoors": 2,
+		"nrSeats": 4,
+		"aircondition": true,
+		"automatic": false,
+		"snowTires": false,
+		"allWheel": false,
+		"navigationSystem": false,
+		"stationWagon": false,
+		"convertible": true,
+		"bodyStyle": 1,
+		"typeId": 98,
+		"nrAdults": null,
+		"nrChildren": null,
+		"fuelTypeId": 1,
+		"nrLargeLuggage": null,
+		"nrSmallLuggage": null,
+		"trunkSize": null,
+		"vehicleSmallImage": null,
+		"vehicleLargeImage": null,
+		"ps": null,
+		"acriss": "CTMR"
+	}],
+	"insurances": [],
+	"contactInformations": [{
+		"type": "telefon",
+		"contact": "+41(071)2923601",
+		"comment": ""
+	}],
+	"ratingView": {
+		"ratingGroups": [{
+			"header": {
+				"stationId": 6,
+				"supplierId": 5,
+				"carCategoryId": 51,
+				"name": "SWMR"
+			},
+			"offers": [{
+				"link": "http://localhost:8080/sunny-joi/joi/request/offer/f49dbd54-a64e-46f8-886b-1839bae65da2",
+				"requestId": null,
+				"errors": null,
+				"PROMOTION_NOT_REQUIRED": "0",
+				"PROMOTION_NOT_VALID": "1",
+				"PROMOTION_NOT_USED": "2",
+				"PROMOTION_USED": "3",
+				"PROMOTION_ERROR": "-1",
+				"id": "f49dbd54-a64e-46f8-886b-1839bae65da2",
+				"bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/f49dbd54-a64e-46f8-886b-1839bae65da2/book",
+				"remainingCacheSeconds": null,
+				"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=1&p=150&v=12437&s=353433&i=0",
+				"name": "SWMR",
+				"supplierId": 5,
+				"serviceCatalogId": 3,
+				"serviceCatalogCode": null,
+				"serviceCatalogName": null,
+				"offeredPayment": null,
+				"price": {
+					"currency": "EUR",
+					"amount": "438,00",
+					"decimalAmount": 438.00,
+					"amountAsUS": "438.00"
+				},
+				"stdPrice": {
+					"currency": "EUR",
+					"amount": "438,00",
+					"decimalAmount": 438.00,
+					"amountAsUS": "438.00"
+				},
+				"promoValue": {
+					"currency": "EUR",
+					"amount": "0,00",
+					"decimalAmount": 0.00,
+					"amountAsUS": "0.00"
+				},
+				"cancelFee": null,
+				"oneWayFee": null,
+				"outOfHourPrice": null,
+				"excessPrice": null,
+				"status": "ON_REQUEST",
+				"inclusives": [{
+					"id": 2,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 1,
+					"displayPriority": 99,
+					"itemClassCode": "MIL",
+					"itemClassName": "Mileage Agreement",
+					"description": "99999",
+					"code": "UM"
+				},
+				{
+					"id": 7,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 2,
+					"displayPriority": 99,
+					"itemClassCode": "FPO",
+					"itemClassName": "Fuel Policy",
+					"description": "Fair Fuel Policy: Return the car with a full tank",
+					"code": "FF"
+				},
+				{
+					"id": 24,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 3,
+					"displayPriority": 99,
+					"itemClassCode": "EXC",
+					"itemClassName": "Damage Excess",
+					"description": "Collision Damage Waiver with refundable excess",
+					"code": "CDWS"
+				},
+				{
+					"id": 33,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "For damages to third party property",
+					"code": "LIP"
+				},
+				{
+					"id": 21,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+					"code": "LIS"
+				},
+				{
+					"id": 20,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "For bodily injuries/persons damages",
+					"code": "LIB"
+				},
+				{
+					"id": 23,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "Location Service Charge",
+					"code": "LSC"
+				},
+				{
+					"id": 22,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "Airport Service Charge",
+					"code": "ASC"
+				},
+				{
+					"id": 25,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "Theft Protection with deductible 800 EUR",
+					"code": "TP"
+				}],
+				"extras": null,
+				"promoText": null,
+				"pickUpStationId": 6,
+				"dropOffStationId": 6,
+				"vehicleId": 1321079154,
+				"commissionType": "1",
+				"carUsedPromotion": "0",
+				"carCategoryId": 51,
+				"supplierCoditions": {
+					"supplierConditions": [],
+					"supplierConditionsUrl": null
+				},
+				"upsell": null,
+				"extVehicleId": 12437,
+				"extSalesSeasonId": 353433,
+				"rating": null,
+				"sunshineTariff": false
+			}]
+		},
+		{
+			"header": {
+				"stationId": 6,
+				"supplierId": 5,
+				"carCategoryId": 4,
+				"name": "CTMR"
+			},
+			"offers": [{
+				"link": "http://localhost:8080/sunny-joi/joi/request/offer/2727a7b5-570e-4179-9364-c7709b4607c9",
+				"requestId": null,
+				"errors": null,
+				"PROMOTION_NOT_REQUIRED": "0",
+				"PROMOTION_NOT_VALID": "1",
+				"PROMOTION_NOT_USED": "2",
+				"PROMOTION_USED": "3",
+				"PROMOTION_ERROR": "-1",
+				"id": "2727a7b5-570e-4179-9364-c7709b4607c9",
+				"bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/2727a7b5-570e-4179-9364-c7709b4607c9/book",
+				"remainingCacheSeconds": null,
+				"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=1&p=150&v=27897&s=353433&i=0",
+				"name": "CTMR",
+				"supplierId": 5,
+				"serviceCatalogId": 3,
+				"serviceCatalogCode": null,
+				"serviceCatalogName": null,
+				"offeredPayment": null,
+				"price": {
+					"currency": "EUR",
+					"amount": "477,00",
+					"decimalAmount": 477.00,
+					"amountAsUS": "477.00"
+				},
+				"stdPrice": {
+					"currency": "EUR",
+					"amount": "477,00",
+					"decimalAmount": 477.00,
+					"amountAsUS": "477.00"
+				},
+				"promoValue": {
+					"currency": "EUR",
+					"amount": "0,00",
+					"decimalAmount": 0.00,
+					"amountAsUS": "0.00"
+				},
+				"cancelFee": null,
+				"oneWayFee": null,
+				"outOfHourPrice": null,
+				"excessPrice": null,
+				"status": "ON_REQUEST",
+				"inclusives": [{
+					"id": 2,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 1,
+					"displayPriority": 99,
+					"itemClassCode": "MIL",
+					"itemClassName": "Mileage Agreement",
+					"description": "99999",
+					"code": "UM"
+				},
+				{
+					"id": 7,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 2,
+					"displayPriority": 99,
+					"itemClassCode": "FPO",
+					"itemClassName": "Fuel Policy",
+					"description": "Fair Fuel Policy: Return the car with a full tank",
+					"code": "FF"
+				},
+				{
+					"id": 24,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 3,
+					"displayPriority": 99,
+					"itemClassCode": "EXC",
+					"itemClassName": "Damage Excess",
+					"description": "Collision Damage Waiver with refundable excess",
+					"code": "CDWS"
+				},
+				{
+					"id": 33,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "For damages to third party property",
+					"code": "LIP"
+				},
+				{
+					"id": 21,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+					"code": "LIS"
+				},
+				{
+					"id": 20,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "For bodily injuries/persons damages",
+					"code": "LIB"
+				},
+				{
+					"id": 23,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "Location Service Charge",
+					"code": "LSC"
+				},
+				{
+					"id": 22,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "Airport Service Charge",
+					"code": "ASC"
+				},
+				{
+					"id": 25,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "Theft Protection with deductible 800 EUR",
+					"code": "TP"
+				}],
+				"extras": null,
+				"promoText": null,
+				"pickUpStationId": 6,
+				"dropOffStationId": 6,
+				"vehicleId": 201967929,
+				"commissionType": "1",
+				"carUsedPromotion": "0",
+				"carCategoryId": 4,
+				"supplierCoditions": {
+					"supplierConditions": [],
+					"supplierConditionsUrl": null
+				},
+				"upsell": null,
+				"extVehicleId": 27897,
+				"extSalesSeasonId": 353433,
+				"rating": null,
+				"sunshineTariff": false
+			}]
+		}],
+		"allOffers": [{
+			"link": "http://localhost:8080/sunny-joi/joi/request/offer/f49dbd54-a64e-46f8-886b-1839bae65da2",
+			"requestId": null,
+			"errors": null,
+			"PROMOTION_NOT_REQUIRED": "0",
+			"PROMOTION_NOT_VALID": "1",
+			"PROMOTION_NOT_USED": "2",
+			"PROMOTION_USED": "3",
+			"PROMOTION_ERROR": "-1",
+			"id": "f49dbd54-a64e-46f8-886b-1839bae65da2",
+			"bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/f49dbd54-a64e-46f8-886b-1839bae65da2/book",
+			"remainingCacheSeconds": null,
+			"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=1&p=150&v=12437&s=353433&i=0",
+			"name": "SWMR",
+			"supplierId": 5,
+			"serviceCatalogId": 3,
+			"serviceCatalogCode": null,
+			"serviceCatalogName": null,
+			"offeredPayment": null,
+			"price": {
+				"currency": "EUR",
+				"amount": "438,00",
+				"decimalAmount": 438.00,
+				"amountAsUS": "438.00"
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "438,00",
+				"decimalAmount": 438.00,
+				"amountAsUS": "438.00"
+			},
+			"promoValue": {
+				"currency": "EUR",
+				"amount": "0,00",
+				"decimalAmount": 0.00,
+				"amountAsUS": "0.00"
+			},
+			"cancelFee": null,
+			"oneWayFee": null,
+			"outOfHourPrice": null,
+			"excessPrice": null,
+			"status": "ON_REQUEST",
+			"inclusives": [{
+				"id": 2,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 1,
+				"displayPriority": 99,
+				"itemClassCode": "MIL",
+				"itemClassName": "Mileage Agreement",
+				"description": "99999",
+				"code": "UM"
+			},
+			{
+				"id": 7,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 2,
+				"displayPriority": 99,
+				"itemClassCode": "FPO",
+				"itemClassName": "Fuel Policy",
+				"description": "Fair Fuel Policy: Return the car with a full tank",
+				"code": "FF"
+			},
+			{
+				"id": 24,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 3,
+				"displayPriority": 99,
+				"itemClassCode": "EXC",
+				"itemClassName": "Damage Excess",
+				"description": "Collision Damage Waiver with refundable excess",
+				"code": "CDWS"
+			},
+			{
+				"id": 33,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "For damages to third party property",
+				"code": "LIP"
+			},
+			{
+				"id": 21,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+				"code": "LIS"
+			},
+			{
+				"id": 20,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "For bodily injuries/persons damages",
+				"code": "LIB"
+			},
+			{
+				"id": 23,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "Location Service Charge",
+				"code": "LSC"
+			},
+			{
+				"id": 22,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "Airport Service Charge",
+				"code": "ASC"
+			},
+			{
+				"id": 25,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "Theft Protection with deductible 800 EUR",
+				"code": "TP"
+			}],
+			"extras": null,
+			"promoText": null,
+			"pickUpStationId": 6,
+			"dropOffStationId": 6,
+			"vehicleId": 1321079154,
+			"commissionType": "1",
+			"carUsedPromotion": "0",
+			"carCategoryId": 51,
+			"supplierCoditions": {
+				"supplierConditions": [],
+				"supplierConditionsUrl": null
+			},
+			"upsell": null,
+			"extVehicleId": 12437,
+			"extSalesSeasonId": 353433,
+			"rating": null,
+			"sunshineTariff": false
+		},
+		{
+			"link": "http://localhost:8080/sunny-joi/joi/request/offer/2727a7b5-570e-4179-9364-c7709b4607c9",
+			"requestId": null,
+			"errors": null,
+			"PROMOTION_NOT_REQUIRED": "0",
+			"PROMOTION_NOT_VALID": "1",
+			"PROMOTION_NOT_USED": "2",
+			"PROMOTION_USED": "3",
+			"PROMOTION_ERROR": "-1",
+			"id": "2727a7b5-570e-4179-9364-c7709b4607c9",
+			"bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/2727a7b5-570e-4179-9364-c7709b4607c9/book",
+			"remainingCacheSeconds": null,
+			"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=1&p=150&v=27897&s=353433&i=0",
+			"name": "CTMR",
+			"supplierId": 5,
+			"serviceCatalogId": 3,
+			"serviceCatalogCode": null,
+			"serviceCatalogName": null,
+			"offeredPayment": null,
+			"price": {
+				"currency": "EUR",
+				"amount": "477,00",
+				"decimalAmount": 477.00,
+				"amountAsUS": "477.00"
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "477,00",
+				"decimalAmount": 477.00,
+				"amountAsUS": "477.00"
+			},
+			"promoValue": {
+				"currency": "EUR",
+				"amount": "0,00",
+				"decimalAmount": 0.00,
+				"amountAsUS": "0.00"
+			},
+			"cancelFee": null,
+			"oneWayFee": null,
+			"outOfHourPrice": null,
+			"excessPrice": null,
+			"status": "ON_REQUEST",
+			"inclusives": [{
+				"id": 2,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 1,
+				"displayPriority": 99,
+				"itemClassCode": "MIL",
+				"itemClassName": "Mileage Agreement",
+				"description": "99999",
+				"code": "UM"
+			},
+			{
+				"id": 7,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 2,
+				"displayPriority": 99,
+				"itemClassCode": "FPO",
+				"itemClassName": "Fuel Policy",
+				"description": "Fair Fuel Policy: Return the car with a full tank",
+				"code": "FF"
+			},
+			{
+				"id": 24,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 3,
+				"displayPriority": 99,
+				"itemClassCode": "EXC",
+				"itemClassName": "Damage Excess",
+				"description": "Collision Damage Waiver with refundable excess",
+				"code": "CDWS"
+			},
+			{
+				"id": 33,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "For damages to third party property",
+				"code": "LIP"
+			},
+			{
+				"id": 21,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+				"code": "LIS"
+			},
+			{
+				"id": 20,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "For bodily injuries/persons damages",
+				"code": "LIB"
+			},
+			{
+				"id": 23,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "Location Service Charge",
+				"code": "LSC"
+			},
+			{
+				"id": 22,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "Airport Service Charge",
+				"code": "ASC"
+			},
+			{
+				"id": 25,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "Theft Protection with deductible 800 EUR",
+				"code": "TP"
+			}],
+			"extras": null,
+			"promoText": null,
+			"pickUpStationId": 6,
+			"dropOffStationId": 6,
+			"vehicleId": 201967929,
+			"commissionType": "1",
+			"carUsedPromotion": "0",
+			"carCategoryId": 4,
+			"supplierCoditions": {
+				"supplierConditions": [],
+				"supplierConditionsUrl": null
+			},
+			"upsell": null,
+			"extVehicleId": 27897,
+			"extSalesSeasonId": 353433,
+			"rating": null,
+			"sunshineTariff": false
+		}]
+	},
+	"recommendations": [],
+	"operator": 1,
+	"texts": {
+		"supplierList": [{
+			"id": 5,
+			"link": "http://localhost:8080/sunny-joi/joi/masterdata/supplier/5",
+			"supplierGroupId": 0,
+			"logo": null,
+			"name": "Sunny Cars"
+		}],
+		"bodyStyleMap": {
+			"1": {
+				"id": 1,
+				"text": "Compact",
+				"iso": null
+			},
+			"2": {
+				"id": 2,
+				"text": "Standard",
+				"iso": null
+			}
+		},
+		"stationList": [{
+			"id": 6,
+			"link": "http://localhost:8080/sunny-joi/joi/masterdata/station/6/lang/2",
+			"identifier": "Palma de Mallorca Airport",
+			"supplierId": 5,
+			"supplierGroupId": null,
+			"stationPriority": 1,
+			"supplierPriority": 5,
+			"crsCode": null,
+			"assignedCityIds": null,
+			"modules": null,
+			"geo": {
+				"country": null,
+				"countryCode": null,
+				"area": null,
+				"city": 3,
+				"airport": null
+			},
+			"addres": {
+				"signee": null,
+				"street": null,
+				"country": null,
+				"countryId": null,
+				"zip": null,
+				"city": "Palma de Mallorca",
+				"latitude": null,
+				"longitude": null
+			},
+			"stationLocTypes": [{
+				"code": "APT",
+				"name": "Airport"
+			}]
+		}]
+	},
+	"remainingCacheSeconds": null,
+	"offerFilterTemplate": {
+		"fuelPolicy": [],
+		"stationLocTypes": [{
+			"name": "RAS,Railway Station",
+			"value": "false"
+		},
+		{
+			"name": "APT,Airport",
+			"value": "true"
+		},
+		{
+			"name": "CTY,City",
+			"value": "false"
+		},
+		{
+			"name": "HAR,Harbour",
+			"value": "false"
+		}],
+		"bodyStyles": [{
+			"name": "6,Fullsize",
+			"value": "false"
+		},
+		{
+			"name": "7,Premium",
+			"value": "false"
+		},
+		{
+			"name": "8,Luxury",
+			"value": "false"
+		},
+		{
+			"name": "9,Special",
+			"value": "false"
+		},
+		{
+			"name": "1,Compact",
+			"value": "true"
+		},
+		{
+			"name": "2,Standard",
+			"value": "true"
+		},
+		{
+			"name": "3,Mini",
+			"value": "true"
+		},
+		{
+			"name": "4,Intermediate",
+			"value": "true"
+		},
+		{
+			"name": "5,Economy",
+			"value": "true"
+		}],
+		"fuelTypes": [{
+			"name": "1,Petrol/gasoline",
+			"value": "true"
+		},
+		{
+			"name": "2,Diesel",
+			"value": "false"
+		},
+		{
+			"name": "3,Ethanol",
+			"value": "false"
+		},
+		{
+			"name": "4,Hybrid",
+			"value": "false"
+		},
+		{
+			"name": "5,Electro",
+			"value": "false"
+		}],
+		"suppliers": [{
+			"name": "5,Sunny Cars",
+			"value": "true"
+		}],
+		"inclusivesFilter": {
+			"LIC, Liability Insurance Coverage": [{
+				"name": "LIP, For damages to third party property",
+				"value": "true"
+			},
+			{
+				"name": "LIS, Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+				"value": "true"
+			},
+			{
+				"name": "LIB, For bodily injuries/persons damages",
+				"value": "true"
+			}],
+			"FPO, Fuel Policy": [{
+				"name": "FF, Fair Fuel Policy: Return the car with a full tank",
+				"value": "true"
+			}],
+			"EXC, Damage Excess": [{
+				"name": "CDWS, Collision Damage Waiver with refundable excess",
+				"value": "true"
+			}],
+			"MIL, Mileage Agreement": [{
+				"name": "UM, 99999",
+				"value": "true"
+			}]
+		},
+		"automatic": {
+			"name": "automatic",
+			"value": "true"
+		},
+		"airCodition": {
+			"name": "aircondition",
+			"value": "true"
+		},
+		"minPrice": {
+			"currency": "EUR",
+			"amount": "122,00",
+			"decimalAmount": 122.00,
+			"amountAsUS": "122.00"
+		},
+		"maxPrice": {
+			"currency": "EUR",
+			"amount": "790,00",
+			"decimalAmount": 790.00,
+			"amountAsUS": "790.00"
+		}
+	},
+	"pageInfo": "page 2 from 2",
+	"allOffers": [{
+		"link": "http://localhost:8080/sunny-joi/joi/request/offer/f49dbd54-a64e-46f8-886b-1839bae65da2",
+		"requestId": null,
+		"errors": null,
+		"PROMOTION_NOT_REQUIRED": "0",
+		"PROMOTION_NOT_VALID": "1",
+		"PROMOTION_NOT_USED": "2",
+		"PROMOTION_USED": "3",
+		"PROMOTION_ERROR": "-1",
+		"id": "f49dbd54-a64e-46f8-886b-1839bae65da2",
+		"bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/f49dbd54-a64e-46f8-886b-1839bae65da2/book",
+		"remainingCacheSeconds": null,
+		"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=1&p=150&v=12437&s=353433&i=0",
+		"name": "SWMR",
+		"supplierId": 5,
+		"serviceCatalogId": 3,
+		"serviceCatalogCode": null,
+		"serviceCatalogName": null,
+		"offeredPayment": null,
+		"price": {
+			"currency": "EUR",
+			"amount": "438,00",
+			"decimalAmount": 438.00,
+			"amountAsUS": "438.00"
+		},
+		"stdPrice": {
+			"currency": "EUR",
+			"amount": "438,00",
+			"decimalAmount": 438.00,
+			"amountAsUS": "438.00"
+		},
+		"promoValue": {
+			"currency": "EUR",
+			"amount": "0,00",
+			"decimalAmount": 0.00,
+			"amountAsUS": "0.00"
+		},
+		"cancelFee": null,
+		"oneWayFee": null,
+		"outOfHourPrice": null,
+		"excessPrice": null,
+		"status": "ON_REQUEST",
+		"inclusives": [{
+			"id": 2,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": true,
+			"itemClassId": 1,
+			"displayPriority": 99,
+			"itemClassCode": "MIL",
+			"itemClassName": "Mileage Agreement",
+			"description": "99999",
+			"code": "UM"
+		},
+		{
+			"id": 7,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": true,
+			"itemClassId": 2,
+			"displayPriority": 99,
+			"itemClassCode": "FPO",
+			"itemClassName": "Fuel Policy",
+			"description": "Fair Fuel Policy: Return the car with a full tank",
+			"code": "FF"
+		},
+		{
+			"id": 24,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": true,
+			"itemClassId": 3,
+			"displayPriority": 99,
+			"itemClassCode": "EXC",
+			"itemClassName": "Damage Excess",
+			"description": "Collision Damage Waiver with refundable excess",
+			"code": "CDWS"
+		},
+		{
+			"id": 33,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": true,
+			"itemClassId": 4,
+			"displayPriority": 99,
+			"itemClassCode": "LIC",
+			"itemClassName": "Liability Insurance Coverage",
+			"description": "For damages to third party property",
+			"code": "LIP"
+		},
+		{
+			"id": 21,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": true,
+			"itemClassId": 4,
+			"displayPriority": 99,
+			"itemClassCode": "LIC",
+			"itemClassName": "Liability Insurance Coverage",
+			"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+			"code": "LIS"
+		},
+		{
+			"id": 20,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": true,
+			"itemClassId": 4,
+			"displayPriority": 99,
+			"itemClassCode": "LIC",
+			"itemClassName": "Liability Insurance Coverage",
+			"description": "For bodily injuries/persons damages",
+			"code": "LIB"
+		},
+		{
+			"id": 23,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": false,
+			"itemClassId": -1,
+			"displayPriority": 99,
+			"itemClassCode": "",
+			"itemClassName": "",
+			"description": "Location Service Charge",
+			"code": "LSC"
+		},
+		{
+			"id": 22,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": false,
+			"itemClassId": -1,
+			"displayPriority": 99,
+			"itemClassCode": "",
+			"itemClassName": "",
+			"description": "Airport Service Charge",
+			"code": "ASC"
+		},
+		{
+			"id": 25,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": false,
+			"itemClassId": -1,
+			"displayPriority": 99,
+			"itemClassCode": "",
+			"itemClassName": "",
+			"description": "Theft Protection with deductible 800 EUR",
+			"code": "TP"
+		}],
+		"extras": null,
+		"promoText": null,
+		"pickUpStationId": 6,
+		"dropOffStationId": 6,
+		"vehicleId": 1321079154,
+		"commissionType": "1",
+		"carUsedPromotion": "0",
+		"carCategoryId": 51,
+		"supplierCoditions": {
+			"supplierConditions": [],
+			"supplierConditionsUrl": null
+		},
+		"upsell": null,
+		"extVehicleId": 12437,
+		"extSalesSeasonId": 353433,
+		"rating": null,
+		"sunshineTariff": false
+	},
+	{
+		"link": "http://localhost:8080/sunny-joi/joi/request/offer/2727a7b5-570e-4179-9364-c7709b4607c9",
+		"requestId": null,
+		"errors": null,
+		"PROMOTION_NOT_REQUIRED": "0",
+		"PROMOTION_NOT_VALID": "1",
+		"PROMOTION_NOT_USED": "2",
+		"PROMOTION_USED": "3",
+		"PROMOTION_ERROR": "-1",
+		"id": "2727a7b5-570e-4179-9364-c7709b4607c9",
+		"bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/2727a7b5-570e-4179-9364-c7709b4607c9/book",
+		"remainingCacheSeconds": null,
+		"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=1&p=150&v=27897&s=353433&i=0",
+		"name": "CTMR",
+		"supplierId": 5,
+		"serviceCatalogId": 3,
+		"serviceCatalogCode": null,
+		"serviceCatalogName": null,
+		"offeredPayment": null,
+		"price": {
+			"currency": "EUR",
+			"amount": "477,00",
+			"decimalAmount": 477.00,
+			"amountAsUS": "477.00"
+		},
+		"stdPrice": {
+			"currency": "EUR",
+			"amount": "477,00",
+			"decimalAmount": 477.00,
+			"amountAsUS": "477.00"
+		},
+		"promoValue": {
+			"currency": "EUR",
+			"amount": "0,00",
+			"decimalAmount": 0.00,
+			"amountAsUS": "0.00"
+		},
+		"cancelFee": null,
+		"oneWayFee": null,
+		"outOfHourPrice": null,
+		"excessPrice": null,
+		"status": "ON_REQUEST",
+		"inclusives": [{
+			"id": 2,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": true,
+			"itemClassId": 1,
+			"displayPriority": 99,
+			"itemClassCode": "MIL",
+			"itemClassName": "Mileage Agreement",
+			"description": "99999",
+			"code": "UM"
+		},
+		{
+			"id": 7,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": true,
+			"itemClassId": 2,
+			"displayPriority": 99,
+			"itemClassCode": "FPO",
+			"itemClassName": "Fuel Policy",
+			"description": "Fair Fuel Policy: Return the car with a full tank",
+			"code": "FF"
+		},
+		{
+			"id": 24,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": true,
+			"itemClassId": 3,
+			"displayPriority": 99,
+			"itemClassCode": "EXC",
+			"itemClassName": "Damage Excess",
+			"description": "Collision Damage Waiver with refundable excess",
+			"code": "CDWS"
+		},
+		{
+			"id": 33,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": true,
+			"itemClassId": 4,
+			"displayPriority": 99,
+			"itemClassCode": "LIC",
+			"itemClassName": "Liability Insurance Coverage",
+			"description": "For damages to third party property",
+			"code": "LIP"
+		},
+		{
+			"id": 21,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": true,
+			"itemClassId": 4,
+			"displayPriority": 99,
+			"itemClassCode": "LIC",
+			"itemClassName": "Liability Insurance Coverage",
+			"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+			"code": "LIS"
+		},
+		{
+			"id": 20,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": true,
+			"itemClassId": 4,
+			"displayPriority": 99,
+			"itemClassCode": "LIC",
+			"itemClassName": "Liability Insurance Coverage",
+			"description": "For bodily injuries/persons damages",
+			"code": "LIB"
+		},
+		{
+			"id": 23,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": false,
+			"itemClassId": -1,
+			"displayPriority": 99,
+			"itemClassCode": "",
+			"itemClassName": "",
+			"description": "Location Service Charge",
+			"code": "LSC"
+		},
+		{
+			"id": 22,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": false,
+			"itemClassId": -1,
+			"displayPriority": 99,
+			"itemClassCode": "",
+			"itemClassName": "",
+			"description": "Airport Service Charge",
+			"code": "ASC"
+		},
+		{
+			"id": 25,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": false,
+			"itemClassId": -1,
+			"displayPriority": 99,
+			"itemClassCode": "",
+			"itemClassName": "",
+			"description": "Theft Protection with deductible 800 EUR",
+			"code": "TP"
+		}],
+		"extras": null,
+		"promoText": null,
+		"pickUpStationId": 6,
+		"dropOffStationId": 6,
+		"vehicleId": 201967929,
+		"commissionType": "1",
+		"carUsedPromotion": "0",
+		"carCategoryId": 4,
+		"supplierCoditions": {
+			"supplierConditions": [],
+			"supplierConditionsUrl": null
+		},
+		"upsell": null,
+		"extVehicleId": 27897,
+		"extSalesSeasonId": 353433,
+		"rating": null,
+		"sunshineTariff": false
+	}],
+	"vehicleIdsFromOffers": [201967929,
+	1321079154]
+}

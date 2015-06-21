@@ -65,6 +65,9 @@ public class Offer extends Response {
 	
 	private Upsell  upsell;
 	
+    private Integer rating; 
+	
+	
 	public URI getBookLink() {
 		return bookLink;
 	}
@@ -325,6 +328,14 @@ public class Offer extends Response {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 }

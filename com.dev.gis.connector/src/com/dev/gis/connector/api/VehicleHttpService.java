@@ -30,8 +30,8 @@ import com.dev.gis.connector.sunny.VehicleResponse;
 public class VehicleHttpService {
 	private static Logger logger = Logger.getLogger(VehicleHttpService.class);
 
-	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?pageSize=5&sort=asc";
-
+	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?&ratingView&sort=asc&pageSize=";
+	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/browsePage?&page=";
 	
 	private static String varPayerId = "G53SL5V9APQV2";
 	
@@ -42,10 +42,12 @@ public class VehicleHttpService {
 		this.httpClient = gisHttpClientInstance;
 	}
 
-	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy) {
+	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy, int pageSize) {
 
 		try {
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+SUNNY_VEHICLE_REQUEST_PARAM);
+			
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
+					SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
 			
 			logger.info("VehicleHttpService = "+uri.toString());
 			
@@ -64,7 +66,7 @@ public class VehicleHttpService {
 			
 			dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( dummy)
-				response = JsonUtils.createDummyResponse("SunnyVehicleResponse");
+				response = JsonUtils.createDummyResponse("SunnyVehicleResponseRatingView");
 			else
 				response =  httpClient.startPostRequestAsJson(uri, request);
 			
@@ -72,13 +74,35 @@ public class VehicleHttpService {
 			
 			if (response != null ) 
 				return JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
-
-			return null;
 			
 		} catch ( IOException e) {
 			logger.error(e.getMessage(),e);
 		} catch (URISyntaxException e) {
 			logger.error(e);
+		}
+		return null;
+	}
+	
+	public VehicleResponse getPage(int pageNo) {
+		try {
+			
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
+					SUNNY_NEXT_PAGE_REQUEST_PARAM+String.valueOf(pageNo));
+			
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( !dummy) {
+				String response = httpClient.sendGetRequest(uri);
+				return  JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
+			}
+			else {
+				String response = JsonUtils.createDummyResponse("SunnyVehicleResponsePage2");
+				return  JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
+			}
+			
+		} catch (IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
 		}
 		return null;
 

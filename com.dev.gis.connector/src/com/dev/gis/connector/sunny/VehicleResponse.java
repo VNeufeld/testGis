@@ -5,9 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class VehicleResponse extends Response {
 
 	private VehicleSummary summary;
@@ -16,7 +18,11 @@ public class VehicleResponse extends Response {
 	private List<Vehicle> vehicles = new ArrayList<Vehicle>();
 
 	private List<Insurance> insurances = new ArrayList<Insurance>();
+	
+	private RatingView ratingView;
 
+	private List<Offer> recommendations;
+	
 	private long operator;
 
 	private GuiTextElements texts;
@@ -129,13 +135,18 @@ public class VehicleResponse extends Response {
 	}
 	public List<Offer> getAllOffers() {
 		List<Offer> offers = new ArrayList<Offer>();
+		
+		if ( ratingView != null) {
+			return ratingView.getAllOffers();
+		}
+		
 		for ( VehicleGroup group : groups) {
 			offers.addAll(group.getOfferList() );
 		}
 		return offers;
 	}
 	
-	@JsonProperty("filterTemplate")
+	@JsonProperty("offerFilterTemplate")
 	public OfferFilterTemplate getOfferFilterTemplate() {
 		return offerFilterTemplate;
 	}
@@ -161,6 +172,22 @@ public class VehicleResponse extends Response {
 		getSummary().setTotalQuantityOffers(getAllOffers().size());
 		getSummary().setTotalQuantityGroups(getGroups().size());
 		
+	}
+
+	public List<Offer> getRecommendations() {
+		return recommendations;
+	}
+
+	public void setRecommendations(List<Offer> recommendations) {
+		this.recommendations = recommendations;
+	}
+
+	public RatingView getRatingView() {
+		return ratingView;
+	}
+
+	public void setRatingView(RatingView ratingView) {
+		this.ratingView = ratingView;
 	}
 
 }
