@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.preference.StringFieldEditor;
@@ -39,6 +40,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.app.taskmanager.loggingView.LogEntryDialog;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.api.VehicleHttpService;
@@ -91,6 +93,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 	private Text contact = null;
 
+	private Text offerFilterTemlate = null;
+	
 	private Text requestId = null;
 
 	private Button buttonOfferTest = null;
@@ -148,8 +152,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 		// Result - Group
 		Composite groupResult = createResultComposite(composite);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
-				.grab(false, false).span(4, 1).applyTo(groupResult);
+		
 
 		final Group groupOffers = new Group(composite, SWT.TITLE);
 		groupOffers.setText("Ofers:");
@@ -351,15 +354,14 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		return bComposite;
 	}
 
-	private Composite createResultComposite(Composite composite) {
+	private Composite createResultComposite(final Composite composite) {
 
 		GridData gdFirm = new GridData();
-		// gdFirm.grabExcessHorizontalSpace = true;
-		// gdFirm.horizontalAlignment = SWT.FILL;
 
 		final Group groupResult = new Group(composite, SWT.TITLE);
 		groupResult.setText("Result:");
 		groupResult.setLayout(new GridLayout(4, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).span(4, 1).applyTo(groupResult);
 
 		new Label(groupResult, SWT.NONE).setText("Page");
 		pageInfo = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
@@ -422,6 +424,30 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		contact = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.grab(true, false).span(3, 1).applyTo(contact);
+
+		new Label(groupResult, SWT.NONE).setText("offerFilterTemplate");
+		offerFilterTemlate = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+				.hint(800, 16).grab(false, false).span(2, 1).applyTo(offerFilterTemlate);
+		
+		Button showFilter = new Button(groupResult, SWT.PUSH | SWT.LEFT);
+		showFilter.setText("show Filter");
+		showFilter.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				OfferFilterDialog mpd = new OfferFilterDialog(composite.getShell());
+				if (mpd.open() == Dialog.OK) {
+					
+				}
+				
+			}
+		});
+
 
 		return groupResult;
 	}
@@ -927,6 +953,10 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		setSummary(response.getSummary());
 
 		contact.setText(" get Contact from respnse");
+		
+		String offerFilter = response.getOfferFilterTemplate().toString();
+		
+		offerFilterTemlate.setText(offerFilter);
 
 		// Table
 		SunnyModelProvider.INSTANCE.updateOffers(response);
