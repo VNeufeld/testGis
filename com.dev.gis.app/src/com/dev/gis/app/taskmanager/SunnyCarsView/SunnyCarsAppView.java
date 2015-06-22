@@ -100,6 +100,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	private Button buttonOfferTest = null;
 
 	private Button buttonGetOffer = null;
+	
+	private int pageNo = 0;
 
 	private static TravelInformation travelInformation;
 
@@ -215,6 +217,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				if (response != null) {
 
 					showVehicleResponse(response);
+					
+					pageNo = 0;
 					
 
 				}
@@ -388,7 +392,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				VehicleHttpService service = serviceFactory
 						.getVehicleJoiService();
 				
-				VehicleResponse response = service.getPage(2);
+				pageNo++;
+				VehicleResponse response = service.getPage(pageNo);
 				
 				showVehicleResponse(response);
 
@@ -954,9 +959,11 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 		contact.setText(" get Contact from respnse");
 		
-		String offerFilter = response.getOfferFilterTemplate().toString();
-		
-		offerFilterTemlate.setText(offerFilter);
+		if (response.getOfferFilterTemplate() != null) {
+			String offerFilter = response.getOfferFilterTemplate().toString();
+			
+			offerFilterTemlate.setText(offerFilter);
+		}
 
 		// Table
 		SunnyModelProvider.INSTANCE.updateOffers(response);

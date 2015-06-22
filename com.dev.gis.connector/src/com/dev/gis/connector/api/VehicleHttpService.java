@@ -30,8 +30,8 @@ import com.dev.gis.connector.sunny.VehicleResponse;
 public class VehicleHttpService {
 	private static Logger logger = Logger.getLogger(VehicleHttpService.class);
 
-	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?&ratingView&sort=asc&pageSize=";
-	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/browsePage?&page=";
+	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?&ratingView=1&sort=asc&pageSize=";
+	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
 	
 	private static String varPayerId = "G53SL5V9APQV2";
 	

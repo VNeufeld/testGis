@@ -160,6 +160,8 @@ private Station findStation(long pickUpStationId, VehicleResponse response) {
 		recommendations.clear();
 			
 		List<Offer> results = response.getRecommendations();
+		if ( results == null)
+			return;
 		
 		for ( Offer offer : results) {
 			Vehicle vh = foundVehicle(offer.getVehicleId(),response.getVehicles());

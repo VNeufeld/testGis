@@ -46,9 +46,12 @@ public class SunnyOfferDo extends  Offer {
 		this.setServiceCatalogCode(offer.getServiceCatalogCode());
 		this.setServiceCatalogId(offer.getServiceCatalogId());
 		
-		for ( Inclusive incl : offer.getInclusives()) {
-			if ( incl.getItemClassCode().equals("MIL")) {
-				inclusiveKm = incl.getDescription();
+		if ( offer.getInclusives() != null) {
+			for ( Inclusive incl : offer.getInclusives()) {
+				
+				if ( "MIL".equals(incl.getItemClassCode())) {
+					inclusiveKm = incl.getDescription();
+				}
 			}
 		}
 		if ( vh != null)
