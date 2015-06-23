@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -61,7 +63,9 @@ public class Offer extends Response {
 	
 	private Long   carCategoryId;
 	
-	//private SupplierCoditions supplierCoditions = new SupplierCoditions();
+	private SupplierCoditions supplierCoditions = new SupplierCoditions();
+	
+	private URI supplierConditionsUrl;
 	
 	private Upsell  upsell;
 	
@@ -338,4 +342,24 @@ public class Offer extends Response {
 		this.rating = rating;
 	}
 
+	@XmlTransient
+	public SupplierCoditions getSupplierCoditions() {
+		return supplierCoditions;
+	}
+
+	public void setSupplierCoditions(List<Pair<String, String>> supplierConditions) {
+		supplierCoditions.setSupplierConditions(supplierConditions);
+		if ( supplierConditionsUrl != null) {
+			supplierCoditions.setSupplierConditionsUrl(supplierConditionsUrl);
+		}
+	}
+	@XmlTransient
+	public URI getSupplierConditionsUrl() {
+		return supplierConditionsUrl;
+	}
+
+	public void setSupplierConditionsUrl(URI supplierConditionsUrl) {
+		this.supplierConditionsUrl = supplierConditionsUrl;
+	}
+	
 }

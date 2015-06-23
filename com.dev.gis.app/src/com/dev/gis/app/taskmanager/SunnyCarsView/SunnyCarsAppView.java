@@ -957,7 +957,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 		setSummary(response.getSummary());
 
-		contact.setText(" get Contact from respnse");
+		contact.setText(" get Contact from response");
 		
 		if (response.getOfferFilterTemplate() != null) {
 			String offerFilter = response.getOfferFilterTemplate().toString();
