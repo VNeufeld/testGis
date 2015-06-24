@@ -1,5 +1,8 @@
 package com.dev.gis.connector.sunny;
 
+import java.util.Calendar;
+
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -50,6 +53,22 @@ public class DayAndHour extends BasicProtocol {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+	
+	public Calendar toCalendar() {
+		Calendar cal = Calendar.getInstance();
+		if ( this.date != null && this.date.length() == 10) {
+			DateTime s = dateFormatter.parseDateTime(date);
+			cal.set(s.getYear(), s.getMonthOfYear()-1, s.getDayOfMonth());
+		}
+
+		if ( this.time != null && this.time.length() == 5) {
+			DateTime s = timeFormatter.parseDateTime(time);
+			cal.set(Calendar.HOUR, s.getHourOfDay());
+			cal.set(Calendar.MINUTE, s.getMinuteOfHour());
+			cal.set(Calendar.SECOND,0);
+		}
+		return cal;
 	}
 
 	@Override

@@ -82,7 +82,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	private TableViewer recommendationTable;
 
 	private Text pageInfo = null;
-
+	
 	private Text summary = null;
 
 	private Text sessionId = null;
@@ -166,7 +166,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		createViewer(groupOffers);
 
 		final Group groupRecomm = new Group(composite, SWT.TITLE);
-		groupRecomm.setText("Recmmendations:");
+		groupRecomm.setText("Recommendations:");
 		groupRecomm.setLayout(new GridLayout(1, false));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, true).applyTo(groupRecomm);
@@ -198,7 +198,14 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 						serverUrl.getText());
 				TaskProperties.getTaskProperties().setOperator(
 						Long.valueOf(operator.getText()));
+
+				TaskProperties.getTaskProperties().setAptCode(aptText.getText());
+				
+				savePropertyDates();
+
 				TaskProperties.getTaskProperties().saveProperty();
+				
+				
 
 				VehicleRequest request = createVehicleRequest();
 
@@ -299,6 +306,40 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 	}
 
+	protected void savePropertyDates() {
+		
+		String sday = String.format("%4d-%02d-%02d",
+				pickupDate.getYear(), pickupDate.getMonth() + 1,
+				pickupDate.getDay());
+		String sTime = String.format("%02d:%02d",
+				pickupTime.getHours(), pickupTime.getMinutes());
+
+		
+		DayAndHour dh = new DayAndHour();
+		dh.setDate(sday);
+		dh.setTime(sTime);
+		
+		TaskProperties.getTaskProperties().setPickupDate(dh);
+		
+
+		sday = String.format("%4d-%02d-%02d",
+				dropOffDate.getYear(), dropOffDate.getMonth() + 1,
+				dropOffDate.getDay());
+		sTime = String.format("%02d:%02d",
+				dropOffTime.getHours(), dropOffTime.getMinutes());
+
+		
+		dh = new DayAndHour();
+		dh.setDate(sday);
+		dh.setTime(sTime);
+		
+		TaskProperties.getTaskProperties().setDropoffDate(dh);
+		
+		
+		
+		
+	}
+
 	private void createRecommendations(Composite parent) {
 
 		recommendationTable = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
@@ -357,23 +398,17 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 		return bComposite;
 	}
-
-	private Composite createResultComposite(final Composite composite) {
-
-		GridData gdFirm = new GridData();
-
-		final Group groupResult = new Group(composite, SWT.TITLE);
-		groupResult.setText("Result:");
-		groupResult.setLayout(new GridLayout(4, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).span(4, 1).applyTo(groupResult);
-
+	
+	private void createNextPage(final Composite groupResult) {
+		
 		new Label(groupResult, SWT.NONE).setText("Page");
-		pageInfo = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.CENTER)
-				.hint(300, 16).grab(false, false).span(2, 1).applyTo(pageInfo);
-
+		pageInfo =  new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+				.hint(800, 16).grab(false, false).span(2, 1).applyTo(pageInfo);
+		
 		Button nextPage = new Button(groupResult, SWT.PUSH | SWT.LEFT);
 		nextPage.setText("next page");
+		
 		nextPage.addSelectionListener(new SelectionListener() {
 
 			@Override
@@ -401,6 +436,64 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				
 			}
 		});
+
+	}
+	
+	private void createBrowseFilterPage(final Composite groupResult) {
+		
+		new Label(groupResult, SWT.NONE).setText("BrowseFilter");
+		final Text browseFilter =  new Text(groupResult, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+				.hint(800, 16).grab(false, false).span(2, 1).applyTo(browseFilter);
+		
+		Button nextPage = new Button(groupResult, SWT.PUSH | SWT.LEFT);
+		nextPage.setText("browse filter page");
+		
+		
+		nextPage.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				 getNextPage();
+			}
+
+			private void getNextPage() {
+
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+
+				VehicleHttpService service = serviceFactory
+						.getVehicleJoiService();
+				
+				int pageSizeInt = 3;
+				if ( pageSize.getText() != null )
+					pageSizeInt = Integer.valueOf(pageSize.getText());
+				
+				VehicleResponse response = service.getBrowsePage(browseFilter.getText(),pageNo,pageSizeInt);
+				
+				showVehicleResponse(response);
+				
+			}
+		});
+
+	}
+	
+
+	private Composite createResultComposite(final Composite composite) {
+
+		GridData gdFirm = new GridData();
+
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Result:");
+		groupResult.setLayout(new GridLayout(4, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).span(4, 1).applyTo(groupResult);
+
+		createNextPage(groupResult);
+		
+		createBrowseFilterPage(groupResult);
 
 		new Label(groupResult, SWT.NONE).setText("Summary");
 
@@ -482,8 +575,18 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		new Label(composite, SWT.NONE).setText(label);
 
 		pickupDate = createDateControl(composite);
-
 		pickupTime = createTimeControl(composite);
+		
+		DayAndHour dh = TaskProperties.getTaskProperties().getPickupDate();
+		if ( dh != null) {
+			Calendar cal = dh.toCalendar();
+			pickupDate.setYear(cal.get(Calendar.YEAR));
+			pickupDate.setMonth(cal.get(Calendar.MONTH));
+			pickupDate.setDay(cal.get(Calendar.DAY_OF_MONTH));
+			
+			pickupTime.setHours(cal.get(Calendar.HOUR_OF_DAY));
+			pickupTime.setMinutes(cal.get(Calendar.MINUTE));
+		}
 
 	}
 
@@ -499,12 +602,22 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		dropOffDate = createDateControl(composite);
 
 		dropOffTime = createTimeControl(composite);
+		
+		DayAndHour dh = TaskProperties.getTaskProperties().getDropoffDate();
+		if ( dh != null) {
+			Calendar cal = dh.toCalendar();
+			dropOffDate.setYear(cal.get(Calendar.YEAR));
+			dropOffDate.setMonth(cal.get(Calendar.MONTH));
+			dropOffDate.setDay(cal.get(Calendar.DAY_OF_MONTH));
+			
+			dropOffTime.setHours(cal.get(Calendar.HOUR_OF_DAY));
+			dropOffTime.setMinutes(cal.get(Calendar.MINUTE));
+		}
+		
 
 	}
 
 	private DateTime createTimeControl(Composite composite) {
-
-		final Calendar resultDate = Calendar.getInstance();
 
 		GridData gridData = new GridData();
 		gridData.horizontalSpan = 2;
@@ -601,9 +714,11 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 						.getSelection();
 				Object selectedNode = thisSelection.getFirstElement();
 
-				SunnyOfferDo offer = (SunnyOfferDo) selectedNode;
-
-				offerId.setText(offer.getId().toString());
+				if ( selectedNode != null ) {
+					SunnyOfferDo offer = (SunnyOfferDo) selectedNode;
+					if ( offer != null )
+						offerId.setText(offer.getId().toString());
+				}
 
 			}
 		});
@@ -767,12 +882,6 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		viewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(menuMgr, viewer);
 
-	}
-
-	private void span(Composite parent, int x) {
-		GridDataFactory.fillDefaults().span(x, 1)
-				.align(SWT.FILL, SWT.BEGINNING).grab(true, false)
-				.applyTo(parent);
 	}
 
 	private Text createServer(Group groupStamp) {
@@ -945,6 +1054,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				this.serverUrl, this.operator, this.languageList, composite
 						.getShell(), aptText));
 
+		aptText.setText(TaskProperties.getTaskProperties().getAptCode());
 		return aptText;
 	}
 	

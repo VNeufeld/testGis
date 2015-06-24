@@ -1,11 +1,13 @@
 package com.dev.gis.connector.api;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
@@ -20,6 +22,7 @@ import com.dev.gis.connector.sunny.Agency;
 import com.dev.gis.connector.sunny.Customer;
 import com.dev.gis.connector.sunny.Extra;
 import com.dev.gis.connector.sunny.Offer;
+import com.dev.gis.connector.sunny.OfferFilter;
 import com.dev.gis.connector.sunny.OfferInformation;
 import com.dev.gis.connector.sunny.Person;
 import com.dev.gis.connector.sunny.PhoneNumber;
@@ -30,8 +33,12 @@ import com.dev.gis.connector.sunny.VehicleResponse;
 public class VehicleHttpService {
 	private static Logger logger = Logger.getLogger(VehicleHttpService.class);
 
+	
 	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?&ratingView=1&sort=asc&pageSize=";
 	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
+	public static String SUNNY_BROWSE_REQUEST_PARAM = "/request/browse?";
+	
+	
 	
 	private static String varPayerId = "G53SL5V9APQV2";
 	
@@ -497,5 +504,43 @@ public class VehicleHttpService {
 		}
 		return null;
 
+	}
+
+	// http://localhost:8080/sunny-joi/joi/request/browse?page=2&pageSize=5&sort=desc
+
+	public VehicleResponse getBrowsePage(String browseFilter, int pageNo, int pageSize) {
+		try {
+			
+			String params = SUNNY_BROWSE_REQUEST_PARAM;
+			params = params+"page="+pageNo;
+			params = params+"&pageSize="+pageSize;
+			params = params+"&sort="+"desc";
+			
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
+					params);
+			
+			logger.info("VehicleHttpService = "+uri.toString());
+			
+			OfferFilter offerFilter = new OfferFilter();
+			offerFilter.setMaxPrice(BigDecimal.valueOf(500));
+
+			String request = JsonUtils.convertRequestToJsonString(offerFilter);
+			logger.info("request = "+request);
+			
+			String response = null;
+			
+			response =  httpClient.startPostRequestAsJson(uri, request);
+			
+			logger.info("response = "+response);
+			
+			if (response != null ) 
+				return JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e.getMessage(),e);
+		} catch (URISyntaxException e) {
+			logger.error(e);
+		}
+		return null;
 	}
 }

@@ -9,7 +9,7 @@ public class OfferInformation {
 	
 	private Offer offer;
 
-	private SupplierCoditions supplierCoditions;
+	private SupplierCoditions supplierConditions;
 	
 	public OfferInformation() {
 	}
@@ -22,8 +22,8 @@ public class OfferInformation {
 		return offer;
 	}
 	
-	@JsonProperty("supplierCoditions")
-	public SupplierCoditions getSupplierCoditions() {
+	@JsonProperty("supplierConditions")
+	public SupplierCoditions getSupplierConditions() {
 		return offer.getSupplierCoditions();
 	}
 

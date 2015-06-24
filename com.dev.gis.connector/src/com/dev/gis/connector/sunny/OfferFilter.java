@@ -1,12 +1,15 @@
 package com.dev.gis.connector.sunny;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OfferFilter {
 	private BigDecimal minPrice;
 	private BigDecimal maxPrice;
 	private String[] stationLocTypeCodes;
-	private String[] fuelPolicy;
+	// instead off fuelPolicy use inclusivesFilter
+	//private String[] fuelPolicy;
 	private Long[] fuelTypes;
 	private Long[] bodyStyles;
 	private Boolean aircondition;
@@ -15,6 +18,9 @@ public class OfferFilter {
 	private Long carGroupId;
 	private Long commissionTypeId;
 	private Long serviceCatalogId;
+	
+	private Map<String,String[]> inclusivesFilter = new HashMap<String,String[]>();
+	
 	
 	public BigDecimal getMinPrice() {
 		return minPrice;
@@ -65,12 +71,6 @@ public class OfferFilter {
 	public void setFuelTypes(Long[] fuelTypes) {
 		this.fuelTypes = fuelTypes;
 	}
-	public String[] getFuelPolicy() {
-		return fuelPolicy;
-	}
-	public void setFuelPolicy(String[] fuelPolicy) {
-		this.fuelPolicy = fuelPolicy;
-	}
 	public Long getCommissionTypeId() {
 		return commissionTypeId;
 	}
@@ -88,6 +88,9 @@ public class OfferFilter {
 	}
 	public void setServiceCatalogId(Long serviceCatalogId) {
 		this.serviceCatalogId = serviceCatalogId;
+	}
+	public Map<String, String[]> getInclusivesFilter() {
+		return inclusivesFilter;
 	}
 	
 
