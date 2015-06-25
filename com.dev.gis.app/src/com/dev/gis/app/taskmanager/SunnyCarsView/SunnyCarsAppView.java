@@ -44,6 +44,7 @@ import com.dev.gis.app.taskmanager.loggingView.LogEntryDialog;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.api.VehicleHttpService;
+import com.dev.gis.connector.sunny.Agency;
 import com.dev.gis.connector.sunny.DayAndHour;
 import com.dev.gis.connector.sunny.Location;
 import com.dev.gis.connector.sunny.OfferInformation;
@@ -65,6 +66,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	private Text serverUrl;
 	private Text operator;
 
+	private Text agencyNo;
+	
 	private Combo languageList;
 
 	Calendar checkInDate = Calendar.getInstance();
@@ -126,6 +129,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		serverUrl = createServer(groupStamp);
 
 		operator = createOperator(groupStamp);
+		
+		agencyNo = createAgencyNo(groupStamp);
 
 		languageList = createLanguageList(groupStamp);
 
@@ -199,6 +204,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				TaskProperties.getTaskProperties().setOperator(
 						Long.valueOf(operator.getText()));
 
+				TaskProperties.getTaskProperties().setAgencyNo(agencyNo.getText());
+				
 				TaskProperties.getTaskProperties().setAptCode(aptText.getText());
 				
 				savePropertyDates();
@@ -208,6 +215,10 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				
 
 				VehicleRequest request = createVehicleRequest();
+				
+				Agency agency = new Agency();
+				agency.setAgencyNo(agencyNo.getText());
+				request.setAgency(agency);
 
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				VehicleHttpService service = serviceFactory
@@ -991,9 +1002,38 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 				.getOperator()));
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
 				.grab(false, false).span(1, 1).hint(100, 16).applyTo(operator);
+		
+
 
 		return operator;
 	}
+	
+	private Text createAgencyNo(Group groupStamp) {
+		GridData gdComposite1 = new GridData();
+		gdComposite1.grabExcessHorizontalSpace = true;
+		gdComposite1.grabExcessVerticalSpace = false;
+		gdComposite1.horizontalAlignment = SWT.FILL;
+		gdComposite1.verticalAlignment = SWT.FILL;
+		gdComposite1.widthHint = 550;
+		gdComposite1.horizontalSpan = 3;
+
+		new Label(groupStamp, SWT.NONE).setText("AgencyNo");
+
+		Composite composite = new Composite(groupStamp, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
+		composite.setLayoutData(gdComposite1);
+
+		final Text agencyNo = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		agencyNo.setText(String.valueOf(TaskProperties.getTaskProperties()
+				.getAgencyNo()));
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+				.grab(false, false).span(1, 1).hint(100, 16).applyTo(agencyNo);
+		
+
+
+		return agencyNo;
+	}
+	
 
 	private Text createCityText(final Group groupStamp) {
 

@@ -10,10 +10,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="offer")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Offer extends BasicProtocol {
 	
 	private final static int MAX_INCLUSIVES = 10;

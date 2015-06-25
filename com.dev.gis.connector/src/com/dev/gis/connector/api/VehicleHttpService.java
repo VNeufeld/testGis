@@ -60,10 +60,6 @@ public class VehicleHttpService {
 			
 			Administration admin = createAdministrator();
 			
-			Agency agency = new Agency();
-			agency.setAgencyId(Long.valueOf(28));
-			vehicleRequest.setAgency(agency);
-
 			vehicleRequest.setAdministration(admin);
 
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);

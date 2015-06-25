@@ -14,6 +14,7 @@ public class TaskProperties {
 	private static final String PREFERENCE_APTCODE_PROPERTY = "APTCODE_PROPERTY";
 	private static final String PREFERENCE_PICKUPDATE_PROPERTY = "PICKUPDATE_PROPERTY";
 	private static final String PREFERENCE_DROPOFFDATE_PROPERTY = "DROPOFFDATE_PROPERTY";
+	private static final String PREFERENCE_AGENCY_PROPERTY = "AGENCY_PROPERTY";
 	
 	private static String PREFERENCE_PATH = "TASK_PREFERENCE";
 	public static String VEHICLE_REQUEST_PARAM = "/vehicleRequest?pageSize=200";
@@ -32,6 +33,8 @@ public class TaskProperties {
 	
 	private String serverProperty;
 	private Long   operator = 152573l;
+	private String agencyNo = "10002";
+	
 	private int   language = 2;
 	private boolean  useDummy = false;
 	private String aptCode="PMI";
@@ -70,6 +73,7 @@ public class TaskProperties {
 		preferences.put(PREFERENCE_APTCODE_PROPERTY, aptCode);
 		preferences.put(PREFERENCE_PICKUPDATE_PROPERTY, pickupDate);
 		preferences.put(PREFERENCE_DROPOFFDATE_PROPERTY, dropoffDate);
+		preferences.put(PREFERENCE_AGENCY_PROPERTY, agencyNo);
 
 		try {
 			preferences.flush();
@@ -88,6 +92,8 @@ public class TaskProperties {
 		aptCode = preferences.get(PREFERENCE_APTCODE_PROPERTY, aptCode);
 		pickupDate = preferences.get(PREFERENCE_PICKUPDATE_PROPERTY, pickupDate);
 		dropoffDate = preferences.get(PREFERENCE_DROPOFFDATE_PROPERTY, dropoffDate);
+		agencyNo = preferences.get(PREFERENCE_AGENCY_PROPERTY, agencyNo);
+
 		
 
 	}
@@ -144,6 +150,14 @@ public class TaskProperties {
 		if ( parts.length > 1)
 			dh.setTime(parts[1]);
 		return dh;
+	}
+
+	public String getAgencyNo() {
+		return agencyNo;
+	}
+
+	public void setAgencyNo(String agencyNo) {
+		this.agencyNo = agencyNo;
 	}
 	
 

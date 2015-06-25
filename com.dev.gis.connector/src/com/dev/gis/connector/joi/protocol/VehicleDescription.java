@@ -37,7 +37,7 @@ public class VehicleDescription extends BasicProtocol {
 
 	private String licenseMinTime;
 
-	private List<String> loadInformation;
+	private String loadInformation;
 	
 	private List<String> cargoInformation;
 
@@ -117,7 +117,7 @@ public class VehicleDescription extends BasicProtocol {
 	}
 
 	@XmlElement(required=false)
-	public List<String> getLoadInformation() {
+	public String getLoadInformation() {
 		return loadInformation;
 	}
 
@@ -234,7 +234,7 @@ public class VehicleDescription extends BasicProtocol {
 		this.licenseMinTime = licenseMinTime;
 	}
 
-	public void setLoadInformation(List<String> loadInformation) {
+	public void setLoadInformation(String loadInformation) {
 		this.loadInformation = loadInformation;
 	}
 
