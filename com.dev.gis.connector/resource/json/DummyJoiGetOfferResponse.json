@@ -136,7 +136,7 @@
 		"commissionType": "1",
 		"carUsedPromotion": "0",
 		"carCategoryId": 1,
-		"supplierCoditions": {
+		"supplierConditions": {
 			"supplierConditions": []
 		},
 		"upsell": null,

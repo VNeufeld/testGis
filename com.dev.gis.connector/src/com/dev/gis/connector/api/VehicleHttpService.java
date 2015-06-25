@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Text;
 
@@ -26,6 +28,8 @@ import com.dev.gis.connector.sunny.OfferFilter;
 import com.dev.gis.connector.sunny.OfferInformation;
 import com.dev.gis.connector.sunny.Person;
 import com.dev.gis.connector.sunny.PhoneNumber;
+import com.dev.gis.connector.sunny.Station;
+import com.dev.gis.connector.sunny.StationResponse;
 import com.dev.gis.connector.sunny.TravelInformation;
 import com.dev.gis.connector.sunny.VehicleRequest;
 import com.dev.gis.connector.sunny.VehicleResponse;
@@ -37,6 +41,7 @@ public class VehicleHttpService {
 	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?&ratingView=1&sort=asc&pageSize=";
 	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
 	public static String SUNNY_BROWSE_REQUEST_PARAM = "/request/browse?";
+	public static String SUNNY_GET_PICKUP_STATIONS = "/request/pickupstations?";
 	
 	
 	
@@ -539,4 +544,52 @@ public class VehicleHttpService {
 		}
 		return null;
 	}
+	
+	public StationResponse getPickupStations(int type, String location, String offerId) {
+		try {
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( dummy ) {
+				StationResponse stationResponse = new StationResponse();
+				Station st = new Station(1234);
+				st.setIdentifier("München");
+				stationResponse.getStations().add(st);
+
+				st = new Station(9876);
+				st.setIdentifier("Tomsk");
+				stationResponse.getStations().add(st);
+				
+				return stationResponse;
+			}
+
+			String params = SUNNY_GET_PICKUP_STATIONS;
+			
+			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
+					params);
+			String query = "offerId="+offerId;
+			query +="&type="+type;
+			query +="&location="+location;
+			URIBuilder uriBuilder = new URIBuilder(uri);
+			uriBuilder.setQuery(query);
+			
+			uri = uriBuilder.build();
+			
+			logger.info("VehicleHttpService = "+uri.toString());
+			
+			String response = null;
+			
+			response =  httpClient.sendGetRequest(uri);
+			
+			logger.info("response = "+response);
+			
+			if (response != null ) 
+				return JsonUtils.createResponseClassFromJson(response, StationResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e.getMessage(),e);
+		} catch (URISyntaxException e) {
+			logger.error(e);
+		}
+		return null;
+	}
+	
 }

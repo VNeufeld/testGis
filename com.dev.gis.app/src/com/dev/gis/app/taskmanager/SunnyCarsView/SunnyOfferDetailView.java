@@ -3,8 +3,10 @@ package com.dev.gis.app.taskmanager.SunnyCarsView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -29,6 +31,7 @@ import com.dev.gis.connector.sunny.Address;
 import com.dev.gis.connector.sunny.Extra;
 import com.dev.gis.connector.sunny.Inclusive;
 import com.dev.gis.connector.sunny.Offer;
+import com.dev.gis.connector.sunny.Station;
 import com.dev.gis.connector.sunny.TravelInformation;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.ModelProvider;
@@ -52,6 +55,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	private TableViewer tableInclusives;
 
 	private Offer selectedOffer = null;
+	
+	private UUID offerId;
 
 	private TravelInformation travelInformation;
 
@@ -200,13 +205,22 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	}
 
 	protected class AddPickupStationsListener extends AbstractListener{
-
+		private final Composite parent;
 	
+		public AddPickupStationsListener(Composite parent) {
+			this.parent = parent;
+		}
+
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			pickupStationsResponse.setText("running....");
-//			String response = JoiVehicleConnector.getPickupStations(selectedOffer);
-//			pickupStationsResponse.setText(response);
+				
+			SelectPickupStationDialog mpd = new SelectPickupStationDialog(parent.getShell(), offerId.toString());
+			if (mpd.open() == Dialog.OK) {
+				Station st = mpd.getSelectedStation();
+				if ( st != null)
+					pickupStationsResponse.setText(st.getIdentifier());
+			}
 		}
 
 	}
@@ -214,7 +228,14 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	private Composite createRequestButtons(final Composite parent) {
 		
 		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(composite);
+		GridLayoutFactory.fillDefaults().numColumns(4).equalWidth(false).applyTo(composite);
+
+		final Button buttonGetPickupStations = new Button(composite, SWT.PUSH | SWT.LEFT);
+		buttonGetPickupStations.setText("Get PickupStations");
+		buttonGetPickupStations.addSelectionListener(new AddPickupStationsListener(parent));
+				
+		pickupStationsResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(pickupStationsResponse);
 		
 		final Button buttonRecalculate = new Button(composite, SWT.PUSH | SWT.LEFT);
 		buttonRecalculate.setText("POST Recalculate");
@@ -224,12 +245,6 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		recalculateResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(recalculateResponse);
 		
-		final Button buttonGetPickupStations = new Button(composite, SWT.PUSH | SWT.LEFT);
-		buttonGetPickupStations.setText("Get PickupStations");
-		buttonGetPickupStations.addSelectionListener(new AddPickupStationsListener());
-				
-		pickupStationsResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(pickupStationsResponse);
 		
 		return composite;
 
@@ -273,6 +288,9 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	}
 
 	public void showOffer(SunnyOfferDo offer) {
+		
+		offerId = offer.getId();
+		
 		textOfferLink.setText(offer.getBookLink().toString());
 
 		priceText.setText(offer.getPrice().toString());

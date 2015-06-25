@@ -20,6 +20,7 @@ public enum SunnyModelProvider {
 
 	private List<Inclusive> inclusives = new ArrayList<Inclusive>();
 	
+	private List<Station> pickupStations = new ArrayList<Station>();
 	
 	private Person driver;
 
@@ -177,6 +178,17 @@ private Station findStation(long pickUpStationId, VehicleResponse response) {
 
 	public List<SunnyOfferDo> getRecommendations() {
 		return recommendations;
+	}
+
+	public void updateickupStations(StationResponse response) {
+		this.pickupStations.clear();
+		if ( response.getStations() != null)
+			this.pickupStations.addAll(response.getStations());
+		
+	}
+
+	public List<Station> getPickupStations() {
+		return pickupStations;
 	}
 
 }
