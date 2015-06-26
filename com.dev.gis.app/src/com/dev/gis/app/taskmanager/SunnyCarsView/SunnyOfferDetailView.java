@@ -68,6 +68,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 	private Text pickupStationsResponse;
 
+	private Text dropOffStationsResponse;
+	
 	private Text recalculateResponse;
 
 	@Override
@@ -219,16 +221,37 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 			if (mpd.open() == Dialog.OK) {
 				Station st = mpd.getSelectedStation();
 				if ( st != null)
-					pickupStationsResponse.setText(st.getIdentifier());
+					pickupStationsResponse.setText(st.getId()+ " "+st.getIdentifier());
+			}
+		}
+	}
+	
+	protected class AddDrooffStationsListener extends AbstractListener{
+		private final Composite parent;
+	
+		public AddDrooffStationsListener(Composite parent) {
+			this.parent = parent;
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			dropOffStationsResponse.setText("running....");
+				
+			SelectDropoffStationDialog mpd = new SelectDropoffStationDialog(parent.getShell(), offerId.toString());
+			if (mpd.open() == Dialog.OK) {
+				Station st = mpd.getSelectedStation();
+				if ( st != null)
+					dropOffStationsResponse.setText(st.getId()+ " "+st.getIdentifier());
 			}
 		}
 
 	}
 	
+	
 	private Composite createRequestButtons(final Composite parent) {
 		
 		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(4).equalWidth(false).applyTo(composite);
+		GridLayoutFactory.fillDefaults().numColumns(6).equalWidth(false).applyTo(composite);
 
 		final Button buttonGetPickupStations = new Button(composite, SWT.PUSH | SWT.LEFT);
 		buttonGetPickupStations.setText("Get PickupStations");
@@ -236,6 +259,14 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 				
 		pickupStationsResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(pickupStationsResponse);
+		
+
+		final Button buttonGetDropOffStations = new Button(composite, SWT.PUSH | SWT.LEFT);
+		buttonGetDropOffStations.setText("Get DropoffStations");
+		buttonGetDropOffStations.addSelectionListener(new AddDrooffStationsListener(parent));
+
+		dropOffStationsResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dropOffStationsResponse);
 		
 		final Button buttonRecalculate = new Button(composite, SWT.PUSH | SWT.LEFT);
 		buttonRecalculate.setText("POST Recalculate");

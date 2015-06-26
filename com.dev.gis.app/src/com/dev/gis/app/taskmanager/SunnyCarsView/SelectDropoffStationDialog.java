@@ -32,7 +32,7 @@ import com.dev.gis.connector.sunny.Station;
 import com.dev.gis.connector.sunny.StationResponse;
 import com.dev.gis.task.execution.api.SunnyModelProvider;
 
-public class SelectPickupStationDialog extends Dialog {
+public class SelectDropoffStationDialog extends Dialog {
 
 	private TableViewer tableStations;
 	private final String offerId;
@@ -40,7 +40,7 @@ public class SelectPickupStationDialog extends Dialog {
 	private Station selectedStation;
 
 
-	protected SelectPickupStationDialog(Shell parentShell, String offerId) {
+	protected SelectDropoffStationDialog(Shell parentShell, String offerId) {
 		super(parentShell);
 		this.offerId = offerId;
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
@@ -59,6 +59,13 @@ public class SelectPickupStationDialog extends Dialog {
 		groupStamp.setLayout(new GridLayout(3, false));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.grab(false, false).applyTo(groupStamp);
+
+		new Label(groupStamp, SWT.NONE).setText("PickupStation ");
+		
+		final Text puStation = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		puStation.setText("");
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+				.grab(false, false).span(2, 1).hint(100, 16).applyTo(puStation);
 		
 		
 		final Combo c = new Combo(groupStamp, SWT.READ_ONLY);
@@ -77,8 +84,8 @@ public class SelectPickupStationDialog extends Dialog {
 		
 		
 		final Button buttonGetPickup = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-		buttonGetPickup.setText("Start getickupStations");
-		buttonGetPickup.addSelectionListener(new PickupStationsServiceListener(parent, c, location));
+		buttonGetPickup.setText("Start getDropoffStations");
+		buttonGetPickup.addSelectionListener(new DropoffStationsServiceListener(parent, c, location, puStation));
 
 		final Group groupStations = new Group(composite, SWT.TITLE);
 		groupStations.setText("Stations:");
@@ -162,15 +169,17 @@ public class SelectPickupStationDialog extends Dialog {
 		return viewerColumn;
 	}
 	
-	protected class PickupStationsServiceListener implements SelectionListener{
+	protected class DropoffStationsServiceListener implements SelectionListener{
 		private final Composite parent;
 		private final Combo type;
 		private final Text location;
+		private final Text puStation;
 	
-		public PickupStationsServiceListener(Composite parent, Combo c, Text location) {
+		public DropoffStationsServiceListener(Composite parent, Combo c, Text location, Text puStation) {
 			this.parent = parent;
 			this.type = c;
 			this.location = location;
+			this.puStation = puStation;
 		}
 
 		@Override
@@ -180,10 +189,10 @@ public class SelectPickupStationDialog extends Dialog {
 			VehicleHttpService service = serviceFactory
 					.getVehicleJoiService();
 
-			StationResponse response = service.getPickupStations(type.getSelectionIndex(),location.getText(), offerId);
+			StationResponse response = service.getDropOffStations(type.getSelectionIndex(),location.getText(), offerId, puStation.getText());
 			
-			SunnyModelProvider.INSTANCE.updatePickupStations(response);
-			tableStations.setInput(SunnyModelProvider.INSTANCE.getPickupStations());
+			SunnyModelProvider.INSTANCE.updateDropoffStations(response);
+			tableStations.setInput(SunnyModelProvider.INSTANCE.getDropoffStations());
 			tableStations.refresh();
 			
 			
@@ -212,10 +221,10 @@ public class SelectPickupStationDialog extends Dialog {
 	}
 	
 	private static class DoubleClickListener implements IDoubleClickListener {
-		SelectPickupStationDialog parent = null;
+		SelectDropoffStationDialog parent = null;
 
 		public DoubleClickListener(
-				SelectPickupStationDialog selectPickupStationDialog) {
+				SelectDropoffStationDialog selectPickupStationDialog) {
 			// TODO Auto-generated constructor stub
 			parent = selectPickupStationDialog;
 		}
