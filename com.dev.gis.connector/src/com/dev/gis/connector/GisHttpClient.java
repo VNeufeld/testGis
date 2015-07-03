@@ -16,6 +16,7 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.log4j.Logger;
@@ -38,13 +39,11 @@ public class GisHttpClient {
 		try {
 			
 			HttpGet httpget = new HttpGet(uri);
+			httpget.addHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));			
+			httpget.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));			
 			System.out.println("executing request " + httpget.getURI());
 
-			httpclient.getParams().setParameter(
-					CoreProtocolPNames.HTTP_CONTENT_CHARSET,CHARSET_UTF8);
-			httpclient.getParams().setParameter(
-					CoreProtocolPNames.HTTP_ELEMENT_CHARSET, CHARSET_UTF8);
-
+			
 			String response = httpclient.execute(httpget, responseHandler,
 					localContext);
 			return response;
