@@ -39,7 +39,8 @@ public class XmlUtils {
 		StringWriter writer = new StringWriter();
 
 		InputStream is = url.openStream();
-		IOUtils.copy(is, writer, "utf-8");
+		//IOUtils.copy(is, writer, "utf-8");
+		IOUtils.copy(is, writer, "cp1252");
 		return  writer.toString();
 	}
 	

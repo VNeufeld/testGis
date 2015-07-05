@@ -54,7 +54,7 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	
 	private TableViewer tableInclusives;
 
-	private Offer selectedOffer = null;
+	private SunnyOfferDo selectedOffer = null;
 	
 	private UUID offerId;
 
@@ -182,7 +182,7 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			List<Extra> extras = getSelectedExtras();
-			//BookingView.updateView(selectedOffer, extras);
+			SunnyBookingView.updateView(selectedOffer, extras);
 
 		}
 
@@ -344,8 +344,9 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 		changeModelExtras(offer);
 		
+		
 
-		//this.selectedOffer = offer.getOfferList().get(0);
+		this.selectedOffer = offer;
 
 		// vehicleResult.getSupplierId();
 		// vehicleResult.getPickUpStationId();

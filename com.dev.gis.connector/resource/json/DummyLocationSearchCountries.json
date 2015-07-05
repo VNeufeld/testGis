@@ -1,0 +1,25 @@
+{
+"nrTotalHits": 1,
+	"nrGroups": 1,
+	"groupedList": [{
+		"nr": 1,
+		"totalHits": 0,
+		"hitGroup": [
+		{
+			"identifier": "Germany",
+			"id": 5,
+			"type": "5",
+			"subResult": [],
+			"countryId": 49,
+			"country": null
+		},
+		{
+			"identifier": "USA",
+			"id": 6,
+			"type": "5"
+		}
+		
+		],
+		"type": "5"
+	}]
+	}

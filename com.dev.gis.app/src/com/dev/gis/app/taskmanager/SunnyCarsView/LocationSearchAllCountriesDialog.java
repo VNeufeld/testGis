@@ -31,24 +31,20 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.connector.api.ILocationService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
-import com.dev.gis.connector.sunny.Hit;
-import com.dev.gis.connector.sunny.HitType;
-import com.dev.gis.connector.sunny.LocationSearchResult;
+import com.dev.gis.connector.api.LocationHttpService;
+import com.dev.gis.connector.sunny.*;
 import com.dev.gis.task.execution.api.SunnyModelProvider;
 
-public class LocationSearchDialog extends Dialog {
+public class LocationSearchAllCountriesDialog extends Dialog {
 	
 	private String searchString="";
 	private Text tName;
 	private TableViewer viewer;
 	
-	private Shell parentShell;
-	
 	private Hit  result;
 
-	public LocationSearchDialog(Shell parentShell) {
+	public LocationSearchAllCountriesDialog(Shell parentShell) {
 		super(parentShell);
-		this.parentShell =parentShell;
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 	}
 
@@ -66,16 +62,13 @@ public class LocationSearchDialog extends Dialog {
 		
 		Group gGeneral = new Group(composite, SWT.TITLE);
 		gGeneral.setText("Allgemein");
-		GridLayout glGeneral = new GridLayout(8, false);
+		GridLayout glGeneral = new GridLayout(2, false);
 		gGeneral.setLayout(glGeneral);
 		
 		GridData gdGeneral = new GridData();
 		gdGeneral.horizontalAlignment = SWT.FILL;
 		gdGeneral.grabExcessHorizontalSpace = true;
 		gGeneral.setLayoutData(gdGeneral);
-		
-		Label lName = new Label(gGeneral, SWT.NONE);
-		lName.setText("search");
 		
 		
 		GridData gdName = new GridData();
@@ -92,46 +85,6 @@ public class LocationSearchDialog extends Dialog {
 				searchString = tName.getText();
 			}
 		});
-
-		new Label(gGeneral, SWT.NONE).setText("country:");
-		
-		final Text country = new Text(gGeneral, SWT.BORDER | SWT.SINGLE);
-		country.setLayoutData(gdName);
-		
-		Button countryButton = new Button(gGeneral, SWT.PUSH | SWT.CENTER | SWT.COLOR_BLUE);
-		countryButton.setText("select country");
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).applyTo(countryButton);
-		countryButton.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				LocationSearchAllCountriesDialog mpd = new LocationSearchAllCountriesDialog(parentShell);
-				
-				if (mpd.open() == Dialog.OK) {
-					if ( mpd.getResult() != null ) {
-						String id = String.valueOf(mpd.getResult().getId());
-						country.setText(id);
-					}
-						
-				}
-				
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-
-		
-		
-		
-		new Label(gGeneral, SWT.NONE).setText("filter:");
-		final Combo c = new Combo(gGeneral, SWT.READ_ONLY);
-		String items[] = { "","All", "City", "Airport","City + Airports", "Country" };
-		c.setItems(items);
-		c.select(2);
-		
 		
 		createViewer(composite);
 		
@@ -146,21 +99,10 @@ public class LocationSearchDialog extends Dialog {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				int filterIndex = c.getSelectionIndex();
-				HitType type = HitType.UNINITIALIZED;
-				if ( filterIndex == 2)
-					type = HitType.CITY;
-				if ( filterIndex == 3)
-					type = HitType.AIRPORT;
-				if ( filterIndex == 5)
-					type = HitType.COUNTRY;
-
-				if ( filterIndex == 4)
-					type = HitType.RAILWAY_STATION;
-
+		
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				ILocationService service = serviceFactory.getLocationJoiService();
-				LocationSearchResult result = service.joiLocationSearch(searchString, type, country.getText());
+				LocationSearchResult result = service.joiLocationSearch(searchString, HitType.COUNTRY, "");
 				
 				SunnyModelProvider.INSTANCE.updateHits(result);
 				
@@ -173,6 +115,13 @@ public class LocationSearchDialog extends Dialog {
 			}
 		});
 
+		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+		ILocationService service = serviceFactory.getLocationJoiService();
+		LocationSearchResult result = service.joiLocationSearch("", HitType.COUNTRY, "");
+		
+		SunnyModelProvider.INSTANCE.updateHits(result);
+		
+		viewer.refresh();
 		
 		composite.pack();
 		return composite;		
@@ -238,8 +187,8 @@ public class LocationSearchDialog extends Dialog {
 	
 	
 	private void createColumns(final Composite parent, final TableViewer viewer) {
-	    String[] titles = { "Name", "Id", "apt", "Type", "Country" };
-	    int[] bounds = { 200, 150, 150, 100, 200};
+	    String[] titles = { "Name", "Id" };
+	    int[] bounds = { 200, 150};
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -257,36 +206,6 @@ public class LocationSearchDialog extends Dialog {
 	      public String getText(Object element) {
 	    	Hit o = (Hit) element;
 	        return String.valueOf(o.getId());
-	      }
-	    });
-	    
-	    col = createTableViewerColumn(titles[2], bounds[2], 2);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	Hit o = (Hit) element;
-	        return String.valueOf(o.getAptCode());
-	      }
-	    });
-
-
-	    col = createTableViewerColumn(titles[3], bounds[3], 3);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	  Hit o = (Hit) element;
-	    	return  o.getType().name();
-	    	
-	      }
-	    });
-
-	    col = createTableViewerColumn(titles[4], bounds[4], 4);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	  Hit o = (Hit) element;
-	    	return  o.getCountry();
-	    	
 	      }
 	    });
 	    

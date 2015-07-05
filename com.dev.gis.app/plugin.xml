@@ -157,6 +157,14 @@
             name="Sunny Offer Details"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.SunnyCarsView.SunnyBookingView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.view.SunnyBookingView"
+            name="Sunny Booking Details"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

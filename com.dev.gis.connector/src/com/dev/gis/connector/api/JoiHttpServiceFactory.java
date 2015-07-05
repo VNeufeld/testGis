@@ -3,10 +3,14 @@ package com.dev.gis.connector.api;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.apache.log4j.Logger;
+
 import com.dev.gis.connector.GisHttpClient;
 
 public class JoiHttpServiceFactory {
-	
+
+	private static Logger logger = Logger.getLogger(JoiHttpServiceFactory.class);
+
 	private static GisHttpClient httpClient = null;
 	
 	private static GisHttpClient getGisHttpClientInstance() {
@@ -18,14 +22,21 @@ public class JoiHttpServiceFactory {
 	}
 
 
-	public LocationHttpService   getLocationJoiService() {
+	public ILocationService   getLocationJoiService() {
 		try {
 			Long operator = TaskProperties.getTaskProperties().getOperator();
 			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty());
-			
 			int language = TaskProperties.getTaskProperties().getLanguage();
-	
-			LocationHttpService locationHttpService = new LocationHttpService(operator,uri, language);
+			
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			ILocationService locationHttpService = null;
+			if ( dummy )
+			{
+				locationHttpService = new DummyLocationService(operator, uri, language); 
+			}
+
+			else
+				locationHttpService = new LocationHttpService(operator,uri, language);
 			
 			return locationHttpService;
 		}

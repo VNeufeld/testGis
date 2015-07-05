@@ -6,34 +6,35 @@ import java.net.URISyntaxException;
 
 import org.apache.log4j.Logger;
 
-import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
 import com.dev.gis.connector.sunny.HitType;
 import com.dev.gis.connector.sunny.LocationSearchResult;
 
-public class LocationHttpService   extends AbstractJoiService implements ILocationService{
-	private static Logger logger = Logger.getLogger(LocationHttpService.class);
-	
-	
+public class DummyLocationService extends AbstractJoiService implements ILocationService{
+	private static Logger logger = Logger.getLogger(DummyLocationService.class);
 
-	public LocationHttpService(Long operator, URI uri, int language) {
+	public DummyLocationService(Long operator, URI uri, int language) {
 		super(operator,uri, language);
-		
 	}
 
 	public LocationSearchResult joiLocationSearch(String searchString, HitType filter, String country) {
 		
-		GisHttpClient httpClient = new GisHttpClient();;
+		logger.info("executy dummy location service. search string "+searchString+ " filter = "+filter );
 
 		try {
+			
 			String query = createLocationQuery(searchString, filter, country);
 			
 			URI locationServiceUri = createUri(query);
 			logger.info("locationServiceUri = "+locationServiceUri.toString());
-
-			
-			String response =  httpClient.sendGetRequest(locationServiceUri);
-			logger.info("response = "+response);
+			String response = null;
+			// dummy
+			if ( filter == HitType.COUNTRY) {
+				response = JsonUtils.createDummyResponse("DummyLocationSearchCountries.json");
+			}
+			else
+				response = JsonUtils.createDummyResponse("DummyLocationSearchResult.json");
+			logger.info("dummy response = "+response);
 			
 			return JsonUtils.createResponseClassFromJson(response, LocationSearchResult.class);
 			
