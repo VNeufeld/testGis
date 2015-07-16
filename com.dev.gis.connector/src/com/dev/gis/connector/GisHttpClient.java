@@ -97,8 +97,8 @@ public class GisHttpClient {
 		StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
 
 		httput.setEntity(entity);
-		httput.addHeader("Accept", "application/json");
-		httput.setHeader("Content-Type", "application/json");
+		httput.addHeader("Accept", "application/json;charset=utf-8");
+		httput.setHeader("Content-Type", "application/json;charset=utf-8");
 
 		String response = httpclient.execute(httput, responseHandler,
 				localContext);

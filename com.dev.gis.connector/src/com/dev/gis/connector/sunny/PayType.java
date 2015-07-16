@@ -28,9 +28,9 @@ public enum PayType {
 	public static PayType parseString(String value) {
 
 		try {
-			if (value.equals("PAY_ON_ARRIVAL") )
+			if (value.equals("2") )
 				return PAY_ON_ARRIVAL;
-			else if (value.equals("PREPAID") )
+			else if (value.equals("1") )
 				return PREPAID;
 			return PAY_ON_ARRIVAL;
 		} catch (Exception e) {

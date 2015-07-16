@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.SunnyCarsView;
 
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -751,9 +752,9 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			VehicleHttpService service = serviceFactory.getVehicleJoiService();
+			
 
-			OfferInformation offerInformation = service.selectOffer(offer
-					.getLink());
+			OfferInformation offerInformation = service.selectOffer(offer.getLink());
 			if (offerInformation != null)
 				offer.addOfferInformation(offerInformation);
 

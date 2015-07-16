@@ -18,7 +18,7 @@ public class TaskProperties {
 	
 	private static String PREFERENCE_PATH = "TASK_PREFERENCE";
 	public static String VEHICLE_REQUEST_PARAM = "/vehicleRequest?pageSize=200";
-	public static String LANGUAGE_CODE = "de-DE";
+	public static String LANGUAGE_CODE = "EN";
 	public static Integer SALES_CHANNEL = 7;
 	public static Integer CALLED_FROM = 9;
 	

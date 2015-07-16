@@ -1,9 +1,11 @@
 package com.dev.gis.app.taskmanager.SunnyCarsView;
 
+import java.net.URI;
 import java.util.Calendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -24,10 +26,11 @@ import org.eclipse.ui.PlatformUI;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.VehicleHttpService;
-import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
+import com.dev.gis.connector.sunny.CreditCard;
 import com.dev.gis.connector.sunny.Extra;
+import com.dev.gis.connector.sunny.VerifyCreditCardPaymentResponse;
 import com.dev.gis.task.execution.api.SunnyOfferDo;
 
 public class SunnyBookingView extends TaskViewAbstract {
@@ -71,17 +74,43 @@ public class SunnyBookingView extends TaskViewAbstract {
 			
 			
 			bookingRequestId.setText("running....");
-//			
-//			BookingRequest  request =  BookingRequestCreator.createBookingRequest(selectedOffer, selectedExtras);
-//			
-//			//StartVerify
-//			BookingResponse response = JoiVehicleConnector.verifyOffers(request,selectedOffer);
-//			bookingRequestId.setText(String.valueOf(response.getRequestId()));
-//			priceText.setText(response.getPrice().getAmount());
+			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			VehicleHttpService service = serviceFactory
+					.getVehicleJoiService();
+			
+			service.putExtras(selectedOffer, selectedExtras);
+
+			String response = service.verifyOffer(selectedOffer);
+			
+			bookingRequestId.setText(response);
 
 		}
 
 	}
+	
+	protected class AddBookingListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			bookingId.setText("running....");
+			
+			//BookingRequestCreater 
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			VehicleHttpService service = serviceFactory
+					.getVehicleJoiService();
+
+			service.putExtras(selectedOffer, selectedExtras);
+
+			String response = service.bookOffer(selectedOffer);
+//			if ( response.getBookingId() != null)
+//				bookingId.setText(response.getBookingId());
+			bookingRequestId.setText(response);
+
+		}
+
+	}
+
 	
 	protected class AddPaypalListener extends AbstractListener {
 
@@ -114,11 +143,14 @@ public class SunnyBookingView extends TaskViewAbstract {
 		private final  Text bsUrl;
 		private final  Text bsToken;
 		private final  Text bsError;
+		private final Composite parent;
+		
 
-		public AddBsGetUrlListener(Text bsUrl, Text bsToken, Text bsError) {
+		public AddBsGetUrlListener(Composite parent,Text bsUrl, Text bsToken, Text bsError) {
 			this.bsUrl = bsUrl;
 			this.bsToken = bsToken;
 			this.bsError = bsError;
+			this.parent = parent;
 		}
 
 		@Override
@@ -130,15 +162,29 @@ public class SunnyBookingView extends TaskViewAbstract {
 			VehicleHttpService service = serviceFactory
 					.getVehicleJoiService();
 
-			PaypalSetCheckoutResponse response = service.getPaypalUrl(selectedOffer,bookingRequestId.getText());
-			if ( response != null) {
-				bsUrl.setText(response.getPaypalUrl());
-				bsToken.setText(response.getToken());
-				if ( response.getError() != null )
-					bsError.setText(response.getError());
+			URI bsuri = service.getPypageUrl();
+			if ( bsuri != null) {
+				bsUrl.setText(bsuri.toString());
+				
+				BSCreditCardDialog mpd = new BSCreditCardDialog(parent.getShell(), bsuri);
+				if (mpd.open() == Dialog.OK) {
+					VerifyCreditCardPaymentResponse response = service.getPayPageResult();
+					if ( response != null && response.getCard() != null) {
+						CreditCard cc = response.getCard();
+						String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
+						bsToken.setText(token);
+						
+						String card = cc.getCardNumber() + " "+cc.getOwnerName();
+						bsError.setText(card);
+						
+					}
+					else
+						paypalError.setText(" Unknown PayPal Error" );
+				}
+				
 			}
 			else
-				bsError.setText(" Unknown PayPal Error" );
+				bsError.setText(" Unknown PayPage Error" );
 
 		}
 
@@ -157,17 +203,22 @@ public class SunnyBookingView extends TaskViewAbstract {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			
-			//paypalUrl.setText("running....");
+			paypalUrl.setText("running....");
 			
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			VehicleHttpService service = serviceFactory
 					.getVehicleJoiService();
 
 			
-			PaypalDoCheckoutResponse response = service.getPaypalResult(selectedOffer,bookingRequestId.getText(),paypalToken.getText());
-			if ( response != null) {
-				if ( response.getError() != null )
-					paypalError.setText(response.getError());
+			VerifyCreditCardPaymentResponse response = service.getPayPageResult();
+			if ( response != null && response.getCard() != null) {
+				CreditCard cc = response.getCard();
+				String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
+				bsToken.setText(token);
+				
+				String card = cc.getCardNumber() + " "+cc.getOwnerName();
+				bsError.setText(card);
+				
 			}
 			else
 				paypalError.setText(" Unknown PayPal Error" );
@@ -200,25 +251,6 @@ public class SunnyBookingView extends TaskViewAbstract {
 
 	}
 
-	protected class AddBookingCompleteListener extends AbstractListener {
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			bookingId.setText("running....");
-			
-			//BookingRequestCreater 
-			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			VehicleHttpService service = serviceFactory
-					.getVehicleJoiService();
-
-			BookingResponse response = service.bookOffers(selectedOffer,bookingRequestId.getText(),selectedExtras);
-			if ( response.getBookingId() != null)
-				bookingId.setText(response.getBookingId());
-			bookingRequestId.setText(String.valueOf(response.getRequestId()));
-
-		}
-
-	}
 
 	
 
@@ -255,11 +287,8 @@ public class SunnyBookingView extends TaskViewAbstract {
 		
 		final Button buttonBook = new Button(groupButtons, SWT.PUSH | SWT.LEFT);
 		buttonBook.setText("Book");
-		buttonBook.addSelectionListener(new AddBookingCompleteListener() );
+		buttonBook.addSelectionListener(new AddBookingListener() );
 	}
-	
-
-
 	
 
 	private Control createDriverGroup(Composite parent) {
@@ -295,10 +324,9 @@ public class SunnyBookingView extends TaskViewAbstract {
 			VehicleHttpService service = serviceFactory
 					.getVehicleJoiService();
 			
-			PaypalDoCheckoutResponse response = service.getPaypalResult(selectedOffer,bookingRequestId.getText(),paypalToken.getText());
+			String response = service.putDriver(selectedOffer,this.driver);
 			if ( response != null) {
-				if ( response.getError() != null )
-					paypalError.setText(response.getError());
+				driver.setText(driver.getText()+ " "+ response);
 			}
 			else
 				paypalError.setText(" Unknown PayPal Error" );
@@ -340,10 +368,9 @@ public class SunnyBookingView extends TaskViewAbstract {
 			VehicleHttpService service = serviceFactory
 					.getVehicleJoiService();
 			
-			PaypalDoCheckoutResponse response = service.getPaypalResult(selectedOffer,bookingRequestId.getText(),paypalToken.getText());
+			String response = service.putCustomer(selectedOffer,this.customer);
 			if ( response != null) {
-				if ( response.getError() != null )
-					paypalError.setText(response.getError());
+				customer.setText(customer.getText()+ " "+ response);
 			}
 			else
 				paypalError.setText(" Unknown PayPal Error" );
@@ -417,7 +444,7 @@ public class SunnyBookingView extends TaskViewAbstract {
 		
 		final Button buttonPayPal = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
 		buttonPayPal.setText("Get PayPage URL ");
-		buttonPayPal.addSelectionListener(new AddBsGetUrlListener(bsUrl, bsToken, bsError));
+		buttonPayPal.addSelectionListener(new AddBsGetUrlListener(parent,bsUrl, bsToken, bsError));
 
 		final Button buttonPayPalResult = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
 		buttonPayPalResult.setText("Get PayPage Result ");
@@ -480,7 +507,7 @@ public class SunnyBookingView extends TaskViewAbstract {
 		
 		new Label(groupStamp, SWT.NONE).setText("RequestId:");
 		this.bookingRequestId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).hint(300, 16).grab(false, false).applyTo(bookingRequestId);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).hint(600, 16).grab(false, false).applyTo(bookingRequestId);
 		
 		new Label(groupStamp, SWT.NONE).setText("bookingId:");
 		this.bookingId = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);

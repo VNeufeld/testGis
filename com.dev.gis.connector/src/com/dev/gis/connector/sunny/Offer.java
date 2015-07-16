@@ -31,6 +31,8 @@ public class Offer extends Response {
 	private long supplierId;
 	private long ServiceCatalogId;
 	private String ServiceCatalogCode;
+	private String serviceCatalogName;
+	private Integer serviceCatalogPrio;
 	
 	private PayType offeredPayment;
 	private MoneyAmount price;
@@ -360,6 +362,22 @@ public class Offer extends Response {
 
 	public void setSupplierConditionsUrl(URI supplierConditionsUrl) {
 		this.supplierConditionsUrl = supplierConditionsUrl;
+	}
+
+	public String getServiceCatalogName() {
+		return serviceCatalogName;
+	}
+
+	public void setServiceCatalogName(String serviceCatalogName) {
+		this.serviceCatalogName = serviceCatalogName;
+	}
+
+	public Integer getServiceCatalogPrio() {
+		return serviceCatalogPrio;
+	}
+
+	public void setServiceCatalogPrio(Integer serviceCatalogPrio) {
+		this.serviceCatalogPrio = serviceCatalogPrio;
 	}
 	
 }

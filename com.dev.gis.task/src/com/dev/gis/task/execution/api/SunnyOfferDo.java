@@ -89,7 +89,11 @@ public class SunnyOfferDo extends  Offer {
 		this.setExtras(offerInformation.getOffer().getExtras());
 		this.setInclusives(offerInformation.getOffer().getInclusives());
 		this.setServiceCatalogCode(offerInformation.getOffer().getServiceCatalogCode());
-		//this.getSupplierCoditions().(offerInformation.getOffer().getSupplierCoditions());
+		this.setServiceCatalogName(offerInformation.getOffer().getServiceCatalogName());
+		this.setServiceCatalogPrio(offerInformation.getOffer().getServiceCatalogPrio());
+		
+		if ( offerInformation.getSupplierConditions() != null && offerInformation.getSupplierConditions().getSupplierConditionsUrl() != null )
+			this.setSupplierConditionsUrl(offerInformation.getSupplierConditions().getSupplierConditionsUrl());
 		
 		
 	}

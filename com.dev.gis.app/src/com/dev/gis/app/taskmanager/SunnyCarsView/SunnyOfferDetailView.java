@@ -122,7 +122,7 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		Label servcatLable = new Label(groupStamp, SWT.NONE);
 		servcatLable.setText("Servcat:");
 		serviceCatalog = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).grab(true, false).applyTo(serviceCatalog);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).hint(400, 16).grab(true, false).applyTo(serviceCatalog);
 
 		Label pickUpLabel = new Label(groupStamp, SWT.NONE);
 		pickUpLabel.setText("pickUp:");
@@ -338,7 +338,7 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		if ( offer.getDropOffStation() != null)
 			dropOffStation.setText(String.valueOf(offer.getDropOffStation().getIdentifier()));
 		
-		serviceCatalog.setText(offer.getServiceCatalogCode() + " : "+offer.getServiceCatalogId());
+		serviceCatalog.setText(offer.getServiceCatalogCode() + " : "+offer.getServiceCatalogId()+ " "+offer.getServiceCatalogName()+ " . Prio ="+offer.getServiceCatalogPrio());
 		
 		changeModelInclusives(offer);
 
@@ -398,8 +398,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	}
 	
 	private void createColumnsExtras(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Name", "Code", "Preis" };
-		int[] bounds = { 200, 100, 100 };
+		String[] titles = { "Name", "Code", "Preis", "Mandatory", "Prepaid/POA" };
+		int[] bounds = { 200, 100, 100, 100, 100 };
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(viewer,titles[0], bounds[0], 0);
@@ -432,6 +432,29 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 			}
 		});
 
+		col = createTableViewerColumn(viewer,titles[3], bounds[3], 3);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				if ( o.getMandatory())
+					return "true";
+				return "false";
+			}
+		});
+		
+		col = createTableViewerColumn(viewer,titles[4], bounds[4], 4);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				if ( o.getPayType() != null)
+					return o.getPayType().name();
+				return "n/a";
+			}
+		});
+		
+		
 	}
 
 	

@@ -4,7 +4,7 @@ public class Person extends BasicProtocol {
 
 	private Salutation salutation;
 
-	private Gender gender;
+	private String  gender;
 
 	private String firstName = "";
 
@@ -20,9 +20,6 @@ public class Person extends BasicProtocol {
 		return firstName;
 	}
 
-	public Gender getGender() {
-		return gender;
-	}
 
 	public String getName() {
 		return name;
@@ -36,9 +33,6 @@ public class Person extends BasicProtocol {
 		this.firstName = firstName;
 	}
 
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -62,5 +56,15 @@ public class Person extends BasicProtocol {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 }
