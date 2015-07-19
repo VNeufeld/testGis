@@ -64,14 +64,13 @@ public class VehicleHttpService {
 
 		try {
 			
+			Thread.sleep(5000);
+			
 			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
 					SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
 			
 			logger.info("VehicleHttpService = "+uri.toString());
 			
-			Administration admin = createAdministrator();
-			
-			vehicleRequest.setAdministration(admin);
 
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
 			logger.info("request = "+request);
@@ -93,6 +92,9 @@ public class VehicleHttpService {
 			logger.error(e.getMessage(),e);
 		} catch (URISyntaxException e) {
 			logger.error(e);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -122,18 +124,6 @@ public class VehicleHttpService {
 
 	}
 
-	private static Administration createAdministrator() {
-		Administration admin = new Administration();
-		
-		admin.setLanguage(TaskProperties.LANGUAGE_CODE);
-		admin.setOperator(TaskProperties.getTaskProperties().getOperator());
-		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
-		admin.setCalledFrom(5);
-		admin.setBroker(false);
-		admin.setProviderId(1l);
-		admin.setProvider("Internet");
-		return admin;
-	}
 	
 	public static ExtraResponse getExtras(Offer offer) {
 		GisHttpClient httpClient = new GisHttpClient();

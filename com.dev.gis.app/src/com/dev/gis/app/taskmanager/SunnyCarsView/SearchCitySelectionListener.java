@@ -23,17 +23,15 @@ public class SearchCitySelectionListener implements SelectionListener {
 	private final Text operator;
 	private final Shell shell;
 	private final Text cityText;
-	private final Combo languageCombo;
 	
 	private String  id;
 
-	public SearchCitySelectionListener(Text serverUrl, Text operator, Combo lang, final Shell shell, Text cityText) {
+	public SearchCitySelectionListener(Text serverUrl, Text operator, final Shell shell, Text cityText) {
 		super();
 		this.serverUrl = serverUrl;
 		this.operator = operator;
 		this.shell = shell;
 		this.cityText = cityText;
-		this.languageCombo = lang;
 		
 	}
 	
@@ -60,8 +58,6 @@ public class SearchCitySelectionListener implements SelectionListener {
 		
 		TaskProperties.getTaskProperties().setServerProperty(serverUrl.getText());
 		TaskProperties.getTaskProperties().setOperator(Long.valueOf(operator.getText()));
-		int language = languageCombo.getSelectionIndex() + 1;
-		TaskProperties.getTaskProperties().setLanguage(language);
 		
 		TaskProperties.getTaskProperties().saveProperty();
 		

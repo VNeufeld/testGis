@@ -51,5 +51,32 @@ public class SunnyOfferViewUpdater  {
 		});
 
 	}
+	
+	public void clearView() {
+		logger.info(" clear vehicle list");
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					logger.info(" showResult : run instanceNum = "+instanceNum );
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					SunnyCarsAppView viewPart =  (SunnyCarsAppView)wp.showView(
+							SunnyCarsAppView.ID, 
+							Integer.toString(instanceNum), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					viewPart.clearView();
+					
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+
+	}
+
 
 }

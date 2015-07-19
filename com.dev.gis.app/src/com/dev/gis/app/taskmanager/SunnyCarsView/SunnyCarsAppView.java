@@ -1,12 +1,13 @@
 package com.dev.gis.app.taskmanager.SunnyCarsView;
 
-import java.net.URI;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.preference.StringFieldEditor;
@@ -26,6 +27,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -41,10 +43,12 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.taskmanager.loggingView.LogEntryDialog;
+import com.dev.gis.app.taskmanager.loggingView.CursorManager;
+import com.dev.gis.app.view.elements.LanguageComboBox;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.api.VehicleHttpService;
+import com.dev.gis.connector.sunny.Administration;
 import com.dev.gis.connector.sunny.Agency;
 import com.dev.gis.connector.sunny.DayAndHour;
 import com.dev.gis.connector.sunny.Location;
@@ -69,7 +73,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 	private Text agencyNo;
 	
-	private Combo languageList;
+	private LanguageComboBox languageComboBox;
 
 	Calendar checkInDate = Calendar.getInstance();
 
@@ -108,13 +112,17 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	private int pageNo = 0;
 
 	private static TravelInformation travelInformation;
+	
+	private Composite parent;
 
 	@Override
 	public void createPartControl(Composite parent) {
 
+		this.parent = parent;
 		// exitAction = ActionFactory.QUIT.create(this);
 		// register(exitAction);
 		//
+		
 
 		// exitAction = new IWorkbenchAction(viewer, parent.getShell());
 
@@ -132,8 +140,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		operator = createOperator(groupStamp);
 		
 		agencyNo = createAgencyNo(groupStamp);
-
-		languageList = createLanguageList(groupStamp);
+		
+		languageComboBox = new LanguageComboBox(groupStamp, 80);
 
 		final Text cityText = createCityText(groupStamp);
 
@@ -187,7 +195,10 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				new SunnyOfferViewUpdater().showOffer(null);
+				
+				viewer.getTable().clearAll();
+				
+//				new SunnyOfferViewUpdater().showOffer(null);
 			}
 		});
 
@@ -195,7 +206,13 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
+				
+				viewer.getTable().clearAll();
+				viewer.getTable().redraw();
+				viewer.refresh();
+				
+				buttonGetOffer.setEnabled(false);
+				
 				System.out.println("Checkindate = "
 						+ new SimpleDateFormat("dd.MM.yyyy hh:mm:ss")
 								.format(checkInDate.getTime()));
@@ -217,21 +234,36 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 
 				VehicleRequest request = createVehicleRequest();
 				
+
+				Administration admin = createAdministrator();
+				
+				request.setAdministration(admin);
+				
 				Agency agency = new Agency();
 				agency.setAgencyNo(agencyNo.getText());
 				request.setAgency(agency);
-
-				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-				VehicleHttpService service = serviceFactory
-						.getVehicleJoiService();
 				
 				
 				int pageSizeInt = 3;
 				if ( pageSize.getText() != null )
 					pageSizeInt = Integer.valueOf(pageSize.getText());
-				
 
-				VehicleResponse response = service.getOffers(request, false, pageSizeInt);
+				VehicleResponse response = null;				
+				GetOfferOperation getOfferOperation = new GetOfferOperation(request, pageSizeInt);
+				
+				ProgressMonitorDialog pd = new ProgressMonitorDialog(e.display.getActiveShell());
+				
+				try {
+					pd.run(true, true, getOfferOperation);
+					response = getOfferOperation.getResponse();
+				} catch (InvocationTargetException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 
 				if (response != null) {
 
@@ -241,7 +273,27 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 					
 
 				}
+				
+				buttonGetOffer.setEnabled(true);
+//				wd.close();
+				
 			}
+			
+			private Administration createAdministrator() {
+				Administration admin = new Administration();
+				
+				String languageCode = languageComboBox.getSelectedLanguage();
+				
+				admin.setLanguage(languageCode);
+				admin.setOperator(TaskProperties.getTaskProperties().getOperator());
+				admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
+				admin.setCalledFrom(5);
+				admin.setBroker(false);
+				admin.setProviderId(1l);
+				admin.setProvider("Internet");
+				return admin;
+			}
+
 
 
 			private VehicleRequest createVehicleRequest() {
@@ -973,7 +1025,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		composite.setLayoutData(gdComposite1);
 
 		final Combo c = new Combo(composite, SWT.READ_ONLY);
-		String items[] = { "deu ( de-DE )", "eng ( uk-UK) " };
+		String items[] = { "deu ( DE )", "eng ( EN) " };
 		c.setItems(items);
 		int lang_id = TaskProperties.getTaskProperties().getLanguage() - 1;
 		c.select(lang_id);
@@ -1061,8 +1113,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		Button buttonSearch = new Button(composite, SWT.PUSH | SWT.LEFT);
 		buttonSearch.setText("Search city");
 		buttonSearch.addSelectionListener(new SearchCitySelectionListener(
-				this.serverUrl, this.operator, this.languageList, composite
-						.getShell(), cityText));
+				this.serverUrl, this.operator, composite.getShell(), cityText));
 
 		// new Label(composite, SWT.NONE).setText("( 3586 for SIXT Truck ) ");
 
@@ -1092,7 +1143,7 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		Button buttonSearch = new Button(composite, SWT.PUSH | SWT.LEFT);
 		buttonSearch.setText("Search airport");
 		buttonSearch.addSelectionListener(new SearchCitySelectionListener(
-				this.serverUrl, this.operator, this.languageList, composite
+				this.serverUrl, this.operator, composite
 						.getShell(), aptText));
 
 		aptText.setText(TaskProperties.getTaskProperties().getAptCode());
@@ -1100,6 +1151,8 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 	}
 	
 	private void showVehicleResponse(VehicleResponse response) {
+		
+		
 		pageInfo.setText(response.getPageInfo());
 
 		// sessionId.setText(String.valueOf(response.getRequestId()));
@@ -1124,6 +1177,12 @@ public class SunnyCarsAppView extends TaskViewAbstract {
 		SunnyModelProvider.INSTANCE.updateRecmmendations(response);
 		recommendationTable.setInput(SunnyModelProvider.INSTANCE.getRecommendations());
 		recommendationTable.refresh();
+	}
+	
+	public void clearView() {
+		SunnyModelProvider.INSTANCE.updateOffers(null);
+		viewer.setInput(SunnyModelProvider.INSTANCE.getOfferDos());
+		viewer.refresh();
 	}
 
 	private void setSummary(VehicleSummary vehicleSummary) {

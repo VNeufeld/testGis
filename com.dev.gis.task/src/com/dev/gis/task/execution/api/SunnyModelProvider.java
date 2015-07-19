@@ -72,6 +72,9 @@ public enum SunnyModelProvider {
 
 	public void updateOffers(VehicleResponse response) {
 		offerDos.clear();
+		if (response == null )
+			return;
+		
 		List<Offer> results = response.getAllOffers();
 		response.getVehicles();
 		

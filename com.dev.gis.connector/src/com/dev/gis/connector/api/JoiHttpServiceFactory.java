@@ -26,7 +26,7 @@ public class JoiHttpServiceFactory {
 		try {
 			Long operator = TaskProperties.getTaskProperties().getOperator();
 			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty());
-			int language = TaskProperties.getTaskProperties().getLanguage();
+			int language = TaskProperties.getTaskProperties().getLanguage()+1;
 			
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			ILocationService locationHttpService = null;
