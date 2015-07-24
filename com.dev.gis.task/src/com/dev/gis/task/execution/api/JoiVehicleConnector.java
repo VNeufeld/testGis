@@ -72,7 +72,7 @@ public class JoiVehicleConnector {
 	private static Administration createAdministrator() {
 		Administration admin = new Administration();
 		
-		admin.setLanguage(TaskProperties.LANGUAGE_CODE);
+		admin.setLanguage("de-DE");
 		admin.setOperator(TaskProperties.getTaskProperties().getOperator());
 		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
 		admin.setCalledFrom(TaskProperties.CALLED_FROM);

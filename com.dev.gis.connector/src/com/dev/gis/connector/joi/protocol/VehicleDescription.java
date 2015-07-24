@@ -8,9 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="vehicleDescription")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class VehicleDescription extends BasicProtocol {
 
 	private boolean aircondition;

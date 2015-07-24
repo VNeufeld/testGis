@@ -8,8 +8,6 @@ public class VehicleRequest extends Request {
 	}
 
 	private Customer customer;
-	
-	private String languaeCode = "EN";
 
 	// not used now
 	private String specialId = null;
@@ -89,14 +87,6 @@ public class VehicleRequest extends Request {
 
 	public void setTravel(TravelInformation travel) {
 		this.travel = travel;
-	}
-
-	public String getLanguaeCode() {
-		return languaeCode;
-	}
-
-	public void setLanguaeCode(String languaeCode) {
-		this.languaeCode = languaeCode;
 	}
 
 

@@ -39,7 +39,7 @@ public class VehicleHttpService {
 	private static Logger logger = Logger.getLogger(VehicleHttpService.class);
 
 	
-	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?&ratingView=1&sort=asc&pageSize=";
+	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?ratingView=1&sort=asc&pageSize=";
 	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
 	public static String SUNNY_BROWSE_REQUEST_PARAM = "/request/browse?";
 	public static String SUNNY_GET_PICKUP_STATIONS = "/request/pickupstations?";
@@ -63,8 +63,6 @@ public class VehicleHttpService {
 	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy, int pageSize) {
 
 		try {
-			
-			Thread.sleep(5000);
 			
 			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
 					SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
@@ -92,9 +90,6 @@ public class VehicleHttpService {
 			logger.error(e.getMessage(),e);
 		} catch (URISyntaxException e) {
 			logger.error(e);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return null;
 	}

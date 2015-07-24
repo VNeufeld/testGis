@@ -11,10 +11,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="vehicleResponse")
-@XmlType(propOrder = {"requestId", "link", "errors", "sessionId", "remainingCacheSeconds", "resultList", "summary", "texts" })
+@XmlType(propOrder = {"requestId", "link", "errors", "sessionId", "remainingCacheSeconds", "resultList", "summary", "texts", "offerFilterTemplate" })
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class VehicleResponse extends Response {
 
 	private VehicleSummary summary;
@@ -25,6 +29,7 @@ public class VehicleResponse extends Response {
 
 	private long remainingCacheSeconds = -1;
 	
+	private OfferFilterTemplate  offerFilterTemplate;
 	
 
 	public VehicleResult accessVehicle(long vehicleId) {
@@ -106,5 +111,13 @@ public class VehicleResponse extends Response {
 				});
 			}
 		}
+	}
+
+	public OfferFilterTemplate getOfferFilterTemplate() {
+		return offerFilterTemplate;
+	}
+
+	public void setOfferFilterTemplate(OfferFilterTemplate offerFilterTemplate) {
+		this.offerFilterTemplate = offerFilterTemplate;
 	}
 }

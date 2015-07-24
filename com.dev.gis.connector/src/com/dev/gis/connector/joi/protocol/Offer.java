@@ -195,7 +195,7 @@ public class Offer extends BasicProtocol {
 	}
 	
 	public void setRemainingCacheSeconds(Long remainingCacheSeconds) {
-		this.remainingCacheSeconds = new Long (remainingCacheSeconds);
+		this.remainingCacheSeconds = remainingCacheSeconds;
 	}
 	
 	public void setServiceCatalogCode(String serviceCatalogCode) {

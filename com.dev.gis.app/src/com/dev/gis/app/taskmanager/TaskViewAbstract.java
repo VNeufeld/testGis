@@ -81,7 +81,7 @@ public abstract class TaskViewAbstract extends ViewPart {
 					.getVehicleJoiService();
 
 			monitor.setTaskName("create Vehicle...");
-			monitor.beginTask(" running HSGW GetCars ", 5000);
+			monitor.beginTask(" running HSGW GetCars ", 15000);
 			
 			ShowTimer showTimer = new ShowTimer(monitor);
 			new Thread(showTimer).start();
