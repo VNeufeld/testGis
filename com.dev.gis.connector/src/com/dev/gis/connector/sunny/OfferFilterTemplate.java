@@ -1,7 +1,9 @@
 package com.dev.gis.connector.sunny;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -18,10 +20,12 @@ public class OfferFilterTemplate {
 	private List<ObjectValuePair> fuelTypes = new ArrayList<ObjectValuePair>();
 	
 	private List<ObjectValuePair> suppliers = new ArrayList<ObjectValuePair>();
+
+	private Map<String, List<ObjectValuePair>> inclusives = new HashMap<String,List<ObjectValuePair>>();
 	
 	
 	private ObjectValuePair automatic;
-	private ObjectValuePair airCodition;
+	private ObjectValuePair aircondition;
 	
 	private MoneyAmount minPrice;
 	
@@ -39,12 +43,6 @@ public class OfferFilterTemplate {
 	}
 	public void setAutomatic(ObjectValuePair automatic) {
 		this.automatic = automatic;
-	}
-	public ObjectValuePair getAirCodition() {
-		return airCodition;
-	}
-	public void setAirCodition(ObjectValuePair airCodition) {
-		this.airCodition = airCodition;
 	}
 	public List<ObjectValuePair> getBodyStyles() {
 		return bodyStyles;
@@ -81,6 +79,18 @@ public class OfferFilterTemplate {
 	}
 	public void setMaxPrice(MoneyAmount maxPrice) {
 		this.maxPrice = maxPrice;
+	}
+	public ObjectValuePair getAircondition() {
+		return aircondition;
+	}
+	public void setAircondition(ObjectValuePair aircondition) {
+		this.aircondition = aircondition;
+	}
+	public Map<String, List<ObjectValuePair>> getInclusives() {
+		return inclusives;
+	}
+	public void setInclusives(Map<String, List<ObjectValuePair>> inclusives) {
+		this.inclusives = inclusives;
 	}
 
 }

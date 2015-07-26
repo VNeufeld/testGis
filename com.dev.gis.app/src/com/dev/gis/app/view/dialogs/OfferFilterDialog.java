@@ -29,8 +29,11 @@ public class OfferFilterDialog extends Dialog {
 	private final OfferFilter offerFilter = new OfferFilter();
 
 	private Button selectMinMax;
+	private Button aircondition;
+	private Button automatic;
 	
 	Map<Long,Button> bodyStylesButtons = new HashMap<Long,Button>();
+	Map<String,Button> inclusiveButtons = new HashMap<String,Button>();
 
 	private Text min, max;
 
@@ -52,10 +55,11 @@ public class OfferFilterDialog extends Dialog {
 			offerFilterTemplate = vehicleResponse.getOfferFilterTemplate();
 		}
 
-		setSummary(composite, offerFilterTemplate);
-
-		if (offerFilterTemplate != null)
+		if (offerFilterTemplate != null) {
+			setSummary(composite, offerFilterTemplate);
 			setBodyStyles(composite, offerFilterTemplate);
+			setInclusives(composite, offerFilterTemplate);
+		}
 
 		composite.pack();
 		return composite;
@@ -112,6 +116,19 @@ public class OfferFilterDialog extends Dialog {
 
 			selectMinMax = new Button(groupResult, SWT.CHECK);
 			selectMinMax.setText("Select");
+			
+			ObjectValuePair  air = offerFilterTemplate.getAircondition();
+			aircondition = new Button(groupResult, SWT.CHECK);
+			aircondition.setText(air.getName()+ "("+air.getCount()+ ")");
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+			.grab(true, false).span(5, 1).applyTo(aircondition);
+			
+			
+			ObjectValuePair  aut = offerFilterTemplate.getAutomatic();
+			automatic  = new Button(groupResult, SWT.CHECK);
+			automatic.setText(aut.getName()+ "("+aut.getCount()+ ")");
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+			.grab(true, false).span(5, 1).applyTo(automatic);
 
 		}
 
@@ -145,12 +162,46 @@ public class OfferFilterDialog extends Dialog {
 				int id = Integer.valueOf(parts[0]);
 				bodyStylesButtons.put((long)id, select);
 			}
-				
 			
 
 		}
 
 	}
+	
+	private void setInclusives(Composite composite,
+			OfferFilterTemplate offerFilterTemplate) {
+
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Inclusives:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		Map<String, List<ObjectValuePair>>  inclusives =   offerFilterTemplate.getInclusives();
+		
+		for ( String key : inclusives.keySet()) {
+			
+			List<ObjectValuePair> items = inclusives.get(key);
+			for (ObjectValuePair b : items ) {
+				String bb = key+ " : "+b.getName()+ "("+b.getCount()+")";
+				Label l = new Label(groupResult, SWT.NONE);
+				l.setText(bb);
+				GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, false).span(4, 1).applyTo(l);
+				Button select = new Button(groupResult, SWT.CHECK);
+				select.setText("Select");
+				String[] parts = b.getName().split(",");
+				if ( parts.length > 0) {
+					//int id = Integer.valueOf(parts[0]);
+					inclusiveButtons.put(parts[0], select);
+				}
+				
+			}
+			
+		}
+
+	}
+	
 
 	@Override
 	protected void okPressed() {
@@ -171,7 +222,23 @@ public class OfferFilterDialog extends Dialog {
 		}
 		Long[] ll = bodyStyles.toArray(new Long[0]);
 		offerFilter.setBodyStyles(ll);
+		
+		offerFilter.setAircondition(aircondition.getSelection());
 
+		offerFilter.setAutomatic(automatic.getSelection());
+		
+		List<Long> incl = new ArrayList<Long>();
+		
+//		for ( Long id : inclusiveButtons.keySet() ) {
+//			Button select = inclusiveButtons.get(id);
+//			if ( select.getSelection()) {
+//				incl.add(id);
+//			}
+//		}
+		Long[] inll = incl.toArray(new Long[0]);
+		offerFilter.setInclusives(inll);
+		
+		
 		super.okPressed();
 	}
 
