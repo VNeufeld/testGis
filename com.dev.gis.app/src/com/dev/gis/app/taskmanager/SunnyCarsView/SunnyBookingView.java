@@ -25,13 +25,13 @@ import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.connector.sunny.CreditCard;
 import com.dev.gis.connector.sunny.Extra;
 import com.dev.gis.connector.sunny.VerifyCreditCardPaymentResponse;
-import com.dev.gis.task.execution.api.SunnyOfferDo;
 
 public class SunnyBookingView extends TaskViewAbstract {
 	

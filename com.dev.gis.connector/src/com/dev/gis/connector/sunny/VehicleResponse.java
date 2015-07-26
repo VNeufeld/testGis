@@ -146,7 +146,7 @@ public class VehicleResponse extends Response {
 		return offers;
 	}
 	
-	@JsonProperty("filterTemplate")
+	@JsonProperty("offerFilterTemplate")
 	public OfferFilterTemplate getOfferFilterTemplate() {
 		return offerFilterTemplate;
 	}

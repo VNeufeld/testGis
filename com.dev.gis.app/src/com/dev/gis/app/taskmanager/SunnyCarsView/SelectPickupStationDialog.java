@@ -26,11 +26,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.Hit;
 import com.dev.gis.connector.sunny.Station;
 import com.dev.gis.connector.sunny.StationResponse;
-import com.dev.gis.task.execution.api.SunnyModelProvider;
 
 public class SelectPickupStationDialog extends Dialog {
 

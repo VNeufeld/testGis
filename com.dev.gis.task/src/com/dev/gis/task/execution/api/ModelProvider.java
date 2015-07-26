@@ -3,10 +3,12 @@ package com.dev.gis.task.execution.api;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.bpcs.mdcars.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.PaymentInformation;
@@ -23,6 +25,18 @@ public enum ModelProvider {
 	
 	private List<Extra> extraDos = new ArrayList<Extra>();
 	
+	public long operatorId;
+
+	public long cityId;
+
+	public long pageSize;
+
+	public long pageNo;
+	
+	public String airport;
+	
+	public Calendar pickupDateTime;
+	public Calendar dropoffDateTime;
 	
 	private Person driver;
 

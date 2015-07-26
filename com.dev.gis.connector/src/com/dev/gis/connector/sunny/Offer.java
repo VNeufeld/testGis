@@ -65,7 +65,7 @@ public class Offer extends Response {
 	
 	private Long   carCategoryId;
 	
-	private SupplierCoditions supplierCoditions = new SupplierCoditions();
+	//private SupplierCoditions supplierCoditions = new SupplierCoditions();
 	
 	private URI supplierConditionsUrl;
 	
@@ -344,17 +344,17 @@ public class Offer extends Response {
 		this.rating = rating;
 	}
 
-	@XmlTransient
-	public SupplierCoditions getSupplierCoditions() {
-		return supplierCoditions;
-	}
-
-	public void setSupplierCoditions(List<Pair<String, String>> supplierConditions) {
-		supplierCoditions.setSupplierConditions(supplierConditions);
-		if ( supplierConditionsUrl != null) {
-			supplierCoditions.setSupplierConditionsUrl(supplierConditionsUrl);
-		}
-	}
+//	@XmlTransient
+//	public SupplierCoditions getSupplierCoditions() {
+//		return supplierCoditions;
+//	}
+//
+//	public void setSupplierCoditions(List<Pair<String, String>> supplierConditions) {
+//		supplierCoditions.setSupplierConditions(supplierConditions);
+//		if ( supplierConditionsUrl != null) {
+//			supplierCoditions.setSupplierConditionsUrl(supplierConditionsUrl);
+//		}
+//	}
 	@XmlTransient
 	public URI getSupplierConditionsUrl() {
 		return supplierConditionsUrl;

@@ -18,7 +18,6 @@ import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.connector.sunny.Address;
-import com.dev.gis.connector.sunny.Administration;
 import com.dev.gis.connector.sunny.Customer;
 import com.dev.gis.connector.sunny.DayAndHour;
 import com.dev.gis.connector.sunny.Extra;
@@ -54,7 +53,20 @@ public class VehicleHttpService {
 	private static String varPayerId = "G53SL5V9APQV2";
 	
 	private final GisHttpClient httpClient ;
+	
 
+	private URI getServerURI(String param ) throws URISyntaxException {
+		
+		String server = SunnyModelProvider.INSTANCE.serverUrl;
+
+		if ( server == null|| server.isEmpty() )
+			server = TaskProperties.getTaskProperties().getServerProperty();
+		
+		URI uri = new URI(server+param);
+		logger.info("VehicleHttpService URI : = "+uri.toString());
+		return uri;
+		
+	}
 
 	public VehicleHttpService(GisHttpClient gisHttpClientInstance) {
 		this.httpClient = gisHttpClientInstance;
@@ -64,11 +76,10 @@ public class VehicleHttpService {
 
 		try {
 			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
-					SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
+//			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
+//					SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
 			
-			logger.info("VehicleHttpService = "+uri.toString());
-			
+			URI uri = getServerURI(SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
 
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
 			logger.info("request = "+request);
@@ -77,7 +88,8 @@ public class VehicleHttpService {
 			
 			dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( dummy)
-				response = JsonUtils.createDummyResponse("SunnyVehicleResponseRatingView");
+				//response = JsonUtils.createDummyResponse("SunnyVehicleResponseRatingView");
+				response = JsonUtils.createDummyResponse("SunnyVehicleResponse");
 			else
 				response =  httpClient.startPostRequestAsJson(uri, request);
 			
@@ -96,9 +108,7 @@ public class VehicleHttpService {
 	
 	public VehicleResponse getPage(int pageNo) {
 		try {
-			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
-					SUNNY_NEXT_PAGE_REQUEST_PARAM+String.valueOf(pageNo));
+			URI uri = getServerURI(SUNNY_NEXT_PAGE_REQUEST_PARAM+String.valueOf(pageNo));
 			
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( !dummy) {
@@ -548,14 +558,16 @@ public class VehicleHttpService {
 			params = params+"page="+pageNo;
 			params = params+"&pageSize="+pageSize;
 			params = params+"&sort="+"desc";
-			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
-					params);
+
+			URI uri = getServerURI(params);
+
 			
 			logger.info("VehicleHttpService = "+uri.toString());
 			
-			OfferFilter offerFilter = new OfferFilter();
-			offerFilter.setMaxPrice(BigDecimal.valueOf(500));
+//			OfferFilter offerFilter = new OfferFilter();
+//			offerFilter.setMaxPrice(BigDecimal.valueOf(500));
+			
+			OfferFilter offerFilter = SunnyModelProvider.INSTANCE.offerFilter;
 
 			String request = JsonUtils.convertRequestToJsonString(offerFilter);
 			logger.info("request = "+request);

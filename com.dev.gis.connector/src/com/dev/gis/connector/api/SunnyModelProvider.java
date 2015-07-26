@@ -1,10 +1,22 @@
-package com.dev.gis.task.execution.api;
+package com.dev.gis.connector.api;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dev.gis.connector.sunny.*;
+import com.dev.gis.connector.sunny.Extra;
+import com.dev.gis.connector.sunny.Hit;
+import com.dev.gis.connector.sunny.HitGroup;
+import com.dev.gis.connector.sunny.HitType;
+import com.dev.gis.connector.sunny.Inclusive;
+import com.dev.gis.connector.sunny.LocationSearchResult;
+import com.dev.gis.connector.sunny.MoneyAmount;
+import com.dev.gis.connector.sunny.Offer;
+import com.dev.gis.connector.sunny.OfferFilter;
+import com.dev.gis.connector.sunny.Person;
+import com.dev.gis.connector.sunny.Station;
+import com.dev.gis.connector.sunny.StationResponse;
+import com.dev.gis.connector.sunny.Vehicle;
+import com.dev.gis.connector.sunny.VehicleResponse;
 
 
 public enum SunnyModelProvider {
@@ -23,6 +35,20 @@ public enum SunnyModelProvider {
 	private List<Station> pickupStations = new ArrayList<Station>();
 
 	private List<Station> dropoffStations = new ArrayList<Station>();
+	
+	public String agencyNo;
+
+	public String languageCode;
+
+	public long languageId;
+	
+	public long operatorId;
+	
+	public String serverUrl;
+	
+	public VehicleResponse  currentResponse;
+
+	public OfferFilter  offerFilter;
 	
 	private Person driver;
 

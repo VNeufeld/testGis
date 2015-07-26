@@ -5,12 +5,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import com.bpcs.mdcars.protocol.Offer;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferDetailView;
-import com.dev.gis.task.execution.api.IResultView;
-import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.OfferDo;
-import com.dev.gis.task.execution.api.SunnyOfferDo;
+import com.dev.gis.connector.api.SunnyOfferDo;
+import com.dev.gis.connector.sunny.VehicleResponse;
 
 public class SunnyOfferViewUpdater  {
 	private Logger logger = Logger.getLogger(SunnyOfferViewUpdater.class);
@@ -78,5 +74,31 @@ public class SunnyOfferViewUpdater  {
 
 	}
 
+	public void showResponse(final VehicleResponse response) {
+		logger.info(" clear vehicle list");
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					logger.info(" showResult : run instanceNum = "+instanceNum );
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					SunnyCarsAppView viewPart =  (SunnyCarsAppView)wp.showView(
+							SunnyCarsAppView.ID, 
+							Integer.toString(instanceNum), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					viewPart.showVehicleResponse(response);
+					
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+
+	}
+	
 
 }

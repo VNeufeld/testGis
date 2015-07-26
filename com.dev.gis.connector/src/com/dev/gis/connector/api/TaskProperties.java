@@ -1,5 +1,7 @@
 package com.dev.gis.connector.api;
 
+import java.util.Calendar;
+
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.osgi.service.prefs.BackingStoreException;
@@ -122,20 +124,6 @@ public class TaskProperties {
 		this.aptCode = aptCode;
 	}
 
-	public void setPickupDate(DayAndHour dh) {
-		String pickupDateProperty = dh.getDate()+"T"+dh.getTime();
-
-		this.pickupDate = pickupDateProperty;
-	}
-
-	public DayAndHour getPickupDate() {
-		String[] parts = this.pickupDate.split("T");
-		DayAndHour dh = new DayAndHour();
-		dh.setDate(parts[0]);
-		if ( parts.length > 1)
-			dh.setTime(parts[1]);
-		return dh;
-	}
 
 	public void setDropoffDate(DayAndHour dh) {
 		String dateProperty = dh.getDate()+"T"+dh.getTime();
@@ -159,6 +147,14 @@ public class TaskProperties {
 	public void setAgencyNo(String agencyNo) {
 		this.agencyNo = agencyNo;
 	}
+
+	public void setPickupDate(String sDate) {
+		this.pickupDate = sDate;
+		
+	}
 	
+	public String getPickupDate() {
+		return this.pickupDate;
+	}
 
 }

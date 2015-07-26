@@ -12,7 +12,10 @@ public class JoiHttpServiceFactory {
 	private static Logger logger = Logger.getLogger(JoiHttpServiceFactory.class);
 
 	private static GisHttpClient httpClient = null;
-	
+
+	public JoiHttpServiceFactory() {
+	}
+
 	private static GisHttpClient getGisHttpClientInstance() {
 		if ( httpClient == null)
 			httpClient = new GisHttpClient();
@@ -20,12 +23,24 @@ public class JoiHttpServiceFactory {
 		return httpClient;
 		
 	}
+	private URI getServerURI() throws URISyntaxException {
+		
+		String server = SunnyModelProvider.INSTANCE.serverUrl;
+
+		if ( server == null|| server.isEmpty() )
+			server = TaskProperties.getTaskProperties().getServerProperty();
+		
+		URI uri = new URI(server);
+		logger.info("VehicleHttpService URI : = "+uri.toString());
+		return uri;
+		
+	}
 
 
-	public ILocationService   getLocationJoiService() {
+	public ILocationService   getLocationJoiService(long operator) {
 		try {
-			Long operator = TaskProperties.getTaskProperties().getOperator();
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty());
+			URI uri = getServerURI();
+			
 			int language = TaskProperties.getTaskProperties().getLanguage()+1;
 			
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();

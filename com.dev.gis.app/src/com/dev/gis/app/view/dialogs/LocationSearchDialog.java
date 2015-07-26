@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.SunnyCarsView;
+package com.dev.gis.app.view.dialogs;
 
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.Dialog;
@@ -31,10 +31,11 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.connector.api.ILocationService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.sunny.Hit;
 import com.dev.gis.connector.sunny.HitType;
 import com.dev.gis.connector.sunny.LocationSearchResult;
-import com.dev.gis.task.execution.api.SunnyModelProvider;
+import com.dev.gis.task.execution.api.ModelProvider;
 
 public class LocationSearchDialog extends Dialog {
 	
@@ -101,11 +102,13 @@ public class LocationSearchDialog extends Dialog {
 		Button countryButton = new Button(gGeneral, SWT.PUSH | SWT.CENTER | SWT.COLOR_BLUE);
 		countryButton.setText("select country");
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).applyTo(countryButton);
+		
+		final long operator = ModelProvider.INSTANCE.operatorId;
 		countryButton.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				LocationSearchAllCountriesDialog mpd = new LocationSearchAllCountriesDialog(parentShell);
+				LocationSearchAllCountriesDialog mpd = new LocationSearchAllCountriesDialog(parentShell, operator);
 				
 				if (mpd.open() == Dialog.OK) {
 					if ( mpd.getResult() != null ) {
@@ -157,9 +160,10 @@ public class LocationSearchDialog extends Dialog {
 
 				if ( filterIndex == 4)
 					type = HitType.RAILWAY_STATION;
+				
 
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-				ILocationService service = serviceFactory.getLocationJoiService();
+				ILocationService service = serviceFactory.getLocationJoiService(operator);
 				LocationSearchResult result = service.joiLocationSearch(searchString, type, country.getText());
 				
 				SunnyModelProvider.INSTANCE.updateHits(result);

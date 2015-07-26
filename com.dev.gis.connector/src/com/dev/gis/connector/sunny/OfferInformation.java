@@ -2,14 +2,15 @@ package com.dev.gis.connector.sunny;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OfferInformation {
 	
 	private Offer offer;
 
-	private SupplierCoditions supplierConditions;
+//	private SupplierCoditions supplierConditions;
 	
 	public OfferInformation() {
 	}
@@ -22,10 +23,10 @@ public class OfferInformation {
 		return offer;
 	}
 	
-	@JsonProperty("supplierConditions")
-	public SupplierCoditions getSupplierConditions() {
-		return offer.getSupplierCoditions();
-	}
+//	@JsonProperty("supplierConditions")
+//	public SupplierCoditions getSupplierConditions() {
+//		return offer.getSupplierCoditions();
+//	}
 
 
 }

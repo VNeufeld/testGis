@@ -1,8 +1,7 @@
-package com.dev.gis.app.taskmanager.SunnyCarsView;
+package com.dev.gis.app.view.dialogs;
 
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -18,11 +17,9 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
@@ -31,21 +28,25 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.connector.api.ILocationService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
-import com.dev.gis.connector.api.LocationHttpService;
-import com.dev.gis.connector.sunny.*;
-import com.dev.gis.task.execution.api.SunnyModelProvider;
+import com.dev.gis.connector.api.SunnyModelProvider;
+import com.dev.gis.connector.sunny.Hit;
+import com.dev.gis.connector.sunny.HitType;
+import com.dev.gis.connector.sunny.LocationSearchResult;
 
 public class LocationSearchAllCountriesDialog extends Dialog {
 	
 	private String searchString="";
 	private Text tName;
 	private TableViewer viewer;
-	
+	private final long operator;
+
 	private Hit  result;
 
-	public LocationSearchAllCountriesDialog(Shell parentShell) {
+	public LocationSearchAllCountriesDialog(Shell parentShell, final long operator) {
 		super(parentShell);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
+		
+		this.operator = operator;
 	}
 
 	/* (non-Javadoc)
@@ -101,7 +102,7 @@ public class LocationSearchAllCountriesDialog extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 		
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-				ILocationService service = serviceFactory.getLocationJoiService();
+				ILocationService service = serviceFactory.getLocationJoiService(operator);
 				LocationSearchResult result = service.joiLocationSearch(searchString, HitType.COUNTRY, "");
 				
 				SunnyModelProvider.INSTANCE.updateHits(result);
@@ -116,7 +117,7 @@ public class LocationSearchAllCountriesDialog extends Dialog {
 		});
 
 		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-		ILocationService service = serviceFactory.getLocationJoiService();
+		ILocationService service = serviceFactory.getLocationJoiService(operator);
 		LocationSearchResult result = service.joiLocationSearch("", HitType.COUNTRY, "");
 		
 		SunnyModelProvider.INSTANCE.updateHits(result);

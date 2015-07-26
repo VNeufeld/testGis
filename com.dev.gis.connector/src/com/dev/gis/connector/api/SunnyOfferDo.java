@@ -1,4 +1,4 @@
-package com.dev.gis.task.execution.api;
+package com.dev.gis.connector.api;
 
 import java.util.List;
 
@@ -92,8 +92,8 @@ public class SunnyOfferDo extends  Offer {
 		this.setServiceCatalogName(offerInformation.getOffer().getServiceCatalogName());
 		this.setServiceCatalogPrio(offerInformation.getOffer().getServiceCatalogPrio());
 		
-		if ( offerInformation.getSupplierConditions() != null && offerInformation.getSupplierConditions().getSupplierConditionsUrl() != null )
-			this.setSupplierConditionsUrl(offerInformation.getSupplierConditions().getSupplierConditionsUrl());
+//		if ( offerInformation.getSupplierConditions() != null && offerInformation.getSupplierConditions().getSupplierConditionsUrl() != null )
+//			this.setSupplierConditionsUrl(offerInformation.getSupplierConditions().getSupplierConditionsUrl());
 		
 		
 	}

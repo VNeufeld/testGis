@@ -1,349 +1,2213 @@
 {
-  "requestId": -4837194342598284000,
-  "link": "http://localhost:8080/sunny-joi/joi/request",
-  "pageInfo": "page 1 from 1",
-  "groups": [
-    {
-      "name": "A",
-      "offerList": [
-        {
-          "link": "http://localhost:8080/sunny-joi/joi/request/offer/dd4f7c2a-8b8d-47e5-87b3-f8f7a3c6e83f",
-          "id": "dd4f7c2a-8b8d-47e5-87b3-f8f7a3c6e83f",
-          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/dd4f7c2a-8b8d-47e5-87b3-f8f7a3c6e83f/book",
-          "name": "A",
-          "supplierId": 7,
-          "price": {
-            "amount": "191,40",
-            "currency": "EUR"
-          },
-          "stdPrice": {
-            "amount": "191,40",
-            "currency": "EUR"
-          },
-          "promoValue": {
-            "amount": "0,00",
-            "currency": "EUR"
-          },
-          "cancelFee": null,
-          "status": "13",
-          "inclusives": [
-            {
-              "id": 2,
-              "insurance": false,
-              "itemClassId": 3,
-              "itemClassCode": "TR",
-              "itemClassName": "Tankrule",
-              "description": "Tank Rule full to full",
-              "code": "FF"
-            }
-          ],
-          "extras": null,
-          "pickUpStationId": 4882,
-          "dropOffStationId": 4882,
-          "vehicleId": 766216606,
-          "commissionType": "1",
-          "carUsedPromotion": "0",
-          "carCategoryId": 1,
-          "upsell": null,
-          "extVehicleId": 7480,
-          "extSalesSeasonId": 325889,
-          "serviceCatalogId": 1,
-          "serviceCatalogCode": null
-        }
-      ],
-      "nrOffers": 1
-    },
-    {
-      "name": "C",
-      "offerList": [
-        {
-          "link": "http://localhost:8080/sunny-joi/joi/request/offer/013ee48b-8624-4c77-878c-9dc7e274e15a",
-          "id": "013ee48b-8624-4c77-878c-9dc7e274e15a",
-          "bookLink": "http://localhost:8080/sunny-joi/joi/booking/offer/013ee48b-8624-4c77-878c-9dc7e274e15a/book",
-          "name": "C",
-          "supplierId": 7,
-          "price": {
-            "amount": "244,20",
-            "currency": "EUR"
-          },
-          "stdPrice": {
-            "amount": "244,20",
-            "currency": "EUR"
-          },
-          "promoValue": {
-            "amount": "0,00",
-            "currency": "EUR"
-          },
-          "cancelFee": null,
-          "status": "13",
-          "inclusives": [
-            {
-              "id": 2,
-              "insurance": false,
-              "itemClassId": 3,
-              "itemClassCode": "TR",
-              "itemClassName": "Tankrule",
-              "description": "Tank Rule full to full",
-              "code": "FF"
-            }
-          ],
-          "extras": null,
-          "pickUpStationId": 4882,
-          "dropOffStationId": 4882,
-          "vehicleId": 453160397,
-          "commissionType": "1",
-          "carUsedPromotion": "0",
-          "carCategoryId": 3,
-          "upsell": null,
-          "extVehicleId": 7481,
-          "extSalesSeasonId": 325889,
-          "serviceCatalogId": 1,
-          "serviceCatalogCode": null
-        }
-      ],
-      "nrOffers": 1
-    }
-  ],
-  "vehicles": [
-    {
-      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/453160397",
-      "id": 453160397,
-      "supplierId": 7,
-      "categoryId": 3,
-      "groupId": 13,
-      "manufacturer": "Renault Megane ",
-      "vehicleModel": "Compact-Intermediate Limousine",
-      "type": null,
-      "fuelType": "Unspecified",
-      "supplierCategory": "CDMR|DB",
-      "commonCarInformation": null,
-      "companyName": "Sunny Cars GmbH",
-      "picture": "/img/cars/large/Renault_Megane_4dr.jpg",
-      "nrDoors": 4,
-      "nrSeats": 2,
-      "aircondition": true,
-      "automatic": false,
-      "snowTires": false,
-      "allWheel": false,
-      "navigationSystem": false,
-      "stationWagon": false,
-      "convertible": false,
-      "bodyStyle": 0,
-      "typeId": null,
-      "nrAdults": 4,
-      "nrChildren": null,
-      "fuelTypeId": -1,
-      "nrLargeLuggage": 2,
-      "trunkSize": null,
-      "acriss": "CDMR"
-    },
-    {
-      "link": "http://localhost:8080/sunny-joi/joi/request/vehicle/766216606",
-      "id": 766216606,
-      "supplierId": 7,
-      "categoryId": 1,
-      "groupId": 4,
-      "manufacturer": "Daihatsu",
-      "vehicleModel": "Compact",
-      "type": "Materia",
-      "fuelType": "Petrol/gasoline",
-      "supplierCategory": "EDMR|BB",
-      "commonCarInformation": null,
-      "companyName": "Sunny Cars GmbH",
-      "picture": "/img/cars/large/Renault_Clio_3dr.jpg",
-      "nrDoors": 5,
-      "nrSeats": 5,
-      "aircondition": false,
-      "automatic": false,
-      "snowTires": false,
-      "allWheel": false,
-      "navigationSystem": false,
-      "stationWagon": true,
-      "convertible": false,
-      "bodyStyle": 2,
-      "typeId": 1,
-      "nrAdults": 2,
-      "nrChildren": 2,
-      "fuelTypeId": 1,
-      "trunkSize": null,
-      "acriss": "EDMR"
-    }
-  ],
-  "insurances": [
-    {
-      "id": 1,
-      "price": {
-        "amount": "50,00",
-        "currency": "EUR"
-      },
-      "inclusivie": false
-    }
-  ],
-  "operator": 1,
-  "summary": {
-    "quantityVehicles": 2,
-    "totalQuantityVehicles": 2,
-    "quantityOffers": 2,
-    "totalQuantityOffers": 2,
-    "quantityGroups": 2,
-    "totalQuantityGroups": 2,
-    "minimalPrice": {
-      "amount": "191,40",
-      "currency": "EUR"
-    },
-    "maximalPrice": {
-      "amount": "244,20",
-      "currency": "EUR"
-    },
-    "minimalStdPrice": {
-      "amount": "191,40",
-      "currency": "EUR"
-    },
-    "maximalStdPrice": {
-      "amount": "244,20",
-      "currency": "EUR"
-    }
-  },
-  "texts": {
-    "supplierList": [
-      {
-        "id": 7,
-        "link": "http://localhost:8080/sunny-joi/joi/masterdata/supplier/7",
-        "supplierGroupId": 0,
-        "logo": null,
-        "name": "Sunny Cars GmbH"
-      }
-    ],
-    "bodyStyleMap": {
-      "2": {
-        "text": "Compact"
-      }
-    },
-    "stationList": [
-      {
-        "id": 4882,
-        "link": "http://localhost:8080/sunny-joi/joi/masterdata/station/4882/lang/2",
-        "identifier": "Zz/ Palma de Mallorca APT",
-        "supplierId": 7,
-        "supplierGroupId": null,
-        "stationPriority": 1,
-        "supplierPriority": 1,
-        "geo": {
-          "city": 6
-        },
-        "addres": {
-          "street": "Avenida 20 de Abril",
-          "zip": "11300",
-          "city": "La Línea de la Concepción",
-          "latitude": 36.151322,
-          "longitude": -5.349504
-        },
-        "stationLocTypes": [
-          {
-            "code": "APT",
-            "name": "Airport"
-          }
-        ]
-      }
-    ]
-  },
-  "filterTemplate": {
-    "fuelPolicy": [],
-    "stationLocTypes": [
-      {
-        "name": "RAS,Railway Station",
-        "value": "false"
-      },
-      {
-        "name": "APT,Airport",
-        "value": "true"
-      },
-      {
-        "name": "CTY,City",
-        "value": "false"
-      },
-      {
-        "name": "HAR,Harbour",
-        "value": "false"
-      }
-    ],
-    "bodyStyles": [
-      {
-        "name": "1,Sports Car",
-        "value": "false"
-      },
-      {
-        "name": "2,Compact",
-        "value": "true"
-      },
-      {
-        "name": "3,Cabrio",
-        "value": "false"
-      },
-      {
-        "name": "4,Fun Car",
-        "value": "false"
-      },
-      {
-        "name": "5,SUV",
-        "value": "false"
-      },
-      {
-        "name": "6,Luxury Car",
-        "value": "false"
-      },
-      {
-        "name": "7,Pickup",
-        "value": "false"
-      },
-      {
-        "name": "8,Normal",
-        "value": "false"
-      }
-    ],
-    "fuelTypes": [
-      {
-        "name": "1,Petrol/gasoline",
-        "value": "true"
-      },
-      {
-        "name": "2,Diesel",
-        "value": "false"
-      },
-      {
-        "name": "3,Ethanol",
-        "value": "false"
-      },
-      {
-        "name": "4,Hybrid",
-        "value": "false"
-      },
-      {
-        "name": "5,Electro",
-        "value": "false"
-      }
-    ],
-    "suppliers": [
-      {
-        "name": "7,Sunny Cars GmbH",
-        "value": "true"
-      }
-    ],
-    "automatic": {
-      "name": "automatic",
-      "value": "false"
-    },
-    "airCodition": {
-      "name": "aircondition",
-      "value": "true"
-    },
-    "minPrice": {
-      "amount": "191,40",
-      "currency": "EUR"
-    },
-    "maxPrice": {
-      "amount": "244,20",
-      "currency": "EUR"
-    }
-  }
+	"link": "http://195.80.208.117:8080/sunny-joi/joi/request",
+	"requestId": -3172892619247685130,
+	"errors": null,
+	"summary": {
+		"quantityVehicles": 5,
+		"totalQuantityVehicles": 23,
+		"quantityOffers": 5,
+		"totalQuantityOffers": 23,
+		"quantityGroups": 5,
+		"totalQuantityGroups": 23,
+		"minimalPrice": {
+			"currency": "EUR",
+			"amount": "362,00",
+			"amountAsUS": "362.00",
+			"decimalAmount": 362.00
+		},
+		"maximalPrice": {
+			"currency": "EUR",
+			"amount": "414,00",
+			"amountAsUS": "414.00",
+			"decimalAmount": 414.00
+		},
+		"minimalStdPrice": {
+			"currency": "EUR",
+			"amount": "362,00",
+			"amountAsUS": "362.00",
+			"decimalAmount": 362.00
+		},
+		"maximalStdPrice": {
+			"currency": "EUR",
+			"amount": "414,00",
+			"amountAsUS": "414.00",
+			"decimalAmount": 414.00
+		}
+	},
+	"groups": [],
+	"vehicles": [{
+		"link": "http://195.80.208.117:8080/sunny-joi/joi/request/vehicle/1777481567",
+		"requestId": null,
+		"errors": null,
+		"id": 1777481567,
+		"supplierId": 1784,
+		"categoryId": 48,
+		"groupId": 53,
+		"manufacturer": "Hyundai",
+		"vehicleModel": "Mini+Economy",
+		"type": "i10",
+		"fuelType": "Petrol/gasoline",
+		"supplierCategory": "MDMR|YB",
+		"commonCarInformation": null,
+		"companyName": null,
+		"picture": "Hyundai_I10.jpg",
+		"nrDoors": 4,
+		"nrSeats": 4,
+		"aircondition": true,
+		"automatic": false,
+		"snowTires": false,
+		"allWheel": false,
+		"navigationSystem": false,
+		"stationWagon": false,
+		"convertible": false,
+		"bodyStyle": 10,
+		"typeId": 34,
+		"nrAdults": null,
+		"nrChildren": null,
+		"fuelTypeId": 1,
+		"nrLargeLuggage": null,
+		"nrSmallLuggage": null,
+		"trunkSize": null,
+		"vehicleSmallImage": null,
+		"vehicleLargeImage": null,
+		"ps": null,
+		"acriss": "MDMR"
+	},
+	{
+		"link": "http://195.80.208.117:8080/sunny-joi/joi/request/vehicle/1254372151",
+		"requestId": null,
+		"errors": null,
+		"id": 1254372151,
+		"supplierId": 1715,
+		"categoryId": 3,
+		"groupId": 3,
+		"manufacturer": "Opel",
+		"vehicleModel": "Mini+Economy",
+		"type": "Corsa",
+		"fuelType": "Petrol/gasoline",
+		"supplierCategory": "EBMR|YB",
+		"commonCarInformation": null,
+		"companyName": null,
+		"picture": "/img/cars/large/Hyundai_I10.jpg",
+		"nrDoors": 2,
+		"nrSeats": 4,
+		"aircondition": true,
+		"automatic": false,
+		"snowTires": false,
+		"allWheel": false,
+		"navigationSystem": false,
+		"stationWagon": false,
+		"convertible": false,
+		"bodyStyle": 10,
+		"typeId": 88,
+		"nrAdults": null,
+		"nrChildren": null,
+		"fuelTypeId": 1,
+		"nrLargeLuggage": null,
+		"nrSmallLuggage": null,
+		"trunkSize": null,
+		"vehicleSmallImage": null,
+		"vehicleLargeImage": null,
+		"ps": null,
+		"acriss": "EBMR"
+	},
+	{
+		"link": "http://195.80.208.117:8080/sunny-joi/joi/request/vehicle/1472460164",
+		"requestId": null,
+		"errors": null,
+		"id": 1472460164,
+		"supplierId": 5,
+		"categoryId": 2,
+		"groupId": 5,
+		"manufacturer": "Ford",
+		"vehicleModel": "Mini+Economy",
+		"type": "Ka",
+		"fuelType": "Petrol/gasoline",
+		"supplierCategory": "MBMR|YB",
+		"commonCarInformation": null,
+		"companyName": null,
+		"picture": "Ford_Ka_2dr_II.jpg",
+		"nrDoors": 2,
+		"nrSeats": 5,
+		"aircondition": true,
+		"automatic": false,
+		"snowTires": false,
+		"allWheel": false,
+		"navigationSystem": false,
+		"stationWagon": false,
+		"convertible": false,
+		"bodyStyle": 10,
+		"typeId": 31,
+		"nrAdults": null,
+		"nrChildren": null,
+		"fuelTypeId": 1,
+		"nrLargeLuggage": null,
+		"nrSmallLuggage": null,
+		"trunkSize": null,
+		"vehicleSmallImage": null,
+		"vehicleLargeImage": null,
+		"ps": null,
+		"acriss": "MBMR"
+	},
+	{
+		"link": "http://195.80.208.117:8080/sunny-joi/joi/request/vehicle/1926971422",
+		"requestId": null,
+		"errors": null,
+		"id": 1926971422,
+		"supplierId": 5,
+		"categoryId": 1,
+		"groupId": 4,
+		"manufacturer": "Ford",
+		"vehicleModel": "Mini+Economy",
+		"type": "Fiesta",
+		"fuelType": "Petrol/gasoline",
+		"supplierCategory": "EDMR|BB",
+		"commonCarInformation": null,
+		"companyName": null,
+		"picture": "Ford_Fiesta_4dr.jpg",
+		"nrDoors": 4,
+		"nrSeats": 4,
+		"aircondition": true,
+		"automatic": false,
+		"snowTires": false,
+		"allWheel": false,
+		"navigationSystem": false,
+		"stationWagon": false,
+		"convertible": false,
+		"bodyStyle": 10,
+		"typeId": 25,
+		"nrAdults": null,
+		"nrChildren": null,
+		"fuelTypeId": 1,
+		"nrLargeLuggage": null,
+		"nrSmallLuggage": null,
+		"trunkSize": null,
+		"vehicleSmallImage": null,
+		"vehicleLargeImage": null,
+		"ps": null,
+		"acriss": "EDMR"
+	},
+	{
+		"link": "http://195.80.208.117:8080/sunny-joi/joi/request/vehicle/2008521756",
+		"requestId": null,
+		"errors": null,
+		"id": 2008521756,
+		"supplierId": 5,
+		"categoryId": 3,
+		"groupId": 3,
+		"manufacturer": "Opel",
+		"vehicleModel": "Mini+Economy",
+		"type": "Corsa",
+		"fuelType": "Petrol/gasoline",
+		"supplierCategory": "EBMR|AB",
+		"commonCarInformation": null,
+		"companyName": null,
+		"picture": "/img/cars/large/Fiat_Punto_2dr.jpg",
+		"nrDoors": 2,
+		"nrSeats": 4,
+		"aircondition": true,
+		"automatic": false,
+		"snowTires": false,
+		"allWheel": false,
+		"navigationSystem": false,
+		"stationWagon": false,
+		"convertible": false,
+		"bodyStyle": 10,
+		"typeId": 88,
+		"nrAdults": null,
+		"nrChildren": null,
+		"fuelTypeId": 1,
+		"nrLargeLuggage": null,
+		"nrSmallLuggage": null,
+		"trunkSize": null,
+		"vehicleSmallImage": null,
+		"vehicleLargeImage": null,
+		"ps": null,
+		"acriss": "EBMR"
+	}],
+	"insurances": [],
+	"contactInformations": [{
+		"type": "telefon",
+		"contact": "+41(071)2923601",
+		"comment": ""
+	}],
+	"ratingView": {
+		"ratingGroups": [{
+			"header": {
+				"stationId": 6,
+				"supplierId": 5,
+				"carCategoryId": 2,
+				"name": "MBMR"
+			},
+			"offers": [{
+				"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/82b9a3dc-ae65-4d12-9451-eb1834a19293",
+				"requestId": null,
+				"errors": null,
+				"PROMOTION_NOT_REQUIRED": "0",
+				"PROMOTION_NOT_VALID": "1",
+				"PROMOTION_NOT_USED": "2",
+				"PROMOTION_USED": "3",
+				"PROMOTION_ERROR": "-1",
+				"id": "82b9a3dc-ae65-4d12-9451-eb1834a19293",
+				"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/82b9a3dc-ae65-4d12-9451-eb1834a19293/book",
+				"remainingCacheSeconds": null,
+				"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=12429&s=358990&i=0",
+				"name": "MBMR",
+				"supplierId": 5,
+				"serviceCatalogId": 222,
+				"serviceCatalogCode": null,
+				"serviceCatalogName": null,
+				"serviceCatalogPrio": 0,
+				"offeredPayment": null,
+				"price": {
+					"currency": "EUR",
+					"amount": "362,00",
+					"amountAsUS": "362.00",
+					"decimalAmount": 362.00
+				},
+				"stdPrice": {
+					"currency": "EUR",
+					"amount": "362,00",
+					"amountAsUS": "362.00",
+					"decimalAmount": 362.00
+				},
+				"promoValue": {
+					"currency": "EUR",
+					"amount": "0,00",
+					"amountAsUS": "0.00",
+					"decimalAmount": 0.00
+				},
+				"cancelFee": null,
+				"oneWayFee": null,
+				"outOfHourPrice": null,
+				"excessPrice": null,
+				"status": "AVAILABLE",
+				"inclusives": [{
+					"id": 2,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": 1,
+					"displayPriority": 99,
+					"itemClassCode": "MIL",
+					"itemClassName": "Mileage Agreement",
+					"description": "9999999999",
+					"name": "Unlimited Free Mileage/Kilometers",
+					"code": "UM",
+					"positive": 1
+				},
+				{
+					"id": 7,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 2,
+					"displayPriority": 99,
+					"itemClassCode": "FPO",
+					"itemClassName": "Fuel Policy",
+					"description": "Fair Fuel Policy: Return the car with a full tank",
+					"name": "Fair Fuel Policy: Full/Full",
+					"code": "FF",
+					"positive": 1
+				},
+				{
+					"id": 24,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 3,
+					"displayPriority": 99,
+					"itemClassCode": "EXC",
+					"itemClassName": "Damage Excess",
+					"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+					"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+					"code": "CDWS",
+					"positive": 0
+				},
+				{
+					"id": 21,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+					"name": "Incremental Liability Insurance 7500000 EUR",
+					"code": "LIS",
+					"positive": 1
+				},
+				{
+					"id": 23,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Location Service Charge",
+					"code": "LSC",
+					"positive": 1
+				},
+				{
+					"id": 22,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Airport Service Charge",
+					"code": "ASC",
+					"positive": 1
+				}],
+				"extras": null,
+				"promoText": null,
+				"pickUpStationId": 6,
+				"dropOffStationId": 6,
+				"vehicleId": 1472460164,
+				"commissionType": "1",
+				"carUsedPromotion": "0",
+				"carCategoryId": 2,
+				"supplierConditions": {
+					"supplierConditions": [],
+					"supplierConditionsUrl": null
+				},
+				"upsell": null,
+				"extVehicleId": 12429,
+				"extSalesSeasonId": 358990,
+				"rating": 3,
+				"sunshineTariff": false
+			}]
+		},
+		{
+			"header": {
+				"stationId": 4367,
+				"supplierId": 1784,
+				"carCategoryId": 48,
+				"name": "MDMR"
+			},
+			"offers": [{
+				"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/c3c3f7e2-c2e8-4b0d-a535-fbbf6e16e679",
+				"requestId": null,
+				"errors": null,
+				"PROMOTION_NOT_REQUIRED": "0",
+				"PROMOTION_NOT_VALID": "1",
+				"PROMOTION_NOT_USED": "2",
+				"PROMOTION_USED": "3",
+				"PROMOTION_ERROR": "-1",
+				"id": "c3c3f7e2-c2e8-4b0d-a535-fbbf6e16e679",
+				"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/c3c3f7e2-c2e8-4b0d-a535-fbbf6e16e679/book",
+				"remainingCacheSeconds": null,
+				"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=51393&s=360470&i=0",
+				"name": "MDMR",
+				"supplierId": 1784,
+				"serviceCatalogId": 222,
+				"serviceCatalogCode": null,
+				"serviceCatalogName": null,
+				"serviceCatalogPrio": 0,
+				"offeredPayment": null,
+				"price": {
+					"currency": "EUR",
+					"amount": "363,00",
+					"amountAsUS": "363.00",
+					"decimalAmount": 363.00
+				},
+				"stdPrice": {
+					"currency": "EUR",
+					"amount": "363,00",
+					"amountAsUS": "363.00",
+					"decimalAmount": 363.00
+				},
+				"promoValue": {
+					"currency": "EUR",
+					"amount": "0,00",
+					"amountAsUS": "0.00",
+					"decimalAmount": 0.00
+				},
+				"cancelFee": null,
+				"oneWayFee": null,
+				"outOfHourPrice": null,
+				"excessPrice": null,
+				"status": "AVAILABLE",
+				"inclusives": [{
+					"id": 2,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": 1,
+					"displayPriority": 99,
+					"itemClassCode": "MIL",
+					"itemClassName": "Mileage Agreement",
+					"description": "9999999999",
+					"name": "Unlimited Free Mileage/Kilometers",
+					"code": "UM",
+					"positive": 1
+				},
+				{
+					"id": 7,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 2,
+					"displayPriority": 99,
+					"itemClassCode": "FPO",
+					"itemClassName": "Fuel Policy",
+					"description": "Fair Fuel Policy: Return the car with a full tank",
+					"name": "Fair Fuel Policy: Full/Full",
+					"code": "FF",
+					"positive": 1
+				},
+				{
+					"id": 24,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 3,
+					"displayPriority": 99,
+					"itemClassCode": "EXC",
+					"itemClassName": "Damage Excess",
+					"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+					"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+					"code": "CDWS",
+					"positive": 0
+				},
+				{
+					"id": 21,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "Increased Liability Coverage 7000000 EUR - if suppliers amounts are less than that",
+					"name": "Incremental Liability Insurance 7000000 EUR",
+					"code": "LIS",
+					"positive": 1
+				},
+				{
+					"id": 38,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Vehicle License Fee",
+					"code": "VLF",
+					"positive": 1
+				},
+				{
+					"id": 23,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Location Service Charge",
+					"code": "LSC",
+					"positive": 1
+				},
+				{
+					"id": 22,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Airport Service Charge",
+					"code": "ASC",
+					"positive": 1
+				}],
+				"extras": null,
+				"promoText": null,
+				"pickUpStationId": 4367,
+				"dropOffStationId": 4367,
+				"vehicleId": 1777481567,
+				"commissionType": "1",
+				"carUsedPromotion": "0",
+				"carCategoryId": 48,
+				"supplierConditions": {
+					"supplierConditions": [],
+					"supplierConditionsUrl": null
+				},
+				"upsell": null,
+				"extVehicleId": 51393,
+				"extSalesSeasonId": 360470,
+				"rating": 3,
+				"sunshineTariff": false
+			}]
+		},
+		{
+			"header": {
+				"stationId": 6,
+				"supplierId": 5,
+				"carCategoryId": 3,
+				"name": "EBMR"
+			},
+			"offers": [{
+				"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/034866b8-dabf-4bbc-b92f-dd9ad26131f7",
+				"requestId": null,
+				"errors": null,
+				"PROMOTION_NOT_REQUIRED": "0",
+				"PROMOTION_NOT_VALID": "1",
+				"PROMOTION_NOT_USED": "2",
+				"PROMOTION_USED": "3",
+				"PROMOTION_ERROR": "-1",
+				"id": "034866b8-dabf-4bbc-b92f-dd9ad26131f7",
+				"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/034866b8-dabf-4bbc-b92f-dd9ad26131f7/book",
+				"remainingCacheSeconds": null,
+				"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=14258&s=358990&i=0",
+				"name": "EBMR",
+				"supplierId": 5,
+				"serviceCatalogId": 222,
+				"serviceCatalogCode": null,
+				"serviceCatalogName": null,
+				"serviceCatalogPrio": 0,
+				"offeredPayment": null,
+				"price": {
+					"currency": "EUR",
+					"amount": "366,00",
+					"amountAsUS": "366.00",
+					"decimalAmount": 366.00
+				},
+				"stdPrice": {
+					"currency": "EUR",
+					"amount": "366,00",
+					"amountAsUS": "366.00",
+					"decimalAmount": 366.00
+				},
+				"promoValue": {
+					"currency": "EUR",
+					"amount": "0,00",
+					"amountAsUS": "0.00",
+					"decimalAmount": 0.00
+				},
+				"cancelFee": null,
+				"oneWayFee": null,
+				"outOfHourPrice": null,
+				"excessPrice": null,
+				"status": "AVAILABLE",
+				"inclusives": [{
+					"id": 2,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": 1,
+					"displayPriority": 99,
+					"itemClassCode": "MIL",
+					"itemClassName": "Mileage Agreement",
+					"description": "9999999999",
+					"name": "Unlimited Free Mileage/Kilometers",
+					"code": "UM",
+					"positive": 1
+				},
+				{
+					"id": 7,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 2,
+					"displayPriority": 99,
+					"itemClassCode": "FPO",
+					"itemClassName": "Fuel Policy",
+					"description": "Fair Fuel Policy: Return the car with a full tank",
+					"name": "Fair Fuel Policy: Full/Full",
+					"code": "FF",
+					"positive": 1
+				},
+				{
+					"id": 24,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 3,
+					"displayPriority": 99,
+					"itemClassCode": "EXC",
+					"itemClassName": "Damage Excess",
+					"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+					"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+					"code": "CDWS",
+					"positive": 0
+				},
+				{
+					"id": 21,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+					"name": "Incremental Liability Insurance 7500000 EUR",
+					"code": "LIS",
+					"positive": 1
+				},
+				{
+					"id": 23,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Location Service Charge",
+					"code": "LSC",
+					"positive": 1
+				},
+				{
+					"id": 22,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Airport Service Charge",
+					"code": "ASC",
+					"positive": 1
+				}],
+				"extras": null,
+				"promoText": null,
+				"pickUpStationId": 6,
+				"dropOffStationId": 6,
+				"vehicleId": 2008521756,
+				"commissionType": "1",
+				"carUsedPromotion": "0",
+				"carCategoryId": 3,
+				"supplierConditions": {
+					"supplierConditions": [],
+					"supplierConditionsUrl": null
+				},
+				"upsell": null,
+				"extVehicleId": 14258,
+				"extSalesSeasonId": 358990,
+				"rating": 3,
+				"sunshineTariff": false
+			}]
+		},
+		{
+			"header": {
+				"stationId": 6,
+				"supplierId": 5,
+				"carCategoryId": 1,
+				"name": "EDMR"
+			},
+			"offers": [{
+				"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/551a1af5-f74e-404e-886d-68591aa54866",
+				"requestId": null,
+				"errors": null,
+				"PROMOTION_NOT_REQUIRED": "0",
+				"PROMOTION_NOT_VALID": "1",
+				"PROMOTION_NOT_USED": "2",
+				"PROMOTION_USED": "3",
+				"PROMOTION_ERROR": "-1",
+				"id": "551a1af5-f74e-404e-886d-68591aa54866",
+				"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/551a1af5-f74e-404e-886d-68591aa54866/book",
+				"remainingCacheSeconds": null,
+				"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=20363&s=358990&i=0",
+				"name": "EDMR",
+				"supplierId": 5,
+				"serviceCatalogId": 222,
+				"serviceCatalogCode": null,
+				"serviceCatalogName": null,
+				"serviceCatalogPrio": 0,
+				"offeredPayment": null,
+				"price": {
+					"currency": "EUR",
+					"amount": "373,00",
+					"amountAsUS": "373.00",
+					"decimalAmount": 373.00
+				},
+				"stdPrice": {
+					"currency": "EUR",
+					"amount": "373,00",
+					"amountAsUS": "373.00",
+					"decimalAmount": 373.00
+				},
+				"promoValue": {
+					"currency": "EUR",
+					"amount": "0,00",
+					"amountAsUS": "0.00",
+					"decimalAmount": 0.00
+				},
+				"cancelFee": null,
+				"oneWayFee": null,
+				"outOfHourPrice": null,
+				"excessPrice": null,
+				"status": "AVAILABLE",
+				"inclusives": [{
+					"id": 2,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": 1,
+					"displayPriority": 99,
+					"itemClassCode": "MIL",
+					"itemClassName": "Mileage Agreement",
+					"description": "9999999999",
+					"name": "Unlimited Free Mileage/Kilometers",
+					"code": "UM",
+					"positive": 1
+				},
+				{
+					"id": 7,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 2,
+					"displayPriority": 99,
+					"itemClassCode": "FPO",
+					"itemClassName": "Fuel Policy",
+					"description": "Fair Fuel Policy: Return the car with a full tank",
+					"name": "Fair Fuel Policy: Full/Full",
+					"code": "FF",
+					"positive": 1
+				},
+				{
+					"id": 24,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 3,
+					"displayPriority": 99,
+					"itemClassCode": "EXC",
+					"itemClassName": "Damage Excess",
+					"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+					"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+					"code": "CDWS",
+					"positive": 0
+				},
+				{
+					"id": 21,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+					"name": "Incremental Liability Insurance 7500000 EUR",
+					"code": "LIS",
+					"positive": 1
+				},
+				{
+					"id": 23,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Location Service Charge",
+					"code": "LSC",
+					"positive": 1
+				},
+				{
+					"id": 22,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Airport Service Charge",
+					"code": "ASC",
+					"positive": 1
+				}],
+				"extras": null,
+				"promoText": null,
+				"pickUpStationId": 6,
+				"dropOffStationId": 6,
+				"vehicleId": 1926971422,
+				"commissionType": "1",
+				"carUsedPromotion": "0",
+				"carCategoryId": 1,
+				"supplierConditions": {
+					"supplierConditions": [],
+					"supplierConditionsUrl": null
+				},
+				"upsell": null,
+				"extVehicleId": 20363,
+				"extSalesSeasonId": 358990,
+				"rating": 3,
+				"sunshineTariff": false
+			}]
+		},
+		{
+			"header": {
+				"stationId": 2869,
+				"supplierId": 1715,
+				"carCategoryId": 3,
+				"name": "EBMR"
+			},
+			"offers": [{
+				"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/81f43524-bf48-4835-87a7-953128cfd9dc",
+				"requestId": null,
+				"errors": null,
+				"PROMOTION_NOT_REQUIRED": "0",
+				"PROMOTION_NOT_VALID": "1",
+				"PROMOTION_NOT_USED": "2",
+				"PROMOTION_USED": "3",
+				"PROMOTION_ERROR": "-1",
+				"id": "81f43524-bf48-4835-87a7-953128cfd9dc",
+				"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/81f43524-bf48-4835-87a7-953128cfd9dc/book",
+				"remainingCacheSeconds": null,
+				"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=151&v=23426&s=360789&i=0",
+				"name": "EBMR",
+				"supplierId": 1715,
+				"serviceCatalogId": 259,
+				"serviceCatalogCode": null,
+				"serviceCatalogName": null,
+				"serviceCatalogPrio": 0,
+				"offeredPayment": null,
+				"price": {
+					"currency": "EUR",
+					"amount": "414,00",
+					"amountAsUS": "414.00",
+					"decimalAmount": 414.00
+				},
+				"stdPrice": {
+					"currency": "EUR",
+					"amount": "414,00",
+					"amountAsUS": "414.00",
+					"decimalAmount": 414.00
+				},
+				"promoValue": {
+					"currency": "EUR",
+					"amount": "0,00",
+					"amountAsUS": "0.00",
+					"decimalAmount": 0.00
+				},
+				"cancelFee": null,
+				"oneWayFee": null,
+				"outOfHourPrice": null,
+				"excessPrice": null,
+				"status": "AVAILABLE",
+				"inclusives": [{
+					"id": 2,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": 1,
+					"displayPriority": 99,
+					"itemClassCode": "MIL",
+					"itemClassName": "Mileage Agreement",
+					"description": "9999999999",
+					"name": "Unlimited Free Mileage/Kilometers",
+					"code": "UM",
+					"positive": 1
+				},
+				{
+					"id": 7,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 2,
+					"displayPriority": 99,
+					"itemClassCode": "FPO",
+					"itemClassName": "Fuel Policy",
+					"description": "Fair Fuel Policy: Return the car with a full tank",
+					"name": "Fair Fuel Policy: Full/Full",
+					"code": "FF",
+					"positive": 1
+				},
+				{
+					"id": 24,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 3,
+					"displayPriority": 99,
+					"itemClassCode": "EXC",
+					"itemClassName": "Damage Excess",
+					"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+					"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+					"code": "CDWS",
+					"positive": 0
+				},
+				{
+					"id": 20,
+					"link": null,
+					"insurance": true,
+					"itemClassFilter": true,
+					"itemClassId": 4,
+					"displayPriority": 99,
+					"itemClassCode": "LIC",
+					"itemClassName": "Liability Insurance Coverage",
+					"description": "Coverage amounts for 3rd party liability insurance",
+					"name": "Lability insurance: 50000000 EUR property damages, 30000 EUR bodily injuries",
+					"code": "LI",
+					"positive": 1
+				},
+				{
+					"id": 16,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": true,
+					"itemClassId": 6,
+					"displayPriority": 99,
+					"itemClassCode": "AD",
+					"itemClassName": "Additional Driver",
+					"description": "Additional Driver Fee included in rate",
+					"name": "Additional Driver",
+					"code": "ADI",
+					"positive": 1
+				},
+				{
+					"id": 38,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Vehicle License Fee",
+					"code": "VLF",
+					"positive": 1
+				},
+				{
+					"id": 23,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Location Service Charge",
+					"code": "LSC",
+					"positive": 1
+				},
+				{
+					"id": 22,
+					"link": null,
+					"insurance": false,
+					"itemClassFilter": false,
+					"itemClassId": -1,
+					"displayPriority": 99,
+					"itemClassCode": "",
+					"itemClassName": "",
+					"description": "",
+					"name": "Airport Service Charge",
+					"code": "ASC",
+					"positive": 1
+				}],
+				"extras": null,
+				"promoText": null,
+				"pickUpStationId": 2869,
+				"dropOffStationId": 2869,
+				"vehicleId": 1254372151,
+				"commissionType": "1",
+				"carUsedPromotion": "0",
+				"carCategoryId": 3,
+				"supplierConditions": {
+					"supplierConditions": [],
+					"supplierConditionsUrl": null
+				},
+				"upsell": null,
+				"extVehicleId": 23426,
+				"extSalesSeasonId": 360789,
+				"rating": 3,
+				"sunshineTariff": false
+			}]
+		}],
+		"allOffers": [{
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/82b9a3dc-ae65-4d12-9451-eb1834a19293",
+			"requestId": null,
+			"errors": null,
+			"PROMOTION_NOT_REQUIRED": "0",
+			"PROMOTION_NOT_VALID": "1",
+			"PROMOTION_NOT_USED": "2",
+			"PROMOTION_USED": "3",
+			"PROMOTION_ERROR": "-1",
+			"id": "82b9a3dc-ae65-4d12-9451-eb1834a19293",
+			"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/82b9a3dc-ae65-4d12-9451-eb1834a19293/book",
+			"remainingCacheSeconds": null,
+			"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=12429&s=358990&i=0",
+			"name": "MBMR",
+			"supplierId": 5,
+			"serviceCatalogId": 222,
+			"serviceCatalogCode": null,
+			"serviceCatalogName": null,
+			"serviceCatalogPrio": 0,
+			"offeredPayment": null,
+			"price": {
+				"currency": "EUR",
+				"amount": "362,00",
+				"amountAsUS": "362.00",
+				"decimalAmount": 362.00
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "362,00",
+				"amountAsUS": "362.00",
+				"decimalAmount": 362.00
+			},
+			"promoValue": {
+				"currency": "EUR",
+				"amount": "0,00",
+				"amountAsUS": "0.00",
+				"decimalAmount": 0.00
+			},
+			"cancelFee": null,
+			"oneWayFee": null,
+			"outOfHourPrice": null,
+			"excessPrice": null,
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 2,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"displayPriority": 99,
+				"itemClassCode": "MIL",
+				"itemClassName": "Mileage Agreement",
+				"description": "9999999999",
+				"name": "Unlimited Free Mileage/Kilometers",
+				"code": "UM",
+				"positive": 1
+			},
+			{
+				"id": 7,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 2,
+				"displayPriority": 99,
+				"itemClassCode": "FPO",
+				"itemClassName": "Fuel Policy",
+				"description": "Fair Fuel Policy: Return the car with a full tank",
+				"name": "Fair Fuel Policy: Full/Full",
+				"code": "FF",
+				"positive": 1
+			},
+			{
+				"id": 24,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 3,
+				"displayPriority": 99,
+				"itemClassCode": "EXC",
+				"itemClassName": "Damage Excess",
+				"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+				"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+				"code": "CDWS",
+				"positive": 0
+			},
+			{
+				"id": 21,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+				"name": "Incremental Liability Insurance 7500000 EUR",
+				"code": "LIS",
+				"positive": 1
+			},
+			{
+				"id": 23,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Location Service Charge",
+				"code": "LSC",
+				"positive": 1
+			},
+			{
+				"id": 22,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Airport Service Charge",
+				"code": "ASC",
+				"positive": 1
+			}],
+			"extras": null,
+			"promoText": null,
+			"pickUpStationId": 6,
+			"dropOffStationId": 6,
+			"vehicleId": 1472460164,
+			"commissionType": "1",
+			"carUsedPromotion": "0",
+			"carCategoryId": 2,
+			"supplierConditions": {
+				"supplierConditions": [],
+				"supplierConditionsUrl": null
+			},
+			"upsell": null,
+			"extVehicleId": 12429,
+			"extSalesSeasonId": 358990,
+			"rating": 3,
+			"sunshineTariff": false
+		},
+		{
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/c3c3f7e2-c2e8-4b0d-a535-fbbf6e16e679",
+			"requestId": null,
+			"errors": null,
+			"PROMOTION_NOT_REQUIRED": "0",
+			"PROMOTION_NOT_VALID": "1",
+			"PROMOTION_NOT_USED": "2",
+			"PROMOTION_USED": "3",
+			"PROMOTION_ERROR": "-1",
+			"id": "c3c3f7e2-c2e8-4b0d-a535-fbbf6e16e679",
+			"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/c3c3f7e2-c2e8-4b0d-a535-fbbf6e16e679/book",
+			"remainingCacheSeconds": null,
+			"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=51393&s=360470&i=0",
+			"name": "MDMR",
+			"supplierId": 1784,
+			"serviceCatalogId": 222,
+			"serviceCatalogCode": null,
+			"serviceCatalogName": null,
+			"serviceCatalogPrio": 0,
+			"offeredPayment": null,
+			"price": {
+				"currency": "EUR",
+				"amount": "363,00",
+				"amountAsUS": "363.00",
+				"decimalAmount": 363.00
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "363,00",
+				"amountAsUS": "363.00",
+				"decimalAmount": 363.00
+			},
+			"promoValue": {
+				"currency": "EUR",
+				"amount": "0,00",
+				"amountAsUS": "0.00",
+				"decimalAmount": 0.00
+			},
+			"cancelFee": null,
+			"oneWayFee": null,
+			"outOfHourPrice": null,
+			"excessPrice": null,
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 2,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"displayPriority": 99,
+				"itemClassCode": "MIL",
+				"itemClassName": "Mileage Agreement",
+				"description": "9999999999",
+				"name": "Unlimited Free Mileage/Kilometers",
+				"code": "UM",
+				"positive": 1
+			},
+			{
+				"id": 7,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 2,
+				"displayPriority": 99,
+				"itemClassCode": "FPO",
+				"itemClassName": "Fuel Policy",
+				"description": "Fair Fuel Policy: Return the car with a full tank",
+				"name": "Fair Fuel Policy: Full/Full",
+				"code": "FF",
+				"positive": 1
+			},
+			{
+				"id": 24,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 3,
+				"displayPriority": 99,
+				"itemClassCode": "EXC",
+				"itemClassName": "Damage Excess",
+				"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+				"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+				"code": "CDWS",
+				"positive": 0
+			},
+			{
+				"id": 21,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "Increased Liability Coverage 7000000 EUR - if suppliers amounts are less than that",
+				"name": "Incremental Liability Insurance 7000000 EUR",
+				"code": "LIS",
+				"positive": 1
+			},
+			{
+				"id": 38,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Vehicle License Fee",
+				"code": "VLF",
+				"positive": 1
+			},
+			{
+				"id": 23,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Location Service Charge",
+				"code": "LSC",
+				"positive": 1
+			},
+			{
+				"id": 22,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Airport Service Charge",
+				"code": "ASC",
+				"positive": 1
+			}],
+			"extras": null,
+			"promoText": null,
+			"pickUpStationId": 4367,
+			"dropOffStationId": 4367,
+			"vehicleId": 1777481567,
+			"commissionType": "1",
+			"carUsedPromotion": "0",
+			"carCategoryId": 48,
+			"supplierConditions": {
+				"supplierConditions": [],
+				"supplierConditionsUrl": null
+			},
+			"upsell": null,
+			"extVehicleId": 51393,
+			"extSalesSeasonId": 360470,
+			"rating": 3,
+			"sunshineTariff": false
+		},
+		{
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/034866b8-dabf-4bbc-b92f-dd9ad26131f7",
+			"requestId": null,
+			"errors": null,
+			"PROMOTION_NOT_REQUIRED": "0",
+			"PROMOTION_NOT_VALID": "1",
+			"PROMOTION_NOT_USED": "2",
+			"PROMOTION_USED": "3",
+			"PROMOTION_ERROR": "-1",
+			"id": "034866b8-dabf-4bbc-b92f-dd9ad26131f7",
+			"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/034866b8-dabf-4bbc-b92f-dd9ad26131f7/book",
+			"remainingCacheSeconds": null,
+			"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=14258&s=358990&i=0",
+			"name": "EBMR",
+			"supplierId": 5,
+			"serviceCatalogId": 222,
+			"serviceCatalogCode": null,
+			"serviceCatalogName": null,
+			"serviceCatalogPrio": 0,
+			"offeredPayment": null,
+			"price": {
+				"currency": "EUR",
+				"amount": "366,00",
+				"amountAsUS": "366.00",
+				"decimalAmount": 366.00
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "366,00",
+				"amountAsUS": "366.00",
+				"decimalAmount": 366.00
+			},
+			"promoValue": {
+				"currency": "EUR",
+				"amount": "0,00",
+				"amountAsUS": "0.00",
+				"decimalAmount": 0.00
+			},
+			"cancelFee": null,
+			"oneWayFee": null,
+			"outOfHourPrice": null,
+			"excessPrice": null,
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 2,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"displayPriority": 99,
+				"itemClassCode": "MIL",
+				"itemClassName": "Mileage Agreement",
+				"description": "9999999999",
+				"name": "Unlimited Free Mileage/Kilometers",
+				"code": "UM",
+				"positive": 1
+			},
+			{
+				"id": 7,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 2,
+				"displayPriority": 99,
+				"itemClassCode": "FPO",
+				"itemClassName": "Fuel Policy",
+				"description": "Fair Fuel Policy: Return the car with a full tank",
+				"name": "Fair Fuel Policy: Full/Full",
+				"code": "FF",
+				"positive": 1
+			},
+			{
+				"id": 24,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 3,
+				"displayPriority": 99,
+				"itemClassCode": "EXC",
+				"itemClassName": "Damage Excess",
+				"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+				"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+				"code": "CDWS",
+				"positive": 0
+			},
+			{
+				"id": 21,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+				"name": "Incremental Liability Insurance 7500000 EUR",
+				"code": "LIS",
+				"positive": 1
+			},
+			{
+				"id": 23,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Location Service Charge",
+				"code": "LSC",
+				"positive": 1
+			},
+			{
+				"id": 22,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Airport Service Charge",
+				"code": "ASC",
+				"positive": 1
+			}],
+			"extras": null,
+			"promoText": null,
+			"pickUpStationId": 6,
+			"dropOffStationId": 6,
+			"vehicleId": 2008521756,
+			"commissionType": "1",
+			"carUsedPromotion": "0",
+			"carCategoryId": 3,
+			"supplierConditions": {
+				"supplierConditions": [],
+				"supplierConditionsUrl": null
+			},
+			"upsell": null,
+			"extVehicleId": 14258,
+			"extSalesSeasonId": 358990,
+			"rating": 3,
+			"sunshineTariff": false
+		},
+		{
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/551a1af5-f74e-404e-886d-68591aa54866",
+			"requestId": null,
+			"errors": null,
+			"PROMOTION_NOT_REQUIRED": "0",
+			"PROMOTION_NOT_VALID": "1",
+			"PROMOTION_NOT_USED": "2",
+			"PROMOTION_USED": "3",
+			"PROMOTION_ERROR": "-1",
+			"id": "551a1af5-f74e-404e-886d-68591aa54866",
+			"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/551a1af5-f74e-404e-886d-68591aa54866/book",
+			"remainingCacheSeconds": null,
+			"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=20363&s=358990&i=0",
+			"name": "EDMR",
+			"supplierId": 5,
+			"serviceCatalogId": 222,
+			"serviceCatalogCode": null,
+			"serviceCatalogName": null,
+			"serviceCatalogPrio": 0,
+			"offeredPayment": null,
+			"price": {
+				"currency": "EUR",
+				"amount": "373,00",
+				"amountAsUS": "373.00",
+				"decimalAmount": 373.00
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "373,00",
+				"amountAsUS": "373.00",
+				"decimalAmount": 373.00
+			},
+			"promoValue": {
+				"currency": "EUR",
+				"amount": "0,00",
+				"amountAsUS": "0.00",
+				"decimalAmount": 0.00
+			},
+			"cancelFee": null,
+			"oneWayFee": null,
+			"outOfHourPrice": null,
+			"excessPrice": null,
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 2,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"displayPriority": 99,
+				"itemClassCode": "MIL",
+				"itemClassName": "Mileage Agreement",
+				"description": "9999999999",
+				"name": "Unlimited Free Mileage/Kilometers",
+				"code": "UM",
+				"positive": 1
+			},
+			{
+				"id": 7,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 2,
+				"displayPriority": 99,
+				"itemClassCode": "FPO",
+				"itemClassName": "Fuel Policy",
+				"description": "Fair Fuel Policy: Return the car with a full tank",
+				"name": "Fair Fuel Policy: Full/Full",
+				"code": "FF",
+				"positive": 1
+			},
+			{
+				"id": 24,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 3,
+				"displayPriority": 99,
+				"itemClassCode": "EXC",
+				"itemClassName": "Damage Excess",
+				"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+				"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+				"code": "CDWS",
+				"positive": 0
+			},
+			{
+				"id": 21,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+				"name": "Incremental Liability Insurance 7500000 EUR",
+				"code": "LIS",
+				"positive": 1
+			},
+			{
+				"id": 23,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Location Service Charge",
+				"code": "LSC",
+				"positive": 1
+			},
+			{
+				"id": 22,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Airport Service Charge",
+				"code": "ASC",
+				"positive": 1
+			}],
+			"extras": null,
+			"promoText": null,
+			"pickUpStationId": 6,
+			"dropOffStationId": 6,
+			"vehicleId": 1926971422,
+			"commissionType": "1",
+			"carUsedPromotion": "0",
+			"carCategoryId": 1,
+			"supplierConditions": {
+				"supplierConditions": [],
+				"supplierConditionsUrl": null
+			},
+			"upsell": null,
+			"extVehicleId": 20363,
+			"extSalesSeasonId": 358990,
+			"rating": 3,
+			"sunshineTariff": false
+		},
+		{
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/81f43524-bf48-4835-87a7-953128cfd9dc",
+			"requestId": null,
+			"errors": null,
+			"PROMOTION_NOT_REQUIRED": "0",
+			"PROMOTION_NOT_VALID": "1",
+			"PROMOTION_NOT_USED": "2",
+			"PROMOTION_USED": "3",
+			"PROMOTION_ERROR": "-1",
+			"id": "81f43524-bf48-4835-87a7-953128cfd9dc",
+			"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/81f43524-bf48-4835-87a7-953128cfd9dc/book",
+			"remainingCacheSeconds": null,
+			"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=151&v=23426&s=360789&i=0",
+			"name": "EBMR",
+			"supplierId": 1715,
+			"serviceCatalogId": 259,
+			"serviceCatalogCode": null,
+			"serviceCatalogName": null,
+			"serviceCatalogPrio": 0,
+			"offeredPayment": null,
+			"price": {
+				"currency": "EUR",
+				"amount": "414,00",
+				"amountAsUS": "414.00",
+				"decimalAmount": 414.00
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "414,00",
+				"amountAsUS": "414.00",
+				"decimalAmount": 414.00
+			},
+			"promoValue": {
+				"currency": "EUR",
+				"amount": "0,00",
+				"amountAsUS": "0.00",
+				"decimalAmount": 0.00
+			},
+			"cancelFee": null,
+			"oneWayFee": null,
+			"outOfHourPrice": null,
+			"excessPrice": null,
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 2,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"displayPriority": 99,
+				"itemClassCode": "MIL",
+				"itemClassName": "Mileage Agreement",
+				"description": "9999999999",
+				"name": "Unlimited Free Mileage/Kilometers",
+				"code": "UM",
+				"positive": 1
+			},
+			{
+				"id": 7,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 2,
+				"displayPriority": 99,
+				"itemClassCode": "FPO",
+				"itemClassName": "Fuel Policy",
+				"description": "Fair Fuel Policy: Return the car with a full tank",
+				"name": "Fair Fuel Policy: Full/Full",
+				"code": "FF",
+				"positive": 1
+			},
+			{
+				"id": 24,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 3,
+				"displayPriority": 99,
+				"itemClassCode": "EXC",
+				"itemClassName": "Damage Excess",
+				"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+				"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+				"code": "CDWS",
+				"positive": 0
+			},
+			{
+				"id": 20,
+				"link": null,
+				"insurance": true,
+				"itemClassFilter": true,
+				"itemClassId": 4,
+				"displayPriority": 99,
+				"itemClassCode": "LIC",
+				"itemClassName": "Liability Insurance Coverage",
+				"description": "Coverage amounts for 3rd party liability insurance",
+				"name": "Lability insurance: 50000000 EUR property damages, 30000 EUR bodily injuries",
+				"code": "LI",
+				"positive": 1
+			},
+			{
+				"id": 16,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": true,
+				"itemClassId": 6,
+				"displayPriority": 99,
+				"itemClassCode": "AD",
+				"itemClassName": "Additional Driver",
+				"description": "Additional Driver Fee included in rate",
+				"name": "Additional Driver",
+				"code": "ADI",
+				"positive": 1
+			},
+			{
+				"id": 38,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Vehicle License Fee",
+				"code": "VLF",
+				"positive": 1
+			},
+			{
+				"id": 23,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Location Service Charge",
+				"code": "LSC",
+				"positive": 1
+			},
+			{
+				"id": 22,
+				"link": null,
+				"insurance": false,
+				"itemClassFilter": false,
+				"itemClassId": -1,
+				"displayPriority": 99,
+				"itemClassCode": "",
+				"itemClassName": "",
+				"description": "",
+				"name": "Airport Service Charge",
+				"code": "ASC",
+				"positive": 1
+			}],
+			"extras": null,
+			"promoText": null,
+			"pickUpStationId": 2869,
+			"dropOffStationId": 2869,
+			"vehicleId": 1254372151,
+			"commissionType": "1",
+			"carUsedPromotion": "0",
+			"carCategoryId": 3,
+			"supplierConditions": {
+				"supplierConditions": [],
+				"supplierConditionsUrl": null
+			},
+			"upsell": null,
+			"extVehicleId": 23426,
+			"extSalesSeasonId": 360789,
+			"rating": 3,
+			"sunshineTariff": false
+		}]
+	},
+	"recommendations": [{
+		"link": "http://195.80.208.117:8080/sunny-joi/joi/request/offer/82b9a3dc-ae65-4d12-9451-eb1834a19293",
+		"requestId": null,
+		"errors": null,
+		"PROMOTION_NOT_REQUIRED": "0",
+		"PROMOTION_NOT_VALID": "1",
+		"PROMOTION_NOT_USED": "2",
+		"PROMOTION_USED": "3",
+		"PROMOTION_ERROR": "-1",
+		"id": "82b9a3dc-ae65-4d12-9451-eb1834a19293",
+		"bookLink": "http://195.80.208.117:8080/sunny-joi/joi/booking/offer/82b9a3dc-ae65-4d12-9451-eb1834a19293/book",
+		"remainingCacheSeconds": null,
+		"supplierConditionsUrl": "http://service.sunnycars.com/InfoPages/rate?l=4&p=150&v=12429&s=358990&i=0",
+		"name": "MBMR",
+		"supplierId": 5,
+		"serviceCatalogId": 222,
+		"serviceCatalogCode": null,
+		"serviceCatalogName": null,
+		"serviceCatalogPrio": 0,
+		"offeredPayment": null,
+		"price": {
+			"currency": "EUR",
+			"amount": "362,00",
+			"amountAsUS": "362.00",
+			"decimalAmount": 362.00
+		},
+		"stdPrice": {
+			"currency": "EUR",
+			"amount": "362,00",
+			"amountAsUS": "362.00",
+			"decimalAmount": 362.00
+		},
+		"promoValue": {
+			"currency": "EUR",
+			"amount": "0,00",
+			"amountAsUS": "0.00",
+			"decimalAmount": 0.00
+		},
+		"cancelFee": null,
+		"oneWayFee": null,
+		"outOfHourPrice": null,
+		"excessPrice": null,
+		"status": "AVAILABLE",
+		"inclusives": [{
+			"id": 2,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": false,
+			"itemClassId": 1,
+			"displayPriority": 99,
+			"itemClassCode": "MIL",
+			"itemClassName": "Mileage Agreement",
+			"description": "9999999999",
+			"name": "Unlimited Free Mileage/Kilometers",
+			"code": "UM",
+			"positive": 1
+		},
+		{
+			"id": 7,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": true,
+			"itemClassId": 2,
+			"displayPriority": 99,
+			"itemClassCode": "FPO",
+			"itemClassName": "Fuel Policy",
+			"description": "Fair Fuel Policy: Return the car with a full tank",
+			"name": "Fair Fuel Policy: Full/Full",
+			"code": "FF",
+			"positive": 1
+		},
+		{
+			"id": 24,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": true,
+			"itemClassId": 3,
+			"displayPriority": 99,
+			"itemClassCode": "EXC",
+			"itemClassName": "Damage Excess",
+			"description": "Collision Damage Waiver & Theft Protection with refundable excess",
+			"name": "Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+			"code": "CDWS",
+			"positive": 0
+		},
+		{
+			"id": 21,
+			"link": null,
+			"insurance": true,
+			"itemClassFilter": true,
+			"itemClassId": 4,
+			"displayPriority": 99,
+			"itemClassCode": "LIC",
+			"itemClassName": "Liability Insurance Coverage",
+			"description": "Increased Liability Coverage 7500000 EUR - if suppliers amounts are less than that",
+			"name": "Incremental Liability Insurance 7500000 EUR",
+			"code": "LIS",
+			"positive": 1
+		},
+		{
+			"id": 23,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": false,
+			"itemClassId": -1,
+			"displayPriority": 99,
+			"itemClassCode": "",
+			"itemClassName": "",
+			"description": "",
+			"name": "Location Service Charge",
+			"code": "LSC",
+			"positive": 1
+		},
+		{
+			"id": 22,
+			"link": null,
+			"insurance": false,
+			"itemClassFilter": false,
+			"itemClassId": -1,
+			"displayPriority": 99,
+			"itemClassCode": "",
+			"itemClassName": "",
+			"description": "",
+			"name": "Airport Service Charge",
+			"code": "ASC",
+			"positive": 1
+		}],
+		"extras": null,
+		"promoText": null,
+		"pickUpStationId": 6,
+		"dropOffStationId": 6,
+		"vehicleId": 1472460164,
+		"commissionType": "1",
+		"carUsedPromotion": "0",
+		"carCategoryId": 2,
+		"supplierConditions": {
+			"supplierConditions": [],
+			"supplierConditionsUrl": null
+		},
+		"upsell": null,
+		"extVehicleId": 12429,
+		"extSalesSeasonId": 358990,
+		"rating": 3,
+		"sunshineTariff": false
+	}],
+	"operator": 1,
+	"texts": {
+		"supplierList": [{
+			"id": 1784,
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/masterdata/supplier/1784",
+			"supplierGroupId": 4,
+			"logo": null,
+			"name": "Sunny Cars"
+		},
+		{
+			"id": 5,
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/masterdata/supplier/5",
+			"supplierGroupId": 4,
+			"logo": null,
+			"name": "Sunny Cars"
+		},
+		{
+			"id": 1715,
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/masterdata/supplier/1715",
+			"supplierGroupId": 4,
+			"logo": null,
+			"name": "Sunny Cars"
+		}],
+		"bodyStyleMap": {
+			"10": {
+				"id": 10,
+				"text": "Mini+Economy",
+				"iso": null
+			}
+		},
+		"stationList": [{
+			"id": 2869,
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/masterdata/station/2869/lang/2",
+			"identifier": "Palma de Mallorca APT",
+			"supplierId": 1715,
+			"supplierGroupId": 4,
+			"stationPriority": 1,
+			"supplierPriority": 5,
+			"crsCode": null,
+			"assignedCityIds": null,
+			"modules": null,
+			"geo": {
+				"country": null,
+				"countryCode": null,
+				"area": null,
+				"city": 3,
+				"airport": null
+			},
+			"addres": {
+				"signee": null,
+				"street": "Aeropuerto de Palma de Mallorca",
+				"country": null,
+				"countryId": null,
+				"zip": "07611",
+				"city": "Palma de Mallorca",
+				"latitude": 39.548067,
+				"longitude": 2.730875
+			},
+			"stationLocTypes": [{
+				"code": "APT",
+				"name": "Airport"
+			}]
+		},
+		{
+			"id": 6,
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/masterdata/station/6/lang/2",
+			"identifier": "Palma de Mallorca Airport",
+			"supplierId": 5,
+			"supplierGroupId": 4,
+			"stationPriority": 1,
+			"supplierPriority": 5,
+			"crsCode": null,
+			"assignedCityIds": null,
+			"modules": null,
+			"geo": {
+				"country": null,
+				"countryCode": null,
+				"area": null,
+				"city": 3,
+				"airport": null
+			},
+			"addres": {
+				"signee": null,
+				"street": null,
+				"country": null,
+				"countryId": null,
+				"zip": null,
+				"city": "Palma de Mallorca",
+				"latitude": null,
+				"longitude": null
+			},
+			"stationLocTypes": [{
+				"code": "APT",
+				"name": "Airport"
+			}]
+		},
+		{
+			"id": 4367,
+			"link": "http://195.80.208.117:8080/sunny-joi/joi/masterdata/station/4367/lang/2",
+			"identifier": "Palma City",
+			"supplierId": 1784,
+			"supplierGroupId": 4,
+			"stationPriority": 8,
+			"supplierPriority": 5,
+			"crsCode": null,
+			"assignedCityIds": null,
+			"modules": null,
+			"geo": {
+				"country": null,
+				"countryCode": null,
+				"area": null,
+				"city": 4211,
+				"airport": null
+			},
+			"addres": {
+				"signee": null,
+				"street": "Av. Ingeniero Gabriel Roca, 19 Bajo",
+				"country": null,
+				"countryId": null,
+				"zip": "7014",
+				"city": "Mallorca",
+				"latitude": 39.5672,
+				"longitude": 2.6294
+			},
+			"stationLocTypes": [{
+				"code": "CTY",
+				"name": "City"
+			}]
+		}]
+	},
+	"remainingCacheSeconds": null,
+	"offerFilterTemplate": {
+		"stationLocTypes": [{
+			"name": "RAS,Railway Station",
+			"count": 0
+		},
+		{
+			"name": "APT,Airport",
+			"count": 21
+		},
+		{
+			"name": "CTY,City",
+			"count": 2
+		},
+		{
+			"name": "HAR,Harbour",
+			"count": 0
+		}],
+		"bodyStyles": [{
+			"name": "10, Mini+Economy",
+			"count": 9,
+			"minPrice": 362.00,
+			"maxPrice": 843.00
+		},
+		{
+			"name": "11, Compact+Midsize",
+			"count": 4,
+			"minPrice": 422.00,
+			"maxPrice": 772.00
+		},
+		{
+			"name": "12, Family+Vans",
+			"count": 4,
+			"minPrice": 608.00,
+			"maxPrice": 1193.00
+		},
+		{
+			"name": "13, Lifestyle",
+			"count": 4,
+			"minPrice": 638.00,
+			"maxPrice": 1469.00
+		},
+		{
+			"name": "4, Intermediate",
+			"count": 1,
+			"minPrice": 727.00,
+			"maxPrice": 727.00
+		},
+		{
+			"name": "5, Economy",
+			"count": 1,
+			"minPrice": 440.00,
+			"maxPrice": 440.00
+		}],
+		"fuelTypes": [{
+			"name": "1, Petrol/gasoline",
+			"count": 23
+		}],
+		"suppliers": [{
+			"name": "1784, Sunny Cars",
+			"count": 2
+		},
+		{
+			"name": "5, Sunny Cars",
+			"count": 10
+		},
+		{
+			"name": "1890, Sunny Cars",
+			"count": 2
+		},
+		{
+			"name": "1715, Sunny Cars",
+			"count": 9
+		}],
+		"inclusives": {
+			"LIC, Liability Insurance Coverage": [{
+				"name": "LIS, Incremental Liability Insurance 7500000 EUR",
+				"count": 12
+			},
+			{
+				"name": "LI, Lability insurance: 50000000 EUR property damages, 30000 EUR bodily injuries",
+				"count": 11
+			}],
+			"AD, Additional Driver": [{
+				"name": "ADI, Additional Driver",
+				"count": 9
+			}],
+			"FPO, Fuel Policy": [{
+				"name": "FF, Fair Fuel Policy: Full/Full",
+				"count": 23
+			}],
+			"EXC, Damage Excess": [{
+				"name": "CDWS, Collision Damage Waiver /Theft Protection Special (with refundable excess)",
+				"count": 23
+			}]
+		},
+		"automatic": {
+			"name": "automatic",
+			"count": 7
+		},
+		"aircondition": {
+			"name": "aircondition",
+			"count": 23
+		},
+		"status": [{
+			"name": "13, AVAILABLE",
+			"count": 9
+		},
+		{
+			"name": "0, ON_REQUEST",
+			"count": 14
+		}],
+		"minPrice": {
+			"currency": "EUR",
+			"amount": "362,00",
+			"amountAsUS": "362.00",
+			"decimalAmount": 362.00
+		},
+		"maxPrice": {
+			"currency": "EUR",
+			"amount": "1.469,00",
+			"amountAsUS": "1,469.00",
+			"decimalAmount": 1469.00
+		}
+	},
+	"pageInfo": "page 1 from 5",
+	"pageNo": "1",
+	"pageCount": "5"
 }

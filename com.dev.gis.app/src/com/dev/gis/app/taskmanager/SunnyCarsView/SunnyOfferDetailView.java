@@ -27,6 +27,8 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.connector.api.SunnyModelProvider;
+import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.sunny.Address;
 import com.dev.gis.connector.sunny.Extra;
 import com.dev.gis.connector.sunny.Inclusive;
@@ -35,8 +37,6 @@ import com.dev.gis.connector.sunny.Station;
 import com.dev.gis.connector.sunny.TravelInformation;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.ModelProvider;
-import com.dev.gis.task.execution.api.SunnyModelProvider;
-import com.dev.gis.task.execution.api.SunnyOfferDo;
 
 public class SunnyOfferDetailView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.view.SunnyOfferDetailView";
