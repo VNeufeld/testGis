@@ -35,7 +35,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private IWorkbenchAction aboutAction;
     private Action stopProcessAction;
     private Action switchPerspectiveAction;
-    private Action switchToAppPerspectiveAction;
+    //private Action switchToAppPerspectiveAction;
     private Action resetCurrentPerspectiveAction;
     private IWorkbenchAction preferencesAction;
 
@@ -75,8 +75,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         register(switchPerspectiveAction);
 
     
-        switchToAppPerspectiveAction = new SwitchToAppPerspectiveAction("Switch To App Perspective", window);
-        register(switchToAppPerspectiveAction);
+//        switchToAppPerspectiveAction = new SwitchToAppPerspectiveAction("Switch To App Perspective", window);
+//        register(switchToAppPerspectiveAction);
 
         preferencesAction = ActionFactory.PREFERENCES.create(window);
         register(preferencesAction);        
@@ -100,14 +100,14 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         //fileMenu.add(openViewAction);
         //fileMenu.add(new Separator());
         perspectiveMenu.add(switchPerspectiveAction);
-        perspectiveMenu.add(switchToAppPerspectiveAction);
+        //perspectiveMenu.add(switchToAppPerspectiveAction);
         perspectiveMenu.add(new Separator());
         perspectiveMenu.add(resetCurrentPerspectiveAction);
         fileMenu.add(exitAction);
         
         // Help
         helpMenu.add(aboutAction);
-        helpMenu.add(preferencesAction);
+        //helpMenu.add(preferencesAction);
     }
     
     protected void fillCoolBar(ICoolBarManager coolBar) {
@@ -115,7 +115,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         coolBar.add(new ToolBarContributionItem(toolbar, "main"));   
         //toolbar.add(openViewAction);
         toolbar.add(switchPerspectiveAction);
-        toolbar.add(switchToAppPerspectiveAction);
+        //toolbar.add(switchToAppPerspectiveAction);
         toolbar.add(resetCurrentPerspectiveAction);
         toolbar.add(stopProcessAction);
     }

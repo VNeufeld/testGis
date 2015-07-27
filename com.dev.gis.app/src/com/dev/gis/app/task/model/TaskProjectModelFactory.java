@@ -13,13 +13,13 @@ public class TaskProjectModelFactory {
 //		TaskItem taskItem = TaskItem.createTask("locationSearch", "folder_edit.png", "test json http request locationSearch");
 //		if ( taskItem != null)
 //			model.getGroups().getFirst().getTasks().add(taskItem);
-		model.getGroups().getFirst().getTasks().
-			add(TaskItem.createTask("joiGetVehicle", "folder_edit.png", "test json http request GetVehicle"));
-		model.getGroups().getFirst().getTasks().
-			add(TaskItem.createTask("joiGetVehicleRecalculate", "folder_edit.png", "test json http request Recalculate"));
-		
-		model.getGroups().getFirst().getTasks().
-		add(TaskItem.createTask("3.SunnyCars Test (Joi)", "folder_edit.png", "test json http request SunnyCars"));
+//		model.getGroups().getFirst().getTasks().
+//			add(TaskItem.createTask("joiGetVehicle", "folder_edit.png", "test json http request GetVehicle"));
+//		model.getGroups().getFirst().getTasks().
+//			add(TaskItem.createTask("joiGetVehicleRecalculate", "folder_edit.png", "test json http request Recalculate"));
+//		
+//		model.getGroups().getFirst().getTasks().
+//		add(TaskItem.createTask("3.SunnyCars Test (Joi)", "folder_edit.png", "test json http request SunnyCars"));
 		
 /*
 		model.getGroups().getFirst().getTasks().
@@ -38,8 +38,8 @@ public class TaskProjectModelFactory {
 //		taskGroupEml.getTasks().add(TaskItem.createTask("EML_Creator", "folder.png", "test create eml"));
 
 
-		model.getGroups().getFirst().getTasks().
-		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
+//		model.getGroups().getFirst().getTasks().
+//		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
 		
 		TaskGroup taskGroup = new TaskGroup("Logging");
 		model.getGroups().add(taskGroup);

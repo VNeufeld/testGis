@@ -4,7 +4,7 @@ Bundle-Name: GisApp
 Bundle-SymbolicName: com.dev.gis.app; singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.dev.gis.app.Activator
-Bundle-Vendor: Neufeld
+Bundle-Vendor: BPCS
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.databinding;bundle-version="1.4.0",

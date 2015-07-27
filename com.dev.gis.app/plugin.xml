@@ -280,11 +280,6 @@
          <menu
                id="taskMenu"
                label="&amp;Tasks">
-            <command
-                  commandId="com.dev.gis.app.addTask"
-                  label="Add"
-                  style="push">
-            </command>
          </menu>
       </menuContribution>
       <menuContribution

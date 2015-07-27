@@ -9,7 +9,7 @@ public class TaskProjectModel extends TaskItemBase {
 
 	public TaskProjectModel() {
 		super();
-		groups.add(new TaskGroup("Default"));
+		//groups.add(new TaskGroup("Default"));
 	}
 
 	/**
