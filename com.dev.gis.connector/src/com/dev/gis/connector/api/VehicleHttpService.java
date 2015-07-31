@@ -82,7 +82,7 @@ public class VehicleHttpService {
 			URI uri = getServerURI(SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
 
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
-			logger.info("request = "+request);
+			logger.info("http client "+httpClient+ " request = "+request);
 			
 			String response = null;
 			
@@ -373,58 +373,6 @@ public class VehicleHttpService {
 	}
 
 
-	public static BookingResponse bookOffers(Offer selectedOffer,String bookingRequestId,
-			List<Extra> selectedExtras) {
-		GisHttpClient httpClient = new GisHttpClient();
-
-		try {
-			// joi/booking/${varBookingCacheId}/book?validateOnly=false
-			BookingRequest bookingRequest = new BookingRequest();
-			
-			String link = "/booking/"+bookingRequestId+"/book?validateOnly=false";
-			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
-			
-			logger.info("Book Request URI = "+uri);
-
-			Customer customer = createCustomer();
-			
-//			bookingRequest.setCustomer(customer);
-//			
-//			Person driver = createDriver();
-//			
-//			bookingRequest.setDriver(driver);
-//			
-//			
-//			Payment payment = new Payment();
-//			payment.setPaymentType("8");   // Paypal
-//			bookingRequest.setPayment(payment);
-//			
-//			bookingRequest.setAcceptedAvailability("13");
-//			bookingRequest.setFlightNo("LH4711");
-//			bookingRequest.setTransferType("1");
-//			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
-//			
-//			bookingRequest.setExtras(selectedExtras);
-
-			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
-			logger.info("book Request = "+request);
-			
-			String response =  httpClient.startPutRequestAsJson(uri, request);
-			logger.info("book Response = "+response);
-			
-			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
-			
-
-			return vh;
-			
-		} catch ( IOException e) {
-			logger.error(e);
-		} catch (URISyntaxException e) {
-			logger.error(e);
-		}
-		return null;
-	}
 
 	public static String recalculate(Offer selectedOffer, TravelInformation travelInformation) {
 		GisHttpClient httpClient = new GisHttpClient();
@@ -440,6 +388,8 @@ public class VehicleHttpService {
 			// http://localhost:8080/joi/vehicleRequest/1127497613/vehicle/899766814/offer/fc3763ab-b892-4f60-b3f7-fbe72fe91525/recalculate
 			
 			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
+			
+			
 			
 			logger.info("recalculate Request = "+uri);
 			
@@ -467,9 +417,8 @@ public class VehicleHttpService {
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( !dummy) {
 				
-				String params = SUNNY_PAYPAMENT_PAYPAGE;
 				
-				URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+params);
+				URI uri = getServerURI(SUNNY_PAYPAMENT_PAYPAGE);
 				
 				logger.info("VehicleHttpService = "+uri.toString());
 				
@@ -497,9 +446,9 @@ public class VehicleHttpService {
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( !dummy) {
 				
-				String params = SUNNY_PAYPAMENT_VERIFY;
 				
-				URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+params);
+				URI uri = getServerURI(SUNNY_PAYPAMENT_VERIFY);
+				
 				
 				logger.info("VehicleHttpService = "+uri.toString());
 				
@@ -527,12 +476,19 @@ public class VehicleHttpService {
 		try {
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( !dummy) {
-				URI uriServer = new URI(TaskProperties.getTaskProperties().getServerProperty());
+				URI uriServer = getServerURI("");
 				URI uri = new URI (uriServer.getScheme(),"", uriServer.getHost(),uriServer.getPort(), link.getPath(),null, link.getFragment());
-				logger.info("select offer : "+uri);
+				logger.info("httpClient : "+httpClient+ ". select offer : "+uri);
 				String response = httpClient.sendGetRequest(uri);
-				logger.info("response : "+response);
-				return  JsonUtils.createResponseClassFromJson(response, OfferInformation.class);
+				if  (response == null) {
+
+					return null;
+				}
+				else {
+					logger.info(" response : "+response);
+					return  JsonUtils.createResponseClassFromJson(response, OfferInformation.class);
+				}
+				
 			}
 			else {
 				String response = JsonUtils.createDummyResponse("DummyJoiGetOfferResponse.json");
@@ -605,10 +561,8 @@ public class VehicleHttpService {
 				return stationResponse;
 			}
 
-			String params = SUNNY_GET_PICKUP_STATIONS;
+			URI uri = getServerURI(SUNNY_GET_PICKUP_STATIONS);
 			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
-					params);
 			if ( type == 0)
 				type = 6;  // airport
 			else if ( type == 1)
@@ -655,11 +609,9 @@ public class VehicleHttpService {
 				
 				return stationResponse;
 			}
-
-			String params = SUNNY_GET_DROPOFF_STATIONS;
 			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
-					params);
+			URI uri = getServerURI(SUNNY_GET_DROPOFF_STATIONS);
+			
 			if ( type == 0)
 				type = 6;  // airport
 			else if ( type == 1)
@@ -695,7 +647,9 @@ public class VehicleHttpService {
 
 	public String putDriver(Offer offer, Text driverText) {
 		try {
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+SUNNY_BOOKING_DRIVER);
+			
+			URI uri = getServerURI(SUNNY_BOOKING_DRIVER);
+			
 			
 			Person driver = new Person();
 			
@@ -728,7 +682,9 @@ public class VehicleHttpService {
 
 	public String putCustomer(Offer selectedOffer, Text customerText) {
 		try {
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+SUNNY_BOOKING_CUSTOMER);
+			
+			URI uri = getServerURI(SUNNY_BOOKING_CUSTOMER);
+
 			
 			Customer customer = new Customer();
 			
@@ -777,7 +733,8 @@ public class VehicleHttpService {
 
 			String param = "/booking/offer/"+selectedOffer.getId().toString()+"/book";
 			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+param);
+			URI uri = getServerURI(param);
+			
 
 			String response =  httpClient.sendGetRequest(uri);
 			
@@ -801,7 +758,7 @@ public class VehicleHttpService {
 
 			String param = "/booking/offer/"+selectedOffer.getId().toString()+"/verify";
 			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+param);
+			URI uri = getServerURI(param);
 
 			String response =  httpClient.sendGetRequest(uri);
 			
@@ -823,7 +780,9 @@ public class VehicleHttpService {
 
 	public String putExtras(Offer selectedOffer, List<Extra> selectedExtras) {
 		try {
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+SUNNY_PUT_EXTRAS);
+			
+			URI uri = getServerURI(SUNNY_PUT_EXTRAS);
+			
 			
 			OfferExtras offerExtras = new OfferExtras();
 			

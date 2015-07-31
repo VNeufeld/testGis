@@ -198,7 +198,9 @@ public class RentCarsAppView extends TaskViewAbstract {
 		
 		Button showFilter = new Button(groupResult, SWT.PUSH | SWT.LEFT);
 		showFilter.setText("show Filter");
-		showFilter.addSelectionListener(showOfferFilterListener());
+		SelectionListener sl = showOfferFilterListener();
+		if (sl != null)
+			showFilter.addSelectionListener(sl);
 	}
 
 

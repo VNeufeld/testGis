@@ -3,6 +3,9 @@ package com.dev.gis.connector.sunny;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RatingGroup {
 	
 	private Header header;
@@ -13,6 +16,7 @@ public class RatingGroup {
 		private Long stationId;
 		private Long supplierId;
 		private Long carCategoryId;
+		private Long supplierGroupId;
 		private String name;
 		
 		public Long getStationId() {
@@ -38,6 +42,12 @@ public class RatingGroup {
 		}
 		public void setName(String name) {
 			this.name = name;
+		}
+		public Long getSupplierGroupId() {
+			return supplierGroupId;
+		}
+		public void setSupplierGroupId(Long supplierGroupId) {
+			this.supplierGroupId = supplierGroupId;
 		}
 		
 	}

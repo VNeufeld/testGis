@@ -1,5 +1,6 @@
 package com.dev.gis.app.view.elements;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
@@ -44,7 +45,10 @@ public class AirportLocationSearch extends LocationSearchText {
 
 	@Override
 	protected String getDefaultValue() {
-		return TaskProperties.getTaskProperties().getAptCode();
+		String apt = TaskProperties.getTaskProperties().getAptCode();
+		if ( StringUtils.isEmpty(apt))
+			apt = "PMI";
+		return apt;
 	}
 
 }

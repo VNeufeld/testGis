@@ -52,13 +52,18 @@ public abstract class ObjectsComboBox {
 	}
 	
 	private void selectValue() {
-		int index = comboList.getSelectionIndex();
-		String st = comboList.getItem(index);
-		selectedValue = getSelectedValue(index, st);
-		
-		setProperties(index);
-		
-		logSelectedValue(index );
+		try {
+			int index = comboList.getSelectionIndex();
+			String st = comboList.getItem(index);
+			selectedValue = getSelectedValue(index, st);
+			
+			setProperties(index);
+			
+			logSelectedValue(index );
+		}
+		catch(Exception err) {
+			
+		}
 
 	}
 

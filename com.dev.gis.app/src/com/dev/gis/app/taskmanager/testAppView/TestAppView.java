@@ -11,6 +11,7 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
@@ -35,6 +36,12 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
+import com.dev.gis.app.view.listener.SelectChangedOfferClickListener;
+import com.dev.gis.app.view.listener.SunnyGetOffersSelectionListener;
+import com.dev.gis.app.view.listener.SunnySelectOfferDoubleClickListener;
+import com.dev.gis.app.view.listener.adac.AdacJoiGetOffersSelectionListener;
+import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Location;
@@ -48,7 +55,7 @@ import com.dev.gis.task.execution.api.JoiVehicleConnector;
 import com.dev.gis.task.execution.api.ModelProvider;
 import com.dev.gis.task.execution.api.OfferDo;
 
-public class TestAppView extends TaskViewAbstract {
+public class TestAppView extends RentCarsAppView {
 	public static final String ID = IEditableTask.ID_TestAppView;
 	private StringFieldEditor city;
 	private StringFieldEditor airport;
@@ -77,8 +84,8 @@ public class TestAppView extends TaskViewAbstract {
 	
 	private static TravelInformation travelInformation;
 	
-	@Override
-	public void createPartControl(Composite parent) {
+	//@Override
+	public void createPartControlx(Composite parent) {
 		
 //		 exitAction = ActionFactory.QUIT.create(this);
 //	        register(exitAction);
@@ -297,7 +304,7 @@ public class TestAppView extends TaskViewAbstract {
 		return cityText;
 	}
 
-	private Button createRadioButtonsCarAndTruck(final Group groupStamp) {
+	protected Button createRadioButtonsCarAndTruck(final Group groupStamp) {
 		Composite rbComposite=new Composite(groupStamp, SWT.NONE);
 		rbComposite.setLayout(new GridLayout(2, true));
 		GridDataFactory.fillDefaults().span(4, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(rbComposite);
@@ -652,6 +659,55 @@ public class TestAppView extends TaskViewAbstract {
 	private void span(Composite parent, int x ) {
 		GridDataFactory.fillDefaults().span(x, 1).align(SWT.FILL, SWT.BEGINNING).grab(true, false).applyTo(parent);
 	}
+	
+	
+	@Override
+	protected ISelectionChangedListener getSelectChangedOfferClickListener() {
+		SelectChangedOfferClickListener ss = new SelectChangedOfferClickListener(offerId);
+		return ss;
+	}
 
+	@Override
+	protected IDoubleClickListener getSelectOfferDoubleClickListener() {
+		SunnySelectOfferDoubleClickListener ssd = new SunnySelectOfferDoubleClickListener();
+		return ssd;
+	}
+
+	@Override
+	protected SelectionListener getOffersSelectionListener() {
+		AdacJoiGetOffersSelectionListener listener = new AdacJoiGetOffersSelectionListener(parent.getShell()); 
+		return listener;
+	}
+	
+	public void showVehicleResponse(VehicleResponse response) {
+		
+		
+//		pageInfo.setText(response.getPageInfo());
+//
+//		// sessionId.setText(String.valueOf(response.getRequestId()));
+//
+//		requestId.setText(String.valueOf(response.getRequestId()));
+//
+//		setSummary(response.getSummary());
+//
+//		contact.setText(" get Contact from response");
+//		
+//		if (response.getOfferFilterTemplate() != null) {
+//			String offerFilter = response.getOfferFilterTemplate().toString();
+//			offerFilterTemlate.setText(offerFilter);
+//			SunnyModelProvider.INSTANCE.currentResponse = response;
+//		}
+//
+//		// Table
+//		SunnyModelProvider.INSTANCE.updateOffers(response);
+//		offerListTable.getViewer().setInput(SunnyModelProvider.INSTANCE.getOfferDos());
+//		offerListTable.getViewer().refresh();
+//		
+//		updateParent(response);
+		
+	}
+
+	public void clearView() {
+	}
 	
 }

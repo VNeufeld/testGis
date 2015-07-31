@@ -10,6 +10,9 @@ import org.eclipse.swt.widgets.Shell;
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferViewUpdater;
 import com.dev.gis.app.view.sunny.requestUtils.CreateVehicleRequestUtils;
 import com.dev.gis.app.view.sunny.requestUtils.GetOffersOperation;
+import com.dev.gis.app.view.sunny.requestUtils.ShowTimer;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.VehicleRequest;
 import com.dev.gis.connector.sunny.VehicleResponse;
 import com.dev.gis.task.execution.api.ModelProvider;
@@ -36,6 +39,15 @@ public class SunnyGetOffersSelectionListener implements SelectionListener {
 		
 		Object obj = arg0.getSource();
 		
+		getOffer1();
+
+		
+		//buttonGetOffer.setEnabled(true);
+		
+	}
+
+
+	private void getOffer1() {
 		VehicleRequest request = CreateVehicleRequestUtils.createVehicleRequest();
 		
 		int pageSizeInt = (int)ModelProvider.INSTANCE.pageSize;
@@ -59,11 +71,27 @@ public class SunnyGetOffersSelectionListener implements SelectionListener {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-
-		
-		//buttonGetOffer.setEnabled(true);
-		
 	}
 
+	private void getOffer2() {
+		
+		VehicleRequest request = CreateVehicleRequestUtils.createVehicleRequest();
+		
+		int pageSizeInt = (int)ModelProvider.INSTANCE.pageSize;
+		
+		new SunnyOfferViewUpdater().clearView();
+
+		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+		VehicleHttpService service = serviceFactory.getVehicleJoiService();
+
+		VehicleResponse response = service.getOffers(request, false, pageSizeInt);
+
+		if (response != null) {
+			new SunnyOfferViewUpdater().showResponse(response);
+			ModelProvider.INSTANCE.pageNo = 0;
+		}
+			
+	}
+	
 
 }

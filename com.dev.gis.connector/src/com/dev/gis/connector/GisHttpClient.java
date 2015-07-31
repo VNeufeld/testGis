@@ -41,17 +41,24 @@ public class GisHttpClient {
 			HttpGet httpget = new HttpGet(uri);
 			httpget.addHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));			
 			httpget.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));			
-			System.out.println("executing request " + httpget.getURI());
-
+			logger.info("httpclient "+httpclient + ". Executing GET request " + httpget.getURI());
 			
 			String response = httpclient.execute(httpget, responseHandler,
 					localContext);
+			logger.info("response = " + response);
+			logger.info("localContext " + localContext.toString());
+			CookieStore cookieStore = httpclient.getCookieStore();
+			logger.info("cookieStore " + cookieStore);
+			
 			return response;
 
 		} 
 		catch(Exception err) {
-			System.out.println("localContext " + localContext.toString());
-			System.out.println("responseHandler " + responseHandler.toString());
+			logger.info("localContext " + localContext.toString());
+			logger.info("responseHandler " + responseHandler.toString());
+			CookieStore cookieStore = httpclient.getCookieStore();
+			logger.info("cookieStore " + cookieStore);
+
 			logger.info(err.getMessage(), err);
 			
 		}
@@ -67,23 +74,27 @@ public class GisHttpClient {
 			StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
 	
 			httpPost.setEntity(entity);
-			httpPost.addHeader("Accept", "application/json");
-			httpPost.setHeader("Content-Type", "application/json");
+
+			httpPost.addHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));			
+			httpPost.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));			
+			
+			logger.info("httpclient "+httpclient + ". Executing POST request " + httpPost.getURI());
+			
 	
 			String response = httpclient.execute(httpPost, responseHandler,
 					localContext);
-			System.out.println("response = " + response);
-			System.out.println("localContext " + localContext.toString());
+			logger.info("response = " + response);
+			logger.info("localContext " + localContext.toString());
 	
 			CookieStore cookieStore = httpclient.getCookieStore();
-			System.out.println("cookieStore " + cookieStore);
-			System.out.println("----------------------------------------");
+			logger.info("cookieStore " + cookieStore);
+			logger.info("----------------------------------------");
 	
 			return response;
 		}
 		catch(Exception err) {
-			System.out.println("localContext " + localContext.toString());
-			System.out.println("responseHandler " + responseHandler.toString());
+			logger.info("localContext " + localContext.toString());
+			logger.info("responseHandler " + responseHandler.toString());
 			logger.info(err.getMessage(), err);
 			
 		}
@@ -103,45 +114,14 @@ public class GisHttpClient {
 		String response = httpclient.execute(httput, responseHandler,
 				localContext);
 
-		System.out.println("response = " + response);
-		System.out.println("localContext " + localContext.toString());
+		logger.info("response = " + response);
+		logger.info("localContext " + localContext.toString());
 
 		CookieStore cookieStore = httpclient.getCookieStore();
-		System.out.println("cookieStore " + cookieStore);
-		System.out.println("----------------------------------------");
+		logger.info("cookieStore " + cookieStore);
+		logger.info("----------------------------------------");
 
 		return response;
-	}
-
-
-	private String startGetRequest(URI uri) throws ClientProtocolException,
-			IOException {
-
-		HttpGet httpget = new HttpGet(uri);
-		System.out.println("executing request " + httpget.getURI());
-
-		httpclient.getParams().setParameter(
-				CoreProtocolPNames.HTTP_CONTENT_CHARSET,CHARSET_UTF8);
-		httpclient.getParams().setParameter(
-				CoreProtocolPNames.HTTP_ELEMENT_CHARSET, CHARSET_UTF8);
-
-//		httpget.getParams().setParameter(
-//				CoreProtocolPNames.HTTP_CONTENT_CHARSET, "UTF-8");
-//		httpget.getParams().setParameter(
-//				CoreProtocolPNames.HTTP_ELEMENT_CHARSET, "UTF-8");
-
-//		httpget.addHeader("charset", "utf-8");
-//		httpget.addHeader("Accept-Charset", "utf-8");
-		String responseBody = httpclient.execute(httpget, responseHandler,
-				localContext);
-		System.out.println("localContext " + localContext.toString());
-		System.out.println(responseBody);
-
-		CookieStore cookieStore = httpclient.getCookieStore();
-		System.out.println("cookieStore " + cookieStore);
-		System.out.println("----------------------------------------");
-
-		return responseBody;
 	}
 
 }

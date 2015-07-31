@@ -72,7 +72,7 @@ public class ObjectTextControl extends BasicControl {
 		
 	}
 	protected String getDefaultValue() {
-		return "";
+		return "5";
 	}
 	public void saveValue(String value) {
 		

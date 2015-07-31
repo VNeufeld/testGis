@@ -1,5 +1,6 @@
 package com.dev.gis.app.view.elements;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Composite;
 
@@ -25,6 +26,8 @@ public class PageSizeControl extends ObjectTextControl {
 
 	@Override
 	public void saveValue(String value) {
+		if ( StringUtils.isEmpty(value))
+			value = "5";
 		ModelProvider.INSTANCE.pageSize = Long.valueOf(value);
 		logger.info("page size : "+value);
 //		TaskProperties.getTaskProperties().setServerProperty(

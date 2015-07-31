@@ -38,6 +38,9 @@ public class LocationSearchText {
 		
 		text.setText(getDefaultValue());
 		
+		saveValue(text.getText());
+
+		
 		text.addKeyListener(new KeyListener() {
 
 			@Override
