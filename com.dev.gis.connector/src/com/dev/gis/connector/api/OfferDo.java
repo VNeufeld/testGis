@@ -49,6 +49,13 @@ public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
 		
 		group = vr.getVehicle().getVehicleGroup().getName() + "_" + vr.getVehicle().getVehicleGroup().getId();  
 		
+		travelInformation = new TravelInformation();
+		
+		travelInformation.setPickUpLocation(vr.getPickUpLocation());
+		travelInformation.setDropOffLocation(vr.getDropOffLocation());
+		
+		
+		
 	}
 
 	public VehicleResult getModel() {

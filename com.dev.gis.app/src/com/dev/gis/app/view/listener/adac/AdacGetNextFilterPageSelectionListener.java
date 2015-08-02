@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferViewUpdater;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.app.taskmanager.testAppView.OfferViewUpdater;
 import com.dev.gis.app.view.elements.CheckBox;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.AdacVehicleHttpService;

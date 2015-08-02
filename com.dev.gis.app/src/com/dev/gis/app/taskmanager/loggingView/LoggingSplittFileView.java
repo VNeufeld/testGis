@@ -45,7 +45,7 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.loggingView.service.SplitToFileService;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.app.taskmanager.testAppView.OfferViewUpdater;
 import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;

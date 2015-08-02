@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.offerDetailView;
+package com.dev.gis.app.taskmanager.testAppView;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.IWorkbenchPage;
@@ -6,7 +6,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyCarsAppView;
-import com.dev.gis.app.taskmanager.testAppView.TestAppView;
 import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.IResultView;

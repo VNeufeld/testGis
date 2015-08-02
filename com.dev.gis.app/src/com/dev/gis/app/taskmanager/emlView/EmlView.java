@@ -36,7 +36,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.app.taskmanager.testAppView.OfferViewUpdater;
 import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.task.execution.api.ITaskResult;
 

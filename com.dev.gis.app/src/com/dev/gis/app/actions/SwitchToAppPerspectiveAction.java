@@ -11,7 +11,7 @@ import org.eclipse.ui.PlatformUI;
 import com.dev.gis.app.Activator;
 import com.dev.gis.app.ICommandIds;
 import com.dev.gis.app.TestAppPerspective;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferDetailView;
+import com.dev.gis.app.taskmanager.testAppView.OfferDetailView;
 import com.dev.gis.app.taskmanager.testAppView.TestAppView;
 
 public class SwitchToAppPerspectiveAction extends Action {

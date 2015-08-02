@@ -18,13 +18,14 @@ public class Inclusive extends BasicProtocol {
 	private long id;
 	
 	private URI link;
-
-	
 	
 	private String description;
 
 	private int displayPriority;
 
+	private String code;
+
+	private String itemClassName;
 	
 	
 	public String getDescription() {
@@ -58,5 +59,21 @@ public class Inclusive extends BasicProtocol {
 	
 	public void setLink(URI link) {
 		this.link = link;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getItemClassName() {
+		return itemClassName;
+	}
+
+	public void setItemClassName(String itemClassName) {
+		this.itemClassName = itemClassName;
 	}
 }

@@ -7,7 +7,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferViewUpdater;
-import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.app.taskmanager.testAppView.OfferViewUpdater;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.api.SunnyModelProvider;

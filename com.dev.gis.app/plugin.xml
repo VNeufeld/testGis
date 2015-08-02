@@ -87,7 +87,7 @@
       </view>
       <view
             allowMultiple="false"
-            class="com.dev.gis.app.taskmanager.offerDetailView.OfferDetailView"
+            class="com.dev.gis.app.taskmanager.testAppView.OfferDetailView"
             icon="icons/sample.gif"
             id="com.dev.gis.app.view.OfferDetailView"
             name="Offer Details"
