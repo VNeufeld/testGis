@@ -75,7 +75,7 @@ public class JoiVehicleConnector {
 		admin.setLanguage("de-DE");
 		admin.setOperator(TaskProperties.getTaskProperties().getOperator());
 		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
-		admin.setCalledFrom(TaskProperties.CALLED_FROM);
+		admin.setCalledFrom(TaskProperties.CALLED_FROM_ANDROID);
 		admin.setBroker(false);
 		return admin;
 	}

@@ -1,4 +1,4 @@
-package com.dev.gis.task.execution.api;
+package com.dev.gis.connector.api;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -13,8 +13,10 @@ import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.PaymentInformation;
 import com.dev.gis.connector.joi.protocol.Person;
+import com.dev.gis.connector.joi.protocol.VehicleRequestFilter;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
+import com.dev.gis.connector.sunny.OfferFilter;
 
 public enum ModelProvider {
 	INSTANCE;
@@ -37,6 +39,15 @@ public enum ModelProvider {
 	
 	public Calendar pickupDateTime;
 	public Calendar dropoffDateTime;
+	
+	public String languageCode;
+
+	public long languageId;
+	
+	private VehicleResponse vehicleResponse;
+	
+	public VehicleRequestFilter  vehicleRequestFilter;
+
 	
 	private Person driver;
 
@@ -89,8 +100,13 @@ public enum ModelProvider {
 		offers.add(createOffer("BMW 7 ",12, 13, "223,32"));
 		
 	}
-	public void updateOffers(VehicleResponse response) {
+	public void updateResponse(VehicleResponse response) {
 		offerDos.clear();
+		if ( response == null)
+			return;
+		
+		this.vehicleResponse = response;
+		
 		List<VehicleResult> results = response.getResultList();
 		for ( VehicleResult vr : results) {
 			if ( vr.getOfferList().size() > 0 ) {
@@ -102,6 +118,12 @@ public enum ModelProvider {
 		}
 		
 	}
+	
+	public void clearView() {
+		offerDos.clear();
+		this.vehicleResponse = null;
+	}
+
 	
 	public void updateExtras(ExtraResponse response) {
 		extraDos.clear();
@@ -155,6 +177,10 @@ public enum ModelProvider {
 
 	public void setExtraDos(List<Extra> extraDos) {
 		this.extraDos = extraDos;
+	}
+
+	public VehicleResponse getVehicleResponse() {
+		return vehicleResponse;
 	}
 
 }

@@ -1,4 +1,6 @@
-package com.dev.gis.task.execution.api;
+package com.dev.gis.connector.api;
+
+import java.util.UUID;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.dev.gis.connector.joi.protocol.Inclusive;
@@ -26,6 +28,12 @@ public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
 		if ( vr.getOfferList().get(0).getPrice() != null)
 			preis = vr.getOfferList().get(0).getPrice().getAmount();
 		this.setPrice(new MoneyAmount(preis, "EUR"));
+
+		UUID id = new UUID(0l, 0l);
+		if ( vr.getOfferList().get(0).getId() != null)
+			id = vr.getOfferList().get(0).getId();
+		this.setId(id);
+
 		
 		if ( "2".equals(vr.getOfferList().get(0).getOfferedPayment()))
 			prepaid = " poa ";

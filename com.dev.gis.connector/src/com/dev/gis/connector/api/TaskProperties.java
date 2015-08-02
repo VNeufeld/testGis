@@ -22,7 +22,8 @@ public class TaskProperties {
 	public static String VEHICLE_REQUEST_PARAM = "/vehicleRequest?pageSize=200";
 	public static String LANGUAGE_CODE = "EN";
 	public static Integer SALES_CHANNEL = 7;
-	public static Integer CALLED_FROM = 9;
+	public static Integer CALLED_FROM_ANDROID = 9;
+	public static Integer CALLED_FROM_RENTFOX = 10;
 	
 	
 	private static TaskProperties taskProperties;

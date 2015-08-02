@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.bookingView.BookingView;
+import com.dev.gis.connector.api.ModelProvider;
+import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.Offer;
@@ -33,8 +35,6 @@ import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 import com.dev.gis.task.execution.api.ITaskResult;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
-import com.dev.gis.task.execution.api.ModelProvider;
-import com.dev.gis.task.execution.api.OfferDo;
 
 public class OfferDetailView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.view.OfferDetailView";

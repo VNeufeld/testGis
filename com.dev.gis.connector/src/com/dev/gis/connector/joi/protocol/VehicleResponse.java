@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @XmlRootElement(name="vehicleResponse")
 @XmlType(propOrder = {"requestId", "link", "errors", "sessionId", "remainingCacheSeconds", "resultList", "summary", "texts", "offerFilterTemplate" })
 @JsonIgnoreProperties(ignoreUnknown = true)
-
 public class VehicleResponse extends Response {
 
 	private VehicleSummary summary;

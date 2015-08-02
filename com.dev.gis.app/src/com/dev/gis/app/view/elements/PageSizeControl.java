@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Composite;
 
-import com.dev.gis.task.execution.api.ModelProvider;
+import com.dev.gis.connector.api.ModelProvider;
 
 public class PageSizeControl extends ObjectTextControl {
 	

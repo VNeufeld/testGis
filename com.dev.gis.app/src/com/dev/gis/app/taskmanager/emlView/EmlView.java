@@ -37,8 +37,8 @@ import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.OfferDo;
 
 public class EmlView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.EmlView";

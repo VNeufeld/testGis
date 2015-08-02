@@ -7,10 +7,10 @@ import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyCarsAppView;
 import com.dev.gis.app.taskmanager.testAppView.TestAppView;
+import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.IResultView;
 import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.OfferDo;
 
 public class OfferViewUpdater  {
 	private Logger logger = Logger.getLogger(OfferViewUpdater.class);

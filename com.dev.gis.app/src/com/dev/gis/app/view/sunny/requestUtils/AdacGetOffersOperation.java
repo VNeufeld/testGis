@@ -6,10 +6,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
+import com.dev.gis.task.execution.api.JoiVehicleConnector;
 
 public class AdacGetOffersOperation implements IRunnableWithProgress {
 
@@ -34,11 +36,9 @@ public class AdacGetOffersOperation implements IRunnableWithProgress {
 			InterruptedException {
 
 		new OfferViewUpdater().clearView();
-		
-		
 
 		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-		VehicleHttpService service = serviceFactory.getVehicleJoiService();
+		AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
 
 		monitor.setTaskName("create Vehicle...");
 		monitor.beginTask(" running HSGW GetCars ", 15000);
@@ -46,7 +46,7 @@ public class AdacGetOffersOperation implements IRunnableWithProgress {
 		ShowTimer showTimer = new ShowTimer(monitor);
 		new Thread(showTimer).start();
 
-		//this.response = service.getOffers(request, false, pageSize);
+		this.response = service.getOffers(request, false, pageSize);
 		showTimer.setWork(false);
 		monitor.done();
 

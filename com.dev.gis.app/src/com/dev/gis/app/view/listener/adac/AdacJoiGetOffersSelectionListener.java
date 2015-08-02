@@ -9,9 +9,9 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
 import com.dev.gis.app.view.sunny.requestUtils.AdacGetOffersOperation;
+import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
-import com.dev.gis.task.execution.api.ModelProvider;
 
 
 public class AdacJoiGetOffersSelectionListener implements SelectionListener {
@@ -43,7 +43,7 @@ public class AdacJoiGetOffersSelectionListener implements SelectionListener {
 
 
 	private void getOffer1() {
-		VehicleRequest request = CreateVehicleRequestUtils.createVehicleRequest();
+		VehicleRequest request = AdacCreateVehicleRequestUtils.createVehicleRequest();
 		
 		int pageSizeInt = (int)ModelProvider.INSTANCE.pageSize;
 

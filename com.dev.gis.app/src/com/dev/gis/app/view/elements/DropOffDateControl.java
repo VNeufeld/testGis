@@ -3,7 +3,7 @@ package com.dev.gis.app.view.elements;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Composite;
 
-import com.dev.gis.task.execution.api.ModelProvider;
+import com.dev.gis.connector.api.ModelProvider;
 
 public class DropOffDateControl extends ObjectDateControl {
 	private static Logger logger = Logger.getLogger(DropOffDateControl.class);

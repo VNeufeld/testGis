@@ -1,13 +1,14 @@
 package com.dev.gis.app.view.elements;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Composite;
 
-import com.dev.gis.connector.api.SunnyModelProvider;
-import com.dev.gis.connector.api.TaskProperties;
-import com.dev.gis.task.execution.api.ModelProvider;
+import com.dev.gis.connector.api.ModelProvider;
 
 public class LanguageComboBox extends ObjectsComboBox{
+	
+	private static final String PREFERENCE_PROPERTY = "LANGUAGE_PROPERTY";
 	
 	private static Logger logger = Logger.getLogger(LanguageComboBox.class);
 	
@@ -21,33 +22,13 @@ public class LanguageComboBox extends ObjectsComboBox{
 		return selectedValue;
 	}
 
-	@Override
-	protected String getSelectedValue(int index, String st) {
-		String selectedLanguage;
-		if ( st.contains("EN"))
-			selectedLanguage = "EN";
-		else
-			selectedLanguage = "DE";
-		
-		SunnyModelProvider.INSTANCE.languageCode = selectedLanguage;
-		SunnyModelProvider.INSTANCE.languageId = index +1;
-
-		return selectedLanguage;
-	}
-
-	@Override
-	protected int getSavedSelectedId() {
-		return TaskProperties.getTaskProperties().getLanguage();
-	}
-
-	@Override
-	protected void saveProperties(int index) {
-		TaskProperties.getTaskProperties().setLanguage(index);
-	}
 
 	@Override
 	protected String getLabel() {
 		return "Language";
+	}
+	protected String getPropertyName() {
+		return PREFERENCE_PROPERTY;
 	}
 
 	@Override
@@ -58,6 +39,25 @@ public class LanguageComboBox extends ObjectsComboBox{
 	@Override
 	protected void logSelectedValue(int index) {
 		logger.info("select language "+ index + " languageCode = "+ selectedValue);
+	}
+
+	@Override
+	protected void saveSelected(int index, String st) {
+		
+		String selectedLanguage;
+		if ( st.contains("EN"))
+			selectedLanguage = "EN";
+		else
+			selectedLanguage = "DE";
+		
+		ModelProvider.INSTANCE.languageCode = selectedLanguage;
+		ModelProvider.INSTANCE.languageId = index +1;
+
+		selectedValue = selectedLanguage;
+
+		saveProperty(PREFERENCE_PROPERTY,String.valueOf(index));
+		
+		
 	}
 
 }

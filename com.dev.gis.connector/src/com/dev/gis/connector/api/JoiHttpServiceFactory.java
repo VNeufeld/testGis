@@ -12,9 +12,11 @@ public class JoiHttpServiceFactory {
 	private static Logger logger = Logger.getLogger(JoiHttpServiceFactory.class);
 
 	private static GisHttpClient httpClient = null;
+	
 
 	public JoiHttpServiceFactory() {
 	}
+	
 
 	private static GisHttpClient getGisHttpClientInstance() {
 		if ( httpClient == null)
@@ -61,12 +63,16 @@ public class JoiHttpServiceFactory {
 		return null;
 
 	}
+	public AdacVehicleHttpService getAdacVehicleJoiService() {
+		
+		return  new  AdacVehicleHttpService(getGisHttpClientInstance());
+		
+	}
+	
 
 	public VehicleHttpService getVehicleJoiService() {
 		
-		VehicleHttpService  service = new  VehicleHttpService(getGisHttpClientInstance());
+		return  new  VehicleHttpService(getGisHttpClientInstance());
 		
-		
-		return service;
 	}
 }

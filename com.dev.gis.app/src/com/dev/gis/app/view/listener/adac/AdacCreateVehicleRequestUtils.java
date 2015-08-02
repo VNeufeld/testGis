@@ -2,14 +2,16 @@ package com.dev.gis.app.view.listener.adac;
 
 import java.util.Calendar;
 
+import com.dev.gis.connector.api.AdacModelProvider;
+import com.dev.gis.connector.api.ModelProvider;
+import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.joi.protocol.Administration;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Location;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
-import com.dev.gis.task.execution.api.ModelProvider;
 
-public class CreateVehicleRequestUtils {
+public class AdacCreateVehicleRequestUtils {
 
 	public static VehicleRequest createVehicleRequest() {
 		
@@ -18,12 +20,7 @@ public class CreateVehicleRequestUtils {
 		Administration admin = createAdministrator();
 		
 		request.setAdministration(admin);
-		
-//		Agency agency = new Agency();
-//		agency.setAgencyNo(SunnyModelProvider.INSTANCE.agencyNo);
-//		request.setAgency(agency);
 		return request;
-		
 		
 	}
 	
@@ -62,11 +59,9 @@ public class CreateVehicleRequestUtils {
 
 		request.setTravel(ti);
 
-		// if ( buttonTruck.getSelection())
-		// request.setModule(2);
-		// else
-		// request.setModule(1);
-		// request.setPayment(PayType.PREPAID);
+		request.setModule(AdacModelProvider.INSTANCE.module);
+		
+		request.setPayment(1);
 
 		return request;
 
@@ -87,15 +82,15 @@ public class CreateVehicleRequestUtils {
 	
 	private static Administration createAdministrator() {
 		Administration admin = new Administration();
+		String lang = "de-DE";
+		if ( "EN".equalsIgnoreCase(ModelProvider.INSTANCE.languageCode))
+			lang = "en-EN";
+		admin.setLanguage(lang);
+
+		admin.setOperator(AdacModelProvider.INSTANCE.operatorId);
+		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
+		admin.setCalledFrom(TaskProperties.CALLED_FROM_RENTFOX);
 		
-//		admin.setLanguage(SunnyModelProvider.INSTANCE.languageCode);
-//		admin.setOperator(ModelProvider.INSTANCE.operatorId);
-//
-//		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
-//		admin.setCalledFrom(5);
-//		admin.setBroker(false);
-//		admin.setProviderId(1l);
-//		admin.setProvider("Internet");
 		return admin;
 	}
 

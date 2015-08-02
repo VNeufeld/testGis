@@ -1,5 +1,6 @@
 package com.dev.gis.app.view.elements;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
@@ -12,7 +13,7 @@ import org.eclipse.swt.widgets.Label;
 
 import com.dev.gis.connector.api.TaskProperties;
 
-public abstract class ObjectsComboBox {
+public abstract class ObjectsComboBox extends BasicControl{
 	
 	private static Logger logger = Logger.getLogger(ObjectsComboBox.class);
 	
@@ -55,9 +56,7 @@ public abstract class ObjectsComboBox {
 		try {
 			int index = comboList.getSelectionIndex();
 			String st = comboList.getItem(index);
-			selectedValue = getSelectedValue(index, st);
-			
-			setProperties(index);
+			saveSelected(index,st);
 			
 			logSelectedValue(index );
 		}
@@ -68,27 +67,27 @@ public abstract class ObjectsComboBox {
 	}
 
 	
+	protected abstract  void saveSelected(int index, String st);
+
 	protected void logSelectedValue(int index) {
 		logger.info("select index "+ index + " value = "+ selectedValue);
 		
 	}
-
-	protected abstract String getSelectedValue(int index, String st);
 
 	private void selectSavedValue() {
 		int index = getSavedSelectedId();
 		comboList.select(index);
 	}
 	
-	protected abstract int getSavedSelectedId();
-
-	private void setProperties(int index) {
-		saveProperties(index);
-		TaskProperties.getTaskProperties().saveProperty();
-
+	protected abstract String getPropertyName() ; 
+	
+	protected int getSavedSelectedId() {
+		String value = readProperty(getPropertyName());
+		if ( StringUtils.isNotEmpty(value)) 
+			return Integer.valueOf(value);
+		return 0;
 	}
 
-	protected abstract void saveProperties(int index);
 
 	private Combo createList(Composite groupStamp) {
 		

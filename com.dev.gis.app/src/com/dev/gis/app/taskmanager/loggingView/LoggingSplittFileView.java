@@ -46,10 +46,10 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.loggingView.service.SplitToFileService;
 import com.dev.gis.app.taskmanager.offerDetailView.OfferViewUpdater;
+import com.dev.gis.connector.api.ModelProvider;
+import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.ITaskResult;
-import com.dev.gis.task.execution.api.ModelProvider;
-import com.dev.gis.task.execution.api.OfferDo;
 
 public class LoggingSplittFileView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.LoggingSplittView";

@@ -19,7 +19,7 @@ import com.dev.gis.connector.sunny.Vehicle;
 import com.dev.gis.connector.sunny.VehicleResponse;
 
 
-public enum SunnyModelProvider {
+public enum AdacModelProvider {
 	INSTANCE;
 
 	private List<Hit> locationSearchHits = new ArrayList<Hit>();
@@ -38,6 +38,9 @@ public enum SunnyModelProvider {
 	
 	public String agencyNo;
 
+	public String languageCode;
+
+	public long languageId;
 	
 	public long operatorId;
 	
@@ -51,9 +54,11 @@ public enum SunnyModelProvider {
 
 	private Person customer;
 	
+	public int module = 1; 
+	
 	//private PaymentInformation  paymentInformation;
 	
-	private SunnyModelProvider() {
+	private AdacModelProvider() {
 		Hit hit = new Hit();
 		hit.setIdentifier("München");
 		hit.setId(123l);

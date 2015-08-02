@@ -12,10 +12,10 @@ import com.dev.gis.app.view.sunny.requestUtils.CreateVehicleRequestUtils;
 import com.dev.gis.app.view.sunny.requestUtils.GetOffersOperation;
 import com.dev.gis.app.view.sunny.requestUtils.ShowTimer;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.VehicleRequest;
 import com.dev.gis.connector.sunny.VehicleResponse;
-import com.dev.gis.task.execution.api.ModelProvider;
 
 
 public class SunnyGetOffersSelectionListener implements SelectionListener {

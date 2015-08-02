@@ -6,12 +6,10 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
-import com.dev.gis.app.view.elements.ResultRecommendationTable;
 import com.dev.gis.app.view.listener.SelectChangedOfferClickListener;
 import com.dev.gis.app.view.listener.SunnyGetNextFilterPageSelectionListener;
 import com.dev.gis.app.view.listener.SunnyGetNextPageSelectionListener;
@@ -39,25 +37,6 @@ public class SunnyCarsAppView extends RentCarsAppView {
 		
 		recommendationTable = new ResultRecommendationTable(getSite(),
 				groupRecomm);
-	}
-	
-
-	protected Button createRadioButtonsCarAndTruck(final Group groupStamp) {
-		Composite rbComposite = new Composite(groupStamp, SWT.NONE);
-		rbComposite.setLayout(new GridLayout(2, true));
-		GridDataFactory.fillDefaults().span(4, 1)
-				.align(SWT.FILL, SWT.BEGINNING).grab(true, false)
-				.applyTo(rbComposite);
-
-		final Button buttonCar = new Button(rbComposite, SWT.RADIO);
-		buttonCar.setSelection(true);
-		buttonCar.setText("Car");
-
-		final Button buttonTruck = new Button(rbComposite, SWT.RADIO);
-		buttonTruck.setSelection(false);
-		buttonTruck.setText("Truck");
-
-		return buttonTruck;
 	}
 	
 

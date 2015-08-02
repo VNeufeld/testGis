@@ -2,6 +2,7 @@ package com.dev.gis.app.view.sunny.requestUtils;
 
 import java.util.Calendar;
 
+import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.sunny.Administration;
@@ -10,7 +11,6 @@ import com.dev.gis.connector.sunny.DayAndHour;
 import com.dev.gis.connector.sunny.Location;
 import com.dev.gis.connector.sunny.TravelInformation;
 import com.dev.gis.connector.sunny.VehicleRequest;
-import com.dev.gis.task.execution.api.ModelProvider;
 
 public class CreateVehicleRequestUtils {
 
@@ -91,7 +91,7 @@ public class CreateVehicleRequestUtils {
 	private static Administration createAdministrator() {
 		Administration admin = new Administration();
 		
-		admin.setLanguage(SunnyModelProvider.INSTANCE.languageCode);
+		admin.setLanguage(ModelProvider.INSTANCE.languageCode);
 		admin.setOperator(ModelProvider.INSTANCE.operatorId);
 
 		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);

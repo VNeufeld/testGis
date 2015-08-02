@@ -1,4 +1,4 @@
-package com.dev.gis.app.view.elements;
+package com.dev.gis.app.taskmanager.SunnyCarsView;
 
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -17,7 +17,7 @@ import org.eclipse.ui.IWorkbenchPartSite;
 
 import com.dev.gis.connector.api.SunnyOfferDo;
 
-public class ResultOfferListTable {
+public class SunnyOfferListTable {
 	
 	private TableViewer viewer;
 	
@@ -30,7 +30,7 @@ public class ResultOfferListTable {
 	private final Composite parent;
 	
 	
-	public ResultOfferListTable(IWorkbenchPartSite site,final Composite parent, 
+	public SunnyOfferListTable(IWorkbenchPartSite site,final Composite parent, 
 			IDoubleClickListener selectOfferListener, 
 			ISelectionChangedListener selectionChangedListener  ) {
 		this.site = site;

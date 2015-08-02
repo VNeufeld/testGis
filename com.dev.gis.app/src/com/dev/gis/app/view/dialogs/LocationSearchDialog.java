@@ -31,11 +31,11 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.connector.api.ILocationService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.sunny.Hit;
 import com.dev.gis.connector.sunny.HitType;
 import com.dev.gis.connector.sunny.LocationSearchResult;
-import com.dev.gis.task.execution.api.ModelProvider;
 
 public class LocationSearchDialog extends Dialog {
 	

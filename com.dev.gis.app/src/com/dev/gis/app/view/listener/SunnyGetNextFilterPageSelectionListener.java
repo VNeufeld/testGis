@@ -6,9 +6,9 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferViewUpdater;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.VehicleResponse;
-import com.dev.gis.task.execution.api.ModelProvider;
 
 
 public class SunnyGetNextFilterPageSelectionListener implements SelectionListener {

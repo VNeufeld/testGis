@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.view.listener.SearchCitySelectionListener;
-import com.dev.gis.task.execution.api.ModelProvider;
+import com.dev.gis.connector.api.ModelProvider;
 
 public class CityLocationSearch extends LocationSearchText {
 

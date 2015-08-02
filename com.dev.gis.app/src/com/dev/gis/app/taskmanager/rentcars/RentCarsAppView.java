@@ -1,11 +1,10 @@
 package com.dev.gis.app.taskmanager.rentcars;
 
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -15,7 +14,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.view.dialogs.OfferFilterDialog;
+import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferListTable;
 import com.dev.gis.app.view.elements.AgencyNoTextControl;
 import com.dev.gis.app.view.elements.AirportLocationSearch;
 import com.dev.gis.app.view.elements.ButtonControl;
@@ -25,34 +24,32 @@ import com.dev.gis.app.view.elements.LanguageComboBox;
 import com.dev.gis.app.view.elements.OperatorComboBox;
 import com.dev.gis.app.view.elements.PageSizeControl;
 import com.dev.gis.app.view.elements.PickupDateControl;
-import com.dev.gis.app.view.elements.ResultOfferListTable;
 import com.dev.gis.app.view.elements.ServerTextControl;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.sunny.VehicleResponse;
 import com.dev.gis.connector.sunny.VehicleSummary;
 import com.dev.gis.task.execution.api.IEditableTask;
-import com.dev.gis.task.execution.api.ITaskResult;
 
 public class RentCarsAppView extends TaskViewAbstract {
 	public static final String ID = IEditableTask.ID_TestRentCarsView;
 
-	private ResultOfferListTable offerListTable;
+	private SunnyOfferListTable offerListTable;
 
-	private Text pageInfo = null;
+	protected Text pageInfo = null;
 	
-	private Text summary = null;
+	protected Text summary = null;
 
-	private Text sessionId = null;
+	protected Text sessionId = null;
 
 	protected Text offerId = null;
 	
 	protected Text browseFilter = null;
 
-	private Text contact = null;
+	protected Text contact = null;
 
-	private Text offerFilterTemlate = null;
+	protected Text offerFilterTemlate = null;
 	
-	private Text requestId = null;
+	protected Text requestId = null;
 	
 	
 	protected Composite parent;
@@ -71,17 +68,7 @@ public class RentCarsAppView extends TaskViewAbstract {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.grab(false, false).applyTo(groupStamp);
 		
-		new ServerTextControl(groupStamp);
-		
-		new AgencyNoTextControl(groupStamp);
-		
-		new LanguageComboBox(groupStamp, 80);
-
-		new OperatorComboBox(groupStamp, 80);
-		
-		CityLocationSearch.createCityLocationSearch(groupStamp); 
-
-		AirportLocationSearch.createAirportLocationSearch(groupStamp);
+		createBasicControls(groupStamp);
 		
 		new PickupDateControl(groupStamp);
 
@@ -99,8 +86,23 @@ public class RentCarsAppView extends TaskViewAbstract {
 		createResultOfferListTable(composite);
 		
 		createRecommendationTable(composite);
-		
+	
+	}
 
+
+	protected void createBasicControls(final Group groupStamp) {
+		
+		new ServerTextControl(groupStamp);
+		
+		new AgencyNoTextControl(groupStamp);
+		
+		new LanguageComboBox(groupStamp, 80);
+
+		new OperatorComboBox(groupStamp, 80);
+		
+		CityLocationSearch.createCityLocationSearch(groupStamp); 
+
+		AirportLocationSearch.createAirportLocationSearch(groupStamp);
 	}
 
 
@@ -113,13 +115,13 @@ public class RentCarsAppView extends TaskViewAbstract {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, true).applyTo(groupOffers);
 		
-		offerListTable = new ResultOfferListTable(getSite(),
+		offerListTable = new SunnyOfferListTable(getSite(),
 				groupOffers, getSelectOfferDoubleClickListener(), getSelectChangedOfferClickListener() );
 		
 		
 	}
 
-	private void createNextPage(final Composite groupResult) {
+	protected void createNextPage(final Composite groupResult) {
 		
 		new Label(groupResult, SWT.NONE).setText("Page");
 		pageInfo =  new Text(groupResult, SWT.BORDER | SWT.SINGLE);
@@ -130,7 +132,7 @@ public class RentCarsAppView extends TaskViewAbstract {
 	
 	}
 	
-	private void createBrowseFilterPage(final Composite groupResult) {
+	protected void createBrowseFilterPage(final Composite groupResult) {
 		
 		new Label(groupResult, SWT.NONE).setText("BrowseFilter");
 		browseFilter =  new Text(groupResult, SWT.BORDER | SWT.SINGLE);
@@ -148,6 +150,38 @@ public class RentCarsAppView extends TaskViewAbstract {
 		groupResult.setLayout(new GridLayout(4, false));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).span(4, 1).applyTo(groupResult);
 
+		createResultFields(groupResult);
+
+
+
+		return groupResult;
+	}
+	
+	protected Composite createComposite(final Composite parent,int columns, int span, boolean grab) {
+		
+		GridLayout gd = (GridLayout)parent.getLayout();
+		int col = gd.numColumns;
+		
+		Composite composite = new Composite(parent, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(columns).equalWidth(false).applyTo(composite);
+
+		if ( span < 0)
+			GridDataFactory.fillDefaults().span(col, 1)
+					.align(SWT.FILL, SWT.BEGINNING).grab(grab, false)
+					.applyTo(composite);
+		else
+			GridDataFactory.fillDefaults().span(span, 1)
+			.align(SWT.FILL, SWT.BEGINNING).grab(grab, false)
+			.applyTo(composite);
+
+
+		return composite;
+	}
+
+
+
+	protected void createResultFields(final Group groupResult) {
+		
 		createNextPage(groupResult);
 		
 		createBrowseFilterPage(groupResult);
@@ -181,16 +215,12 @@ public class RentCarsAppView extends TaskViewAbstract {
 				.grab(true, false).span(3, 1).applyTo(contact);
 		
 		createFilterTemplate(groupResult);
-
-
-
-		return groupResult;
 	}
 
 
 
 
-	private void createFilterTemplate(Group groupResult) {
+	protected void createFilterTemplate(Group groupResult) {
 		new Label(groupResult, SWT.NONE).setText("offerFilterTemplate");
 		offerFilterTemlate = new Text(groupResult, SWT.BORDER | SWT.SINGLE);
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
@@ -208,26 +238,6 @@ public class RentCarsAppView extends TaskViewAbstract {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	@Override
-	public void setFocus() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void refresh() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void refresh(ITaskResult result) {
-		// TODO Auto-generated method stub
-
-	}
-
 
 	
 	public void showVehicleResponse(VehicleResponse response) {

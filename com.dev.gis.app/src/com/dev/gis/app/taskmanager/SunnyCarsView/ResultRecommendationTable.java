@@ -1,4 +1,4 @@
-package com.dev.gis.app.view.elements;
+package com.dev.gis.app.taskmanager.SunnyCarsView;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;

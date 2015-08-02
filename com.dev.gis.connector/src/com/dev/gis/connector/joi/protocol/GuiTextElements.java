@@ -8,9 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name = "text")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GuiTextElements extends BasicProtocol {
 
 	private List<Supplier> supplierList = new ArrayList<>();
