@@ -17,7 +17,7 @@ public class AgencyNoTextControl extends ObjectTextControl {
 	}
 
 	public AgencyNoTextControl(Composite parent) {
-		super(parent, 100);
+		super(parent, 100, true);
 	}
 
 	@Override

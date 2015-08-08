@@ -25,16 +25,16 @@ public abstract class ObjectsComboBox extends BasicControl{
 
 	private final Composite parent;
 	
-	public ObjectsComboBox(Composite parent, int size) {
+	public ObjectsComboBox(Composite parent, int size, boolean span) {
 		super();
 		this.parent = parent;
 		this.size = size;
-		create();
+		create(span);
 	}
 
-	public void create() {
+	public void create(boolean span) {
 		logger.info("create ");
-		comboList = createList(parent);
+		comboList = createList(parent, span);
 		selectSavedValue();
 		comboList.addSelectionListener(new SelectionListener() {
 			
@@ -89,7 +89,7 @@ public abstract class ObjectsComboBox extends BasicControl{
 	}
 
 
-	private Combo createList(Composite groupStamp) {
+	private Combo createList(Composite groupStamp, boolean span) {
 		
 		new Label(groupStamp, SWT.NONE).setText(getLabel());
 
@@ -98,9 +98,12 @@ public abstract class ObjectsComboBox extends BasicControl{
 
 		final Combo c = new Combo(groupStamp, SWT.READ_ONLY);
 		c.setItems(getItems());
-		
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-				.grab(false, false).span(col-1, 1).hint(size, 16).applyTo(c);
+		if ( span )
+			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+					.grab(false, false).span(col-1, 1).hint(size, 16).applyTo(c);
+		else
+			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+			.grab(false, false).hint(size, 16).applyTo(c);
 
 		return c;
 	}

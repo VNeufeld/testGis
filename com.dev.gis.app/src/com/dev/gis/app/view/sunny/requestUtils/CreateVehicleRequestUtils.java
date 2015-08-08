@@ -92,7 +92,7 @@ public class CreateVehicleRequestUtils {
 		Administration admin = new Administration();
 		
 		admin.setLanguage(ModelProvider.INSTANCE.languageCode);
-		admin.setOperator(ModelProvider.INSTANCE.operatorId);
+		admin.setOperator(SunnyModelProvider.INSTANCE.operatorId);
 
 		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
 		admin.setCalledFrom(5);

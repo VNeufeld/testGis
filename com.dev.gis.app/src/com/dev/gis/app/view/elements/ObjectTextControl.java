@@ -22,12 +22,12 @@ public class ObjectTextControl extends BasicControl {
 
 	private final Composite parent;
 	
-	public ObjectTextControl(Composite parent, int size) {
+	public ObjectTextControl(Composite parent, int size, boolean span) {
 		super();
 		this.parent = parent;
 		this.size = size;
 		
-		create();
+		create(span);
 		
 		text.setText(getDefaultValue());
 		
@@ -41,8 +41,8 @@ public class ObjectTextControl extends BasicControl {
 			public void keyReleased(KeyEvent arg0) {
 				if (arg0.character == '\r') {
 					
-					String value = text.getText();
-					saveValue(value);
+					selectedValue = text.getText();
+					saveValue(selectedValue);
 				}
 			}
 
@@ -64,8 +64,8 @@ public class ObjectTextControl extends BasicControl {
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				String value = text.getText();
-				saveValue(value);
+				selectedValue = text.getText();
+				saveValue(selectedValue);
 			}
 		});
 
@@ -78,7 +78,7 @@ public class ObjectTextControl extends BasicControl {
 		
 	}
 	
-	private void create() {
+	private void create(boolean span) {
 		
 		String label = getLabel();
 
@@ -88,13 +88,27 @@ public class ObjectTextControl extends BasicControl {
 		int col = gd.numColumns;
 		
 		text = new Text(parent, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-				.grab(false, false).span(col-1, 1).hint(size, 16).applyTo(text);
+		if ( span )
+			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+					.grab(false, false).span(col-1, 1).hint(size, 16).applyTo(text);
+		else
+			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+			.grab(false, false).hint(size, 16).applyTo(text);
 
 	}
 
 	protected String getLabel() {
 		return " XXX";
 	}
+	public String getSelectedValue() {
+		return selectedValue;
+	}
+	
+	public void setSelectedValue(String value) {
+		selectedValue = value;
+		this.text.setText(value);
+		saveValue(value);
+	}
+
 
 }

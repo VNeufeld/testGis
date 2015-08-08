@@ -15,7 +15,7 @@ public class PageSizeControl extends ObjectTextControl {
 	}
 
 	public PageSizeControl(Composite parent) {
-		super(parent, 100);
+		super(parent, 100, true);
 	}
 
 	@Override

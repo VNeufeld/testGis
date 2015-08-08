@@ -43,7 +43,7 @@ public class JoiHttpServiceFactory {
 		try {
 			URI uri = getServerURI();
 			
-			int language = TaskProperties.getTaskProperties().getLanguage()+1;
+			long language = ModelProvider.INSTANCE.languageId;
 			
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			ILocationService locationHttpService = null;

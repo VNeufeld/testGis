@@ -17,7 +17,7 @@ public class OperatorComboBox extends ObjectsComboBox{
 	
 	
 	public OperatorComboBox(Composite parent, int size) {
-		super(parent, size);
+		super(parent, size, true);
 	}
 
 	@Override

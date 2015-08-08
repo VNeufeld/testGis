@@ -12,7 +12,7 @@ public class AdacServerTextControl extends ObjectTextControl {
 	private static final String PREFERENCE_PROPERTY = "ADAC_SERVER_PROPERTY";
 
 	public AdacServerTextControl(Composite parent) {
-		super(parent, 300);
+		super(parent, 300, true);
 	}
 
 	@Override
