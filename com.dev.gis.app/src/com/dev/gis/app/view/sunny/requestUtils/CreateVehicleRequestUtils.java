@@ -1,6 +1,10 @@
 package com.dev.gis.app.view.sunny.requestUtils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
@@ -9,6 +13,7 @@ import com.dev.gis.connector.sunny.Administration;
 import com.dev.gis.connector.sunny.Agency;
 import com.dev.gis.connector.sunny.DayAndHour;
 import com.dev.gis.connector.sunny.Location;
+import com.dev.gis.connector.sunny.OfferFilter;
 import com.dev.gis.connector.sunny.TravelInformation;
 import com.dev.gis.connector.sunny.VehicleRequest;
 
@@ -70,6 +75,31 @@ public class CreateVehicleRequestUtils {
 		// else
 		// request.setModule(1);
 		// request.setPayment(PayType.PREPAID);
+		
+		OfferFilter offerFilter = new OfferFilter();
+		String supplierFilter  = SunnyModelProvider.INSTANCE.supplierFilter;
+		if ( StringUtils.isNotEmpty(supplierFilter)) {
+			String[] parts = supplierFilter.split(",");
+			List<Long> suppliers = new ArrayList<Long>();
+			for ( String part : parts) {
+				suppliers.add(Long.parseLong(part));
+			}
+			Long[] lsupp = suppliers.toArray(new Long[0]);
+			offerFilter.setSuppliers(lsupp);
+		}
+
+		String servcatFilter  = SunnyModelProvider.INSTANCE.servcatFilter;
+		if ( StringUtils.isNotEmpty(servcatFilter)) {
+			String[] parts = servcatFilter.split(",");
+			List<Long> servcats = new ArrayList<Long>();
+			for ( String part : parts) {
+				servcats.add(Long.parseLong(part));
+			}
+			Long[] lsupp = servcats.toArray(new Long[0]);
+			offerFilter.setServiceCatalogId(lsupp[0]);
+		}
+		
+		request.setFilter(offerFilter);
 
 		return request;
 

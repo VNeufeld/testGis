@@ -89,4 +89,11 @@ public class SunnyCarsAppView extends RentCarsAppView {
 	}
 
 
+	@Override
+	protected void createExtFilter(Group groupStamp) {
+		new SunnyExtSupplierFilterTextControl(groupStamp);
+		new SunnyExtServcatFilterTextControl(groupStamp);
+	}
+
+
 }
