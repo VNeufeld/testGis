@@ -547,19 +547,6 @@ public class VehicleHttpService {
 	
 	public StationResponse getPickupStations(int type, String location, String offerId) {
 		try {
-			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
-			if ( dummy ) {
-				StationResponse stationResponse = new StationResponse();
-				Station st = new Station(1234);
-				st.setIdentifier("München");
-				stationResponse.getStations().add(st);
-
-				st = new Station(9876);
-				st.setIdentifier("Tomsk");
-				stationResponse.getStations().add(st);
-				
-				return stationResponse;
-			}
 
 			URI uri = getServerURI(SUNNY_GET_PICKUP_STATIONS);
 			
@@ -575,27 +562,8 @@ public class VehicleHttpService {
 			
 			uri = uriBuilder.build();
 			
-			logger.info("VehicleHttpService = "+uri.toString());
+			logger.info("VehicleHttpService getPickupStations = "+uri.toString());
 			
-			String response = null;
-			
-			response =  httpClient.sendGetRequest(uri);
-			
-			logger.info("response = "+response);
-			
-			if (response != null ) 
-				return JsonUtils.createResponseClassFromJson(response, StationResponse.class);
-			
-		} catch ( IOException e) {
-			logger.error(e.getMessage(),e);
-		} catch (URISyntaxException e) {
-			logger.error(e);
-		}
-		return null;
-	}
-	
-	public StationResponse getDropOffStations(int type, String location, String offerId, String pickupStationId) {
-		try {
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( dummy ) {
 				StationResponse stationResponse = new StationResponse();
@@ -609,6 +577,29 @@ public class VehicleHttpService {
 				
 				return stationResponse;
 			}
+			else {
+			
+				String response = null;
+				
+				response =  httpClient.sendGetRequest(uri);
+				
+				logger.info("response = "+response);
+				
+				if (response != null ) 
+					return JsonUtils.createResponseClassFromJson(response, StationResponse.class);
+			}
+			
+		} catch ( IOException e) {
+			logger.error(e.getMessage(),e);
+		} catch (URISyntaxException e) {
+			logger.error(e);
+		}
+		return null;
+	}
+	
+	public StationResponse getDropOffStations(int type, String location, String offerId, String pickupStationId) {
+		try {
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			
 			URI uri = getServerURI(SUNNY_GET_DROPOFF_STATIONS);
 			
@@ -626,7 +617,21 @@ public class VehicleHttpService {
 			
 			uri = uriBuilder.build();
 			
-			logger.info("VehicleHttpService = "+uri.toString());
+			logger.info("VehicleHttpService getDropOffStations URI = "+uri.toString());
+			
+			if ( dummy ) {
+				StationResponse stationResponse = new StationResponse();
+				Station st = new Station(1234);
+				st.setIdentifier("München");
+				stationResponse.getStations().add(st);
+
+				st = new Station(9876);
+				st.setIdentifier("Tomsk");
+				stationResponse.getStations().add(st);
+				
+				return stationResponse;
+			}
+
 			
 			String response = null;
 			
