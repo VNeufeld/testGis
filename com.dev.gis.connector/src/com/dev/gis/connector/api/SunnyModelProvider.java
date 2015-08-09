@@ -41,6 +41,8 @@ public enum SunnyModelProvider {
 	public String supplierFilter;
 
 	public String servcatFilter;
+
+	public String stationFilter;
 	
 	public long operatorId;
 	

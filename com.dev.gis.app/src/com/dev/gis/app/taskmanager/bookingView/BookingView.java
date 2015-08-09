@@ -300,7 +300,7 @@ public class BookingView extends TaskViewAbstract {
 					
 					viewPart.showOffer(selectedOffer,extras);
 					
-					instanceNum++;
+					//instanceNum++;
 					
 					logger.info(" add view :"+viewPart.getTitle());
 					

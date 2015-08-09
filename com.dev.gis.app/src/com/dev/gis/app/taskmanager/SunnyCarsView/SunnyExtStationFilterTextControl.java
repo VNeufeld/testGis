@@ -10,14 +10,14 @@ import org.eclipse.swt.widgets.Text;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.connector.api.SunnyModelProvider;
 
-public class SunnyExtServcatFilterTextControl extends ObjectTextControl {
+public class SunnyExtStationFilterTextControl extends ObjectTextControl {
 	
-	private static Logger logger = Logger.getLogger(SunnyExtServcatFilterTextControl.class);
+	private static Logger logger = Logger.getLogger(SunnyExtStationFilterTextControl.class);
 
-	public SunnyExtServcatFilterTextControl(final Composite parent) {
+	public SunnyExtStationFilterTextControl(final Composite parent) {
 		super(parent, 100, false);
 		
-		getText().setToolTipText("Add ServiceCatalog filter : serviceCatalogID");
+		getText().setToolTipText("Add Station IDS ( pickupStationID, DropOffStationID");
 		
 		getText().addVerifyListener(new VerifyListener() {
 			
@@ -33,15 +33,18 @@ public class SunnyExtServcatFilterTextControl extends ObjectTextControl {
 			          event.doit = true;
 			          err = false;
 		        }
-		        
 		        if (myChar == '\b' || myChar == ' ') {
 		            event.doit = true;		        
-			          err = false;
+			        err = false;
 		        }
-
+				
+		        if (myChar == ',' && text.length() > 0 && !text.contains(",")) {
+		          event.doit = true;
+		          err = false;
+		        }
 				
 				if ( err) {
-					MessageDialog.openError(parent.getShell(), "Verify Error"," please enter only Service Catalog ID"+ text);
+					MessageDialog.openError(parent.getShell(), "Verify Error"," please enter only pickupStationID, dropoffstationID");
 			        event.doit = false;
 					
 				}
@@ -49,19 +52,19 @@ public class SunnyExtServcatFilterTextControl extends ObjectTextControl {
 				
 			}
 		});
-
+		
 	}
 
 	@Override
 	protected String getLabel() {
-		return "Servcat";
+		return "Station ";
 	}
 
 
 	@Override
 	public void saveValue(String value) {
-		SunnyModelProvider.INSTANCE.servcatFilter = value;
-		logger.info("servcatFilter: "+value);
+		SunnyModelProvider.INSTANCE.stationFilter = value;
+		logger.info("Station Filter: "+value);
 	
 	}
 

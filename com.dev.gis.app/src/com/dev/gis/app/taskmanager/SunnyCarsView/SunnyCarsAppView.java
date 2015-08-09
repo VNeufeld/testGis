@@ -91,8 +91,15 @@ public class SunnyCarsAppView extends RentCarsAppView {
 
 	@Override
 	protected void createExtFilter(Group groupStamp) {
-		new SunnyExtSupplierFilterTextControl(groupStamp);
-		new SunnyExtServcatFilterTextControl(groupStamp);
+		final Group groupFilter = new Group(groupStamp, SWT.TITLE);
+		groupFilter.setText("Filter :");
+		groupFilter.setLayout(new GridLayout(6, false));
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).span(4,1)
+				.grab(true, true).applyTo(groupFilter);
+		
+		new SunnyExtSupplierFilterTextControl(groupFilter);
+		new SunnyExtServcatFilterTextControl(groupFilter);
+		new SunnyExtStationFilterTextControl(groupFilter);
 	}
 
 

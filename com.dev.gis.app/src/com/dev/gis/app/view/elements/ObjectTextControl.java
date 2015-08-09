@@ -109,6 +109,9 @@ public class ObjectTextControl extends BasicControl {
 		this.text.setText(value);
 		saveValue(value);
 	}
+	protected Text getText() {
+		return text;
+	}
 
 
 }

@@ -14,6 +14,7 @@ import com.dev.gis.connector.sunny.Agency;
 import com.dev.gis.connector.sunny.DayAndHour;
 import com.dev.gis.connector.sunny.Location;
 import com.dev.gis.connector.sunny.OfferFilter;
+import com.dev.gis.connector.sunny.Station;
 import com.dev.gis.connector.sunny.TravelInformation;
 import com.dev.gis.connector.sunny.VehicleRequest;
 
@@ -40,6 +41,8 @@ public class CreateVehicleRequestUtils {
 
 		VehicleRequest request = new VehicleRequest();
 		TravelInformation ti = new TravelInformation();
+		
+		
 
 		Location pickUpLocation = new Location();
 		Location dropOffLocation = new Location();
@@ -47,13 +50,16 @@ public class CreateVehicleRequestUtils {
 		String aptCode = ModelProvider.INSTANCE.airport;
 		long cityId = ModelProvider.INSTANCE.cityId;
 		
+		boolean locationExist = false;
 		if (cityId > 0 ) {
 			pickUpLocation.setCityId(cityId);
 		    dropOffLocation.setCityId(cityId);
+		    locationExist = true;		    
 		}
-		else {
+		else if ( StringUtils.isNotEmpty(aptCode)){
 			pickUpLocation.setAirport(aptCode);
 			dropOffLocation.setAirport(aptCode);
+		    locationExist = true;		    
 		}
 
 		ti.setPickUpLocation(pickUpLocation);
@@ -69,15 +75,89 @@ public class CreateVehicleRequestUtils {
 		ti.setDropOffTime(dh);
 
 		request.setTravel(ti);
-
-		// if ( buttonTruck.getSelection())
-		// request.setModule(2);
-		// else
-		// request.setModule(1);
-		// request.setPayment(PayType.PREPAID);
 		
+		OfferFilter offerFilter = createFilter();
+		if (offerFilter != null )
+			request.setFilter(offerFilter);
+		
+		if ( !locationExist) {
+			createStationLocations(request);
+		}
+		
+
+		return request;
+
+	}
+
+	private static void createStationLocations(VehicleRequest request) {
+
+		String stationFilter  = SunnyModelProvider.INSTANCE.stationFilter;
+		Long pickupStationId = null;
+		Long dropofStationId = null;
+		Long pickupSupplierId = null;
+		Long dropoffSupplierId = null;
+		if ( StringUtils.isNotEmpty(stationFilter)) {
+			String[] parts = stationFilter.split(",");
+			
+			for ( String part : parts) {
+				if(pickupStationId == null )
+					pickupStationId =Long.parseLong(part);
+				if(dropofStationId == null )
+					dropofStationId =Long.parseLong(part);
+			}
+			if ( dropofStationId == null)
+				dropofStationId = pickupStationId;
+		}
+		
+		if ( request.getFilter() != null && request.getFilter().getSuppliers() != null) {
+			Long[] suppliers = request.getFilter().getSuppliers();
+			if (suppliers.length > 0)
+				pickupSupplierId = suppliers[0];
+			if (suppliers.length > 1)
+				dropoffSupplierId = suppliers[1];
+			if ( dropoffSupplierId == null)
+				dropoffSupplierId = pickupSupplierId;
+		}
+		
+		if (pickupStationId != null && pickupSupplierId != null) {
+			Location pickUpLocation = new Location();
+			pickUpLocation.setStationId(pickupStationId);
+			
+			Station s = new Station(pickupStationId);
+			s.setSupplierId(pickupSupplierId);
+			pickUpLocation.setStation(s);
+			
+			request.getTravel().setPickUpLocation(pickUpLocation);
+		}
+		
+		if ( dropofStationId != null && dropoffSupplierId != null) {
+			
+			
+			Location dropOffLocation = new Location();
+			dropOffLocation.setStationId(dropofStationId);
+	
+			Station s = new Station(dropofStationId);
+			s.setSupplierId(dropoffSupplierId);
+			dropOffLocation.setStation(s);
+			
+			request.getTravel().setDropOffLocation(dropOffLocation);
+			
+		}
+		
+		
+		
+		
+	}
+
+
+	private static OfferFilter createFilter() {
 		OfferFilter offerFilter = new OfferFilter();
+
 		String supplierFilter  = SunnyModelProvider.INSTANCE.supplierFilter;
+		String servcatFilter  = SunnyModelProvider.INSTANCE.servcatFilter;
+		
+		boolean filterEnable = false;
+		
 		if ( StringUtils.isNotEmpty(supplierFilter)) {
 			String[] parts = supplierFilter.split(",");
 			List<Long> suppliers = new ArrayList<Long>();
@@ -86,9 +166,10 @@ public class CreateVehicleRequestUtils {
 			}
 			Long[] lsupp = suppliers.toArray(new Long[0]);
 			offerFilter.setSuppliers(lsupp);
+			
+			filterEnable = true;;			
 		}
 
-		String servcatFilter  = SunnyModelProvider.INSTANCE.servcatFilter;
 		if ( StringUtils.isNotEmpty(servcatFilter)) {
 			String[] parts = servcatFilter.split(",");
 			List<Long> servcats = new ArrayList<Long>();
@@ -97,13 +178,16 @@ public class CreateVehicleRequestUtils {
 			}
 			Long[] lsupp = servcats.toArray(new Long[0]);
 			offerFilter.setServiceCatalogId(lsupp[0]);
+			
+			filterEnable = true;;			
+			
 		}
-		
-		request.setFilter(offerFilter);
-
-		return request;
-
+		if ( filterEnable)
+			return offerFilter;
+		else
+			return null;
 	}
+
 
 	private static DayAndHour createDate(Calendar cal) {
 		String sday = String.format("%4d-%02d-%02d",

@@ -23,6 +23,11 @@
             id="com.dev.gis.app.perspective"
             name="RCP Perspective">
       </perspective>
+      <perspective
+            class="com.dev.gis.app.SunnyAppPerspective"
+            id="com.dev.gis.app.sunnyapp.perspective"
+            name="Sunny App Perspective">
+      </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.views">
@@ -222,6 +227,12 @@
             description="Switch To App Perspektive"
             id="com.dev.gis.app.switch.app"
             name="SwitchToApp">
+      </command>
+      <command
+            categoryId="com.dev.gis.app.category1"
+            description="Switch To Sunny App Perspektive"
+            id="com.dev.gis.app.switch.sunny.app"
+            name="SwitchTo SunnyApp">
       </command>
       <command
             categoryId="com.dev.gis.app.category1"
