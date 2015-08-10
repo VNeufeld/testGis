@@ -33,7 +33,7 @@ public class OfferFilterDialog extends Dialog {
 	private Button automatic;
 	
 	Map<Long,Button> bodyStylesButtons = new HashMap<Long,Button>();
-	Map<String,Button> inclusiveButtons = new HashMap<String,Button>();
+	Map<Long,Button> inclusiveButtons = new HashMap<Long,Button>();
 
 	private Text min, max;
 
@@ -184,17 +184,14 @@ public class OfferFilterDialog extends Dialog {
 			List<ObjectValuePair> items = inclusives.get(key);
 			for (ObjectValuePair b : items ) {
 				String bb = key+ " : "+b.getName()+ "("+b.getCount()+")";
+				long id = b.getId();
 				Label l = new Label(groupResult, SWT.NONE);
 				l.setText(bb);
 				GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.grab(true, false).span(4, 1).applyTo(l);
 				Button select = new Button(groupResult, SWT.CHECK);
 				select.setText("Select");
-				String[] parts = b.getName().split(",");
-				if ( parts.length > 0) {
-					//int id = Integer.valueOf(parts[0]);
-					inclusiveButtons.put(parts[0], select);
-				}
+				inclusiveButtons.put(id, select);
 				
 			}
 			
@@ -223,21 +220,22 @@ public class OfferFilterDialog extends Dialog {
 		Long[] ll = bodyStyles.toArray(new Long[0]);
 		offerFilter.setBodyStyles(ll);
 		
-		offerFilter.setAircondition(aircondition.getSelection());
+		if ( aircondition.getSelection())
+			offerFilter.setAircondition(true);
+		else
+			offerFilter.setAircondition(null);
 
-		offerFilter.setAutomatic(automatic.getSelection());
+		if ( automatic.getSelection())
+			offerFilter.setAutomatic(true);
+		else
+			offerFilter.setAutomatic(null);
 		
-		List<Long> incl = new ArrayList<Long>();
-		
-//		for ( Long id : inclusiveButtons.keySet() ) {
-//			Button select = inclusiveButtons.get(id);
-//			if ( select.getSelection()) {
-//				incl.add(id);
-//			}
-//		}
-		Long[] inll = incl.toArray(new Long[0]);
-		offerFilter.setInclusives(inll);
-		
+		for ( Long id : inclusiveButtons.keySet() ) {
+			Button select = inclusiveButtons.get(id);
+			if ( select.getSelection()) {
+				offerFilter.getInclusives().add(id);
+			}
+		}
 		
 		super.okPressed();
 	}

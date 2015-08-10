@@ -1,6 +1,8 @@
 package com.dev.gis.connector.sunny;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 public class OfferFilter {
 	private BigDecimal minPrice;
@@ -16,8 +18,8 @@ public class OfferFilter {
 	private Long carGroupId;
 	private Long commissionTypeId;
 	private Long serviceCatalogId;
-
-	private Long[] inclusives;
+	
+	private final Set<Long> inclusives = new HashSet<Long>();	
 	
 	public BigDecimal getMinPrice() {
 		return minPrice;
@@ -86,11 +88,8 @@ public class OfferFilter {
 	public void setServiceCatalogId(Long serviceCatalogId) {
 		this.serviceCatalogId = serviceCatalogId;
 	}
-	public Long[] getInclusives() {
+	public Set<Long> getInclusives() {
 		return inclusives;
-	}
-	public void setInclusives(Long[] inclusives) {
-		this.inclusives = inclusives;
 	}
 	
 

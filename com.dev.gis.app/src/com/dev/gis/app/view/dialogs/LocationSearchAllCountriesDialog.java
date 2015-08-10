@@ -79,10 +79,22 @@ public class LocationSearchAllCountriesDialog extends Dialog implements IDialogC
 		
 		new ButtonControl(gGeneral, "Search", 0,  
 				new StartCountrySearchListener(operator, searchStringTextControl, countryListTable));
+		
+		showAllCountries();
 
 		
 		composite.pack();
 		return composite;		
+	}
+
+	private void showAllCountries() {
+		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+		ILocationService service = serviceFactory.getLocationJoiService(operator);
+		LocationSearchResult result = service.joiLocationSearch("", HitType.COUNTRY, "");
+
+		SunnyModelProvider.INSTANCE.updateHits(result);
+		countryListTable.update();
+		
 	}
 
 	/* (non-Javadoc)

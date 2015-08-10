@@ -11,7 +11,9 @@ public enum HitType {
 	RAILWAY_STATION (3),
 	AREA (4),
 	COUNTRY (5),
-	AIRPORT (6);
+	AIRPORT (6),
+	PREFERED_HITS (7);
+	
 	
 	HitType (int ordinal) {
 		this.ordinal = ordinal;

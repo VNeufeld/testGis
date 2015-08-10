@@ -31,10 +31,10 @@ public abstract class AbstractJoiService {
 
 		if ( filter != null && filter != HitType.UNINITIALIZED)
 			if ( filter == HitType.RAILWAY_STATION ) {
-				query = query + "&filter=2;6";
+				query = query + "&resultType=2;6";
 			}
 			else
-				query = query + "&filter="+filter.getOrdinal();
+				query = query + "&resultType="+filter.getOrdinal();
 
 		return query;
 	}
