@@ -13,7 +13,7 @@ import com.dev.gis.connector.sunny.LocationSearchResult;
 public class DummyLocationService extends AbstractJoiService implements ILocationService{
 	private static Logger logger = Logger.getLogger(DummyLocationService.class);
 
-	public DummyLocationService(Long operator, URI uri, int language) {
+	public DummyLocationService(Long operator, URI uri, long language) {
 		super(operator,uri, language);
 	}
 

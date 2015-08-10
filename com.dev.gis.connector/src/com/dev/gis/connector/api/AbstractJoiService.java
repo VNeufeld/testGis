@@ -13,7 +13,7 @@ public abstract class AbstractJoiService {
 	private final long language;
 
 	
-	public AbstractJoiService(Long operator, URI uri, int language) {
+	public AbstractJoiService(Long operator, URI uri, long language) {
 		this.uri = uri;
 		this.operator = operator;
 		this.language = language;		

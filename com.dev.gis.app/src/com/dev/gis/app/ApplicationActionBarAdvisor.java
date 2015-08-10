@@ -20,6 +20,7 @@ import org.eclipse.ui.application.IActionBarConfigurer;
 import com.dev.gis.app.actions.ResetCurrentPerspectiveAction;
 import com.dev.gis.app.actions.SwitchToLogPerspectiveAction;
 import com.dev.gis.app.actions.SwitchToAppPerspectiveAction;
+import com.dev.gis.app.actions.SwitchToSunnyAppPerspectiveAction;
 
 /**
  * An action bar advisor is responsible for creating, adding, and disposing of the
@@ -36,6 +37,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private Action stopProcessAction;
     private Action switchPerspectiveAction;
     private Action switchToAppPerspectiveAction;
+    private Action switchToSunnyAppPerspectiveAction;
     private Action resetCurrentPerspectiveAction;
     private IWorkbenchAction preferencesAction;
 
@@ -77,6 +79,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     
         switchToAppPerspectiveAction = new SwitchToAppPerspectiveAction("Switch To App Perspective", window);
         register(switchToAppPerspectiveAction);
+        
+        switchToSunnyAppPerspectiveAction = new SwitchToSunnyAppPerspectiveAction("Switch To Sunny App Perspective", window);
+        register(switchToAppPerspectiveAction);
 
         preferencesAction = ActionFactory.PREFERENCES.create(window);
         register(preferencesAction);        
@@ -101,6 +106,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         //fileMenu.add(new Separator());
         perspectiveMenu.add(switchPerspectiveAction);
         perspectiveMenu.add(switchToAppPerspectiveAction);
+        perspectiveMenu.add(switchToSunnyAppPerspectiveAction);
         perspectiveMenu.add(new Separator());
         perspectiveMenu.add(resetCurrentPerspectiveAction);
         fileMenu.add(exitAction);

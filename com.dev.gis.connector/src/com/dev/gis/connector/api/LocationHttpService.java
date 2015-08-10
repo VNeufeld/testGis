@@ -16,7 +16,7 @@ public class LocationHttpService   extends AbstractJoiService implements ILocati
 	
 	
 
-	public LocationHttpService(Long operator, URI uri, int language) {
+	public LocationHttpService(Long operator, URI uri, long language) {
 		super(operator,uri, language);
 		
 	}

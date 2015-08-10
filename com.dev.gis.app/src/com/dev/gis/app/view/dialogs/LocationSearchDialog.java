@@ -1,49 +1,36 @@
 package com.dev.gis.app.view.dialogs;
 
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.Text;
 
+import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.app.view.elements.CountryTextControl;
+import com.dev.gis.app.view.elements.ObjectTextControl;
+import com.dev.gis.app.view.elements.SearchStringTextControl;
+import com.dev.gis.app.view.elements.SelectHitTypeComboBox;
 import com.dev.gis.connector.api.ILocationService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
-import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.sunny.Hit;
 import com.dev.gis.connector.sunny.HitType;
 import com.dev.gis.connector.sunny.LocationSearchResult;
 
-public class LocationSearchDialog extends Dialog {
-	
-	private String searchString="";
-	private Text tName;
-	private TableViewer viewer;
+public class LocationSearchDialog extends Dialog implements IDialogCallBack {
 	
 	private Shell parentShell;
+	
+	private LocationItemListTable locationItemListTable;
 	
 	private Hit  result;
 
@@ -61,122 +48,40 @@ public class LocationSearchDialog extends Dialog {
 		
 		Composite composite = (Composite) super.createDialogArea(parent);
 		composite.getShell().setText("location search");
-		
-		GridLayout glMain = new GridLayout(1, false);
-		composite.setLayout(glMain);
+		composite.setLayout(new GridLayout(1, false));
+
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+		.grab(true, true).applyTo(composite);
 		
 		Group gGeneral = new Group(composite, SWT.TITLE);
 		gGeneral.setText("Allgemein");
-		GridLayout glGeneral = new GridLayout(8, false);
-		gGeneral.setLayout(glGeneral);
+		gGeneral.setLayout(new GridLayout(8, false));
 		
-		GridData gdGeneral = new GridData();
-		gdGeneral.horizontalAlignment = SWT.FILL;
-		gdGeneral.grabExcessHorizontalSpace = true;
-		gGeneral.setLayoutData(gdGeneral);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+		.grab(true, false).applyTo(gGeneral);
 		
-		Label lName = new Label(gGeneral, SWT.NONE);
-		lName.setText("search");
-		
-		
-		GridData gdName = new GridData();
-		gdName.horizontalAlignment = SWT.FILL;
-		gdName.grabExcessHorizontalSpace = true;
+		final SearchStringTextControl searchStringTextControl = new SearchStringTextControl(gGeneral);
 
-		tName = new Text(gGeneral, SWT.BORDER | SWT.SINGLE);
-		tName.setText(searchString);
-		tName.setLayoutData(gdName);
-		tName.addModifyListener(new ModifyListener() {
+		final CountryTextControl countryTextControl = new CountryTextControl(gGeneral);
 
-			@Override
-			public void modifyText(ModifyEvent e) {
-				searchString = tName.getText();
-			}
-		});
+		final long operator = SunnyModelProvider.INSTANCE.operatorId;
 
-		new Label(gGeneral, SWT.NONE).setText("country:");
+		new ButtonControl(gGeneral, "select country", 0,  new LocationSearchCountryListener(parentShell, operator,countryTextControl));
 		
-		final Text country = new Text(gGeneral, SWT.BORDER | SWT.SINGLE);
-		country.setLayoutData(gdName);
-		
-		Button countryButton = new Button(gGeneral, SWT.PUSH | SWT.CENTER | SWT.COLOR_BLUE);
-		countryButton.setText("select country");
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).grab(false, false).applyTo(countryButton);
-		
-		final long operator = ModelProvider.INSTANCE.operatorId;
-		countryButton.addSelectionListener(new SelectionListener() {
+		final SelectHitTypeComboBox hitTypeComboBox = new SelectHitTypeComboBox(gGeneral, 100);
 
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				LocationSearchAllCountriesDialog mpd = new LocationSearchAllCountriesDialog(parentShell, operator);
-				
-				if (mpd.open() == Dialog.OK) {
-					if ( mpd.getResult() != null ) {
-						String id = String.valueOf(mpd.getResult().getId());
-						country.setText(id);
-					}
-						
-				}
-				
-			}
+		Group grTable = new Group(composite, SWT.TITLE);
+		grTable.setText("Hit Items");
+		grTable.setLayout(new GridLayout(1, false));
 
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+		.grab(true, true).applyTo(grTable);
 
-		
-		
-		
-		new Label(gGeneral, SWT.NONE).setText("filter:");
-		final Combo c = new Combo(gGeneral, SWT.READ_ONLY);
-		String items[] = { "","All", "City", "Airport","City + Airports", "Country" };
-		c.setItems(items);
-		c.select(2);
-		
-		
-		createViewer(composite);
-		
-		GridData gdButton = new GridData();
-		gdButton.grabExcessHorizontalSpace = false;
-		gdButton.horizontalAlignment = SWT.NONE;
-		Button button = new Button(gGeneral, SWT.PUSH | SWT.CENTER | SWT.COLOR_BLUE);
-		button.setText("Search");
-		button.setLayoutData(gdButton);
+		SelectItemDoubleClickListener selectItemDoubleClickListener = new SelectItemDoubleClickListener(this);
+		locationItemListTable = new LocationItemListTable(null, grTable, selectItemDoubleClickListener);
 
-		button.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				int filterIndex = c.getSelectionIndex();
-				HitType type = HitType.UNINITIALIZED;
-				if ( filterIndex == 2)
-					type = HitType.CITY;
-				if ( filterIndex == 3)
-					type = HitType.AIRPORT;
-				if ( filterIndex == 5)
-					type = HitType.COUNTRY;
-
-				if ( filterIndex == 4)
-					type = HitType.RAILWAY_STATION;
-				
-
-				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-				ILocationService service = serviceFactory.getLocationJoiService(operator);
-				LocationSearchResult result = service.joiLocationSearch(searchString, type, country.getText());
-				
-				SunnyModelProvider.INSTANCE.updateHits(result);
-				
-				viewer.refresh();
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-
+		new ButtonControl(gGeneral, "Search", 0,  
+				new StartLocationSearchListener(operator,countryTextControl, searchStringTextControl, hitTypeComboBox, locationItemListTable));
 		
 		composite.pack();
 		return composite;		
@@ -195,122 +100,108 @@ public class LocationSearchDialog extends Dialog {
 		//super.createButtonsForButtonBar(parent);
 	}
 	
-	private void createViewer(Composite parent) {
-		
-	    viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-	        | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-	    createColumns(parent, viewer);
-	    final Table table = viewer.getTable();
-	    table.setHeaderVisible(true);
-	    table.setLinesVisible(true);
-
-	    viewer.setContentProvider(new ArrayContentProvider());
-
-	    viewer.setInput(SunnyModelProvider.INSTANCE.getLocationSearchHits());
-
-	    // define layout for the viewer
-	    GridData gridData = new GridData();
-	    gridData.verticalAlignment = GridData.FILL;
-	    gridData.horizontalSpan = 2;
-	    gridData.grabExcessHorizontalSpace = true;
-	    gridData.grabExcessVerticalSpace = true;
-	    gridData.horizontalAlignment = GridData.FILL;
-	    viewer.getControl().setLayoutData(gridData);
-	    
-	    viewer.addDoubleClickListener(new IDoubleClickListener() {
-
-			@Override
-			public void doubleClick(DoubleClickEvent event) {
-				result = (Hit) ((IStructuredSelection) event.getSelection()).getFirstElement();
-				okPressed();
-			}
-		});
-	    
-	    hookContextMenu();
-	}
-	
-	private void hookContextMenu() {
-		MenuManager menuMgr = new MenuManager();
-
-		menuMgr.setRemoveAllWhenShown(true);
-
-		Menu menu = menuMgr.createContextMenu(viewer.getControl());
-		viewer.getControl().setMenu(menu);
-		
-		
-	}
-	
-	
-	private void createColumns(final Composite parent, final TableViewer viewer) {
-	    String[] titles = { "Name", "Id", "apt", "Type", "Country" };
-	    int[] bounds = { 200, 150, 150, 100, 200};
-
-	    // first column is for the first name
-	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	Hit o = (Hit) element;
-	        return o.getIdentifier();
-	      }
-	    });
-	    
-	    col = createTableViewerColumn(titles[1], bounds[1], 1);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	Hit o = (Hit) element;
-	        return String.valueOf(o.getId());
-	      }
-	    });
-	    
-	    col = createTableViewerColumn(titles[2], bounds[2], 2);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	Hit o = (Hit) element;
-	        return String.valueOf(o.getAptCode());
-	      }
-	    });
-
-
-	    col = createTableViewerColumn(titles[3], bounds[3], 3);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	  Hit o = (Hit) element;
-	    	return  o.getType().name();
-	    	
-	      }
-	    });
-
-	    col = createTableViewerColumn(titles[4], bounds[4], 4);
-	    col.setLabelProvider(new ColumnLabelProvider() {
-	      @Override
-	      public String getText(Object element) {
-	    	  Hit o = (Hit) element;
-	    	return  o.getCountry();
-	    	
-	      }
-	    });
-	    
-
-	  }
-
-	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
-	    final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,
-	        SWT.NONE);
-	    final TableColumn column = viewerColumn.getColumn();
-	    column.setText(title);
-	    column.setWidth(bound);
-	    column.setResizable(true);
-	    column.setMoveable(true);
-	    return viewerColumn;
-		
-	}
 
 	public Hit getResult() {
 		return result;
 	}
+	
+	public void closeDialog(Hit hit) {
+		result = hit;
+		okPressed();
+	}
+	
+	private static class LocationSearchCountryListener implements SelectionListener {
+		
+
+		private final Shell parentShell;
+		private final long operator;
+		private final ObjectTextControl country;
+
+		public LocationSearchCountryListener(Shell parentShell, long operator,
+				ObjectTextControl country) {
+			super();
+			this.parentShell = parentShell;
+			this.operator = operator;
+			this.country = country;
+		}
+		
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+			LocationSearchAllCountriesDialog mpd = new LocationSearchAllCountriesDialog(parentShell, operator);
+			
+			if (mpd.open() == Dialog.OK) {
+				if ( mpd.getResult() != null ) {
+					String id = String.valueOf(mpd.getResult().getId());
+					country.setSelectedValue(id);
+				}
+					
+			}
+			
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			widgetSelected(e);
+		}
+		
+	}
+	
+	private static class StartLocationSearchListener implements SelectionListener {
+		
+
+		private final long operator;
+		private final ObjectTextControl country;
+		private final ObjectTextControl searchStringTextControl;
+		private final SelectHitTypeComboBox hitTypeComboBox;
+		
+		private final LocationItemListTable locationItemListTable;
+
+		public StartLocationSearchListener(long operator, ObjectTextControl country, 
+				ObjectTextControl searchStringTextControl, SelectHitTypeComboBox hitTypeComboBox, LocationItemListTable locationItemListTable) {
+			super();
+			this.operator = operator;
+			this.country = country;
+			this.searchStringTextControl = searchStringTextControl;
+			this.hitTypeComboBox = hitTypeComboBox;
+			this.locationItemListTable = locationItemListTable;
+		}
+		
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+			HitType type = hitTypeComboBox.getHitType();
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			ILocationService service = serviceFactory.getLocationJoiService(operator);
+			LocationSearchResult result = service.joiLocationSearch(searchStringTextControl.getSelectedValue(), type, country.getSelectedValue());
+			SunnyModelProvider.INSTANCE.updateHits(result);
+			
+			locationItemListTable.update();
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			widgetSelected(e);
+		}
+		
+	}
+	
+	private static class SelectItemDoubleClickListener implements IDoubleClickListener {
+		
+
+		private final IDialogCallBack dialogCallBack;
+
+		public SelectItemDoubleClickListener(IDialogCallBack dialogCallBack) {
+			super();
+			this.dialogCallBack = dialogCallBack;
+		}
+		
+		@Override
+		public void doubleClick(DoubleClickEvent event) {
+			Hit hit = (Hit) ((IStructuredSelection) event.getSelection()).getFirstElement();
+			dialogCallBack.closeDialog(hit);
+		}
+		
+	}
+	
+	
 	
 }

@@ -15,7 +15,7 @@ public class LanguageComboBox extends ObjectsComboBox{
 	private final static String items[] = { "deu ( DE )", "eng ( EN) " };
 	
 	public LanguageComboBox(Composite parent, int size) {
-		super(parent, size);
+		super(parent, size, true);
 	}
 
 	public final String getSelectedLanguage() {

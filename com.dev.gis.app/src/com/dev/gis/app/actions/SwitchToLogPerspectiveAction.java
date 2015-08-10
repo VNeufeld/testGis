@@ -28,8 +28,6 @@ public class SwitchToLogPerspectiveAction extends Action {
 	}
 
 	public void run() {
-		// MessageDialog.openInformation(window.getShell(), "Switch",
-		// "Switch to App Perspektive!");
 
 		if (PlatformUI.getWorkbench() != null) {
 
@@ -47,14 +45,5 @@ public class SwitchToLogPerspectiveAction extends Action {
 
 		}
 
-		// if(window != null) {
-		// try {
-		// window.getActivePage().showView(viewId,
-		// Integer.toString(instanceNum++), IWorkbenchPage.VIEW_ACTIVATE);
-		// } catch (PartInitException e) {
-		// MessageDialog.openError(window.getShell(), "Error",
-		// "Error opening view:" + e.getMessage());
-		// }
-		// }
 	}
 }

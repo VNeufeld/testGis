@@ -26,8 +26,6 @@ public enum ModelProvider {
 	private List<OfferDo> offerDos;
 	
 	private List<Extra> extraDos = new ArrayList<Extra>();
-	
-	public long operatorId;
 
 	public long cityId;
 
