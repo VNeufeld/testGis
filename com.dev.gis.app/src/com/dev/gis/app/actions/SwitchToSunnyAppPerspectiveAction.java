@@ -49,16 +49,6 @@ public class SwitchToSunnyAppPerspectiveAction extends Action {
 			
 			new SunnyOfferViewUpdater().clearView();
 
-//			IWorkbenchPage wp = PlatformUI.getWorkbench()
-//					.getActiveWorkbenchWindow().getActivePage();
-//			try {
-//				wp.showView(SunnyCarsAppView.ID, Integer.toString(0),
-//						IWorkbenchPage.VIEW_ACTIVATE);
-//			} catch (PartInitException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-
 		}
 
 	}

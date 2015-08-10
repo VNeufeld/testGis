@@ -71,6 +71,7 @@ public class LogViewUpdater  {
 			@Override
 			public void run() {
 				try {
+					logger.info("updateTempView ");
 					// Show protocol, show results
 					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 					
@@ -83,8 +84,8 @@ public class LogViewUpdater  {
 					        final IViewPart view = viewReference.getView(true);
 					        if (view instanceof LogBookingEntryView) {
 					            final LogBookingEntryView graphView = (LogBookingEntryView) view;
-								System.out.println("viewPart = "+graphView);
 					            graphView.updateTempView();
+								logger.info("updateTempView viewpart  "+view);
 					            break;
 					        }
 					    }
@@ -95,8 +96,6 @@ public class LogViewUpdater  {
 							LogBookingEntryView.ID, 
 							Integer.toString(0), 
 							IWorkbenchPage.VIEW_ACTIVATE);
-					System.out.println("viewPart = "+viewPart);
-//					viewPart.updateTempView();
 					
 					
 				} catch (PartInitException e) {

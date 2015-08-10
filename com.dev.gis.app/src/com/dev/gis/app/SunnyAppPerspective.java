@@ -1,5 +1,6 @@
 package com.dev.gis.app;
 
+import org.apache.log4j.Logger;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
@@ -8,13 +9,16 @@ import com.dev.gis.app.taskmanager.TaskTreeView;
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyCarsAppView;
 
 public class SunnyAppPerspective implements IPerspectiveFactory {
+	
+	private static Logger logger = Logger.getLogger(SunnyAppPerspective.class);
 
-	/**
-	 * The ID of the perspective as specified in the extension.
-	 */
+
 	public static final String ID = "com.dev.gis.app.sunnyapp.perspective";
 
 	public void createInitialLayout(IPageLayout layout) {
+
+		logger.info("createInitialLayout for sunny perspective " + ID);
+		
 		String editorArea = layout.getEditorArea();
 		layout.setEditorAreaVisible(false);
 		

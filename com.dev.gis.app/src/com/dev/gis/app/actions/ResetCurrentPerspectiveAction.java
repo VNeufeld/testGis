@@ -1,13 +1,20 @@
 package com.dev.gis.app.actions;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.Action;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.ICommandIds;
+import com.dev.gis.app.SunnyAppPerspective;
 
 
 public class ResetCurrentPerspectiveAction extends Action {
+	
+	private static Logger logger = Logger.getLogger(ResetCurrentPerspectiveAction.class);
+
 
     private final IWorkbenchWindow window;
 
@@ -22,6 +29,10 @@ public class ResetCurrentPerspectiveAction extends Action {
     }
 
     public void run() {
+    	
+    	IWorkbenchPage p = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+    	IPerspectiveDescriptor pp = p.getPerspective();
+    	
     	
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow() 
 		.getActivePage().resetPerspective(); 
