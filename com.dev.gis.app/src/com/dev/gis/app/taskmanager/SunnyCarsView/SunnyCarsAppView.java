@@ -10,8 +10,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
+import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.app.view.elements.CheckBox;
+import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.app.view.listener.SelectChangedOfferClickListener;
-import com.dev.gis.app.view.listener.SunnyGetNextFilterPageSelectionListener;
 import com.dev.gis.app.view.listener.SunnyGetNextPageSelectionListener;
 import com.dev.gis.app.view.listener.SunnyGetOffersSelectionListener;
 import com.dev.gis.app.view.listener.SunnySelectOfferDoubleClickListener;
@@ -24,6 +26,20 @@ public class SunnyCarsAppView extends RentCarsAppView {
 	public static final String ID = IEditableTask.ID_TestSunnyCarsView;
 
 	private ResultRecommendationTable recommendationTable;
+	
+	private OutputTextControls countVehicles = null;
+
+	//private OutputTextControls sessionId = null;
+
+	private OutputTextControls requestId = null;
+
+	private OutputTextControls offerId = null;
+	
+	private OutputTextControls pageNo = null;
+
+	private OutputTextControls pageCount = null;
+
+
 
 
 	@Override
@@ -39,6 +55,65 @@ public class SunnyCarsAppView extends RentCarsAppView {
 				groupRecomm);
 	}
 	
+	
+	@Override
+	protected void createResultFields(Group groupResult) {
+		
+
+		Composite cc = createComposite(groupResult, 4, -1, false);
+
+		requestId = new OutputTextControls(cc, "Request ID", 150, 1 );
+
+		countVehicles = new OutputTextControls(cc, "Count of Vehicles", 100,1 );
+		
+		//sessionId = new OutputTextControls(cc, "Session ID", 300 );
+		
+		offerId = new OutputTextControls(groupResult, "OfferId", 300 );
+		
+		{ // buttons
+			Composite buttonComposite = createComposite(groupResult, 2, -1, false);
+	
+			new ButtonControl(buttonComposite, "show filterTemplate", 0,  showOfferFilterListener());
+			new ButtonControl(buttonComposite, "show text summary", 0,  showOfferFilterListener());
+			
+		}
+
+		createNextPage(groupResult);
+	}
+	
+	
+	public void showVehicleResponse(VehicleResponse response) {
+		
+		
+		//pageInfo.setText(response.getPageInfo());
+
+		// sessionId.setText(String.valueOf(response.getRequestId()));
+
+		requestId.setValue(String.valueOf(response.getRequestId()));
+		
+		countVehicles.setValue(String.valueOf(response.getSummary().getTotalQuantityOffers()));
+
+		//setSummary(response.getSummary());
+
+		//contact.setText(" get Contact from response");
+		
+		SunnyModelProvider.INSTANCE.currentResponse = response;
+
+		// Table
+		SunnyModelProvider.INSTANCE.updateOffers(response);
+		offerListTable.getViewer().setInput(SunnyModelProvider.INSTANCE.getOfferDos());
+		offerListTable.getViewer().refresh();
+		
+		updateParent(response);
+		
+		pageNo.setValue(response.getPageNo());
+		pageCount.setValue(response.getPageCount());
+
+		
+	}
+
+
+	
 
 	@Override
 	protected SelectionListener getOffersSelectionListener() {
@@ -48,7 +123,7 @@ public class SunnyCarsAppView extends RentCarsAppView {
 
 	@Override
 	protected ISelectionChangedListener getSelectChangedOfferClickListener() {
-		SelectChangedOfferClickListener ss = new SelectChangedOfferClickListener(offerId);
+		SelectChangedOfferClickListener ss = new SelectChangedOfferClickListener(offerId.getControl());
 		return ss;
 	}
 
@@ -68,19 +143,11 @@ public class SunnyCarsAppView extends RentCarsAppView {
 		}
 	}
 
-
-	@Override
-	protected SelectionListener getNextPageSelectionListener() {
-		SunnyGetNextPageSelectionListener sgn = new SunnyGetNextPageSelectionListener(parent.getShell());
+	private SelectionListener getNextPageSelectionListener(final OutputTextControls pageNo, final CheckBox useFilter) {
+		SunnyGetNextPageSelectionListener sgn = new SunnyGetNextPageSelectionListener(parent.getShell(), pageNo,useFilter );
 		return sgn;
 	}
 
-
-	@Override
-	protected SelectionListener getNextFilterPageSelectionListener() {
-		SunnyGetNextFilterPageSelectionListener sgn = new SunnyGetNextFilterPageSelectionListener(browseFilter);
-		return sgn;
-	}
 
 	@Override
 	protected SelectionListener showOfferFilterListener() {
@@ -102,5 +169,21 @@ public class SunnyCarsAppView extends RentCarsAppView {
 		new SunnyExtStationFilterTextControl(groupFilter);
 	}
 
+	@Override
+	protected void createNextPage(Composite groupResult) {
+		// http://localhost:8080/web-joi/joi/vehicleRequest/673406724?pageNo=1
+		
+		Composite cc = createComposite(groupResult, 4, 2, false);
+		
+		pageNo = new OutputTextControls(cc, "PageNo", 100,1 );
+		pageNo.setValue("0");
+
+		pageCount = new OutputTextControls(cc, "PageCount", 100,1 );
+		
+		CheckBox useFilter = new CheckBox(groupResult, "use filter");
+		new ButtonControl(groupResult, "Show Page", 0,  getNextPageSelectionListener(pageNo, useFilter));
+
+	}
+	
 
 }

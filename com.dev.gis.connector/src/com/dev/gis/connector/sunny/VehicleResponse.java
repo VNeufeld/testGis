@@ -31,6 +31,11 @@ public class VehicleResponse extends Response {
 	private OfferFilterTemplate  offerFilterTemplate;
 	
 	private String pageInfo;
+	
+	private String pageNo;
+
+	private String pageCount;
+
 
 	public VehicleResponse() {
 		
@@ -188,6 +193,22 @@ public class VehicleResponse extends Response {
 
 	public void setRatingView(RatingView ratingView) {
 		this.ratingView = ratingView;
+	}
+
+	public String getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(String pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public String getPageCount() {
+		return pageCount;
+	}
+
+	public void setPageCount(String pageCount) {
+		this.pageCount = pageCount;
 	}
 
 }

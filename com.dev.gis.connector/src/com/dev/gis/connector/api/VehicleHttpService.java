@@ -507,7 +507,7 @@ public class VehicleHttpService {
 
 	// http://localhost:8080/sunny-joi/joi/request/browse?page=2&pageSize=5&sort=desc
 
-	public VehicleResponse getBrowsePage(String browseFilter, int pageNo, int pageSize) {
+	public VehicleResponse getBrowsePage(int pageNo, int pageSize) {
 		try {
 			
 			String params = SUNNY_BROWSE_REQUEST_PARAM;

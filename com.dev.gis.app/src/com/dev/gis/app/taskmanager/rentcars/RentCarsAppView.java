@@ -33,7 +33,7 @@ import com.dev.gis.task.execution.api.IEditableTask;
 public class RentCarsAppView extends TaskViewAbstract {
 	public static final String ID = IEditableTask.ID_TestRentCarsView;
 
-	private SunnyOfferListTable offerListTable;
+	protected SunnyOfferListTable offerListTable;
 
 	protected Text pageInfo = null;
 	

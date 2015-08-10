@@ -28,20 +28,6 @@ public class SunnyGetNextFilterPageSelectionListener implements SelectionListene
 
 	@Override
 	public void widgetSelected(SelectionEvent arg0) {
-		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-
-		VehicleHttpService service = serviceFactory
-				.getVehicleJoiService();
-		
-		int pageSizeInt = (int) ModelProvider.INSTANCE.pageSize;
-		
-		int pageNo = 0;
-		
-		VehicleResponse response = service.getBrowsePage(browseFilter.getText(),pageNo,pageSizeInt);
-		
-		if (response != null) {
-			new SunnyOfferViewUpdater().showResponse(response);
-		}
 		
 	}
 
