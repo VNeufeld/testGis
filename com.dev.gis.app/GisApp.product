@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Log Analyzer" id="com.dev.gis.app.product" application="com.dev.gis.app.application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="BPCS Tester" id="com.dev.gis.app.product" application="com.dev.gis.app.application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="product_lg.gif"/>
@@ -19,7 +19,6 @@ Copyright 2015
    </launcherArgs>
 
    <windowImages i16="icons/sample2.gif"/>
-
 
    <launcher>
       <solaris/>
