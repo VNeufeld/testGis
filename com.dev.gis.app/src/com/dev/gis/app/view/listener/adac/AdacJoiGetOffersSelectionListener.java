@@ -35,14 +35,14 @@ public class AdacJoiGetOffersSelectionListener implements SelectionListener {
 		
 		Object obj = arg0.getSource();
 		
-		getOffer1();
+		getOffer();
 		
 		//buttonGetOffer.setEnabled(true);
 		
 	}
 
 
-	private void getOffer1() {
+	private void getOffer() {
 		VehicleRequest request = AdacCreateVehicleRequestUtils.createVehicleRequest();
 		
 		int pageSizeInt = (int)ModelProvider.INSTANCE.pageSize;

@@ -56,10 +56,26 @@ public class AdacVehicleHttpService {
 			server = TaskProperties.getTaskProperties().getServerProperty();
 		
 		URI uri = new URI(server+param);
-		logger.info("VehicleHttpService URI : = "+uri.toString());
 		return uri;
 		
 	}
+
+	//http://localhost:8080/web-joi/joi/vehicleRequest/673406724/vehicle/1468117378/offer/6cadd10a-3c5f-43bb-99b0-02a8e4da7370
+
+	private URI getExtrasURI(URI offerLink) throws URISyntaxException {
+		String link = offerLink.toString();
+		int pos = link.indexOf("/vehicleRequest");
+		link = link.substring(pos);
+		return getServerURI(link+"/extras");
+	}
+
+	private URI getPickupStationURI(URI offerLink) throws URISyntaxException {
+		String link = offerLink.toString();
+		int pos = link.indexOf("/vehicleRequest");
+		link = link.substring(pos);
+		return getServerURI(link+"/pickUp");
+	}
+	
 
 	public AdacVehicleHttpService(GisHttpClient gisHttpClientInstance) {
 		this.httpClient = gisHttpClientInstance;
@@ -70,8 +86,7 @@ public class AdacVehicleHttpService {
 		try {
 			
 			URI uri = getServerURI(VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
-
-			logger.info("get Offerss URI : = "+uri.toString());
+			logger.info("get Offers URI : = "+uri.toString());
 
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
 			logger.info(" request = "+request);
@@ -166,26 +181,21 @@ public class AdacVehicleHttpService {
 
 
 	
-	public static ExtraResponse getExtras(Offer offer) {
-		GisHttpClient httpClient = new GisHttpClient();
-
+	public ExtraResponse getExtras(Offer offer) {
+		ExtraResponse extraResponse =  null;
 		try {
-			String link = offer.getBookLink().toString();
-			int pos = link.indexOf("/vehicleRe");
-			link = link.substring(pos);
-			link = link.replace("/book","/extras");
-			//URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=200");
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
-			
+
+			URI uri = getExtrasURI(offer.getLink());
 			logger.info("GetExtra Request = "+uri);
 			
-			
-			String response =  httpClient.sendGetRequest(uri);
-			logger.info("response = "+response);
-			
-			ExtraResponse extraResponse = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
-			
-
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( dummy)
+				extraResponse = getExtrasDummy();
+			else {
+				String response =  httpClient.sendGetRequest(uri);
+				logger.info("response = "+response);
+				extraResponse = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
+			}
 			return extraResponse;
 			
 		} catch ( IOException e) {
@@ -193,9 +203,35 @@ public class AdacVehicleHttpService {
 		} catch (URISyntaxException e) {
 			logger.error(e,e);
 		}
-		return null;
+		return extraResponse;
 
 	}
+	
+	public String getPickupStations(Offer offer) {
+		String response = "PickupStations ";
+		try {
+			
+			
+			URI uri = getPickupStationURI(offer.getLink());
+			logger.info("getPickupStations Request = "+uri);
+			
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( !dummy)
+			{
+				response =  httpClient.sendGetRequest(uri);
+				logger.info("response = "+response);
+			}
+			return response;
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+	
+
 	public static PaypalSetCheckoutResponse getPaypalUrl(Offer offer, String bookingRequestId) {
 		GisHttpClient httpClient = new GisHttpClient();
 
@@ -388,7 +424,7 @@ public class AdacVehicleHttpService {
 
 	}
 	
-	public static ExtraResponse getExtrasDummy() {
+	private static ExtraResponse getExtrasDummy() {
 
 		try {
 			

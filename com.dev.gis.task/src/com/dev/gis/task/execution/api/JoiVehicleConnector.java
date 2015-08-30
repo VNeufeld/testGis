@@ -36,39 +36,6 @@ public class JoiVehicleConnector {
 	
 	private static String varPayerId = "G53SL5V9APQV2";
 
-	public static VehicleResponse getOffers(VehicleRequest vehicleRequest) {
-		GisHttpClient httpClient = new GisHttpClient();
-
-		try {
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+TaskProperties.VEHICLE_REQUEST_PARAM);
-			
-			Administration admin = createAdministrator();
-
-			vehicleRequest.setAdministration(admin);
-			
-
-			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
-			logger.info("request = "+request);
-			
-//			String request = JsonUtils.createDummyResponse("DummyJoiVehicleRequest.json");
-			
-			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("response = "+response);
-			
-			VehicleResponse vh = JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
-			
-
-			return vh;
-			
-		} catch ( IOException e) {
-			logger.error(e);
-		} catch (URISyntaxException e) {
-			logger.error(e);
-		}
-		return null;
-
-	}
-
 	private static Administration createAdministrator() {
 		Administration admin = new Administration();
 		
@@ -80,36 +47,6 @@ public class JoiVehicleConnector {
 		return admin;
 	}
 	
-	public static ExtraResponse getExtras(Offer offer) {
-		GisHttpClient httpClient = new GisHttpClient();
-
-		try {
-			String link = offer.getBookLink().toString();
-			int pos = link.indexOf("/vehicleRe");
-			link = link.substring(pos);
-			link = link.replace("/book","/extras");
-			//URI uri = new URI("http://localhost:8080/joi/vehicleRequest?pageSize=200");
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
-			
-			logger.info("GetExtra Request = "+uri);
-			
-			
-			String response =  httpClient.sendGetRequest(uri);
-			logger.info("response = "+response);
-			
-			ExtraResponse extraResponse = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
-			
-
-			return extraResponse;
-			
-		} catch ( IOException e) {
-			logger.error(e,e);
-		} catch (URISyntaxException e) {
-			logger.error(e,e);
-		}
-		return null;
-
-	}
 	public static PaypalSetCheckoutResponse getPaypalUrl(Offer offer, String bookingRequestId) {
 		GisHttpClient httpClient = new GisHttpClient();
 
@@ -301,27 +238,6 @@ public class JoiVehicleConnector {
 		return null;
 
 	}
-	
-	public static ExtraResponse getExtrasDummy() {
-
-		try {
-			
-			String response = JsonUtils.createDummyResponse("GetExtrasResponse.json");
-			
-			logger.info("response = "+response);
-			
-			ExtraResponse vh = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
-			
-
-			return vh;
-			
-		} catch ( IOException e) {
-			logger.error(e);
-		}
-		return null;
-
-	}
-
 
 	public static BookingResponse bookOffers(Offer selectedOffer,String bookingRequestId,
 			List<Extra> selectedExtras) {
@@ -412,6 +328,7 @@ public class JoiVehicleConnector {
 		return null;
 	}
 
+	@Deprecated
 	public static String getPickupStations(Offer selectedOffer) {
 		GisHttpClient httpClient = new GisHttpClient();
 

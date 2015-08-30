@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Text;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.bookingView.BookingView;
 import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.connector.api.AdacVehicleHttpService;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
@@ -175,9 +177,10 @@ public class OfferDetailView extends TaskViewAbstract {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
-			// ExtraResponse response =
-			// JoiVehicleConnector.getExtras(selectedOffer);
-			ExtraResponse response = JoiVehicleConnector.getExtrasDummy();
+			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
+			ExtraResponse response  = service.getExtras(selectedOffer);
 			extraListTable.refresh(response);
 		}
 	}
@@ -218,9 +221,12 @@ public class OfferDetailView extends TaskViewAbstract {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			pickupStationsResponse.setText("running....");
-			String response = JoiVehicleConnector
-					.getPickupStations(selectedOffer);
+			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
+			String response  = service.getPickupStations(selectedOffer);
 			pickupStationsResponse.setText(response);
+			
 		}
 
 	}
