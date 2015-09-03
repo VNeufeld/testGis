@@ -18,6 +18,10 @@ public class PageSizeControl extends ObjectTextControl {
 		super(parent, 100, true);
 	}
 
+	public PageSizeControl(Composite parent, int size,  boolean span) {
+		super(parent, size, span);
+	}
+
 	@Override
 	protected String getLabel() {
 		return "Page size";

@@ -14,7 +14,11 @@ public class PreferenceConstants {
 	public static final String P_STRING = "stringPreference";
 
 	public static final String P_URL = "urlPreference";
+	
+	public static final String ADAC_URL = "AdacUrlPreference";
 
+	public static final String ADAC_OPERATORS = "AdacOperatorsPreference";
+	
 	public static final String P_USE_DUMMY = "booleanPreferenceUseDummy";
 	
 }

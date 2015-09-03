@@ -194,7 +194,7 @@ public class CreateVehicleRequestUtils {
 				cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1,
 				cal.get(Calendar.DAY_OF_MONTH));
 		String sTime = String.format("%02d:%02d",
-				cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE));
+				cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE));
 
 		DayAndHour dh = new DayAndHour();
 		dh.setDate(sday);

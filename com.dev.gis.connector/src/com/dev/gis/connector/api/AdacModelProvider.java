@@ -40,6 +40,8 @@ public enum AdacModelProvider {
 
 	public String languageCode;
 
+	public String crossOfferOperator;
+	
 	public long languageId;
 	
 	public long operatorId;

@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -18,7 +19,9 @@ import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.CheckBox;
 import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.app.view.elements.LanguageComboBox;
+import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
+import com.dev.gis.app.view.elements.PageSizeControl;
 import com.dev.gis.app.view.listener.adac.AdacGetNextFilterPageSelectionListener;
 import com.dev.gis.app.view.listener.adac.AdacJoiGetOffersSelectionListener;
 import com.dev.gis.app.view.listener.adac.AdacSelectChangedOfferClickListener;
@@ -65,6 +68,14 @@ public class TestAppView extends RentCarsAppView {
 
 		AirportLocationSearch.createAirportLocationSearch(groupStamp);
 	}
+	
+	protected void createPageSize(Group groupStamp) {
+		Composite cc = createComposite(groupStamp, 4, -1, false);
+
+		new PageSizeControl(cc, 50, false);
+		new CrossOfferOperatorControl(cc);
+	}
+
 	
 	protected Button createRadioButtonsCarAndTruck(final Group groupStamp) {
 		Composite rbComposite = new Composite(groupStamp, SWT.NONE);
@@ -221,7 +232,37 @@ public class TestAppView extends RentCarsAppView {
 		pageNo.setValue("0");
 		CheckBox useFilter = new CheckBox(groupResult, "use filter");
 		new ButtonControl(groupResult, "Show Page", 0,  selectNextPageSelectionListener(pageNo, useFilter));
-		
+
+	}
+	
+	protected static class CrossOfferOperatorControl extends ObjectTextControl {
+		private static final String PREFERENCE_PROPERTY = "ADAC_CROSSOFFER";
+
+		public CrossOfferOperatorControl(Composite parent) {
+			super(parent, 50, false);
+		}
+
+		@Override
+		protected String getLabel() {
+			return "Cross Offer Operator";
+		}
+
+
+		@Override
+		public void saveValue(String value) {
+			if ( StringUtils.isEmpty(value))
+				value = "1";
+			AdacModelProvider.INSTANCE.crossOfferOperator = value;
+			logger.info("Cross Offer Operator : "+value);
+			
+			saveProperty(PREFERENCE_PROPERTY,value);
+		}
+
+		@Override
+		protected String getDefaultValue() {
+			String value = readProperty(PREFERENCE_PROPERTY);
+			return value;
+		}
 
 	}
 

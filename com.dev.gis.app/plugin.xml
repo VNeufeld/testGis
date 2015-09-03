@@ -358,7 +358,12 @@
       <page
             class="com.dev.gis.app.preferences.SamplePreferencePage"
             id="com.dev.gis.app.preferences.SamplePreferencePage"
-            name="Sample Preferences">
+            name="Sunny JOI Preferences">
+      </page>
+      <page
+            class="com.dev.gis.app.preferences.AdacPreferencePage"
+            id="com.dev.gis.app.preferences.AdacPreferencePage"
+            name="ADAC Preferences">
       </page>
    </extension>
    <extension

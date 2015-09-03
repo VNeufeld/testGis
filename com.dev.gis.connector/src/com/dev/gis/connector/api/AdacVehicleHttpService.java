@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.connector.GisHttpClient;
@@ -81,11 +82,15 @@ public class AdacVehicleHttpService {
 		this.httpClient = gisHttpClientInstance;
 	}
 
-	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy, int pageSize) {
+	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy, int pageSize, String crossOfferOperator) {
 
 		try {
 			
-			URI uri = getServerURI(VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
+			String param = VEHICLE_REQUEST_PARAM+String.valueOf(pageSize);
+			if ( StringUtils.isNotEmpty(crossOfferOperator)) {
+				param = param + "&crossOffer="+crossOfferOperator;
+			}
+			URI uri = getServerURI(param);
 			logger.info("get Offers URI : = "+uri.toString());
 
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
