@@ -487,8 +487,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	}
 
 	private void createColumnsInclusives(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Name1", "Code", "Class" };
-		int[] bounds = { 200, 100, 100 };
+		String[] titles = { "Name1", "Code", "Class", "Filter" };
+		int[] bounds = { 200, 100, 100, 50 };
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(viewer,titles[0], bounds[0], 0);
@@ -496,7 +496,11 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 			@Override
 			public String getText(Object element) {
 				Inclusive o = (Inclusive) element;
-				return o.getDescription() ;
+				String name = o.getName();
+				String description = o.getDescription();
+				if ( StringUtils.isEmpty(description))
+					description = name;
+				return description ;
 			}
 		});
 
@@ -516,6 +520,15 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 			public String getText(Object element) {
 				Inclusive o = (Inclusive) element;
 				return o.getItemClassName() + ":"+ o.getItemClassCode()+":"+ o.getItemClassId();
+			}
+		});
+
+		col = createTableViewerColumn(viewer,titles[3], bounds[3], 3);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Inclusive o = (Inclusive) element;
+				return ( o.isItemClassFilter()?"1":"0");
 			}
 		});
 		

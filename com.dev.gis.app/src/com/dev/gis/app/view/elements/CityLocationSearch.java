@@ -39,6 +39,9 @@ public class CityLocationSearch extends LocationSearchText {
 		if (!StringUtils.isEmpty(value)) {
 			ModelProvider.INSTANCE.cityId = Long.valueOf(value);
 			logger.info("selected city : " + value);
+			
+			ModelProvider.INSTANCE.airport = null;
+
 		}
 		// TaskProperties.getTaskProperties().setServerProperty(
 		// serverUrl.getText());

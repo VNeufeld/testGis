@@ -20,7 +20,7 @@ public class BookingRequest extends BasicProtocol {
 
 	private String acceptedAvailability;
 
-	private String transferType;
+	private Integer transferType;
 
 	private String flightNo;
 
@@ -113,10 +113,6 @@ public class BookingRequest extends BasicProtocol {
 		return promoCode;
 	}
 
-	@XmlElement(required = false)
-	public String getTransferType() {
-		return transferType;
-	}
 
 	public boolean isTravelAgent() {
 		return travelAgent;
@@ -174,13 +170,17 @@ public class BookingRequest extends BasicProtocol {
 		this.promoCode = promoCode;
 	}
 
-	
-	public void setTransferType(String transferType) {
-		this.transferType = transferType;
-	}
 
 	
 	public void setTravelAgent(boolean travelAgent) {
 		this.travelAgent = travelAgent;
+	}
+
+	public Integer getTransferType() {
+		return transferType;
+	}
+
+	public void setTransferType(Integer transferType) {
+		this.transferType = transferType;
 	}
 }

@@ -79,6 +79,8 @@ public class EmlView extends  ViewPart {
 		logEntryTable = new LogEntryTable(compositeLogTable,getSite());
 		
 		startServer();
+		
+		
 	}
 	
 	

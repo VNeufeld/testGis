@@ -21,8 +21,16 @@ public class Inclusive extends BasicProtocol {
 
 	private String itemClassName;
 	
+	protected boolean itemClassFilter;
+	
 	// description of the inclusive item
 	private String description;
+
+	// description of the inclusive item
+	private String name;
+	
+	// flag unique - only one of this extra can be booked
+	private Boolean unique;
 
 	private String code;
 	
@@ -89,5 +97,29 @@ public class Inclusive extends BasicProtocol {
 
 	public void setItemClassName(String itemClassName) {
 		this.itemClassName = itemClassName;
+	}
+
+	public boolean isItemClassFilter() {
+		return itemClassFilter;
+	}
+
+	public void setItemClassFilter(boolean itemClassFilter) {
+		this.itemClassFilter = itemClassFilter;
+	}
+
+	public Boolean getUnique() {
+		return unique;
+	}
+
+	public void setUnique(Boolean unique) {
+		this.unique = unique;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

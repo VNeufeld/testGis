@@ -263,12 +263,12 @@ public class JoiVehicleConnector {
 			
 			
 			Payment payment = new Payment();
-			payment.setPaymentType("8");   // Paypal
+			payment.setPaymentType(8);   // Paypal
 			bookingRequest.setPayment(payment);
 			
-			bookingRequest.setAcceptedAvailability("13");
+			//bookingRequest.setAcceptedAvailability("13");
 			bookingRequest.setFlightNo("LH4711");
-			bookingRequest.setTransferType("1");
+			bookingRequest.setTransferType(1);
 			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
 			
 			bookingRequest.setExtras(selectedExtras);

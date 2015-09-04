@@ -38,6 +38,8 @@ public class AirportLocationSearch extends LocationSearchText {
 		ModelProvider.INSTANCE.airport = value;
 		logger.info("selected airport : "+value);
 		
+		ModelProvider.INSTANCE.cityId = 0;
+		
 		TaskProperties.getTaskProperties().setAptCode(value);
 		TaskProperties.getTaskProperties().saveProperty();
 		

@@ -14,7 +14,7 @@ public class Payment extends BasicProtocol {
 	
 	private BankAccount account;
 	
-	String paymentType;
+	Integer paymentType;
 	
 	private PaypalTransactionInfo paypalTransactionInfo;
 	
@@ -29,9 +29,6 @@ public class Payment extends BasicProtocol {
 		return card;
 	}
 	
-	public String getPaymentType() {
-		return paymentType;
-	}
 	
 	@XmlElement(required=false)
 	public PaypalTransactionInfo getPaypalTransactionInfo() {
@@ -46,11 +43,16 @@ public class Payment extends BasicProtocol {
 		this.card = card;
 	}
 
-	public void setPaymentType(String paymentType) {
-		this.paymentType = paymentType;
-	}
 
 	public void setPaypalTransactionInfo(PaypalTransactionInfo paypalTransactionInfo) {
 		this.paypalTransactionInfo = paypalTransactionInfo;
+	}
+
+	public Integer getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(Integer paymentType) {
+		this.paymentType = paymentType;
 	}
 }

@@ -27,13 +27,13 @@ public class BookingRequestCreator {
 		
 		bookingRequest.setDriver(driver);
 		Payment payment = new Payment();
-		payment.setPaymentType("1");
+		payment.setPaymentType(1);
 		
 		//payment.setPaymentType(PaymentType.PAYPAL_PAYMENT);
 		
-		bookingRequest.setAcceptedAvailability("13");
+		//bookingRequest.setAcceptedAvailability("13");
 		bookingRequest.setFlightNo("LH4711");
-		bookingRequest.setTransferType("1");
+		bookingRequest.setTransferType(1);
 		bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
 		//bookingRequest.setPayment(payment);
 		
@@ -53,7 +53,7 @@ public class BookingRequestCreator {
 		Person person = createDriver();
 		customer.setPerson(person);
 		Address address = new Address();
-		address.setCity("München");
+		address.setCity("Muenchen");
 		address.setStreet("Street");
 		address.setZip("81543");
 		address.setCountry("DE");

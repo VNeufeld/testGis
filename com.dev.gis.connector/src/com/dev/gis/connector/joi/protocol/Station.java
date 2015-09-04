@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name = "station")
-@XmlType(propOrder =
-	{ "id", "link", "stationName", "stationPriority", "airportStation", "airport", "cityId", "supplierId", "supplierGroupId",
-			"supplierPriority", "assignedCityIds", "modules", "area", "countryId", "address", "info", "phone", "fax", "flightNoMandatory" })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Station extends BasicProtocol {
 
 	private long id;

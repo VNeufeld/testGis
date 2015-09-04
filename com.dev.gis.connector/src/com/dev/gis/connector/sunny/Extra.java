@@ -2,10 +2,11 @@ package com.dev.gis.connector.sunny;
 
 import java.net.URI;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Extra extends BasicProtocol {
 
 	private int id;
@@ -18,6 +19,9 @@ public class Extra extends BasicProtocol {
 	private String code;
 	
 	private String name; 
+
+	// description of the inclusive item
+	private String description;
 
 	private MoneyAmount totalPrice;
 
@@ -235,6 +239,14 @@ public class Extra extends BasicProtocol {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
