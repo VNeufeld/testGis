@@ -5,17 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-
-@XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlRootElement(name="offer")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Offer extends BasicProtocol {
 	
@@ -37,6 +30,8 @@ public class Offer extends BasicProtocol {
 
 	private MoneyAmount stdPrice;
 
+	private MoneyAmount dailyPrice;
+	
 	private String status;
 
 	private List<Inclusive> inclusives;
@@ -216,5 +211,13 @@ public class Offer extends BasicProtocol {
 	
 	public void setSupplierId(long supplierId) {
 		this.supplierId = supplierId;
+	}
+
+	public MoneyAmount getDailyPrice() {
+		return dailyPrice;
+	}
+
+	public void setDailyPrice(MoneyAmount dailyPrice) {
+		this.dailyPrice = dailyPrice;
 	}
 }

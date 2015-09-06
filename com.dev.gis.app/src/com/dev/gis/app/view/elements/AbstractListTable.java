@@ -1,5 +1,9 @@
 package com.dev.gis.app.view.elements;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -13,9 +17,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbenchPartSite;
 
+
 public abstract class AbstractListTable implements IListTable {
+
+	private static Logger logger = Logger.getLogger(AbstractListTable.class);
 
 	private TableViewer viewer;
 
@@ -86,11 +94,7 @@ public abstract class AbstractListTable implements IListTable {
 	}
 	
 	protected void addTooltipListener() {
-		
 	}
-
-//	protected abstract void createColumns(final Composite parent,
-//			final TableViewer viewer);
 
 	protected TableViewerColumn createTableViewerColumn(String title,
 			int bound, final int colNumber) {
@@ -121,4 +125,22 @@ public abstract class AbstractListTable implements IListTable {
 
 	}
 
+	public <T> List<T> getSelectedOjects(Class<T> obbk) {
+		logger.info(" getSelectedExtras "+obbk.getName());
+
+		List<T> selectedOjects = new ArrayList<T>();
+		TableItem[] selection = getViewer().getTable().getSelection();
+		if (selection != null && selection.length > 0) {
+			for (TableItem item : selection) {
+				@SuppressWarnings("unchecked")
+				T e = (T) item.getData();
+				selectedOjects.add(e);
+				logger.info(" selected object " + e.toString());
+
+			}
+		}
+
+		return selectedOjects;
+	}
+	
 }

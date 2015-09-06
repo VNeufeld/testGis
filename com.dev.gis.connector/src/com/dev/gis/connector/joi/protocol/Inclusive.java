@@ -2,16 +2,11 @@ package com.dev.gis.connector.joi.protocol;
 
 import java.net.URI;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
-@XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlRootElement(name="inclusive")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Inclusive extends BasicProtocol {
 
@@ -27,6 +22,11 @@ public class Inclusive extends BasicProtocol {
 
 	private String itemClassName;
 	
+	private String itemClassCode;
+	
+	private int itemClassId;
+	
+	private boolean itemClassFilter;
 	
 	public String getDescription() {
 		return description;
@@ -75,5 +75,29 @@ public class Inclusive extends BasicProtocol {
 
 	public void setItemClassName(String itemClassName) {
 		this.itemClassName = itemClassName;
+	}
+
+	public String getItemClassCode() {
+		return itemClassCode;
+	}
+
+	public void setItemClassCode(String itemClassCode) {
+		this.itemClassCode = itemClassCode;
+	}
+
+	public int getItemClassId() {
+		return itemClassId;
+	}
+
+	public void setItemClassId(int itemClassId) {
+		this.itemClassId = itemClassId;
+	}
+
+	public boolean isItemClassFilter() {
+		return itemClassFilter;
+	}
+
+	public void setItemClassFilter(boolean itemClassFilter) {
+		this.itemClassFilter = itemClassFilter;
 	}
 }

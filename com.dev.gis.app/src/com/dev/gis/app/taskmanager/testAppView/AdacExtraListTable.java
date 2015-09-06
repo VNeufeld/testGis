@@ -1,72 +1,45 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbenchPartSite;
 
-import com.dev.gis.connector.api.ModelProvider;
+import com.dev.gis.app.view.elements.AbstractListTable;
+import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 
-public class AdacExtraListTable {
-
-	private TableViewer viewer;
-
-	private final IWorkbenchPartSite site;
-
-	private ISelectionChangedListener selectionChangedListener;
-
-	private final Composite parent;
+public class AdacExtraListTable extends AbstractListTable {
+	private static Logger logger = Logger.getLogger(AdacExtraListTable.class);
 
 	public AdacExtraListTable(IWorkbenchPartSite site, final Composite parent,
 			ISelectionChangedListener selectionChangedListener) {
-		this.site = site;
-		this.parent = parent;
-		this.selectionChangedListener = selectionChangedListener;
-		createViewer();
-	}
-
-	private void createViewer() {
-
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-		createColumns(parent, viewer);
-		final Table table = viewer.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
-		viewer.setContentProvider(new ArrayContentProvider());
-		site.setSelectionProvider(viewer);
-
-		// define layout for the viewer
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 2;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
-		viewer.getControl().setLayoutData(gridData);
-
-		if (selectionChangedListener != null)
-			viewer.addSelectionChangedListener(this.selectionChangedListener);
+		super(site, parent, null, selectionChangedListener);
 
 	}
 
-	private void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Name", "Code", "Preis" };
-		int[] bounds = { 200, 100, 100 };
+	public List<Extra> getSelectedExtras() {
+		List<Extra> extras = getSelectedOjects(Extra.class);
+		return extras;
+	}
+
+	public void refresh(ExtraResponse response) {
+		AdacModelProvider.INSTANCE.updateExtras(response);
+		getViewer().setInput(AdacModelProvider.INSTANCE.getExtras());
+		getViewer().refresh();
+		
+	}
+
+	@Override
+	public void createColumns(Composite parent, TableViewer viewer) {
+		String[] titles = { "Id", "Code", "Name", "Preis", "TotalPrice", "PayType","Mandatory" };
+		int[] bounds = { 50, 70, 300, 100, 100, 150, 100 };
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -74,68 +47,72 @@ public class AdacExtraListTable {
 			@Override
 			public String getText(Object element) {
 				Extra o = (Extra) element;
-				return o.getName() + "(" + o.getCode() + ")";
+				return ""+o.getId();
 			}
 		});
-
-		// second column is supplierId
+		
 		col = createTableViewerColumn(titles[1], bounds[1], 1);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				Extra o = (Extra) element;
-				return String.valueOf(o.getId());
+				return ""+o.getCode();
 			}
 		});
 
+		// second column is supplierId
 		col = createTableViewerColumn(titles[2], bounds[2], 2);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				Extra o = (Extra) element;
-				return o.getPrice().getAmount();
+				return o.getName();
 			}
 		});
 
-	}
-
-	private TableViewerColumn createTableViewerColumn(String title, int bound,
-			final int colNumber) {
-		final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,
-				SWT.NONE);
-		final TableColumn column = viewerColumn.getColumn();
-		column.setText(title);
-		column.setWidth(bound);
-		column.setResizable(true);
-		column.setMoveable(true);
-		return viewerColumn;
-	}
-
-	public TableViewer getViewer() {
-		return viewer;
-	}
-
-	public List<Extra> getSelectedExtras() {
-		List<Extra> extras = new ArrayList<Extra>();
-		TableItem[] selection = viewer.getTable().getSelection();
-		System.out.println(" getSelectedExtras ");
-		if (selection != null && selection.length > 0) {
-			for (TableItem item : selection) {
-				Extra e = (Extra) item.getData();
-				extras.add(e);
-
-				System.out.println(" selected extra " + e.getName());
-
+		col = createTableViewerColumn(titles[3], bounds[3], 3);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				return o.getPrice().getAmount().toString();
 			}
-		}
+		});
 
-		return extras;
+		col = createTableViewerColumn(titles[4], bounds[4], 4);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				if ( o.getTotalPrice() != null)
+					return o.getTotalPrice().getAmount().toString();
+				return "";
+			}
+		});
+
+		col = createTableViewerColumn(titles[5], bounds[5], 5);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				return o.getPayType();
+			}
+		});
+
+		col = createTableViewerColumn(titles[6], bounds[6], 6);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				return String.valueOf(o.isMandatory());
+			}
+		});
+		
 	}
 
-	public void refresh(ExtraResponse response) {
-		ModelProvider.INSTANCE.updateExtras(response);
-		viewer.setInput(ModelProvider.INSTANCE.getExtraDos());
-		viewer.refresh();
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
 		
 	}
 

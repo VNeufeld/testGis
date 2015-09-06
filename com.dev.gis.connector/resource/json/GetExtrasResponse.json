@@ -1,82 +1,160 @@
 {
+	"link": null,
 	"requestId": 0,
+	"sessionId": null,
 	"errors": [],
 	"extras": [{
-		"id": 58,
-		"code": "BO",
-		"name": "Sitzpolster (4-12 Jahre)",
-		"payType": "2",
-		"status": "0",
-		"insurance": false,
-		"mandatory": false,
-		"price": {
-			"amount": "10,98",
-			"currency": "EUR"
-		},
-		"totalPrice": {
-			"amount": "54,90",
-			"currency": "EUR"
-		},
-		"dimension1": "11"
-	},
-	{
-		"id": 51,
-		"code": "BS",
-		"name": "Babysitz (bis 12 Monate)",
-		"payType": "2",
-		"status": "0",
-		"insurance": false,
-		"mandatory": false,
-		"price": {
-			"amount": "10,98",
-			"currency": "EUR"
-		},
-		"totalPrice": {
-			"amount": "54,90",
-			"currency": "EUR"
-		},
-		"dimension1": "11"
-	},
-	{
-		"id": 54,
-		"code": "CS",
-		"name": "Kindersitz (1 bis ca. 4 Jahre)",
-		"payType": "2",
-		"status": "0",
-		"insurance": false,
-		"mandatory": false,
-		"price": {
-			"amount": "10,98",
-			"currency": "EUR"
-		},
-		"totalPrice": {
-			"amount": "54,90",
-			"currency": "EUR"
-		},
-		"dimension1": "11"
-	},
-	{
 		"id": 6,
+		"status": "AVAILABLE",
 		"code": "NAG",
-		"name": "Navigationssystem (nach Verfügbarkeit)",
-		"payType": "2",
-		"status": "0",
-		"insurance": false,
-		"mandatory": false,
-		"price": {
-			"amount": "8,54",
-			"currency": "EUR"
-		},
+		"name": "Navigationssystem (nach Verf𧢡rkeit)",
 		"totalPrice": {
-			"amount": "59,78",
-			"currency": "EUR"
+			"currency": "EUR",
+			"amount": "130,37",
+			"decimalAmount": 130.37
 		},
-		"competingItems": [64,
+		"competingItems": [139,
+		64,
 		65,
 		77,
 		78,
 		41],
+		"mandatory": false,
+		"payType": "PAY_ON_ARRIVAL",
+		"insurance": false,
+		"price": {
+			"currency": "EUR",
+			"amount": "130,37",
+			"decimalAmount": 130.37
+		},
+		"dimension1": "10"
+	},
+	{
+		"id": 53,
+		"status": "AVAILABLE",
+		"code": "BS",
+		"name": "Babysitz (0-18kg)",
+		"totalPrice": {
+			"currency": "EUR",
+			"amount": "60,62",
+			"decimalAmount": 60.62
+		},
+		"mandatory": false,
+		"payType": "PAY_ON_ARRIVAL",
+		"insurance": false,
+		"price": {
+			"currency": "EUR",
+			"amount": "20,22",
+			"decimalAmount": 20.22
+		},
 		"dimension1": "11"
+	},
+	{
+		"id": 55,
+		"status": "AVAILABLE",
+		"code": "CS",
+		"name": "Kindersitz (15-30kg)",
+		"totalPrice": {
+			"currency": "EUR",
+			"amount": "60,62",
+			"decimalAmount": 60.62
+		},
+		"mandatory": false,
+		"payType": "PAY_ON_ARRIVAL",
+		"insurance": false,
+		"price": {
+			"currency": "EUR",
+			"amount": "20,22",
+			"decimalAmount": 20.22
+		},
+		"dimension1": "11"
+	},
+	{
+		"id": 14,
+		"status": "AVAILABLE",
+		"code": "SC",
+		"name": "Schneeketten",
+		"totalPrice": {
+			"currency": "EUR",
+			"amount": "100,00",
+			"decimalAmount": 100.00
+		},
+		"mandatory": false,
+		"payType": "PAY_ON_ARRIVAL",
+		"insurance": false,
+		"price": {
+			"currency": "EUR",
+			"amount": "16,66",
+			"decimalAmount": 16.66
+		},
+		"dimension1": "11"
+	},
+	{
+		"id": 16,
+		"status": "AVAILABLE",
+		"code": "SR",
+		"name": "Skitr娥r",
+		"totalPrice": {
+			"currency": "EUR",
+			"amount": "114,17",
+			"decimalAmount": 114.17
+		},
+		"mandatory": false,
+		"payType": "PAY_ON_ARRIVAL",
+		"insurance": false,
+		"price": {
+			"currency": "EUR",
+			"amount": "19,03",
+			"decimalAmount": 19.03
+		},
+		"dimension1": "11"
+	},
+	{
+		"id": 120,
+		"status": "AVAILABLE",
+		"code": "WSR",
+		"name": "wintertaugliche Bereifung",
+		"totalPrice": {
+			"currency": "EUR",
+			"amount": "79,20",
+			"decimalAmount": 79.20
+		},
+		"competingItems": [85,
+		119,
+		86,
+		4,
+		96,
+		57],
+		"mandatory": false,
+		"payType": "PAY_ON_ARRIVAL",
+		"insurance": false,
+		"price": {
+			"currency": "EUR",
+			"amount": "9,90",
+			"decimalAmount": 9.90
+		},
+		"dimension1": "11"
+	},
+	{
+		"id": 50,
+		"status": "ON_REQUEST",
+		"code": "ZKM",
+		"name": "Zusatzkilometer",
+		"competingItems": [37,
+		97,
+		8,
+		72,
+		73,
+		61],
+		"mandatory": false,
+		"payType": "PAY_ON_ARRIVAL",
+		"insurance": false,
+		"price": {
+			"currency": "EUR",
+			"amount": "0,00",
+			"decimalAmount": 0.00
+		},
+		"dimension1": "2"
 	}],
-	"remainingCacheSeconds": 6000000
+	"remainingCacheSeconds": 3000
 }

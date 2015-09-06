@@ -5,6 +5,7 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.osgi.service.prefs.BackingStoreException;
 
 public class BasicControl {
+	
 	private static String PREFERENCE_PATH = "CONTROL_PREFERENCE";
 
 	protected String readProperty(String property) {

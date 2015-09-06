@@ -52,7 +52,6 @@ public class RentCarsAppView extends TaskViewAbstract {
 	protected Text requestId = null;
 	
 	
-	protected Composite parent;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -168,26 +167,6 @@ public class RentCarsAppView extends TaskViewAbstract {
 		return groupResult;
 	}
 	
-	protected Composite createComposite(final Composite parent,int columns, int span, boolean grab) {
-		
-		GridLayout gd = (GridLayout)parent.getLayout();
-		int col = gd.numColumns;
-		
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(columns).equalWidth(false).applyTo(composite);
-
-		if ( span < 0)
-			GridDataFactory.fillDefaults().span(col, 1)
-					.align(SWT.FILL, SWT.BEGINNING).grab(grab, false)
-					.applyTo(composite);
-		else
-			GridDataFactory.fillDefaults().span(span, 1)
-			.align(SWT.FILL, SWT.BEGINNING).grab(grab, false)
-			.applyTo(composite);
-
-
-		return composite;
-	}
 
 
 

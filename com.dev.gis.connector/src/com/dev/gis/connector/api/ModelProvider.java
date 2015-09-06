@@ -24,8 +24,6 @@ public enum ModelProvider {
 	private List<Offer> offers;
 
 	private List<OfferDo> offerDos;
-	
-	private List<Extra> extraDos = new ArrayList<Extra>();
 
 	public long cityId;
 
@@ -122,22 +120,6 @@ public enum ModelProvider {
 		this.vehicleResponse = null;
 	}
 
-	
-	public void updateExtras(ExtraResponse response) {
-		extraDos.clear();
-		for ( Extra vr : response.getExtras()) {
-				
-			Extra extra = new Extra();
-			extra.setName(vr.getName());
-			extra.setCode(vr.getCode());
-			extra.setId(vr.getId());
-			extra.setPrice(vr.getPrice());
-				
-			extraDos.add(extra);
-		}
-		
-	}
-	
 
 	public void update(VehicleResponse response) {
 		offers.clear();
@@ -167,14 +149,6 @@ public enum ModelProvider {
 
 	public List<OfferDo> getOfferDos() {
 		return offerDos;
-	}
-
-	public List<Extra> getExtraDos() {
-		return extraDos;
-	}
-
-	public void setExtraDos(List<Extra> extraDos) {
-		this.extraDos = extraDos;
 	}
 
 	public VehicleResponse getVehicleResponse() {

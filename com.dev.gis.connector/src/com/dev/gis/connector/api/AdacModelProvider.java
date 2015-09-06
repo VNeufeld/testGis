@@ -3,7 +3,8 @@ package com.dev.gis.connector.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dev.gis.connector.sunny.Extra;
+import com.dev.gis.connector.joi.protocol.Extra;
+import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.sunny.Hit;
 import com.dev.gis.connector.sunny.HitGroup;
 import com.dev.gis.connector.sunny.HitType;
@@ -22,13 +23,13 @@ import com.dev.gis.connector.sunny.VehicleResponse;
 public enum AdacModelProvider {
 	INSTANCE;
 
+	private List<Extra> extras = new ArrayList<Extra>();
+	
 	private List<Hit> locationSearchHits = new ArrayList<Hit>();
 	
 	private List<SunnyOfferDo> offerDos = new ArrayList<SunnyOfferDo>();
 
 	private List<SunnyOfferDo> recommendations = new ArrayList<SunnyOfferDo>();
-	
-	private List<Extra> extras = new ArrayList<Extra>();
 
 	private List<Inclusive> inclusives = new ArrayList<Inclusive>();
 	
@@ -179,19 +180,6 @@ private Station findStation(long pickUpStationId, VehicleResponse response) {
 	}
 
 
-	public void updateExtras(SunnyOfferDo offer) {
-		this.extras.clear();
-		if ( offer.getExtras() != null)
-			this.extras.addAll(offer.getExtras());
-		
-	}
-
-
-	public List<Extra> getExtras() {
-		return extras;
-	}
-
-
 	public void updateRecmmendations(VehicleResponse response) {
 		recommendations.clear();
 			
@@ -236,6 +224,17 @@ private Station findStation(long pickUpStationId, VehicleResponse response) {
 
 	public List<Station> getDropoffStations() {
 		return dropoffStations;
+	}
+
+
+	public void updateExtras(ExtraResponse response) {
+		extras.clear();
+		extras.addAll(response.getExtras());
+	}
+
+
+	public List<Extra> getExtras() {
+		return extras;
 	}
 
 }
