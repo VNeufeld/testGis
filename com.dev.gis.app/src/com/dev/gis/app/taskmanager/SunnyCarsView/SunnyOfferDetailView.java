@@ -1,18 +1,12 @@
 package com.dev.gis.app.taskmanager.SunnyCarsView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -21,22 +15,15 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.sunny.Address;
 import com.dev.gis.connector.sunny.Extra;
-import com.dev.gis.connector.sunny.Inclusive;
-import com.dev.gis.connector.sunny.Offer;
 import com.dev.gis.connector.sunny.Station;
 import com.dev.gis.connector.sunny.TravelInformation;
-import com.dev.gis.task.execution.api.ITaskResult;
 
 public class SunnyOfferDetailView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.view.SunnyOfferDetailView";
@@ -50,9 +37,9 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 	private Text carDescription = null;
 
-	private TableViewer tableExtras;
+	private SunnyInclusivesListTable inclusivesListTable;
 	
-	private TableViewer tableInclusives;
+	private SunnyExtraListTable extrasListTable;
 
 	private SunnyOfferDo selectedOffer = null;
 	
@@ -144,8 +131,10 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		group.setText("Extras:");
 		group.setLayout(new GridLayout(1, true));
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		
+		extrasListTable = new SunnyExtraListTable(getSite(), group, null);
 
-		createTableExtras(group);
+		//createTableExtras(group);
 		
 		return group;
 	}
@@ -155,8 +144,11 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		group.setText("Inclusives:");
 		group.setLayout(new GridLayout(1, true));
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		
+		inclusivesListTable = new SunnyInclusivesListTable(getSite(), group, null);
 
-		createTableInclusives(group);
+
+		//createTableInclusives(group);
 		
 		return group;
 	}
@@ -181,7 +173,7 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
-			List<Extra> extras = getSelectedExtras();
+			List<Extra> extras = extrasListTable.getSelectedExtras();
 			SunnyBookingView.updateView(selectedOffer, extras);
 
 		}
@@ -283,40 +275,6 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	}
 
 
-	private List<Extra> getSelectedExtras() {
-		List<Extra> extras = new ArrayList<Extra>();
-		TableItem[] selection = tableExtras.getTable().getSelection();
-		System.out.println(" getSelectedExtras ");
-		if (selection != null && selection.length > 0) {
-			for (TableItem item : selection) {
-				Extra e = (Extra) item.getData();
-				extras.add(e);
-
-				System.out.println(" selected extra " + e.getName());
-
-			}
-		}
-
-		return extras;
-	}
-
-	@Override
-	public void setFocus() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void refresh() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void refresh(ITaskResult result) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public void showOffer(SunnyOfferDo offer) {
 		
@@ -357,195 +315,15 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	
 	private void changeModelExtras(SunnyOfferDo offer) {
 		SunnyModelProvider.INSTANCE.updateExtras(offer);
-		tableExtras.setInput(SunnyModelProvider.INSTANCE.getExtras());
-		tableExtras.refresh();
+		extrasListTable.update();
 		
 	}
 
 	private void changeModelInclusives(SunnyOfferDo offer) {
 		SunnyModelProvider.INSTANCE.updateInclusives(offer);
-		tableInclusives.setInput(SunnyModelProvider.INSTANCE.getInclusives());
-		tableInclusives.refresh();
+		inclusivesListTable.update(SunnyModelProvider.INSTANCE.getInclusives());
 		
 		
 	}
-
-	private void createTableInclusives(Composite parent) {
-		tableInclusives = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL // | SWT.CHECK
-				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-		createColumnsInclusives(parent, tableInclusives);
-		final Table table = tableInclusives.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
-		tableInclusives.setContentProvider(new ArrayContentProvider());
-		// get the content for the viewer, setInput will call getElements in the
-		// contentProvider
-		// viewer.setInput(ModelProvider.INSTANCE.getOffers());
-		// make the selection available to other views
-		getSite().setSelectionProvider(tableInclusives);
-		// set the sorter for the table
-
-		// define layout for the viewer
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 2;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
-		tableInclusives.getControl().setLayoutData(gridData);
-		
-	}
-	
-	private void createColumnsExtras(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Name", "Code", "Preis", "Mandatory", "Prepaid/POA" };
-		int[] bounds = { 200, 100, 100, 100, 100 };
-
-		// first column is for the first name
-		TableViewerColumn col = createTableViewerColumn(viewer,titles[0], bounds[0], 0);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Extra o = (Extra) element;
-				return o.getName() + "(" + o.getCode() + ")";
-			}
-		});
-
-		// second column is supplierId
-		col = createTableViewerColumn(viewer,titles[1], bounds[1], 1);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Extra o = (Extra) element;
-				return String.valueOf(o.getId());
-			}
-		});
-
-		col = createTableViewerColumn(viewer,titles[2], bounds[2], 2);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Extra o = (Extra) element;
-				if ( o.getPrice() != null)
-					return o.getPrice().getAmount();
-				return "";
-			}
-		});
-
-		col = createTableViewerColumn(viewer,titles[3], bounds[3], 3);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Extra o = (Extra) element;
-				if ( o.getMandatory())
-					return "true";
-				return "false";
-			}
-		});
-		
-		col = createTableViewerColumn(viewer,titles[4], bounds[4], 4);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Extra o = (Extra) element;
-				if ( o.getPayType() != null)
-					return o.getPayType().name();
-				return "n/a";
-			}
-		});
-		
-		
-	}
-
-	
-
-	private void createTableExtras(Composite parent) {
-		tableExtras = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL // | SWT.CHECK
-				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-		createColumnsExtras(parent, tableExtras);
-		final Table table = tableExtras.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
-		tableExtras.setContentProvider(new ArrayContentProvider());
-		// get the content for the viewer, setInput will call getElements in the
-		// contentProvider
-		// viewer.setInput(ModelProvider.INSTANCE.getOffers());
-		// make the selection available to other views
-		getSite().setSelectionProvider(tableExtras);
-		// set the sorter for the table
-
-		// define layout for the viewer
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 2;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
-		tableExtras.getControl().setLayoutData(gridData);
-
-	}
-
-	private void createColumnsInclusives(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Name1", "Code", "Class", "Filter" };
-		int[] bounds = { 200, 100, 100, 50 };
-
-		// first column is for the first name
-		TableViewerColumn col = createTableViewerColumn(viewer,titles[0], bounds[0], 0);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Inclusive o = (Inclusive) element;
-				String name = o.getName();
-				String description = o.getDescription();
-				if ( StringUtils.isEmpty(description))
-					description = name;
-				return description ;
-			}
-		});
-
-		// second column is supplierId
-		col = createTableViewerColumn(viewer,titles[1], bounds[1], 1);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Inclusive o = (Inclusive) element;
-				return o.getCode() + ":"+ String.valueOf(o.getId());
-			}
-		});
-
-		col = createTableViewerColumn(viewer,titles[2], bounds[2], 2);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Inclusive o = (Inclusive) element;
-				return o.getItemClassName() + ":"+ o.getItemClassCode()+":"+ o.getItemClassId();
-			}
-		});
-
-		col = createTableViewerColumn(viewer,titles[3], bounds[3], 3);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Inclusive o = (Inclusive) element;
-				return ( o.isItemClassFilter()?"1":"0");
-			}
-		});
-		
-	}
-
-	private TableViewerColumn createTableViewerColumn(TableViewer table, String title, int bound,
-			final int colNumber) {
-		final TableViewerColumn viewerColumn = new TableViewerColumn(
-				table, SWT.NONE);
-		final TableColumn column = viewerColumn.getColumn();
-		column.setText(title);
-		column.setWidth(bound);
-		column.setResizable(true);
-		column.setMoveable(true);
-		return viewerColumn;
-	}
-	
-	
 
 }

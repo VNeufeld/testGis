@@ -74,59 +74,204 @@
 			"code": "EX300"
 		}],
 		"extras": [{
-			"id": 4,
-			"link": null,
-			"status": "ON_REQUEST",
-			"code": "BS",
-			"name": "Babysitz 01",
+			"id": 13,
+			"status": "0",
+			"code": "CS",
+			"name": "ChildSeat",
+			"description": "ChildSeat",
 			"totalPrice": {
-				"currency": null,
-				"amount": "16,00",
-				"decimalAmount": 16.00,
-				"amountAsUS": "16.00"
+				"amount": "75,00",
+				"currency": null
 			},
-			"requiredItems": null,
-			"competingItems": null,
 			"mandatory": false,
-			"payType": "PAY_ON_ARRIVAL",
+			"payType": "1",
 			"insurance": false,
-			"unique": true,
-			"itemClassId": 2,
+			"unique": false,
+			"itemClassId": 8,
 			"price": {
-				"currency": null,
-				"amount": "2,00",
-				"decimalAmount": 2.00,
-				"amountAsUS": "2.00"
+				"amount": "45,00",
+				"currency": null
 			},
-			"upperPrice": null,
-			"lowerPrice": null,
-			"value1": null,
-			"value2": null,
+			"upperPrice": {
+				"amount": "75,00",
+				"currency": null
+			},
+			"lowerPrice": {
+				"amount": "30,00",
+				"currency": null
+			},
 			"dimension1": "11",
-			"dimension2": null,
 			"dependency": null
 		},
 		{
 			"id": 3,
-			"link": null,
-			"status": "ON_REQUEST",
-			"code": "FE",
-			"name": "Tank Rule full to empty",
-			"totalPrice": null,
-			"requiredItems": null,
-			"competingItems": null,
+			"status": "0",
+			"code": "FP",
+			"name": "Fuel Paid",
+			"description": "Fuel Paid",
+			"totalPrice": {
+				"amount": "175,00",
+				"currency": null
+			},
 			"mandatory": false,
-			"payType": "PAY_ON_ARRIVAL",
-			"insurance": true,
-			"unique": false,
+			"payType": "1",
+			"insurance": false,
+			"unique": true,
 			"itemClassId": 3,
+			"price": {
+				"amount": "150,00",
+				"currency": null
+			},
+			"upperPrice": {
+				"amount": "175,00",
+				"currency": null
+			},
+			"lowerPrice": {
+				"amount": "135,00",
+				"currency": null
+			},
+			"dimension1": "11",
+			"dependency": null
+		},
+		{
+			"id": 19,
+			"status": "0",
+			"code": "KM250",
+			"name": "Mileage Agreement: 250 KM (each more: 13 Cent) (LONG)",
+			"description": "Mileage Agreement: 250 KM (each more: 13 Cent) (LONG)",
+			"totalPrice": null,
+			"mandatory": false,
+			"payType": "2",
+			"insurance": false,
+			"unique": true,
+			"itemClassId": 5,
 			"price": null,
 			"upperPrice": null,
 			"lowerPrice": null,
-			"value1": null,
-			"value2": null,
-			"dimension1": null,
-			"dimension2": null,
+			"dependency": null
+		},
+		{
+			"id": 17,
+			"status": "0",
+			"code": "KM500",
+			"name": "Mileage Agreement: 500 KM (each more: 13 Cent) (LONG)",
+			"description": "Mileage Agreement: 500 KM (each more: 13 Cent) (LONG)",
+			"totalPrice": null,
+			"mandatory": false,
+			"payType": "2",
+			"insurance": false,
+			"unique": true,
+			"itemClassId": 5,
+			"price": null,
+			"upperPrice": null,
+			"lowerPrice": null,
+			"dependency": null
+		},
+		{
+			"id": 16,
+			"status": "0",
+			"code": "KM99999",
+			"name": "Mileage Agreement: 9999999999 KM (each more: #3 #4) (LONG)",
+			"description": "Mileage Agreement: 9999999999 KM (each more: #3 #4) (LONG)",
+			"totalPrice": {
+				"amount": "250,00",
+				"currency": null
+			},
+			"mandatory": false,
+			"payType": "1",
+			"insurance": false,
+			"unique": true,
+			"itemClassId": 5,
+			"price": {
+				"amount": "220,00",
+				"currency": null
+			},
+			"upperPrice": {
+				"amount": "250,00",
+				"currency": null
+			},
+			"lowerPrice": {
+				"amount": "180,00",
+				"currency": null
+			},
+			"dimension1": "11",
+			"dependency": null
+		},
+		{
+			"id": 28,
+			"status": "0",
+			"code": "LIC2",
+			"name": "Liability Insurance Coverage (Persons: 2000000 EUR / Property: 400000 EUR) (LONG)",
+			"description": "Liability Insurance Coverage (Persons: 2000000 EUR / Property: 400000 EUR) (LONG)",
+			"totalPrice": {
+				"amount": "175,00",
+				"currency": null
+			},
+			"mandatory": false,
+			"payType": "1",
+			"insurance": true,
+			"unique": true,
+			"itemClassId": 4,
+			"price": {
+				"amount": "150,00",
+				"currency": null
+			},
+			"upperPrice": {
+				"amount": "175,00",
+				"currency": null
+			},
+			"lowerPrice": {
+				"amount": "120,00",
+				"currency": null
+			},
+			"dimension1": "11",
+			"dependency": null
+		},
+		{
+			"id": 18,
+			"status": "0",
+			"code": "MUL",
+			"name": "Unlimited Mileage ( LONG)",
+			"description": "Unlimited Mileage ( LONG)",
+			"totalPrice": null,
+			"mandatory": false,
+			"payType": "2",
+			"insurance": false,
+			"unique": true,
+			"itemClassId": 5,
+			"price": null,
+			"upperPrice": null,
+			"lowerPrice": null,
+			"dependency": null
+		},
+		{
+			"id": 24,
+			"status": "0",
+			"code": "SCDW",
+			"name": "Super CDW",
+			"description": "Super CDW",
+			"totalPrice": {
+				"amount": "90,00",
+				"currency": null
+			},
+			"mandatory": false,
+			"payType": "1",
+			"insurance": false,
+			"unique": true,
+			"itemClassId": 11,
+			"price": {
+				"amount": "75,00",
+				"currency": null
+			},
+			"upperPrice": {
+				"amount": "90,00",
+				"currency": null
+			},
+			"lowerPrice": {
+				"amount": "60,00",
+				"currency": null
+			},
+			"dimension1": "11",
 			"dependency": null
 		}],
 		"promoText": null,

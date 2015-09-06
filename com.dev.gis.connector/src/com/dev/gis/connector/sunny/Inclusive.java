@@ -34,6 +34,10 @@ public class Inclusive extends BasicProtocol {
 
 	private String code;
 	
+	private int positive;
+	
+	private int displayPriority;
+	
 	public String getDescription() {
 		return description;
 	}
@@ -121,5 +125,21 @@ public class Inclusive extends BasicProtocol {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getPositive() {
+		return positive;
+	}
+
+	public void setPositive(int positive) {
+		this.positive = positive;
+	}
+
+	public int getDisplayPriority() {
+		return displayPriority;
+	}
+
+	public void setDisplayPriority(int displayPriority) {
+		this.displayPriority = displayPriority;
 	}
 }
