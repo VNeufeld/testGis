@@ -1,9 +1,12 @@
 package com.dev.gis.app.taskmanager.bookingView;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -22,6 +25,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.app.taskmanager.SunnyCarsView.BSCreditCardDialog;
+import com.dev.gis.app.view.dialogs.PayPalDialog;
 import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
@@ -30,6 +35,7 @@ import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
+import com.dev.gis.connector.sunny.VerifyCreditCardPaymentResponse;
 import com.dev.gis.task.execution.api.JoiVehicleConnector;
 
 public class BookingView extends TaskViewAbstract {
@@ -104,6 +110,13 @@ public class BookingView extends TaskViewAbstract {
 				paypalToken.setText(response.getToken());
 				if ( response.getError() != null )
 					paypalError.setText(response.getError());
+				else {
+					PayPalDialog mpd = new PayPalDialog(parent.getShell(), response.getPaypalUrl());
+					if (mpd.open() == Dialog.OK) {
+						
+					}
+				}
+				
 			}
 			else
 				paypalError.setText(" Unknown PayPal Error" );
