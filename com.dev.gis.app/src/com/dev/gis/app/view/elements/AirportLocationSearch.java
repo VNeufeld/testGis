@@ -36,9 +36,11 @@ public class AirportLocationSearch extends LocationSearchText {
 	@Override
 	public void saveValue(String value) {
 		ModelProvider.INSTANCE.airport = value;
-		logger.info("selected airport : "+value);
 		
-		ModelProvider.INSTANCE.cityId = 0;
+		logger.info("selected airport : "+ModelProvider.INSTANCE.airport);
+		
+		if ( !StringUtils.isBlank(value))
+			ModelProvider.INSTANCE.cityId = 0;
 		
 		TaskProperties.getTaskProperties().setAptCode(value);
 		TaskProperties.getTaskProperties().saveProperty();

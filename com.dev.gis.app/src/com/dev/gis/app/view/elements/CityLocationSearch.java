@@ -38,14 +38,11 @@ public class CityLocationSearch extends LocationSearchText {
 	public void saveValue(String value) {
 		if (!StringUtils.isEmpty(value)) {
 			ModelProvider.INSTANCE.cityId = Long.valueOf(value);
-			logger.info("selected city : " + value);
-			
-			ModelProvider.INSTANCE.airport = null;
+			logger.info("selected city : " + ModelProvider.INSTANCE.cityId);
 
+			ModelProvider.INSTANCE.airport = null;
+			logger.info("selected airport : " + ModelProvider.INSTANCE.airport);
 		}
-		// TaskProperties.getTaskProperties().setServerProperty(
-		// serverUrl.getText());
-		// TaskProperties.getTaskProperties().saveProperty();
 
 	}
 

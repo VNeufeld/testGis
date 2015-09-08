@@ -2,6 +2,10 @@ package com.dev.gis.app.view.listener.adac;
 
 import java.util.Calendar;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
+import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.TaskProperties;
@@ -12,6 +16,7 @@ import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 
 public class AdacCreateVehicleRequestUtils {
+	private static Logger logger = Logger.getLogger(AdacCreateVehicleRequestUtils.class);
 
 	public static VehicleRequest createVehicleRequest() {
 		
@@ -44,6 +49,11 @@ public class AdacCreateVehicleRequestUtils {
 			pickUpLocation.setAirport(aptCode);
 			dropOffLocation.setAirport(aptCode);
 		}
+		
+		if ( cityId <= 0 && StringUtils.isEmpty(aptCode)) {
+			logger.warn(" NO Location is selected ");
+		}
+		
 
 		ti.setPickUpLocation(pickUpLocation);
 		ti.setDropOffLocation(dropOffLocation);

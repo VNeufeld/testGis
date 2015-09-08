@@ -76,6 +76,19 @@ public class AdacVehicleHttpService {
 		link = link.substring(pos);
 		return getServerURI(link+"/pickUp");
 	}
+
+	// http://193.30.38.251/web-joi/joi/vehicleRequest/600354792/vehicle/940561578/offer/37c76ed6-0006-48c4-9ff7-bcc381e1004a/book
+	private URI getVerifyURI(URI offerLink) throws URISyntaxException {
+		String link = offerLink.toString();
+		int pos = link.indexOf("/vehicleRequest");
+		link = link.substring(pos);
+		return getServerURI(link+"/book");
+	}
+	
+	private URI getPaypalURI(String link) throws URISyntaxException{
+		return getServerURI(link);
+	}
+
 	
 
 	public AdacVehicleHttpService(GisHttpClient gisHttpClientInstance) {
@@ -124,7 +137,7 @@ public class AdacVehicleHttpService {
 				throw new VehicleServiceException("No vehicle response exist in the Model. Call GetOffer at first");
 			Long requestId = respone.getRequestId();
 			
-			URI uri = getServerURI(VEHICLE_NEXTPAGE_PARAM+String.valueOf(requestId)+"?pageNo="+pageNo);
+			URI uri = getServerURI(VEHICLE_NEXTPAGE_PARAM+String.valueOf(requestId)+"?page="+pageNo);
 
 			logger.info("get page URI : = "+uri.toString());
 
@@ -156,7 +169,7 @@ public class AdacVehicleHttpService {
 				throw new VehicleServiceException("No vehicle response exist in the Model. Call GetOffer at first");
 			Long requestId = respone.getRequestId();
 			
-			URI uri = getServerURI(VEHICLE_NEXTPAGE_PARAM+String.valueOf(requestId)+"?pageNo="+pageNo);
+			URI uri = getServerURI(VEHICLE_NEXTPAGE_PARAM+String.valueOf(requestId)+"?page="+pageNo);
 
 			logger.info("browse filter page URI : = "+uri.toString());
 			
@@ -237,15 +250,14 @@ public class AdacVehicleHttpService {
 	}
 	
 
-	public static PaypalSetCheckoutResponse getPaypalUrl(Offer offer, String bookingRequestId) {
-		GisHttpClient httpClient = new GisHttpClient();
+	public PaypalSetCheckoutResponse getPaypalUrl(Offer offer, String bookingRequestId) {
 
 		try {
 			String link = "/booking/"+bookingRequestId+"/payPaypal";
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
+			
+			URI uri = getPaypalURI(link);
 			
 			logger.info("GetPaypal URL Request = "+uri);
-			
 			
 			String response =  httpClient.sendGetRequest(uri);
 			logger.info("response = "+response);
@@ -263,15 +275,15 @@ public class AdacVehicleHttpService {
 		
 	}
 
-	public static PaypalDoCheckoutResponse getPaypalResult(Offer offer, String bookingRequestId, String token) {
-		GisHttpClient httpClient = new GisHttpClient();
+
+	public PaypalDoCheckoutResponse getPaypalResult(Offer offer, String bookingRequestId, String token) {
 
 		//joi/booking/${varBookingCacheId}/getPaypalResult?payerID=${varPayerId}&token=${varToken}
 		try {
 			String link = "/booking/"+bookingRequestId+"/getPaypalResult";
 			link = link + "?payerID="+varPayerId;
 			link = link + "&token="+token;
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
+			URI uri = getPaypalURI(link);
 			
 			logger.info("GetPaypal URL Request = "+uri);
 			
@@ -293,16 +305,10 @@ public class AdacVehicleHttpService {
 	}
 	
 	
-	public static BookingResponse verifyOffers(BookingRequest bookingRequest, Offer selectedOffer) {
-		GisHttpClient httpClient = new GisHttpClient();
+	public BookingResponse verifyOffers(BookingRequest bookingRequest, Offer selectedOffer) {
 
 		try {
-			
-			String link = selectedOffer.getBookLink().toString();
-			int pos = link.indexOf("/vehicleRe");
-			link = link.substring(pos);
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
-			
+			URI uri = getVerifyURI(selectedOffer.getLink());
 			logger.info("Verify Request URI = "+uri);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
@@ -312,7 +318,6 @@ public class AdacVehicleHttpService {
 			logger.info("Verify Response = "+response);
 			
 			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
-			
 
 			return vh;
 			
@@ -325,58 +330,7 @@ public class AdacVehicleHttpService {
 
 	}
 	
-//	public static BookingResponse verifyOffers(Offer offer,) {
-//		GisHttpClient httpClient = new GisHttpClient();
-//
-//		try {
-//			
-//			BookingRequest bookingRequest = new BookingRequest();
-//			String link = offer.getBookLink().toString();
-//			int pos = link.indexOf("/vehicleRe");
-//			link = link.substring(pos);
-//			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
-//			
-//			logger.info("Verify Request URI = "+uri);
-//
-//			Customer customer = createCustomer();
-//			
-//			bookingRequest.setCustomer(customer);
-//			
-//			Person driver = createDriver();
-//			
-//			bookingRequest.setDriver(driver);
-//			Payment payment = new Payment();
-//			payment.setPaymentType("1");
-//			
-//			//payment.setPaymentType(PaymentType.PAYPAL_PAYMENT);
-//			
-//			bookingRequest.setAcceptedAvailability("13");
-//			bookingRequest.setFlightNo("LH4711");
-//			bookingRequest.setTransferType("1");
-//			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
-//			//bookingRequest.setPayment(payment);
-//			
-//			bookingRequest.setExtras(selectedExtras);
-//
-//			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
-//			logger.info("Verify Request = "+request);
-//			
-//			String response =  httpClient.startPutRequestAsJson(uri, request);
-//			logger.info("Verify Response = "+response);
-//			
-//			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
-//			
-//
-//			return vh;
-//			
-//		} catch ( IOException e) {
-//			logger.error(e);
-//		} catch (URISyntaxException e) {
-//			logger.error(e);
-//		}
-//		return null;
-//
-//	}
+
 
 
 	private static Person createDriver() {
@@ -675,30 +629,6 @@ public class AdacVehicleHttpService {
 			
 			URI uri = getServerURI(param);
 			
-
-			String response =  httpClient.sendGetRequest(uri);
-			
-			return response;
-
-//			if (response != null ) 
-//				return JsonUtils.createResponseClassFromJson(response, Person.class);
-
-			
-		} catch ( IOException e) {
-			logger.error(e.getMessage(),e);
-		} catch (URISyntaxException e) {
-			logger.error(e);
-		}
-		
-		return null;
-	}
-	
-	public String verifyOffer(Offer selectedOffer) {
-		try {
-
-			String param = "/booking/offer/"+selectedOffer.getId().toString()+"/verify";
-			
-			URI uri = getServerURI(param);
 
 			String response =  httpClient.sendGetRequest(uri);
 			

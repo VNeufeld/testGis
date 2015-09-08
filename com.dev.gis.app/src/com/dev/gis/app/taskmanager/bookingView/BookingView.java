@@ -22,6 +22,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.connector.api.AdacVehicleHttpService;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.Extra;
@@ -71,8 +73,11 @@ public class BookingView extends TaskViewAbstract {
 			
 			BookingRequest  request =  BookingRequestCreator.createBookingRequest(selectedOffer, selectedExtras);
 			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
+			
 			//StartVerify
-			BookingResponse response = JoiVehicleConnector.verifyOffers(request,selectedOffer);
+			BookingResponse response = service.verifyOffers(request,selectedOffer);
 			bookingRequestId.setText(String.valueOf(response.getRequestId()));
 			priceText.setText(response.getPrice().getAmount());
 
@@ -88,7 +93,11 @@ public class BookingView extends TaskViewAbstract {
 			
 			paypalUrl.setText("running....");
 			
-			PaypalSetCheckoutResponse response = JoiVehicleConnector.getPaypalUrl(selectedOffer,bookingRequestId.getText());
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
+			
+			
+			PaypalSetCheckoutResponse response = service.getPaypalUrl(selectedOffer,bookingRequestId.getText());
 			if ( response != null) {
 				paypalUrl.setText(response.getPaypalUrl());
 				paypalUrlLink.setText(response.getPaypalUrl());
@@ -110,7 +119,10 @@ public class BookingView extends TaskViewAbstract {
 			
 			//paypalUrl.setText("running....");
 			
-			PaypalDoCheckoutResponse response = JoiVehicleConnector.getPaypalResult(selectedOffer,bookingRequestId.getText(),paypalToken.getText());
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
+			
+			PaypalDoCheckoutResponse response = service.getPaypalResult(selectedOffer,bookingRequestId.getText(),paypalToken.getText());
 			if ( response != null) {
 				if ( response.getError() != null )
 					paypalError.setText(response.getError());
