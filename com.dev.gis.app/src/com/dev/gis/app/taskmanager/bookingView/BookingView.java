@@ -155,6 +155,10 @@ public class BookingView extends TaskViewAbstract {
 			
 			//BookingRequestCreater 
 			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
+
+			
 			BookingResponse response = JoiVehicleConnector.bookOffers(selectedOffer,bookingRequestId.getText(),selectedExtras);
 			if ( response.getBookingId() != null)
 				bookingId.setText(response.getBookingId());
@@ -169,6 +173,7 @@ public class BookingView extends TaskViewAbstract {
 	@Override
 	public void createPartControl(Composite parent) {
 
+		this.parent = parent;
 		
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));

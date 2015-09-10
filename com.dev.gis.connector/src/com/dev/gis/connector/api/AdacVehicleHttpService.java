@@ -283,6 +283,7 @@ public class AdacVehicleHttpService {
 			String link = "/booking/"+bookingRequestId+"/getPaypalResult";
 			link = link + "?payerID="+varPayerId;
 			link = link + "&token="+token;
+			link = link + "&test=0";
 			URI uri = getPaypalURI(link);
 			
 			logger.info("GetPaypal URL Request = "+uri);
