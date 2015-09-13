@@ -84,7 +84,7 @@
       </view>
       <view
             allowMultiple="false"
-            class="com.dev.gis.app.taskmanager.bookingView.BookingView"
+            class="com.dev.gis.app.taskmanager.testAppView.BookingView"
             icon="icons/sample.gif"
             id="com.dev.gis.app.view.BookingView"
             name="Booking Details"
@@ -239,6 +239,12 @@
             description="Reset Perspektive"
             id="com.dev.gis.app.perspective.reset"
             name="ResetPerspective">
+      </command>
+      <command
+            categoryId="com.dev.gis.app.category1"
+            description="Show Response"
+            id="com.dev.gis.app.showResponse"
+            name="Show Response">
       </command>
    </extension>
    <extension

@@ -8,22 +8,17 @@ import java.util.List;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.bpcs.mdcars.protocol.Offer;
-import com.dev.gis.connector.joi.protocol.DayAndHour;
-import com.dev.gis.connector.joi.protocol.Extra;
-import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.PaymentInformation;
 import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.VehicleRequestFilter;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
-import com.dev.gis.connector.sunny.OfferFilter;
 
 public enum ModelProvider {
 	INSTANCE;
 
 	private List<Offer> offers;
 
-	private List<OfferDo> offerDos;
 
 	public long cityId;
 
@@ -40,9 +35,10 @@ public enum ModelProvider {
 
 	public long languageId;
 	
-	private VehicleResponse vehicleResponse;
 	
 	public VehicleRequestFilter  vehicleRequestFilter;
+	
+	public String lastResponse;
 
 	
 	private Person driver;
@@ -53,7 +49,6 @@ public enum ModelProvider {
 	
 	private ModelProvider() {
 		offers = new ArrayList<Offer>();
-		offerDos = new ArrayList<OfferDo>();
 		// Image here some fancy database access to read the persons and to
 		// put them into the model
 		offers.add(createOffer("BMW 7 ",12, 13, "223,32"));
@@ -96,29 +91,6 @@ public enum ModelProvider {
 		offers.add(createOffer("BMW 7 ",12, 13, "223,32"));
 		
 	}
-	public void updateResponse(VehicleResponse response) {
-		offerDos.clear();
-		if ( response == null)
-			return;
-		
-		this.vehicleResponse = response;
-		
-		List<VehicleResult> results = response.getResultList();
-		for ( VehicleResult vr : results) {
-			if ( vr.getOfferList().size() > 0 ) {
-				
-				OfferDo offer = new OfferDo(vr);
-				
-				offerDos.add(offer);
-			}
-		}
-		
-	}
-	
-	public void clearView() {
-		offerDos.clear();
-		this.vehicleResponse = null;
-	}
 
 
 	public void update(VehicleResponse response) {
@@ -145,14 +117,6 @@ public enum ModelProvider {
 			}
 		}
 		
-	}
-
-	public List<OfferDo> getOfferDos() {
-		return offerDos;
-	}
-
-	public VehicleResponse getVehicleResponse() {
-		return vehicleResponse;
 	}
 
 }

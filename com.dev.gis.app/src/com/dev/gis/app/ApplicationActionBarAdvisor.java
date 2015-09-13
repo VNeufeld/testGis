@@ -39,6 +39,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private Action switchToAppPerspectiveAction;
     private Action switchToSunnyAppPerspectiveAction;
     private Action resetCurrentPerspectiveAction;
+    private Action lastResponseAction;
     private IWorkbenchAction preferencesAction;
 
     public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
@@ -84,7 +85,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         register(switchToAppPerspectiveAction);
 
         preferencesAction = ActionFactory.PREFERENCES.create(window);
-        register(preferencesAction);        
+        register(preferencesAction);
+        
+        lastResponseAction = new ShowResponseAction("Show last response", window);
+        register(lastResponseAction);        
+        
     }
     
     protected void fillMenuBar(IMenuManager menuBar) {
@@ -124,5 +129,6 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         toolbar.add(switchToAppPerspectiveAction);
         toolbar.add(resetCurrentPerspectiveAction);
         toolbar.add(stopProcessAction);
+        toolbar.add(lastResponseAction);
     }
 }

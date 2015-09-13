@@ -39,6 +39,8 @@ public class TestAppView extends RentCarsAppView {
 
 	public static final String ID = IEditableTask.ID_TestAppView;
 	
+	private CrossOfferListTable crossOfferListTable;
+	
 	private OutputTextControls countVehicles = null;
 
 	private OutputTextControls sessionId = null;
@@ -70,10 +72,13 @@ public class TestAppView extends RentCarsAppView {
 	}
 	
 	protected void createPageSize(Group groupStamp) {
-		Composite cc = createComposite(groupStamp, 4, -1, false);
+		Composite cc = createComposite(groupStamp, 3, -1, false);
 
 		new PageSizeControl(cc, 50, false);
-		new CrossOfferOperatorControl(cc);
+		//new CrossOfferOperatorControl(cc);
+		CrossOfferCheckBox crossOffer = new CrossOfferCheckBox(cc, "use crossOffer");
+		crossOffer.setSelection(true);
+
 	}
 
 	
@@ -162,10 +167,11 @@ public class TestAppView extends RentCarsAppView {
 		requestId.setValue(String.valueOf(response.getRequestId()));		
 		pageNo.setValue("1");
 		
-		ModelProvider.INSTANCE.updateResponse(response);
-		offerListTable.getViewer().setInput(ModelProvider.INSTANCE.getOfferDos());
+		AdacModelProvider.INSTANCE.updateResponse(response);
+		offerListTable.getViewer().setInput(AdacModelProvider.INSTANCE.getOfferDos());
 		offerListTable.getViewer().refresh();
 		
+		crossOfferListTable.update();
 		
 //		pageInfo.setText(response.getPageInfo());
 //
@@ -184,8 +190,8 @@ public class TestAppView extends RentCarsAppView {
 	}
 
 	public void clearView() {
-		ModelProvider.INSTANCE.clearView();
-		offerListTable.getViewer().setInput(ModelProvider.INSTANCE.getOfferDos());
+		AdacModelProvider.INSTANCE.clearView();
+		offerListTable.getViewer().setInput(AdacModelProvider.INSTANCE.getOfferDos());
 		offerListTable.getViewer().refresh();
 
 	}
@@ -264,6 +270,19 @@ public class TestAppView extends RentCarsAppView {
 			return value;
 		}
 
+	}
+
+	
+	@Override
+	protected void createRecommendationTable(Composite composite) {
+		
+		final Group groupRecomm = new Group(composite, SWT.TITLE);
+		groupRecomm.setText("CrossOfferList:");
+		groupRecomm.setLayout(new GridLayout(1, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(groupRecomm);
+		
+		crossOfferListTable = new CrossOfferListTable(getSite(),groupRecomm, null);
 	}
 
 	

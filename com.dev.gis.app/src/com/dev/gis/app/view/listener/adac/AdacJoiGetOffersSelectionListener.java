@@ -2,6 +2,7 @@ package com.dev.gis.app.view.listener.adac;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -37,8 +38,6 @@ public class AdacJoiGetOffersSelectionListener implements SelectionListener {
 		
 		getOffer();
 		
-		//buttonGetOffer.setEnabled(true);
-		
 	}
 
 
@@ -48,11 +47,12 @@ public class AdacJoiGetOffersSelectionListener implements SelectionListener {
 		int pageSizeInt = (int)ModelProvider.INSTANCE.pageSize;
 
 		VehicleResponse response = null;				
-		AdacGetOffersOperation getOfferOperation = new AdacGetOffersOperation(request, pageSizeInt);
 		
 		ProgressMonitorDialog pd = new ProgressMonitorDialog(shell);
 		
 		try {
+			AdacGetOffersOperation getOfferOperation = new AdacGetOffersOperation(request, pageSizeInt);
+			
 			pd.run(true, true, getOfferOperation);
 			response = getOfferOperation.getResponse();
 
@@ -60,12 +60,21 @@ public class AdacJoiGetOffersSelectionListener implements SelectionListener {
 				new OfferViewUpdater().showResponse(response);
 				ModelProvider.INSTANCE.pageNo = 0;
 			}
-			
-		} catch (InvocationTargetException e1) {
-			e1.printStackTrace();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
 		}
+		catch(Exception err) {
+			String message = err.getMessage();
+			if ( err instanceof InvocationTargetException) {
+				InvocationTargetException ii = (InvocationTargetException) err;
+				if ( ii.getTargetException() != null ) {
+					message = ii.getTargetException().getMessage();
+				}
+			}
+			MessageDialog.openError(
+					shell,"Error",message);
+			
+		}
+		
+		
 	}
 
 }

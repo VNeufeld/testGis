@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.joi.protocol.FilterObject;
@@ -51,7 +52,7 @@ public class AdacOfferFilterDialog extends Dialog {
 		composite.getShell().setText("Offer Filter");
 
 		OfferFilterTemplate offerFilterTemplate = null;
-		VehicleResponse vehicleResponse = ModelProvider.INSTANCE.getVehicleResponse();
+		VehicleResponse vehicleResponse = AdacModelProvider.INSTANCE.getVehicleResponse();
 		if (vehicleResponse != null
 				&& vehicleResponse.getOfferFilterTemplate() != null) {
 			offerFilterTemplate = vehicleResponse.getOfferFilterTemplate();

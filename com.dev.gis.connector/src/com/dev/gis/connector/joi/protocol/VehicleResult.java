@@ -10,11 +10,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="vehicleResult")
-@XmlType(propOrder =
-	{ "id", "link", "remainingCacheSeconds", "recalculateLink", "pickUpLocation", "dropOffLocation", "vehicle", "offerList", "module", "texts" })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class VehicleResult extends BasicProtocol {
 
 	private long id;
@@ -36,6 +37,8 @@ public class VehicleResult extends BasicProtocol {
 	private String module;
 	
 	private Long remainingCacheSeconds;
+	
+	private String crossOfferLink;
 
 
 	
@@ -138,5 +141,13 @@ public class VehicleResult extends BasicProtocol {
 	
 	public void setVehicle(VehicleDescription vehicle) {
 		this.vehicle = vehicle;
+	}
+
+	public String getCrossOfferLink() {
+		return crossOfferLink;
+	}
+
+	public void setCrossOfferLink(String crossOfferLink) {
+		this.crossOfferLink = crossOfferLink;
 	}
 }

@@ -1,0 +1,1062 @@
+{
+	"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013",
+	"requestId": 1128187013,
+	"sessionId": "EC2F32FE4D8EBE142F524FC62CB391A0",
+	"errors": [{
+		"errorType": 4,
+		"errorText": "Failed to validate Response to XSD /home/www/work/ADAC_GW/schema/GetCarsResponse/GetCarsResponse.xsd",
+		"errorNumber": 10099
+	}],
+	"summary": {
+		"quantity": 5,
+		"totalQuantity": 78,
+		"minimalPrice": {
+			"currency": "EUR",
+			"amount": "205,84",
+			"decimalAmount": 205.84
+		},
+		"maximalPrice": {
+			"currency": "EUR",
+			"amount": "1.283,52",
+			"decimalAmount": 1283.52
+		}
+	},
+	"resultList": [
+	{
+		"id": 914333098,
+		"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/914333098",
+		"recalculateLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/914333098/recalculate",
+		"pickUpLocation": {
+			"stationId": 171402,
+			"cityId": 3444,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171402
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 22,
+			"carClassId": 1,
+			"categoryId": 101,
+			"driverMinAge": 18,
+			"manufacturer": "Volkswagen Polo",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100901,
+				"link": null,
+				"name": "ECMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/_ext/avm/App/Avis/DE/large/ECMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/_ext/avm/App/Avis/DE/small/ECMR.jpg"
+		},
+		"offerList": [{
+			"id": "9cc70ca7-7d2e-486c-9c53-3311b5de191a",
+			"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/914333098/offer/9cc70ca7-7d2e-486c-9c53-3311b5de191a",
+			"bookLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/914333098/offer/9cc70ca7-7d2e-486c-9c53-3311b5de191a/book",
+			"supplierId": 158037,
+			"supplierGroupId": 157739,
+			"price": {
+				"currency": "EUR",
+				"amount": "205,84",
+				"decimalAmount": 205.84
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "205,84",
+				"decimalAmount": 205.84
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "25,73",
+				"decimalAmount": 25.73
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM999"
+			},
+			{
+				"id": 47,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 5,
+				"itemClassCode": "VV",
+				"itemClassName": "Versicherung_Vollkasko",
+				"code": "CDW"
+			},
+			{
+				"id": 102,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 45,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 9,
+				"itemClassCode": "ZU",
+				"itemClassName": "Zuschl娥",
+				"code": "SO"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "CAR"
+	},
+	{
+		"id": 1416942560,
+		"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/1416942560",
+		"recalculateLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/1416942560/recalculate",
+		"pickUpLocation": {
+			"stationId": 171746,
+			"cityId": 3444,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171746
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 22,
+			"carClassId": 1,
+			"categoryId": 97,
+			"driverMinAge": 0,
+			"manufacturer": "A Ford KA",
+			"nrDoors": 4,
+			"nrLargeLuggage": 2,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"supplierId": 158039,
+			"vehicleGroup": {
+				"id": 112701,
+				"link": null,
+				"name": "MCMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/_ext/avm/App/Default/DE/large/MCMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/_ext/avm/App/Default/DE/small/MCMR.jpg"
+		},
+		"offerList": [{
+			"id": "87172b95-e854-4777-b357-b80adb34d09a",
+			"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/1416942560/offer/87172b95-e854-4777-b357-b80adb34d09a",
+			"bookLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/1416942560/offer/87172b95-e854-4777-b357-b80adb34d09a/book",
+			"supplierId": 158039,
+			"supplierGroupId": 157741,
+			"price": {
+				"currency": "EUR",
+				"amount": "212,14",
+				"decimalAmount": 212.14
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "212,14",
+				"decimalAmount": 212.14
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "26,52",
+				"decimalAmount": 26.52
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM999"
+			},
+			{
+				"id": 47,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 5,
+				"itemClassCode": "VV",
+				"itemClassName": "Versicherung_Vollkasko",
+				"code": "CDW"
+			},
+			{
+				"id": 48,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 45,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 9,
+				"itemClassCode": "ZU",
+				"itemClassName": "Zuschl娥",
+				"code": "SO"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "CAR"
+	},
+	{
+		"id": 1641216212,
+		"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/1641216212",
+		"recalculateLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/1641216212/recalculate",
+		"pickUpLocation": {
+			"stationId": 171746,
+			"cityId": 3444,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171746
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 22,
+			"carClassId": 1,
+			"categoryId": 101,
+			"driverMinAge": 0,
+			"manufacturer": "B Opel Corsa",
+			"nrDoors": 4,
+			"nrLargeLuggage": 1,
+			"nrSeats": 4,
+			"nrSmallLuggage": 1,
+			"supplierId": 158039,
+			"vehicleGroup": {
+				"id": 111001,
+				"link": null,
+				"name": "ECMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/_ext/avm/App/Default/DE/large/ECMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/_ext/avm/App/Default/DE/small/ECMR.jpg"
+		},
+		"offerList": [{
+			"id": "51e9630d-e6a5-4e15-8a60-3676e09b140a",
+			"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/1641216212/offer/51e9630d-e6a5-4e15-8a60-3676e09b140a",
+			"bookLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/1641216212/offer/51e9630d-e6a5-4e15-8a60-3676e09b140a/book",
+			"supplierId": 158039,
+			"supplierGroupId": 157741,
+			"price": {
+				"currency": "EUR",
+				"amount": "220,11",
+				"decimalAmount": 220.11
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "220,11",
+				"decimalAmount": 220.11
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "27,51",
+				"decimalAmount": 27.51
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM999"
+			},
+			{
+				"id": 47,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 850,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 5,
+				"itemClassCode": "VV",
+				"itemClassName": "Versicherung_Vollkasko",
+				"code": "CDW"
+			},
+			{
+				"id": 48,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/48",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 45,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 9,
+				"itemClassCode": "ZU",
+				"itemClassName": "Zuschl娥",
+				"code": "SO"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "CAR"
+	},
+	{
+		"id": 18979038,
+		"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/18979038",
+		"recalculateLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/18979038/recalculate",
+		"pickUpLocation": {
+			"stationId": 171402,
+			"cityId": 3444,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171402
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 22,
+			"carClassId": 2,
+			"categoryId": 115,
+			"driverMinAge": 21,
+			"manufacturer": "Seat Leon",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100601,
+				"link": null,
+				"name": "CDMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/_ext/avm/App/Avis/DE/large/CDMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/_ext/avm/App/Avis/DE/small/CDMR.jpg"
+		},
+		"offerList": [{
+			"id": "e2423c6f-a7fb-44fb-b523-c542fbd63f45",
+			"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/18979038/offer/e2423c6f-a7fb-44fb-b523-c542fbd63f45",
+			"bookLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/18979038/offer/e2423c6f-a7fb-44fb-b523-c542fbd63f45/book",
+			"supplierId": 158037,
+			"supplierGroupId": 157739,
+			"price": {
+				"currency": "EUR",
+				"amount": "234,58",
+				"decimalAmount": 234.58
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "234,58",
+				"decimalAmount": 234.58
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "29,32",
+				"decimalAmount": 29.32
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM999"
+			},
+			{
+				"id": 47,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 5,
+				"itemClassCode": "VV",
+				"itemClassName": "Versicherung_Vollkasko",
+				"code": "CDW"
+			},
+			{
+				"id": 102,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 45,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 9,
+				"itemClassCode": "ZU",
+				"itemClassName": "Zuschl娥",
+				"code": "SO"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "CAR"
+	},
+	{
+		"id": 731009682,
+		"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/731009682",
+		"recalculateLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/731009682/recalculate",
+		"pickUpLocation": {
+			"stationId": 171402,
+			"cityId": 3444,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171402
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 22,
+			"carClassId": 2,
+			"categoryId": 118,
+			"driverMinAge": 21,
+			"manufacturer": "Ford Focus Turnier",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100701,
+				"link": null,
+				"name": "CWMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/_ext/avm/App/Avis/DE/large/CWMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/_ext/avm/App/Avis/DE/small/CWMR.jpg"
+		},
+		"offerList": [{
+			"id": "7fd9855e-a508-4b0a-971b-a2f1a8384584",
+			"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/731009682/offer/7fd9855e-a508-4b0a-971b-a2f1a8384584",
+			"bookLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/731009682/offer/7fd9855e-a508-4b0a-971b-a2f1a8384584/book",
+			"supplierId": 158037,
+			"supplierGroupId": 157739,
+			"price": {
+				"currency": "EUR",
+				"amount": "246,10",
+				"decimalAmount": 246.10
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "246,10",
+				"decimalAmount": 246.10
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "30,76",
+				"decimalAmount": 30.76
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM999"
+			},
+			{
+				"id": 47,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 5,
+				"itemClassCode": "VV",
+				"itemClassName": "Versicherung_Vollkasko",
+				"code": "CDW"
+			},
+			{
+				"id": 102,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 45,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 9,
+				"itemClassCode": "ZU",
+				"itemClassName": "Zuschl娥",
+				"code": "SO"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "CAR"
+	}],
+	"texts": {
+		"supplierList": [{
+			"id": 158039,
+			"link": "http://localhost:8080/web-joi/joi/masterdata/supplier/158039",
+			"supplierGroupId": 157741,
+			"logo": "http://10.10.2.37:8080/_ext/avm/App/Default/default.png",
+			"name": "Hertz Deutschland"
+		},
+		{
+			"id": 158037,
+			"link": "http://localhost:8080/web-joi/joi/masterdata/supplier/158037",
+			"supplierGroupId": 157739,
+			"logo": "http://10.10.2.37:8080/_ext/avm/App/Avis/avis.png",
+			"name": "Avis Deutschland"
+		},
+		{
+			"id": 158036,
+			"link": "http://localhost:8080/web-joi/joi/masterdata/supplier/158036",
+			"supplierGroupId": 157740,
+			"logo": "http://10.10.2.37:8080/_ext/avm/App/Sixt/sixt.png",
+			"name": "Sixt Deutschland"
+		}],
+		"bodyStyleList": [{
+			"id": 19,
+			"text": "Limousine"
+		},
+		{
+			"id": 21,
+			"text": "Coupe"
+		},
+		{
+			"id": 20,
+			"text": "SUV"
+		},
+		{
+			"id": 22,
+			"text": "Zwei- bis Viert𲥲"
+		},
+		{
+			"id": 9,
+			"text": "Cabrio"
+		},
+		{
+			"id": 10,
+			"text": "Van"
+		}],
+		"carClassList": [{
+			"id": 1,
+			"text": "Kleinwagen"
+		},
+		{
+			"id": 2,
+			"text": "Kompaktklasse"
+		},
+		{
+			"id": 4,
+			"text": "Untere Mittelklasse"
+		},
+		{
+			"id": 5,
+			"text": "Mittelklasse"
+		},
+		{
+			"id": 6,
+			"text": "Obere Mittelklasse"
+		},
+		{
+			"id": 7,
+			"text": "Luxusklasse"
+		}],
+		"stationList": [{
+			"id": 167979,
+			"link": "http://localhost:8080/web-joi/joi/masterdata/station/167979",
+			"supplierId": 158036,
+			"stationName": "N𲮢erg Flughafen (NUE)",
+			"supplierGroupId": 157740,
+			"stationPriority": 1,
+			"supplierPriority": null,
+			"airportStation": true,
+			"airport": "NUE",
+			"assignedCityIds": [3444],
+			"modules": ["CAR"],
+			"countryId": 1,
+			"cityId": 3444,
+			"area": 269,
+			"address": {
+				"signee": null,
+				"street": "Flughafenstr./Mietwagenzentrum",
+				"country": null,
+				"countryId": 1,
+				"zip": "90411",
+				"city": "N𲮢erg"
+			},
+			"info": {
+				"providesTransfer": false,
+				"transfer": null,
+				"openingHours": "Mo-Fr: 06.30-23.30, Sa-So: 08.00-23.00",
+				"outOfHourFee": null
+			},
+			"phone": null,
+			"fax": null,
+			"flightNoMandatory": false,
+			"longitude": "10.451526",
+			"latitude": "51.165691"
+		},
+		{
+			"id": 171402,
+			"link": "http://localhost:8080/web-joi/joi/masterdata/station/171402",
+			"supplierId": 158037,
+			"stationName": "N𲮢erg Flughafen (NUE)",
+			"supplierGroupId": 157739,
+			"stationPriority": 1,
+			"supplierPriority": null,
+			"airportStation": true,
+			"airport": "NUE",
+			"assignedCityIds": [3444],
+			"modules": ["CAR"],
+			"countryId": 1,
+			"cityId": 3444,
+			"area": 269,
+			"address": {
+				"signee": null,
+				"street": "Flughafenstraࠥ",
+				"country": null,
+				"countryId": 1,
+				"zip": "90411",
+				"city": "N𲮢erg"
+			},
+			"info": {
+				"providesTransfer": false,
+				"transfer": null,
+				"openingHours": "Mo-Fr: 07.00-23.00, Sa: 09.30-18.00, So: 09.00-23.00",
+				"outOfHourFee": null
+			},
+			"phone": null,
+			"fax": null,
+			"flightNoMandatory": false,
+			"longitude": "11.082155",
+			"latitude": "49.489529"
+		},
+		{
+			"id": 171746,
+			"link": "http://localhost:8080/web-joi/joi/masterdata/station/171746",
+			"supplierId": 158039,
+			"stationName": "N𲮢erg Flughafen (NUE)",
+			"supplierGroupId": 157741,
+			"stationPriority": 1,
+			"supplierPriority": null,
+			"airportStation": true,
+			"airport": "NUE",
+			"assignedCityIds": [-1,
+			3444],
+			"modules": ["CAR"],
+			"countryId": 1,
+			"cityId": 3444,
+			"area": 269,
+			"address": {
+				"signee": null,
+				"street": "N𲮢erg Airport",
+				"country": null,
+				"countryId": 1,
+				"zip": "90269",
+				"city": "N𲮢erg"
+			},
+			"info": {
+				"providesTransfer": false,
+				"transfer": null,
+				"openingHours": "Mo-Fr:07:00-23:00, Sa:09:00-18:00, So:10:00-23:00",
+				"outOfHourFee": null
+			},
+			"phone": null,
+			"fax": null,
+			"flightNoMandatory": false,
+			"longitude": "11.07645",
+			"latitude": "49.495336"
+		}],
+		"supplierGroupList": [{
+			"id": 157739,
+			"name": "Avis (Deutschland) Budget Autovermietung GmbH & Co.KG"
+		},
+		{
+			"id": 157741,
+			"name": "Hertz (Deutschland) Autovermietung GmbH"
+		},
+		{
+			"id": 157740,
+			"name": "Sixt (Deutschland) GmbH & Co. Autovermietung KG"
+		}],
+		"paymentInfoList": [{
+			"paymentType": "CREDIT_CARD_PAYMENT",
+			"provided": true
+		},
+		{
+			"paymentType": "PAYPAL_PAYMENT",
+			"provided": true
+		}]
+	},
+	"remainingCacheSeconds": 3000,
+	"offerFilterTemplate": {
+		"stationLocTypes": [],
+		"bodyStyles": [{
+			"name": "Limousine",
+			"count": 2,
+			"id": 19,
+			"value": null
+		},
+		{
+			"name": "Coupe",
+			"count": 2,
+			"id": 21,
+			"value": null
+		},
+		{
+			"name": "SUV",
+			"count": 13,
+			"id": 20,
+			"value": null
+		},
+		{
+			"name": "Zwei- bis Viert𲥲",
+			"count": 46,
+			"id": 22,
+			"value": null
+		},
+		{
+			"name": "Cabrio",
+			"count": 4,
+			"id": 9,
+			"value": null
+		},
+		{
+			"name": "Van",
+			"count": 11,
+			"id": 10,
+			"value": null
+		}],
+		"serviceCatalogs": [{
+			"name": "6, MDENP",
+			"count": 44,
+			"id": 6,
+			"value": ""
+		},
+		{
+			"name": "7, HOSBPP",
+			"count": 13,
+			"id": 7,
+			"value": ""
+		},
+		{
+			"name": "8, A360PP",
+			"count": 12,
+			"id": 8,
+			"value": ""
+		},
+		{
+			"name": "9, SSCPP",
+			"count": 9,
+			"id": 9,
+			"value": ""
+		}],
+		"inclusivesFilter": {
+			
+		},
+		"stations": [{
+			"name": "N𲮢erg Flughafen (NUE)",
+			"count": 28,
+			"id": 167979,
+			"value": "http://localhost:8080/web-joi/joi/masterdata/station/167979"
+		},
+		{
+			"name": "N𲮢erg Flughafen (NUE)",
+			"count": 24,
+			"id": 171402,
+			"value": "http://localhost:8080/web-joi/joi/masterdata/station/171402"
+		},
+		{
+			"name": "N𲮢erg Flughafen (NUE)",
+			"count": 26,
+			"id": 171746,
+			"value": "http://localhost:8080/web-joi/joi/masterdata/station/171746"
+		}],
+		"suppliers": [{
+			"name": "Hertz Deutschland",
+			"count": 26,
+			"id": 158039,
+			"value": "http://localhost:8080/web-joi/joi/masterdata/supplier/158039"
+		},
+		{
+			"name": "Avis Deutschland",
+			"count": 24,
+			"id": 158037,
+			"value": "http://localhost:8080/web-joi/joi/masterdata/supplier/158037"
+		},
+		{
+			"name": "Sixt Deutschland",
+			"count": 28,
+			"id": 158036,
+			"value": "http://localhost:8080/web-joi/joi/masterdata/supplier/158036"
+		}],
+		"carClasses": [{
+			"name": "Kleinwagen",
+			"count": 7,
+			"id": 1,
+			"value": null
+		},
+		{
+			"name": "Kompaktklasse",
+			"count": 19,
+			"id": 2,
+			"value": null
+		},
+		{
+			"name": "Untere Mittelklasse",
+			"count": 15,
+			"id": 4,
+			"value": null
+		},
+		{
+			"name": "Mittelklasse",
+			"count": 19,
+			"id": 5,
+			"value": null
+		},
+		{
+			"name": "Obere Mittelklasse",
+			"count": 8,
+			"id": 6,
+			"value": null
+		},
+		{
+			"name": "Luxusklasse",
+			"count": 10,
+			"id": 7,
+			"value": null
+		}],
+		"automatic": {
+			"name": "automatic",
+			"count": 16,
+			"id": null,
+			"value": 0
+		},
+		"aircondition": {
+			"name": "aircondition",
+			"count": 78,
+			"id": null,
+			"value": 0
+		},
+		"status": [{
+			"name": "13, AVAILABLE",
+			"count": 78,
+			"id": 13,
+			"value": null
+		},
+		{
+			"name": "0, ON_REQUEST",
+			"count": 0,
+			"id": 0,
+			"value": null
+		}],
+		"minPrice": {
+			"currency": "EUR",
+			"amount": "205,84",
+			"decimalAmount": 205.84
+		},
+		"maxPrice": {
+			"currency": "EUR",
+			"amount": "1.283,52",
+			"decimalAmount": 1283.52
+		}
+	},
+	"crossOfferResultList": [
+	{
+		"id": 914333098,
+		"crossOfferLink": "http://adac.de/web-joi/joi/vehicleRequest/1128187013/vehicle/914333098/offer/9cc70ca7-7d2e-486c-9c53-3311b5de191a/book",
+		"pickUpLocation": {
+			"stationId": 171402,
+			"cityId": 3444,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 171402
+		},
+		"vehicle": {
+			"aircondition": true,
+			"automatic": false,
+			"bodyStyle": 22,
+			"carClassId": 1,
+			"categoryId": 101,
+			"driverMinAge": 18,
+			"manufacturer": "Volkswagen Polo",
+			"nrDoors": 4,
+			"nrLargeLuggage": 0,
+			"nrSeats": 5,
+			"nrSmallLuggage": 0,
+			"supplierId": 158037,
+			"vehicleGroup": {
+				"id": 100901,
+				"link": null,
+				"name": "ECMR"
+			},
+			"vehicleLargeImage": "http://10.10.2.37:8080/_ext/avm/App/Avis/DE/large/ECMR.jpg",
+			"vehicleSmallImage": "http://10.10.2.37:8080/_ext/avm/App/Avis/DE/small/ECMR.jpg"
+		},
+		"offerList": [{
+			"id": "9cc70ca7-7d2e-486c-9c53-3311b5de191a",
+			"link": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/914333098/offer/9cc70ca7-7d2e-486c-9c53-3311b5de191a",
+			"bookLink": "http://localhost:8080/web-joi/joi/vehicleRequest/1128187013/vehicle/914333098/offer/9cc70ca7-7d2e-486c-9c53-3311b5de191a/book",
+			"supplierId": 158037,
+			"supplierGroupId": 157739,
+			"price": {
+				"currency": "EUR",
+				"amount": "205,84",
+				"decimalAmount": 205.84
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "205,84",
+				"decimalAmount": 205.84
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "25,73",
+				"decimalAmount": 25.73
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 37,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/37",
+				"description": "Kilometer unbegrenzt",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM999"
+			},
+			{
+				"id": 47,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/47",
+				"description": "Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 5,
+				"itemClassCode": "VV",
+				"itemClassName": "Versicherung_Vollkasko",
+				"code": "CDW"
+			},
+			{
+				"id": 102,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/102",
+				"description": "1 Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 45,
+				"link": "http://localhost:8080/web-joi/joi/masterdata/inclusive/45",
+				"description": "Standortzuschlag",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 9,
+				"itemClassCode": "ZU",
+				"itemClassName": "Zuschl娥",
+				"code": "SO"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "MDENP",
+			"serviceCatalogId": 6
+		}],
+		"module": "CAR"
+	}
+	]
+}}

@@ -29,6 +29,8 @@ public class VehicleResponse extends Response {
 	private long remainingCacheSeconds = -1;
 	
 	private OfferFilterTemplate  offerFilterTemplate;
+
+	private List<VehicleResult> crossOfferResultList = new ArrayList<>();
 	
 
 	public VehicleResult accessVehicle(long vehicleId) {
@@ -118,5 +120,13 @@ public class VehicleResponse extends Response {
 
 	public void setOfferFilterTemplate(OfferFilterTemplate offerFilterTemplate) {
 		this.offerFilterTemplate = offerFilterTemplate;
+	}
+
+	public List<VehicleResult> getCrossOfferResultList() {
+		return crossOfferResultList;
+	}
+
+	public void setCrossOfferResultList(List<VehicleResult> crossOfferResultList) {
+		this.crossOfferResultList = crossOfferResultList;
 	}
 }

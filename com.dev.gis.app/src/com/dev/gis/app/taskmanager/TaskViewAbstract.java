@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -87,5 +88,11 @@ public abstract class TaskViewAbstract extends ViewPart {
 		return composite;
 	}
 
+	protected void showError(String message) {
+		MessageDialog.openError(
+			parent.getShell(),
+			"Error",
+			message);
+	}
 
 }

@@ -3,6 +3,7 @@ package com.dev.gis.connector.api;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -13,8 +14,11 @@ import com.dev.gis.connector.joi.protocol.Address;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.Customer;
+import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
+import com.dev.gis.connector.joi.protocol.MoneyAmount;
 import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.Payment;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.Person;
@@ -95,14 +99,16 @@ public class AdacVehicleHttpService {
 		this.httpClient = gisHttpClientInstance;
 	}
 
-	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy, int pageSize, String crossOfferOperator) {
+	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy, int pageSize, boolean crossOfferFlag) {
 
 		try {
 			
 			String param = VEHICLE_REQUEST_PARAM+String.valueOf(pageSize);
-			if ( StringUtils.isNotEmpty(crossOfferOperator)) {
-				param = param + "&crossOffer="+crossOfferOperator;
-			}
+			int flag = 0;
+			if ( crossOfferFlag)
+				flag = 1;
+			param = param + "&crossOffer="+flag;
+			
 			URI uri = getServerURI(param);
 			logger.info("get Offers URI : = "+uri.toString());
 
@@ -113,26 +119,28 @@ public class AdacVehicleHttpService {
 			
 			dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( dummy)
-				response = JsonUtils.createDummyResponse("AdacWebJoiVehicleResponse.json");
+				//response = JsonUtils.createDummyResponse("AdacWebJoiVehicleResponse.json");
+				response = JsonUtils.createDummyResponse("AdacWebJoiResponseWithEmptyCrossOffer.json");
 			else
 				response =  httpClient.startPostRequestAsJson(uri, request);
 			
 			logger.info("response = "+response);
 			
+			ModelProvider.INSTANCE.lastResponse = response;
+			
 			if (response != null ) 
 				return JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
 			
-		} catch ( IOException e) {
+		} catch ( Exception e) {
 			logger.error(e.getMessage(),e);
-		} catch (URISyntaxException e) {
-			logger.error(e);
+			throw new VehicleServiceException(e.getMessage());
 		}
 		return null;
 	}
 	
 	public VehicleResponse getPage(int pageNo) {
 		try {
-			VehicleResponse respone = ModelProvider.INSTANCE.getVehicleResponse();
+			VehicleResponse respone = AdacModelProvider.INSTANCE.getVehicleResponse();
 			if ( respone == null )
 				throw new VehicleServiceException("No vehicle response exist in the Model. Call GetOffer at first");
 			Long requestId = respone.getRequestId();
@@ -164,7 +172,7 @@ public class AdacVehicleHttpService {
 	
 	public VehicleResponse getBrowsePage(int pageNo, VehicleRequestFilter filter) {
 		try {
-			VehicleResponse respone = ModelProvider.INSTANCE.getVehicleResponse();
+			VehicleResponse respone = AdacModelProvider.INSTANCE.getVehicleResponse();
 			if ( respone == null )
 				throw new VehicleServiceException("No vehicle response exist in the Model. Call GetOffer at first");
 			Long requestId = respone.getRequestId();
@@ -216,12 +224,10 @@ public class AdacVehicleHttpService {
 			}
 			return extraResponse;
 			
-		} catch ( IOException e) {
-			logger.error(e,e);
-		} catch (URISyntaxException e) {
-			logger.error(e,e);
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
 		}
-		return extraResponse;
 
 	}
 	
@@ -266,13 +272,10 @@ public class AdacVehicleHttpService {
 
 			return paypalResponse;
 			
-		} catch ( IOException e) {
-			logger.error(e,e);
-		} catch (URISyntaxException e) {
-			logger.error(e,e);
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
 		}
-		return null;
-		
 	}
 
 
@@ -296,12 +299,10 @@ public class AdacVehicleHttpService {
 
 			return paypalResult;
 			
-		} catch ( IOException e) {
-			logger.error(e,e);
-		} catch (URISyntaxException e) {
-			logger.error(e,e);
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
 		}
-		return null;
 		
 	}
 	
@@ -322,15 +323,61 @@ public class AdacVehicleHttpService {
 
 			return vh;
 			
-		} catch ( IOException e) {
-			logger.error(e);
-		} catch (URISyntaxException e) {
-			logger.error(e);
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
 		}
-		return null;
-
 	}
 	
+	public BookingResponse bookOffers(Offer selectedOffer,String bookingRequestId,
+			List<Extra> selectedExtras, int paymentType) {
+		
+
+		try {
+			// joi/booking/${varBookingCacheId}/book?validateOnly=false
+			BookingRequest bookingRequest = new BookingRequest();
+			
+			String link = "/booking/"+bookingRequestId+"/book?validateOnly=false";
+			
+			URI uri = getServerURI(link);
+			
+			logger.info("Book Request URI = "+uri);
+
+			Customer customer = createCustomer();
+			
+			bookingRequest.setCustomer(customer);
+			
+			Person driver = createDriver();
+			
+			bookingRequest.setDriver(driver);
+			
+			
+			Payment payment = new Payment();
+			payment.setPaymentType(8);   // Paypal
+			bookingRequest.setPayment(payment);
+			
+			//bookingRequest.setAcceptedAvailability("13");
+			bookingRequest.setFlightNo("LH4711");
+			bookingRequest.setTransferType(1);
+			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
+			
+			bookingRequest.setExtras(selectedExtras);
+
+			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
+			logger.info("book Request = "+request);
+			
+			String response =  httpClient.startPutRequestAsJson(uri, request);
+			logger.info("book Response = "+response);
+			
+			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
+
+			return vh;
+			
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
+		}
+	}
 
 
 

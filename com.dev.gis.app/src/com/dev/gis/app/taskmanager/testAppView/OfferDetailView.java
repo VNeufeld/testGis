@@ -11,7 +11,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
-import com.dev.gis.app.taskmanager.bookingView.BookingView;
 import com.dev.gis.app.taskmanager.rentcars.RentCarOfferDetailBasicView;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
