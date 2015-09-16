@@ -37,6 +37,7 @@ public class AdacOfferFilterDialog extends Dialog {
 	
 	Map<Long,Button> bodyStylesButtons = new HashMap<Long,Button>();
 	Map<String,Button> inclusiveButtons = new HashMap<String,Button>();
+	Map<Long,Button> carTypesButtons = new HashMap<Long,Button>();
 
 	private Text min, max;
 
@@ -60,12 +61,42 @@ public class AdacOfferFilterDialog extends Dialog {
 
 		if (offerFilterTemplate != null) {
 			setSummary(composite, offerFilterTemplate);
-			setBodyStyles(composite, offerFilterTemplate);
+			//setBodyStyles(composite, offerFilterTemplate);
 			setInclusives(composite, offerFilterTemplate);
+			setCarTypes(composite, offerFilterTemplate);
 		}
 
 		composite.pack();
 		return composite;
+	}
+
+	private void setCarTypes(Composite composite,
+			OfferFilterTemplate offerFilterTemplate) {
+		
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Car Types:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		List<FilterObject>  carTypes =   offerFilterTemplate.getCarTypes();
+		
+		for (FilterObject b : carTypes ) {
+
+			String bb = b.getName()+ "("+b.getCount()+")";
+			Label l = new Label(groupResult, SWT.NONE);
+			l.setText(bb);
+			
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+					.grab(true, false).span(4, 1).applyTo(l);
+
+			Button select = new Button(groupResult, SWT.CHECK);
+			select.setText("Select");
+			carTypesButtons.put(b.getId(), select);
+			
+
+		}
+		
 	}
 
 	private void setSummary(Composite composite,

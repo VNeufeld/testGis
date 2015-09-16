@@ -78,6 +78,9 @@ public class AdacVehicleHttpService {
 		String link = offerLink.toString();
 		int pos = link.indexOf("/vehicleRequest");
 		link = link.substring(pos);
+		int pos2 = link.indexOf("/offer");
+		link = link.substring(0,pos2);
+		
 		return getServerURI(link+"/pickUp");
 	}
 
