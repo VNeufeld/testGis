@@ -39,7 +39,7 @@ public class SunnyGetOffersSelectionListener implements SelectionListener {
 		
 		Object obj = arg0.getSource();
 		
-		getOffer1();
+		getOffer();
 
 		
 		//buttonGetOffer.setEnabled(true);
@@ -47,7 +47,7 @@ public class SunnyGetOffersSelectionListener implements SelectionListener {
 	}
 
 
-	private void getOffer1() {
+	private void getOffer() {
 		VehicleRequest request = CreateVehicleRequestUtils.createVehicleRequest();
 		
 		int pageSizeInt = (int)ModelProvider.INSTANCE.pageSize;
@@ -71,26 +71,6 @@ public class SunnyGetOffersSelectionListener implements SelectionListener {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-	}
-
-	private void getOffer2() {
-		
-		VehicleRequest request = CreateVehicleRequestUtils.createVehicleRequest();
-		
-		int pageSizeInt = (int)ModelProvider.INSTANCE.pageSize;
-		
-		new SunnyOfferViewUpdater().clearView();
-
-		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-		VehicleHttpService service = serviceFactory.getVehicleJoiService();
-
-		VehicleResponse response = service.getOffers(request, false, pageSizeInt);
-
-		if (response != null) {
-			new SunnyOfferViewUpdater().showResponse(response);
-			ModelProvider.INSTANCE.pageNo = 0;
-		}
-			
 	}
 	
 

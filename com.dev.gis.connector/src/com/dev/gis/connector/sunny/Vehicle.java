@@ -23,6 +23,8 @@ public class Vehicle extends Response {
 	private String commonCarInformation;
 	private String companyName;
 	private String picture;
+	
+	private String bodyStyleText;
 
 	private Integer nrDoors;
 	private Integer nrSeats;
@@ -349,6 +351,14 @@ public class Vehicle extends Response {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getBodyStyleText() {
+		return bodyStyleText;
+	}
+
+	public void setBodyStyleText(String bodyStyleText) {
+		this.bodyStyleText = bodyStyleText;
 	}
 
 }

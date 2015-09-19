@@ -89,12 +89,15 @@ public class VehicleHttpService {
 			dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( dummy)
 				//response = JsonUtils.createDummyResponse("SunnyVehicleResponseRatingView");
-				response = JsonUtils.createDummyResponse("SunnyVehicleResponse");
+				//response = JsonUtils.createDummyResponse("SunnyVehicleResponse");
+				response = JsonUtils.createDummyResponse("Sunny_PMI_VehicleResponseRatingView");
 			else
 				response =  httpClient.startPostRequestAsJson(uri, request);
 			
 			logger.info("response = "+response);
 			
+			ModelProvider.INSTANCE.lastResponse = response;
+
 			if (response != null ) 
 				return JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
 			

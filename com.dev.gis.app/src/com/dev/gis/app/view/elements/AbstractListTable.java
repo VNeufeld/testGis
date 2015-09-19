@@ -52,11 +52,26 @@ public abstract class AbstractListTable implements IListTable {
 		GridLayout gd = (GridLayout)parent.getLayout();
 		int col = gd.numColumns;
 
+		this.viewer = createViewerAndLaylout(parent,col);
+		
+		createColumns(parent, this.viewer);
 
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+		if (doubleClickListener != null )
+			viewer.addDoubleClickListener(doubleClickListener);
+
+		if ( selectionChangedListener != null)
+			viewer.addSelectionChangedListener(this.selectionChangedListener);
+
+		hookContextMenu();
+		
+		addTooltipListener();
+
+	}
+	
+	protected TableViewer createViewerAndLaylout(Composite parent, int columns) {
+		TableViewer viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
 				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		
-		createColumns(parent, viewer);
 		
 		final Table table = viewer.getTable();
 		table.setHeaderVisible(true);
@@ -74,25 +89,18 @@ public abstract class AbstractListTable implements IListTable {
 		// define layout for the viewer
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = col;
+		gridData.horizontalSpan = columns;
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		gridData.horizontalAlignment = GridData.FILL;
 		
 		viewer.getControl().setLayoutData(gridData);
-
-		if (doubleClickListener != null )
-			viewer.addDoubleClickListener(doubleClickListener);
-
-		if ( selectionChangedListener != null)
-			viewer.addSelectionChangedListener(this.selectionChangedListener);
-
-		hookContextMenu();
 		
-		addTooltipListener();
-
+		return viewer;
+		
+		
 	}
-	
+
 	protected void addTooltipListener() {
 	}
 
@@ -141,6 +149,10 @@ public abstract class AbstractListTable implements IListTable {
 		}
 
 		return selectedOjects;
+	}
+
+	protected Composite getParent() {
+		return parent;
 	}
 	
 }

@@ -28,10 +28,8 @@ import com.dev.gis.app.view.listener.adac.AdacSelectChangedOfferClickListener;
 import com.dev.gis.app.view.listener.adac.AdacSelectOfferDoubleClickListener;
 import com.dev.gis.app.view.listener.adac.AdacShowOfferFilterSelectionListener;
 import com.dev.gis.connector.api.AdacModelProvider;
-import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.IEditableTask;
-//import com.dev.gis.db.api.IStationDao;
 
 public class TestAppView extends RentCarsAppView {
 	
@@ -124,18 +122,6 @@ public class TestAppView extends RentCarsAppView {
 		return buttonTruck;
 	}
 	
-	@Override
-	protected void createResultOfferListTable(Composite composite) {
-		final Group groupOffers = new Group(composite, SWT.TITLE);
-		groupOffers.setText("Ofers:");
-		
-		groupOffers.setLayout(new GridLayout(1, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(groupOffers);
-		
-		this.offerListTable = new AdacOfferListTable(getSite(),
-				groupOffers, getSelectOfferDoubleClickListener(), getSelectChangedOfferClickListener() );
-	}
 
 
 	
@@ -168,8 +154,8 @@ public class TestAppView extends RentCarsAppView {
 		pageNo.setValue("1");
 		
 		AdacModelProvider.INSTANCE.updateResponse(response);
-		offerListTable.getViewer().setInput(AdacModelProvider.INSTANCE.getOfferDos());
-		offerListTable.getViewer().refresh();
+		
+		offerListTable.update();
 		
 		crossOfferListTable.update();
 		
@@ -273,8 +259,7 @@ public class TestAppView extends RentCarsAppView {
 	}
 
 	
-	@Override
-	protected void createRecommendationTable(Composite composite) {
+	private void createCrossOfferTable(Composite composite) {
 		
 		final Group groupRecomm = new Group(composite, SWT.TITLE);
 		groupRecomm.setText("CrossOfferList:");
@@ -283,6 +268,28 @@ public class TestAppView extends RentCarsAppView {
 				.grab(true, true).applyTo(groupRecomm);
 		
 		crossOfferListTable = new CrossOfferListTable(getSite(),groupRecomm, null);
+	}
+	
+	private void createResultOfferListTable(Composite composite) {
+		final Group groupOffers = new Group(composite, SWT.TITLE);
+		groupOffers.setText("Ofers:");
+		
+		groupOffers.setLayout(new GridLayout(1, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(groupOffers);
+		
+		this.offerListTable = new AdacOfferListTable(getSite(),
+				groupOffers, getSelectOfferDoubleClickListener(), getSelectChangedOfferClickListener() );
+	}
+
+
+	@Override
+	protected void createResultTables(Composite composite) {
+		super.createResultTables(composite);
+		createResultOfferListTable(composite);
+
+		createCrossOfferTable(composite);
+
 	}
 
 	

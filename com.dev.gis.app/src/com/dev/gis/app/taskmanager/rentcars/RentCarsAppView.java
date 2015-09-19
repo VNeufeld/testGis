@@ -1,7 +1,6 @@
 package com.dev.gis.app.taskmanager.rentcars;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.swt.SWT;
@@ -14,7 +13,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferListTable;
 import com.dev.gis.app.view.elements.AgencyNoTextControl;
 import com.dev.gis.app.view.elements.AirportLocationSearch;
 import com.dev.gis.app.view.elements.ButtonControl;
@@ -25,7 +23,6 @@ import com.dev.gis.app.view.elements.OperatorComboBox;
 import com.dev.gis.app.view.elements.PageSizeControl;
 import com.dev.gis.app.view.elements.PickupDateControl;
 import com.dev.gis.app.view.elements.ServerTextControl;
-import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.sunny.VehicleResponse;
 import com.dev.gis.connector.sunny.VehicleSummary;
 import com.dev.gis.task.execution.api.IEditableTask;
@@ -33,7 +30,6 @@ import com.dev.gis.task.execution.api.IEditableTask;
 public class RentCarsAppView extends TaskViewAbstract {
 	public static final String ID = IEditableTask.ID_TestRentCarsView;
 
-	protected SunnyOfferListTable offerListTable;
 
 	protected Text pageInfo = null;
 	
@@ -83,11 +79,15 @@ public class RentCarsAppView extends TaskViewAbstract {
 
 		// Result - Group
 		createResultComposite(composite);
-
-		createResultOfferListTable(composite);
 		
-		createRecommendationTable(composite);
+		createResultTables(composite);
+		
+		composite.pack();
 	
+	}
+
+	protected void createResultTables(Composite composite) {
+		
 	}
 
 	protected void createPageSize(Group groupStamp) {
@@ -116,20 +116,6 @@ public class RentCarsAppView extends TaskViewAbstract {
 	}
 
 
-	protected  void createResultOfferListTable(Composite composite) {
-		
-		final Group groupOffers = new Group(composite, SWT.TITLE);
-		groupOffers.setText("Ofers:");
-		
-		groupOffers.setLayout(new GridLayout(1, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(groupOffers);
-		
-		offerListTable = new SunnyOfferListTable(getSite(),
-				groupOffers, getSelectOfferDoubleClickListener(), getSelectChangedOfferClickListener() );
-		
-		
-	}
 
 	protected void createNextPage(final Composite groupResult) {
 		
@@ -229,35 +215,6 @@ public class RentCarsAppView extends TaskViewAbstract {
 		return null;
 	}
 
-	
-	public void showVehicleResponse(VehicleResponse response) {
-		
-		
-		pageInfo.setText(response.getPageInfo());
-
-		// sessionId.setText(String.valueOf(response.getRequestId()));
-
-		requestId.setText(String.valueOf(response.getRequestId()));
-
-		setSummary(response.getSummary());
-
-		contact.setText(" get Contact from response");
-		
-		if (response.getOfferFilterTemplate() != null) {
-			String offerFilter = response.getOfferFilterTemplate().toString();
-			offerFilterTemlate.setText(offerFilter);
-			SunnyModelProvider.INSTANCE.currentResponse = response;
-		}
-
-		// Table
-		SunnyModelProvider.INSTANCE.updateOffers(response);
-		offerListTable.getViewer().setInput(SunnyModelProvider.INSTANCE.getOfferDos());
-		offerListTable.getViewer().refresh();
-		
-		updateParent(response);
-		
-	}
-
 
 
 	private void setSummary(VehicleSummary vehicleSummary) {
@@ -269,11 +226,6 @@ public class RentCarsAppView extends TaskViewAbstract {
 
 	}
 
-	public void clearView() {
-		SunnyModelProvider.INSTANCE.updateOffers(null);
-		offerListTable.getViewer().setInput(SunnyModelProvider.INSTANCE.getOfferDos());
-		offerListTable.getViewer().refresh();
-	}
 	
 	protected ISelectionChangedListener getSelectChangedOfferClickListener() {
 		// TODO Auto-generated method stub
@@ -284,10 +236,6 @@ public class RentCarsAppView extends TaskViewAbstract {
 	protected IDoubleClickListener getSelectOfferDoubleClickListener() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	protected  void createRecommendationTable(Composite composite) {
-		
 	}
 
 

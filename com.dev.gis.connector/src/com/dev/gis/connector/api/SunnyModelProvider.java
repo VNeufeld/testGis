@@ -1,7 +1,9 @@
 package com.dev.gis.connector.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.dev.gis.connector.sunny.Extra;
 import com.dev.gis.connector.sunny.Hit;
@@ -15,6 +17,8 @@ import com.dev.gis.connector.sunny.OfferFilter;
 import com.dev.gis.connector.sunny.Person;
 import com.dev.gis.connector.sunny.Station;
 import com.dev.gis.connector.sunny.StationResponse;
+import com.dev.gis.connector.sunny.Supplier;
+import com.dev.gis.connector.sunny.Text;
 import com.dev.gis.connector.sunny.Vehicle;
 import com.dev.gis.connector.sunny.VehicleResponse;
 
@@ -67,26 +71,6 @@ public enum SunnyModelProvider {
 		locationSearchHits.add(hit);
 	}
 
-	
-	private static Offer createOffer(String name, long supplierId, long stationId, String price) {
-		Offer offer = new Offer();
-		offer.setName(name);
-		offer.setPickUpStationId(stationId);
-		offer.setPrice(new MoneyAmount(price, "EUR"));
-		offer.setSupplierId(supplierId);
-		return offer;
-	}
-	
-	private static Offer createOffer(String name, long supplierId, long stationId, String price, String servCatCode, long servCatId) {
-		Offer offer = new Offer();
-		offer.setName(name);
-		offer.setPickUpStationId(stationId);
-		offer.setPrice(new MoneyAmount(price, "EUR"));
-		offer.setSupplierId(supplierId);
-		offer.setServiceCatalogCode(servCatCode);
-		offer.setServiceCatalogId(servCatId);;
-		return offer;
-	}
 
 	public void updateHits(LocationSearchResult result) {
 		locationSearchHits.clear();
@@ -99,49 +83,68 @@ public enum SunnyModelProvider {
 	}
 
 	public void updateOffers(VehicleResponse response) {
+		
 		offerDos.clear();
+		recommendations.clear();
+
 		if (response == null )
 			return;
 		
-		List<Offer> results = response.getAllOffers();
-		response.getVehicles();
+		currentResponse = response;
 		
+		offerDos.addAll(createOffersDo(response.getAllOffers(), response));
 		
-		for ( Offer offer : results) {
-			Vehicle vh = foundVehicle(offer.getVehicleId(),response.getVehicles());
-			Station pickupStation = findStation(offer.getPickUpStationId(), response);
-			Station dropOffStation = findStation(offer.getDropOffStationId(), response);
-			SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh, pickupStation, dropOffStation);
-			
-			offerDos.add(offerDo);
-		}
+		recommendations.addAll(createOffersDo(response.getRecommendations(), response));
+
 	}
 	
-private Station findStation(long pickUpStationId, VehicleResponse response) {
+	private List<SunnyOfferDo> createOffersDo(List<Offer> results, VehicleResponse response) {
+		Map<Long, Supplier> suppliers = createSupplierMap(response);
+		List<SunnyOfferDo> offers = new ArrayList<SunnyOfferDo>();
+		for ( Offer offer : results) {
+			Vehicle vh = foundVehicle(offer.getVehicleId(),response.getVehicles());
+			setBodyStyle(vh,response);
+			
+			Station pickupStation = findStation(offer.getPickUpStationId(),suppliers, response);
+			Station dropOffStation = findStation(offer.getDropOffStationId(),suppliers, response);
+			SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh, pickupStation, dropOffStation);
+			
+			
+			offers.add(offerDo);
+		}
+		return offers;
+	}
 
+	
+	private void setBodyStyle(Vehicle vh, VehicleResponse response) {
+		if ( response.getTexts() != null && response.getTexts().getBodyStyleMap() != null ) {
+			Text text = response.getTexts().getBodyStyleMap().get(vh.getBodyStyle());
+			if ( text != null)
+				vh.setBodyStyleText(text.getText());
+		}
+		
+	}
+
+
+	private Station findStation(long pickUpStationId, Map<Long, Supplier> suppliers, VehicleResponse response) {
 		for ( Station station : response.getTexts().getStationList()) {
-			if ( station.getId() == pickUpStationId )
+			if ( station.getId() == pickUpStationId ) {
+				station.setSupplier(suppliers.get(station.getSupplierId()));
 				return station;
+			}
 		}
 	
 		return null;
 	}
 
 
-//	public void updateExtras(ExtraResponse response) {
-//		extraDos.clear();
-//		for ( Extra vr : response.getExtras()) {
-//				
-//			Extra extra = new Extra();
-//			extra.setName(vr.getName());
-//			extra.setCode(vr.getCode());
-//			extra.setId(vr.getId());
-//			extra.setPrice(vr.getPrice());
-//				
-//			extraDos.add(extra);
-//		}
-//		
-//	}
+	private Map<Long, Supplier> createSupplierMap(VehicleResponse response) {
+		Map<Long, Supplier> suppliers = new HashMap<Long, Supplier>(); 
+		for ( Supplier supplier : response.getTexts().getSupplierList()) {
+			suppliers.put(supplier.getId(), supplier);	
+		}
+		return suppliers;
+	}
 
 
 	private Vehicle foundVehicle(long vehicleId, List<Vehicle> vehicles) {
@@ -190,23 +193,6 @@ private Station findStation(long pickUpStationId, VehicleResponse response) {
 	}
 
 
-	public void updateRecmmendations(VehicleResponse response) {
-		recommendations.clear();
-			
-		List<Offer> results = response.getRecommendations();
-		if ( results == null)
-			return;
-		
-		for ( Offer offer : results) {
-			Vehicle vh = foundVehicle(offer.getVehicleId(),response.getVehicles());
-			Station pickupStation = findStation(offer.getPickUpStationId(), response);
-			Station dropOffStation = findStation(offer.getDropOffStationId(), response);
-			SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh, pickupStation, dropOffStation);
-			
-			recommendations.add(offerDo);
-		}
-		
-	}
 
 
 	public List<SunnyOfferDo> getRecommendations() {

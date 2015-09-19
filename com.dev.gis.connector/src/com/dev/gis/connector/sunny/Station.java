@@ -33,6 +33,9 @@ public class Station extends GenericLocation {
 	
 	private Address addres;
 	
+	private Supplier supplier;
+	
+	
 	private List<StationLocType> stationLocTypes = new ArrayList<StationLocType>();
 	
 	public Long[] getAssignedCityIds() {
@@ -110,4 +113,13 @@ public class Station extends GenericLocation {
 	public void setSupplierGroupId(Long supplierGroupId) {
 		this.supplierGroupId = supplierGroupId;
 	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
 }

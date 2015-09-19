@@ -55,7 +55,7 @@ public class SunnyOfferDo extends  Offer {
 			}
 		}
 		if ( vh != null)
-			group = vh.getACRISS();
+			group = vh.getGroupId()+"/"+offer.getName() + " / "+ vh.getACRISS()+ " cat:"+vh.getCategoryId();
 		else
 			group = offer.getName();
 		

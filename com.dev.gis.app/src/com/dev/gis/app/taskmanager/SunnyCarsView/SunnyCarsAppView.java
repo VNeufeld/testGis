@@ -25,6 +25,8 @@ import com.dev.gis.task.execution.api.IEditableTask;
 public class SunnyCarsAppView extends RentCarsAppView {
 	public static final String ID = IEditableTask.ID_TestSunnyCarsView;
 
+	private SunnyOfferListTable offerListTable;
+
 	private ResultRecommendationTable recommendationTable;
 	
 	private OutputTextControls countVehicles = null;
@@ -38,22 +40,6 @@ public class SunnyCarsAppView extends RentCarsAppView {
 	private OutputTextControls pageNo = null;
 
 	private OutputTextControls pageCount = null;
-
-
-
-
-	@Override
-	protected void createRecommendationTable(Composite composite) {
-		
-		final Group groupRecomm = new Group(composite, SWT.TITLE);
-		groupRecomm.setText("Recommendations:");
-		groupRecomm.setLayout(new GridLayout(1, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(groupRecomm);
-		
-		recommendationTable = new ResultRecommendationTable(getSite(),
-				groupRecomm);
-	}
 	
 	
 	@Override
@@ -97,14 +83,15 @@ public class SunnyCarsAppView extends RentCarsAppView {
 
 		//contact.setText(" get Contact from response");
 		
-		SunnyModelProvider.INSTANCE.currentResponse = response;
 
 		// Table
 		SunnyModelProvider.INSTANCE.updateOffers(response);
-		offerListTable.getViewer().setInput(SunnyModelProvider.INSTANCE.getOfferDos());
-		offerListTable.getViewer().refresh();
 		
-		updateParent(response);
+		offerListTable.update();
+		
+		if ( recommendationTable != null) {
+			recommendationTable.update();
+		}
 		
 		pageNo.setValue(response.getPageNo());
 		pageCount.setValue(response.getPageCount());
@@ -136,11 +123,6 @@ public class SunnyCarsAppView extends RentCarsAppView {
 
 	@Override
 	protected void updateParent(VehicleResponse response) {
-		if ( recommendationTable != null) {
-			SunnyModelProvider.INSTANCE.updateRecmmendations(response);
-			recommendationTable.getViewer().setInput(SunnyModelProvider.INSTANCE.getRecommendations());
-			recommendationTable.getViewer().refresh();
-		}
 	}
 
 	private SelectionListener getNextPageSelectionListener(final OutputTextControls pageNo, final CheckBox useFilter) {
@@ -184,6 +166,48 @@ public class SunnyCarsAppView extends RentCarsAppView {
 		new ButtonControl(groupResult, "Show Page", 0,  getNextPageSelectionListener(pageNo, useFilter));
 
 	}
-	
+
+
+	@Override
+	protected void createResultTables(Composite composite) {
+		super.createResultTables(composite);
+		
+		createResultOfferListTable(composite);
+		createRecommendationTable(composite);
+		
+	}
+
+	private  void createResultOfferListTable(Composite composite) {
+		
+		final Group groupOffers = new Group(composite, SWT.TITLE);
+		groupOffers.setText("Ofers:");
+		
+		groupOffers.setLayout(new GridLayout(1, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+				.grab(true, true).applyTo(groupOffers);
+		
+		offerListTable = new SunnyOfferListTable(getSite(),
+				groupOffers, getSelectOfferDoubleClickListener(), getSelectChangedOfferClickListener() );
+		
+		
+	}
+
+	private void createRecommendationTable(Composite composite) {
+		
+		final Group groupRecomm = new Group(composite, SWT.TITLE);
+		groupRecomm.setText("Recommendations:");
+		groupRecomm.setLayout(new GridLayout(1, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.END).minSize(500, 100)
+				.grab(true, false).applyTo(groupRecomm);
+		
+		recommendationTable = new ResultRecommendationTable(getSite(),groupRecomm);
+	}
+
+
+	public void clearView() {
+		SunnyModelProvider.INSTANCE.updateOffers(null);
+		offerListTable.getViewer().setInput(SunnyModelProvider.INSTANCE.getOfferDos());
+		offerListTable.getViewer().refresh();
+	}
 
 }

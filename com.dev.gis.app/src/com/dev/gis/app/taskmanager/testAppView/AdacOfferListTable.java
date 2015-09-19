@@ -1,85 +1,30 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
-import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IWorkbenchPartSite;
 
+import com.dev.gis.app.view.elements.AbstractListTable;
 import com.dev.gis.app.view.listener.adac.AdacTooltipListener;
+import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.OfferDo;
 
-public class AdacOfferListTable {
-	
-	private TableViewer viewer;
-	
-	private final IWorkbenchPartSite site;
-	
-	private IDoubleClickListener selectOfferListener;
-
-	private ISelectionChangedListener selectionChangedListener;
-	
-	private final Composite parent;
+public class AdacOfferListTable extends AbstractListTable {
 	
 	
 	public AdacOfferListTable(IWorkbenchPartSite site,final Composite parent, 
 			IDoubleClickListener selectOfferListener, 
 			ISelectionChangedListener selectionChangedListener  ) {
-		this.site = site;
-		this.parent = parent;
-		this.selectOfferListener = selectOfferListener;
-		this.selectionChangedListener = selectionChangedListener;
-		createViewer();
+		super(site,parent,selectOfferListener,selectionChangedListener);
 	}
 
-	private void createViewer() {
-
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-		createColumns(parent, viewer);
-		final Table table = viewer.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
-		viewer.setContentProvider(new ArrayContentProvider());
-		// get the content for the viewer, setInput will call getElements in the
-		// contentProvider
-		// viewer.setInput(ModelProvider.INSTANCE.getOffers());
-		// make the selection available to other views
-		site.setSelectionProvider(viewer);
-		// set the sorter for the table
-
-		// define layout for the viewer
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 2;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
-		viewer.getControl().setLayoutData(gridData);
-
-		viewer.addDoubleClickListener(selectOfferListener);
-
-		viewer.addSelectionChangedListener(this.selectionChangedListener);
-
-		hookContextMenu();
-		
-		AdacTooltipListener listener = new AdacTooltipListener(parent.getShell(), viewer.getTable());
-		
-		viewer.getControl().addListener(SWT.MouseHover, listener.getTableListener());
-
-	}
-	
-	private void createColumns(final Composite parent, final TableViewer viewer) {
+	@Override
+	public void createColumns(Composite parent, TableViewer viewer) {
 	    String[] titles = { "Name", "Group", "Supplier", "Station", "Service Catalog",  "Price", "Incl. km.", "Prepaid" };
 	    int[] bounds = { 200, 150, 100, 100, 100,  200, 100, 100 };
 
@@ -165,34 +110,20 @@ public class AdacOfferListTable {
 
 	  }
 
-	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
-	    final TableViewerColumn viewerColumn = new TableViewerColumn(viewer,
-	        SWT.NONE);
-	    final TableColumn column = viewerColumn.getColumn();
-	    column.setText(title);
-	    column.setWidth(bound);
-	    column.setResizable(true);
-	    column.setMoveable(true);
-	    return viewerColumn;
-	  }
 
 
-	  public TableViewer getViewer() {
-	    return viewer;
-	  }
+	@Override
+	public void update() {
+		getViewer().setInput(AdacModelProvider.INSTANCE.getOfferDos());
+		getViewer().refresh();
+		
+	}
 
-
-
-
-	private void hookContextMenu() {
-		MenuManager menuMgr = new MenuManager();
-
-		menuMgr.setRemoveAllWhenShown(true);
-
-		Menu menu = menuMgr.createContextMenu(viewer.getControl());
-		viewer.getControl().setMenu(menu);
-		site.registerContextMenu(menuMgr, viewer);
-
+	@Override
+	protected void addTooltipListener() {
+		AdacTooltipListener listener = new AdacTooltipListener(getParent().getShell(), getViewer().getTable());
+		
+		getViewer().getControl().addListener(SWT.MouseHover, listener.getTableListener());
 	}
 
 }
