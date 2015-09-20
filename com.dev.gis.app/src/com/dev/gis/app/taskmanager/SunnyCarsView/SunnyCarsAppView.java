@@ -10,9 +10,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
+import com.dev.gis.app.view.elements.AgencyNoTextControl;
+import com.dev.gis.app.view.elements.AirportLocationSearch;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.CheckBox;
+import com.dev.gis.app.view.elements.CityLocationSearch;
+import com.dev.gis.app.view.elements.LanguageComboBox;
+import com.dev.gis.app.view.elements.OperatorComboBox;
 import com.dev.gis.app.view.elements.OutputTextControls;
+import com.dev.gis.app.view.elements.ServerTextControl;
 import com.dev.gis.app.view.listener.SelectChangedOfferClickListener;
 import com.dev.gis.app.view.listener.SunnyGetNextPageSelectionListener;
 import com.dev.gis.app.view.listener.SunnyGetOffersSelectionListener;
@@ -40,6 +46,24 @@ public class SunnyCarsAppView extends RentCarsAppView {
 	private OutputTextControls pageNo = null;
 
 	private OutputTextControls pageCount = null;
+
+	@Override
+	protected void createBasicControls(Group groupStamp) {
+		super.createBasicControls(groupStamp);
+		
+		new ServerTextControl(groupStamp);
+		
+		new AgencyNoTextControl(groupStamp);
+		
+		new LanguageComboBox(groupStamp, 80);
+
+		new OperatorComboBox(groupStamp, 80);
+		
+		SunnyCityLocationSearch.createCityLocationSearch(groupStamp); 
+
+		SunnyAirportLocationSearch.createAirportLocationSearch(groupStamp);
+		
+	}
 	
 	
 	@Override
@@ -209,5 +233,7 @@ public class SunnyCarsAppView extends RentCarsAppView {
 		offerListTable.getViewer().setInput(SunnyModelProvider.INSTANCE.getOfferDos());
 		offerListTable.getViewer().refresh();
 	}
+
+
 
 }

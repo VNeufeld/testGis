@@ -38,6 +38,19 @@ public class JoiHttpServiceFactory {
 		
 	}
 
+	private URI getAdacServerURI() throws URISyntaxException {
+		
+		String server = AdacModelProvider.INSTANCE.serverUrl;
+
+		if ( server == null|| server.isEmpty() )
+			server = TaskProperties.getTaskProperties().getServerProperty();
+		
+		URI uri = new URI(server);
+		logger.info("Adac LocationHttpService URI : = "+uri.toString());
+		return uri;
+		
+	}
+	
 
 	public ILocationService   getLocationJoiService(long operator) {
 		try {
@@ -63,6 +76,32 @@ public class JoiHttpServiceFactory {
 		return null;
 
 	}
+	
+	public ILocationService   getAdacLocationJoiService(long operator) {
+		try {
+			URI uri = getAdacServerURI();
+			
+			long language = ModelProvider.INSTANCE.languageId;
+			
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			ILocationService locationHttpService = null;
+			if ( dummy )
+			{
+				locationHttpService = new DummyLocationService(operator, uri, language); 
+			}
+
+			else
+				locationHttpService = new AdacLocationHttpService(operator,uri, language);
+			
+			return locationHttpService;
+		}
+		catch(URISyntaxException ex) {
+			
+		}
+		return null;
+
+	}
+	
 	public AdacVehicleHttpService getAdacVehicleJoiService() {
 		
 		return  new  AdacVehicleHttpService(getGisHttpClientInstance());

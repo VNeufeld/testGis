@@ -13,16 +13,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
-import com.dev.gis.app.view.elements.AgencyNoTextControl;
-import com.dev.gis.app.view.elements.AirportLocationSearch;
 import com.dev.gis.app.view.elements.ButtonControl;
-import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.app.view.elements.DropOffDateControl;
-import com.dev.gis.app.view.elements.LanguageComboBox;
-import com.dev.gis.app.view.elements.OperatorComboBox;
 import com.dev.gis.app.view.elements.PageSizeControl;
 import com.dev.gis.app.view.elements.PickupDateControl;
-import com.dev.gis.app.view.elements.ServerTextControl;
 import com.dev.gis.connector.sunny.VehicleResponse;
 import com.dev.gis.connector.sunny.VehicleSummary;
 import com.dev.gis.task.execution.api.IEditableTask;
@@ -102,17 +96,6 @@ public class RentCarsAppView extends TaskViewAbstract {
 
 	protected void createBasicControls(final Group groupStamp) {
 		
-		new ServerTextControl(groupStamp);
-		
-		new AgencyNoTextControl(groupStamp);
-		
-		new LanguageComboBox(groupStamp, 80);
-
-		new OperatorComboBox(groupStamp, 80);
-		
-		CityLocationSearch.createCityLocationSearch(groupStamp); 
-
-		AirportLocationSearch.createAirportLocationSearch(groupStamp);
 	}
 
 

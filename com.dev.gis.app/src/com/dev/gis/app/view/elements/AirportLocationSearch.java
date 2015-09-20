@@ -28,8 +28,7 @@ public class AirportLocationSearch extends LocationSearchText {
 	}
 
 	@Override
-	protected SelectionListener getSelectionListener(Shell shell,
-			Text text) {
+	protected SelectionListener getSelectionListener(Shell shell,Text text) {
 		SelectionListener selectionListener = new SearchCitySelectionListener(shell, text, this);
 		return selectionListener;
 	}

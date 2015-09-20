@@ -34,11 +34,14 @@ public class LocationSearchAllCountriesDialog extends Dialog implements IDialogC
 
 	private Hit  result;
 
+	private static boolean adac = false;
+	
 	public LocationSearchAllCountriesDialog(Shell parentShell, final long operator) {
 		super(parentShell);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 		
 		this.operator = operator;
+		adac = false;
 	}
 
 	/* (non-Javadoc)
@@ -89,10 +92,18 @@ public class LocationSearchAllCountriesDialog extends Dialog implements IDialogC
 
 	private void showAllCountries() {
 		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-		ILocationService service = serviceFactory.getLocationJoiService(operator);
-		LocationSearchResult result = service.joiLocationSearch("", HitType.COUNTRY, "");
+		
+		if ( adac) {
+			ILocationService service = serviceFactory.getAdacLocationJoiService(operator);
+			LocationSearchResult result = service.joiLocationSearch("", HitType.COUNTRY, "");
+			SunnyModelProvider.INSTANCE.updateHits(result);
+		}
+		else {
+			ILocationService service = serviceFactory.getLocationJoiService(operator);
+			LocationSearchResult result = service.joiLocationSearch("", HitType.COUNTRY, "");
+			SunnyModelProvider.INSTANCE.updateHits(result);
+		}
 
-		SunnyModelProvider.INSTANCE.updateHits(result);
 		countryListTable.update();
 		
 	}
@@ -156,10 +167,17 @@ public class LocationSearchAllCountriesDialog extends Dialog implements IDialogC
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			ILocationService service = serviceFactory.getLocationJoiService(operator);
-			LocationSearchResult result = service.joiLocationSearch(searchStringTextControl.getSelectedValue(), HitType.COUNTRY, "");
-
-			SunnyModelProvider.INSTANCE.updateHits(result);
+			
+			if ( adac) {
+				ILocationService service = serviceFactory.getAdacLocationJoiService(operator);
+				LocationSearchResult result = service.joiLocationSearch(searchStringTextControl.getSelectedValue(), HitType.COUNTRY, "");
+				SunnyModelProvider.INSTANCE.updateHits(result);
+			}
+			else {
+				ILocationService service = serviceFactory.getLocationJoiService(operator);
+				LocationSearchResult result = service.joiLocationSearch(searchStringTextControl.getSelectedValue(), HitType.COUNTRY, "");
+				SunnyModelProvider.INSTANCE.updateHits(result);
+			}
 			listTable.update();
 		}
 
@@ -168,6 +186,9 @@ public class LocationSearchAllCountriesDialog extends Dialog implements IDialogC
 			widgetSelected(e);
 		}
 		
+	}
+	public void setAdac(boolean flag) {
+		adac = flag;
 	}
 
 	

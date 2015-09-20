@@ -8,14 +8,15 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.view.dialogs.LocationSearchDialog;
 import com.dev.gis.app.view.elements.LocationSearchText;
+import com.dev.gis.connector.api.AdacModelProvider;
 
 
 public class SearchCitySelectionListener implements SelectionListener {
 
-	private final Shell shell;
-	private final Text cityText;
+	protected final Shell shell;
+	protected final Text cityText;
 	
-	private LocationSearchText parent;
+	protected LocationSearchText parent;
 	
 
 	public SearchCitySelectionListener(final Shell shell, Text cityText, LocationSearchText parent) {
@@ -35,18 +36,19 @@ public class SearchCitySelectionListener implements SelectionListener {
 
 	@Override
 	public void widgetSelected(SelectionEvent arg0) {
-		
-		LocationSearchDialog mpd = new LocationSearchDialog(shell);
-		
-		if (mpd.open() == Dialog.OK) {
-			if ( mpd.getResult() != null ) {
-				String  id = String.valueOf(mpd.getResult().getId());
-				cityText.setText(id);
-				parent.saveValue(id);
-			}
-				
-		}
+//		
+//		LocationSearchDialog mpd = new LocationSearchDialog(shell, AdacModelProvider.INSTANCE.operatorId);
+//		
+//		if (mpd.open() == Dialog.OK) {
+//			if ( mpd.getResult() != null ) {
+//				String  id = String.valueOf(mpd.getResult().getId());
+//				cityText.setText(id);
+//				parent.saveValue(id);
+//			}
+//				
+//		}
 		
 	}
+
 
 }

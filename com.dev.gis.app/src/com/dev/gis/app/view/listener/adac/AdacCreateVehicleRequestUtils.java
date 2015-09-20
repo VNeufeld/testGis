@@ -38,8 +38,8 @@ public class AdacCreateVehicleRequestUtils {
 		Location pickUpLocation = new Location();
 		Location dropOffLocation = new Location();
 
-		String aptCode = ModelProvider.INSTANCE.airport;
-		long cityId = ModelProvider.INSTANCE.cityId;
+		String aptCode = AdacModelProvider.INSTANCE.airport;
+		long cityId = AdacModelProvider.INSTANCE.cityId;
 		
 		if (cityId > 0 ) {
 			pickUpLocation.setCityId(cityId);

@@ -32,12 +32,18 @@ public class LocationSearchDialog extends Dialog implements IDialogCallBack {
 	
 	private LocationItemListTable locationItemListTable;
 	
+	private final long operator;
+	
 	private Hit  result;
+	
+	private static boolean adac = false;
 
-	public LocationSearchDialog(Shell parentShell) {
+	public LocationSearchDialog(Shell parentShell, long operator) {
 		super(parentShell);
 		this.parentShell =parentShell;
+		this.operator = operator;
 		setShellStyle(getShellStyle() | SWT.RESIZE);
+		adac = false;
 	}
 
 	/* (non-Javadoc)
@@ -63,8 +69,6 @@ public class LocationSearchDialog extends Dialog implements IDialogCallBack {
 		final SearchStringTextControl searchStringTextControl = new SearchStringTextControl(gGeneral);
 
 		final CountryTextControl countryTextControl = new CountryTextControl(gGeneral);
-
-		final long operator = SunnyModelProvider.INSTANCE.operatorId;
 
 		new ButtonControl(gGeneral, "select country", 0,  new LocationSearchCountryListener(parentShell, operator,countryTextControl));
 		
@@ -128,6 +132,7 @@ public class LocationSearchDialog extends Dialog implements IDialogCallBack {
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			LocationSearchAllCountriesDialog mpd = new LocationSearchAllCountriesDialog(parentShell, operator);
+			mpd.setAdac(adac);
 			
 			if (mpd.open() == Dialog.OK) {
 				if ( mpd.getResult() != null ) {
@@ -170,9 +175,16 @@ public class LocationSearchDialog extends Dialog implements IDialogCallBack {
 		public void widgetSelected(SelectionEvent e) {
 			HitType type = hitTypeComboBox.getHitType();
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			ILocationService service = serviceFactory.getLocationJoiService(operator);
-			LocationSearchResult result = service.joiLocationSearch(searchStringTextControl.getSelectedValue(), type, country.getSelectedValue());
-			SunnyModelProvider.INSTANCE.updateHits(result);
+			if ( adac) {
+				ILocationService service = serviceFactory.getAdacLocationJoiService(operator);
+				LocationSearchResult result = service.joiLocationSearch(searchStringTextControl.getSelectedValue(), type, country.getSelectedValue());
+				SunnyModelProvider.INSTANCE.updateHits(result);
+			}
+			else {
+				ILocationService service = serviceFactory.getLocationJoiService(operator);
+				LocationSearchResult result = service.joiLocationSearch(searchStringTextControl.getSelectedValue(), type, country.getSelectedValue());
+				SunnyModelProvider.INSTANCE.updateHits(result);
+			}
 			
 			locationItemListTable.update();
 		}
@@ -200,6 +212,10 @@ public class LocationSearchDialog extends Dialog implements IDialogCallBack {
 			dialogCallBack.closeDialog(hit);
 		}
 		
+	}
+
+	public void setAdac(boolean flag) {
+		adac = flag;
 	}
 	
 	

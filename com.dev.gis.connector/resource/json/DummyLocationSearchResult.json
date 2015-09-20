@@ -20,6 +20,15 @@
 			"subResult": [],
 			"countryId": 49,
 			"country": "Germany"
+		},
+		{
+			"identifier": "München",
+			"aptCode":"MUC",
+			"id": 12347,
+			"type": "6",
+			"subResult": [],
+			"countryId": 49,
+			"country": "Germany"
 		}
 		
 		],

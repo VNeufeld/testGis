@@ -60,6 +60,11 @@ public enum SunnyModelProvider {
 
 	private Person customer;
 	
+	public long cityId;
+	
+	public String airport;
+
+	
 	//private PaymentInformation  paymentInformation;
 	
 	private SunnyModelProvider() {

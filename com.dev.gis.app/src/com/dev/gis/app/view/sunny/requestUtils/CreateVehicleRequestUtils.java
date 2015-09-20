@@ -47,8 +47,8 @@ public class CreateVehicleRequestUtils {
 		Location pickUpLocation = new Location();
 		Location dropOffLocation = new Location();
 
-		String aptCode = ModelProvider.INSTANCE.airport;
-		long cityId = ModelProvider.INSTANCE.cityId;
+		String aptCode = SunnyModelProvider.INSTANCE.airport;
+		long cityId = SunnyModelProvider.INSTANCE.cityId;
 		
 		boolean locationExist = false;
 		if (cityId > 0 ) {

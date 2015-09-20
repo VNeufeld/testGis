@@ -64,9 +64,9 @@ public class TestAppView extends RentCarsAppView {
 
 		new AdacOperatorComboBox(groupStamp, 80);
 		
-		CityLocationSearch.createCityLocationSearch(groupStamp); 
+		AdacCityLocationSearch.createCityLocationSearch(groupStamp); 
 
-		AirportLocationSearch.createAirportLocationSearch(groupStamp);
+		AdacAirportLocationSearch.createAirportLocationSearch(groupStamp);
 	}
 	
 	protected void createPageSize(Group groupStamp) {
