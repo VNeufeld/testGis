@@ -663,7 +663,8 @@ public class VehicleHttpService {
 			
 			driver.setName("Müller");
 			driver.setFirstName("Florian");
-			driver.setGender("1");
+			driver.setGender("2");
+			driver.setSalutation("1");
 			driver.setComment(" from Giss APP ");
 			DayAndHour birthday = new DayAndHour("1963-06-17", "00:00");
 			driver.setBirthday(birthday);
@@ -701,7 +702,8 @@ public class VehicleHttpService {
 			
 			driver.setName("Müller");
 			driver.setFirstName("Florian");
-			driver.setGender("1");
+			driver.setGender("2");
+			driver.setSalutation("1");
 			driver.setComment(" from Giss APP ");
 			DayAndHour birthday = new DayAndHour("1963-06-17", "00:00");
 			driver.setBirthday(birthday);
@@ -714,7 +716,10 @@ public class VehicleHttpService {
 			address.setStreet("Schönstr");
 			address.setZip("81543");
 			address.setCountryId(1);
+			address.setCountry("Germany");
 			customer.setAddress(address);
+			
+			customer.setEMail("vv@arcor.de");
 
 			String request = JsonUtils.convertRequestToJsonString(customer);
 			logger.info("request = "+request);

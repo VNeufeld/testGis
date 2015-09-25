@@ -2,7 +2,7 @@ package com.dev.gis.connector.sunny;
 
 public class Person extends BasicProtocol {
 
-	private Salutation salutation;
+	private String salutation;
 
 	private String  gender;
 
@@ -25,9 +25,6 @@ public class Person extends BasicProtocol {
 		return name;
 	}
 
-	public Salutation getSalutation() {
-		return salutation;
-	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -38,9 +35,6 @@ public class Person extends BasicProtocol {
 		this.name = name;
 	}
 
-	public void setSalutation(Salutation salutation) {
-		this.salutation = salutation;
-	}
 
 	public DayAndHour getBirthday() {
 		return birthday;
@@ -66,5 +60,15 @@ public class Person extends BasicProtocol {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+
+	public String getSalutation() {
+		return salutation;
+	}
+
+
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
 	}
 }
