@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.ModelProvider;
+import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.joi.protocol.Administration;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
@@ -38,19 +39,32 @@ public class AdacCreateVehicleRequestUtils {
 		Location pickUpLocation = new Location();
 		Location dropOffLocation = new Location();
 
-		String aptCode = AdacModelProvider.INSTANCE.airport;
-		long cityId = AdacModelProvider.INSTANCE.cityId;
+		String aptCode = StringUtils.trimToEmpty(AdacModelProvider.INSTANCE.airport);
+		String dropOffAptCode = StringUtils.trimToEmpty(AdacModelProvider.INSTANCE.dropoffAirport);
 		
+		long cityId = AdacModelProvider.INSTANCE.cityId;
+		long dropoffCityId = AdacModelProvider.INSTANCE.dropoffCityId;
+		
+		
+		
+		boolean locationExist = false;
 		if (cityId > 0 ) {
 			pickUpLocation.setCityId(cityId);
-		    dropOffLocation.setCityId(cityId);
 		}
-		else {
+		if (dropoffCityId > 0)
+			dropOffLocation.setCityId(dropoffCityId);
+		
+		if ( StringUtils.isNotEmpty(aptCode)) {
 			pickUpLocation.setAirport(aptCode);
-			dropOffLocation.setAirport(aptCode);
+		}			
+		if ( StringUtils.isNotEmpty(dropOffAptCode))
+			dropOffLocation.setAirport(dropOffAptCode);
+		
+		if ((cityId > 0 || StringUtils.isNotEmpty(aptCode) ) && ( dropoffCityId >0 && StringUtils.isNotEmpty(dropOffAptCode))) {
+		    locationExist = true;		    
 		}
 		
-		if ( cityId <= 0 && StringUtils.isEmpty(aptCode)) {
+		if ( !locationExist) {
 			logger.warn(" NO Location is selected ");
 		}
 		

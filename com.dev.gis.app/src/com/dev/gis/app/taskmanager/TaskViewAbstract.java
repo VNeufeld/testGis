@@ -8,6 +8,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.part.ViewPart;
 
 import com.dev.gis.task.execution.api.ITaskResult;
@@ -87,6 +88,23 @@ public abstract class TaskViewAbstract extends ViewPart {
 
 		return composite;
 	}
+
+	protected Group createGroupSpannAll(final Composite parent,String title, int columns) {
+		
+		GridLayout gd = (GridLayout)parent.getLayout();
+		int col = gd.numColumns;
+		
+		final Group groupResult = new Group(parent, SWT.TITLE);
+		groupResult.setText(title);		
+		GridLayoutFactory.fillDefaults().numColumns(columns).equalWidth(false).applyTo(groupResult);
+
+		GridDataFactory.fillDefaults().span(col, 1)
+					.align(SWT.FILL, SWT.BEGINNING).grab(true, false)
+					.applyTo(groupResult);
+
+		return groupResult;
+	}
+	
 
 	protected void showError(String message) {
 		MessageDialog.openError(

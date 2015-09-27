@@ -1,6 +1,5 @@
 package com.dev.gis.app.taskmanager.SunnyCarsView;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
@@ -8,21 +7,28 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.view.elements.AirportLocationSearch;
-import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
-import com.dev.gis.connector.api.TaskProperties;
 
 public class SunnyAirportLocationSearch extends AirportLocationSearch {
 	private static Logger logger = Logger.getLogger(SunnyAirportLocationSearch.class);
+	private boolean isPickup = true;
 
-	private SunnyAirportLocationSearch(Composite parent) {
-		super(parent);
+	private SunnyAirportLocationSearch(Composite parent, String label) {
+		super(parent, label);
+
 	}
 
-	public static void createAirportLocationSearch(Composite parent) {
-		new SunnyAirportLocationSearch(parent);
+	public static void createPickupAirportLocationSearch(Composite parent) {
+		new SunnyAirportLocationSearch(parent, "Pickup :").create();;
+		
 	}
 
+	public static void createDropoffAirportLocationSearch(Composite parent) {
+		SunnyAirportLocationSearch xx = new SunnyAirportLocationSearch(parent, "Dropoff :");
+		xx.isPickup = false;
+		xx.create();
+	}
+	
 
 	@Override
 	protected String getLabel() {
@@ -38,23 +44,29 @@ public class SunnyAirportLocationSearch extends AirportLocationSearch {
 	
 	@Override
 	public void saveValue(String value) {
-		SunnyModelProvider.INSTANCE.airport = value;
+		if ( isPickup) {
+			SunnyModelProvider.INSTANCE.airport = value;
+			logger.info("selected pickup airport : "+SunnyModelProvider.INSTANCE.airport);
+		}
+		else {
+			SunnyModelProvider.INSTANCE.dropoffAirport = value;
+			logger.info("selected dropoffAirport airport : "+SunnyModelProvider.INSTANCE.dropoffAirport);
+		}
 		
-		logger.info("selected airport : "+SunnyModelProvider.INSTANCE.airport);
-		
-		if ( !StringUtils.isBlank(value))
-			SunnyModelProvider.INSTANCE.cityId = 0;
-		
-		TaskProperties.getTaskProperties().setAptCode(value);
-		TaskProperties.getTaskProperties().saveProperty();
+		if ( isPickup)
+			saveProperty("SUNNY_PICKUP_APT", value);
+		else
+			saveProperty("SUNNY_DROPOFF_APT", value);
 		
 	}
 
 	@Override
 	protected String getDefaultValue() {
-		String apt = TaskProperties.getTaskProperties().getAptCode();
-		if ( StringUtils.isEmpty(apt))
-			apt = "PMI";
+		String apt = "PMI";
+		if ( isPickup)
+			apt = readProperty("SUNNY_PICKUP_APT");
+		else
+			apt = readProperty("SUNNY_DROPOFF_APT");
 		return apt;
 	}
 

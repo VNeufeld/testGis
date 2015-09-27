@@ -59,13 +59,26 @@ public class SunnyCarsAppView extends RentCarsAppView {
 
 		new OperatorComboBox(groupStamp, 80);
 		
-		SunnyCityLocationSearch.createCityLocationSearch(groupStamp); 
-
-		SunnyAirportLocationSearch.createAirportLocationSearch(groupStamp);
+		createLocationGroup(groupStamp);
+		
 		
 	}
 	
 	
+	private void createLocationGroup(Group groupStamp) {
+		final Group groupLocation = createGroupSpannAll(groupStamp, "Location",4);
+
+		SunnyCityLocationSearch.createPickupCityLocationSearch(groupLocation); 
+
+		SunnyAirportLocationSearch.createPickupAirportLocationSearch(groupLocation);
+
+		SunnyCityLocationSearch.createDropoffCityLocationSearch(groupLocation); 
+
+		SunnyAirportLocationSearch.createDropoffAirportLocationSearch(groupLocation);
+		
+	}
+
+
 	@Override
 	protected void createResultFields(Group groupResult) {
 		

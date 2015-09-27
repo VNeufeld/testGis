@@ -1,6 +1,5 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
@@ -9,25 +8,27 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.view.elements.AirportLocationSearch;
 import com.dev.gis.connector.api.AdacModelProvider;
-import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
-import com.dev.gis.connector.api.TaskProperties;
 
 public class AdacAirportLocationSearch extends AirportLocationSearch {
 	private static Logger logger = Logger.getLogger(AdacAirportLocationSearch.class);
+	private boolean isPickup = true;
 
-	private AdacAirportLocationSearch(Composite parent) {
-		super(parent);
+	private AdacAirportLocationSearch(Composite parent, String label) {
+		super(parent, label);
 	}
 
-	public static void createAirportLocationSearch(Composite parent) {
-		new AdacAirportLocationSearch(parent);
+	public static void createPickupAirportLocationSearch(Composite parent) {
+		AdacAirportLocationSearch xx = new AdacAirportLocationSearch(parent, "Pickup Airport:");
+		xx.isPickup = true;
+		xx.create();
 	}
 
-
-	@Override
-	protected String getLabel() {
-		return "Search Adac Airport";
+	public static void createDropoffAirportLocationSearch(Composite parent) {
+		AdacAirportLocationSearch xx = new AdacAirportLocationSearch(parent, "Dropoff Airport :");
+		xx.isPickup = false;
+		xx.create();
+		
 	}
 
 	@Override
@@ -39,24 +40,31 @@ public class AdacAirportLocationSearch extends AirportLocationSearch {
 	
 	@Override
 	public void saveValue(String value) {
-		AdacModelProvider.INSTANCE.airport = value;
+		if ( isPickup) {
+			AdacModelProvider.INSTANCE.airport = value;
+			logger.info("selected pickup airport : "+AdacModelProvider.INSTANCE.airport);
+		}
+		else {
+			AdacModelProvider.INSTANCE.dropoffAirport = value;
+			logger.info("selected dropoffAirport airport : "+AdacModelProvider.INSTANCE.dropoffAirport);
+		}
 		
-		logger.info("selected airport : "+AdacModelProvider.INSTANCE.airport);
-		
-		if ( !StringUtils.isBlank(value))
-			AdacModelProvider.INSTANCE.cityId = 0;
-		
-		TaskProperties.getTaskProperties().setAptCode(value);
-		TaskProperties.getTaskProperties().saveProperty();
+		if ( isPickup)
+			saveProperty("ADAC_PICKUP_APT", value);
+		else
+			saveProperty("ADAC_DROPOFF_APT", value);
 		
 	}
 
 	@Override
 	protected String getDefaultValue() {
-		String apt = TaskProperties.getTaskProperties().getAptCode();
-		if ( StringUtils.isEmpty(apt))
-			apt = "PMI";
+		String apt = "PMI";
+		if ( isPickup)
+			apt = readProperty("ADAC_PICKUP_APT");
+		else
+			apt = readProperty("ADAC_DROPOFF_APT");
 		return apt;
+		
 	}
 
 }

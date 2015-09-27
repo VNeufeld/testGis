@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
+import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyAirportLocationSearch;
+import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyCityLocationSearch;
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
 import com.dev.gis.app.view.elements.AirportLocationSearch;
 import com.dev.gis.app.view.elements.ButtonControl;
@@ -64,10 +66,23 @@ public class TestAppView extends RentCarsAppView {
 
 		new AdacOperatorComboBox(groupStamp, 80);
 		
-		AdacCityLocationSearch.createCityLocationSearch(groupStamp); 
-
-		AdacAirportLocationSearch.createAirportLocationSearch(groupStamp);
+		createLocationGroup(groupStamp);
+		
 	}
+	
+	private void createLocationGroup(Group groupStamp) {
+		final Group groupLocation = createGroupSpannAll(groupStamp, "Location",4);
+
+		AdacCityLocationSearch.createPickupCityLocationSearch(groupLocation); 
+
+		AdacAirportLocationSearch.createPickupAirportLocationSearch(groupLocation);
+		
+		AdacCityLocationSearch.createDropoffCityLocationSearch(groupLocation); 
+
+		AdacAirportLocationSearch.createDropoffAirportLocationSearch(groupLocation);
+		
+	}
+
 	
 	protected void createPageSize(Group groupStamp) {
 		Composite cc = createComposite(groupStamp, 3, -1, false);

@@ -13,18 +13,26 @@ import com.dev.gis.connector.api.SunnyModelProvider;
 public class SunnyCityLocationSearch extends CityLocationSearch {
 
 	private static Logger logger = Logger.getLogger(SunnyCityLocationSearch.class);
+	private boolean isPickup = true;
 
-	public static void createCityLocationSearch(Composite parent) {
-		new SunnyCityLocationSearch(parent);
+	public static void createPickupCityLocationSearch(Composite parent) {
+		new SunnyCityLocationSearch(parent,"Pickup City").create();
 	}
 
-	private SunnyCityLocationSearch(Composite parent) {
-		super(parent);
+	public static void createDropoffCityLocationSearch(Composite parent) {
+		SunnyCityLocationSearch bb = new SunnyCityLocationSearch(parent,"Dropoff City");
+		bb.isPickup = false;
+		bb.create();
+	}
+	
+	private SunnyCityLocationSearch(Composite parent, String label) {
+		super(parent, label);
+
 	}
 
 	@Override
 	protected String getLabel() {
-		return "Search Sunny City";
+		return "Search";
 	}
 
 	@Override
@@ -36,14 +44,45 @@ public class SunnyCityLocationSearch extends CityLocationSearch {
 
 	@Override
 	public void saveValue(String value) {
-		if (!StringUtils.isEmpty(value)) {
-			SunnyModelProvider.INSTANCE.cityId = Long.valueOf(value);
-			logger.info("selected city : " + SunnyModelProvider.INSTANCE.cityId);
+		if (!StringUtils.isEmpty(value) && StringUtils.isNumeric(value)) {
+			if ( isPickup ) {
+				SunnyModelProvider.INSTANCE.cityId = Long.valueOf(value);
+			}
+			else {
+				SunnyModelProvider.INSTANCE.dropoffCityId = Long.valueOf(value);
+			}
 
-			SunnyModelProvider.INSTANCE.airport = null;
-			logger.info("selected airport : " + SunnyModelProvider.INSTANCE.airport);
+		}
+		else {
+			if ( isPickup ) {
+				SunnyModelProvider.INSTANCE.cityId = 0;
+			}
+			else {
+				SunnyModelProvider.INSTANCE.dropoffCityId = 0;
+			}
+		}
+		
+		if ( isPickup ) {
+			logger.info("selected pickup city : " + SunnyModelProvider.INSTANCE.cityId);
+			saveProperty("SUNNY_PICKUP_CITY", value);
+		}
+		else {
+			logger.info("selected dropoff city : " + SunnyModelProvider.INSTANCE.dropoffCityId);
+			saveProperty("SUNNY_DROPOFF_CITY", value);
 		}
 
 	}
+	
+	@Override
+	protected String getDefaultValue() {
+		String city = "1234"; 
+		if ( isPickup ) 
+			city = readProperty("SUNNY_PICKUP_CITY");
+		
+		else
+			city = readProperty("SUNNY_DROPOFF_CITY");
+		return city;
+	}
+
 
 }

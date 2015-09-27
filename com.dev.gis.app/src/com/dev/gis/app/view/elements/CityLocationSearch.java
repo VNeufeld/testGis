@@ -14,12 +14,12 @@ public class CityLocationSearch extends LocationSearchText {
 
 	private static Logger logger = Logger.getLogger(CityLocationSearch.class);
 
-	public static void createCityLocationSearch(Composite parent) {
-		new CityLocationSearch(parent);
+	public static void createCityLocationSearch(Composite parent, String label) {
+		new CityLocationSearch(parent, label);
 	}
 
-	public CityLocationSearch(Composite parent) {
-		super(parent, 300, true);
+	public CityLocationSearch(Composite parent, String label) {
+		super(parent, 300, true, label);
 	}
 
 	@Override

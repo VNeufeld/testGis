@@ -55,9 +55,10 @@ public abstract class ObjectDateControl extends BasicControl{
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(3, true));
-		GridDataFactory.fillDefaults().span(col, 1)
-				.align(SWT.FILL, SWT.BEGINNING).grab(true, false)
-				.applyTo(composite);
+//		GridDataFactory.fillDefaults().span(col, 1)
+//				.align(SWT.FILL, SWT.BEGINNING).grab(true, false)
+//				.applyTo(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).applyTo(composite);
 
 		String label = getLabel();
 		new Label(composite, SWT.NONE).setText(label);

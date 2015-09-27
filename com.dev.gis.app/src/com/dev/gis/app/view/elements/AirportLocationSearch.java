@@ -14,12 +14,12 @@ import com.dev.gis.connector.api.TaskProperties;
 public class AirportLocationSearch extends LocationSearchText {
 	private static Logger logger = Logger.getLogger(AirportLocationSearch.class);
 
-	public static void createAirportLocationSearch(Composite parent) {
-		new AirportLocationSearch(parent);
+	public static void createAirportLocationSearch(Composite parent, String label) {
+		new AirportLocationSearch(parent, label);
 	}
 
-	public AirportLocationSearch(Composite parent) {
-		super(parent, 300, true);
+	public AirportLocationSearch(Composite parent, String label) {
+		super(parent, 300, true, label);
 	}
 
 	@Override

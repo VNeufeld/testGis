@@ -41,8 +41,12 @@ public enum AdacModelProvider {
 	public int module = 1; 
 	
 	public long cityId;
+
+	public long dropoffCityId;
 	
 	public String airport;
+	
+	public String dropoffAirport;
 
 	
 

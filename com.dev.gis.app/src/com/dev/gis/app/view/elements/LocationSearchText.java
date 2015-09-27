@@ -17,10 +17,11 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class LocationSearchText {
+public class LocationSearchText extends BasicControl {
 	
-	private final int size; 
-
+	private final int size;
+	
+	private final String searchLabel;
 	
 	private Text text;
 	
@@ -28,14 +29,60 @@ public class LocationSearchText {
 
 	private final Composite parent;
 	
+	private boolean spannAll = false;
+
+	private final boolean addSearch ;
 	
-	public LocationSearchText(Composite parent, int size, boolean addSearch) {
+	public LocationSearchText(Composite parent, int size, boolean addSearch, String label) {
 		super();
 		this.parent = parent;
 		this.size = size;
+		this.searchLabel = label;
+		this.addSearch = addSearch;
 		
-		create(addSearch);
+
 		
+	}
+	protected String getDefaultValue() {
+		return "";
+	}
+	public void saveValue(String value) {
+		
+	}
+	
+	protected void create() {
+		
+		String label = searchLabel; //getLabel();
+
+		new Label(parent, SWT.NONE).setText(label);
+		
+		GridLayout gd = (GridLayout)parent.getLayout();
+		int col = gd.numColumns;
+		
+		Composite composite = new Composite(parent, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(composite);
+		
+		if ( spannAll)
+			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+			.grab(false, false).span(col-1, 1).hint(size, 24).applyTo(composite);
+		else
+			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+			.grab(false, false).hint(size, 24).applyTo(composite);
+
+		text = new Text(composite, SWT.BORDER | SWT.SINGLE);
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+				.grab(false, false).hint(200, 24).applyTo(text);
+
+		if ( addSearch) {
+			Button buttonSearch = new Button(composite, SWT.PUSH | SWT.LEFT);
+			buttonSearch.setText("Location Search");
+			buttonSearch.addSelectionListener(getSelectionListener(parent.getShell(), text));
+
+//			buttonSearch.addSelectionListener(new SearchCitySelectionListener(
+//					this.serverUrl, operatorComboBox.getOperatorId(), composite.getShell(), cityText));
+		}
+
+
 		text.setText(getDefaultValue());
 		
 		saveValue(text.getText());
@@ -74,45 +121,7 @@ public class LocationSearchText {
 				saveValue(value);
 			}
 		});
-
 		
-	}
-	protected String getDefaultValue() {
-		return "";
-	}
-	public void saveValue(String value) {
-		
-	}
-	
-	private void create(boolean addSearch) {
-		
-		String label = getLabel();
-
-		new Label(parent, SWT.NONE).setText(label);
-		
-		GridLayout gd = (GridLayout)parent.getLayout();
-		int col = gd.numColumns;
-		
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(composite);
-
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-		.grab(false, false).span(col-1, 1).hint(size, 24).applyTo(composite);
-
-		text = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-				.grab(false, false).hint(200, 24).applyTo(text);
-
-		if ( addSearch) {
-			Button buttonSearch = new Button(composite, SWT.PUSH | SWT.LEFT);
-			buttonSearch.setText("Search Obj");
-			buttonSearch.addSelectionListener(getSelectionListener(parent.getShell(), text));
-
-//			buttonSearch.addSelectionListener(new SearchCitySelectionListener(
-//					this.serverUrl, operatorComboBox.getOperatorId(), composite.getShell(), cityText));
-		}
-
-
 	}
 
 	protected String getLabel() {

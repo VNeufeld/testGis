@@ -47,21 +47,29 @@ public class CreateVehicleRequestUtils {
 		Location pickUpLocation = new Location();
 		Location dropOffLocation = new Location();
 
-		String aptCode = SunnyModelProvider.INSTANCE.airport;
+		String aptCode = StringUtils.trimToEmpty(SunnyModelProvider.INSTANCE.airport);
+		String dropOffAptCode = StringUtils.trimToEmpty(SunnyModelProvider.INSTANCE.dropoffAirport);
+		
 		long cityId = SunnyModelProvider.INSTANCE.cityId;
+		long dropoffCityId = SunnyModelProvider.INSTANCE.dropoffCityId;
 		
 		boolean locationExist = false;
 		if (cityId > 0 ) {
 			pickUpLocation.setCityId(cityId);
-		    dropOffLocation.setCityId(cityId);
-		    locationExist = true;		    
 		}
-		else if ( StringUtils.isNotEmpty(aptCode)){
+		if (dropoffCityId > 0)
+			dropOffLocation.setCityId(dropoffCityId);
+		
+		if ( StringUtils.isNotEmpty(aptCode)) {
 			pickUpLocation.setAirport(aptCode);
-			dropOffLocation.setAirport(aptCode);
+		}			
+		if ( StringUtils.isNotEmpty(dropOffAptCode))
+			dropOffLocation.setAirport(dropOffAptCode);
+		
+		if ((cityId > 0 || StringUtils.isNotEmpty(aptCode) ) && ( dropoffCityId >0 && StringUtils.isNotEmpty(dropOffAptCode))) {
 		    locationExist = true;		    
 		}
-
+		
 		ti.setPickUpLocation(pickUpLocation);
 		ti.setDropOffLocation(dropOffLocation);
 		
@@ -125,6 +133,7 @@ public class CreateVehicleRequestUtils {
 			
 			Station s = new Station(pickupStationId);
 			s.setSupplierId(pickupSupplierId);
+			s.setId(pickupStationId);
 			pickUpLocation.setStation(s);
 			
 			request.getTravel().setPickUpLocation(pickUpLocation);
@@ -137,6 +146,7 @@ public class CreateVehicleRequestUtils {
 			dropOffLocation.setStationId(dropofStationId);
 	
 			Station s = new Station(dropofStationId);
+			s.setId(dropofStationId);
 			s.setSupplierId(dropoffSupplierId);
 			dropOffLocation.setStation(s);
 			

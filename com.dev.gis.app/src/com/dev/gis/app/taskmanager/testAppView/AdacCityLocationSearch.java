@@ -9,24 +9,32 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.connector.api.AdacModelProvider;
-import com.dev.gis.connector.api.SunnyModelProvider;
 
 public class AdacCityLocationSearch extends CityLocationSearch {
 
 	private static Logger logger = Logger.getLogger(AdacCityLocationSearch.class);
+	private boolean isPickup = true;
+	
 
-	public static void createCityLocationSearch(Composite parent) {
-		new AdacCityLocationSearch(parent);
+	public static void createPickupCityLocationSearch(Composite parent) {
+		AdacCityLocationSearch xx = new AdacCityLocationSearch(parent,"Pickup City : ");
+		xx.isPickup = true;
+		xx.create();
+		
 	}
 
-	private AdacCityLocationSearch(Composite parent) {
-		super(parent);
+	public static void createDropoffCityLocationSearch(Composite parent) {
+		AdacCityLocationSearch xx = new AdacCityLocationSearch(parent,"Dropoff City : ");
+		xx.isPickup = false;
+		xx.create();
+		
+	}
+	
+	private AdacCityLocationSearch(Composite parent, String label) {
+		super(parent, label);
+
 	}
 
-	@Override
-	protected String getLabel() {
-		return "Search Sunny City";
-	}
 
 	@Override
 	protected SelectionListener getSelectionListener(Shell shell, Text text) {
@@ -37,14 +45,44 @@ public class AdacCityLocationSearch extends CityLocationSearch {
 
 	@Override
 	public void saveValue(String value) {
-		if (!StringUtils.isEmpty(value)) {
-			AdacModelProvider.INSTANCE.cityId = Long.valueOf(value);
-			logger.info("selected city : " + AdacModelProvider.INSTANCE.cityId);
+		
+		if (!StringUtils.isEmpty(value) && StringUtils.isNumeric(value)) {
+			if ( isPickup ) {
+				AdacModelProvider.INSTANCE.cityId = Long.valueOf(value);
+			}
+			else {
+				AdacModelProvider.INSTANCE.dropoffCityId = Long.valueOf(value);
+			}
 
-			AdacModelProvider.INSTANCE.airport = null;
-			logger.info("selected airport : " + AdacModelProvider.INSTANCE.airport);
+		}
+		else {
+			if ( isPickup ) {
+				AdacModelProvider.INSTANCE.cityId = 0;
+			}
+			else {
+				AdacModelProvider.INSTANCE.dropoffCityId = 0;
+			}
+		}
+		
+		if ( isPickup ) {
+			logger.info("selected pickup city : " + AdacModelProvider.INSTANCE.cityId);
+			saveProperty("ADAC_PICKUP_CITY", value);
+		}
+		else {
+			logger.info("selected dropoff city : " + AdacModelProvider.INSTANCE.dropoffCityId);
+			saveProperty("ADAC_DROPOFF_CITY", value);
 		}
 
+	}
+	@Override
+	protected String getDefaultValue() {
+		String city = "1234"; 
+		if ( isPickup ) 
+			city = readProperty("ADAC_PICKUP_CITY");
+		
+		else
+			city = readProperty("ADAC_DROPOFF_CITY");
+		return city;
 	}
 
 }

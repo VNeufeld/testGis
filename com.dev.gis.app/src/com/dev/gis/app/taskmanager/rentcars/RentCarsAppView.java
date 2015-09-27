@@ -59,9 +59,8 @@ public class RentCarsAppView extends TaskViewAbstract {
 		
 		createBasicControls(groupStamp);
 		
-		new PickupDateControl(groupStamp);
-
-		new DropOffDateControl(groupStamp);
+		createDatesControl(groupStamp);
+		
 
 		createRadioButtonsCarAndTruck(groupStamp);
 		
@@ -78,6 +77,15 @@ public class RentCarsAppView extends TaskViewAbstract {
 		
 		composite.pack();
 	
+	}
+
+	protected void createDatesControl(Group groupStamp) {
+		
+		final Group groupDates = createGroupSpannAll(groupStamp, "Dates",6);
+		
+		new PickupDateControl(groupDates);
+		new DropOffDateControl(groupDates);
+		
 	}
 
 	protected void createResultTables(Composite composite) {
