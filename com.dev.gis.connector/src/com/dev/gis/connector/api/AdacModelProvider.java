@@ -47,9 +47,12 @@ public enum AdacModelProvider {
 	public String airport;
 	
 	public String dropoffAirport;
-
 	
+	public String supplierFilter;
 
+	public String servcatFilter;
+	
+	public String stationFilter;
 
 	public void updateExtras(ExtraResponse response) {
 		extras.clear();

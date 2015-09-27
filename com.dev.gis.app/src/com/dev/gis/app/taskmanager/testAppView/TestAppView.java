@@ -15,6 +15,9 @@ import org.eclipse.swt.widgets.Group;
 
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyAirportLocationSearch;
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyCityLocationSearch;
+import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyExtServcatFilterTextControl;
+import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyExtStationFilterTextControl;
+import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyExtSupplierFilterTextControl;
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
 import com.dev.gis.app.view.elements.AirportLocationSearch;
 import com.dev.gis.app.view.elements.ButtonControl;
@@ -69,6 +72,20 @@ public class TestAppView extends RentCarsAppView {
 		createLocationGroup(groupStamp);
 		
 	}
+	
+	@Override
+	protected void createExtFilter(Group groupStamp) {
+		final Group groupFilter = new Group(groupStamp, SWT.TITLE);
+		groupFilter.setText("Filter :");
+		groupFilter.setLayout(new GridLayout(6, false));
+		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).span(4,1)
+				.grab(true, true).applyTo(groupFilter);
+		
+		new AdacExtSupplierFilterTextControl(groupFilter);
+		new AdacExtServcatFilterTextControl(groupFilter);
+		new AdacExtStationFilterTextControl(groupFilter);
+	}
+
 	
 	private void createLocationGroup(Group groupStamp) {
 		final Group groupLocation = createGroupSpannAll(groupStamp, "Location",4);
@@ -279,8 +296,13 @@ public class TestAppView extends RentCarsAppView {
 		final Group groupRecomm = new Group(composite, SWT.TITLE);
 		groupRecomm.setText("CrossOfferList:");
 		groupRecomm.setLayout(new GridLayout(1, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(groupRecomm);
+		
+//		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+//				.grab(true, true).applyTo(groupRecomm);
+
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).minSize(500, 300)
+		.grab(true, false).applyTo(groupRecomm);
+		
 		
 		crossOfferListTable = new CrossOfferListTable(getSite(),groupRecomm, null);
 	}
