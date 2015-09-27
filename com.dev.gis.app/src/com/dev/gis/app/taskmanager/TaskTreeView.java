@@ -68,7 +68,7 @@ public class TaskTreeView extends ViewPart {
 		//startRefreshViewsThread();
 
 		// INIT Main View
-		LogViewUpdater.updateView("");
+		//LogViewUpdater.updateView("");
 		
 	}
 

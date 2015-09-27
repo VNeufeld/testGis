@@ -19,7 +19,7 @@ public class CityLocationSearch extends LocationSearchText {
 	}
 
 	public CityLocationSearch(Composite parent, String label) {
-		super(parent, 300, true, label);
+		super(parent, 400, true, label);
 	}
 
 	@Override

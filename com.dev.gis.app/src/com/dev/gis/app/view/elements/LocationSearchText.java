@@ -64,7 +64,7 @@ public class LocationSearchText extends BasicControl {
 		
 		if ( spannAll)
 			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-			.grab(false, false).span(col-1, 1).hint(size, 24).applyTo(composite);
+			.grab(false, false).span(col-1, 1).hint(size, 28).applyTo(composite);
 		else
 			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
 			.grab(false, false).hint(size, 24).applyTo(composite);
@@ -77,9 +77,8 @@ public class LocationSearchText extends BasicControl {
 			Button buttonSearch = new Button(composite, SWT.PUSH | SWT.LEFT);
 			buttonSearch.setText("Location Search");
 			buttonSearch.addSelectionListener(getSelectionListener(parent.getShell(), text));
-
-//			buttonSearch.addSelectionListener(new SearchCitySelectionListener(
-//					this.serverUrl, operatorComboBox.getOperatorId(), composite.getShell(), cityText));
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+			.grab(false, true).applyTo(buttonSearch);
 		}
 
 
