@@ -3,7 +3,11 @@ package com.dev.gis.connector.sunny;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -32,6 +36,7 @@ public class Station extends GenericLocation {
 	private GeoLocation geo;
 	
 	private Address addres;
+	
 	
 	private Supplier supplier;
 	
@@ -114,6 +119,7 @@ public class Station extends GenericLocation {
 		this.supplierGroupId = supplierGroupId;
 	}
 
+	@JsonIgnore
 	public Supplier getSupplier() {
 		return supplier;
 	}

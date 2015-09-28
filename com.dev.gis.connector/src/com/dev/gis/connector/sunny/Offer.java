@@ -41,6 +41,8 @@ public class Offer extends Response {
 	private MoneyAmount cancelFee;
 	
 	private MoneyAmount oneWayFee;
+	
+	private Boolean oneWayFeeIncluded;
 
 	private MoneyAmount outOfHourPrice;
 	
@@ -378,6 +380,14 @@ public class Offer extends Response {
 
 	public void setServiceCatalogPrio(Integer serviceCatalogPrio) {
 		this.serviceCatalogPrio = serviceCatalogPrio;
+	}
+
+	public Boolean getOneWayFeeIncluded() {
+		return oneWayFeeIncluded;
+	}
+
+	public void setOneWayFeeIncluded(Boolean oneWayFeeIncluded) {
+		this.oneWayFeeIncluded = oneWayFeeIncluded;
 	}
 	
 }

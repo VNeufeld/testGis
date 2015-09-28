@@ -34,8 +34,7 @@ public class SunnyOfferDo extends  Offer {
 		this.setSupplierId(offer.getSupplierId());
 		long stationId = offer.getPickUpStationId();
 		this.setPickUpStationId(stationId);
-		String preis = offer.getPrice().getAmount();
-		this.setPrice(new MoneyAmount(preis, "EUR"));
+		this.setPrice(offer.getPrice());
 		this.setInclusives(offer.getInclusives());
 		
 		if ( "2".equals(offer.getOfferedPayment()))
@@ -58,6 +57,12 @@ public class SunnyOfferDo extends  Offer {
 			group = vh.getGroupId()+"/"+offer.getName() + " / "+ vh.getACRISS()+ " cat:"+vh.getCategoryId();
 		else
 			group = offer.getName();
+		
+		this.setStatus(offer.getStatus());
+
+		this.setOneWayFee(offer.getOneWayFee());
+
+		this.setOneWayFeeIncluded(offer.getOneWayFeeIncluded());
 		
 	}
 

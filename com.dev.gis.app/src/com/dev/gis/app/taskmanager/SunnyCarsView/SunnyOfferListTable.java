@@ -29,8 +29,8 @@ public class SunnyOfferListTable extends AbstractListTable {
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
 		String[] titles = { "BodyStyle", "Name", "Group", "Supplier", "Station",
-				"Service Catalog", "Price", "Rating", "Incl. km." };
-		int[] bounds = { 200,250, 100, 80, 80, 50, 120, 50, 100 };
+				"Service Catalog", "Price", "Status",  "Rating", "OneWay Fee", "Incl. km." };
+		int[] bounds = { 200,250, 100, 80, 80, 50, 120,50, 50, 120, 100 };
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -93,12 +93,27 @@ public class SunnyOfferListTable extends AbstractListTable {
 			@Override
 			public String getText(Object element) {
 				SunnyOfferDo o = (SunnyOfferDo) element;
-				return o.getPrice().getAmount();
+				String price = "";
+				if (o.getPrice() != null) {
+					price = o.getPrice().getAmount();
+					price = price + " " + o.getPrice().getCurrency();
+				}
+				return price;
 			}
 
 		});
 
 		col = createTableViewerColumn(titles[7], bounds[7], 7);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				SunnyOfferDo o = (SunnyOfferDo) element;
+				return o.getStatus();
+			}
+
+		});
+		
+		col = createTableViewerColumn(titles[8], bounds[8], 8);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -110,7 +125,28 @@ public class SunnyOfferListTable extends AbstractListTable {
 
 		});
 
-		col = createTableViewerColumn(titles[8], bounds[8], 8);
+		col = createTableViewerColumn(titles[9], bounds[9], 9);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				SunnyOfferDo o = (SunnyOfferDo) element;
+				String oneWay = "";
+				if (o.getOneWayFee() != null) {
+					oneWay = o.getOneWayFee().getAmount();
+					oneWay = oneWay + " " + o.getOneWayFee().getCurrency();
+					if ( o.getOneWayFeeIncluded() != null ) {
+						if ( o.getOneWayFeeIncluded().booleanValue() == true)
+							oneWay = oneWay + " ( Included ) ";
+						else
+							oneWay = oneWay + " ( Not Included ) ";
+					}
+				}
+				return oneWay;
+			}
+
+		});
+		
+		col = createTableViewerColumn(titles[10], bounds[10], 10);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
