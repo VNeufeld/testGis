@@ -12,6 +12,10 @@ public class Payment extends BasicProtocol {
 	
 	private PaymentType paymentType;
 	
+    private String    creditCardPaymentReference;
+    
+    private boolean   paymentConfirmed;
+
 	
 	public BankAccount getAccount() {
 		return account;
@@ -37,5 +41,21 @@ public class Payment extends BasicProtocol {
 	@JsonDeserialize(using = PaymentTypeJsonDesirializer.class)
 	public void setPaymentType(PaymentType paymentType) {
 		this.paymentType = paymentType;
+	}
+
+	public String getCreditCardPaymentReference() {
+		return creditCardPaymentReference;
+	}
+
+	public void setCreditCardPaymentReference(String creditCardPaymentReference) {
+		this.creditCardPaymentReference = creditCardPaymentReference;
+	}
+
+	public boolean isPaymentConfirmed() {
+		return paymentConfirmed;
+	}
+
+	public void setPaymentConfirmed(boolean paymentConfirmed) {
+		this.paymentConfirmed = paymentConfirmed;
 	}
 }
