@@ -1,10 +1,8 @@
 package com.dev.gis.app.taskmanager.SunnyCarsView;
 
-import java.net.URI;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -25,14 +23,13 @@ import org.eclipse.ui.PlatformUI;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.view.elements.BookingControl;
 import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.app.view.elements.CreditCardControl;
 import com.dev.gis.app.view.elements.OfferInfoControl;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.BookingRequest;
-import com.dev.gis.connector.sunny.CreditCard;
 import com.dev.gis.connector.sunny.Extra;
-import com.dev.gis.connector.sunny.VerifyCreditCardPaymentResponse;
 
 public class SunnyBookingView extends TaskViewAbstract {
 	
@@ -89,110 +86,12 @@ public class SunnyBookingView extends TaskViewAbstract {
 				
 			}
 			catch( Exception err) {
-				
 				logger.error(err.getMessage(),err);
-			
 				MessageDialog.openError(
 						shell,"Error",err.getMessage());
 			}
-			
-
 		}
-
 	}
-	
-	protected class AddBsGetUrlListener extends AbstractListener {
-		
-		private final  Text bsUrl;
-		private final  Text bsToken;
-		private final  Text bsError;
-		private final Composite parent;
-		
-
-		public AddBsGetUrlListener(Composite parent,Text bsUrl, Text bsToken, Text bsError) {
-			this.bsUrl = bsUrl;
-			this.bsToken = bsToken;
-			this.bsError = bsError;
-			this.parent = parent;
-		}
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			
-			try {
-				bsToken.setText("running....");
-				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-				VehicleHttpService service = serviceFactory
-						.getVehicleJoiService();
-	
-				URI bsuri = service.getPypageUrl();
-				if ( bsuri != null) {
-					bsUrl.setText(bsuri.toString());
-					
-					BSCreditCardDialog mpd = new BSCreditCardDialog(parent.getShell(), bsuri);
-					if (mpd.open() == Dialog.OK) {
-						VerifyCreditCardPaymentResponse response = service.getPayPageResult();
-						if ( response != null && response.getCard() != null) {
-							CreditCard cc = response.getCard();
-							String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
-							bsToken.setText(token);
-							
-							String card = cc.getCardNumber() + " "+cc.getOwnerName();
-							bsError.setText(card);
-							
-						}
-						else
-							bsError.setText(" Unknown PayPage Error" );
-					}
-					
-				}
-				else
-					bsError.setText(" Unknown PayPage Error" );
-			}
-			catch(Exception err) {
-				bsToken.setText("");
-				bsError.setText(err.getMessage());
-				
-			}
-
-		}
-
-	}
-
-	protected class AddBSGetResultListener extends AbstractListener {
-		
-		private final  Text bsToken;
-		private final  Text bsError;
-
-		public AddBSGetResultListener(Text bsToken, Text bsError) {
-			this.bsToken = bsToken;
-			this.bsError = bsError;
-		}
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			
-			
-			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			VehicleHttpService service = serviceFactory
-					.getVehicleJoiService();
-
-			
-			VerifyCreditCardPaymentResponse response = service.getPayPageResult();
-			if ( response != null && response.getCard() != null) {
-				CreditCard cc = response.getCard();
-				String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
-				bsToken.setText(token);
-				
-				String card = cc.getCardNumber() + " "+cc.getOwnerName();
-				bsError.setText(card);
-				
-			}
-
-		}
-
-	}
-	
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -201,15 +100,14 @@ public class SunnyBookingView extends TaskViewAbstract {
 		composite.setLayout(new GridLayout(1, false));
 		
 		offerInfoControl = OfferInfoControl.createOfferInfoControl(composite);
-
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createCreditCardGroup(composite));
+		
+		CreditCardControl.createControl(composite);
 
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createDriverGroup(composite));
 
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createCustomerGroup(composite));
 		
 		new ButtonControl(composite, "GetBookingInfo", 0,  new AddGetBookingInfoListener(parent.getShell()));
-
 		
 		bookingControl = BookingControl.createBookingControl(composite);
 		
@@ -297,42 +195,6 @@ public class SunnyBookingView extends TaskViewAbstract {
 			}
 		}
 	}
-
-	
-	private Control createCreditCardGroup(Composite parent) {
-		
-		final Group groupStamp = new Group(parent, SWT.TITLE);
-		groupStamp.setText("Credit Card:");
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(groupStamp);
-		
-		// TODO Auto-generated method stub
-		new Label(groupStamp, SWT.NONE).setText("B & S URL:");
-		final Text bsUrl = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(bsUrl);
-		
-
-		new Label(groupStamp, SWT.NONE).setText("B & S Token:");
-		bsToken = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.FILL).
-		grab(true, false).hint(300, 16).applyTo(bsToken);
-
-		new Label(groupStamp, SWT.NONE).setText("B & S Kreditkarte:");
-		bsCrediCard = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(bsCrediCard);
-		
-		
-		final Button buttonPayPal = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-		buttonPayPal.setText("Get PayPage URL ");
-		buttonPayPal.addSelectionListener(new AddBsGetUrlListener(parent,bsUrl, bsToken, bsCrediCard));
-
-//		final Button buttonPayPalResult = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-//		buttonPayPalResult.setText("Get PayPage Result ");
-//		buttonPayPalResult.addSelectionListener(new AddBSGetResultListener(bsToken, bsError));
-
-		
-		return groupStamp;
-	}
-
 
 	public void showOffer(final SunnyOfferDo selectedOffer, List<Extra> extras) {
 		if ( selectedOffer == null)
