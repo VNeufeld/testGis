@@ -322,7 +322,7 @@ public class TestAppView extends RentCarsAppView {
 
 	@Override
 	protected void createResultTables(Composite composite) {
-		super.createResultTables(composite);
+
 		createResultOfferListTable(composite);
 
 		createCrossOfferTable(composite);

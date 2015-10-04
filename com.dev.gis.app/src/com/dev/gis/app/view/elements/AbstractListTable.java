@@ -76,6 +76,7 @@ public abstract class AbstractListTable implements IListTable {
 		final Table table = viewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		
 
 		viewer.setContentProvider(new ArrayContentProvider());
 		// get the content for the viewer, setInput will call getElements in the
@@ -93,7 +94,6 @@ public abstract class AbstractListTable implements IListTable {
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		gridData.horizontalAlignment = GridData.FILL;
-		
 		viewer.getControl().setLayoutData(gridData);
 		
 		return viewer;

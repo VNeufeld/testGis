@@ -35,6 +35,7 @@ public class ResultRecommendationTable extends SunnyOfferListTable {
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		gridData.horizontalAlignment = GridData.FILL;
+		gridData.minimumHeight = 100;
 		
 		viewer.getControl().setLayoutData(gridData);
 		

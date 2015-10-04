@@ -658,8 +658,13 @@ public class VehicleHttpService {
 			String param = "/booking/offer/"+selectedOffer.getId().toString()+"/verify";
 			
 			URI uri = getServerURI(param);
-
-			String response =  httpClient.sendGetRequest(uri);
+			String response = "";
+			
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( dummy)
+				response = JsonUtils.createDummyResponse("SunnyVerifyResponse1.json");
+			else
+				response =  httpClient.sendGetRequest(uri);
 			
 			BookingResponse booking = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
 			
@@ -689,7 +694,10 @@ public class VehicleHttpService {
 			String request = JsonUtils.convertRequestToJsonString(offerExtras);
 			logger.info("request = "+request);
 
-			String response =  httpClient.startPutRequestAsJson(uri, request);
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			String response = "";
+			if ( !dummy)
+				response =  httpClient.startPutRequestAsJson(uri, request);
 			
 			return response;
 

@@ -1,0 +1,14 @@
+{
+	"errors": [{
+		"errorType": "3",
+		"errorText": "ACHTUNG: es gilt ein Sonderpreis. Der Preis wurde auf 370,98 erhöht!",
+		"errorNumber": "632",
+		"exception": null
+	}],
+	"confirmed": false,
+	"price": {
+		"amount": "370,98",
+		"currency": "EUR"
+	},
+	"status": "0"
+}
