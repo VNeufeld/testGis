@@ -86,7 +86,7 @@ public class SearchCriteriaComposite {
 		GridData gridData = new GridData();
 		gridData.grabExcessHorizontalSpace = true;
 		//gridData.horizontalAlignment = SWT.true;
-		gridData.widthHint = 400;
+		gridData.widthHint = 300;
 
 		filePattern = new Text(innernComposite, SWT.BORDER | SWT.SINGLE);
 		filePattern.setText(saved);
@@ -114,7 +114,7 @@ public class SearchCriteriaComposite {
 		gdDateSession.grabExcessHorizontalSpace = false;
 		gdDateSession.horizontalAlignment = SWT.NONE;
 		gdDateSession.horizontalSpan = 1;
-		gdDateSession.widthHint = 400;
+		gdDateSession.widthHint = 300;
 		
 		
 		sessionIdText = new Text(composite, SWT.BORDER | SWT.SINGLE);
@@ -130,7 +130,7 @@ public class SearchCriteriaComposite {
 		gdDateSession.grabExcessHorizontalSpace = false;
 		gdDateSession.horizontalAlignment = SWT.NONE;
 		gdDateSession.horizontalSpan = 1;
-		gdDateSession.widthHint = 400;
+		gdDateSession.widthHint = 300;
 
 		new Label(composite, SWT.NONE).setText("BookingId");
 		
@@ -141,7 +141,7 @@ public class SearchCriteriaComposite {
 		GridData gdButton = new GridData();
 		gdButton.grabExcessHorizontalSpace = false;
 		gdButton.horizontalAlignment = SWT.NONE;
-		gdButton.widthHint = 150;
+		//gdButton.widthHint = 150;
 
 		buttonBooking = new Button(composite, SWT.PUSH | SWT.CENTER);
 		buttonBooking.setText("Search booking");
@@ -267,7 +267,7 @@ public class SearchCriteriaComposite {
 		GridData gdButton = new GridData();
 		gdButton.grabExcessHorizontalSpace = false;
 		gdButton.horizontalAlignment = SWT.NONE;
-		gdButton.widthHint = 150;
+		//gdButton.widthHint = 150;
 
 		
 		buttonSession = new Button(composite, SWT.PUSH | SWT.CENTER);

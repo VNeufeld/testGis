@@ -15,7 +15,7 @@ public class ServerTextControl extends ObjectTextControl {
 	}
 
 	public ServerTextControl(Composite parent) {
-		super(parent, 300);
+		super(parent, 300, false);
 	}
 
 	@Override
