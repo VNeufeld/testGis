@@ -552,11 +552,11 @@ public class VehicleHttpService {
 			
 			Person driver = new Person();
 			
-			driver.setName("Müller");
-			driver.setFirstName("Florian");
+			driver.setName("TestMüller");
+			driver.setFirstName("TestFlorian");
 			driver.setGender("2");
 			driver.setSalutation("1");
-			driver.setComment(" from Giss APP ");
+			driver.setComment(" from Bpcs Test ");
 			DayAndHour birthday = new DayAndHour("1963-06-17", "00:00");
 			driver.setBirthday(birthday);
 
@@ -591,11 +591,11 @@ public class VehicleHttpService {
 			
 			Person driver = new Person();
 			
-			driver.setName("Müller");
-			driver.setFirstName("Florian");
+			driver.setName("TestMüller");
+			driver.setFirstName("TestFlorian");
 			driver.setGender("2");
 			driver.setSalutation("1");
-			driver.setComment(" from Giss APP ");
+			driver.setComment(" from Bpcs Test APP ");
 			DayAndHour birthday = new DayAndHour("1963-06-17", "00:00");
 			driver.setBirthday(birthday);
 			

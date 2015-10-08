@@ -25,6 +25,7 @@ import com.dev.gis.app.view.elements.BookingControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.CreditCardControl;
 import com.dev.gis.app.view.elements.OfferInfoControl;
+import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.api.VehicleHttpService;
@@ -48,6 +49,8 @@ public class SunnyBookingView extends TaskViewAbstract {
 	
 	private OfferInfoControl offerInfoControl = null;
 	
+	private OutputTextControls driver;
+	
 	private BookingControl bookingControl = null;
 
 	protected class AddGetBookingInfoListener extends AbstractListener {
@@ -65,8 +68,6 @@ public class SunnyBookingView extends TaskViewAbstract {
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				VehicleHttpService service = serviceFactory
 						.getVehicleJoiService();
-				
-				service.putExtras(selectedOffer, selectedExtras);
 				
 				BookingRequest response = service.getBookingInfo(selectedOffer);
 				String result = "";
@@ -102,8 +103,8 @@ public class SunnyBookingView extends TaskViewAbstract {
 		offerInfoControl = OfferInfoControl.createOfferInfoControl(composite);
 		
 		CreditCardControl.createControl(composite);
-
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createDriverGroup(composite));
+		
+		createDriverGroup(composite);
 
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createCustomerGroup(composite));
 		
@@ -115,20 +116,12 @@ public class SunnyBookingView extends TaskViewAbstract {
 	
 
 	private Control createDriverGroup(Composite parent) {
-		final Group groupStamp = new Group(parent, SWT.TITLE);
-		groupStamp.setText("Driver:");
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(groupStamp);
 		
-		// TODO Auto-generated method stub
-		new Label(groupStamp, SWT.NONE).setText("Driver:");
-		final Text driver = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(driver);
+		driver = new OutputTextControls(parent, "Driver ",-1);
 		
-		final Button buttonPutDriver = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-		buttonPutDriver.setText("PutDriver ");
-		buttonPutDriver.addSelectionListener(new AddPutDriverListener(driver));
+		ButtonControl b  = new ButtonControl(parent, "PutDriver", 0,  new AddPutDriverListener(driver.getControl()));
 		
-		return groupStamp;
+		return null;
 
 	}
 
@@ -201,6 +194,32 @@ public class SunnyBookingView extends TaskViewAbstract {
 			return;
 		this.selectedOffer = selectedOffer;
 		this.selectedExtras = extras;
+		
+		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+		VehicleHttpService service = serviceFactory
+				.getVehicleJoiService();
+		
+		BookingRequest response = service.getBookingInfo(selectedOffer);
+		
+		if ( response != null) {
+			String result = " Car Preis: "+response.getBookingTotalInfo().getCarPrice().toString()+ " Totalpreis : "+response.getBookingTotalInfo().getTotalPrice().toString();
+			bookingId.setText(result);
+			if ( response.getDriver() != null)
+				driver.setValue(response.getDriver().getName());
+			else
+				driver.setValue("");
+			
+			if ( response.getPayment() != null) {
+				bsToken.setText(response.getPayment().getCreditCardPaymentReference());
+				if ( response.getPayment().getCard() != null) {
+					bsCrediCard.setText(response.getPayment().getCard().getOwnerName()+ " : " + response.getPayment().getCard().getCardNumber());
+				}
+				
+			}
+			
+		}
+		
+		
 		
 		offerInfoControl.setInitValues(selectedOffer,extras);
 		
