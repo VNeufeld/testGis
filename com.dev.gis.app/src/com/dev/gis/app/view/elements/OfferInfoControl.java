@@ -71,7 +71,8 @@ public class OfferInfoControl extends EditPartControl {
 			}
 			selectedExtras.setValue(sbx.toString());
 		}
-		
+		else
+			selectedExtras.setValue("");
 		
 		
 	

@@ -39,10 +39,6 @@ public class SunnyBookingView extends TaskViewAbstract {
 	private static int instanceNum = 1;
 
 	public static final String ID = "com.dev.gis.app.view.SunnyBookingView";
-	private Text bookingId = null;
-	
-	private Text bsToken = null;
-	private Text bsCrediCard = null;
 	
 	private SunnyOfferDo selectedOffer = null;
 	private List<Extra> selectedExtras = null;
@@ -70,18 +66,15 @@ public class SunnyBookingView extends TaskViewAbstract {
 						.getVehicleJoiService();
 				
 				BookingRequest response = service.getBookingInfo(selectedOffer);
-				String result = "";
 				if ( response != null) {
-					result = result + " Car Preis: "+response.getBookingTotalInfo().getCarPrice().toString()+ " Totalpreis : "+response.getBookingTotalInfo().getTotalPrice().toString();
-					bookingId.setText(result);
 					
-					if ( response.getPayment() != null) {
-						bsToken.setText(response.getPayment().getCreditCardPaymentReference());
-						if ( response.getPayment().getCard() != null) {
-							bsCrediCard.setText(response.getPayment().getCard().getOwnerName()+ " : " + response.getPayment().getCard().getCardNumber());
-						}
-						
-					}
+//					if ( response.getPayment() != null) {
+//						bsToken.setText(response.getPayment().getCreditCardPaymentReference());
+//						if ( response.getPayment().getCard() != null) {
+//							bsCrediCard.setText(response.getPayment().getCard().getOwnerName()+ " : " + response.getPayment().getCard().getCardNumber());
+//						}
+//						
+//					}
 					
 				}
 				
@@ -202,20 +195,18 @@ public class SunnyBookingView extends TaskViewAbstract {
 		BookingRequest response = service.getBookingInfo(selectedOffer);
 		
 		if ( response != null) {
-			String result = " Car Preis: "+response.getBookingTotalInfo().getCarPrice().toString()+ " Totalpreis : "+response.getBookingTotalInfo().getTotalPrice().toString();
-			bookingId.setText(result);
 			if ( response.getDriver() != null)
 				driver.setValue(response.getDriver().getName());
 			else
 				driver.setValue("");
 			
-			if ( response.getPayment() != null) {
-				bsToken.setText(response.getPayment().getCreditCardPaymentReference());
-				if ( response.getPayment().getCard() != null) {
-					bsCrediCard.setText(response.getPayment().getCard().getOwnerName()+ " : " + response.getPayment().getCard().getCardNumber());
-				}
-				
-			}
+//			if ( response.getPayment() != null) {
+//				bsToken.setText(response.getPayment().getCreditCardPaymentReference());
+//				if ( response.getPayment().getCard() != null) {
+//					bsCrediCard.setText(response.getPayment().getCard().getOwnerName()+ " : " + response.getPayment().getCard().getCardNumber());
+//				}
+//				
+//			}
 			
 		}
 		
@@ -246,7 +237,7 @@ public class SunnyBookingView extends TaskViewAbstract {
 					
 					//instanceNum++;
 					
-					logger.info(" add view :"+viewPart.getTitle());
+					logger.info(" add view :"+viewPart.getTitle() + " offer "+selectedOffer.getId().toString() + " extras : "+ ( extras != null ? extras.size(): 0) );
 					
 				} catch (PartInitException e) {
 					logger.error(e.getMessage(),e);

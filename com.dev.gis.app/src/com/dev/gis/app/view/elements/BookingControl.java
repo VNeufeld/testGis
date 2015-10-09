@@ -145,7 +145,8 @@ public class BookingControl extends EditPartControl {
 					bookingId.setValue(result);
 					
 					result = " Status: "+response.getStatus();
-					result = result + " Preis: "+response.getPrice().toString();
+					if ( response.getPrice() != null)
+						result = result + " Preis: "+response.getPrice().toString();
 					
 					bookingPreis.setValue(result);
 					showErrors( response );
