@@ -65,6 +65,8 @@ public enum SunnyModelProvider {
 	
 	public String airport;
 	public String dropoffAirport;
+	
+	private SunnyOfferDo selectedOffer;
 
 	
 	//private PaymentInformation  paymentInformation;
@@ -227,6 +229,20 @@ public enum SunnyModelProvider {
 
 	public List<Station> getDropoffStations() {
 		return dropoffStations;
+	}
+
+
+	public String getSelectedOfferId() {
+		if ( selectedOffer != null )
+			return selectedOffer.getId().toString();
+		return null;
+	}
+
+
+
+	public void updateOffer(SunnyOfferDo offer) {
+		selectedOffer = offer;
+		
 	}
 
 }

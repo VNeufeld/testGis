@@ -18,12 +18,13 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.app.view.elements.GetDropoffStationControl;
+import com.dev.gis.app.view.elements.GetPickupStationControl;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.sunny.Address;
 import com.dev.gis.connector.sunny.Extra;
 import com.dev.gis.connector.sunny.Station;
-import com.dev.gis.connector.sunny.TravelInformation;
 
 public class SunnyOfferDetailView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.view.SunnyOfferDetailView";
@@ -45,7 +46,7 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	
 	private UUID offerId;
 
-	private TravelInformation travelInformation;
+	//private TravelInformation travelInformation;
 
 	private Text serviceCatalog;
 	
@@ -53,7 +54,7 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 	private Text dropOffStation;
 
-	private Text pickupStationsResponse;
+	//private Text pickupStationsResponse;
 
 	private Text dropOffStationsResponse;
 	
@@ -197,68 +198,19 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		}
 
 	}
-
-	protected class AddPickupStationsListener extends AbstractListener{
-		private final Composite parent;
 	
-		public AddPickupStationsListener(Composite parent) {
-			this.parent = parent;
-		}
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			pickupStationsResponse.setText("running....");
-				
-			SelectPickupStationDialog mpd = new SelectPickupStationDialog(parent.getShell(), offerId.toString());
-			if (mpd.open() == Dialog.OK) {
-				Station st = mpd.getSelectedStation();
-				if ( st != null)
-					pickupStationsResponse.setText(st.getId()+ " "+st.getIdentifier());
-			}
-		}
-	}
-	
-	protected class AddDrooffStationsListener extends AbstractListener{
-		private final Composite parent;
-	
-		public AddDrooffStationsListener(Composite parent) {
-			this.parent = parent;
-		}
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			dropOffStationsResponse.setText("running....");
-				
-			SelectDropoffStationDialog mpd = new SelectDropoffStationDialog(parent.getShell(), offerId.toString());
-			if (mpd.open() == Dialog.OK) {
-				Station st = mpd.getSelectedStation();
-				if ( st != null)
-					dropOffStationsResponse.setText(st.getId()+ " "+st.getIdentifier());
-			}
-		}
-
-	}
 	
 	
 	private Composite createRequestButtons(final Composite parent) {
 		
 		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(6).equalWidth(false).applyTo(composite);
-
-		final Button buttonGetPickupStations = new Button(composite, SWT.PUSH | SWT.LEFT);
-		buttonGetPickupStations.setText("Get PickupStations");
-		buttonGetPickupStations.addSelectionListener(new AddPickupStationsListener(parent));
-				
-		pickupStationsResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(pickupStationsResponse);
+		GridLayoutFactory.fillDefaults().numColumns(4).equalWidth(false).applyTo(composite);
 		
-
-		final Button buttonGetDropOffStations = new Button(composite, SWT.PUSH | SWT.LEFT);
-		buttonGetDropOffStations.setText("Get DropoffStations");
-		buttonGetDropOffStations.addSelectionListener(new AddDrooffStationsListener(parent));
-
-		dropOffStationsResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(dropOffStationsResponse);
+		GetPickupStationControl getPickupStationControl = new GetPickupStationControl();
+		getPickupStationControl.create(composite);
+		
+		GetDropoffStationControl getDropoffStationControl = new GetDropoffStationControl();
+		getDropoffStationControl.create(composite);
 		
 		final Button buttonRecalculate = new Button(composite, SWT.PUSH | SWT.LEFT);
 		buttonRecalculate.setText("POST Recalculate");
@@ -305,6 +257,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		
 
 		this.selectedOffer = offer;
+		
+		SunnyModelProvider.INSTANCE.updateOffer(offer);
 
 		// vehicleResult.getSupplierId();
 		// vehicleResult.getPickUpStationId();

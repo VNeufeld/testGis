@@ -1,47 +1,44 @@
 package com.dev.gis.app.taskmanager.SunnyCarsView;
 
+import java.util.List;
+
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.dev.gis.connector.api.JoiHttpServiceFactory;
-import com.dev.gis.connector.api.SunnyModelProvider;
-import com.dev.gis.connector.api.VehicleHttpService;
-import com.dev.gis.connector.sunny.Hit;
-import com.dev.gis.connector.sunny.Station;
-import com.dev.gis.connector.sunny.StationResponse;
+import com.dev.gis.app.model.IStationService;
+import com.dev.gis.app.model.StationModel;
+import com.dev.gis.app.view.dialogs.StationListTable;
+import com.dev.gis.app.view.elements.ButtonControl;
 
 public class SelectPickupStationDialog extends Dialog {
 
-	private TableViewer tableStations;
 	private final String offerId;
 	
-	private Station selectedStation;
+	private StationModel selectedStation;
+	
+	private StationListTable stationListTable;
+	
+	private final IStationService stationService;
 
 
-	protected SelectPickupStationDialog(Shell parentShell, String offerId) {
+	public SelectPickupStationDialog(Shell parentShell, String offerId,IStationService stationService ) {
 		super(parentShell);
+		this.stationService = stationService;
 		this.offerId = offerId;
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
 		
@@ -76,9 +73,9 @@ public class SelectPickupStationDialog extends Dialog {
 				.grab(false, false).span(1, 1).hint(100, 16).applyTo(location);
 		
 		
-		final Button buttonGetPickup = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
-		buttonGetPickup.setText("Start getickupStations");
-		buttonGetPickup.addSelectionListener(new PickupStationsServiceListener(parent, c, location));
+		PickupStationsServiceListener pp = new PickupStationsServiceListener( c, location,this.offerId, stationService);
+		
+		new ButtonControl(groupStamp, "Start getickupStations", pp);
 
 		final Group groupStations = new Group(composite, SWT.TITLE);
 		groupStations.setText("Stations:");
@@ -86,116 +83,13 @@ public class SelectPickupStationDialog extends Dialog {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, true).applyTo(groupStations);
 		
-		createTableStaions(groupStations);
+		DoubleClickListener dbl = new DoubleClickListener(this);
+		stationListTable = new StationListTable(null, groupStations, dbl);
 		
 		return composite;
 	}
 	
-	private void createTableStaions(Composite parent) {
-		tableStations = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL // | SWT.CHECK
-				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-		createColumns(parent, tableStations);
-		final Table table = tableStations.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
-		tableStations.setContentProvider(new ArrayContentProvider());
-		
-
-		// define layout for the viewer
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 1;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
-		tableStations.getControl().setLayoutData(gridData);
-		
-		tableStations.addDoubleClickListener(new DoubleClickListener(this));
-
-		
-	}
 	
-	private void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Name", "Id", "Class" };
-		int[] bounds = { 200, 100, 100 };
-
-		// first column is for the first name
-		TableViewerColumn col = createTableViewerColumn(viewer,titles[0], bounds[0], 0);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Station o = (Station) element;
-				return o.getIdentifier() ;
-			}
-		});
-
-		// second column is supplierId
-		col = createTableViewerColumn(viewer,titles[1], bounds[1], 1);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Station o = (Station) element;
-				return ""+o.getId();
-			}
-		});
-
-		col = createTableViewerColumn(viewer,titles[2], bounds[2], 2);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Station o = (Station) element;
-				return o.getSupplierId() + ":"+ o.getSupplierGroupId();
-			}
-		});
-		
-	}
-	private TableViewerColumn createTableViewerColumn(TableViewer table, String title, int bound,
-			final int colNumber) {
-		final TableViewerColumn viewerColumn = new TableViewerColumn(
-				table, SWT.NONE);
-		final TableColumn column = viewerColumn.getColumn();
-		column.setText(title);
-		column.setWidth(bound);
-		column.setResizable(true);
-		column.setMoveable(true);
-		return viewerColumn;
-	}
-	
-	protected class PickupStationsServiceListener implements SelectionListener{
-		private final Composite parent;
-		private final Combo type;
-		private final Text location;
-	
-		public PickupStationsServiceListener(Composite parent, Combo c, Text location) {
-			this.parent = parent;
-			this.type = c;
-			this.location = location;
-		}
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			
-			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			VehicleHttpService service = serviceFactory
-					.getVehicleJoiService();
-
-			StationResponse response = service.getPickupStations(type.getSelectionIndex(),location.getText(), offerId);
-			
-			SunnyModelProvider.INSTANCE.updatePickupStations(response);
-			tableStations.setInput(SunnyModelProvider.INSTANCE.getPickupStations());
-			tableStations.refresh();
-			
-			
-		}
-
-		@Override
-		public void widgetDefaultSelected(SelectionEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-	}
 	@Override
 	protected void okPressed() {
 		super.okPressed();
@@ -203,10 +97,9 @@ public class SelectPickupStationDialog extends Dialog {
 
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		//super.createButtonsForButtonBar(parent);
 	}
 	
-	void closeDialog(Station st) {
+	void closeDialog(StationModel st) {
 		this.selectedStation = st;
 		okPressed();
 	}
@@ -216,7 +109,6 @@ public class SelectPickupStationDialog extends Dialog {
 
 		public DoubleClickListener(
 				SelectPickupStationDialog selectPickupStationDialog) {
-			// TODO Auto-generated constructor stub
 			parent = selectPickupStationDialog;
 		}
 
@@ -227,24 +119,48 @@ public class SelectPickupStationDialog extends Dialog {
 			IStructuredSelection thisSelection = (IStructuredSelection) event
 					.getSelection();
 			Object selectedNode = thisSelection.getFirstElement();
-			
-			Station st = (Station) selectedNode;
-			
-			System.out.println("selectedNode " + st);
-			
+			StationModel st = (StationModel) selectedNode;
 			parent.closeDialog(st);
 
-
-	        
-
 		}
-
-
 	}
-	public Station getSelectedStation() {
+	public StationModel getSelectedStation() {
 		return selectedStation;
 	}
 	
 
+	protected class PickupStationsServiceListener implements SelectionListener{
+		private Combo c;
+		private String offerId;
+		private Text location;
+		private IStationService stationService;
+		
+	
+		public PickupStationsServiceListener(Combo c,  Text location, String offerId, IStationService stationService) {
+			this.c = c;
+			this.location = location;
+			this.offerId = offerId;
+			this.stationService = stationService;
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			int type = c.getSelectionIndex();
+			String search = location.getText();
+			
+			List<StationModel> stations = stationService.executeService(type, search, offerId);
+			
+			stationListTable.update(stations);
+			
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent arg0) {
+			
+		}
+
+
+	}
 
 }
