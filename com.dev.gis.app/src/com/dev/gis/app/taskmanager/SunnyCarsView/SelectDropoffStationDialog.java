@@ -40,7 +40,7 @@ public class SelectDropoffStationDialog extends Dialog {
 	private Station selectedStation;
 
 
-	protected SelectDropoffStationDialog(Shell parentShell, String offerId) {
+	public SelectDropoffStationDialog(Shell parentShell, String offerId) {
 		super(parentShell);
 		this.offerId = offerId;
 	    setShellStyle(getShellStyle() | SWT.RESIZE);

@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 public class ButtonControl extends BasicControl {
-	private final int size; 
+	private int size; 
 	
 	private Button button;
 
@@ -17,6 +17,17 @@ public class ButtonControl extends BasicControl {
 		super();
 		this.parent = parent;
 		this.size = size;
+		
+		button = new Button(parent, SWT.PUSH | SWT.LEFT);
+		button.setText(name);
+		if ( selectionListener != null)
+			button.addSelectionListener(selectionListener);
+	}
+
+	public ButtonControl(Composite parent, String name, SelectionListener selectionListener) {
+		
+		super();
+		this.parent = parent;
 		
 		button = new Button(parent, SWT.PUSH | SWT.LEFT);
 		button.setText(name);
