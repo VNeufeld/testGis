@@ -16,6 +16,8 @@ public class Response extends BasicProtocol {
 
 	private Long requestId;
 
+	private String sessionId;
+	
 	private List<Error> errors ;
 	
 	public List<Error> getErrors() {
@@ -45,5 +47,13 @@ public class Response extends BasicProtocol {
 	@Override
 	public String toString() {
 		return "Response [link=" + link + ", requestId=" + requestId + ", errors=" + errors + "]";
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
 	}
 }

@@ -2,7 +2,9 @@ package com.dev.gis.connector.sunny;
 
 import java.net.URI;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Vehicle extends Response {
 	
 	private long id;
