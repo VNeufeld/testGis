@@ -259,7 +259,7 @@ public class AdacVehicleHttpService {
 	}
 	
 
-	public PaypalSetCheckoutResponse getPaypalUrl(Offer offer, String bookingRequestId) {
+	public PaypalSetCheckoutResponse getPaypalUrl(String bookingRequestId) {
 
 		try {
 			String link = "/booking/"+bookingRequestId+"/payPaypal";
@@ -282,7 +282,7 @@ public class AdacVehicleHttpService {
 	}
 
 
-	public PaypalDoCheckoutResponse getPaypalResult(Offer offer, String bookingRequestId, String token) {
+	public PaypalDoCheckoutResponse getPaypalResult(String bookingRequestId, String token) {
 
 		//joi/booking/${varBookingCacheId}/getPaypalResult?payerID=${varPayerId}&token=${varToken}
 		try {
@@ -494,14 +494,14 @@ public class AdacVehicleHttpService {
 		return null;
 	}
 	
-	public URI getPypageUrl() {
+	public URI getBSPayPageUrl(String bookingRequestId ) {
 		try {
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( !dummy) {
 				
-				
-				URI uri = getServerURI(SUNNY_PAYPAMENT_PAYPAGE);
-				
+				String link = "/booking/"+bookingRequestId+"/payCreditCard";
+				URI uri = getServerURI(link);
+
 				logger.info("VehicleHttpService = "+uri.toString());
 				
 				String response = httpClient.sendGetRequest(uri);

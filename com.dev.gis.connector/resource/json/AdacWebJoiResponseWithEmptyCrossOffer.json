@@ -144,7 +144,7 @@
 			"countryCode": "DE"
 		},
 		"dropOffLocation": {
-			"stationId": 171746
+			"stationId": 171748
 		},
 		"vehicle": {
 			"aircondition": true,
@@ -234,6 +234,11 @@
 				"code": "SO"
 			}],
 			"offeredPayment": "PREPAID",
+			"oneWayFee": {
+				"currency": "EUR",
+				"amount": "51,12"
+			},
+            "oneWayInclusive": true,
 			"member": true,
 			"noMember": false,
 			"hsgwOfferId": "",

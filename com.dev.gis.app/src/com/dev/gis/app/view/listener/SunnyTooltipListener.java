@@ -64,6 +64,10 @@ public class SunnyTooltipListener extends TooltipListener {
 		sb.append("\n");
 		sb.append("Acriss: "+vd.getACRISS());
 		sb.append("\n");
+		sb.append("Category: "+offer.getCarCategoryId());
+		sb.append("\n");
+		sb.append("Doors: "+vd.getNrDoors()+ " Seats :"+vd.getNrSeats());
+		sb.append("\n");
 		return sb.toString();
 	}
 

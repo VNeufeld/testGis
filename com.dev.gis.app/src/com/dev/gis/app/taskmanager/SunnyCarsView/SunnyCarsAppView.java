@@ -37,7 +37,7 @@ public class SunnyCarsAppView extends RentCarsAppView {
 	
 	private OutputTextControls countVehicles = null;
 
-	//private OutputTextControls sessionId = null;
+	private OutputTextControls sessionId = null;
 
 	private OutputTextControls requestId = null;
 
@@ -81,15 +81,18 @@ public class SunnyCarsAppView extends RentCarsAppView {
 
 	@Override
 	protected void createResultFields(Group groupResult) {
-		
 
-		Composite cc = createComposite(groupResult, 4, -1, false);
+		Composite cc = createComposite(groupResult, 7, -1, true);
 
 		requestId = new OutputTextControls(cc, "Request ID", 150, 1 );
 
 		countVehicles = new OutputTextControls(cc, "Count of Vehicles", 100,1 );
 		
-		//sessionId = new OutputTextControls(cc, "Session ID", 300 );
+		//Composite sessionLoging = createComposite(groupResult, 4, 2, false);
+		
+		sessionId = new OutputTextControls(cc, "Session ID", -1, 1 );
+		
+		ButtonControl bc = new ButtonControl(cc, "Show Log", null);
 		
 		offerId = new OutputTextControls(groupResult, "OfferId", 300 );
 		
@@ -110,12 +113,15 @@ public class SunnyCarsAppView extends RentCarsAppView {
 		
 		//pageInfo.setText(response.getPageInfo());
 
-		// sessionId.setText(String.valueOf(response.getRequestId()));
+		if ( response.getSessionId() != null )
+			sessionId.setValue(response.getSessionId());
 
 		requestId.setValue(String.valueOf(response.getRequestId()));
 		
 		countVehicles.setValue(String.valueOf(response.getSummary().getTotalQuantityOffers()));
-
+		
+		offerId.setValue("");
+		
 		//setSummary(response.getSummary());
 
 		//contact.setText(" get Contact from response");

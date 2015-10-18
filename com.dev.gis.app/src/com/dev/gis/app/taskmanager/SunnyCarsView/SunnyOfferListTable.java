@@ -75,7 +75,11 @@ public class SunnyOfferListTable extends AbstractListTable {
 			@Override
 			public String getText(Object element) {
 				SunnyOfferDo o = (SunnyOfferDo) element;
-				return String.valueOf(o.getPickUpStationId());
+				String value = String.valueOf(o.getPickUpStationId());
+				if ( o.getDropOffStationId() != o.getPickUpStationId()) {
+					value = value + " / " + String.valueOf(o.getDropOffStationId());
+				}
+				return value;
 			}
 		});
 

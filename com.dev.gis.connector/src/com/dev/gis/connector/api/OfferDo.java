@@ -4,35 +4,48 @@ import java.util.UUID;
 
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.dev.gis.connector.joi.protocol.Inclusive;
+import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 
-public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
+public class OfferDo extends  Offer {
 	private VehicleResult  model;
 	private String         inclusiveKm = "";
 	private String         group = "";
 	private String         prepaid = "prepaid";
+	private MoneyAmount    price;
+	
+	private Offer   offer;
+
+	private long pickUpStationId;
+	private long dropOffStationId;
+	private String name;
 	
 	private TravelInformation travelInformation;
 
 	public OfferDo ( VehicleResult vr) {
 		model = vr;
 		this.setName( vr.getVehicle().getManufacturer());
+		
+		this.offer = vr.getOfferList().get(0);
+		
 		this.setBookLink(vr.getOfferList().get(0).getBookLink());
 		this.setSupplierId(vr.getOfferList().get(0).getSupplierId());
 		long stationId = -1;
 		if ( vr.getPickUpLocation() != null )
 			stationId = vr.getPickUpLocation().getStationId();
 		this.setPickUpStationId(stationId);
-		String preis = "";
+		if ( vr.getDropOffLocation() != null)
+			this.setDropOffStationId(vr.getDropOffLocation().getStationId());
+		
 		if ( vr.getOfferList().get(0).getPrice() != null)
-			preis = vr.getOfferList().get(0).getPrice().getAmount();
-		this.setPrice(new MoneyAmount(preis, "EUR"));
+			this.setPrice(vr.getOfferList().get(0).getPrice());
 
 		UUID id = new UUID(0l, 0l);
 		if ( vr.getOfferList().get(0).getId() != null)
 			id = vr.getOfferList().get(0).getId();
 		this.setId(id);
+		
 
 		
 		if ( "2".equals(vr.getOfferList().get(0).getOfferedPayment()))
@@ -81,4 +94,35 @@ public class OfferDo extends  com.bpcs.mdcars.protocol.Offer {
 	public void setTravelInformation(TravelInformation travelInformation) {
 		this.travelInformation = travelInformation;
 	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public long getPickUpStationId() {
+		return pickUpStationId;
+	}
+
+	public void setPickUpStationId(long pickUpStationId) {
+		this.pickUpStationId = pickUpStationId;
+	}
+
+	public long getDropOffStationId() {
+		return dropOffStationId;
+	}
+
+	public void setDropOffStationId(long dropOffStationId) {
+		this.dropOffStationId = dropOffStationId;
+	}
+
+	public Offer getOffer() {
+		return offer;
+	}
+
 }

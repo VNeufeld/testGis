@@ -34,6 +34,7 @@ public class SunnyOfferDo extends  Offer {
 		this.setSupplierId(offer.getSupplierId());
 		long stationId = offer.getPickUpStationId();
 		this.setPickUpStationId(stationId);
+		this.setDropOffStationId(offer.getDropOffStationId());
 		this.setPrice(offer.getPrice());
 		this.setInclusives(offer.getInclusives());
 		
@@ -44,6 +45,8 @@ public class SunnyOfferDo extends  Offer {
 		
 		this.setServiceCatalogCode(offer.getServiceCatalogCode());
 		this.setServiceCatalogId(offer.getServiceCatalogId());
+
+		this.setCarCategoryId(offer.getCarCategoryId());
 		
 		if ( offer.getInclusives() != null) {
 			for ( Inclusive incl : offer.getInclusives()) {

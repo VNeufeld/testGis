@@ -2,30 +2,20 @@ package com.dev.gis.app.view.elements;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
-import com.dev.gis.app.view.listener.SearchCitySelectionListener;
-import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyOfferDo;
-import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.sunny.Extra;
 
 public class OfferInfoControl extends EditPartControl {
 	private static Logger logger = Logger.getLogger(OfferInfoControl.class);
 	
-	private OutputTextControls bookingLink;
-	private OutputTextControls carPrice;
-	private OutputTextControls selectedExtras;
-	private OutputTextControls bookingCar;
+	protected OutputTextControls bookingLink;
+	protected OutputTextControls carPrice;
+	protected OutputTextControls selectedExtras;
+	protected OutputTextControls bookingCar;
 
 	public static OfferInfoControl createOfferInfoControl(Composite parent) {
 		OfferInfoControl bc = new OfferInfoControl(parent);
@@ -33,8 +23,8 @@ public class OfferInfoControl extends EditPartControl {
 		return bc;
 		
 	}
-
-	private OfferInfoControl(Composite parent) {
+	
+	protected OfferInfoControl(Composite parent) {
 		super(parent);
 	}
 

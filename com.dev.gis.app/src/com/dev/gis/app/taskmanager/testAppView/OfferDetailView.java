@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Group;
 import com.dev.gis.app.taskmanager.rentcars.RentCarOfferDetailBasicView;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
+import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.OfferDo;
@@ -60,6 +61,8 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 	public void showOffer(OfferDo offerDo) {
 		
 		VehicleResult vehicleResult = offerDo.getModel();
+		
+		AdacModelProvider.INSTANCE.setSelectedOffer(offerDo);
 		
 		if ( vehicleResult == null )
 			return;
@@ -192,7 +195,7 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			List<Extra> extras = extraListTable.getSelectedExtras();
-			BookingView.updateView(selectedOffer, extras);
+			BookingView.updateView(extras);
 
 		}
 

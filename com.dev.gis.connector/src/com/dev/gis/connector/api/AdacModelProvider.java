@@ -19,8 +19,13 @@ public enum AdacModelProvider {
 	
 	private VehicleResponse vehicleResponse;
 
+	private OfferDo selectedOffer;
 
 	private List<Extra> extras = new ArrayList<Extra>();
+	
+	private final List<Extra> selectedExtras = new ArrayList<Extra>();
+	
+	private String bookingRequestId;
 	
 	public String agencyNo;
 
@@ -114,6 +119,31 @@ public enum AdacModelProvider {
 
 	public VehicleResponse getVehicleResponse() {
 		return vehicleResponse;
+	}
+
+
+	public OfferDo getSelectedOffer() {
+		return selectedOffer;
+	}
+
+
+	public void setSelectedOffer(OfferDo selectedOffer) {
+		this.selectedOffer = selectedOffer;
+	}
+
+
+	public List<Extra> getSelectedExtras() {
+		return selectedExtras;
+	}
+
+
+	public String getBookingRequestId() {
+		return bookingRequestId;
+	}
+
+
+	public void setBookingRequestId(String bookingRequestId) {
+		this.bookingRequestId = bookingRequestId;
 	}
 
 	

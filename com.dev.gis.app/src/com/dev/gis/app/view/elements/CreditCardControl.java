@@ -22,10 +22,10 @@ import com.dev.gis.connector.sunny.VerifyCreditCardPaymentResponse;
 public class CreditCardControl extends EditPartControl {
 	private static Logger logger = Logger.getLogger(CreditCardControl.class);
 	
-	private OutputTextControls errorText;
-	private OutputTextControls bsUrl = null;
-	private OutputTextControls bsToken = null;
-	private OutputTextControls bsCrediCard = null;
+	protected OutputTextControls errorText;
+	protected OutputTextControls bsUrl = null;
+	protected OutputTextControls bsToken = null;
+	protected OutputTextControls bsCrediCard = null;
 
 	public static CreditCardControl createControl(Composite parent) {
 		CreditCardControl bc = new CreditCardControl(parent);
@@ -54,16 +54,17 @@ public class CreditCardControl extends EditPartControl {
 
 	@Override
 	protected void createButtons(Group groupStamp) {
-
-		new ButtonControl(groupStamp, "CreditCard Payment With B&S", 0,  getCreditCardListener(getShell()));
+		Composite  cp = createComposite(groupStamp, 1, -1, true);
+		
+		new ButtonControl(cp, "CreditCard Payment With B&S", 0,  getCreditCardListener(getShell()));
 		
 	}
 
-	private SelectionListener getCreditCardListener(Shell shell) {
+	protected SelectionListener getCreditCardListener(Shell shell) {
 		return new AddBsPaymentListener(shell);
 	}
 
-	private void showErrors(com.dev.gis.connector.sunny.Error error) {
+	protected void showErrors(com.dev.gis.connector.sunny.Error error) {
 		
 		String message = "";
 		message = message + error.getErrorNumber()+ "  "+ error.getErrorText() + " " + error.getErrorType() + " ;";

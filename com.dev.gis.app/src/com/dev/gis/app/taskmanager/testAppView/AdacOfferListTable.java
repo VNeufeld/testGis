@@ -13,6 +13,7 @@ import com.dev.gis.app.view.elements.AbstractListTable;
 import com.dev.gis.app.view.listener.adac.AdacTooltipListener;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.OfferDo;
+import com.dev.gis.connector.joi.protocol.Offer;
 
 public class AdacOfferListTable extends AbstractListTable {
 	
@@ -25,8 +26,8 @@ public class AdacOfferListTable extends AbstractListTable {
 
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-	    String[] titles = { "Name", "Group", "Supplier", "Station", "Service Catalog",  "Price", "Incl. km.", "Prepaid" };
-	    int[] bounds = { 200, 150, 100, 100, 100,  200, 100, 100 };
+	    String[] titles = { "Name", "Group", "Supplier", "Station", "Service Catalog",  "Price", "Incl. km.", "Prepaid", "OneWay Fee", };
+	    int[] bounds = { 200, 150, 100, 100, 100,  200, 100, 100, 200 };
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -63,7 +64,11 @@ public class AdacOfferListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	OfferDo o = (OfferDo) element;
-			return String.valueOf(o.getPickUpStationId());
+			String value = String.valueOf(o.getPickUpStationId());
+			if ( o.getDropOffStationId() != o.getPickUpStationId()) {
+				value = value + " / " + String.valueOf(o.getDropOffStationId());
+			}
+			return value;
 	      }
 	    });
 
@@ -103,6 +108,27 @@ public class AdacOfferListTable extends AbstractListTable {
 	      public String getText(Object element) {
 	    	OfferDo o = (OfferDo) element;
 	    	return  o.getPrepaid();
+	    	
+	      }
+	    });
+
+	    col = createTableViewerColumn(titles[8], bounds[8], 8);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	OfferDo o = (OfferDo) element;
+			String oneWay = "";
+			Offer offer = o.getOffer();
+					
+			if (offer.getOneWayFee() != null) {
+				oneWay = offer.getOneWayFee().getAmount();
+				oneWay = oneWay + " " + offer.getOneWayFee().getCurrency();
+				if ( offer.isOneWayInclusive() ) 
+					oneWay = oneWay + " ( Included ) ";
+				else
+					oneWay = oneWay + " ( Not Included ) ";
+			}
+	    	return  oneWay;
 	    	
 	      }
 	    });
