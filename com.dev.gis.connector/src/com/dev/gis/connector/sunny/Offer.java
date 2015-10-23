@@ -44,6 +44,8 @@ public class Offer extends Response {
 	
 	private Boolean oneWayFeeIncluded;
 
+	private Boolean oneWayTaxIncluded;
+
 	private MoneyAmount outOfHourPrice;
 	
 	private MoneyAmount excessPrice;
@@ -388,6 +390,14 @@ public class Offer extends Response {
 
 	public void setOneWayFeeIncluded(Boolean oneWayFeeIncluded) {
 		this.oneWayFeeIncluded = oneWayFeeIncluded;
+	}
+
+	public Boolean getOneWayTaxIncluded() {
+		return oneWayTaxIncluded;
+	}
+
+	public void setOneWayTaxIncluded(Boolean oneWayTaxIncluded) {
+		this.oneWayTaxIncluded = oneWayTaxIncluded;
 	}
 	
 }

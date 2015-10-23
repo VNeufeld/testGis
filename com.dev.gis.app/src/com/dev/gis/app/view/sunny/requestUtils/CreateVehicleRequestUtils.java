@@ -110,8 +110,9 @@ public class CreateVehicleRequestUtils {
 			for ( String part : parts) {
 				if(pickupStationId == null )
 					pickupStationId =Long.parseLong(part);
-				if(dropofStationId == null )
-					dropofStationId =Long.parseLong(part);
+				else
+					if(dropofStationId == null )
+						dropofStationId =Long.parseLong(part);
 			}
 			if ( dropofStationId == null)
 				dropofStationId = pickupStationId;

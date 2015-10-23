@@ -66,6 +66,8 @@ public class SunnyOfferDo extends  Offer {
 		this.setOneWayFee(offer.getOneWayFee());
 
 		this.setOneWayFeeIncluded(offer.getOneWayFeeIncluded());
+
+		this.setOneWayTaxIncluded(offer.getOneWayTaxIncluded());
 		
 	}
 

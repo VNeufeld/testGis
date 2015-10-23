@@ -144,6 +144,12 @@ public class SunnyOfferListTable extends AbstractListTable {
 						else
 							oneWay = oneWay + " ( Not Included ) ";
 					}
+					if ( o.getOneWayTaxIncluded() != null ) {
+						if ( o.getOneWayTaxIncluded().booleanValue() == true)
+							oneWay = oneWay + " with Tax ";
+						else
+							oneWay = oneWay + " without Tax ";
+					}
 				}
 				return oneWay;
 			}
