@@ -57,6 +57,8 @@ public class CreditCardControl extends EditPartControl {
 		Composite  cp = createComposite(groupStamp, 1, -1, true);
 		
 		new ButtonControl(cp, "CreditCard Payment With B&S", 0,  getCreditCardListener(getShell()));
+
+		new ButtonControl(cp, "CreditCard GetData", 0,  getResultListener(getShell()));
 		
 	}
 
@@ -64,6 +66,10 @@ public class CreditCardControl extends EditPartControl {
 		return new AddBsPaymentListener(shell);
 	}
 
+	protected SelectionListener getResultListener(Shell shell) {
+		return new AddBSGetResultListener();
+	}
+	
 	protected void showErrors(com.dev.gis.connector.sunny.Error error) {
 		
 		String message = "";
@@ -98,6 +104,7 @@ public class CreditCardControl extends EditPartControl {
 					
 					BSCreditCardDialog mpd = new BSCreditCardDialog(shell, bsuri);
 					if (mpd.open() == Dialog.OK) {
+						Thread.sleep(2000);
 						VerifyCreditCardPaymentResponse response = service.getPayPageResult();
 						if ( response != null && response.getCard() != null) {
 							CreditCard cc = response.getCard();
@@ -127,16 +134,9 @@ public class CreditCardControl extends EditPartControl {
 
 	}
 
-	@Deprecated
 	private class AddBSGetResultListener extends AbstractListener {
 		
-		private final  Text bsToken;
-		private final  Text bsError;
-
-		public AddBSGetResultListener(Text bsToken, Text bsError) {
-			this.bsToken = bsToken;
-			this.bsError = bsError;
-		}
+	
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
@@ -151,10 +151,11 @@ public class CreditCardControl extends EditPartControl {
 			if ( response != null && response.getCard() != null) {
 				CreditCard cc = response.getCard();
 				String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
-				bsToken.setText(token);
+				bsToken.setValue(token);
 				
 				String card = cc.getCardNumber() + " "+cc.getOwnerName();
-				bsError.setText(card);
+				bsCrediCard.setValue(card);
+				
 				
 			}
 

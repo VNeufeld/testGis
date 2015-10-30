@@ -34,7 +34,7 @@ public class BSCreditCardDialog extends Dialog {
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
  	    parent.setLayout(new GridLayout(1, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(500, 300).applyTo(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(500, 600).applyTo(composite);
 
  	    text = new Text(composite, SWT.BORDER);
  	    text.setText("url :"+bsUri.toString());
