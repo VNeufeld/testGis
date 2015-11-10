@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.app.taskmanager.bookingView.BookingRequestCreator;
+import com.dev.gis.app.view.elements.BookingRequestIdControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.EditPartControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
@@ -46,7 +47,7 @@ public class AdacBookingControl extends EditPartControl {
 	@Override
 	protected void createElements(Group groupStamp) {
 		
-		bookingRequestId = new ObjectTextControl(groupStamp, -1, true);
+		bookingRequestId = new BookingRequestIdControl(groupStamp);
 		
 		bookingId = new OutputTextControls(groupStamp, "BookingId", -1,1 );
 

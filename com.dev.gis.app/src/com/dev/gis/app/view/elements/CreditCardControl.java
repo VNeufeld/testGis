@@ -17,6 +17,7 @@ import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.BookingResponse;
 import com.dev.gis.connector.sunny.CreditCard;
+import com.dev.gis.connector.sunny.PayPageResponse;
 import com.dev.gis.connector.sunny.VerifyCreditCardPaymentResponse;
 
 public class CreditCardControl extends EditPartControl {
@@ -98,25 +99,31 @@ public class CreditCardControl extends EditPartControl {
 				VehicleHttpService service = serviceFactory
 						.getVehicleJoiService();
 	
-				URI bsuri = service.getPypageUrl();
-				if ( bsuri != null) {
-					bsUrl.setValue(bsuri.toString());
-					
-					BSCreditCardDialog mpd = new BSCreditCardDialog(shell, bsuri);
-					if (mpd.open() == Dialog.OK) {
-						Thread.sleep(2000);
-						VerifyCreditCardPaymentResponse response = service.getPayPageResult();
-						if ( response != null && response.getCard() != null) {
-							CreditCard cc = response.getCard();
-							String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
-							bsToken.setValue(token);
-							
-							String card = cc.getCardNumber() + " "+cc.getOwnerName();
-							bsCrediCard.setValue(card);
-							
+				PayPageResponse payPageResponse = service.getPypageUrl();
+				if ( payPageResponse != null) {
+					if ( payPageResponse.getLink() != null) {
+						bsUrl.setValue(payPageResponse.getLink().toString());
+						bsToken.setValue(payPageResponse.getReference());
+						
+						BSCreditCardDialog mpd = new BSCreditCardDialog(shell, payPageResponse.getLink());
+						if (mpd.open() == Dialog.OK) {
+							Thread.sleep(1000);
+							VerifyCreditCardPaymentResponse response = service.getPayPageResult();
+							if ( response != null && response.getCard() != null) {
+								CreditCard cc = response.getCard();
+								String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
+								bsToken.setValue(token);
+								
+								String card = cc.getCardNumber() + " "+cc.getOwnerName();
+								bsCrediCard.setValue(card);
+								
+							}
+							else
+								showErrors(new com.dev.gis.connector.sunny.Error(1,1," Error in PayPage Verify "));
 						}
-						else
-							showErrors(new com.dev.gis.connector.sunny.Error(1,1," Error in PayPage Verify "));
+					}
+					else {
+						showErrors(new com.dev.gis.connector.sunny.Error(1,1," Error in PayPage "+ payPageResponse.getErrorText()));	
 					}
 					
 				}

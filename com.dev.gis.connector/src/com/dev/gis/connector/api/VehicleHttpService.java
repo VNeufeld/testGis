@@ -22,6 +22,7 @@ import com.dev.gis.connector.sunny.Offer;
 import com.dev.gis.connector.sunny.OfferExtras;
 import com.dev.gis.connector.sunny.OfferFilter;
 import com.dev.gis.connector.sunny.OfferInformation;
+import com.dev.gis.connector.sunny.PayPageResponse;
 import com.dev.gis.connector.sunny.Person;
 import com.dev.gis.connector.sunny.PhoneNumber;
 import com.dev.gis.connector.sunny.Station;
@@ -40,7 +41,7 @@ public class VehicleHttpService {
 	public static String SUNNY_BROWSE_REQUEST_PARAM = "/request/browse?";
 	public static String SUNNY_GET_PICKUP_STATIONS = "/request/pickupstations?";
 	public static String SUNNY_GET_DROPOFF_STATIONS = "/request/dropoffstations?";
-	public static String SUNNY_PAYPAMENT_PAYPAGE = "/payment/paypage";
+	public static String SUNNY_PAYPAMENT_PAYPAGE = "/payment/paypageurl";
 	public static String SUNNY_PAYPAMENT_VERIFY = "/payment/verify";
 	public static String SUNNY_BOOKING_DRIVER = "/booking/driver/put";
 	public static String SUNNY_PUT_EXTRAS = "/request/extras/put";
@@ -306,7 +307,7 @@ public class VehicleHttpService {
 		return null;
 	}
 	
-	public URI getPypageUrl() {
+	public PayPageResponse getPypageUrl() {
 		try {
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( !dummy) {
@@ -318,11 +319,11 @@ public class VehicleHttpService {
 				
 				String response = httpClient.sendGetRequest(uri);
 				logger.info("response : "+response);
-				return  JsonUtils.createResponseClassFromJson(response, URI.class);
+				return  JsonUtils.createResponseClassFromJson(response, PayPageResponse.class);
 			}
 			else {
-				String response = JsonUtils.createDummyResponse("DummyJoiGetOfferResponse.json");
-				return  new URI(TaskProperties.getTaskProperties().getServerProperty());
+				PayPageResponse resp = new PayPageResponse();
+				return  resp;
 			}
 			
 		} catch (IOException e) {

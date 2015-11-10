@@ -313,6 +313,7 @@ public class AdacVehicleHttpService {
 	public BookingResponse verifyOffers(BookingRequest bookingRequest, Offer selectedOffer) {
 
 		try {
+			logger.info("Verify Request URI = "+selectedOffer.getLink());
 			URI uri = getVerifyURI(selectedOffer.getLink());
 			logger.info("Verify Request URI = "+uri);
 

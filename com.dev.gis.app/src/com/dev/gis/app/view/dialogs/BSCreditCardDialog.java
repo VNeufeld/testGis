@@ -37,7 +37,7 @@ public class BSCreditCardDialog extends Dialog {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(500, 600).applyTo(composite);
 
  	    text = new Text(composite, SWT.BORDER);
- 	    text.setText("url :"+bsUri.toString());
+ 	    text.setText(bsUri.toString());
  	    text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 

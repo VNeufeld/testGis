@@ -56,4 +56,11 @@ public class Response extends BasicProtocol {
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
+	
+	public String getErrorText() {
+		if ( errors != null && errors.size() > 0) {
+			return errors.get(0).getErrorNumber() + " " + errors.get(0).getErrorText();
+		}
+		return "";
+	}
 }

@@ -29,6 +29,7 @@ public class OfferDo extends  Offer {
 		
 		this.offer = vr.getOfferList().get(0);
 		
+		this.setLink(vr.getOfferList().get(0).getLink());
 		this.setBookLink(vr.getOfferList().get(0).getBookLink());
 		this.setSupplierId(vr.getOfferList().get(0).getSupplierId());
 		long stationId = -1;
