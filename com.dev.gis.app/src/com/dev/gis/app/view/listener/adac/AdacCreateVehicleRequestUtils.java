@@ -1,6 +1,10 @@
 package com.dev.gis.app.view.listener.adac;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -13,8 +17,10 @@ import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.joi.protocol.Administration;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Location;
+import com.dev.gis.connector.joi.protocol.Station;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
+import com.dev.gis.connector.joi.protocol.VehicleRequestFilter;
 
 public class AdacCreateVehicleRequestUtils {
 	private static Logger logger = Logger.getLogger(AdacCreateVehicleRequestUtils.class);
@@ -86,6 +92,15 @@ public class AdacCreateVehicleRequestUtils {
 		request.setModule(AdacModelProvider.INSTANCE.module);
 		
 		request.setPayment(1);
+		
+		VehicleRequestFilter filter = createFilter();
+		if ( filter != null)
+			request.setFilter(filter);
+		
+		if ( !locationExist) {
+			createStationLocations(request);
+		}
+		
 
 		return request;
 
@@ -119,5 +134,105 @@ public class AdacCreateVehicleRequestUtils {
 	}
 
 
+	private static VehicleRequestFilter createFilter() {
+		VehicleRequestFilter offerFilter = new VehicleRequestFilter();
+
+		String supplierFilter  = AdacModelProvider.INSTANCE.supplierFilter;
+		String servcatFilter  = AdacModelProvider.INSTANCE.servcatFilter;
+		
+		boolean filterEnable = false;
+		
+		if ( StringUtils.isNotEmpty(supplierFilter)) {
+			String[] parts = supplierFilter.split(",");
+			Set<Long> suppliers = new HashSet<Long>();
+			for ( String part : parts) {
+				suppliers.add(Long.parseLong(part));
+			}
+			offerFilter.setSuppliers(suppliers);
+			
+			filterEnable = true;;			
+		}
+
+		if ( StringUtils.isNotEmpty(servcatFilter)) {
+			String[] parts = servcatFilter.split(",");
+			Set<Long> servcats = new HashSet<Long>();
+			for ( String part : parts) {
+				servcats.add(Long.parseLong(part));
+			}
+			offerFilter.setServiceCatalogs(servcats);
+			
+			filterEnable = true;;			
+			
+		}
+		if ( filterEnable)
+			return offerFilter;
+		else
+			return null;
+	}
+	
+	private static void createStationLocations(VehicleRequest request) {
+
+		String stationFilter  = AdacModelProvider.INSTANCE.stationFilter;
+		Long pickupStationId = null;
+		Long dropofStationId = null;
+		Long pickupSupplierId = null;
+		Long dropoffSupplierId = null;
+		if ( StringUtils.isNotEmpty(stationFilter)) {
+			String[] parts = stationFilter.split(",");
+			
+			for ( String part : parts) {
+				if(pickupStationId == null )
+					pickupStationId =Long.parseLong(part);
+				else
+					if(dropofStationId == null )
+						dropofStationId =Long.parseLong(part);
+			}
+			if ( dropofStationId == null)
+				dropofStationId = pickupStationId;
+		}
+		
+		if ( request.getFilter() != null && request.getFilter().getSuppliers() != null) {
+			Set<Long> suppliers = request.getFilter().getSuppliers();
+			Long[] lsupp = suppliers.toArray(new Long[0]);
+			
+			if (lsupp.length > 0)
+				pickupSupplierId = lsupp[0];
+			if (lsupp.length > 1)
+				dropoffSupplierId = lsupp[1];
+			if ( dropoffSupplierId == null)
+				dropoffSupplierId = pickupSupplierId;
+		}
+		
+		if (pickupStationId != null && pickupSupplierId != null) {
+			Location pickUpLocation = new Location();
+			pickUpLocation.setStationId(pickupStationId);
+			
+			Station s = new Station(pickupStationId.intValue());
+			s.setSupplierId(pickupSupplierId);
+			s.setId(pickupStationId);
+			pickUpLocation.setStation(s);
+			
+			request.getTravel().setPickUpLocation(pickUpLocation);
+		}
+		
+		if ( dropofStationId != null && dropoffSupplierId != null) {
+			
+			
+			Location dropOffLocation = new Location();
+			dropOffLocation.setStationId(dropofStationId);
+	
+			Station s = new Station(dropofStationId.intValue());
+			s.setId(dropofStationId);
+			s.setSupplierId(dropoffSupplierId);
+			dropOffLocation.setStation(s);
+			
+			request.getTravel().setDropOffLocation(dropOffLocation);
+			
+		}
+		
+		
+		
+		
+	}
 
 }

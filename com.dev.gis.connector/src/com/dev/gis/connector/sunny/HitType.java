@@ -36,10 +36,18 @@ public enum HitType {
 
 	public static HitType parseString(String s) {
 		try {
+			
+			if ( "CITY".equalsIgnoreCase(s))
+				return HitType.CITY;
+			else if ("AIRPORT".equalsIgnoreCase(s))
+				return HitType.AIRPORT;
+			else if ("COUNTRY".equalsIgnoreCase(s))
+				return HitType.COUNTRY;
+			
 			int i = Integer.parseInt(s);
 			return parseInt(i);
 		} catch (Exception e) {
-			throw new BadValueException("could not interprete value as int" + s);
+			throw new BadValueException("could not interprete value as int " + s);
 		}
 	}
 
