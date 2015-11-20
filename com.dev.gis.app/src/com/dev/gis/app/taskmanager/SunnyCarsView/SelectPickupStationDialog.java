@@ -24,6 +24,7 @@ import com.dev.gis.app.model.IStationService;
 import com.dev.gis.app.model.StationModel;
 import com.dev.gis.app.view.dialogs.StationListTable;
 import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.connector.api.SunnyModelProvider;
 
 public class SelectPickupStationDialog extends Dialog {
 
@@ -68,7 +69,19 @@ public class SelectPickupStationDialog extends Dialog {
 		new Label(groupStamp, SWT.NONE).setText("Location ");
 		
 		final Text location = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		
 		location.setText("PMI");
+		
+		if ( SunnyModelProvider.INSTANCE.cityId > 0) {
+			location.setText(String.valueOf(SunnyModelProvider.INSTANCE.cityId));
+			c.select(1);
+		}
+		else {
+			location.setText(SunnyModelProvider.INSTANCE.airport);
+			c.select(0);
+		}
+		
+		
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
 				.grab(false, false).span(1, 1).hint(100, 16).applyTo(location);
 		

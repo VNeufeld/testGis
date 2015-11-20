@@ -46,5 +46,9 @@ public class GetDropoffStationControl extends BasicControl{
 		}
 
 	}
+
+	public OutputTextControls getDoTextControls() {
+		return doTextControls;
+	}
 	
 }

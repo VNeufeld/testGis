@@ -211,4 +211,15 @@ public class VehicleResponse extends Response {
 		this.pageCount = pageCount;
 	}
 
+	public Offer findOfferForVehicle(String acriss) {
+		List<Offer> offers = getAllOffers();
+		for ( Offer offer :  offers ) {
+			for ( Vehicle v : vehicles ) {
+				if ( v.getACRISS().equals(acriss) && offer.getVehicleId() == v.getId())
+					return offer;
+			}
+		}
+		return null;
+	}
+
 }

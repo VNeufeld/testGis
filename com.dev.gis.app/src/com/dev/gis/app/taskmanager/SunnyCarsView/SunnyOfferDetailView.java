@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -20,11 +21,20 @@ import org.eclipse.swt.widgets.Text;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.view.elements.GetDropoffStationControl;
 import com.dev.gis.app.view.elements.GetPickupStationControl;
+import com.dev.gis.app.view.sunny.requestUtils.CreateVehicleRequestUtils;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.SunnyOfferDo;
+import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.Address;
 import com.dev.gis.connector.sunny.Extra;
+import com.dev.gis.connector.sunny.Location;
+import com.dev.gis.connector.sunny.Offer;
+import com.dev.gis.connector.sunny.OfferInformation;
 import com.dev.gis.connector.sunny.Station;
+import com.dev.gis.connector.sunny.TravelInformation;
+import com.dev.gis.connector.sunny.VehicleRequest;
+import com.dev.gis.connector.sunny.VehicleResponse;
 
 public class SunnyOfferDetailView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.view.SunnyOfferDetailView";
@@ -43,10 +53,6 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	private SunnyExtraListTable extrasListTable;
 
 	private SunnyOfferDo selectedOffer = null;
-	
-	private UUID offerId;
-
-	//private TravelInformation travelInformation;
 
 	private Text serviceCatalog;
 	
@@ -54,11 +60,11 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 	private Text dropOffStation;
 
-	//private Text pickupStationsResponse;
-
-	private Text dropOffStationsResponse;
-	
 	private Text recalculateResponse;
+	
+	private GetPickupStationControl pickupStationControl; 	
+	
+	private GetDropoffStationControl dropoffStationControl;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -187,17 +193,59 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			recalculateResponse.setText("running....");
-			
-//			if ( StringUtils.isNotEmpty(dropOffStationId.getText()) && StringUtils.isNumeric(dropOffStationId.getText()))
-//					travelInformation.getDropOffLocation().setStationId(Long.valueOf(dropOffStationId.getText()));
-			//travelInformation.getDropOffLocation().setStationId(167956);420222
 
-//			String response = JoiVehicleConnector.recalculate(selectedOffer, travelInformation);
-//			recalculateResponse.setText(response);
+			Long pickupStationId = null;
+			Long dropofStationId = null;
+			
+			String pu = pickupStationControl.getPuTextControls().getValue();
+			String[] pparts = pu.split(" ");
+			if ( pparts.length > 0 && StringUtils.isNotEmpty(pparts[0]))
+				pickupStationId = Long.valueOf(pparts[0]);
+
+			String drops = dropoffStationControl.getDoTextControls().getValue();
+			pparts = drops.split(" ");
+			if ( pparts.length > 0 && StringUtils.isNotEmpty(pparts[0]))
+				dropofStationId = Long.valueOf(pparts[0]);
+			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			VehicleHttpService service = serviceFactory.getVehicleJoiService();
+			
+			VehicleRequest request = CreateVehicleRequestUtils.createVehicleRequest();
+			
+			TravelInformation travel = request.getTravel();
+			
+			travel.getPickUpLocation().setCityId(null);
+			travel.getPickUpLocation().setAirport(null);
+			travel.getPickUpLocation().setStationId(pickupStationId);
+
+			travel.getDropOffLocation().setCityId(null);
+			travel.getDropOffLocation().setAirport(null);
+			travel.getDropOffLocation().setStationId(dropofStationId);
+			
+			String acriss = selectedOffer.getVehicle().getACRISS();
+			
+			VehicleResponse response = service.recalculate(selectedOffer, request);
+
+			if ( response != null) {
+				recalculateResponse.setText(response.getSessionId());
+				
+				SunnyOfferDo offer = SunnyModelProvider.INSTANCE.getOfferDO(response,acriss);
+				
+				OfferInformation offerInformation = service.selectOffer(offer.getLink());
+				if (offerInformation != null)
+					offer.addOfferInformation(offerInformation);
+				
+				showOffer(offer);
+				
+				
+			}
+			else
+				recalculateResponse.setText("Error ...");
 
 		}
 
 	}
+	
 	
 	
 	
@@ -206,11 +254,11 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(4).equalWidth(false).applyTo(composite);
 		
-		GetPickupStationControl getPickupStationControl = new GetPickupStationControl();
-		getPickupStationControl.create(composite);
+		pickupStationControl = new GetPickupStationControl();
+		pickupStationControl.create(composite);
 		
-		GetDropoffStationControl getDropoffStationControl = new GetDropoffStationControl();
-		getDropoffStationControl.create(composite);
+		dropoffStationControl = new GetDropoffStationControl();
+		dropoffStationControl.create(composite);
 		
 		final Button buttonRecalculate = new Button(composite, SWT.PUSH | SWT.LEFT);
 		buttonRecalculate.setText("POST Recalculate");
@@ -229,8 +277,6 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 
 	public void showOffer(SunnyOfferDo offer) {
-		
-		offerId = offer.getId();
 		
 		textOfferLink.setText(offer.getBookLink().toString());
 
@@ -253,8 +299,6 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		changeModelInclusives(offer);
 
 		changeModelExtras(offer);
-		
-		
 
 		this.selectedOffer = offer;
 		

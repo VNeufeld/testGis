@@ -78,7 +78,22 @@ public class SelectDropoffStationDialog extends Dialog {
 		new Label(groupStamp, SWT.NONE).setText("Location ");
 		
 		final Text location = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
-		location.setText("PMI");
+		
+		if ( SunnyModelProvider.INSTANCE.dropoffCityId > 0) {
+			location.setText(String.valueOf(SunnyModelProvider.INSTANCE.dropoffCityId));
+			c.select(1);
+		}
+		else {
+			location.setText(SunnyModelProvider.INSTANCE.dropoffAirport);
+			c.select(0);
+		}
+		
+		if ( SunnyModelProvider.INSTANCE.selectedPickupStationId > 0 )
+			puStation.setText(String.valueOf(SunnyModelProvider.INSTANCE.selectedPickupStationId)); 
+			
+		
+		
+		
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
 				.grab(false, false).span(1, 1).hint(100, 16).applyTo(location);
 		

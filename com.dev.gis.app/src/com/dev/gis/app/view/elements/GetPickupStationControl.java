@@ -13,7 +13,7 @@ import com.dev.gis.connector.api.SunnyModelProvider;
 
 public class GetPickupStationControl extends BasicControl{
 	
-	OutputTextControls puTextControls = null;
+	private OutputTextControls puTextControls = null;
 	
 	public Composite create(final Composite parent) {
 		
@@ -45,10 +45,17 @@ public class GetPickupStationControl extends BasicControl{
 			SelectPickupStationDialog mpd = new SelectPickupStationDialog(shell, offerId, stationService);
 			if (mpd.open() == Dialog.OK) {
 				StationModel st = mpd.getSelectedStation();
-				if ( st != null)
+				if ( st != null) {
 					puTextControls.setValue(st.getId()+ " "+st.getName());
+					if ( st.getId() != null)
+						SunnyModelProvider.INSTANCE.selectedPickupStationId = st.getId().longValue();
+				}
 			}
 		}
+	}
+
+	public OutputTextControls getPuTextControls() {
+		return puTextControls;
 	}
 
 	

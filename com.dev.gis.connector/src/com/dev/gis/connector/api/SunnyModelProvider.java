@@ -62,6 +62,8 @@ public enum SunnyModelProvider {
 	
 	public long cityId;
 	public long dropoffCityId;
+
+	public long selectedPickupStationId;
 	
 	public String airport;
 	public String dropoffAirport;
@@ -106,6 +108,20 @@ public enum SunnyModelProvider {
 		recommendations.addAll(createOffersDo(response.getRecommendations(), response));
 
 	}
+	
+	public SunnyOfferDo getOfferDO(VehicleResponse response, String accrissCode) {
+		Map<Long, Supplier> suppliers = createSupplierMap(response);
+		
+		Offer offer = response.findOfferForVehicle(accrissCode);
+		Vehicle vh = foundVehicle(offer.getVehicleId(),response.getVehicles());
+		Station pickupStation = findStation(offer.getPickUpStationId(),suppliers, response);
+		Station dropOffStation = findStation(offer.getDropOffStationId(),suppliers, response);
+		SunnyOfferDo offerDo = new SunnyOfferDo(offer, vh, pickupStation, dropOffStation);
+		return offerDo;
+		
+
+	}
+	
 	
 	private List<SunnyOfferDo> createOffersDo(List<Offer> results, VehicleResponse response) {
 		Map<Long, Supplier> suppliers = createSupplierMap(response);

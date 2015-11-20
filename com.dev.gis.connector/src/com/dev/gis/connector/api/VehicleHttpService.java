@@ -1,11 +1,11 @@
 package com.dev.gis.connector.api;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Text;
@@ -27,7 +27,6 @@ import com.dev.gis.connector.sunny.Person;
 import com.dev.gis.connector.sunny.PhoneNumber;
 import com.dev.gis.connector.sunny.Station;
 import com.dev.gis.connector.sunny.StationResponse;
-import com.dev.gis.connector.sunny.TravelInformation;
 import com.dev.gis.connector.sunny.VehicleRequest;
 import com.dev.gis.connector.sunny.VehicleResponse;
 import com.dev.gis.connector.sunny.VerifyCreditCardPaymentResponse;
@@ -40,6 +39,7 @@ public class VehicleHttpService {
 	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
 	public static String SUNNY_BROWSE_REQUEST_PARAM = "/request/browse?";
 	public static String SUNNY_GET_PICKUP_STATIONS = "/request/pickupstations?";
+	public static String SUNNY_RECALCULATE = "/request/recalculate?";
 	public static String SUNNY_GET_DROPOFF_STATIONS = "/request/dropoffstations?";
 	public static String SUNNY_PAYPAMENT_PAYPAGE = "/payment/paypageurl";
 	public static String SUNNY_PAYPAMENT_VERIFY = "/payment/verify";
@@ -269,27 +269,21 @@ public class VehicleHttpService {
 	
 
 
-	public static String recalculate(Offer selectedOffer, TravelInformation travelInformation) {
-		GisHttpClient httpClient = new GisHttpClient();
+	public VehicleResponse recalculate(Offer selectedOffer, VehicleRequest vehicleRequest) {
 		
 		try {
-			String link = selectedOffer.getBookLink().toString();
-			int pos = link.indexOf("/vehicleRe");
-			link = link.substring(pos);
-			pos = link.indexOf("/offer");
-			link = link.substring(0,pos);
-			link = link + "/recalculate";
-			//URI uri = new URI("https://avm-mobile.adac.de/test/vehicleRequest/1162967122/vehicle/77345424/recalculate");
-			// http://localhost:8080/joi/vehicleRequest/1127497613/vehicle/899766814/offer/fc3763ab-b892-4f60-b3f7-fbe72fe91525/recalculate
 			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
+			URI uri = getServerURI(SUNNY_RECALCULATE);
 			
+			String query = "offerId="+selectedOffer.getId().toString();
+			URIBuilder uriBuilder = new URIBuilder(uri);
+			uriBuilder.setQuery(query);
 			
+			uri = uriBuilder.build();
 			
 			logger.info("recalculate Request = "+uri);
 			
-			
-			String request = JsonUtils.convertRequestToJsonString(travelInformation);
+			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
 			logger.info("request = "+request);
 			
 			String response =  httpClient.startPostRequestAsJson(uri, request);
@@ -297,7 +291,9 @@ public class VehicleHttpService {
 			if ( response == null)
 				response = " no cars found ";
 			
-			return response;
+			if (response != null ) 
+				return JsonUtils.createResponseClassFromJson(response, VehicleResponse.class);
+			
 			
 		} catch ( IOException e) {
 			logger.error(e);
@@ -451,7 +447,17 @@ public class VehicleHttpService {
 				type = 2;   // city
 			String query = "offerId="+offerId;
 			query +="&type="+type;
-			query +="&locationId="+location;
+			if( type == 6 ) {
+				if (StringUtils.isNumeric(location)) {
+					query +="&locationId="+location;
+				}
+				else {
+					query +="&apt="+location;
+				}
+				query +="&stationLocTypesFilter=APT";
+			}
+			else
+				query +="&locationId="+location;
 			URIBuilder uriBuilder = new URIBuilder(uri);
 			uriBuilder.setQuery(query);
 			
@@ -504,7 +510,20 @@ public class VehicleHttpService {
 				type = 2;   // city
 			String query = "offerId="+offerId;
 			query +="&type="+type;
-			query +="&locationId="+location;
+			
+			if( type == 6 ) {
+				if (StringUtils.isNumeric(location)) {
+					query +="&locationId="+location;
+				}
+				else {
+					query +="&apt="+location;
+				}
+				query +="&stationLocTypesFilter=APT";
+			}
+			else
+				query +="&locationId="+location;
+			
+			
 			query +="&pickupStation="+pickupStationId;
 			
 			URIBuilder uriBuilder = new URIBuilder(uri);
