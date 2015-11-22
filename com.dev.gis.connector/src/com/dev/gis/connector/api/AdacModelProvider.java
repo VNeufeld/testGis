@@ -1,13 +1,17 @@
 package com.dev.gis.connector.api;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
+import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.Station;
+import com.dev.gis.connector.joi.protocol.Supplier;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
-import com.dev.gis.connector.sunny.OfferFilter;
 
 
 public enum AdacModelProvider {
@@ -38,8 +42,6 @@ public enum AdacModelProvider {
 	public long operatorId;
 	
 	public String serverUrl;
-
-	public OfferFilter  offerFilter;
 	
 	public boolean crossOfferFlag = false;;
 	
@@ -78,10 +80,14 @@ public enum AdacModelProvider {
 		this.vehicleResponse = response;
 		
 		List<VehicleResult> results = response.getResultList();
+		Map<Long, Supplier> suppliers = createSupplierMap(response);
+		Map<Long, Station> stations = createStationMap(response);
+		
 		for ( VehicleResult vr : results) {
 			if ( vr.getOfferList().size() > 0 ) {
 				
-				OfferDo offer = new OfferDo(vr);
+				//OfferDo offer = new OfferDo(vr);
+				OfferDo offer = createOffer(vr,suppliers, stations);
 				
 				offerDos.add(offer);
 			}
@@ -99,6 +105,40 @@ public enum AdacModelProvider {
 		}
 		
 	}
+	
+	private Map<Long, Station> createStationMap(VehicleResponse response) {
+		Map<Long, Station> stations = new HashMap<Long, Station>(); 
+		for ( Station station : response.getTexts().getStationList()) {
+			stations.put(station.getId(), station);	
+		}
+		return stations;
+	}
+
+	private Map<Long, Station> createSupplierGroupMap(VehicleResponse response) {
+		Map<Long, Station> stations = new HashMap<Long, Station>(); 
+		for ( Station station : response.getTexts().getStationList()) {
+			stations.put(station.getId(), station);	
+		}
+		return stations;
+	}
+
+	private OfferDo createOffer(VehicleResult vr, Map<Long, Supplier> suppliers, Map<Long, Station> stations) {
+		OfferDo offer = new OfferDo(vr);
+		offer.setPickupStation(stations.get(offer.getPickUpStationId()));
+		offer.setDropoffStation(stations.get(offer.getDropOffStationId()));
+		offer.setSupplier(suppliers.get(offer.getSupplierId()));
+		return offer;
+	}
+
+
+	private Map<Long, Supplier> createSupplierMap(VehicleResponse response) {
+		Map<Long, Supplier> suppliers = new HashMap<Long, Supplier>(); 
+		for ( Supplier supplier : response.getTexts().getSupplierList()) {
+			suppliers.put(supplier.getId(), supplier);	
+		}
+		return suppliers;
+	}
+
 	
 	public void clearView() {
 		offerDos.clear();

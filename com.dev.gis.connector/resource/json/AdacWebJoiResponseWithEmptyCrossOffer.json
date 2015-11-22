@@ -656,7 +656,7 @@
 			"id": 167979,
 			"link": "http://localhost:8080/web-joi/joi/masterdata/station/167979",
 			"supplierId": 158036,
-			"stationName": "N𲮢erg Flughafen (NUE)",
+			"stationName": "Nürnberg Flughafen (NUE)",
 			"supplierGroupId": 157740,
 			"stationPriority": 1,
 			"supplierPriority": null,
@@ -691,7 +691,7 @@
 			"id": 171402,
 			"link": "http://localhost:8080/web-joi/joi/masterdata/station/171402",
 			"supplierId": 158037,
-			"stationName": "N𲮢erg Flughafen (NUE)",
+			"stationName": "Nürnberg Flughafen (NUE)",
 			"supplierGroupId": 157739,
 			"stationPriority": 1,
 			"supplierPriority": null,
@@ -704,11 +704,11 @@
 			"area": 269,
 			"address": {
 				"signee": null,
-				"street": "Flughafenstraࠥ",
+				"street": "Flughafenstraße",
 				"country": null,
 				"countryId": 1,
 				"zip": "90411",
-				"city": "N𲮢erg"
+				"city": "Nürnberg"
 			},
 			"info": {
 				"providesTransfer": false,
@@ -726,7 +726,7 @@
 			"id": 171746,
 			"link": "http://localhost:8080/web-joi/joi/masterdata/station/171746",
 			"supplierId": 158039,
-			"stationName": "N𲮢erg Flughafen (NUE)",
+			"stationName": "Nürnberg Flughafen (NUE)",
 			"supplierGroupId": 157741,
 			"stationPriority": 1,
 			"supplierPriority": null,
@@ -740,11 +740,11 @@
 			"area": 269,
 			"address": {
 				"signee": null,
-				"street": "N𲮢erg Airport",
+				"street": "Nürnberg Airport",
 				"country": null,
 				"countryId": 1,
 				"zip": "90269",
-				"city": "N𲮢erg"
+				"city": "Nürnberg"
 			},
 			"info": {
 				"providesTransfer": false,

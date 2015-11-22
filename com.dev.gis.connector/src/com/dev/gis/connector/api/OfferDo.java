@@ -5,6 +5,8 @@ import java.util.UUID;
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.dev.gis.connector.joi.protocol.Inclusive;
 import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.Station;
+import com.dev.gis.connector.joi.protocol.Supplier;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 
@@ -19,6 +21,13 @@ public class OfferDo extends  Offer {
 
 	private long pickUpStationId;
 	private long dropOffStationId;
+	
+	private Station pickupStation;
+
+	private Station dropoffStation;
+	
+	private Supplier supplier;
+	
 	private String name;
 	
 	private TravelInformation travelInformation;
@@ -46,8 +55,6 @@ public class OfferDo extends  Offer {
 		if ( vr.getOfferList().get(0).getId() != null)
 			id = vr.getOfferList().get(0).getId();
 		this.setId(id);
-		
-
 		
 		if ( "2".equals(vr.getOfferList().get(0).getOfferedPayment()))
 			prepaid = " poa ";
@@ -124,6 +131,30 @@ public class OfferDo extends  Offer {
 
 	public Offer getOffer() {
 		return offer;
+	}
+
+	public Station getPickupStation() {
+		return pickupStation;
+	}
+
+	public Station getDropoffStation() {
+		return dropoffStation;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public void setPickupStation(Station pickupStation) {
+		this.pickupStation = pickupStation;
+	}
+
+	public void setDropoffStation(Station dropoffStation) {
+		this.dropoffStation = dropoffStation;
 	}
 
 }
