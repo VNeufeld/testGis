@@ -273,13 +273,13 @@ public class VehicleHttpService {
 		
 		try {
 			
-			URI uri = getServerURI(SUNNY_RECALCULATE);
 			
 			String query = "offerId="+selectedOffer.getId().toString();
-			URIBuilder uriBuilder = new URIBuilder(uri);
-			uriBuilder.setQuery(query);
 			
-			uri = uriBuilder.build();
+			
+			String requestUrl = SUNNY_RECALCULATE + query;
+
+			URI uri = getServerURI(requestUrl);
 			
 			logger.info("recalculate Request = "+uri);
 			
@@ -439,7 +439,8 @@ public class VehicleHttpService {
 	public StationResponse getPickupStations(int type, String location, String offerId) {
 		try {
 
-			URI uri = getServerURI(SUNNY_GET_PICKUP_STATIONS);
+			logger.info("VehicleHttpService getPickupStations = "+type + " offerId "+offerId+ " location "+location);
+
 			
 			if ( type == 0)
 				type = 6;  // airport
@@ -454,16 +455,18 @@ public class VehicleHttpService {
 				else {
 					query +="&apt="+location;
 				}
-				query +="&stationLocTypesFilter=APT";
+				//query +="&stationLocTypesFilter=APT";
 			}
 			else
 				query +="&locationId="+location;
-			URIBuilder uriBuilder = new URIBuilder(uri);
-			uriBuilder.setQuery(query);
+
+			logger.info("VehicleHttpService query = "+query);
 			
-			uri = uriBuilder.build();
+			String requestUrl = SUNNY_GET_PICKUP_STATIONS + query;
+
+			URI suri = getServerURI(requestUrl);
 			
-			logger.info("VehicleHttpService getPickupStations = "+uri.toString());
+			logger.info("VehicleHttpService getPickupStations = "+suri.toString());
 			
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
 			if ( dummy ) {
@@ -482,7 +485,7 @@ public class VehicleHttpService {
 			
 				String response = null;
 				
-				response =  httpClient.sendGetRequest(uri);
+				response =  httpClient.sendGetRequest(suri);
 				
 				logger.info("response = "+response);
 				
@@ -490,10 +493,8 @@ public class VehicleHttpService {
 					return JsonUtils.createResponseClassFromJson(response, StationResponse.class);
 			}
 			
-		} catch ( IOException e) {
+		} catch ( Exception e) {
 			logger.error(e.getMessage(),e);
-		} catch (URISyntaxException e) {
-			logger.error(e);
 		}
 		return null;
 	}
@@ -501,8 +502,6 @@ public class VehicleHttpService {
 	public StationResponse getDropOffStations(int type, String location, String offerId, String pickupStationId) {
 		try {
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
-			
-			URI uri = getServerURI(SUNNY_GET_DROPOFF_STATIONS);
 			
 			if ( type == 0)
 				type = 6;  // airport
@@ -518,7 +517,6 @@ public class VehicleHttpService {
 				else {
 					query +="&apt="+location;
 				}
-				query +="&stationLocTypesFilter=APT";
 			}
 			else
 				query +="&locationId="+location;
@@ -526,10 +524,9 @@ public class VehicleHttpService {
 			
 			query +="&pickupStation="+pickupStationId;
 			
-			URIBuilder uriBuilder = new URIBuilder(uri);
-			uriBuilder.setQuery(query);
-			
-			uri = uriBuilder.build();
+			String requestUrl = SUNNY_GET_DROPOFF_STATIONS + query;
+
+			URI uri = getServerURI(requestUrl);
 			
 			logger.info("VehicleHttpService getDropOffStations URI = "+uri.toString());
 			

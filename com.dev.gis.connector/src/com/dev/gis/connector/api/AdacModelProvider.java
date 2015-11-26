@@ -97,7 +97,7 @@ public enum AdacModelProvider {
 			results = response.getCrossOfferResultList();
 			for ( VehicleResult vr : results) {
 				if ( vr.getOfferList().size() > 0 ) {
-					OfferDo offer = new OfferDo(vr);
+					OfferDo offer = createOffer(vr,suppliers, stations);
 					crossOffers.add(offer);
 				}
 			}

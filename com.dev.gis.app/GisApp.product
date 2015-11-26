@@ -157,6 +157,7 @@ Copyright 2015
       <plugin id="org.eclipse.ui.win32.nl_de" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.nl_de" fragment="true"/>
+      <plugin id="org.joda.time"/>
       <plugin id="org.springframework.beans"/>
       <plugin id="org.springframework.context"/>
       <plugin id="org.springframework.core"/>

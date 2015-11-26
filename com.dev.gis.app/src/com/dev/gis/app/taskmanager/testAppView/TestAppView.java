@@ -296,9 +296,6 @@ public class TestAppView extends RentCarsAppView {
 		final Group groupRecomm = new Group(composite, SWT.TITLE);
 		groupRecomm.setText("CrossOfferList:");
 		groupRecomm.setLayout(new GridLayout(1, false));
-		
-//		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-//				.grab(true, true).applyTo(groupRecomm);
 
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).minSize(500, 300)
 		.grab(true, false).applyTo(groupRecomm);

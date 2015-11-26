@@ -26,7 +26,7 @@ public class AdacTooltipListener extends TooltipListener {
 		if ( data instanceof OfferDo) {
 			OfferDo offer = (OfferDo) data;
 			
-			if ( pos < 20)
+			if ( pos < 100)
 				return createVehicleInfo(offer);
 			if ( pos > 500 && pos < 700)
 				return createStationInfo(offer);
@@ -38,7 +38,13 @@ public class AdacTooltipListener extends TooltipListener {
 		StringBuffer sb = new StringBuffer();
 		Station station = offer.getPickupStation();
 		com.dev.gis.connector.joi.protocol.Supplier supplier = offer.getSupplier();
-		String supplierTxt = supplier.getId() + " " + supplier.getName() + "  sgr:" + station.getSupplierGroupId();
+		String supplierTxt = "";
+		if (supplier != null ) {
+			supplierTxt = supplier.getId() + " " + supplier.getName() + "  sgr:" + station.getSupplierGroupId();
+		}
+		else
+			supplierTxt = station.getSupplierId() +  "  sgr:" + station.getSupplierGroupId();
+		
 		Address address = station.getAddress();
 		
 		sb.append("Station "+station.getStationName()+ " " + station.getId());

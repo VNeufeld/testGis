@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import com.dev.gis.app.view.elements.AbstractListTable;
+import com.dev.gis.app.view.listener.adac.AdacTooltipListener;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.OfferDo;
 
@@ -164,5 +165,13 @@ public class CrossOfferListTable extends AbstractListTable {
 	    });
 
 	  }
+	
+	@Override
+	protected void addTooltipListener() {
+		AdacTooltipListener listener = new AdacTooltipListener(getParent().getShell(), getViewer().getTable());
+		
+		getViewer().getControl().addListener(SWT.MouseHover, listener.getTableListener());
+	}
+
 
 }
