@@ -91,7 +91,7 @@ public class AdacCreateVehicleRequestUtils {
 
 		request.setModule(AdacModelProvider.INSTANCE.module);
 		
-		request.setPayment(1);
+		//request.setPayment(1);
 		
 		VehicleRequestFilter filter = createFilter();
 		if ( filter != null)

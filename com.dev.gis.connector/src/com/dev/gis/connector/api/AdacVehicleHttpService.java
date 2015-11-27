@@ -112,6 +112,9 @@ public class AdacVehicleHttpService {
 				flag = 1;
 			param = param + "&crossOffer="+flag;
 			
+			if ( vehicleRequest.getFilter() != null)
+				param = param + "&remoteFilter=true";
+			
 			URI uri = getServerURI(param);
 			logger.info("get Offers URI : = "+uri.toString());
 

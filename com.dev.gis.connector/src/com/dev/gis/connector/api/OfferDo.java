@@ -56,14 +56,14 @@ public class OfferDo extends  Offer {
 			id = vr.getOfferList().get(0).getId();
 		this.setId(id);
 		
-		if ( "2".equals(vr.getOfferList().get(0).getOfferedPayment()))
+		if ( "PAY_ON_ARRIVAL".equals(vr.getOfferList().get(0).getOfferedPayment()))
 			prepaid = " poa ";
 		
 		this.setServiceCatalogCode(vr.getOfferList().get(0).getServiceCatalogCode());
 		this.setServiceCatalogId(vr.getOfferList().get(0).getServiceCatalogId());
 		
 		for ( Inclusive incl : vr.getOfferList().get(0).getInclusives()) {
-			if ( incl.getId() == 73) {
+			if ( incl.getItemClassCode().equals("KM")) {
 				inclusiveKm = incl.getDescription();
 			}
 		}
