@@ -61,8 +61,11 @@ public class AdacOfferFilterDialog extends Dialog {
 
 		if (offerFilterTemplate != null) {
 			setSummary(composite, offerFilterTemplate);
-			//setBodyStyles(composite, offerFilterTemplate);
-			setInclusives(composite, offerFilterTemplate);
+			setCarSuppliers(composite, offerFilterTemplate);
+			setStations(composite, offerFilterTemplate);
+			setServiceCatalogs(composite, offerFilterTemplate);
+			setBodyStyles(composite, offerFilterTemplate);
+			//setInclusives(composite, offerFilterTemplate);
 			setCarTypes(composite, offerFilterTemplate);
 		}
 
@@ -70,18 +73,50 @@ public class AdacOfferFilterDialog extends Dialog {
 		return composite;
 	}
 
-	private void setCarTypes(Composite composite,
+	private void setCarSuppliers(Composite composite,
 			OfferFilterTemplate offerFilterTemplate) {
-		
 		final Group groupResult = new Group(composite, SWT.TITLE);
-		groupResult.setText("Car Types:");
+		groupResult.setText("Suppliers:");
 		groupResult.setLayout(new GridLayout(5, false));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.grab(true, true).applyTo(groupResult);
 		
-		List<FilterObject>  carTypes =   offerFilterTemplate.getCarTypes();
+		List<FilterObject>  filter =   offerFilterTemplate.getSuppliers();
 		
-		for (FilterObject b : carTypes ) {
+		defineFilter(groupResult, filter);
+		
+	}
+
+	private void setServiceCatalogs(Composite composite,
+			OfferFilterTemplate offerFilterTemplate) {
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Service catalogs:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		List<FilterObject>  filter =   offerFilterTemplate.getServiceCatalogs();
+		
+		defineFilter(groupResult, filter);
+		
+	}
+
+	private void setStations(Composite composite,
+			OfferFilterTemplate offerFilterTemplate) {
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Stations:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		List<FilterObject>  filter =   offerFilterTemplate.getStations();
+		
+		defineFilter(groupResult, filter);
+		
+	}
+	
+	private void defineFilter(final Group groupResult, List<FilterObject> filter) {
+		for (FilterObject b : filter ) {
 
 			String bb = b.getName()+ "("+b.getCount()+")";
 			Label l = new Label(groupResult, SWT.NONE);
@@ -96,6 +131,20 @@ public class AdacOfferFilterDialog extends Dialog {
 			
 
 		}
+	}
+
+	private void setCarTypes(Composite composite,
+			OfferFilterTemplate offerFilterTemplate) {
+		
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Car classes:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		List<FilterObject>  carTypes =   offerFilterTemplate.getCarClasses();
+		
+		defineFilter(groupResult, carTypes);
 		
 	}
 

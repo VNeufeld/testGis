@@ -15,7 +15,7 @@ public class OfferFilterTemplate {
 
 	private List<FilterObject> bodyStyles = new ArrayList<FilterObject>();
 
-	private List<FilterObject> servcatFilter = new ArrayList<FilterObject>();
+	private List<FilterObject> serviceCatalogs = new ArrayList<FilterObject>();
 	
 	private List<ObjectValuePair> fuelTypes = new ArrayList<ObjectValuePair>();
 	
@@ -25,7 +25,7 @@ public class OfferFilterTemplate {
 	
 	private List<FilterObject> suppliers = new ArrayList<FilterObject>();
 
-	private List<FilterObject> carTypes = new ArrayList<FilterObject>();
+	private List<FilterObject> carClasses = new ArrayList<FilterObject>();
 	
 	private FilterObject automatic = new FilterObject("automatic",new Long(0));
 	private FilterObject aircondition = new FilterObject("aircondition",new Long(0));
@@ -87,9 +87,6 @@ public class OfferFilterTemplate {
 	public List<FilterObject> getStatus() {
 		return status;
 	}
-	public List<FilterObject> getServcatFilter() {
-		return servcatFilter;
-	}
 	public Map<String, List<FilterObject>> getInclusivesFilter() {
 		return inclusivesFilter;
 	}
@@ -98,9 +95,6 @@ public class OfferFilterTemplate {
 	}
 	public void setBodyStyles(List<FilterObject> bodyStyles) {
 		this.bodyStyles = bodyStyles;
-	}
-	public void setServcatFilter(List<FilterObject> servcatFilter) {
-		this.servcatFilter = servcatFilter;
 	}
 	public void setStations(List<FilterObject> stations) {
 		this.stations = stations;
@@ -117,11 +111,17 @@ public class OfferFilterTemplate {
 	public void setStatus(List<FilterObject> status) {
 		this.status = status;
 	}
-	public List<FilterObject> getCarTypes() {
-		return carTypes;
+	public List<FilterObject> getCarClasses() {
+		return carClasses;
 	}
-	public void setCarTypes(List<FilterObject> carTypes) {
-		this.carTypes = carTypes;
+	public void setCarClasses(List<FilterObject> carClasses) {
+		this.carClasses = carClasses;
+	}
+	public List<FilterObject> getServiceCatalogs() {
+		return serviceCatalogs;
+	}
+	public void setServiceCatalogs(List<FilterObject> serviceCatalogs) {
+		this.serviceCatalogs = serviceCatalogs;
 	}
 
 	

@@ -87,7 +87,7 @@ public class AdacOfferListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	OfferDo o = (OfferDo) element;
-			return o.getPrice().getAmount();
+			return o.getPrice().toString();
 	      }
 
 	    });

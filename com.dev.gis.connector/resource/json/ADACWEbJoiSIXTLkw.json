@@ -1,0 +1,4622 @@
+{
+	"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675",
+	"requestId": 224409675,
+	"sessionId": "AEEA052C270B87847343E0C6D099F0B2",
+	"errors": [{
+		"errorType": 4,
+		"errorText": "Failed to validate Response to XSD /home/www/work/ADAC_GW/schema/GetCarsResponse/GetCarsResponse.xsd",
+		"errorNumber": 10099
+	}],
+	"summary": {
+		"quantity": 36,
+		"totalQuantity": 36,
+		"minimalPrice": {
+			"currency": "EUR",
+			"amount": "383,43",
+			"decimalAmount": 383.43
+		},
+		"maximalPrice": {
+			"currency": "EUR",
+			"amount": "1.670,92",
+			"decimalAmount": 1670.92
+		}
+	},
+	"resultList": [{
+		"id": 118538255,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/118538255",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/118538255/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2500 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1650 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": "Ladebordwand 2000 kg",
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94301,
+				"link": null,
+				"name": "V"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=V&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/V.jpg",
+			"weightTotal": "2800 kg",
+			"weightUse": "622 kg"
+		},
+		"offerList": [{
+			"id": "ece67b58-7932-40c6-bd70-18b89becfa79",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/118538255/offer/ece67b58-7932-40c6-bd70-18b89becfa79",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/118538255/offer/ece67b58-7932-40c6-bd70-18b89becfa79/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "383,43",
+				"decimalAmount": 383.43
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "383,43",
+				"decimalAmount": 383.43
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "54,78",
+				"decimalAmount": 54.78
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,25 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_943_km700_a01abdfc-8c7b-426e-b123-398dc04ac726",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 317883933,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/317883933",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/317883933/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "10.5 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94401,
+				"link": null,
+				"name": "B"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=B&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/B.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1300 kg"
+		},
+		"offerList": [{
+			"id": "b9c6fa48-c3a4-44dd-b584-b466f55c7948",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/317883933/offer/b9c6fa48-c3a4-44dd-b584-b466f55c7948",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/317883933/offer/b9c6fa48-c3a4-44dd-b584-b466f55c7948/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "407,42",
+				"decimalAmount": 407.42
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "407,42",
+				"decimalAmount": 407.42
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "58,20",
+				"decimalAmount": 58.20
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_944_km700_e994690f-fc98-47cc-bc71-ced7be5b909a",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1291254822,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1291254822",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1291254822/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95401,
+				"link": null,
+				"name": "S"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=S&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/S.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1220 kg"
+		},
+		"offerList": [{
+			"id": "70f63e26-b834-4817-b448-3b0c068ae821",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1291254822/offer/70f63e26-b834-4817-b448-3b0c068ae821",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1291254822/offer/70f63e26-b834-4817-b448-3b0c068ae821/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "430,49",
+				"decimalAmount": 430.49
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "430,49",
+				"decimalAmount": 430.49
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "61,50",
+				"decimalAmount": 61.50
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_954_km700_525a1b3f-bacf-401b-9397-a227b1275b7f",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 45955237,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/45955237",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/45955237/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2500 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1650 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": "Ladebordwand 2000 kg",
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94301,
+				"link": null,
+				"name": "V"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=V&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/V.jpg",
+			"weightTotal": "2800 kg",
+			"weightUse": "622 kg"
+		},
+		"offerList": [{
+			"id": "35480e13-7054-4521-a370-66e0cc0ee81c",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/45955237/offer/35480e13-7054-4521-a370-66e0cc0ee81c",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/45955237/offer/35480e13-7054-4521-a370-66e0cc0ee81c/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "488,39",
+				"decimalAmount": 488.39
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "488,39",
+				"decimalAmount": 488.39
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "69,77",
+				"decimalAmount": 69.77
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,24 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_943_km700_377c1bf3-bb0b-4bb4-a7d5-c3ca622f38e2",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 424485507,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/424485507",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/424485507/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "10.5 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94401,
+				"link": null,
+				"name": "B"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=B&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/B.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1300 kg"
+		},
+		"offerList": [{
+			"id": "4d964ce7-ace7-4478-af1c-6f6f49beacae",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/424485507/offer/4d964ce7-ace7-4478-af1c-6f6f49beacae",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/424485507/offer/4d964ce7-ace7-4478-af1c-6f6f49beacae/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "515,88",
+				"decimalAmount": 515.88
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "515,88",
+				"decimalAmount": 515.88
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "73,70",
+				"decimalAmount": 73.70
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_944_km700_160ffd12-20e4-41f9-b8a1-63fbd62a04cf",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1783545407,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1783545407",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1783545407/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95401,
+				"link": null,
+				"name": "S"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=S&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/S.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1220 kg"
+		},
+		"offerList": [{
+			"id": "c3adfb3a-b2f3-4bed-b4f9-9012e7971982",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1783545407/offer/c3adfb3a-b2f3-4bed-b4f9-9012e7971982",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1783545407/offer/c3adfb3a-b2f3-4bed-b4f9-9012e7971982/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "545,86",
+				"decimalAmount": 545.86
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "545,86",
+				"decimalAmount": 545.86
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "77,98",
+				"decimalAmount": 77.98
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,33 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_954_km700_b465fdcd-bbbe-4f6f-943a-121e4e6d0f52",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 450140385,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/450140385",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/450140385/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 0,
+			"cargoHeight": "2080 mm",
+			"cargoLength": "4050 mm",
+			"cargoVolume": "18 m³",
+			"cargoWidth": "2030 mm",
+			"categoryId": 34,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "IVECO Daily 35C15 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 117601,
+				"link": null,
+				"name": "W"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=W&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/W.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "810 kg"
+		},
+		"offerList": [{
+			"id": "c31d141a-6e4e-434b-a63d-a4d46ae514eb",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/450140385/offer/c31d141a-6e4e-434b-a63d-a4d46ae514eb",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/450140385/offer/c31d141a-6e4e-434b-a63d-a4d46ae514eb/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "550,45",
+				"decimalAmount": 550.45
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "550,45",
+				"decimalAmount": 550.45
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "78,64",
+				"decimalAmount": 78.64
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,39 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_1176_km700_ae2ef7e4-3e0f-46ce-b7cb-eebf10fa9d92",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 314389465,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/314389465",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/314389465/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2500 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1650 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": "Ladebordwand 2000 kg",
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94302,
+				"link": null,
+				"name": "V"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=V&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/V.jpg",
+			"weightTotal": "2800 kg",
+			"weightUse": "622 kg"
+		},
+		"offerList": [{
+			"id": "ec230f56-aba2-4ef8-b3f3-7e68fd4c64c0",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/314389465/offer/ec230f56-aba2-4ef8-b3f3-7e68fd4c64c0",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/314389465/offer/ec230f56-aba2-4ef8-b3f3-7e68fd4c64c0/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "578,44",
+				"decimalAmount": 578.44
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "578,44",
+				"decimalAmount": 578.44
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "82,63",
+				"decimalAmount": 82.63
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,25 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_943_km2100_7888d5b0-6250-48a2-872c-7ad1db60b52a",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 344702121,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/344702121",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/344702121/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "10.5 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94402,
+				"link": null,
+				"name": "B"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=B&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/B.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1300 kg"
+		},
+		"offerList": [{
+			"id": "d82038ee-e9bc-4d9b-955f-1a4f3a9ca797",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/344702121/offer/d82038ee-e9bc-4d9b-955f-1a4f3a9ca797",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/344702121/offer/d82038ee-e9bc-4d9b-955f-1a4f3a9ca797/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "623,42",
+				"decimalAmount": 623.42
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "623,42",
+				"decimalAmount": 623.42
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "89,06",
+				"decimalAmount": 89.06
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_944_km2100_d04e877e-3f67-459f-b875-511f08f8646c",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 738197824,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/738197824",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/738197824/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95501,
+				"link": null,
+				"name": "P"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=P&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/P.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2490 kg"
+		},
+		"offerList": [{
+			"id": "127aa1f0-02cd-4266-914b-ab424f60a5f4",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/738197824/offer/127aa1f0-02cd-4266-914b-ab424f60a5f4",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/738197824/offer/127aa1f0-02cd-4266-914b-ab424f60a5f4/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "653,41",
+				"decimalAmount": 653.41
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "653,41",
+				"decimalAmount": 653.41
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "93,34",
+				"decimalAmount": 93.34
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,54 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_955_km700_d3f13c88-18bb-49f8-a7d0-fff690185fa1",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1545991952,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1545991952",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1545991952/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94701,
+				"link": null,
+				"name": "D"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=D&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/D.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2450 kg"
+		},
+		"offerList": [{
+			"id": "4bcb0292-1af1-433e-941a-d6c9b30be7d3",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1545991952/offer/4bcb0292-1af1-433e-941a-d6c9b30be7d3",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1545991952/offer/4bcb0292-1af1-433e-941a-d6c9b30be7d3/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "653,41",
+				"decimalAmount": 653.41
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "653,41",
+				"decimalAmount": 653.41
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "93,34",
+				"decimalAmount": 93.34
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,54 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_947_km700_bb47336b-9e9b-43bb-b711-fde2edea7313",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 886663080,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/886663080",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/886663080/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 0,
+			"cargoHeight": "2080 mm",
+			"cargoLength": "4050 mm",
+			"cargoVolume": "18 m³",
+			"cargoWidth": "2030 mm",
+			"categoryId": 34,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "IVECO Daily 35C15 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 117601,
+				"link": null,
+				"name": "W"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=W&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/W.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "810 kg"
+		},
+		"offerList": [{
+			"id": "6689a0db-b4aa-4e19-96f7-23c1e2909b4e",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/886663080/offer/6689a0db-b4aa-4e19-96f7-23c1e2909b4e",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/886663080/offer/6689a0db-b4aa-4e19-96f7-23c1e2909b4e/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "669,40",
+				"decimalAmount": 669.40
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "669,40",
+				"decimalAmount": 669.40
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "95,63",
+				"decimalAmount": 95.63
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,40 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_1176_km700_3da7bd67-c0ad-4801-9e28-939026dbe798",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 2061976743,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2061976743",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2061976743/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95402,
+				"link": null,
+				"name": "S"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=S&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/S.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1220 kg"
+		},
+		"offerList": [{
+			"id": "9a345adb-4cae-4741-b18e-ddf7f375156b",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2061976743/offer/9a345adb-4cae-4741-b18e-ddf7f375156b",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2061976743/offer/9a345adb-4cae-4741-b18e-ddf7f375156b/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "690,47",
+				"decimalAmount": 690.47
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "690,47",
+				"decimalAmount": 690.47
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "98,64",
+				"decimalAmount": 98.64
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_954_km2100_6baf6ff7-9e0b-4cba-af31-358469823473",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1744693455,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1744693455",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1744693455/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2500 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1650 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": "Ladebordwand 2000 kg",
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94302,
+				"link": null,
+				"name": "V"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=V&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/V.jpg",
+			"weightTotal": "2800 kg",
+			"weightUse": "622 kg"
+		},
+		"offerList": [{
+			"id": "fc49e895-c481-4c5c-8f69-4c1bdb64d758",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1744693455/offer/fc49e895-c481-4c5c-8f69-4c1bdb64d758",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1744693455/offer/fc49e895-c481-4c5c-8f69-4c1bdb64d758/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "692,39",
+				"decimalAmount": 692.39
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "692,39",
+				"decimalAmount": 692.39
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "98,91",
+				"decimalAmount": 98.91
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,24 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_943_km2100_9b7de73a-198a-4517-b0ee-a6a0a24a0297",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1647288709,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1647288709",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1647288709/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "10.5 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94402,
+				"link": null,
+				"name": "B"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=B&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/B.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1300 kg"
+		},
+		"offerList": [{
+			"id": "0d23ec80-1049-4f35-9a4d-00d4ca5f1396",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1647288709/offer/0d23ec80-1049-4f35-9a4d-00d4ca5f1396",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1647288709/offer/0d23ec80-1049-4f35-9a4d-00d4ca5f1396/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "743,87",
+				"decimalAmount": 743.87
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "743,87",
+				"decimalAmount": 743.87
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "106,27",
+				"decimalAmount": 106.27
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_944_km2100_7708a992-44e9-4a02-9b5b-1986085b4590",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 216087704,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/216087704",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/216087704/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2500 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1650 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": "Ladebordwand 2000 kg",
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94303,
+				"link": null,
+				"name": "V"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=V&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/V.jpg",
+			"weightTotal": "2800 kg",
+			"weightUse": "622 kg"
+		},
+		"offerList": [{
+			"id": "bccb6a18-5c41-4a73-9254-894a0ba6614a",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/216087704/offer/bccb6a18-5c41-4a73-9254-894a0ba6614a",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/216087704/offer/bccb6a18-5c41-4a73-9254-894a0ba6614a/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "772,44",
+				"decimalAmount": 772.44
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "772,44",
+				"decimalAmount": 772.44
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "110,35",
+				"decimalAmount": 110.35
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,25 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_943_km3500_95807590-630a-465e-bcf0-a8a1babf6008",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1279451190,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1279451190",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1279451190/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95501,
+				"link": null,
+				"name": "P"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=P&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/P.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2490 kg"
+		},
+		"offerList": [{
+			"id": "26952724-6169-419b-b09e-a97597833019",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1279451190/offer/26952724-6169-419b-b09e-a97597833019",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1279451190/offer/26952724-6169-419b-b09e-a97597833019/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "782,86",
+				"decimalAmount": 782.86
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "782,86",
+				"decimalAmount": 782.86
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "111,84",
+				"decimalAmount": 111.84
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,52 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_955_km700_79e0762f-08a8-4718-a23f-37e97aff45d3",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 566881035,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/566881035",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/566881035/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94701,
+				"link": null,
+				"name": "D"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=D&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/D.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2450 kg"
+		},
+		"offerList": [{
+			"id": "65575208-216e-4dc2-8c93-bd579f3a0037",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/566881035/offer/65575208-216e-4dc2-8c93-bd579f3a0037",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/566881035/offer/65575208-216e-4dc2-8c93-bd579f3a0037/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "782,86",
+				"decimalAmount": 782.86
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "782,86",
+				"decimalAmount": 782.86
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "111,84",
+				"decimalAmount": 111.84
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 700 Km frei (Zusatzkilometer 0,52 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_947_km700_5d5fb076-966d-49a4-9294-fdbcba825baf",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1096671073,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1096671073",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1096671073/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95402,
+				"link": null,
+				"name": "S"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=S&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/S.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1220 kg"
+		},
+		"offerList": [{
+			"id": "a59ae047-231f-424f-a011-94f575ea0fc6",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1096671073/offer/a59ae047-231f-424f-a011-94f575ea0fc6",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1096671073/offer/a59ae047-231f-424f-a011-94f575ea0fc6/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "821,92",
+				"decimalAmount": 821.92
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "821,92",
+				"decimalAmount": 821.92
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "117,42",
+				"decimalAmount": 117.42
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,33 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_954_km2100_9186d854-dd66-4a9c-8535-d7b4671e5ab7",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1056158501,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1056158501",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1056158501/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "10.5 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94403,
+				"link": null,
+				"name": "B"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=B&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/B.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1300 kg"
+		},
+		"offerList": [{
+			"id": "93a7a98f-2914-4979-80c6-a65194a5ecdb",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1056158501/offer/93a7a98f-2914-4979-80c6-a65194a5ecdb",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1056158501/offer/93a7a98f-2914-4979-80c6-a65194a5ecdb/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "840,41",
+				"decimalAmount": 840.41
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "840,41",
+				"decimalAmount": 840.41
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "120,06",
+				"decimalAmount": 120.06
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_944_km3500_22368cd6-82b4-4e51-b70f-df43c49d8df6",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1816986124,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1816986124",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1816986124/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 0,
+			"cargoHeight": "2080 mm",
+			"cargoLength": "4050 mm",
+			"cargoVolume": "18 m³",
+			"cargoWidth": "2030 mm",
+			"categoryId": 34,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "IVECO Daily 35C15 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 117602,
+				"link": null,
+				"name": "W"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=W&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/W.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "810 kg"
+		},
+		"offerList": [{
+			"id": "40b0359f-d7b8-467c-8d17-7d90490d8889",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1816986124/offer/40b0359f-d7b8-467c-8d17-7d90490d8889",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1816986124/offer/40b0359f-d7b8-467c-8d17-7d90490d8889/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "864,40",
+				"decimalAmount": 864.40
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "864,40",
+				"decimalAmount": 864.40
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "123,49",
+				"decimalAmount": 123.49
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,39 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_1176_km2100_4021ef00-9ec0-4997-a93e-21d301b246a7",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 2049092533,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2049092533",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2049092533/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1410 mm",
+			"cargoLength": "2500 mm",
+			"cargoVolume": "5.7 m³",
+			"cargoWidth": "1650 mm",
+			"categoryId": 47,
+			"driverLicense": "B / 3**",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"loadInformation": "Ladebordwand 2000 kg",
+			"manufacturer": "Mercedes-Benz Vito",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94303,
+				"link": null,
+				"name": "V"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=V&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/V.jpg",
+			"weightTotal": "2800 kg",
+			"weightUse": "622 kg"
+		},
+		"offerList": [{
+			"id": "9f23e111-71e0-4459-a571-48b2b23dc713",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2049092533/offer/9f23e111-71e0-4459-a571-48b2b23dc713",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2049092533/offer/9f23e111-71e0-4459-a571-48b2b23dc713/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "896,39",
+				"decimalAmount": 896.39
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "896,39",
+				"decimalAmount": 896.39
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "128,06",
+				"decimalAmount": 128.06
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,24 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_943_km3500_68b2eb84-97e6-44c2-9760-d38712790ce6",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 647966430,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/647966430",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/647966430/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95403,
+				"link": null,
+				"name": "S"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=S&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/S.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1220 kg"
+		},
+		"offerList": [{
+			"id": "8f96a765-4762-4b11-818f-c402a62d1bd3",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/647966430/offer/8f96a765-4762-4b11-818f-c402a62d1bd3",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/647966430/offer/8f96a765-4762-4b11-818f-c402a62d1bd3/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "950,45",
+				"decimalAmount": 950.45
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "950,45",
+				"decimalAmount": 950.45
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "135,78",
+				"decimalAmount": 135.78
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,32 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_954_km3500_c8771710-be94-4d86-9653-bdff6a2c7ab5",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 782294288,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/782294288",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/782294288/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 16,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "3265 mm",
+			"cargoVolume": "10.5 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 5,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 K / 316 K",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94403,
+				"link": null,
+				"name": "B"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=B&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/B.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1300 kg"
+		},
+		"offerList": [{
+			"id": "99dfb9c6-7a9f-499c-9af5-2da6b4810be5",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/782294288/offer/99dfb9c6-7a9f-499c-9af5-2da6b4810be5",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/782294288/offer/99dfb9c6-7a9f-499c-9af5-2da6b4810be5/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "970,95",
+				"decimalAmount": 970.95
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "970,95",
+				"decimalAmount": 970.95
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "138,71",
+				"decimalAmount": 138.71
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,27 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_944_km3500_f8966ed7-d65e-4131-a047-26487994cef0",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1662720309,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1662720309",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1662720309/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 0,
+			"cargoHeight": "2080 mm",
+			"cargoLength": "4050 mm",
+			"cargoVolume": "18 m³",
+			"cargoWidth": "2030 mm",
+			"categoryId": 34,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "IVECO Daily 35C15 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 117602,
+				"link": null,
+				"name": "W"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=W&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/W.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "810 kg"
+		},
+		"offerList": [{
+			"id": "f5a2f1f5-5b69-4cad-8304-b52bc489e99b",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1662720309/offer/f5a2f1f5-5b69-4cad-8304-b52bc489e99b",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1662720309/offer/f5a2f1f5-5b69-4cad-8304-b52bc489e99b/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.005,35",
+				"decimalAmount": 1005.35
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.005,35",
+				"decimalAmount": 1005.35
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "143,62",
+				"decimalAmount": 143.62
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,40 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_1176_km2100_2218bffe-8fec-4df4-8cb1-c8339db7a455",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 888232852,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/888232852",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/888232852/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95502,
+				"link": null,
+				"name": "P"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=P&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/P.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2490 kg"
+		},
+		"offerList": [{
+			"id": "5c6230fc-ec8f-4a84-b6bc-e985e6b08eb2",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/888232852/offer/5c6230fc-ec8f-4a84-b6bc-e985e6b08eb2",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/888232852/offer/5c6230fc-ec8f-4a84-b6bc-e985e6b08eb2/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.076,40",
+				"decimalAmount": 1076.40
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.076,40",
+				"decimalAmount": 1076.40
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "153,77",
+				"decimalAmount": 153.77
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,54 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_955_km2100_daf55aec-ecdf-49d9-9957-afa2845cd1a9",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1550667535,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1550667535",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1550667535/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94702,
+				"link": null,
+				"name": "D"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=D&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/D.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2450 kg"
+		},
+		"offerList": [{
+			"id": "0434a164-e302-4424-9c3d-cc40fd889f20",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1550667535/offer/0434a164-e302-4424-9c3d-cc40fd889f20",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1550667535/offer/0434a164-e302-4424-9c3d-cc40fd889f20/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.076,40",
+				"decimalAmount": 1076.40
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.076,40",
+				"decimalAmount": 1076.40
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "153,77",
+				"decimalAmount": 153.77
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,54 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_947_km2100_b5ea322f-9d01-4604-8e61-bbf097943e05",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 502333920,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/502333920",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/502333920/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 17,
+			"cargoHeight": "1900 mm",
+			"cargoLength": "4300 mm",
+			"cargoVolume": "14 m³",
+			"cargoWidth": "1780 mm",
+			"categoryId": 445,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "Mercedes-Benz Sprinter 313 L / 316 L",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95403,
+				"link": null,
+				"name": "S"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=S&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/S.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "1220 kg"
+		},
+		"offerList": [{
+			"id": "bdf388ba-329c-490d-b4b0-45129e22458d",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/502333920/offer/bdf388ba-329c-490d-b4b0-45129e22458d",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/502333920/offer/bdf388ba-329c-490d-b4b0-45129e22458d/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.097,89",
+				"decimalAmount": 1097.89
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.097,89",
+				"decimalAmount": 1097.89
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "156,84",
+				"decimalAmount": 156.84
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,33 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 750,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_954_km3500_f10a761c-8c46-44bd-a051-b47a942abc80",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 17116059,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/17116059",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/17116059/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 0,
+			"cargoHeight": "2080 mm",
+			"cargoLength": "4050 mm",
+			"cargoVolume": "18 m³",
+			"cargoWidth": "2030 mm",
+			"categoryId": 34,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "IVECO Daily 35C15 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 117603,
+				"link": null,
+				"name": "W"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=W&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/W.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "810 kg"
+		},
+		"offerList": [{
+			"id": "217b3a41-61f4-49a0-b357-57010908dbcb",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/17116059/offer/217b3a41-61f4-49a0-b357-57010908dbcb",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/17116059/offer/217b3a41-61f4-49a0-b357-57010908dbcb/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.178,45",
+				"decimalAmount": 1178.45
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.178,45",
+				"decimalAmount": 1178.45
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "168,35",
+				"decimalAmount": 168.35
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,39 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_1176_km3500_aa4b4a27-441d-41af-ab52-87bf4368a344",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 742057770,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/742057770",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/742057770/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94702,
+				"link": null,
+				"name": "D"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=D&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/D.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2450 kg"
+		},
+		"offerList": [{
+			"id": "212b1dd9-1365-4a94-a845-4f34cd023d53",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/742057770/offer/212b1dd9-1365-4a94-a845-4f34cd023d53",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/742057770/offer/212b1dd9-1365-4a94-a845-4f34cd023d53/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.226,93",
+				"decimalAmount": 1226.93
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.226,93",
+				"decimalAmount": 1226.93
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "175,28",
+				"decimalAmount": 175.28
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,52 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_947_km2100_645eb515-48c4-4b2c-831e-a443e09decaf",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 2013264342,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2013264342",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2013264342/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95502,
+				"link": null,
+				"name": "P"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=P&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/P.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2490 kg"
+		},
+		"offerList": [{
+			"id": "1b5117af-b2b2-4929-a1c2-1ee6f0321f36",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2013264342/offer/1b5117af-b2b2-4929-a1c2-1ee6f0321f36",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2013264342/offer/1b5117af-b2b2-4929-a1c2-1ee6f0321f36/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.226,93",
+				"decimalAmount": 1226.93
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.226,93",
+				"decimalAmount": 1226.93
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "175,28",
+				"decimalAmount": 175.28
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 2100 Km frei (Zusatzkilometer 0,52 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_955_km2100_0521acff-ad91-4ee6-a23d-20f142cc1e4f",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 440865537,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/440865537",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/440865537/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 0,
+			"cargoHeight": "2080 mm",
+			"cargoLength": "4050 mm",
+			"cargoVolume": "18 m³",
+			"cargoWidth": "2030 mm",
+			"categoryId": 34,
+			"driverLicense": "B / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "IVECO Daily 35C15 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 117603,
+				"link": null,
+				"name": "W"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=W&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/W.jpg",
+			"weightTotal": "3500 kg",
+			"weightUse": "810 kg"
+		},
+		"offerList": [{
+			"id": "e63ed4cc-e770-4789-b653-30c58c9def6e",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/440865537/offer/e63ed4cc-e770-4789-b653-30c58c9def6e",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/440865537/offer/e63ed4cc-e770-4789-b653-30c58c9def6e/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.341,38",
+				"decimalAmount": 1341.38
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.341,38",
+				"decimalAmount": 1341.38
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "191,63",
+				"decimalAmount": 191.63
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,40 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_1176_km3500_5962bed4-ac4e-4a72-adc2-f5aa44828d3f",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 1039341368,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1039341368",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1039341368/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94703,
+				"link": null,
+				"name": "D"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=D&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/D.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2450 kg"
+		},
+		"offerList": [{
+			"id": "468e5b2a-ae5b-4b95-b50e-da50aee4813a",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1039341368/offer/468e5b2a-ae5b-4b95-b50e-da50aee4813a",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/1039341368/offer/468e5b2a-ae5b-4b95-b50e-da50aee4813a/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.498,48",
+				"decimalAmount": 1498.48
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.498,48",
+				"decimalAmount": 1498.48
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "214,07",
+				"decimalAmount": 214.07
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,54 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_947_km3500_5323150e-9358-4687-9f11-ce7bfe2a0f7b",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 2126954600,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2126954600",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2126954600/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95503,
+				"link": null,
+				"name": "P"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=P&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/P.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2490 kg"
+		},
+		"offerList": [{
+			"id": "efa44254-f90b-480f-a5af-570fbc76bad0",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2126954600/offer/efa44254-f90b-480f-a5af-570fbc76bad0",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/2126954600/offer/efa44254-f90b-480f-a5af-570fbc76bad0/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.498,48",
+				"decimalAmount": 1498.48
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.498,48",
+				"decimalAmount": 1498.48
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "214,07",
+				"decimalAmount": 214.07
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,54 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 101,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/101",
+				"description": "Haftpflichtversicherung ohne Vollkasko- und Diebstahlschutz",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 12,
+				"itemClassCode": "HPF",
+				"itemClassName": "Haftpflicht_noVK_Hertz_Avis",
+				"code": "HPF"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 5,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 85,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/85",
+				"description": "Winterpaket inkl. wintertaugl. Bereifung zwischen 15.10.-15.4.",
+				"displayPriority": 9,
+				"itemClassFilter": false,
+				"itemClassId": 6,
+				"itemClassCode": "WR",
+				"itemClassName": "Winterreifen",
+				"code": "WIN"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_17_955_km3500_a8fa0168-3dc1-498a-bd12-75e314d217a5",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "TRDE",
+			"serviceCatalogId": 17
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 668305457,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/668305457",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/668305457/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2480 mm",
+			"categoryId": 446,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Koffer mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 95503,
+				"link": null,
+				"name": "P"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=P&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/P.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2490 kg"
+		},
+		"offerList": [{
+			"id": "9bc19672-3383-4c5a-90d0-d939f127a0c3",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/668305457/offer/9bc19672-3383-4c5a-90d0-d939f127a0c3",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/668305457/offer/9bc19672-3383-4c5a-90d0-d939f127a0c3/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.670,92",
+				"decimalAmount": 1670.92
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.670,92",
+				"decimalAmount": 1670.92
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "238,70",
+				"decimalAmount": 238.70
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,52 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_955_km3500_156be81e-5f8d-496e-b156-418f7c6b1433",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	},
+	{
+		"id": 794143144,
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/794143144",
+		"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/794143144/recalculate",
+		"pickUpLocation": {
+			"stationId": 168124,
+			"cityId": 3797,
+			"countryId": 1,
+			"countryCode": "DE"
+		},
+		"dropOffLocation": {
+			"stationId": 168124
+		},
+		"vehicle": {
+			"aircondition": false,
+			"automatic": false,
+			"navigationSystem": false,
+			"allWheel": false,
+			"bodyStyle": 18,
+			"cargoHeight": "2360 mm",
+			"cargoLength": "6050 mm",
+			"cargoVolume": "35.4 m³",
+			"cargoWidth": "2470 mm",
+			"categoryId": 8,
+			"driverLicense": "C / C1 / 3 **",
+			"driverMinAge": 18,
+			"licenseMinTime": "0",
+			"manufacturer": "MB Atego 816 L (Plane mit Hebebühne)",
+			"nrDoors": 0,
+			"nrLargeLuggage": 0,
+			"nrSeats": 0,
+			"nrSmallLuggage": 0,
+			"nrAdults": 3,
+			"nrChildren": 0,
+			"supplierId": 158036,
+			"vehicleGroup": {
+				"id": 94703,
+				"link": null,
+				"name": "D"
+			},
+			"vehicleLargeImage": "https://www.sixt.de/php/fleet/vehicleimage?grp=D&liso=DE&uci=310",
+			"vehicleSmallImage": "http://www.adac.de/152573/Sixt/DE/small/D.jpg",
+			"weightTotal": "7490 kg",
+			"weightUse": "2450 kg"
+		},
+		"offerList": [{
+			"id": "0559f2d6-99df-4940-a996-733f043d2d30",
+			"link": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/794143144/offer/0559f2d6-99df-4940-a996-733f043d2d30",
+			"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/224409675/vehicle/794143144/offer/0559f2d6-99df-4940-a996-733f043d2d30/book",
+			"supplierId": 158036,
+			"supplierGroupId": 157740,
+			"price": {
+				"currency": "EUR",
+				"amount": "1.670,92",
+				"decimalAmount": 1670.92
+			},
+			"stdPrice": {
+				"currency": "EUR",
+				"amount": "1.670,92",
+				"decimalAmount": 1670.92
+			},
+			"dailyPrice": {
+				"currency": "EUR",
+				"amount": "238,70",
+				"decimalAmount": 238.70
+			},
+			"status": "AVAILABLE",
+			"inclusives": [{
+				"id": 73,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/73",
+				"description": "Kilometer 3500 Km frei (Zusatzkilometer 0,52 EUR je Km)",
+				"displayPriority": 1,
+				"itemClassFilter": false,
+				"itemClassId": 1,
+				"itemClassCode": "KM",
+				"itemClassName": "Kilometer",
+				"code": "KM100"
+			},
+			{
+				"id": 95,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/95",
+				"description": "Basis Vollkasko- und Diebstahlschutz mit 950,00 EUR Selbstbehalt",
+				"displayPriority": 2,
+				"itemClassFilter": false,
+				"itemClassId": 10,
+				"itemClassCode": "SVK",
+				"itemClassName": "Vollkasko_Sixt",
+				"code": "CDW"
+			},
+			{
+				"id": 87,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/87",
+				"description": "alle Zusatzfahrer ohne Aufpreis",
+				"displayPriority": 3,
+				"itemClassFilter": false,
+				"itemClassId": 7,
+				"itemClassCode": "AD",
+				"itemClassName": "Zusatzfahrer",
+				"code": "ADD"
+			},
+			{
+				"id": 71,
+				"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/71",
+				"description": "Haftpflichtversicherung",
+				"displayPriority": 4,
+				"itemClassFilter": false,
+				"itemClassId": 4,
+				"itemClassCode": "VS",
+				"itemClassName": "Versicherung_Sonstiges",
+				"code": "TI"
+			}],
+			"offeredPayment": "PREPAID",
+			"member": true,
+			"noMember": false,
+			"hsgwOfferId": "158036_168124_199_947_km3500_49d77152-156a-4865-b1dd-6c68dcd51fd0",
+			"crossOfferFlag": false,
+			"availableExtras": [],
+			"serviceCatalogCode": "STPCDW",
+			"serviceCatalogId": 199
+		}],
+		"module": "TRUCK"
+	}],
+	"texts": {
+		"supplierList": [{
+			"id": 158036,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/supplier/158036",
+			"supplierGroupId": 157740,
+			"logo": "http://www.rentfox.de/fileadmin/CarImages/Sixt/Logos/Logo.jpg",
+			"name": "Sixt Deutschland"
+		},
+		{
+			"id": 158039,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/supplier/158039",
+			"supplierGroupId": 157741,
+			"logo": "http://www.rentfox.de/fileadmin/CarImages/Hertz/Logos/Logo.jpg",
+			"name": "Hertz Deutschland"
+		},
+		{
+			"id": 158037,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/supplier/158037",
+			"supplierGroupId": 157739,
+			"logo": "http://www.rentfox.de/fileadmin/CarImages/Avis/Logos/Logo.jpg",
+			"name": "Avis Deutschland"
+		}],
+		"bodyStyleList": [{
+			"id": 0,
+			"text": null
+		},
+		{
+			"id": 17,
+			"text": "Mittlere LKW (bis 3,5t)"
+		},
+		{
+			"id": 16,
+			"text": "Kleine LKW & Transporter"
+		},
+		{
+			"id": 18,
+			"text": "Große LKW"
+		}],
+		"stationList": [{
+			"id": 171600,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/station/171600",
+			"supplierId": 158039,
+			"stationName": "Berlin - Neukölln",
+			"supplierGroupId": 157741,
+			"stationPriority": 1,
+			"airportStation": false,
+			"assignedCityIds": [3797],
+			"modules": ["CAR",
+			"TRUCK"],
+			"countryId": 1,
+			"cityId": 3797,
+			"area": 269,
+			"address": {
+				"street": "Gottlieb-Dunkel-Straße 43-44",
+				"countryId": 1,
+				"zip": "12099",
+				"city": "Berlin"
+			},
+			"info": {
+				"providesTransfer": false,
+				"openingHours": "Mo-Fr:06:30-18:30, Sa:07:00-13:00"
+			},
+			"flightNoMandatory": false,
+			"longitude": "13.411215",
+			"latitude": "52.456478",
+			"countryCode": "DE"
+		},
+		{
+			"id": 171440,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/station/171440",
+			"supplierId": 158037,
+			"stationName": "Berlin - Mitte (Kronenstr.)",
+			"supplierGroupId": 157739,
+			"stationPriority": 1,
+			"airportStation": false,
+			"assignedCityIds": [3797],
+			"modules": ["CAR",
+			"TRUCK"],
+			"countryId": 1,
+			"cityId": 3797,
+			"area": 269,
+			"address": {
+				"street": "Kronenstr. 16/ Ecke Friedrichstraße",
+				"countryId": 1,
+				"zip": "10117",
+				"city": "Berlin"
+			},
+			"info": {
+				"providesTransfer": false,
+				"openingHours": "Mo-Fr: 07.00-20.00, Sa: 08.00-14.00, So: 09.00-12.00"
+			},
+			"flightNoMandatory": false,
+			"longitude": "10.451526",
+			"latitude": "51.165691",
+			"countryCode": "DE"
+		},
+		{
+			"id": 168124,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/station/168124",
+			"supplierId": 158036,
+			"stationName": "Berlin - Europa-Center",
+			"supplierGroupId": 157740,
+			"stationPriority": 1,
+			"airportStation": false,
+			"assignedCityIds": [3797],
+			"modules": ["CAR",
+			"TRUCK"],
+			"countryId": 1,
+			"cityId": 3797,
+			"area": 269,
+			"address": {
+				"street": "Budapester Str. 45",
+				"countryId": 1,
+				"zip": "10787",
+				"city": "Berlin"
+			},
+			"info": {
+				"providesTransfer": false,
+				"openingHours": "Mo-So: 00.00-24.00"
+			},
+			"flightNoMandatory": false,
+			"longitude": "13.338153",
+			"latitude": "52.504941",
+			"countryCode": "DE"
+		}],
+		"supplierGroupList": [{
+			"id": 157739,
+			"name": "Avis (Deutschland) Budget Autovermietung GmbH & Co.KG"
+		},
+		{
+			"id": 157741,
+			"name": "Hertz (Deutschland) Autovermietung GmbH"
+		},
+		{
+			"id": 157740,
+			"name": "Sixt (Deutschland) GmbH & Co. Autovermietung KG"
+		}],
+		"paymentInfoList": [{
+			"paymentType": "CREDIT_CARD_PAYMENT",
+			"provided": true
+		},
+		{
+			"paymentType": "PAYPAL_PAYMENT",
+			"provided": true
+		}]
+	},
+	"remainingCacheSeconds": 3000,
+	"offerFilterTemplate": {
+		"serviceCatalogs": [{
+			"name": "17, TRDE",
+			"count": 18,
+			"id": 17,
+			"value": ""
+		},
+		{
+			"name": "199, STPCDW",
+			"count": 18,
+			"id": 199,
+			"value": ""
+		}],
+		"inclusivesFilter": {
+			
+		},
+		"stations": [{
+			"name": "Berlin - Europa-Center",
+			"count": 36,
+			"id": 168124,
+			"value": "http://localhost:8180/web-joi/joi/masterdata/station/168124"
+		}],
+		"suppliers": [{
+			"name": "Sixt Deutschland",
+			"count": 36,
+			"id": 158036,
+			"value": "http://localhost:8180/web-joi/joi/masterdata/supplier/158036"
+		}],
+		"carTypes": [],
+		"status": [{
+			"name": "13, AVAILABLE",
+			"count": 36,
+			"id": 13,
+			"value": null
+		},
+		{
+			"name": "0, ON_REQUEST",
+			"count": 0,
+			"id": 0,
+			"value": null
+		}],
+		"minPrice": {
+			"currency": "EUR",
+			"amount": "383,43",
+			"decimalAmount": 383.43
+		},
+		"maxPrice": {
+			"currency": "EUR",
+			"amount": "1.670,92",
+			"decimalAmount": 1670.92
+		}
+	},
+	"crossOfferResultList": []
+}

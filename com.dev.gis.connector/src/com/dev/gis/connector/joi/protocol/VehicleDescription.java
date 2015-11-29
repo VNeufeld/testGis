@@ -48,12 +48,15 @@ public class VehicleDescription extends BasicProtocol {
 	
 	private int nrDoors;
 
+	private int nrAdults;
+
+	private int nrChildren;
+	
 	private int nrLargeLuggage;
 	
 	private int nrSeats;
 	
 	private int nrSmallLuggage;
-	
 	
 	private long supplierId;
 	
@@ -287,5 +290,21 @@ public class VehicleDescription extends BasicProtocol {
 
 	public void setWeightUse(String weightUse) {
 		this.weightUse = weightUse;
+	}
+
+	public int getNrAdults() {
+		return nrAdults;
+	}
+
+	public void setNrAdults(int nrAdults) {
+		this.nrAdults = nrAdults;
+	}
+
+	public int getNrChildren() {
+		return nrChildren;
+	}
+
+	public void setNrChildren(int nrChildren) {
+		this.nrChildren = nrChildren;
 	}
 }

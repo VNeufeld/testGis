@@ -34,5 +34,9 @@ public class ButtonControl extends BasicControl {
 		if ( selectionListener != null)
 			button.addSelectionListener(selectionListener);
 	}
+
+	public Button getButton() {
+		return button;
+	}
 	
 }

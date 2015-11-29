@@ -86,7 +86,7 @@ public class TooltipListener {
 									org.eclipse.swt.graphics.Point size = tip.computeSize (SWT.DEFAULT, SWT.DEFAULT);
 									Rectangle rect = item.getBounds (0);
 									Point pt = table.toDisplay (event.x, event.y);
-									tip.setBounds (pt.x-2, pt.y-90, 500, 100);
+									tip.setBounds (pt.x-2, pt.y-90, 600, 200);
 									//tip.setBounds (100, 200, 400, 500);
 									tip.setVisible (true);
 								}

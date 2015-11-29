@@ -61,14 +61,11 @@ public class RentCarsAppView extends TaskViewAbstract {
 		
 		createDatesControl(groupStamp);
 		
-
 		createRadioButtonsCarAndTruck(groupStamp);
-		
-		createPageSize(groupStamp);
 
 		createExtFilter(groupStamp);
-
-		new ButtonControl(groupStamp, "GetOffer", 0, getOffersSelectionListener());
+		
+		createExecutionPanel(groupStamp);
 
 		// Result - Group
 		createResultComposite(composite);
@@ -77,6 +74,12 @@ public class RentCarsAppView extends TaskViewAbstract {
 		
 		composite.pack();
 	
+	}
+
+	protected void createExecutionPanel(Group groupStamp) {
+		createPageSize(groupStamp);
+		new ButtonControl(groupStamp, "GetOffer", 0, getOffersSelectionListener());
+
 	}
 
 	protected void createDatesControl(Group groupStamp) {

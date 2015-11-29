@@ -1,5 +1,7 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
+import java.awt.Color;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -11,6 +13,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyAirportLocationSearch;
@@ -51,8 +54,6 @@ public class TestAppView extends RentCarsAppView {
 	private OutputTextControls requestId = null;
 	
 	private AdacOfferListTable offerListTable;
-	
-	private OutputTextControls summary = null;
 	
 	private OutputTextControls offerId = null;
 
@@ -102,12 +103,19 @@ public class TestAppView extends RentCarsAppView {
 
 	
 	protected void createPageSize(Group groupStamp) {
-		Composite cc = createComposite(groupStamp, 3, -1, false);
+		Composite cc = createComposite(groupStamp, 4, -1, false);
+		cc.setBackground(cc.getDisplay().getSystemColor(SWT.COLOR_LIST_SELECTION));
 
 		new PageSizeControl(cc, 50, false);
-		//new CrossOfferOperatorControl(cc);
 		CrossOfferCheckBox crossOffer = new CrossOfferCheckBox(cc, "use crossOffer");
 		crossOffer.setSelection(true);
+
+		ButtonControl bb = new ButtonControl(cc, "GetOffer", 0, getOffersSelectionListener());
+		bb.getButton().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+
+	}
+	protected void createExecutionPanel(Group groupStamp) {
+		createPageSize(groupStamp);
 
 	}
 
@@ -217,31 +225,35 @@ public class TestAppView extends RentCarsAppView {
 	@Override
 	protected void createResultFields(Group groupResult) {
 		
-
-		Composite cc = createComposite(groupResult, 4, -1, false);
+		Composite cc = createComposite(groupResult, 6, -1, false);
 
 		requestId = new OutputTextControls(cc, "Request ID", 150, 1 );
-
+		sessionId = new OutputTextControls(cc, "Session ID", 300,1 );
 		countVehicles = new OutputTextControls(cc, "Count of Vehicles", 100,1 );
+
+		Composite ccAll = createComposite(groupResult, 2, -1, true);
+
+		Composite ccLeft = createComposite(ccAll, 6, 1, false);
+
+		Composite ccRight = createComposite(ccAll, 2, 1, true);
 		
-		sessionId = new OutputTextControls(cc, "Session ID", 300 );
+		Group grRight = createGroupSpannAll(ccRight, "VehicleProperries",2);
 		
-		offerId = new OutputTextControls(groupResult, "OfferId", 300 );
+		offerId = new OutputTextControls(ccLeft, "OfferId", 300 );
 		
 		{ // buttons
-			Composite buttonComposite = createComposite(groupResult, 2, -1, false);
-	
+			Composite buttonComposite = createComposite(ccLeft, 2, -1, false);
 			new ButtonControl(buttonComposite, "show filterTemplate", 0,  showOfferFilterTemplate());
-			new ButtonControl(buttonComposite, "show text summary", 0,  showOfferFilterTemplate());
-			
 		}
-
-		createNextPage(groupResult);
+		createNextPage(ccLeft);
+		
+		OutputTextControls xxx = new OutputTextControls(grRight, "XXX", 300 );
+		OutputTextControls yyy = new OutputTextControls(grRight, "YYY", 300 );
+		
 	}
 
 	private SelectionListener showOfferFilterTemplate() {
-		AdacShowOfferFilterSelectionListener sdc = new AdacShowOfferFilterSelectionListener(parent.getShell());
-		return sdc;
+		return new AdacShowOfferFilterSelectionListener(parent.getShell());
 	}
 
 	protected SelectionListener selectNextPageSelectionListener(final OutputTextControls pageNo, final CheckBox useFilter) {

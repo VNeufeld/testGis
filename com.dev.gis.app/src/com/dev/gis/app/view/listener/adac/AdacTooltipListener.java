@@ -22,13 +22,16 @@ public class AdacTooltipListener extends TooltipListener {
 	@Override
 	protected String getTooltipText(TableItem item, int pos) {
 		Object data = item.getData();
+		int xx = item.getBounds().x;
+		int ww = item.getBounds().width;
+		
 		StringBuffer sb = new StringBuffer();
 		if ( data instanceof OfferDo) {
 			OfferDo offer = (OfferDo) data;
 			
 			if ( pos < 100)
 				return createVehicleInfo(offer);
-			if ( pos > 500 && pos < 700)
+			if ( pos > 300 && pos < 600)
 				return createStationInfo(offer);
 		}
 		return sb.toString();
@@ -64,18 +67,27 @@ public class AdacTooltipListener extends TooltipListener {
 		StringBuffer sb = new StringBuffer();
 		
 		VehicleDescription vd = offer.getModel().getVehicle();
-		sb.append("Vehicle1: "+vd.getManufacturer());
+		sb.append("Manufacturer: "+vd.getManufacturer());
 		sb.append("\n");
-		sb.append("Model: "+vd.getVehicleModel());
-		sb.append("Acriss: "+vd.getVehicleGroup().getName());
+		sb.append("BodyStyle : "+vd.getBodyStyleText().getText());
+		sb.append(" Acriss: "+vd.getVehicleGroup().getName());
 		sb.append("\n");
 		sb.append("Category: "+vd.getCategoryId());
 		sb.append("\n");
-		sb.append("Doors: "+vd.getNrDoors()+ " Seats :"+vd.getNrSeats());
+		sb.append("Doors: "+vd.getNrDoors()+ " Seats :"+vd.getNrSeats()+ " Adults :"+vd.getNrAdults() + " Children :"+vd.getNrChildren());
 		sb.append("\n");
 		sb.append("Large image: "+vd.getVehicleLargeImage());
 		sb.append("\n");
 		sb.append("Small image: "+vd.getVehicleSmallImage());
+		sb.append("\n");
+		sb.append("Cargo height : "+vd.getCargoHeight() + " width : "+vd.getCargoWidth()+ " lenght : "+vd.getCargoLength()+ " volume : "+vd.getCargoVolume());
+		sb.append("Weight Total : "+vd.getWeightTotal() + "Weight Use : "+vd.getWeightUse());
+		sb.append("\n");
+		sb.append("Luggage large : "+vd.getNrLargeLuggage() + " small : "+vd.getNrSmallLuggage());
+		sb.append("\n");
+		sb.append("Driver license : "+vd.getDriverLicense() + " min age : "+vd.getDriverMinAge());
+			
+		
 		sb.append("\n");
 		return sb.toString();
 	}

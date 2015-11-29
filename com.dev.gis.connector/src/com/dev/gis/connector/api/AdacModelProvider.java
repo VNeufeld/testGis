@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.dev.gis.connector.joi.protocol.BodyStyleText;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.Offer;
@@ -82,12 +83,14 @@ public enum AdacModelProvider {
 		List<VehicleResult> results = response.getResultList();
 		Map<Long, Supplier> suppliers = createSupplierMap(response);
 		Map<Long, Station> stations = createStationMap(response);
+		Map<Long, BodyStyleText> bodyStyles = createBodyStyleTextMap(response);
+		
 		
 		for ( VehicleResult vr : results) {
 			if ( vr.getOfferList().size() > 0 ) {
 				
 				//OfferDo offer = new OfferDo(vr);
-				OfferDo offer = createOffer(vr,suppliers, stations);
+				OfferDo offer = createOffer(vr,suppliers, stations, bodyStyles);
 				
 				offerDos.add(offer);
 			}
@@ -97,7 +100,7 @@ public enum AdacModelProvider {
 			results = response.getCrossOfferResultList();
 			for ( VehicleResult vr : results) {
 				if ( vr.getOfferList().size() > 0 ) {
-					OfferDo offer = createOffer(vr,suppliers, stations);
+					OfferDo offer = createOffer(vr,suppliers, stations, bodyStyles);
 					crossOffers.add(offer);
 				}
 			}
@@ -121,12 +124,24 @@ public enum AdacModelProvider {
 		}
 		return stations;
 	}
+	private Map<Long, BodyStyleText> createBodyStyleTextMap(VehicleResponse response) {
+		Map<Long, BodyStyleText> stations = new HashMap<Long, BodyStyleText>(); 
+		for ( BodyStyleText bd : response.getTexts().getBodyStyleList()) {
+			stations.put(bd.getId(), bd);	
+		}
+		return stations;
+	}
+	
 
-	private OfferDo createOffer(VehicleResult vr, Map<Long, Supplier> suppliers, Map<Long, Station> stations) {
+	private OfferDo createOffer(VehicleResult vr, Map<Long, Supplier> suppliers, Map<Long, Station> stations, Map<Long, BodyStyleText> bodyStyles) {
 		OfferDo offer = new OfferDo(vr);
 		offer.setPickupStation(stations.get(offer.getPickUpStationId()));
 		offer.setDropoffStation(stations.get(offer.getDropOffStationId()));
 		offer.setSupplier(suppliers.get(offer.getSupplierId()));
+		BodyStyleText bdt = bodyStyles.get(offer.getModel().getVehicle().getBodyStyle());
+		if ( bdt != null)
+			offer.getModel().getVehicle().setBodyStyleText(bdt);
+		
 		return offer;
 	}
 
