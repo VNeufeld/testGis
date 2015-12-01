@@ -6,17 +6,17 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.view.dialogs.BSCreditCardDialog;
+import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.CreditCardControl;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
-import com.dev.gis.connector.api.VehicleHttpService;
-import com.dev.gis.connector.sunny.CreditCard;
-import com.dev.gis.connector.sunny.VerifyCreditCardPaymentResponse;
+import com.dev.gis.connector.joi.protocol.CreditCard;
+import com.dev.gis.connector.joi.protocol.VerifyCreditCardPaymentResponse;
 
 
 public class AdacCreditCardControl extends CreditCardControl {
@@ -24,6 +24,21 @@ public class AdacCreditCardControl extends CreditCardControl {
 	public AdacCreditCardControl(Composite parent) {
 		super(parent);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public static CreditCardControl createControl(Composite parent) {
+		AdacCreditCardControl bc = new AdacCreditCardControl(parent);
+		bc.createGroupControl(parent, "Edit Credit Card");
+		return bc;
+		
+	}
+	
+	@Override
+	protected void createButtons(Group groupStamp) {
+		Composite  cp = createComposite(groupStamp, 1, -1, true);
+		
+		new ButtonControl(cp, "CreditCard ADAC Payment With B&S", 0,  getCreditCardListener(getShell()));
+		
 	}
 
 	@Override
@@ -43,7 +58,7 @@ public class AdacCreditCardControl extends CreditCardControl {
 		public void widgetSelected(SelectionEvent arg0) {
 			
 			try {
-				bsUrl.setValue("running");
+				bsUrl.setValue("running adac");
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
 
@@ -55,7 +70,7 @@ public class AdacCreditCardControl extends CreditCardControl {
 					
 					BSCreditCardDialog mpd = new BSCreditCardDialog(shell, bsuri);
 					if (mpd.open() == Dialog.OK) {
-						VerifyCreditCardPaymentResponse response = null; // service.getPayPageResult();
+						VerifyCreditCardPaymentResponse response = service.getBSPayPageResult(bookingRequestId);
 						if ( response != null && response.getCard() != null) {
 							CreditCard cc = response.getCard();
 							String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";

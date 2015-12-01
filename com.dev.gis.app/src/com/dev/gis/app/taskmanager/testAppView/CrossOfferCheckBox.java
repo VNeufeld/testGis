@@ -14,7 +14,7 @@ public class CrossOfferCheckBox extends CheckBox {
 
 	public CrossOfferCheckBox(Composite parent, String name) {
 		super(parent, name);
-		AdacModelProvider.INSTANCE.crossOfferFlag = getButton().getSelection();
+		getButton().setSelection(AdacModelProvider.INSTANCE.crossOfferFlag);
 	}
 
 	@Override

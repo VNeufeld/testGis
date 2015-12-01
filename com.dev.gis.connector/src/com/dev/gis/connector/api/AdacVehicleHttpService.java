@@ -27,6 +27,7 @@ import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleRequestFilter;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
+import com.dev.gis.connector.joi.protocol.VerifyCreditCardPaymentResponse;
 
 public class AdacVehicleHttpService {
 	private static Logger logger = Logger.getLogger(AdacVehicleHttpService.class);
@@ -513,7 +514,6 @@ public class AdacVehicleHttpService {
 				return  JsonUtils.createResponseClassFromJson(response, URI.class);
 			}
 			else {
-				String response = JsonUtils.createDummyResponse("DummyJoiGetOfferResponse.json");
 				return  new URI(TaskProperties.getTaskProperties().getServerProperty());
 			}
 			
@@ -526,6 +526,35 @@ public class AdacVehicleHttpService {
 		return null;
 
 	}
+	
+	public VerifyCreditCardPaymentResponse getBSPayPageResult(String bookingRequestId ) {
+		try {
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( !dummy) {
+				
+				String link = "/booking/"+bookingRequestId+"/getPaymentResult";
+				URI uri = getServerURI(link);
+
+				logger.info("VehicleHttpService = "+uri.toString());
+				
+				String response = httpClient.sendGetRequest(uri);
+				logger.info("response : "+response);
+				return  JsonUtils.createResponseClassFromJson(response, VerifyCreditCardPaymentResponse.class);
+			}
+			else {
+				VerifyCreditCardPaymentResponse resp = new VerifyCreditCardPaymentResponse();
+				return resp;
+			}
+			
+		} catch (IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
 
 //	public VerifyCreditCardPaymentResponse getPayPageResult() {
 //		try {

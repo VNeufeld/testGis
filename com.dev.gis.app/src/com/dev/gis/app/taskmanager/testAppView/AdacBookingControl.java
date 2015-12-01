@@ -181,7 +181,8 @@ public class AdacBookingControl extends EditPartControl {
 	}
 	
 	public void setInitValues() {
-	
+		bookingRequestId.setSelectedValue("");
+		bookingPreis.setValue("");
 	}
 
 	

@@ -1,5 +1,6 @@
 package com.dev.gis.connector.joi.protocol;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="extraResponse")
 public class ExtraResponse extends Response
 {
-	private List<Extra> extras;
+	private List<Extra> extras = new ArrayList<Extra>();
 	
 	private long remainingCacheSeconds;
 

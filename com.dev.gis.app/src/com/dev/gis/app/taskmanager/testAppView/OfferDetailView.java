@@ -95,6 +95,7 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		
 		locationInfoControl.update(offerDo.getTravelInformation());
 		
+		extraListTable.refresh(new ExtraResponse());
 
 	}
 

@@ -108,7 +108,6 @@ public class TestAppView extends RentCarsAppView {
 
 		new PageSizeControl(cc, 50, false);
 		CrossOfferCheckBox crossOffer = new CrossOfferCheckBox(cc, "use crossOffer");
-		crossOffer.setSelection(true);
 
 		ButtonControl bb = new ButtonControl(cc, "GetOffer", 0, getOffersSelectionListener());
 		bb.getButton().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
@@ -198,20 +197,6 @@ public class TestAppView extends RentCarsAppView {
 		offerListTable.update();
 		
 		crossOfferListTable.update();
-		
-//		pageInfo.setText(response.getPageInfo());
-//
-//
-//		setSummary(response.getSummary());
-//
-//		contact.setText(" get Contact from response");
-//		
-//		if (response.getOfferFilterTemplate() != null) {
-//			String offerFilter = response.getOfferFilterTemplate().toString();
-//			offerFilterTemlate.setText(offerFilter);
-//			SunnyModelProvider.INSTANCE.currentResponse = response;
-//		}
-//
 		
 	}
 
