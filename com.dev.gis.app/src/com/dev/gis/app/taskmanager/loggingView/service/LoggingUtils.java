@@ -49,14 +49,19 @@ class LoggingUtils {
 				String fileName = f.getName();
 				boolean flag = true;
 				if ( StringUtils.isNotBlank(filePattern)) {
-					if (StringUtils.containsIgnoreCase(fileName,filePattern))
+					if ( "*".equals(filePattern)) {
+						flag = true;
+					}else	if (StringUtils.containsIgnoreCase(fileName,filePattern))
 						flag = true;
 					else
 						flag = false;
 					
 				}
 				if ( flag ) {
-					if ( fileNameMatch2(fileName, from, to))
+					if ( "*".equals(filePattern)) {
+						list.add(f);
+					}
+					else if ( fileNameMatch2(fileName, from, to))
 						list.add(f);
 				}
 			}

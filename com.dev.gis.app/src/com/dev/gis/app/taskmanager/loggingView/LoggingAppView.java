@@ -40,10 +40,7 @@ public class LoggingAppView extends TaskViewAbstract {
 	@Override
 	public void createPartControl(final Composite parent) {
 		
-		//cursorManager = new CursorManager(parent);
-		
-		final Group group = new Group(parent, SWT.TITLE);
-		group.setText("Session Logging:");
+		final Composite group = new Composite(parent, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(group);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(group);
 		
@@ -71,13 +68,13 @@ public class LoggingAppView extends TaskViewAbstract {
 
 
 
-	private Composite createCompositeRowLeft(Group group) {
+	private Composite createCompositeRowLeft(Composite group) {
 		GridData gdComposite1 = new GridData();
-		gdComposite1.grabExcessHorizontalSpace = true;
+		gdComposite1.grabExcessHorizontalSpace = false;
 		gdComposite1.grabExcessVerticalSpace = false;
-		gdComposite1.horizontalAlignment = SWT.FILL;
+		gdComposite1.horizontalAlignment = SWT.LEFT;
 		gdComposite1.verticalAlignment = SWT.FILL;
-		gdComposite1.widthHint = 550;
+		//gdComposite1.widthHint = 550;
 		
 		Composite composite = new Composite(group, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
@@ -122,7 +119,7 @@ public class LoggingAppView extends TaskViewAbstract {
 	}
 
 
-	private void createOutputText(Group group) {
+	private void createOutputText(Composite group) {
 
 		Composite composite = new Composite(group, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(composite);
@@ -163,7 +160,7 @@ public class LoggingAppView extends TaskViewAbstract {
 		GridData gdMaxFileSize = new GridData();
 		gdMaxFileSize.grabExcessHorizontalSpace = false;
 		gdMaxFileSize.horizontalAlignment = SWT.NONE;
-		gdMaxFileSize.widthHint = 150;
+		//gdMaxFileSize.widthHint = 150;
 		
 		maxThreadsText = new Text(textComposite, SWT.BORDER | SWT.SINGLE);
 		maxThreadsText.setLayoutData(gdMaxFileSize);
@@ -183,7 +180,7 @@ public class LoggingAppView extends TaskViewAbstract {
 		
 		logDirText = new Text(composite, SWT.BORDER | SWT.SINGLE);
 		//GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(logDirText);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(400, 16).grab(false, false).applyTo(logDirText);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(300, 16).grab(false, false).applyTo(logDirText);
 		logDirText.setText(savedDir);
 
 		final Button dirDialogBtn = addButtonSelectDir(composite);
@@ -226,7 +223,8 @@ public class LoggingAppView extends TaskViewAbstract {
 		new Label(composite, SWT.NONE).setText("OutputDir");
 		
 		outputDirText = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(400, 16).grab(false, false).applyTo(outputDirText);
+		//GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(400, 16).grab(false, false).applyTo(outputDirText);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(outputDirText);
 		outputDirText.setText(savedDir);
 
 		final Button dirDialogBtn = addButtonSelectDir(composite);
@@ -266,7 +264,7 @@ public class LoggingAppView extends TaskViewAbstract {
 		GridData gdButton = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		gdButton.grabExcessHorizontalSpace = false;
 		gdButton.horizontalAlignment = SWT.FILL;
-		gdButton.widthHint = 150;
+		//gdButton.widthHint = 150;
 		
 		final Button dirDialogBtn = new Button(composite, SWT.PUSH | SWT.CENTER);
 		dirDialogBtn.setText("Select Dir");

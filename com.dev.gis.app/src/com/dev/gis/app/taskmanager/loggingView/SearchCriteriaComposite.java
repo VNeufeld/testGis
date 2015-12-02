@@ -310,7 +310,8 @@ public class SearchCriteriaComposite {
 
 	
 	private void saveInput() {
-		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_MAX_THREADS_PROPERTY,maxThreadsText.getText());
+		if ( maxThreadsText != null)
+			LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_MAX_THREADS_PROPERTY,maxThreadsText.getText());
 		
 		LoggingSettings.saveTimeProperty(loggingFromDate, loggingToDate);
 

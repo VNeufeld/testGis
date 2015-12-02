@@ -2,19 +2,25 @@ package com.dev.gis.app.taskmanager.loggingView;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.CheckboxTableViewer;
+import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -24,6 +30,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPartSite;
 
@@ -32,7 +39,7 @@ import com.dev.gis.app.taskmanager.loggingView.service.FileNameEntry;
 import com.dev.gis.app.taskmanager.loggingView.service.FindFilesService;
 
 public class LogFilesTable {
-	private TableViewer viewer;
+	private CheckboxTableViewer viewer;
 	private final Composite parent;
 	private final IWorkbenchPartSite site;
 
@@ -44,7 +51,7 @@ public class LogFilesTable {
 	}
 
 	private void createViewer(Composite parent) {
-		viewer = new TableViewer(parent, SWT.SINGLE | SWT.H_SCROLL
+		viewer = new CheckboxTableViewer(parent, SWT.SINGLE | SWT.H_SCROLL
 				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		
 		createColumns( viewer);
@@ -65,7 +72,7 @@ public class LogFilesTable {
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.horizontalAlignment = GridData.FILL;
-//		gridData.grabExcessHorizontalSpace = true;
+		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		viewer.getControl().setLayoutData(gridData);
 		
@@ -87,12 +94,25 @@ public class LogFilesTable {
 		site.registerContextMenu(menuMgr, viewer);
 	}
 
-	private void createColumns( final TableViewer viewer) {
+	private void createColumns( final TableViewer viewerx) {
 		final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
 		final SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
 		
 		String[] titles = { "FileName", "Size", "Dir", "Status" };
 		int[] bounds = { 350, 100, 300, 80 };
+		
+		TableViewerColumn columnKey=new TableViewerColumn(viewer,SWT.NONE,0);
+		final TableColumn column = columnKey.getColumn();
+		column.setText("Select");
+		column.setWidth(100);
+		column.setResizable(true);
+		columnKey.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return "";
+			}
+		});
+		
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -134,6 +154,40 @@ public class LogFilesTable {
 				return o.getStatus();
 			}
 		});
+		
+//		TableColumn column = new TableColumn(viewer.getTable(), SWT.NONE);
+//        column.setText("Select");
+//        column.setWidth(100);
+//        TableViewerColumn actionsNameCol = new TableViewerColumn(viewer, column);
+//        
+//        actionsNameCol.setLabelProvider(new ColumnLabelProvider(){
+//            //make sure you dispose these buttons when viewer input changes
+//            Map<Object, Button> buttons = new HashMap<Object, Button>();
+//
+//
+//            @Override
+//            public void update(ViewerCell cell) {
+//
+//                TableItem item = (TableItem) cell.getItem();
+//                Button button;
+//                if(buttons.containsKey(cell.getElement()))
+//                {
+//                    button = buttons.get(cell.getElement());
+//                }
+//                else
+//                {
+//                     button = new Button((Composite) cell.getViewerRow().getControl(),SWT.NONE);
+//                    button.setText("Remove");
+//                    buttons.put(cell.getElement(), button);
+//                }
+//                TableEditor editor = new TableEditor(item.getParent());
+//                editor.grabHorizontal  = true;
+//                editor.grabVertical = true;
+//                editor.setEditor(button , item, cell.getColumnIndex());
+//                editor.layout();
+//            }
+//
+//        });
 
 	}
 

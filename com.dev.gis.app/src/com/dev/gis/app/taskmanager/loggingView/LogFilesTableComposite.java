@@ -102,9 +102,9 @@ public class LogFilesTableComposite {
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.horizontalAlignment = GridData.FILL;
 		gridData.heightHint = 220;
-		//gridData.widthHint  = 900;
+		gridData.widthHint  = 900;
 		//gridData.horizontalSpan = 1;
-		//gridData.grabExcessHorizontalSpace = true;
+		gridData.grabExcessHorizontalSpace = true;
 		//gridData.grabExcessVerticalSpace = true;
 		compositeTable.setLayoutData(gridData);
 
