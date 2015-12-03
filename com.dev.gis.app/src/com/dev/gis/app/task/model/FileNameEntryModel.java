@@ -26,6 +26,22 @@ public class FileNameEntryModel {
 	public List<FileNameEntry> getEntries() {
 		return entries;
 	}
+	
+	public List<File> getFiles() {
+		List<File> files = new ArrayList<File>();
+		for ( FileNameEntry entry : entries  )
+		{
+			if ( entry.isSelect()) {
+				if ( entry.getFile() != null) {
+					File file = entry.getFile();
+					files.add(file);
+				}
+			}
+				
+		}
+		return files;
+	}
+	
 
 	public void sort() {
 		Collections.sort(entries);

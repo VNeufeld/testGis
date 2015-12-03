@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.layout.TableColumnLayout;
@@ -15,7 +16,9 @@ import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerCell;
@@ -37,9 +40,13 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.service.FileNameEntry;
 import com.dev.gis.app.taskmanager.loggingView.service.FindFilesService;
+import com.dev.gis.connector.api.OfferDo;
 
 public class LogFilesTable {
-	private CheckboxTableViewer viewer;
+
+	private final static Logger logger = Logger.getLogger(LogFilesTable.class);
+	
+	private TableViewer viewer;
 	private final Composite parent;
 	private final IWorkbenchPartSite site;
 
@@ -51,8 +58,8 @@ public class LogFilesTable {
 	}
 
 	private void createViewer(Composite parent) {
-		viewer = new CheckboxTableViewer(parent, SWT.SINGLE | SWT.H_SCROLL
-				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
+		viewer = new TableViewer(parent, SWT.SINGLE | SWT.H_SCROLL
+				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER ) ;
 		
 		createColumns( viewer);
 		
@@ -80,6 +87,9 @@ public class LogFilesTable {
 //		parent.setLayout(tableLayout);
 
 		viewer.addDoubleClickListener(new DoubleClickListener());
+		
+		viewer.addSelectionChangedListener(new SelectClickListener());
+
 
 		hookContextMenu();
 	}
@@ -109,7 +119,11 @@ public class LogFilesTable {
 		columnKey.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return "";
+				FileNameEntry o = (FileNameEntry) element;
+				if ( o.isSelect())
+					return "1";
+				return "0";
+				
 			}
 		});
 		
@@ -219,6 +233,34 @@ public class LogFilesTable {
 		}
 
 	}
+	
+	private class SelectClickListener implements ISelectionChangedListener {
+
+		@Override
+		public void selectionChanged(SelectionChangedEvent event) {
+			
+			IStructuredSelection thisSelection = (IStructuredSelection) event
+					.getSelection();
+			Object selectedNode = thisSelection.getFirstElement();
+
+			if ( selectedNode != null ) {
+				FileNameEntry o = (FileNameEntry) selectedNode;
+				if ( o.isSelect())
+					o.setSelect(false);
+				else
+					o.setSelect(true);
+				logger.info("Change select "+o.isSelect());
+				
+				FileNameEntryModel model = FileNameEntryModel.getInstance();
+				viewer.setInput(model.getEntries());
+			}
+
+			
+		}
+
+
+	}
+	
 
 	public void update() {
 		updateModel();

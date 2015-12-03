@@ -3,11 +3,14 @@ package com.dev.gis.app.taskmanager.loggingView.service;
 import java.io.File;
 
 public class FileNameEntry implements Comparable<FileNameEntry>{
-	
+
+	private boolean select;
 	private String fileName;
 	private String dir;
 	private long   size;
 	private String status;
+	
+	private File file;
 	
 	public String getFileName() {
 		return fileName;
@@ -27,6 +30,7 @@ public class FileNameEntry implements Comparable<FileNameEntry>{
 		fn.fileName = file.getName();
 		fn.size = file.length();
 		fn.dir = file.getParent();
+		fn.file = file;
 		return fn;
 		
 	}
@@ -43,5 +47,14 @@ public class FileNameEntry implements Comparable<FileNameEntry>{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public boolean isSelect() {
+		return select;
+	}
+	public void setSelect(boolean select) {
+		this.select = select;
+	}
+	public File getFile() {
+		return file;
 	}	
 }

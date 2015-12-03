@@ -44,6 +44,8 @@ public class FindFilesService implements Callable<String> {
 			File[] files = LoggingUtils.getAllFilesRecurisive(logDir,filePattern, loggingFromDate,
 					loggingToDate);
 			
+			
+			
 			LogFileTableUpdater.updateFileList(files);					
 			
 	}

@@ -28,13 +28,13 @@ public class WriteSessionService implements Callable<String> {
 
 	private static Logger logger = Logger.getLogger(WriteSessionService.class);
 
-	private final String outputDir;
-	private final String logDir;
-	private final String sessionId;
-	private final String filePattern;
-	private final int maxThreads;
-	private final Calendar loggingFromDate;
-	private final Calendar loggingToDate;
+	private  String outputDir;
+	private  String logDir;
+	private  String sessionId;
+	private  String filePattern;
+	private int maxThreads;
+	private  Calendar loggingFromDate;
+	private  Calendar loggingToDate;
 	
 	private boolean canceled = false;
 
@@ -43,7 +43,6 @@ public class WriteSessionService implements Callable<String> {
 
 	public WriteSessionService(String dirName,
 			String outputDir, String sessionId,
-			String maxThreadsText,
 			String filePattern,
 			Calendar loggingFromDate,
 			Calendar loggingToDate) {
@@ -59,20 +58,57 @@ public class WriteSessionService implements Callable<String> {
 		this.sessionId = sessionId;
 		this.loggingFromDate = loggingFromDate;
 		this.loggingToDate = loggingToDate;
-		if (StringUtils.isBlank(maxThreadsText))
-			maxThreads = 1;
-		else {
-			int temp = Integer.valueOf(maxThreadsText);
-			if ( temp == 0)
-				maxThreads = 1;
-			else if ( temp > 10)
-				maxThreads = 10;
-			else
-				maxThreads = temp;
-				
-		}
+		maxThreads = LoggingModelProvider.INSTANCE.getThreadcounts();
 
 	}
+	
+	public WriteSessionService(	String sessionId) {
+		this.sessionId = sessionId;
+		maxThreads = LoggingModelProvider.INSTANCE.getThreadcounts();
+
+	}
+	
+	private void searchSession() {
+		try {
+			entries.clear();
+			
+			LogEntryModel.getInstance().getLoggingEntries().clear();
+
+			LogEntryTableUpdater.showResult(null);
+			
+			List<File> files = 	FileNameEntryModel.getInstance().getFiles();		
+
+			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);
+			
+			List<SessionFileService> splitterServicers = new ArrayList<SessionFileService>();
+			
+			for (File file : files) {
+				logger.info("check file :"+file.getAbsolutePath());
+
+				SessionFileService ss = new SessionFileService(file,this.sessionId);
+				splitterServicers.add(ss);
+			}
+				
+			List<Future< List<LogEntry>>> results = executor
+					.invokeAll(splitterServicers);
+			
+			for (Future<List<LogEntry>> fc : results) {
+				List<LogEntry> le = fc.get();
+				entries.addAll(le);
+			}
+		
+		
+			logger.info(" sort " + entries.size()+ " entries");
+			Collections.sort(entries);
+			
+			LogViewUpdater.updateView("exit");					
+			
+			
+		} catch (InterruptedException | ExecutionException ioe) {
+			logger.info(ioe.getMessage(), ioe);
+		}
+	}
+
 
 
 	private void splitToSession() {
@@ -148,7 +184,7 @@ public class WriteSessionService implements Callable<String> {
 	public String call() throws Exception {
 		long start = System.currentTimeMillis();
 		logger.info("start splitter session " + sessionId);
-		splitToSession();
+		searchSession();
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
 		return null;
 	}

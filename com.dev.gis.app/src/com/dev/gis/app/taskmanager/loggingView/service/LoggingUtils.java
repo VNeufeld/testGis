@@ -61,7 +61,7 @@ class LoggingUtils {
 					if ( "*".equals(filePattern)) {
 						list.add(f);
 					}
-					else if ( fileNameMatch2(fileName, from, to))
+					else if ( from != null && fileNameMatch2(fileName, from, to))
 						list.add(f);
 				}
 			}

@@ -1,32 +1,27 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.app.taskmanager.loggingView.service.LoggingSelectDirListener;
+import com.dev.gis.app.taskmanager.loggingView.service.SearchBookingListener;
+import com.dev.gis.app.taskmanager.loggingView.service.SearchSessionListener;
+import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.task.execution.api.ITaskResult;
 
 public class LoggingAppView extends TaskViewAbstract {
 	public static final String ID = "com.dev.gis.app.task.LoggingAppView";
 	
 	private final static Logger logger = Logger.getLogger(LoggingAppView.class);
-	
-	
-	private Text logDirText;
-	private Text outputDirText;
-	private Text maxThreadsText;
 	
 	private Text currentFileName;
 	
@@ -45,15 +40,17 @@ public class LoggingAppView extends TaskViewAbstract {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(group);
 		
 		Composite composite1 = createCompositeRowLeft(group);
+		
+		createMaxThreadComposite(composite1);
 
 		createGroupFiles(composite1);
 
+		createGroupSearchCriteria(composite1);
+		
 		createGroupSearch(composite1);
 		
-		logFilesTableComposite = new LogFilesTableComposite(
-				logDirText,
-				searchCriteriaComposite,
-				getSite());
+		
+		logFilesTableComposite = new LogFilesTableComposite(getSite());
 		logFilesTableComposite.create(group);
 
 		progressBarElement = new ProgressBarElement();
@@ -74,12 +71,10 @@ public class LoggingAppView extends TaskViewAbstract {
 		gdComposite1.grabExcessVerticalSpace = false;
 		gdComposite1.horizontalAlignment = SWT.LEFT;
 		gdComposite1.verticalAlignment = SWT.FILL;
-		//gdComposite1.widthHint = 550;
 		
 		Composite composite = new Composite(group, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
 		composite.setLayoutData(gdComposite1);
-		//GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(composite1);
 		
 		return composite;
 	}
@@ -98,23 +93,35 @@ public class LoggingAppView extends TaskViewAbstract {
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(composite);
 
 		createSelectDirComposite(composite);
-
-		createMaxThreadComposite(composite);
-
-		createOutputDirComposite(composite);
-
 		
 	}
 
-	private void createGroupSearch(Composite group) {
+	private void createGroupSearchCriteria(Composite group) {
 		
 		final Group groupSearch = new Group(group, SWT.TITLE);
 		groupSearch.setText("Search criteria:");
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(groupSearch);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(groupSearch);
 		
-		searchCriteriaComposite = new SearchCriteriaComposite(logDirText, maxThreadsText, outputDirText);
+		SearchCriteriaComposite searchCriteriaComposite = new SearchCriteriaComposite();
 		searchCriteriaComposite.create(groupSearch);
+		
+	}
+	
+	private void createGroupSearch(Composite group) {
+		
+		final Group groupSearch = new Group(group, SWT.TITLE);
+		groupSearch.setText("Search:");
+		GridLayoutFactory.fillDefaults().numColumns(3).applyTo(groupSearch);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(groupSearch);
+		
+		SearchSessionIdTextControl searchSessionIdTextControl = new SearchSessionIdTextControl(groupSearch);
+		
+		new ButtonControl(groupSearch, "Search Session", 0,  new SearchSessionListener());
+
+		SearchBookingIdTextControl searchBookingIdTextControl = new SearchBookingIdTextControl(groupSearch);
+		
+		new ButtonControl(groupSearch, "Search Booking", 0,  new SearchBookingListener());
 		
 	}
 
@@ -142,138 +149,34 @@ public class LoggingAppView extends TaskViewAbstract {
 	
 	
 	private void createMaxThreadComposite(Composite parent) {
-
-		String maxThreadsSaved = LoggingSettings.readProperty(LoggingSettings.PREFERENCE_MAX_THREADS_PROPERTY,"1");
-
-
-		new Label(parent, SWT.NONE).setText("maxThreadPoolSize");
 		
-		GridData gdTextComposite = new GridData();
-		gdTextComposite.grabExcessHorizontalSpace = false;
-		gdTextComposite.horizontalAlignment = SWT.NONE;
-		gdTextComposite.horizontalSpan = 2;
+		Composite composite = createComposite(parent, 2, -1, true);
 		
-		Composite textComposite = new Composite(parent, SWT.NONE);
-		textComposite.setLayoutData(gdTextComposite);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(textComposite);
-
-		GridData gdMaxFileSize = new GridData();
-		gdMaxFileSize.grabExcessHorizontalSpace = false;
-		gdMaxFileSize.horizontalAlignment = SWT.NONE;
-		//gdMaxFileSize.widthHint = 150;
+		new ThreadCountTextControl(composite);
 		
-		maxThreadsText = new Text(textComposite, SWT.BORDER | SWT.SINGLE);
-		maxThreadsText.setLayoutData(gdMaxFileSize);
-		
-		maxThreadsText.setText(maxThreadsSaved);
-
-		new Label(textComposite, SWT.NONE).setText("( 1 : 10 )");
 		
 	}
-
-
 	private void createSelectDirComposite(final Composite composite) {
-
-		String savedDir = LoggingSettings.readProperty(LoggingSettings.PREFERENCE_INPUT_DIR_PROPERTY,"");
-
-		new Label(composite, SWT.NONE).setText("LogDir");
 		
-		logDirText = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		//GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(logDirText);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(300, 16).grab(false, false).applyTo(logDirText);
-		logDirText.setText(savedDir);
-
-		final Button dirDialogBtn = addButtonSelectDir(composite);
+		Composite innernComposite = createComposite(composite, 3, -1, false);
 		
+		LogDirControl logDirControl = new LogDirControl(innernComposite);
 		
-		dirDialogBtn.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				DirectoryDialog dirDialog = new DirectoryDialog(composite.getShell());
-				    // Set the text
-				dirDialog.setText("Select logging dir");		
-
-
-				// Set the text
-				if ( StringUtils.isNotBlank(logDirText.getText()))
-					dirDialog.setFilterPath(logDirText.getText());
-
-				String dir = dirDialog.open();
-				
-				if (StringUtils.isNotEmpty(dir) )
-					logDirText.setText(dir);
-				
-				LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_INPUT_DIR_PROPERTY,logDirText.getText());
-				
-
-			}
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-				
-	}
-	
-	private void createOutputDirComposite(final Composite composite) {
+		new ButtonControl(innernComposite, "Select Dir", 0,  selectDirListener(composite, logDirControl));
 		
-		String savedDir = LoggingSettings.readProperty(LoggingSettings.PREFERENCE_OUTPUT_DIR_PROPERTY,"");
-		
-		new Label(composite, SWT.NONE).setText("OutputDir");
-		
-		outputDirText = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		//GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).hint(400, 16).grab(false, false).applyTo(outputDirText);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(outputDirText);
-		outputDirText.setText(savedDir);
 
-		final Button dirDialogBtn = addButtonSelectDir(composite);
+		LogOutputDirControl logOutputDirControl = new LogOutputDirControl(innernComposite);
 		
+		new ButtonControl(innernComposite, "Select Output Dir", 0,  selectDirListener(composite, logOutputDirControl));
 		
-		
-		dirDialogBtn.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				DirectoryDialog dirDialog = new DirectoryDialog(composite.getShell());
-				
-				// Set the text
-				if ( StringUtils.isNotBlank(outputDirText.getText()))
-					dirDialog.setFilterPath(outputDirText.getText());
-				
-				dirDialog.setText("Select output dir");				
-
-				String dir = dirDialog.open();
-				
-				if (StringUtils.isNotEmpty(dir) )
-					outputDirText.setText(dir);
-				
-				LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_OUTPUT_DIR_PROPERTY,outputDirText.getText());
-
-			}
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
 		
 	}
 
-
-	private Button addButtonSelectDir(final Composite composite) {
-		GridData gdButton = new GridData(GridData.HORIZONTAL_ALIGN_END);
-		gdButton.grabExcessHorizontalSpace = false;
-		gdButton.horizontalAlignment = SWT.FILL;
-		//gdButton.widthHint = 150;
+	private SelectionListener selectDirListener(final Composite composite, ObjectTextControl dirControl) {
 		
-		final Button dirDialogBtn = new Button(composite, SWT.PUSH | SWT.CENTER);
-		dirDialogBtn.setText("Select Dir");
-		dirDialogBtn.setLayoutData(gdButton);
-		return dirDialogBtn;
+		LoggingSelectDirListener listener = new LoggingSelectDirListener(composite.getShell(), dirControl);
+		return listener;
 	}
-
-	
-
 
 
 	
@@ -326,7 +229,7 @@ public class LoggingAppView extends TaskViewAbstract {
 
 	private void resetButtons() {
 		
-		searchCriteriaComposite.resetButtons();
+		//searchCriteriaComposite.resetButtons();
 		
 		progressBarElement.reset();
 		

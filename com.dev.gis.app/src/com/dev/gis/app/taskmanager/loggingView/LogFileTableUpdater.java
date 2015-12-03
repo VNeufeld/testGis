@@ -52,7 +52,10 @@ public class LogFileTableUpdater  {
 							Integer.toString(instanceNum), 
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
-					FileNameEntryModel.getInstance().create(files);
+					if (files == null )
+						FileNameEntryModel.getInstance().clear();
+					else
+						FileNameEntryModel.getInstance().create(files);
 					
 					viewPart.logFilesTableComposite.update();
 					

@@ -19,9 +19,14 @@ import org.eclipse.swt.widgets.Text;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.service.FindBookingService;
+import com.dev.gis.app.taskmanager.loggingView.service.FindFilesService;
+import com.dev.gis.app.taskmanager.loggingView.service.LoggingModelProvider;
+import com.dev.gis.app.taskmanager.loggingView.service.LoggingSearchFilesSelectionListener;
 import com.dev.gis.app.taskmanager.loggingView.service.WriteSessionService;
+import com.dev.gis.app.view.elements.BasicControl;
+import com.dev.gis.app.view.elements.ButtonControl;
 
-public class SearchCriteriaComposite {
+public class SearchCriteriaComposite extends BasicControl {
 	
 	private final static Logger logger = Logger.getLogger(SearchCriteriaComposite.class);
 	
@@ -32,14 +37,8 @@ public class SearchCriteriaComposite {
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
 
 
-	Text filePattern;
 	private Text sessionIdText;
 	private Text bookingIdText;
-	
-	private final Text logDirText;
-	private final Text maxThreadsText;
-	private final Text outputDirText;
-	
 	
 	
 	Calendar loggingFromDate ;
@@ -50,10 +49,7 @@ public class SearchCriteriaComposite {
 	private Button buttonBooking;
 
 
-	public SearchCriteriaComposite(final Text logDirText, final Text maxThreadsText, final Text outputDirText) {
-		this.logDirText = logDirText;
-		this.maxThreadsText = maxThreadsText;
-		this.outputDirText = outputDirText;
+	public SearchCriteriaComposite() {
 		
 	}
 	
@@ -62,68 +58,25 @@ public class SearchCriteriaComposite {
 		Composite composite = new Composite(groupSearch, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(composite);
 
-		createFileMatching(composite);
+		Composite innernComposite = createComposite(composite, 2, -1, false);
+		
+		new FilePatternTextControl(composite);
 		
 		createDates(composite);
-
-		createSessionComposite(composite);
-
-		createBookingComposite(composite);
 		
-	}
-
-	private void createFileMatching(Composite composite) {
-		String saved = LoggingSettings.readProperty(LoggingSettings.PREFERENCE_FILE_MATCH,"request");
-
-		new Label(composite, SWT.NONE).setText("File pattern");
-		
-		
-		Composite innernComposite = new Composite(composite, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(innernComposite);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(innernComposite);
+		new ButtonControl(composite, "Search Files", 0,  searchFilesListener());
 		
 
-		GridData gridData = new GridData();
-		gridData.grabExcessHorizontalSpace = true;
-		//gridData.horizontalAlignment = SWT.true;
-		gridData.widthHint = 400;
-
-		filePattern = new Text(innernComposite, SWT.BORDER | SWT.SINGLE);
-		filePattern.setText(saved);
-		filePattern.setLayoutData(gridData);
+//		createSessionComposite(composite);
+//
+//		createBookingComposite(composite);
 		
 	}
 	
-	private void createSessionComposite(Composite composite) {
-		
-		String saved = LoggingSettings.readProperty(LoggingSettings.PREFERENCE_SESSION_PROPERTY,"0");
-		
-		GridData gdLabel = new GridData();
-		gdLabel.grabExcessHorizontalSpace = false;
-		gdLabel.horizontalAlignment = SWT.LEFT;
-		gdLabel.widthHint= 100;
-
-		Composite labelComposite = new Composite(composite, SWT.NONE);
-		labelComposite.setLayoutData(gdLabel);
-		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(labelComposite);
-		
-		new Label(labelComposite, SWT.NONE).setText("SessionId");
-		
-		
-		GridData gdDateSession = new GridData();
-		gdDateSession.grabExcessHorizontalSpace = false;
-		gdDateSession.horizontalAlignment = SWT.NONE;
-		gdDateSession.horizontalSpan = 1;
-		gdDateSession.widthHint = 400;
-		
-		
-		sessionIdText = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		sessionIdText.setLayoutData(gdDateSession);
-		sessionIdText.setText(saved);
-		
-		addButtonSession(composite);
-		
+	private SelectionListener searchFilesListener() {
+		return new LoggingSearchFilesSelectionListener();	
 	}
+
 	
 	private void createBookingComposite(Composite composite) {
 		GridData gdDateSession = new GridData();
@@ -161,9 +114,9 @@ public class SearchCriteriaComposite {
 				
 				//buttonStop.setEnabled(true);
 				
-				findBooking = new FindBookingService(logDirText.getText(), 
+				findBooking = new FindBookingService(LoggingModelProvider.INSTANCE.logDirName, 
 						bookingIdText.getText(),
-						maxThreadsText.getText(),filePattern.getText(),
+						LoggingModelProvider.INSTANCE.filePattern,
 						loggingFromDate,loggingToDate);
 				
 				executor.submit(findBooking);
@@ -287,9 +240,9 @@ public class SearchCriteriaComposite {
 				//buttonStop.setEnabled(true);
 				FileNameEntryModel.getInstance().getEntries().clear();
 				
-				splittFileToSession = new WriteSessionService(logDirText.getText(),outputDirText.getText(), 
+				splittFileToSession = new WriteSessionService(LoggingModelProvider.INSTANCE.logDirName,LoggingModelProvider.INSTANCE.outputDirName, 
 						sessionIdText.getText(),
-						maxThreadsText.getText(),filePattern.getText(),
+						LoggingModelProvider.INSTANCE.filePattern,
 						loggingFromDate,loggingToDate);
 				
 				executor.submit(splittFileToSession);
@@ -310,16 +263,11 @@ public class SearchCriteriaComposite {
 
 	
 	private void saveInput() {
-		if ( maxThreadsText != null)
-			LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_MAX_THREADS_PROPERTY,maxThreadsText.getText());
 		
 		LoggingSettings.saveTimeProperty(loggingFromDate, loggingToDate);
 
-		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_INPUT_DIR_PROPERTY,logDirText.getText());
-
 		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_SESSION_PROPERTY,sessionIdText.getText());
 
-		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_FILE_MATCH,filePattern.getText());
 
 		
 	}

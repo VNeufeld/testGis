@@ -27,7 +27,7 @@ public class FindBookingService implements Callable<String> {
 
 	private final String logDir;
 	private final String bookingId;
-	private final int maxThreads;
+	private int maxThreads;
 	private final Calendar loggingFromDate;
 	private final Calendar loggingToDate;
 	private final String   filePattern;
@@ -39,7 +39,6 @@ public class FindBookingService implements Callable<String> {
 
 	public FindBookingService(String dirName,
 			String bookingId,
-			String maxThreadsText,
 			String   filePattern,
 			Calendar loggingFromDate,
 			Calendar loggingToDate) {
@@ -54,18 +53,7 @@ public class FindBookingService implements Callable<String> {
 		this.bookingId = bookingId;
 		this.loggingFromDate = loggingFromDate;
 		this.loggingToDate = loggingToDate;
-		if (StringUtils.isBlank(maxThreadsText))
-			maxThreads = 1;
-		else {
-			int temp = Integer.valueOf(maxThreadsText);
-			if ( temp == 0)
-				maxThreads = 1;
-			else if ( temp > 10)
-				maxThreads = 10;
-			else
-				maxThreads = temp;
-				
-		}
+		maxThreads = LoggingModelProvider.INSTANCE.getThreadcounts();
 
 	}
 

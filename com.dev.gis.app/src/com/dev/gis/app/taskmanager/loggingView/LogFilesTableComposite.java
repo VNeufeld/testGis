@@ -25,19 +25,13 @@ public class LogFilesTableComposite {
 	private Text filesCount;
 	private LogFilesTable logFilesTable;
 	private final IWorkbenchPartSite partSite;
-	private final Text logDirText;
 	
-	private final SearchCriteriaComposite searchCriteriaComposite;
 
 	private ExecutorService executor = Executors.newSingleThreadExecutor();
 
 
-	public LogFilesTableComposite(Text logDirText,
-			final SearchCriteriaComposite searchCriteriaComposite,
-			IWorkbenchPartSite iWorkbenchPartSite) {
-		this.searchCriteriaComposite = searchCriteriaComposite;
+	public LogFilesTableComposite(IWorkbenchPartSite iWorkbenchPartSite) {
 		this.partSite = iWorkbenchPartSite;
-		this.logDirText = logDirText;
 		
 	}
 
@@ -89,7 +83,7 @@ public class LogFilesTableComposite {
 		gridData2.horizontalSpan = 2;
 		compositeFileSearch.setLayoutData(gridData2);
 
-		addSearchFilesButton(compositeFileSearch);
+		//addSearchFilesButton(compositeFileSearch);
 		
 		filesCount = new Text(compositeFileSearch, SWT.BORDER | SWT.SINGLE);
 		filesCount.setEnabled(false);
@@ -111,42 +105,42 @@ public class LogFilesTableComposite {
 		logFilesTable = new LogFilesTable(compositeTable, partSite);
 	}
 
-	private void addSearchFilesButton(Composite parent) {
-		GridData gdButton = new GridData();
-		gdButton.grabExcessHorizontalSpace = false;
-		gdButton.horizontalAlignment = SWT.NONE;
-		gdButton.widthHint = 150;
-		
-		final Button dirDialogBtn = new Button(parent, SWT.PUSH | SWT.CENTER);
-		dirDialogBtn.setText("Show files");
-		dirDialogBtn.setLayoutData(gdButton);
-		
-		dirDialogBtn.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
-				FileNameEntryModel.getInstance().getEntries().clear();
-				logFilesTable.update();
-				
-				FindFilesService ff = new FindFilesService(logDirText.getText(),searchCriteriaComposite.filePattern.getText(),
-						searchCriteriaComposite.loggingFromDate,searchCriteriaComposite.loggingToDate);
-				
-				executor.submit(ff);
-				
-				logger.info(" executer started ");
-				
-	
-			}
-			
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-		
-		
-	}
+//	private void addSearchFilesButton(Composite parent) {
+//		GridData gdButton = new GridData();
+//		gdButton.grabExcessHorizontalSpace = false;
+//		gdButton.horizontalAlignment = SWT.NONE;
+//		gdButton.widthHint = 150;
+//		
+//		final Button dirDialogBtn = new Button(parent, SWT.PUSH | SWT.CENTER);
+//		dirDialogBtn.setText("Show files");
+//		dirDialogBtn.setLayoutData(gdButton);
+//		
+//		dirDialogBtn.addSelectionListener(new SelectionListener() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				
+//				FileNameEntryModel.getInstance().getEntries().clear();
+//				logFilesTable.update();
+//				
+//				FindFilesService ff = new FindFilesService(logDirText.getText(),searchCriteriaComposite.filePattern.getText(),
+//						searchCriteriaComposite.loggingFromDate,searchCriteriaComposite.loggingToDate);
+//				
+//				executor.submit(ff);
+//				
+//				logger.info(" executer started ");
+//				
+//	
+//			}
+//			
+//
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent e) {
+//				widgetSelected(e);
+//			}
+//		});
+//		
+//		
+//	}
 
 
 	public void update() {
