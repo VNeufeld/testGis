@@ -36,8 +36,7 @@ public class LoggingSearchFilesSelectionListener implements SelectionListener {
 		
 		LogFileTableUpdater.updateFileList(null);					
 		
-		FindFilesService ff = new FindFilesService(LoggingModelProvider.INSTANCE.logDirName,LoggingModelProvider.INSTANCE.filePattern,
-				null, null);  //searchCriteriaComposite.loggingFromDate,searchCriteriaComposite.loggingToDate);
+		FindFilesService ff = new FindFilesService();
 		
 		executor.submit(ff);
 		

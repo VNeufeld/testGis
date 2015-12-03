@@ -2,7 +2,6 @@ package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -11,48 +10,28 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.task.model.LogEntryModel;
-import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
-import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
-import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LogBookingEntryView;
+import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
 
 public class FindBookingService implements Callable<String> {
 
 	private static Logger logger = Logger.getLogger(FindBookingService.class);
 
-	private final String logDir;
 	private final String bookingId;
 	private int maxThreads;
-	private final Calendar loggingFromDate;
-	private final Calendar loggingToDate;
-	private final String   filePattern;
 
 	private boolean canceled = false;
 
 
 	private List<LogEntry> entries = new ArrayList<LogEntry>();
 
-	public FindBookingService(String dirName,
-			String bookingId,
-			String   filePattern,
-			Calendar loggingFromDate,
-			Calendar loggingToDate) {
+	public FindBookingService(){
 
-		if (StringUtils.isNotEmpty(dirName)) {
-			logDir = dirName;
-		} else {
-			logDir = null;
-		}
-
-		this.filePattern = filePattern;
-		this.bookingId = bookingId;
-		this.loggingFromDate = loggingFromDate;
-		this.loggingToDate = loggingToDate;
+		this.bookingId = LoggingModelProvider.INSTANCE.searchBooking;
 		maxThreads = LoggingModelProvider.INSTANCE.getThreadcounts();
 
 	}
@@ -60,17 +39,6 @@ public class FindBookingService implements Callable<String> {
 
 	private void searchBooking() {
 		try {
-
-			File[] files = LoggingUtils.getAllFilesRecurisive(logDir, filePattern, loggingFromDate,
-					loggingToDate);
-			
-			if (files.length == 0 ) {
-				LogViewUpdater.updateView("error: no files found for this search criteria.");					
-				return;
-			}
-			
-			LogFileTableUpdater.updateFileList(files);					
-			
 			
 			entries.clear();
 
@@ -79,6 +47,8 @@ public class FindBookingService implements Callable<String> {
 			List<SearchBookingFileService> services = new ArrayList<SearchBookingFileService>();
 			
 			LogEntryModel.getInstance().setProcessRunning();
+			
+			List<File> files = 	FileNameEntryModel.getInstance().getFiles();		
 			
 			for (File file : files) {
 				logger.info("check file :"+file.getAbsolutePath());
@@ -96,8 +66,6 @@ public class FindBookingService implements Callable<String> {
 		
 		
 			Collections.sort(entries);
-
-			//writeEntries();
 
 			logger.info(" save " + entries.size()+ " entries successfull");
 			

@@ -115,11 +115,11 @@ public class LoggingAppView extends TaskViewAbstract {
 		GridLayoutFactory.fillDefaults().numColumns(3).applyTo(groupSearch);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(groupSearch);
 		
-		SearchSessionIdTextControl searchSessionIdTextControl = new SearchSessionIdTextControl(groupSearch);
+		new SearchSessionIdTextControl(groupSearch);
 		
 		new ButtonControl(groupSearch, "Search Session", 0,  new SearchSessionListener());
 
-		SearchBookingIdTextControl searchBookingIdTextControl = new SearchBookingIdTextControl(groupSearch);
+		new SearchBookingIdTextControl(groupSearch);
 		
 		new ButtonControl(groupSearch, "Search Booking", 0,  new SearchBookingListener());
 		
@@ -196,11 +196,6 @@ public class LoggingAppView extends TaskViewAbstract {
 	}
 
 
-	void refreshCriteria(String bookingId, String sessionId) {
-		searchCriteriaComposite.update(bookingId,sessionId);
-	}
-
-
 	void outputText(String text) {
 		if ( text.startsWith("error") || text.startsWith("session")) {
 
@@ -228,8 +223,6 @@ public class LoggingAppView extends TaskViewAbstract {
 
 
 	private void resetButtons() {
-		
-		//searchCriteriaComposite.resetButtons();
 		
 		progressBarElement.reset();
 		

@@ -1,5 +1,7 @@
 package com.dev.gis.app.taskmanager.loggingView.service;
 
+import java.util.Calendar;
+
 public enum LoggingModelProvider {
 	INSTANCE;
 	
@@ -15,6 +17,11 @@ public enum LoggingModelProvider {
 
 	public String outputDirName;
 	
+	public Calendar loggingFromDate ;
+	public Calendar loggingToDate;
+
+	
+	public boolean useDates;
 	
 	public int getThreadcounts() {
 		if ( threadCounts <= 0)

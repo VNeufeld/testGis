@@ -8,7 +8,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
-import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 
 
 public class SearchBookingListener implements SelectionListener {
@@ -30,20 +29,15 @@ public class SearchBookingListener implements SelectionListener {
 	@Override
 	public void widgetSelected(SelectionEvent arg0) {
 		
-		logger.info(" FindFilesService started ");
+		logger.info(" FindBookingService started ");
 		
 		FileNameEntryModel.getInstance().getEntries().clear();
 		
-		LogFileTableUpdater.updateFileList(null);					
+		FindBookingService findBooking = new FindBookingService();
 		
-		FindFilesService ff = new FindFilesService(LoggingModelProvider.INSTANCE.logDirName,LoggingModelProvider.INSTANCE.filePattern,
-				null, null);  //searchCriteriaComposite.loggingFromDate,searchCriteriaComposite.loggingToDate);
+		executor.submit(findBooking);
 		
-		executor.submit(ff);
-		
-		logger.info(" FindFilesService finished ");
-
-
+		logger.info(" FindBookingService finished ");
 		
 	}
 

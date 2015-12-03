@@ -1,55 +1,37 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import com.dev.gis.app.task.model.FileNameEntryModel;
-import com.dev.gis.app.taskmanager.loggingView.service.FindFilesService;
+import com.dev.gis.app.view.elements.BasicControl;
 
-public class LogFilesTableComposite {
-
-	private final static Logger logger = Logger.getLogger(LogFilesTableComposite.class);
+public class LogFilesTableComposite extends BasicControl{
 
 	private Text filesCount;
 	private LogFilesTable logFilesTable;
 	private final IWorkbenchPartSite partSite;
-	
-
-	private ExecutorService executor = Executors.newSingleThreadExecutor();
-
 
 	public LogFilesTableComposite(IWorkbenchPartSite iWorkbenchPartSite) {
 		this.partSite = iWorkbenchPartSite;
-		
 	}
 
-
 	public void create(Composite parent) {
-
 		GridData gdComposite2 = new GridData();
 		gdComposite2.grabExcessHorizontalSpace = true;
 		gdComposite2.grabExcessVerticalSpace = false;
 		gdComposite2.horizontalAlignment = SWT.FILL;
 		gdComposite2.verticalAlignment = SWT.FILL;
-		//gdComposite2.widthHint = 800;
 
 
 		Composite composite = new Composite(parent, SWT.RIGHT);
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
 		composite.setLayoutData(gdComposite2);
-		
 		
 		addFilesTable(composite);
 	}
@@ -62,13 +44,9 @@ public class LogFilesTableComposite {
 		GridData gridDataGroupTable = new GridData();
 		gridDataGroupTable.verticalAlignment = GridData.FILL;
 		gridDataGroupTable.horizontalAlignment = GridData.FILL;
-//		gridData.heightHint = 200;
-//		gridDataGroupTable.widthHint  = 900;
-//		gridDataGroupTable.horizontalSpan = 1;
 		gridDataGroupTable.grabExcessHorizontalSpace = true;
 		gridDataGroupTable.grabExcessVerticalSpace = true;
 
-//		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(false, true).applyTo(groupTable);
 		groupTable.setText("File list:");
 		groupTable.setLayoutData(gridDataGroupTable);
 		
@@ -82,12 +60,10 @@ public class LogFilesTableComposite {
 		gridData2.horizontalAlignment = GridData.FILL;
 		gridData2.horizontalSpan = 2;
 		compositeFileSearch.setLayoutData(gridData2);
-
-		//addSearchFilesButton(compositeFileSearch);
 		
 		filesCount = new Text(compositeFileSearch, SWT.BORDER | SWT.SINGLE);
 		filesCount.setEnabled(false);
-		filesCount.setText("files : 0");
+		filesCount.setText("files :        0");
 
 		Composite compositeTable = new Composite(groupTable, SWT.RIGHT);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(compositeTable);
@@ -95,8 +71,8 @@ public class LogFilesTableComposite {
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.horizontalAlignment = GridData.FILL;
-		gridData.heightHint = 220;
-		gridData.widthHint  = 900;
+		gridData.heightHint = 320;
+		//gridData.widthHint  = 900;
 		//gridData.horizontalSpan = 1;
 		gridData.grabExcessHorizontalSpace = true;
 		//gridData.grabExcessVerticalSpace = true;
@@ -105,47 +81,9 @@ public class LogFilesTableComposite {
 		logFilesTable = new LogFilesTable(compositeTable, partSite);
 	}
 
-//	private void addSearchFilesButton(Composite parent) {
-//		GridData gdButton = new GridData();
-//		gdButton.grabExcessHorizontalSpace = false;
-//		gdButton.horizontalAlignment = SWT.NONE;
-//		gdButton.widthHint = 150;
-//		
-//		final Button dirDialogBtn = new Button(parent, SWT.PUSH | SWT.CENTER);
-//		dirDialogBtn.setText("Show files");
-//		dirDialogBtn.setLayoutData(gdButton);
-//		
-//		dirDialogBtn.addSelectionListener(new SelectionListener() {
-//			@Override
-//			public void widgetSelected(SelectionEvent e) {
-//				
-//				FileNameEntryModel.getInstance().getEntries().clear();
-//				logFilesTable.update();
-//				
-//				FindFilesService ff = new FindFilesService(logDirText.getText(),searchCriteriaComposite.filePattern.getText(),
-//						searchCriteriaComposite.loggingFromDate,searchCriteriaComposite.loggingToDate);
-//				
-//				executor.submit(ff);
-//				
-//				logger.info(" executer started ");
-//				
-//	
-//			}
-//			
-//
-//			@Override
-//			public void widgetDefaultSelected(SelectionEvent e) {
-//				widgetSelected(e);
-//			}
-//		});
-//		
-//		
-//	}
-
-
 	public void update() {
 		logFilesTable.update();
-		filesCount.setText("files :"+ FileNameEntryModel.getInstance().getEntries().size());
+		filesCount.setText("files : "+ FileNameEntryModel.getInstance().getEntries().size()+ "   ");
 	}
 
 }

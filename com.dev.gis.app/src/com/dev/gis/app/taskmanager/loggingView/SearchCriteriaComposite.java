@@ -1,52 +1,25 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
 import java.util.Calendar;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
 
-import com.dev.gis.app.task.model.FileNameEntryModel;
-import com.dev.gis.app.taskmanager.loggingView.service.FindBookingService;
-import com.dev.gis.app.taskmanager.loggingView.service.FindFilesService;
 import com.dev.gis.app.taskmanager.loggingView.service.LoggingModelProvider;
 import com.dev.gis.app.taskmanager.loggingView.service.LoggingSearchFilesSelectionListener;
-import com.dev.gis.app.taskmanager.loggingView.service.WriteSessionService;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 
 public class SearchCriteriaComposite extends BasicControl {
 	
 	private final static Logger logger = Logger.getLogger(SearchCriteriaComposite.class);
-	
-	private WriteSessionService splittFileToSession = null;
-	
-	private FindBookingService findBooking = null;
-	
-	private ExecutorService executor = Executors.newSingleThreadExecutor();
-
-
-	private Text sessionIdText;
-	private Text bookingIdText;
-	
-	
-	Calendar loggingFromDate ;
-	Calendar loggingToDate;
-
-	
-	private Button buttonSession;
-	private Button buttonBooking;
 
 
 	public SearchCriteriaComposite() {
@@ -57,8 +30,6 @@ public class SearchCriteriaComposite extends BasicControl {
 		
 		Composite composite = new Composite(groupSearch, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(composite);
-
-		Composite innernComposite = createComposite(composite, 2, -1, false);
 		
 		new FilePatternTextControl(composite);
 		
@@ -66,87 +37,26 @@ public class SearchCriteriaComposite extends BasicControl {
 		
 		new ButtonControl(composite, "Search Files", 0,  searchFilesListener());
 		
-
-//		createSessionComposite(composite);
-//
-//		createBookingComposite(composite);
-		
 	}
 	
 	private SelectionListener searchFilesListener() {
 		return new LoggingSearchFilesSelectionListener();	
 	}
-
 	
-	private void createBookingComposite(Composite composite) {
-		GridData gdDateSession = new GridData();
-		gdDateSession.grabExcessHorizontalSpace = false;
-		gdDateSession.horizontalAlignment = SWT.NONE;
-		gdDateSession.horizontalSpan = 1;
-		gdDateSession.widthHint = 400;
-
-		new Label(composite, SWT.NONE).setText("BookingId");
-		
-		bookingIdText = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		bookingIdText.setLayoutData(gdDateSession);
-		
-
-		GridData gdButton = new GridData();
-		gdButton.grabExcessHorizontalSpace = false;
-		gdButton.horizontalAlignment = SWT.NONE;
-		gdButton.widthHint = 150;
-
-		buttonBooking = new Button(composite, SWT.PUSH | SWT.CENTER);
-		buttonBooking.setText("Search booking");
-		buttonBooking.setLayoutData(gdButton);
-		
-		
-		buttonBooking.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
-				saveInput();
-				
-				buttonBooking.setEnabled(false);
-				buttonBooking.setText(" Wait ....");
-				
-				FileNameEntryModel.getInstance().getEntries().clear();
-				
-				//buttonStop.setEnabled(true);
-				
-				findBooking = new FindBookingService(LoggingModelProvider.INSTANCE.logDirName, 
-						bookingIdText.getText(),
-						LoggingModelProvider.INSTANCE.filePattern,
-						loggingFromDate,loggingToDate);
-				
-				executor.submit(findBooking);
-				
-				logger.info(" executer started ");
-				
-	
-			}
-			
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-		
-	}
-
 
 	private void createDates(Composite parent) {
+		
+		Composite checkBoxComosite = createComposite(parent, 1, -1, true);
+		new UseDatesCheckBox(checkBoxComosite," select dates :");
 
 		Calendar[] cals = LoggingSettings.readTimeProperty();
 		
-		//initDates();
-		loggingFromDate = cals[0];
-		loggingToDate = cals[1];
+		LoggingModelProvider.INSTANCE.loggingFromDate = cals[0];
+		LoggingModelProvider.INSTANCE.loggingToDate = cals[1];
 		
-		addDateControl("fromDate:",parent,loggingFromDate,2);
+		addDateControl("fromDate:",parent,LoggingModelProvider.INSTANCE.loggingFromDate,2);
 		
-		addDateControl("toDate:",parent,loggingToDate,2);
+		addDateControl("toDate:",parent,LoggingModelProvider.INSTANCE.loggingToDate,2);
 
 	}
 
@@ -188,6 +98,7 @@ public class SearchCriteriaComposite extends BasicControl {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				resultDate.set(dateTime.getYear(), dateTime.getMonth(), dateTime.getDay());
+				saveInput();
 			}
 
 			@Override
@@ -204,103 +115,20 @@ public class SearchCriteriaComposite extends BasicControl {
 				resultDate.set(Calendar.HOUR_OF_DAY, dateTime2.getHours());
 				resultDate.set(Calendar.MINUTE, dateTime2.getMinutes());
 				resultDate.set(Calendar.SECOND, dateTime2.getSeconds());
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				widgetSelected(e);
-			}
-		});
-
-		
-	}
-	
-	private void addButtonSession(final Composite composite) {
-		
-		GridData gdButton = new GridData();
-		gdButton.grabExcessHorizontalSpace = false;
-		gdButton.horizontalAlignment = SWT.NONE;
-		gdButton.widthHint = 150;
-
-		
-		buttonSession = new Button(composite, SWT.PUSH | SWT.CENTER);
-		buttonSession.setText("Split to session");
-		buttonSession.setLayoutData(gdButton);
-
-		
-		buttonSession.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
 				saveInput();
-				
-				buttonSession.setEnabled(false);
-				buttonSession.setText(" Wait ....");
-				
-				//buttonStop.setEnabled(true);
-				FileNameEntryModel.getInstance().getEntries().clear();
-				
-				splittFileToSession = new WriteSessionService(LoggingModelProvider.INSTANCE.logDirName,LoggingModelProvider.INSTANCE.outputDirName, 
-						sessionIdText.getText(),
-						LoggingModelProvider.INSTANCE.filePattern,
-						loggingFromDate,loggingToDate);
-				
-				executor.submit(splittFileToSession);
-				
-				logger.info(" executer started ");
-				
-	
 			}
-			
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				widgetSelected(e);
 			}
 		});
+		
 	}
-	
-
 	
 	private void saveInput() {
-		
-		LoggingSettings.saveTimeProperty(loggingFromDate, loggingToDate);
-
-		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_SESSION_PROPERTY,sessionIdText.getText());
-
-
-		
+		LoggingSettings.saveTimeProperty(
+				LoggingModelProvider.INSTANCE.loggingFromDate, 
+				LoggingModelProvider.INSTANCE.loggingToDate);
 	}
-
-	public void resetButtons() {
-		buttonSession.setEnabled(true);
-		buttonSession.setText("Split to session");
-		
-		splittFileToSession = null;
-		
-		findBooking = null;
-
-		buttonBooking.setEnabled(true);
-		
-		buttonBooking.setText("Search booking");
-		
-	}
-	
-	@SuppressWarnings("unused")
-	private void initDates() {
-		
-		loggingFromDate.set(Calendar.HOUR_OF_DAY, 11);
-		loggingFromDate.set(Calendar.MINUTE, 30);
-		loggingFromDate.set(Calendar.SECOND, 0);
-
-		loggingToDate.set(Calendar.HOUR_OF_DAY, 18);
-		loggingToDate.set(Calendar.MINUTE, 0);
-		loggingToDate.set(Calendar.SECOND, 0);	
-	}
-
-	public void update(String bookingId, String sessionId) {
-		sessionIdText.setText(sessionId);
-		bookingIdText.setText(bookingId);
-	}
-
 }

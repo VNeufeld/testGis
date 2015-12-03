@@ -18,50 +18,24 @@ class LoggingUtils {
 	private static Logger logger = Logger.getLogger(LoggingUtils.class);
 
 	private static final String DATE_TIME_FORMAT = "yyyy_MM_dd_HH";
-
-	public static File[] getAllFiles(String dirName, Calendar from, Calendar to) {
-		// TODO Auto-generated method stub
-		List<File> list = new ArrayList<File>();
-		File dir = new File(dirName);
-		if ( dir.exists() && dir.isDirectory()) {
-			File[] files = dir.listFiles();
-			for ( File f : files) {
-				if ( f.isDirectory()) {
-					
-				}
-				else {
-					String fileName = f.getName();
-					if ( fileNameMatch(fileName, from, to))
-						list.add(f);
-				}
-			}
-			
-		}
-		return list.toArray(new File[0]);
-	}
 	
 	public static File[] getAllFilesRecurisive(String dirName, String filePattern, Calendar from, Calendar to) {
 		List<File> list = new ArrayList<File>();
+		if ( StringUtils.isBlank(filePattern)) {
+			filePattern = "*";
+		}
+		
 		File dir = new File(dirName);
 		if ( dir.exists() && dir.isDirectory()) {
 			Collection<File> files = FileUtils.listFiles(dir,null, true);
 			for ( File f : files) {
 				String fileName = f.getName();
-				boolean flag = true;
-				if ( StringUtils.isNotBlank(filePattern)) {
-					if ( "*".equals(filePattern)) {
-						flag = true;
-					}else	if (StringUtils.containsIgnoreCase(fileName,filePattern))
-						flag = true;
-					else
-						flag = false;
-					
-				}
-				if ( flag ) {
-					if ( "*".equals(filePattern)) {
-						list.add(f);
+				if ( matchPattern(fileName,filePattern)) {
+					if (from != null && to != null ) {
+						if ( fileNameMatch2(fileName, from, to))
+							list.add(f);
 					}
-					else if ( from != null && fileNameMatch2(fileName, from, to))
+					else
 						list.add(f);
 				}
 			}
@@ -70,38 +44,22 @@ class LoggingUtils {
 		return list.toArray(new File[0]);
 	}
 
-
-	private static boolean fileNameMatch(String fileName, Calendar from, Calendar to) {
-		SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
-
-		int pos = fileName.indexOf(".log.");
-		if ( pos > 0 ) {
-			String log_ext = fileName.substring(pos+5);
-			Date logDate = null;
-			try {
-				logDate = stf.parse(log_ext);
-			}
-			catch(ParseException e) {
-				logger.info("can't parse "+e.getMessage());
-			}
-			
-			if (logDate != null ) {
-				Calendar c = Calendar.getInstance();
-				c.setTime(logDate);
-				c.set(Calendar.MINUTE,10);
-				from.set(Calendar.MINUTE,0);
-				from.set(Calendar.SECOND,0);
-				to.set(Calendar.MINUTE,0);
-				to.set(Calendar.SECOND,0);
-				
-				//logger.info("file : "+stf.format(c.getTime())+ " from : "+stf.format(from.getTime())+ " to : "+ stf.format(to.getTime()));
-				
-				if ( c.before(to) && c.after(from))
-					return true;
-			}
+	private static boolean matchPattern(String fileName, String filePattern) {
+		if ( "*".equals(filePattern))
+			return true;
+		if ( filePattern.endsWith("*")) {
+			String pattern = StringUtils.removeEnd(filePattern,"*");
+			if ( StringUtils.startsWithIgnoreCase(fileName, pattern))
+				return true;
+		}
+		if ( filePattern.length() > 3 && filePattern.startsWith("%") && filePattern.endsWith("%")) {
+			String pattern = StringUtils.substringBetween(filePattern,"%", "%");
+			if ( pattern.length() > 0 && StringUtils.containsIgnoreCase(fileName,pattern))
+				return true;
 			
 		}
-		return false;
+		
+		return StringUtils.containsIgnoreCase(fileName,filePattern);
 	}
 	
 	private static boolean fileNameMatch2(String fileName, Calendar from, Calendar to) {

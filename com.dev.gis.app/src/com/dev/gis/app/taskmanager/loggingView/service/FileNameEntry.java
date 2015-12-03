@@ -31,6 +31,7 @@ public class FileNameEntry implements Comparable<FileNameEntry>{
 		fn.size = file.length();
 		fn.dir = file.getParent();
 		fn.file = file;
+		fn.select = true;
 		return fn;
 		
 	}
