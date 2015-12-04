@@ -1,53 +1,34 @@
 package com.dev.gis.app.taskmanager.loggingView;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.net.URI;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
 import com.dev.gis.app.xmlutils.XmlUtils;
-import com.dev.gis.task.dialogs.TaskDialogAbstract;
-import com.dev.gis.task.dialogs.TaskDialogFactory;
-import com.dev.gis.task.dialogs.TaskLocationSearchDialog;
-import com.dev.gis.task.execution.api.ITaskDataProvider;
 
 public class LogEntryDialog extends Dialog {
+	
+	private final static Logger logger = Logger.getLogger(LogEntryDialog.class);
+	
+	private final LogEntry logEntry;
 
-//	private TaskItem currentItem = new TaskItem();
-//	private TaskItem tempItem = new TaskItem();
-	private String  requestPath = null;
-	//private ITaskDataProvider dataProvider;
-	private final String logText ;
-
-	public LogEntryDialog(Shell parentShell, final String logText) {
+	public LogEntryDialog(Shell parentShell, LogEntry logEntry) {
 		super(parentShell);
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
-	    
-	    this.logText = logText;
-
-		// setShellStyle(SWT.CLOSE | SWT.MODELESS | SWT.BORDER | SWT.TITLE);
-		//
-		// setBlockOnOpen(false);
+	    this.logEntry = logEntry;
 	}
 
 	private void checkResource() {
@@ -76,12 +57,6 @@ public class LogEntryDialog extends Dialog {
 	@Override
 	protected void okPressed() {
 		super.okPressed();
-//		currentItem.setName(taskName);
-//		if ( !StringUtils.isEmpty(requestPath)) {
-//			currentItem.setRequestPath(requestPath);
-//		}
-//		if (!tempItem.getRequestPath().equals(currentItem.getRequestPath()))
-//			currentItem.setRequestPath(tempItem.getRequestPath());
 
 	}
 
@@ -89,6 +64,7 @@ public class LogEntryDialog extends Dialog {
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		composite.getShell().setText("edit task properties");
+		
 		
 		GridLayout glMain = new GridLayout(1, false);
 		composite.setLayout(glMain);
@@ -105,6 +81,8 @@ public class LogEntryDialog extends Dialog {
 		
 		final Text tName = new Text(gGeneral, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL);
 		
+		int limit = tName.getTextLimit();
+		
 		GridData gdName = new GridData();
 		gdName.horizontalAlignment = SWT.FILL;
 		gdName.grabExcessHorizontalSpace = true;
@@ -119,7 +97,12 @@ public class LogEntryDialog extends Dialog {
 //				taskName = tName.getText();
 //			}
 //		});
-		tName.setText(logText);
+		logger.info("create text " + limit );
+		String s = createText(logEntry);
+		logger.info("show entry s = "+s.length());
+		if ( s.length() > 300000)
+			s = s.substring(0,300000);
+		tName.setText(s);
 
 //		Button bDetailDialog = new Button(gGeneral, SWT.PUSH);
 //		bDetailDialog.setText("Detailsdialog");
@@ -151,4 +134,13 @@ public class LogEntryDialog extends Dialog {
 	}
 
 
+	private String createText(LogEntry o) {
+		StringBuilder sb = new StringBuilder();
+		for ( String s : o.getEntry()) {
+			sb.append(s);
+			sb.append('\n');
+		}
+		return sb.toString();
+	}
+	
 }

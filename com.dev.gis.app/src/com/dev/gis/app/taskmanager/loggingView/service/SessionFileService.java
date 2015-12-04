@@ -24,6 +24,10 @@ import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
 
 class SessionFileService implements Callable<List<LogEntry>> {
+	
+	final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
+	final String DATE_TIME_FORMAT_SUNNY = "yyyy-MM-dd HH:mm:ss,SSS";
+	
 
 	private final static Logger logger = Logger
 			.getLogger(SessionFileService.class);
@@ -50,8 +54,6 @@ class SessionFileService implements Callable<List<LogEntry>> {
 		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
 		
 		List<LogEntry> logEntries = readLogEntries(logFile, this.sessionId);
-		
-		
 		
 		LogEntryTableUpdater.showResult(logEntries);
 		
@@ -83,7 +85,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 				readedSize = readedSize + s.length();
 				if (++count % 1000 == 0) {
 					//logger.info("check " + count + " lines");
-					ProgressBarElement.updateProgressBar(readedSize,fileSize);
+					//ProgressBarElement.updateProgressBar(readedSize,fileSize);
 					
 				}
 
@@ -109,8 +111,9 @@ class SessionFileService implements Callable<List<LogEntry>> {
 					else if (time != null) {
 
 						if (entry != null) // completed prev. entry
-							if ( matchSession(entry))
+							//if ( matchSession(entry))
 								entries.add(entry);
+						
 
 						if (sessionFlagFound) { // begin new entry
 							entry = new LogEntry(time, s);
@@ -216,24 +219,41 @@ class SessionFileService implements Callable<List<LogEntry>> {
 	}
 
 	private Date getTimeString(String s) {
-		final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
+		if (s == null || s.length() <= 25) 
+			return null;
+		
+		Date date = checkAdacFormat(s);
+		if ( date == null)
+			date = checkSunnyFormat(s);
 
-		SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
-
-		if (s != null && s.length() > 25) {
-			String time = s.substring(0, 25);
-			try {
-				Date d = null;
-				if (time.charAt(2) == '.' && time.charAt(5) == '.') {
-					d = stf.parse(time);
-					return d;
-				}
-			} catch (ParseException e) {
-				logger.info(e.getMessage() + " " + s);
-			}
-		}
-		return null;
+		return date;
 
 	}
 
+	private Date checkAdacFormat(String s) {
+		try {
+			String time = s.substring(0, 25);
+			if (time.charAt(2) == '.' && time.charAt(5) == '.') {
+				SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
+				return stf.parse(time);
+			}
+		} catch (ParseException e) {
+			logger.info(e.getMessage() + " " + s);
+		}
+		return null;
+	}
+
+	private Date checkSunnyFormat(String s) {
+		try {
+			String time = s.substring(0, 25);
+			if (time.charAt(4) == '-' && time.charAt(7) == '-') {
+				SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT_SUNNY);
+				return stf.parse(time);
+			}
+		} catch (ParseException e) {
+			logger.info(e.getMessage() + " " + s);
+		}
+		return null;
+	}
+	
 }

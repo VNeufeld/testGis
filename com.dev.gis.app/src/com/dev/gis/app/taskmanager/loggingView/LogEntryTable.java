@@ -3,6 +3,7 @@ package com.dev.gis.app.taskmanager.loggingView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -31,6 +32,9 @@ public class LogEntryTable {
 	private TableViewer viewer;
 	private final Composite parent;
 	private final IWorkbenchPartSite site;
+	
+	private final static Logger logger = Logger.getLogger(LogEntryTable.class);
+	
 
 	public LogEntryTable(Composite group, IWorkbenchPartSite site) {
 		this.parent = group;
@@ -110,7 +114,10 @@ public class LogEntryTable {
 			@Override
 			public String getText(Object element) {
 				LogEntry o = (LogEntry) element;
-				return o.getEntry().get(0);
+				String s = o.getEntry().get(0);
+				if ( s.length() > 300)
+					s = s.substring(0, 300);
+				return s;
 			}
 		});
 
@@ -140,11 +147,9 @@ public class LogEntryTable {
 			
 			LogEntry o = (LogEntry) selectedNode;
 			
-			String text = createText ( o );
-			
-	        //MessageDialog.openInformation(viewer.getTable().getShell(), "Open", text);
+			logger.info(" open dialog :" + o.getEntry().size());
 	        
-			LogEntryDialog mpd = new LogEntryDialog(viewer.getTable().getShell(), text);
+			LogEntryDialog mpd = new LogEntryDialog(viewer.getTable().getShell(), o);
 			if (mpd.open() == Dialog.OK) {
 				
 			}
@@ -152,15 +157,6 @@ public class LogEntryTable {
 
 		}
 
-		private String createText(LogEntry o) {
-			StringBuilder sb = new StringBuilder();
-			for ( String s : o.getEntry()) {
-				sb.append(s);
-				sb.append('\n');
-			}
-			// TODO Auto-generated method stub
-			return sb.toString();
-		}
 
 	}
 

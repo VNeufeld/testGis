@@ -31,8 +31,6 @@ public class SearchBookingListener implements SelectionListener {
 		
 		logger.info(" FindBookingService started ");
 		
-		FileNameEntryModel.getInstance().getEntries().clear();
-		
 		FindBookingService findBooking = new FindBookingService();
 		
 		executor.submit(findBooking);

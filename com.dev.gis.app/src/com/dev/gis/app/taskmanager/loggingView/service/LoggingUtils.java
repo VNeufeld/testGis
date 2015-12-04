@@ -18,6 +18,10 @@ class LoggingUtils {
 	private static Logger logger = Logger.getLogger(LoggingUtils.class);
 
 	private static final String DATE_TIME_FORMAT = "yyyy_MM_dd_HH";
+
+	private static final String DATE_TIME_FORMAT_SUNNY = "yyyy-MM-dd-HH";
+
+	private static final String DATE_FORMAT_SUNNY = "yyyy-MM-dd";
 	
 	public static File[] getAllFilesRecurisive(String dirName, String filePattern, Calendar from, Calendar to) {
 		List<File> list = new ArrayList<File>();
@@ -32,7 +36,7 @@ class LoggingUtils {
 				String fileName = f.getName();
 				if ( matchPattern(fileName,filePattern)) {
 					if (from != null && to != null ) {
-						if ( fileNameMatch2(fileName, from, to))
+						if ( fileNameMatch2(f, from, to))
 							list.add(f);
 					}
 					else
@@ -62,9 +66,15 @@ class LoggingUtils {
 		return StringUtils.containsIgnoreCase(fileName,filePattern);
 	}
 	
-	private static boolean fileNameMatch2(String fileName, Calendar from, Calendar to) {
+	private static boolean fileNameMatch2(File f, Calendar from, Calendar to) {
 		SimpleDateFormat stf = new SimpleDateFormat(DATE_TIME_FORMAT);
 		SimpleDateFormat stf2 = new SimpleDateFormat("yyyyMMdd");
+		String fileName = f.getName();
+		Date fileDate = getSunnyLogFileDate(f);
+		if ( fileDate != null) {
+			if ( checkBetween(fileDate,from, to))
+				return true;
+		}
 		
 		if ( StringUtils.endsWithIgnoreCase(fileName, ".log")) {
 			try {
@@ -107,6 +117,44 @@ class LoggingUtils {
 			
 		}
 		return false;
+	}
+
+	private static boolean checkBetween(Date fileDate, Calendar from,
+			Calendar to) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(fileDate);
+		c.set(Calendar.MINUTE,10);
+		from.set(Calendar.MINUTE,0);
+		from.set(Calendar.SECOND,0);
+		to.set(Calendar.MINUTE,0);
+		to.set(Calendar.SECOND,0);
+		return ( c.before(to) && c.after(from));
+	}
+
+	private static Date getSunnyLogFileDate(File f) {
+		String fileName = f.getName();
+		SimpleDateFormat stf = new SimpleDateFormat(DATE_FORMAT_SUNNY);
+		SimpleDateFormat stf2 = new SimpleDateFormat(DATE_TIME_FORMAT_SUNNY);
+		String dateSuffix = StringUtils.substringAfter(fileName, "log.");
+		Date d = null;
+		try {
+			if (dateSuffix != null ) {
+				if ( dateSuffix.length() == 10)
+					d = stf.parse(dateSuffix);
+				else if ( dateSuffix.length() == 13)
+					d = stf2.parse(dateSuffix);
+			}
+		}
+		catch(ParseException e) {
+			logger.info("can't parse "+e.getMessage());
+		}
+		if ( d != null)
+			return d;
+		if ( StringUtils.endsWithIgnoreCase(fileName,".log")) {
+			Date dx = new Date(f.lastModified());
+			return dx;
+		}
+		return null;
 	}
 
 
