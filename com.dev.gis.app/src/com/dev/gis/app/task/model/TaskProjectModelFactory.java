@@ -1,5 +1,7 @@
 package com.dev.gis.app.task.model;
 
+import com.dev.gis.app.Application;
+import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
 
 public class TaskProjectModelFactory {
@@ -10,16 +12,11 @@ public class TaskProjectModelFactory {
 		
 		model.setName("TaskProjectModel");
 		
-//		TaskItem taskItem = TaskItem.createTask("locationSearch", "folder_edit.png", "test json http request locationSearch");
-//		if ( taskItem != null)
-//			model.getGroups().getFirst().getTasks().add(taskItem);
-		model.getGroups().getFirst().getTasks().
-			add(TaskItem.createTask("joiGetVehicle", "folder_edit.png", "test json http request GetVehicle"));
-		model.getGroups().getFirst().getTasks().
-			add(TaskItem.createTask("joiGetVehicleRecalculate", "folder_edit.png", "test json http request Recalculate"));
-		
-		model.getGroups().getFirst().getTasks().
-		add(TaskItem.createTask("3.SunnyCars Test (Joi)", "folder_edit.png", "test json http request SunnyCars"));
+		if ( !Application.ONLY_LOGGING){
+			createDefaultModel();
+		}
+
+		createLoggingModel();
 		
 /*
 		model.getGroups().getFirst().getTasks().
@@ -38,22 +35,36 @@ public class TaskProjectModelFactory {
 //		taskGroupEml.getTasks().add(TaskItem.createTask("EML_Creator", "folder.png", "test create eml"));
 
 
-		model.getGroups().getFirst().getTasks().
-		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
+//		model.getGroups().getFirst().getTasks().
+//		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
 		
-		TaskGroup taskGroup = new TaskGroup("Logging");
-		model.getGroups().add(taskGroup);
-		taskGroup.getTasks().add(TaskItem.createTask("Splitt", "folder_edit.png", "Splitt Logging"));
-		taskGroup.getTasks().add(TaskItem.createTask("SearchSession", "folder_edit.png", "Search session"));
 			
 		
 		for ( TaskGroup group: model.getGroups()) {
 			for ( TaskItem item : group.getTasks())
 				item.setGroup(group);
 		}
-
 		
 		return model;
+	}
+
+	private static void createLoggingModel() {
+		TaskProjectModel model = TaskProjectModel.getInstance();
+		TaskGroup taskGroup = new TaskGroup("Logging");
+		model.getGroups().add(taskGroup);
+		taskGroup.getTasks().add(TaskItem.createTask("Splitt", "folder_edit.png", "Splitt Logging"));
+		taskGroup.getTasks().add(TaskItem.createTask("SearchSession", "folder_edit.png", "Search session"));
+		
+	}
+
+	private static void createDefaultModel() {
+		TaskProjectModel model = TaskProjectModel.getInstance();
+		TaskGroup defaultGroup = new TaskGroup("Default");
+		model.getGroups().add(defaultGroup);
+		defaultGroup.getTasks().
+		add(TaskItem.createTask("3.SunnyCars Test (Joi)", "folder_edit.png", "test json http request SunnyCars"));
+		defaultGroup.getTasks().
+		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
 	}
 
 }

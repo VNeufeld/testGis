@@ -15,6 +15,8 @@ import com.dev.gis.connector.api.TaskProperties;
 public class Application implements IApplication {
 	public static final String PLUGIN_ID = "rcpmail-99";
 
+	public static final boolean  ONLY_LOGGING = false;
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
 	 */
@@ -22,8 +24,6 @@ public class Application implements IApplication {
 		Display display = PlatformUI.createDisplay();
 		try {
 			TaskProjectModelFactory.createModel();
-			
-			TaskProperties.getTaskProperties().readProperty();
 			
 			int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
 			if (returnCode == PlatformUI.RETURN_RESTART) {

@@ -13,6 +13,7 @@ import com.dev.gis.app.ICommandIds;
 import com.dev.gis.app.TestAppPerspective;
 import com.dev.gis.app.taskmanager.testAppView.OfferDetailView;
 import com.dev.gis.app.taskmanager.testAppView.TestAppView;
+import com.dev.gis.connector.api.TaskProperties;
 
 public class SwitchToAppPerspectiveAction extends Action {
 
@@ -57,6 +58,10 @@ public class SwitchToAppPerspectiveAction extends Action {
 			}
 
 		}
+		
+		TaskProperties.getTaskProperties().setOnlyLogging(false);
+		TaskProperties.getTaskProperties().saveProperty();
+		
 
 		// if(window != null) {
 		// try {

@@ -21,6 +21,8 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
         configurer.setInitialSize(new Point(600, 400));
         configurer.setShowCoolBar(true);
         configurer.setShowStatusLine(false);
+        if ( Application.ONLY_LOGGING)
+        	configurer.setTitle("Log Analyzer");
     }
     
 }

@@ -17,6 +17,7 @@ public class TaskProperties {
 	private static final String PREFERENCE_PICKUPDATE_PROPERTY = "PICKUPDATE_PROPERTY";
 	private static final String PREFERENCE_DROPOFFDATE_PROPERTY = "DROPOFFDATE_PROPERTY";
 	private static final String PREFERENCE_AGENCY_PROPERTY = "AGENCY_PROPERTY";
+	private static final String PREFERENCE_ONLY_LOGGING_PROPERTY = "ONLY_LOGGING_PROPERTY";
 
 	private static final String PREFERENCE_ADAC_OPERATOR_PROPERTY = "ADAC_OPERATOR_PROPERTY";
 	
@@ -48,7 +49,16 @@ public class TaskProperties {
 	
 	private String pickupDate = "";
 	private String dropoffDate = "";
+	private boolean  onlyLogging = true;
 	
+	public boolean isOnlyLogging() {
+		return onlyLogging;
+	}
+
+	public void setOnlyLogging(boolean onlyLogging) {
+		this.onlyLogging = onlyLogging;
+	}
+
 	private TaskProperties() {
 		serverProperty = "http://localhost:8080/joi";
 	}
@@ -82,6 +92,7 @@ public class TaskProperties {
 		preferences.put(PREFERENCE_DROPOFFDATE_PROPERTY, dropoffDate);
 		preferences.put(PREFERENCE_AGENCY_PROPERTY, agencyNo);
 		preferences.put(PREFERENCE_ADAC_OPERATOR_PROPERTY, adacOperatos);
+		preferences.putBoolean(PREFERENCE_ONLY_LOGGING_PROPERTY, onlyLogging);
 
 		try {
 			preferences.flush();
@@ -101,6 +112,7 @@ public class TaskProperties {
 		pickupDate = preferences.get(PREFERENCE_PICKUPDATE_PROPERTY, pickupDate);
 		dropoffDate = preferences.get(PREFERENCE_DROPOFFDATE_PROPERTY, dropoffDate);
 		agencyNo = preferences.get(PREFERENCE_AGENCY_PROPERTY, agencyNo);
+		onlyLogging = preferences.getBoolean(PREFERENCE_ONLY_LOGGING_PROPERTY, true);
 		
 		adacOperatos = preferences.get(PREFERENCE_ADAC_OPERATOR_PROPERTY,"1");
 

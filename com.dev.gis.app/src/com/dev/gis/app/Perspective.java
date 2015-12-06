@@ -28,7 +28,7 @@ public class Perspective implements IPerspectiveFactory {
 		
 		
 		//layout.addStandaloneView(NavigationView.ID,  false, IPageLayout.LEFT, 0.25f, editorArea);
-		IFolderLayout folder = layout.createFolder("BPCS Tools", IPageLayout.TOP, 0.5f, editorArea);
+		IFolderLayout folder = layout.createFolder("Logging", IPageLayout.TOP, 0.5f, editorArea);
 		folder.addPlaceholder(LoggingAppView.ID + ":*");
 		//folder.addView(LoggingAppView.ID);
 		

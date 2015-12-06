@@ -2,6 +2,8 @@ package com.dev.gis.app.task.model;
 
 import java.util.LinkedList;
 
+import com.dev.gis.connector.api.TaskProperties;
+
 public class TaskProjectModel extends TaskItemBase {
 	private static TaskProjectModel model;
 
@@ -9,7 +11,6 @@ public class TaskProjectModel extends TaskItemBase {
 
 	public TaskProjectModel() {
 		super();
-		groups.add(new TaskGroup("Default"));
 	}
 
 	/**
@@ -43,6 +44,4 @@ public class TaskProjectModel extends TaskItemBase {
 		if ( taskItem.getGroup() != null )
 			taskItem.getGroup().removeTask(taskItem);
 	}
-
-
 }

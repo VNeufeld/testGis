@@ -21,6 +21,7 @@ import com.dev.gis.app.actions.ResetCurrentPerspectiveAction;
 import com.dev.gis.app.actions.SwitchToLogPerspectiveAction;
 import com.dev.gis.app.actions.SwitchToAppPerspectiveAction;
 import com.dev.gis.app.actions.SwitchToSunnyAppPerspectiveAction;
+import com.dev.gis.connector.api.TaskProperties;
 
 /**
  * An action bar advisor is responsible for creating, adding, and disposing of the
@@ -52,6 +53,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         // The corresponding commands keybindings are defined in the plugin.xml file.
         // Registering also provides automatic disposal of the actions when
         // the window is closed.
+    	
+		boolean onlyLogging = TaskProperties.getTaskProperties().isOnlyLogging();
+
 
         exitAction = ActionFactory.QUIT.create(window);
         register(exitAction);
@@ -77,7 +81,6 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         switchPerspectiveAction = new SwitchToLogPerspectiveAction("Switch to Log Perspective", window);
         register(switchPerspectiveAction);
 
-    
         switchToAppPerspectiveAction = new SwitchToAppPerspectiveAction("Switch To App Perspective", window);
         register(switchToAppPerspectiveAction);
         
@@ -109,9 +112,14 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         //fileMenu.add(messagePopupAction);
         //fileMenu.add(openViewAction);
         //fileMenu.add(new Separator());
+		boolean onlyLogging = TaskProperties.getTaskProperties().isOnlyLogging();
+		
+
         perspectiveMenu.add(switchPerspectiveAction);
-        perspectiveMenu.add(switchToAppPerspectiveAction);
-        perspectiveMenu.add(switchToSunnyAppPerspectiveAction);
+		if ( !Application.ONLY_LOGGING){
+	        perspectiveMenu.add(switchToAppPerspectiveAction);
+	        perspectiveMenu.add(switchToSunnyAppPerspectiveAction);
+		}
         perspectiveMenu.add(new Separator());
         perspectiveMenu.add(resetCurrentPerspectiveAction);
         fileMenu.add(exitAction);
@@ -122,12 +130,16 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     }
     
     protected void fillCoolBar(ICoolBarManager coolBar) {
+		boolean onlyLogging = TaskProperties.getTaskProperties().isOnlyLogging();
+    	
         IToolBarManager toolbar = new ToolBarManager(SWT.FLAT | SWT.RIGHT);
         coolBar.add(new ToolBarContributionItem(toolbar, "main"));   
         //toolbar.add(openViewAction);
         toolbar.add(switchPerspectiveAction);
-        toolbar.add(switchToAppPerspectiveAction);
-        toolbar.add(resetCurrentPerspectiveAction);
+		if (!onlyLogging) {
+	        toolbar.add(switchToAppPerspectiveAction);
+	        toolbar.add(resetCurrentPerspectiveAction);
+		}
         toolbar.add(stopProcessAction);
         toolbar.add(lastResponseAction);
     }
