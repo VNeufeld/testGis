@@ -27,7 +27,7 @@ public class LogOutputDirControl extends ObjectTextControl {
 
 	@Override
 	public void saveValue(String value) {
-		LoggingModelProvider.INSTANCE.outputDirName = value;
+		LoggingModelProvider.INSTANCE.outputFileName = value;
 		logger.info("log output dir name : "+value);
 		LoggingSettings.saveProperty(LoggingSettings.PREFERENCE_OUTPUT_DIR_PROPERTY, value);
 		

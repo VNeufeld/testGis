@@ -4,9 +4,16 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
+
+import com.dev.gis.app.taskmanager.loggingView.service.LoggingExportFileListener;
+import com.dev.gis.app.taskmanager.loggingView.service.LoggingSelectDirListener;
+import com.dev.gis.app.taskmanager.loggingView.service.LoggingSelectFileListener;
+import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.app.view.elements.ObjectTextControl;
 
 public class LogEntryTableView extends ViewPart {
 	public static final String ID = "com.dev.gis.app.task.LogEntryTableView";
@@ -24,6 +31,14 @@ public class LogEntryTableView extends ViewPart {
 		final Composite group = new Composite(parent, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true).applyTo(group);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(group);
+		
+		Composite composite = new Composite(group, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(4).equalWidth(false).applyTo(composite);
+		LogOutputDirControl logOutputFileControl = new LogOutputDirControl(composite);
+		
+		new ButtonControl(composite, "Select Output File", 0,  selectFileListener(composite, logOutputFileControl));
+		
+		new ButtonControl(composite, "Export", 0,  exportFileListener(composite));
 
 		Composite compositeLogTable = createCompositeLogTable(group);
 
@@ -31,6 +46,17 @@ public class LogEntryTableView extends ViewPart {
 		
 	}
 
+	private SelectionListener selectFileListener(final Composite composite, ObjectTextControl dirControl) {
+		
+		LoggingSelectFileListener listener = new LoggingSelectFileListener(composite.getShell(), dirControl);
+		return listener;
+	}
+
+	private SelectionListener exportFileListener(final Composite composite) {
+		
+		LoggingExportFileListener listener = new LoggingExportFileListener();
+		return listener;
+	}
 
 
 

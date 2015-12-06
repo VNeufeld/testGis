@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IViewPart;
@@ -14,6 +15,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
+import com.dev.gis.app.taskmanager.loggingView.service.LoggingSelectDirListener;
+import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.app.view.elements.ObjectTextControl;
 
 public class LogBookingEntryView extends ViewPart {
 	public static final String ID = "com.dev.gis.app.task.LoggingTableView";
@@ -40,6 +44,11 @@ public class LogBookingEntryView extends ViewPart {
 		
 	}
 
+	private SelectionListener selectDirListener(final Composite composite, ObjectTextControl dirControl) {
+		
+		LoggingSelectDirListener listener = new LoggingSelectDirListener(composite.getShell(), dirControl);
+		return listener;
+	}
 
 
 

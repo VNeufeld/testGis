@@ -15,7 +15,7 @@ import com.dev.gis.connector.api.TaskProperties;
 public class Application implements IApplication {
 	public static final String PLUGIN_ID = "rcpmail-99";
 
-	public static final boolean  ONLY_LOGGING = false;
+	public static final boolean  ONLY_LOGGING = true;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)

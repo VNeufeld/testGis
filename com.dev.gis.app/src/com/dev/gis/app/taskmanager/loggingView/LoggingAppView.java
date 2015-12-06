@@ -165,9 +165,9 @@ public class LoggingAppView extends TaskViewAbstract {
 		new ButtonControl(innernComposite, "Select Dir", 0,  selectDirListener(composite, logDirControl));
 		
 
-		LogOutputDirControl logOutputDirControl = new LogOutputDirControl(innernComposite);
-		
-		new ButtonControl(innernComposite, "Select Output Dir", 0,  selectDirListener(composite, logOutputDirControl));
+//		LogOutputDirControl logOutputDirControl = new LogOutputDirControl(innernComposite);
+//		
+//		new ButtonControl(innernComposite, "Select Output Dir", 0,  selectDirListener(composite, logOutputDirControl));
 		
 		
 	}

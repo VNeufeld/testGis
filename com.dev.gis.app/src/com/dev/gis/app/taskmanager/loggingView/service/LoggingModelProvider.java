@@ -15,7 +15,7 @@ public enum LoggingModelProvider {
 	
 	public String logDirName;
 
-	public String outputDirName;
+	public String outputFileName;
 	
 	public Calendar loggingFromDate ;
 	public Calendar loggingToDate;
