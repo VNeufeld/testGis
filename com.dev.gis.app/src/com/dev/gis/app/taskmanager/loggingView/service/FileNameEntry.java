@@ -9,6 +9,7 @@ public class FileNameEntry implements Comparable<FileNameEntry>{
 	private String dir;
 	private long   size;
 	private String status;
+	private int    number;
 	
 	private File file;
 	
@@ -24,7 +25,7 @@ public class FileNameEntry implements Comparable<FileNameEntry>{
 	public void setSize(long size) {
 		this.size = size;
 	}
-	public static FileNameEntry create(File file) {
+	public static FileNameEntry create(File file, int index) {
 		
 		FileNameEntry fn = new FileNameEntry();
 		fn.fileName = file.getName();
@@ -32,6 +33,7 @@ public class FileNameEntry implements Comparable<FileNameEntry>{
 		fn.dir = file.getParent();
 		fn.file = file;
 		fn.select = true;
+		fn.number = index;
 		return fn;
 		
 	}
@@ -57,5 +59,11 @@ public class FileNameEntry implements Comparable<FileNameEntry>{
 	}
 	public File getFile() {
 		return file;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
 	}	
 }

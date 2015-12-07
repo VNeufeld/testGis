@@ -21,7 +21,7 @@ public class FilePatternTextControl extends ObjectTextControl {
 
 	@Override
 	protected String getLabel() {
-		return "File Pattern";
+		return "file pattern";
 	}
 
 

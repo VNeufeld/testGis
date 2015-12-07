@@ -11,14 +11,16 @@ public class LogEntry implements Comparable<LogEntry> {
 	private String bookingId;
 	private String price;
 	private String demandedObject;
+	private int    fileIndex;
 	
 	private List<String> entry = new ArrayList<String>();
 	
 	public LogEntry(Date time) {
 		this.date = time;
 	}
-	public LogEntry(Date time, String s) {
+	public LogEntry(Date time, String s, int index) {
 		this.date = time;
+		this.fileIndex = index;
 		addString(s);
 	}
 	public Date getDate() {
@@ -64,6 +66,12 @@ public class LogEntry implements Comparable<LogEntry> {
 	}
 	public void setDemandedObject(String demandedObject) {
 		this.demandedObject = demandedObject;
+	}
+	public int getFileIndex() {
+		return fileIndex;
+	}
+	public void setFileIndex(int fileIndex) {
+		this.fileIndex = fileIndex;
 	}
 	
 	

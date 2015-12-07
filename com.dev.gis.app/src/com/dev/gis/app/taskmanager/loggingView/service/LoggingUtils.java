@@ -97,7 +97,7 @@ class LoggingUtils {
 				logDate = stf.parse(log_ext);
 			}
 			catch(ParseException e) {
-				logger.info("can't parse "+e.getMessage());
+				logger.debug("can't parse "+e.getMessage());
 			}
 			
 			if (logDate != null ) {

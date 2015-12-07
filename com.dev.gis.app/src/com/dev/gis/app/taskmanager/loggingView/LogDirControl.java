@@ -10,13 +10,8 @@ public class LogDirControl extends ObjectTextControl {
 	
 	private static Logger logger = Logger.getLogger(LogDirControl.class);
 
-
-	public static void createCityLocationSearch(Composite parent) {
-		new LogDirControl(parent);
-	}
-
 	public LogDirControl(Composite parent) {
-		super(parent, 300, false);
+		super(parent, 320, false);
 	}
 
 	@Override
@@ -37,6 +32,11 @@ public class LogDirControl extends ObjectTextControl {
 	protected String getDefaultValue() {
 		String savedDir = LoggingSettings.readProperty(LoggingSettings.PREFERENCE_INPUT_DIR_PROPERTY,"");
 		return savedDir;
+	}
+
+	@Override
+	protected int getLabelSize() {
+		return 70;
 	}
 
 }

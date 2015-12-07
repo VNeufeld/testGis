@@ -24,10 +24,12 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 	
 	private final File  logFile;
 	private final String bookingId;
+	private final int index;
 
-	public SearchBookingFileService(File file, String bookingId) {
+	public SearchBookingFileService(File file, String bookingId, int index) {
 		this.logFile = file;
 		this.bookingId = bookingId;
+		this.index = index;
 		
 	}
 
@@ -92,7 +94,7 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 						if ( entry != null)
 							entries.add(entry);
 						
-						entry = new LogEntry(time,s);
+						entry = new LogEntry(time,s,index);
 						
 						LogEntryModel.getInstance().addTempEntry(entry);
 					}

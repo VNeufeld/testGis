@@ -82,7 +82,14 @@ public class ObjectTextControl extends BasicControl {
 		
 		String label = getLabel();
 
-		new Label(parent, SWT.NONE).setText(label);
+		Label lb = new Label(parent, SWT.NONE);
+		lb.setText(label);
+		
+		int lbSize = getLabelSize();
+		if ( lbSize > 0 ) {
+			GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
+			.grab(false, false).hint(lbSize, 16).applyTo(lb);
+		}
 		
 		GridLayout gd = (GridLayout)parent.getLayout();
 		int col = gd.numColumns;
@@ -97,6 +104,9 @@ public class ObjectTextControl extends BasicControl {
 
 	}
 
+	protected int getLabelSize() {
+		return 0;
+	}
 	protected String getLabel() {
 		return " XXX";
 	}

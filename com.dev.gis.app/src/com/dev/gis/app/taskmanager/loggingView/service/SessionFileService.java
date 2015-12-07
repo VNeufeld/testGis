@@ -36,10 +36,12 @@ class SessionFileService implements Callable<List<LogEntry>> {
 
 	private final File logFile;
 	private final String sessionId;
+	private final int index;
 
-	public SessionFileService(File file, String sessionId) {
+	public SessionFileService(File file, String sessionId, int index) {
 		this.logFile = file;
 		this.sessionId = sessionId;
+		this.index = index;
 
 	}
 
@@ -98,7 +100,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 						if (time == null) {
 							entry = tryFoundPreviousEntryWithDate();
 						} else {
-							entry = new LogEntry(time, s);
+							entry = new LogEntry(time, s,index);
 						}
 						firstSessionIdNotFound = false;
 						searchNextLinewithTime = true;
@@ -116,7 +118,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 						
 
 						if (sessionFlagFound) { // begin new entry
-							entry = new LogEntry(time, s);
+							entry = new LogEntry(time, s, index);
 							searchNextLinewithTime = true;
 						} else {
 							entry = null;
@@ -191,7 +193,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 			while (i >= 0) {
 				String s = lines.get(i);
 				if (logEntry == null) {
-					logEntry = new LogEntry(time, s);
+					logEntry = new LogEntry(time, s, index);
 					logger.info("create logEntry "+s);
 				}
 				else {

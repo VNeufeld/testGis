@@ -26,6 +26,7 @@ import org.eclipse.ui.IWorkbenchPartSite;
 
 import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.TaskPropertyDialog;
+import com.dev.gis.app.taskmanager.loggingView.service.FileNameEntry;
 import com.dev.gis.app.taskmanager.loggingView.service.LogEntry;
 
 public class LogEntryTable {
@@ -88,6 +89,20 @@ public class LogEntryTable {
 		
 		String[] titles = { "Date", "Request", "LogEntry" };
 		int[] bounds = { 140, 200, 1800 };
+		
+		TableViewerColumn columnKey2=new TableViewerColumn(viewer,SWT.NONE,0);
+		final TableColumn column2 = columnKey2.getColumn();
+		column2.setText("file");
+		column2.setWidth(100);
+		column2.setResizable(true);
+		columnKey2.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				LogEntry o = (LogEntry) element;
+				return ""+o.getFileIndex();
+			}
+		});
+
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);

@@ -50,9 +50,10 @@ public class FileNameEntryModel {
 	}
 
 	public void create(File[] files) {
+		int index = 0;
 		for (File file : files ) {
 			if ( file.length() > 0) {
-				FileNameEntry fn = FileNameEntry.create(file);
+				FileNameEntry fn = FileNameEntry.create(file,++index);
 				getEntries().add(fn);
 			}
 		}

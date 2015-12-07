@@ -126,6 +126,7 @@ public class LogFilesTable {
 				
 			}
 		});
+
 		
 
 		// first column is for the first name
@@ -169,39 +170,20 @@ public class LogFilesTable {
 			}
 		});
 		
-//		TableColumn column = new TableColumn(viewer.getTable(), SWT.NONE);
-//        column.setText("Select");
-//        column.setWidth(100);
-//        TableViewerColumn actionsNameCol = new TableViewerColumn(viewer, column);
-//        
-//        actionsNameCol.setLabelProvider(new ColumnLabelProvider(){
-//            //make sure you dispose these buttons when viewer input changes
-//            Map<Object, Button> buttons = new HashMap<Object, Button>();
-//
-//
-//            @Override
-//            public void update(ViewerCell cell) {
-//
-//                TableItem item = (TableItem) cell.getItem();
-//                Button button;
-//                if(buttons.containsKey(cell.getElement()))
-//                {
-//                    button = buttons.get(cell.getElement());
-//                }
-//                else
-//                {
-//                     button = new Button((Composite) cell.getViewerRow().getControl(),SWT.NONE);
-//                    button.setText("Remove");
-//                    buttons.put(cell.getElement(), button);
-//                }
-//                TableEditor editor = new TableEditor(item.getParent());
-//                editor.grabHorizontal  = true;
-//                editor.grabVertical = true;
-//                editor.setEditor(button , item, cell.getColumnIndex());
-//                editor.layout();
-//            }
-//
-//        });
+		TableViewerColumn columnKey2=new TableViewerColumn(viewer,SWT.NONE,5);
+		final TableColumn column2 = columnKey2.getColumn();
+		column2.setText("Index");
+		column2.setWidth(100);
+		column2.setResizable(true);
+		columnKey2.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				FileNameEntry o = (FileNameEntry) element;
+				return ""+o.getNumber();
+			}
+		});
+
+		
 
 	}
 

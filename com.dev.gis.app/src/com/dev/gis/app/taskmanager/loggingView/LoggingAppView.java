@@ -43,7 +43,7 @@ public class LoggingAppView extends TaskViewAbstract {
 		
 		createMaxThreadComposite(composite1);
 
-		createGroupFiles(composite1);
+		createSelectDirComposite(composite1);
 
 		createGroupSearchCriteria(composite1);
 		
@@ -79,22 +79,6 @@ public class LoggingAppView extends TaskViewAbstract {
 		return composite;
 	}
 
-
-
-
-	private void createGroupFiles(Composite group) {
-		final Group groupFiles = new Group(group, SWT.TITLE);
-		groupFiles.setText("Directory:");
-		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(groupFiles);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(groupFiles);
-
-		
-		Composite composite = new Composite(groupFiles, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(composite);
-
-		createSelectDirComposite(composite);
-		
-	}
 
 	private void createGroupSearchCriteria(Composite group) {
 		
@@ -163,11 +147,6 @@ public class LoggingAppView extends TaskViewAbstract {
 		LogDirControl logDirControl = new LogDirControl(innernComposite);
 		
 		new ButtonControl(innernComposite, "Select Dir", 0,  selectDirListener(composite, logDirControl));
-		
-
-//		LogOutputDirControl logOutputDirControl = new LogOutputDirControl(innernComposite);
-//		
-//		new ButtonControl(innernComposite, "Select Output Dir", 0,  selectDirListener(composite, logOutputDirControl));
 		
 		
 	}

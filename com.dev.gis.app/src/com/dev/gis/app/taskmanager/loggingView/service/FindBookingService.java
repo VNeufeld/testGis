@@ -48,12 +48,15 @@ public class FindBookingService implements Callable<String> {
 			
 			LogEntryModel.getInstance().setProcessRunning();
 			
-			List<File> files = 	FileNameEntryModel.getInstance().getFiles();		
+			//List<File> files = 	FileNameEntryModel.getInstance().getFiles();	
+			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getEntries();
 			
-			for (File file : files) {
+			
+			for (FileNameEntry fileNameEntry : fileEntries) {
+				File file = fileNameEntry.getFile();
 				logger.info("check file :"+file.getAbsolutePath());
 
-				SearchBookingFileService ss = new SearchBookingFileService(file,this.bookingId);
+				SearchBookingFileService ss = new SearchBookingFileService(file,this.bookingId, fileNameEntry.getNumber());
 				services.add(ss);
 			}
 				
