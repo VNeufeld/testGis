@@ -23,45 +23,40 @@ import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
 
-class SessionFileService implements Callable<List<LogEntry>> {
+class SessionThreadFileService extends SessionFileService {
 	
 	final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
 	final String DATE_TIME_FORMAT_SUNNY = "yyyy-MM-dd HH:mm:ss,SSS";
 	
 
 	private final static Logger logger = Logger
-			.getLogger(SessionFileService.class);
+			.getLogger(SessionThreadFileService.class);
 
 	private Deque<String> savedLines = new ArrayDeque<String>();
 
-	protected final File logFile;
-	protected final String sessionId;
-	protected final int index;
-	protected final int logEntryView;
+	private final String threadText;
 
-	public SessionFileService(File file, String sessionId, int index, int logEntryView) {
-		this.logFile = file;
-		this.sessionId = sessionId;
-		this.index = index;
-		this.logEntryView = logEntryView;
+	public SessionThreadFileService(File file, String threadText, String sessionId, int index, int logEntryView) {
+		super(file, sessionId, index, logEntryView);
+		this.threadText = threadText;
 
 	}
 
 	@Override
 	public List<LogEntry> call() throws Exception {
 		long start = System.currentTimeMillis();
-		logger.info("start search session " + sessionId + " in file "
+		logger.info("start search thread session " + sessionId + "/"+ threadText+" in file "
 				+ logFile.getAbsolutePath() + ". File size =  "+ logFile.length());
 		
-		LogFileTableUpdater.updateFileStatus(logFile,"running");					
+		//LogFileTableUpdater.updateFileStatus(logFile,"running");					
 		
 		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
 		
-		List<LogEntry> logEntries = readLogEntries(logFile, this.sessionId);
+		List<LogEntry> logEntries = readLogEntries(logFile);
 		
-		LogEntryTableUpdater.showResult(logEntries, logEntryView);
+		//LogEntryTableUpdater.showResult(logEntries, logEntryView);
 		
-		LogFileTableUpdater.updateFileStatus(logFile,"completed");					
+		//LogFileTableUpdater.updateFileStatus(logFile,"completed");					
 		
 
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
@@ -69,13 +64,9 @@ class SessionFileService implements Callable<List<LogEntry>> {
 
 	}
 
-	private List<LogEntry> readLogEntries(File file, String sessionId2) {
+	private List<LogEntry> readLogEntries(File file) {
 		List<LogEntry> entries = new ArrayList<LogEntry>();
 		long count = 0;
-
-		long fileSize = file.length();
-
-		long readedSize = 0;
 
 		LineIterator li;
 		try {
@@ -86,14 +77,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 			while (li.hasNext()) {
 				String s = li.nextLine();
 
-				readedSize = readedSize + s.length();
-				if (++count % 1000 == 0) {
-					//logger.info("check " + count + " lines");
-					//ProgressBarElement.updateProgressBar(readedSize,fileSize);
-					
-				}
-
-				boolean sessionFlagFound = s.contains(sessionId);
+				boolean sessionFlagFound = s.contains(sessionId) && s.contains(threadText);
 				Date time = getTimeString(s);
 
 				if (firstSessionIdNotFound) {

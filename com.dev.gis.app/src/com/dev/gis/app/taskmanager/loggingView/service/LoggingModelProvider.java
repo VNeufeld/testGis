@@ -11,6 +11,8 @@ public enum LoggingModelProvider {
 	
 	public String searchSession;
 
+	public String searchThread;
+	
 	public String searchBooking;
 	
 	public String logDirName;

@@ -18,7 +18,7 @@ public class LogEntryTableUpdater  {
 	public LogEntryTableUpdater() {
 	}
 
-	public static void showResult(final List<LogEntry> entries) {
+	public static void showResult(final List<LogEntry> entries, final int viewNo) {
 		
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 			
@@ -28,7 +28,7 @@ public class LogEntryTableUpdater  {
 					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 					LogEntryTableView viewPart =  (LogEntryTableView)wp.showView(
 							LogEntryTableView.ID, 
-							Integer.toString(instanceNum), 
+							Integer.toString(viewNo), 
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
 					
@@ -45,6 +45,29 @@ public class LogEntryTableUpdater  {
 			}
 		});
 
+	}
+
+	public static void showResultTable(final List<LogEntry> entries, final int viewNo) {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					LogEntryTableView viewPart =  (LogEntryTableView)wp.showView(
+							LogEntryTableView.ID, 
+							Integer.toString(viewNo), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					
+					
+					viewPart.update(entries);
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+		
 	}
 
 }

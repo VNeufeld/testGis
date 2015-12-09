@@ -14,6 +14,7 @@ import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.taskmanager.loggingView.service.LoggingSelectDirListener;
 import com.dev.gis.app.taskmanager.loggingView.service.SearchBookingListener;
 import com.dev.gis.app.taskmanager.loggingView.service.SearchSessionListener;
+import com.dev.gis.app.taskmanager.loggingView.service.SearchThreadListener;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.task.execution.api.ITaskResult;
@@ -106,6 +107,10 @@ public class LoggingAppView extends TaskViewAbstract {
 		new SearchBookingIdTextControl(groupSearch);
 		
 		new ButtonControl(groupSearch, "Search Booking", 0,  new SearchBookingListener());
+
+		new SearchThreadTextControl(groupSearch);
+		
+		new ButtonControl(groupSearch, "Search Thread", 0,  new SearchThreadListener());
 		
 	}
 

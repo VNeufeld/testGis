@@ -17,21 +17,20 @@ import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LogEntryTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
 
-public class WriteSessionService implements Callable<String> {
+public class SearchThreadService implements Callable<String> {
 
-	private static Logger logger = Logger.getLogger(WriteSessionService.class);
+	private static Logger logger = Logger.getLogger(SearchThreadService.class);
 
-	private  String sessionId;
+	private  String searchText;
+	private  String sessionText;
 	private int maxThreads;
-	
-	private boolean canceled = false;
-
 
 	private List<LogEntry> entries = new ArrayList<LogEntry>();
 
 	
-	public WriteSessionService(	String sessionId) {
-		this.sessionId = sessionId;
+	public SearchThreadService() {
+		this.searchText = LoggingModelProvider.INSTANCE.searchThread;
+		this.sessionText = LoggingModelProvider.INSTANCE.searchSession;
 		maxThreads = LoggingModelProvider.INSTANCE.getThreadcounts();
 
 	}
@@ -40,21 +39,21 @@ public class WriteSessionService implements Callable<String> {
 		try {
 			entries.clear();
 			
-			LogEntryModel.getInstance().getLoggingEntries().clear();
+			//LogEntryModel.getInstance().getLoggingEntries().clear();
 
-			LogEntryTableUpdater.showResult(null,1);
+			//LogEntryTableUpdater.showResult(null,2);
 			
 			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getEntries();
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);
 			
-			List<SessionFileService> splitterServicers = new ArrayList<SessionFileService>();
+			List<SessionThreadFileService> splitterServicers = new ArrayList<SessionThreadFileService>();
 			
 			for (FileNameEntry entry : fileEntries) {
 				File file = entry.getFile();
 				logger.info("check file :"+file.getAbsolutePath());
 
-				SessionFileService ss = new SessionFileService(file,this.sessionId, entry.getNumber(), 1);
+				SessionThreadFileService ss = new SessionThreadFileService(file,this.searchText, sessionText, entry.getNumber(),2);
 				splitterServicers.add(ss);
 			}
 				
@@ -70,7 +69,10 @@ public class WriteSessionService implements Callable<String> {
 			logger.info(" sort " + entries.size()+ " entries");
 			Collections.sort(entries);
 			
-			LogViewUpdater.updateView("exit");					
+			
+			LogEntryTableUpdater.showResultTable(entries, 2);
+
+			//LogViewUpdater.updateViewThread("exit");					
 			
 			
 		} catch (InterruptedException | ExecutionException ioe) {
@@ -82,20 +84,10 @@ public class WriteSessionService implements Callable<String> {
 	@Override
 	public String call() throws Exception {
 		long start = System.currentTimeMillis();
-		logger.info("start splitter session " + sessionId);
+		logger.info("start splitter session " + searchText);
 		searchSession();
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
 		return null;
-	}
-
-
-	public boolean isCanceled() {
-		return canceled;
-	}
-
-
-	public void setCanceled(boolean canceled) {
-		this.canceled = canceled;
 	}
 
 }

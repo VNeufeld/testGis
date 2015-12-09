@@ -37,6 +37,31 @@ public class LogViewUpdater  {
 		});
 	}
 	
+	public static void  updateViewThread(final String text ) {
+		
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					LoggingAppView viewPart =  (LoggingAppView)wp.showView(
+							LoggingAppView.ID, 
+							Integer.toString(2), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					
+					viewPart.outputText(text);
+					
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
+	}
+	
+	
 	public static void  updateView(final LogEntry entry ) {
 		
 		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {

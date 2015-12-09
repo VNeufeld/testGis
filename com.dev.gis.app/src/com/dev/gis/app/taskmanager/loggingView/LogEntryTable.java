@@ -180,4 +180,9 @@ public class LogEntryTable {
 		viewer.setInput(model.getLoggingEntries());
 	}
 
+	public void update(List<LogEntry> entries) {
+		viewer.setInput(entries);
+	}
+
+	
 }
