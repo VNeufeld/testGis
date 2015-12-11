@@ -406,9 +406,8 @@ public class AdacVehicleHttpService {
 		address.setStreet("Street");
 		address.setZip("81543");
 		address.setCountry("DE");
-		//address.setCountryId(Long.valueOf(49));
+		address.setCountryId(Long.valueOf(1));
 		customer.setAddress(address);
-		customer.setExternalCustomerNo("111111111");
 		customer.setEMail("John-Appleseed@mac.com");
 		PhoneNumber ph = new PhoneNumber();
 		ph.setPrefix("");

@@ -19,6 +19,9 @@ public class UseDatesCheckBox extends CheckBox {
 			getButton().setSelection(true);
 		else
 			getButton().setSelection(false);
+
+		LoggingModelProvider.INSTANCE.useDates = getButton().getSelection();
+		
 	}
 
 	@Override

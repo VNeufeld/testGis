@@ -21,6 +21,7 @@ public class LogEntry implements Comparable<LogEntry> {
 	public LogEntry(Date time, String s, int index) {
 		this.date = time;
 		this.fileIndex = index;
+		
 		addString(s);
 	}
 	public Date getDate() {

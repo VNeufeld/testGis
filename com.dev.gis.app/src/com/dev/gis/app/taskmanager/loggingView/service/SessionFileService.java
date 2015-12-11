@@ -77,7 +77,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 
 		long readedSize = 0;
 
-		LineIterator li;
+		LineIterator li = null;
 		try {
 			li = FileUtils.lineIterator(file);
 			LogEntry entry = null;
@@ -139,7 +139,10 @@ class SessionFileService implements Callable<List<LogEntry>> {
 
 		} catch (Exception e2) {
 			logger.error(e2.getMessage(), e2);
-		}
+		} finally {
+			if ( li != null)
+				li.close();
+	    }
 
 		logger.info(" lines  = " + count);
 

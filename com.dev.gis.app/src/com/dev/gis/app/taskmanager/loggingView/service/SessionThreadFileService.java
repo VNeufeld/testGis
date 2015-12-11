@@ -68,7 +68,7 @@ class SessionThreadFileService extends SessionFileService {
 		List<LogEntry> entries = new ArrayList<LogEntry>();
 		long count = 0;
 
-		LineIterator li;
+		LineIterator li = null;
 		try {
 			li = FileUtils.lineIterator(file);
 			LogEntry entry = null;
@@ -123,6 +123,9 @@ class SessionThreadFileService extends SessionFileService {
 
 		} catch (Exception e2) {
 			logger.error(e2.getMessage(), e2);
+		} finally {
+			if ( li != null)
+				li.close();
 		}
 
 		logger.info(" lines  = " + count);

@@ -208,8 +208,17 @@ public class LogFilesTable {
 			IStructuredSelection thisSelection = (IStructuredSelection) event
 					.getSelection();
 			Object selectedNode = thisSelection.getFirstElement();
-			
-			FileNameEntry o = (FileNameEntry) selectedNode;
+			if ( selectedNode != null ) {
+				FileNameEntry o = (FileNameEntry) selectedNode;
+				if ( o.isSelect())
+					o.setSelect(false);
+				else
+					o.setSelect(true);
+				logger.info("Change select "+o.isSelect());
+				
+				FileNameEntryModel model = FileNameEntryModel.getInstance();
+				viewer.setInput(model.getEntries());
+			}
 			
 
 		}
@@ -224,18 +233,6 @@ public class LogFilesTable {
 			IStructuredSelection thisSelection = (IStructuredSelection) event
 					.getSelection();
 			Object selectedNode = thisSelection.getFirstElement();
-
-			if ( selectedNode != null ) {
-				FileNameEntry o = (FileNameEntry) selectedNode;
-				if ( o.isSelect())
-					o.setSelect(false);
-				else
-					o.setSelect(true);
-				logger.info("Change select "+o.isSelect());
-				
-				FileNameEntryModel model = FileNameEntryModel.getInstance();
-				viewer.setInput(model.getEntries());
-			}
 
 			
 		}
