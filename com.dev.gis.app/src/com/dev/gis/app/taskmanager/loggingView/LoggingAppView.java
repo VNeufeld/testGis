@@ -32,6 +32,11 @@ public class LoggingAppView extends TaskViewAbstract {
 	
 	SearchCriteriaComposite searchCriteriaComposite;
 	
+	SearchBookingIdTextControl searchBookingIdTextControl;
+	
+	
+	private SearchSessionIdTextControl searchSessionIdTextControl;
+	
 	
 	@Override
 	public void createPartControl(final Composite parent) {
@@ -100,11 +105,11 @@ public class LoggingAppView extends TaskViewAbstract {
 		GridLayoutFactory.fillDefaults().numColumns(3).applyTo(groupSearch);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(groupSearch);
 		
-		new SearchSessionIdTextControl(groupSearch);
+		searchSessionIdTextControl = new SearchSessionIdTextControl(groupSearch);
 		
 		new ButtonControl(groupSearch, "Search Session", 0,  new SearchSessionListener());
 
-		new SearchBookingIdTextControl(groupSearch);
+		searchBookingIdTextControl = new SearchBookingIdTextControl(groupSearch);
 		
 		new ButtonControl(groupSearch, "Search Booking", 0,  new SearchBookingListener());
 
@@ -177,6 +182,12 @@ public class LoggingAppView extends TaskViewAbstract {
 	@Override
 	public void refresh(ITaskResult result) {
 		
+	}
+
+
+	void refreshCriteria(String bookingId, String sessionId) {
+		searchSessionIdTextControl.setSelectedValue(sessionId);
+		searchBookingIdTextControl.setSelectedValue(bookingId);
 	}
 
 

@@ -77,6 +77,9 @@ public class LogViewUpdater  {
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
 					viewPart.outputText(entry.getEntry().get(0));
+
+					viewPart.refreshCriteria(entry.getBookingId(), entry.getSessionId());
+					
 					
 				} catch (PartInitException e) {
 					logger.error(e.getMessage(),e);

@@ -26,6 +26,7 @@ import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
 class SessionFileService implements Callable<List<LogEntry>> {
 	
 	final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
+	final String ADAC_DATE_TIME_SHORT_FORMAT = "dd.MM.yyyy HH:mm:ss";
 	final String DATE_TIME_FORMAT_SUNNY = "yyyy-MM-dd HH:mm:ss,SSS";
 	
 
@@ -88,12 +89,12 @@ class SessionFileService implements Callable<List<LogEntry>> {
 
 				readedSize = readedSize + s.length();
 				if (++count % 1000 == 0) {
-					//logger.info("check " + count + " lines");
-					//ProgressBarElement.updateProgressBar(readedSize,fileSize);
-					
+					logger.info("check " + count + " lines");
+					ProgressBarElement.updateProgressBar(readedSize,fileSize);
 				}
 
-				boolean sessionFlagFound = s.contains(sessionId);
+				boolean sessionFlagFound = StringUtils.containsIgnoreCase(s,sessionId);
+				
 				Date time = getTimeString(s);
 
 				if (firstSessionIdNotFound) {
@@ -162,7 +163,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 		return true;
 	}
 
-	private LogEntry tryFoundPreviousEntryWithDate() {
+	protected LogEntry tryFoundPreviousEntryWithDate() {
 		List<String> lines = new ArrayList<String>();
 		Date time = null;
 		logger.info("tryFoundPreviousEntryWithDate");
@@ -213,19 +214,19 @@ class SessionFileService implements Callable<List<LogEntry>> {
 		return logEntry;
 	}
 
-	private Date createDateTime_2000_01_01() {
+	protected Date createDateTime_2000_01_01() {
 		Calendar cal = Calendar.getInstance();
 		cal.set(2000, 0, 1);
 		return cal.getTime();
 	}
 
-	private void saveLineInQueue(String s) {
-		if (savedLines.size() > 5)
+	protected void saveLineInQueue(String s) {
+		if (savedLines.size() > 100)
 			savedLines.removeLast();
 		savedLines.addFirst(s);
 	}
 
-	private Date getTimeString(String s) {
+	protected Date getTimeString(String s) {
 		if (s == null || s.length() <= 25) 
 			return null;
 		
@@ -236,8 +237,15 @@ class SessionFileService implements Callable<List<LogEntry>> {
 		return date;
 
 	}
+	protected Date checkAdacFormat(String s) {
+		Date date = checkAdacLongFormat(s);
+		if ( date != null)
+			return date;
+		return checkAdacShortFormat(s);
+	}
+	
 
-	private Date checkAdacFormat(String s) {
+	protected Date checkAdacLongFormat(String s) {
 		try {
 			String time = s.substring(0, 25);
 			if (time.charAt(2) == '.' && time.charAt(5) == '.') {
@@ -245,12 +253,25 @@ class SessionFileService implements Callable<List<LogEntry>> {
 				return stf.parse(time);
 			}
 		} catch (ParseException e) {
-			logger.info(e.getMessage() + " " + s);
+			logger.debug(e.getMessage() + " " + s);
 		}
 		return null;
 	}
+	protected Date checkAdacShortFormat(String s) {
+		try {
+			String time = s.substring(0, 19);
+			if (time.charAt(2) == '.' && time.charAt(5) == '.') {
+				SimpleDateFormat stf = new SimpleDateFormat(ADAC_DATE_TIME_SHORT_FORMAT);
+				return stf.parse(time);
+			}
+		} catch (ParseException e) {
+			logger.debug(e.getMessage() + " " + s);
+		}
+		return null;
+	}
+	
 
-	private Date checkSunnyFormat(String s) {
+	protected Date checkSunnyFormat(String s) {
 		try {
 			String time = s.substring(0, 25);
 			if (time.charAt(4) == '-' && time.charAt(7) == '-') {

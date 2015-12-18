@@ -39,10 +39,6 @@ public class SearchThreadService implements Callable<String> {
 		try {
 			entries.clear();
 			
-			//LogEntryModel.getInstance().getLoggingEntries().clear();
-
-			//LogEntryTableUpdater.showResult(null,2);
-			
 			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getEntries();
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);
