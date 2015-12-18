@@ -1,5 +1,6 @@
 package com.dev.gis.app;
 
+import org.apache.log4j.Logger;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.swt.widgets.Display;
@@ -14,14 +15,22 @@ import com.dev.gis.connector.api.TaskProperties;
  */
 public class Application implements IApplication {
 	public static final String PLUGIN_ID = "rcpmail-99";
+	private Logger logger = Logger.getLogger(getClass());
 
-	public static final boolean  ONLY_LOGGING = false;
+	public static final boolean  ONLY_LOGGING = true;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)
 	 */
 	public Object start(IApplicationContext context) {
 		Display display = PlatformUI.createDisplay();
+        logger.info("class path :"+ System.getProperty("java.class.path"));
+        logger.info("home :"+ System.getProperty("java.home"));
+        logger.info("os :"+ System.getProperty("os.name"));
+        logger.info("user dir :"+ System.getProperty("user.dir"));
+        logger.info("user home:"+ System.getProperty("user.home"));
+        logger.info("user name:"+ System.getProperty("user.name"));
+
 		try {
 			TaskProjectModelFactory.createModel();
 			

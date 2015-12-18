@@ -672,6 +672,7 @@ public class VehicleHttpService {
 	public BookingResponse verifyOffer(Offer selectedOffer) {
 		try {
 
+			//String param = "/booking/offer/"+selectedOffer.getId().toString()+"/verify?test=true";
 			String param = "/booking/offer/"+selectedOffer.getId().toString()+"/verify";
 			
 			URI uri = getServerURI(param);
