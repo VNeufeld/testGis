@@ -31,11 +31,8 @@ public class LogEntryTableUpdater  {
 							Integer.toString(viewNo), 
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
-					
 					if (entries != null )
 						LogEntryModel.getInstance().updateLoggingEntries((entries));
-					//LogEntryModel.getInstance().getLoggingEntries().addAll(entries);
-
 					
 					viewPart.update();
 					
@@ -59,6 +56,8 @@ public class LogEntryTableUpdater  {
 							Integer.toString(viewNo), 
 							IWorkbenchPage.VIEW_ACTIVATE);
 					
+					if ( viewNo == 2)
+						viewPart.setName("Thread Search");
 					
 					viewPart.update(entries);
 					

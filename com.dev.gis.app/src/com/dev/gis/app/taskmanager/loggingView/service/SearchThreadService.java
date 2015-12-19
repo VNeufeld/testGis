@@ -39,7 +39,7 @@ public class SearchThreadService implements Callable<String> {
 		try {
 			entries.clear();
 			
-			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getEntries();
+			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getSelectedFiles();
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);
 			
@@ -61,14 +61,10 @@ public class SearchThreadService implements Callable<String> {
 				entries.addAll(le);
 			}
 		
-		
 			logger.info(" sort " + entries.size()+ " entries");
 			Collections.sort(entries);
 			
-			
 			LogEntryTableUpdater.showResultTable(entries, 2);
-
-			//LogViewUpdater.updateViewThread("exit");					
 			
 			
 		} catch (InterruptedException | ExecutionException ioe) {

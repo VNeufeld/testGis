@@ -44,7 +44,7 @@ public class WriteSessionService implements Callable<String> {
 
 			LogEntryTableUpdater.showResult(null,1);
 			
-			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getEntries();
+			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getSelectedFiles();
 
 			ExecutorService executor = Executors.newFixedThreadPool((int)maxThreads);
 			

@@ -25,7 +25,9 @@ public class LogEntryTableView extends ViewPart {
 	
 	private LogEntryTable  logEntryTable;
 	
-	
+	public void setName(String name) {
+		this.setPartName(name);
+	}
 	
 	@Override
 	public void createPartControl(final Composite parent) {

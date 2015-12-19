@@ -27,14 +27,13 @@ public class FileNameEntryModel {
 		return entries;
 	}
 	
-	public List<File> getFiles() {
-		List<File> files = new ArrayList<File>();
+	public List<FileNameEntry> getSelectedFiles() {
+		List<FileNameEntry> files = new ArrayList<FileNameEntry>();
 		for ( FileNameEntry entry : entries  )
 		{
 			if ( entry.isSelect()) {
 				if ( entry.getFile() != null) {
-					File file = entry.getFile();
-					files.add(file);
+					files.add(entry);
 				}
 			}
 				

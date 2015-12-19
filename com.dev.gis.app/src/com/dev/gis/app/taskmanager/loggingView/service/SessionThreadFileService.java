@@ -23,8 +23,6 @@ class SessionThreadFileService extends SessionFileService {
 	private final static Logger logger = Logger
 			.getLogger(SessionThreadFileService.class);
 
-	private Deque<String> savedLines = new ArrayDeque<String>();
-
 	private final String threadText;
 
 	public SessionThreadFileService(File file, String threadText, String sessionId, int index, int logEntryView) {
@@ -39,16 +37,9 @@ class SessionThreadFileService extends SessionFileService {
 		logger.info("start search thread session " + sessionId + "/"+ threadText+" in file "
 				+ logFile.getAbsolutePath() + ". File size =  "+ logFile.length());
 		
-		//LogFileTableUpdater.updateFileStatus(logFile,"running");					
-		
 		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
 		
 		List<LogEntry> logEntries = readLogEntries(logFile);
-		
-		//LogEntryTableUpdater.showResult(logEntries, logEntryView);
-		
-		//LogFileTableUpdater.updateFileStatus(logFile,"completed");					
-		
 
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
 		return logEntries;

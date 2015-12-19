@@ -48,8 +48,7 @@ public class FindBookingService implements Callable<String> {
 			
 			LogEntryModel.getInstance().setProcessRunning();
 			
-			//List<File> files = 	FileNameEntryModel.getInstance().getFiles();	
-			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getEntries();
+			List<FileNameEntry> fileEntries = FileNameEntryModel.getInstance().getSelectedFiles();
 			
 			
 			for (FileNameEntry fileNameEntry : fileEntries) {
