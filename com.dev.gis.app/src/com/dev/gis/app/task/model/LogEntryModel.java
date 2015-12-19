@@ -107,6 +107,9 @@ public class LogEntryModel  extends ModelObject {
 					demandedObject = demObj;
 					break;
 				}
+				if ( StringUtils.containsIgnoreCase(str, "RequestorResult")){
+					demandedObject = "Respose";
+				}
 			}
 			entry.setDemandedObject(demandedObject);
 		}
