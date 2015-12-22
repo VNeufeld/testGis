@@ -249,7 +249,7 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 	
 	
 	
-	private Composite createRequestButtons(final Composite parent) {
+	protected Composite createRequestButtons(final Composite parent) {
 		
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(4).equalWidth(false).applyTo(composite);

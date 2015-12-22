@@ -30,7 +30,7 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 
 	protected AdacVehicleInfoControl vehicleInfo;
 
-	protected AdacLocationInfoControl locationInfoControl;
+	//protected AdacLocationInfoControl locationInfoControl;
 	
 	protected Offer selectedOffer = null;
 
@@ -45,6 +45,14 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 	protected OutputTextControls priceStd = null;
 
 	protected OutputTextControls priceDaily = null;
+
+	protected OutputTextControls serviceCatalog = null;
+
+	protected OutputTextControls supplier = null;
+
+	protected OutputTextControls station = null;
+
+	protected OutputTextControls location = null;
 	
 
 	@Override
@@ -55,6 +63,18 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		priceText = new OutputTextControls(priceComposite, "Preis:", 200, 1 );
 		priceStd = new OutputTextControls(priceComposite, "PreisStd:", 200, 1 );
 		priceDaily = new OutputTextControls(priceComposite, "PreisDaily:", 200, 1 );
+	}
+
+	@Override
+	protected void createServcatSupplierOutput(Group groupStamp) {
+		final Composite composite = createComposite(groupStamp, 4, -1,  true);
+		supplier = new OutputTextControls(composite, "Supplier:", 500, 1 );
+		serviceCatalog = new OutputTextControls(composite, "ServiceCatalog:", 500, 1 );
+		
+		station = new OutputTextControls(composite, "Stations :", 1500, 3 );
+		
+		//location = new OutputTextControls(composite, "Locations :", 1500, 3 );		
+		
 	}
 
 	
@@ -82,18 +102,29 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 			priceDaily.setValue(offer.getDailyPrice().toString());
 			
 			inclusivesListTable.update(selectedOffer.getInclusives());
+			
+			
+			supplier.setValue(offerDo.getSupplier().getName() + " id : "+offerDo.getSupplier().getId() + " sgr : " + offerDo.getSupplier().getSupplierGroupId());
+			serviceCatalog.setValue(offerDo.getServiceCatalogCode() + " id : "+offerDo.getServiceCatalogId());
+			String text = offerDo.getPickupStation().getId() + " Name : " + offerDo.getPickupStation().getStationName();
+			if ( offerDo.getDropoffStation() != null) {
+				text += ". DropOff : " + offerDo.getDropoffStation().getId() + " Name : " + offerDo.getDropoffStation().getStationName();
+			}
+			station.setValue(text);
+			
+			
 		}
 		
 		vehicleInfo.update(vehicleResult.getVehicle());
 
-		this.travelInformation = offerDo.getTravelInformation();
-
-		this.travelInformation.setPickUpLocation(vehicleResult
-				.getPickUpLocation());
-		this.travelInformation.setDropOffLocation(vehicleResult
-				.getDropOffLocation());
+//		this.travelInformation = offerDo.getTravelInformation();
+//
+//		this.travelInformation.setPickUpLocation(vehicleResult
+//				.getPickUpLocation());
+//		this.travelInformation.setDropOffLocation(vehicleResult
+//				.getDropOffLocation());
 		
-		locationInfoControl.update(offerDo.getTravelInformation());
+		//locationInfoControl.update(offerDo.getTravelInformation());
 		
 		extraListTable.refresh(new ExtraResponse());
 
@@ -118,7 +149,7 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 
 	@Override
 	protected void createLocationGroup(Group groupStamp) {
-		locationInfoControl = new AdacLocationInfoControl(groupStamp);
+		//locationInfoControl = new AdacLocationInfoControl(groupStamp);
 		
 	}
 	
@@ -177,7 +208,7 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		public void widgetSelected(SelectionEvent arg0) {
 			recalculateResponse.setText("running....");
 			
-			String dropOffStationId = locationInfoControl.getDropOffStationId();
+			String dropOffStationId = ""; //locationInfoControl.getDropOffStationId();
 
 			if (StringUtils.isNotEmpty(dropOffStationId))
 				travelInformation.getDropOffLocation().setStationId(

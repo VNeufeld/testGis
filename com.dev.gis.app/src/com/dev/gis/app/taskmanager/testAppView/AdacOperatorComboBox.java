@@ -24,6 +24,9 @@ public class AdacOperatorComboBox extends ObjectsComboBox{
 		String ops = TaskProperties.getTaskProperties().getAdacOperators();
 		logger.info("create operator list "+ops);
 		operators.clear();
+		if ( ops.isEmpty()) {
+			ops = "DE:152573; Internationl:1; RentFox:1081205;";
+		}
 		if ( !ops.isEmpty())
 		{
 			String[] opp = ops.split(";");

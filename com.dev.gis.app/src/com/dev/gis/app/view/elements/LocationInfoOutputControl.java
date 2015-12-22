@@ -8,7 +8,7 @@ public abstract class LocationInfoOutputControl extends BasicControl implements 
 
 	protected OutputTextControls dropOffCity;
 
-	protected OutputTextControls dropOffStation;
+	//protected OutputTextControls dropOffStation;
 
 	
 	private final Composite parent;
@@ -21,7 +21,7 @@ public abstract class LocationInfoOutputControl extends BasicControl implements 
 
 		dropOffCity = new OutputTextControls(this.parent, "DropOff City", 500, 1 );
 		
-		dropOffStation = new OutputTextControls(this.parent, "DropOffStation", 500, 1 );
+		//dropOffStation = new OutputTextControls(this.parent, "DropOffStation", 500, 1 );
 		
 	}
 

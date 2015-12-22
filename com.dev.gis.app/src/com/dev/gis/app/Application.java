@@ -17,7 +17,7 @@ public class Application implements IApplication {
 	public static final String PLUGIN_ID = "rcpmail-99";
 	private Logger logger = Logger.getLogger(getClass());
 
-	public static final boolean  ONLY_LOGGING = true;
+	public static final boolean  ONLY_LOGGING = false;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.IApplicationContext)

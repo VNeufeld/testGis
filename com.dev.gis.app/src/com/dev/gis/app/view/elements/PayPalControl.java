@@ -56,7 +56,7 @@ public class PayPalControl extends EditPartControl {
 	protected void createButtons(Group groupStamp) {
 		Composite cp = createComposite(groupStamp, 1, -1, true);
 
-		new ButtonControl(cp, "Call Paypal", 0, getPaypalListener(getShell()));
+		new ButtonControl(cp, "Paypal Payment", 250, getPaypalListener(getShell()));
 
 	}
 
@@ -91,6 +91,8 @@ public class PayPalControl extends EditPartControl {
 
 			try {
 				paypalUrl.setValue("running");
+				clearFields();
+
 				
 				String bookingRequestId = AdacModelProvider.INSTANCE.getBookingRequestId();
 
@@ -125,6 +127,14 @@ public class PayPalControl extends EditPartControl {
 
 			}
 
+		}
+
+		private void clearFields() {
+			paypalUrl.setValue("");
+			paypalToken.setValue("");
+			paypalInfo.setValue("");
+			errorText.setValue("");
+			
 		}
 
 	}

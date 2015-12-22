@@ -20,6 +20,8 @@ public class ButtonControl extends BasicControl {
 		
 		button = new Button(parent, SWT.PUSH | SWT.LEFT);
 		button.setText(name);
+		if ( size > 0)
+			button.setSize(size, 150);
 		if ( selectionListener != null)
 			button.addSelectionListener(selectionListener);
 	}

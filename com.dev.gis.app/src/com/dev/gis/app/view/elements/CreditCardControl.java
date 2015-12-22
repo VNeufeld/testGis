@@ -93,6 +93,8 @@ public class CreditCardControl extends EditPartControl {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			
+			clearFields();
+			
 			try {
 				bsUrl.setValue("running");
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
@@ -148,7 +150,10 @@ public class CreditCardControl extends EditPartControl {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			
-			
+			bsToken.setValue("");
+			bsCrediCard.setValue("");
+			errorText.setValue("");
+
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			VehicleHttpService service = serviceFactory
 					.getVehicleJoiService();
@@ -169,6 +174,15 @@ public class CreditCardControl extends EditPartControl {
 		}
 
 	}
+	
+	private void clearFields() {
+		bsUrl.setValue("");
+		bsToken.setValue("");
+		bsCrediCard.setValue("");
+		errorText.setValue("");
+		
+	}
+
 
 
 	

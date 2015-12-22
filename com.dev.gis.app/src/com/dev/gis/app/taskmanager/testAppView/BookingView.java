@@ -13,7 +13,9 @@ import org.eclipse.ui.PlatformUI;
 import com.dev.gis.app.model.service.adac.PaypalService;
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.view.elements.CreditCardControl;
+import com.dev.gis.app.view.elements.MemberNoTextControl;
 import com.dev.gis.app.view.elements.PayPalControl;
+import com.dev.gis.app.view.elements.PaymentTypeControl;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.joi.protocol.Extra;
 
@@ -37,10 +39,18 @@ public class BookingView extends TaskViewAbstract {
 	private void createControls(Composite composite) {
 		
 		offerInfoControl = AdacOfferInfoControl.createOfferInfoControl(composite);
-
-		AdacCreditCardControl.createControl(composite);
 		
-		PayPalControl.createControl(composite, new PaypalService());
+		Composite paymentComposite = createGroupSpannAll(composite,"Payment",2);
+
+		AdacCreditCardControl.createControl(paymentComposite);
+		
+		PayPalControl.createControl(paymentComposite, new PaypalService());
+
+		Composite customerComposite = createGroupSpannAll(composite,"Customer",4);
+		
+		new MemberNoTextControl(customerComposite);
+
+		new PaymentTypeControl(customerComposite);
 		
 		bookingControl = AdacBookingControl.createBookingControl(composite);
 		
@@ -75,8 +85,6 @@ public class BookingView extends TaskViewAbstract {
 							IWorkbenchPage.VIEW_ACTIVATE);
 
 					viewPart.showOffer(extras);
-
-					// instanceNum++;
 
 					logger.info(" add view :" + viewPart.getTitle());
 

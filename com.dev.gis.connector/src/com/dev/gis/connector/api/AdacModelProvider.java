@@ -34,6 +34,10 @@ public enum AdacModelProvider {
 	
 	public String agencyNo;
 
+	public String memberNo;
+
+	public String paymentType;
+	
 	public String languageCode;
 
 	public String crossOfferOperator;

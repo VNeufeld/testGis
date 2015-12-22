@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -20,6 +21,7 @@ import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
+import com.dev.gis.connector.joi.protocol.Customer;
 import com.dev.gis.connector.joi.protocol.Error;
 
 public class AdacBookingControl extends EditPartControl {
@@ -86,6 +88,8 @@ public class AdacBookingControl extends EditPartControl {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 
+			clearFields();
+			
 			try {
 
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
@@ -93,22 +97,34 @@ public class AdacBookingControl extends EditPartControl {
 						.getAdacVehicleJoiService();
 				
 				int paymentType = 8;  // paypal
+				
+				Customer customer = AdacVehicleHttpService.createCustomer(AdacModelProvider.INSTANCE.memberNo);
+				
+				if ( "1".equals(AdacModelProvider.INSTANCE.paymentType))
+					paymentType = 1;   // KK
+				else
+					paymentType = 8;
+
 
 				BookingResponse response = service.bookOffers(
 						AdacModelProvider.INSTANCE.getSelectedOffer(), bookingRequestId.getSelectedValue(),
-						AdacModelProvider.INSTANCE.getSelectedExtras(),paymentType);
+						AdacModelProvider.INSTANCE.getSelectedExtras(),paymentType, customer);
+				if ( response == null) {
+					bookingId.setValue("");
+					errorText.setValue(" Booking response is null");
+					return;
+				}
 				
-				if (response.getBookingId() != null)
-					bookingId.setValue(response.getBookingId());
+				if (StringUtils.isNotEmpty(response.getBookingId())) {
+						bookingId.setValue(response.getBookingId());
+						String result = " Status: "; //+response.getStatus();
+						result = result + " Preis: "+response.getPrice().toString();
+						bookingPreis.setValue(result);
+				}
+				else {
+					showErrors(response);					
+				}
 				
-				bookingRequestId.setSelectedValue(
-						String.valueOf(response.getRequestId()));
-				AdacModelProvider.INSTANCE.setBookingRequestId(String.valueOf(response.getRequestId()));
-				
-				String result = " Status: "; //+response.getStatus();
-				result = result + " Preis: "+response.getPrice().toString();
-				
-				bookingPreis.setValue(result);
 
 			} catch (Exception err) {
 				logger.error(err.getMessage(),err);
@@ -136,6 +152,7 @@ public class AdacBookingControl extends EditPartControl {
 		public void widgetSelected(SelectionEvent arg0) {
 
 			bookingRequestId.setSelectedValue("running....");
+			clearFields();
 			try {
 
 				BookingRequest request = BookingRequestCreator
@@ -151,7 +168,11 @@ public class AdacBookingControl extends EditPartControl {
 						AdacModelProvider.INSTANCE.getSelectedOffer());
 				bookingRequestId
 						.setSelectedValue(String.valueOf(response.getRequestId()));
+
+
 				bookingPreis.setValue(response.getPrice().getAmount());
+				
+				showErrors(response);					
 				
 				AdacModelProvider.INSTANCE.setBookingRequestId(String.valueOf(response.getRequestId()));
 				
@@ -165,6 +186,12 @@ public class AdacBookingControl extends EditPartControl {
 		}
 
 	}
+	
+	private void clearFields() {
+		errorText.setValue("");
+		bookingId.setValue("");
+		bookingPreis.setValue("");
+	}
 
 	private void showErrors(BookingResponse response) {
 		String message = "";
@@ -174,9 +201,11 @@ public class AdacBookingControl extends EditPartControl {
 			}
 			
 		}
-		errorText.setValue(message);
-		errorText.getControl().setBackground(getDisplay().getSystemColor(SWT.COLOR_GRAY));
-		errorText.getControl().setForeground(getDisplay().getSystemColor(SWT.COLOR_DARK_RED));
+		if ( message.length() > 0 ) {
+			errorText.setValue(message);
+			errorText.getControl().setBackground(getDisplay().getSystemColor(SWT.COLOR_GRAY));
+			errorText.getControl().setForeground(getDisplay().getSystemColor(SWT.COLOR_DARK_RED));
+		}
 		
 	}
 	

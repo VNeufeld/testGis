@@ -28,21 +28,18 @@ public class AdacOfferInfoControl extends OfferInfoControl {
 
 		List<Extra> extras = AdacModelProvider.INSTANCE.getSelectedExtras();
 		
-		//carPrice.setValue(selectedOffer.getPrice().toString());
 		bookingLink.setValue(selectedOffer.getBookLink().toString());
-		
 
-		bookingCar.setValue(". Price = "+selectedOffer.getPrice().toString());
-		
-//				selectedOffer.getGroup()+ " : " + selectedOffer.getVehicle().getACRISS()
-//				+ " Model : " + selectedOffer.getVehicle().getVehicleModel() + ". Price = "+selectedOffer.getPrice().toString());
+		String text = selectedOffer.getGroup()+ ". Price = " + selectedOffer.getPrice().toString() + " Servcat : "+selectedOffer.getServiceCatalogCode() + " / "+selectedOffer.getServiceCatalogId();
+
+		bookingCar.setValue(text);
 		
 		if ( extras != null && extras.size() > 0) {
 			StringBuilder sbx = new StringBuilder();
 			for ( Extra extra : extras) {
-				sbx.append(""+ extra.getId()+ " "+extra.getCode()+" :  " + extra.getName());
+				sbx.append(" "+ extra.getId()+ " "+extra.getCode()+" :  " + extra.getName());
 				if ( extra.getPrice() != null)
-					sbx.append(". Price :"+extra.getPrice().toString());
+					sbx.append(". Price :"+extra.getPrice().toString()+ " ;  ");
 			}
 			selectedExtras.setValue(sbx.toString());
 		}

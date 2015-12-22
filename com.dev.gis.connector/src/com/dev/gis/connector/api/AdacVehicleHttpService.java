@@ -338,7 +338,7 @@ public class AdacVehicleHttpService {
 	}
 	
 	public BookingResponse bookOffers(Offer selectedOffer,String bookingRequestId,
-			List<Extra> selectedExtras, int paymentType) {
+			List<Extra> selectedExtras, int paymentType,Customer customer ) {
 		
 
 		try {
@@ -350,8 +350,6 @@ public class AdacVehicleHttpService {
 			URI uri = getServerURI(link);
 			
 			logger.info("Book Request URI = "+uri);
-
-			Customer customer = createCustomer();
 			
 			bookingRequest.setCustomer(customer);
 			
@@ -361,7 +359,7 @@ public class AdacVehicleHttpService {
 			
 			
 			Payment payment = new Payment();
-			payment.setPaymentType(8);   // Paypal
+			payment.setPaymentType(paymentType);  
 			bookingRequest.setPayment(payment);
 			
 			//bookingRequest.setAcceptedAvailability("13");
@@ -397,7 +395,7 @@ public class AdacVehicleHttpService {
 		return driver;
 	}
 
-	private static Customer createCustomer() {
+	public static Customer createCustomer(String memberNo) {
 		Customer customer = new Customer();
 		Person person = createDriver();
 		customer.setPerson(person);
@@ -413,6 +411,10 @@ public class AdacVehicleHttpService {
 		ph.setPrefix("");
 		ph.setExtension("8885555512");
 		customer.setPhone(ph);
+		
+		if ( StringUtils.isNotEmpty(memberNo))
+			customer.setExternalCustomerNo(memberNo);
+		
 		return customer;
 	}
 

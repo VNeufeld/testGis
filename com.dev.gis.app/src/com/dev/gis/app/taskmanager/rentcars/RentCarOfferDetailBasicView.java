@@ -66,11 +66,19 @@ public abstract class RentCarOfferDetailBasicView extends TaskViewAbstract {
 		createPrice(groupStamp);
 
 		createVehicleInfoOutput(groupStamp);
+
+		createServcatSupplierOutput(groupStamp);
 		
 		createLocationGroup(groupStamp);
 
 		return groupStamp;
 	}
+
+	protected void createServcatSupplierOutput(Group groupStamp) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	protected void createPrice(Group groupStamp) {
 		priceText = new OutputTextControls(groupStamp, "Preis:", 200, 1 );
@@ -101,7 +109,7 @@ public abstract class RentCarOfferDetailBasicView extends TaskViewAbstract {
 
 
 
-	private Composite createRequestButtons(final Composite parent) {
+	protected Composite createRequestButtons(final Composite parent) {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false)

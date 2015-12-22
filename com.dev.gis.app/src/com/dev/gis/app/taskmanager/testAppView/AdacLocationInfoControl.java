@@ -22,9 +22,5 @@ public class AdacLocationInfoControl extends LocationInfoOutputControl {
 		}
 		
 	}
-
-	public String getDropOffStationId() {
-		return dropOffStation.getValue();
-	}
 	
 }

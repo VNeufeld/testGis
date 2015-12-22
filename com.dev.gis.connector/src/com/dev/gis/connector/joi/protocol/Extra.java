@@ -3,26 +3,16 @@ package com.dev.gis.connector.joi.protocol;
 import java.net.URI;
 import java.util.Set;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
-
-@XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlRootElement(name="extra")
-@XmlType(propOrder={ 	"id", "link", "code", "name", "payType", "status", "insurance", "mandatory", 
-						"price", "totalPrice", "requiredItems" , "competingItems", "requiredItemsString" , "competingItemsString",
-						"extraClass", "value1" , "value2", "value3", "value4", "dimension1", "dimension2" } )
 public class Extra extends BasicProtocol {
 
 	private long id;
 
 	private URI link;
 
+	private boolean selected = false;
 	
 	
+
 	private String status;
 	
 	private String code;
@@ -54,35 +44,26 @@ public class Extra extends BasicProtocol {
 	private String dimension1;
 	private String dimension2;
 
-
-	
-	
-	@XmlElement(required=false)
 	public String getCode() {
 		return code;
 	}
 
-	@XmlElement(required=false)
 	public Set<Long> getCompetingItems() {
 		return competingItems;
 	}
 
-	@XmlElement(required=false)
 	public String getCompetingItemsString() {
 		return competingItemsString;
 	}
 
-	@XmlElement(required=false)
 	public String getDimension1() {
 		return dimension1;
 	}
 
-	@XmlElement(required=false)
 	public String getDimension2() {
 		return dimension2;
 	}
 
-	@XmlElement(required=false)
 	public ItemClass getExtraClass() {
 		return extraClass;
 	}
@@ -90,73 +71,58 @@ public class Extra extends BasicProtocol {
 	public long getId() {
 		return id;
 	}
-
-	@XmlElement(required=false)
 	public URI getLink() {
 		return link;
 	}
 
-	@XmlElement(required=false)
 	public String getName() {
 		return name;
 	}
 
-	@XmlElement(required=false)
 	public String getPayType() {
 		return payType;
 	}
 
-	@XmlElement(required=false)
 	public MoneyAmount getPrice() {
 		return price;
 	}
 
-	@XmlElement(required=false)
 	public Set<Long> getRequiredItems() {
 		return requiredItems;
 	}
 
-	@XmlElement(required=false)
 	public String getRequiredItemsString() {
 		return requiredItemsString;
 	}
 
-	@XmlElement(required=false)
 	public String getStatus() {
 		return status;
 	}
 	
-	@XmlElement(required=false)
 	public MoneyAmount getTotalPrice() {
 		return totalPrice;
 	}
 	
-	@XmlElement(required=false)
 	public String getValue1() {
 		return value1;
 	}
 	
-	@XmlElement(required=false)
 	public String getValue2() {
 		return value2;
 	}
 	
-	@XmlElement(required=false)
 	public String getValue3() {
 		return value3;
 	}
 	
-	@XmlElement(required=false)
 	public String getValue4() {
 		return value4;
 	}
 	
-	@XmlElement(required=false)
 	public boolean isInsurance() {
 		return insurance;
 	}
-	
-	@XmlElement(required=false)
+
 	public boolean isMandatory() {
 		return mandatory;
 	}
@@ -248,4 +214,13 @@ public class Extra extends BasicProtocol {
 	public void setValue4(String value4) {
 		this.value4 = value4;
 	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+	
 }
