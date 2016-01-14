@@ -70,14 +70,15 @@ public class VehicleHttpService {
 		this.httpClient = gisHttpClientInstance;
 	}
 
-	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy, int pageSize) {
+	public VehicleResponse getOffers(VehicleRequest vehicleRequest, boolean dummy, int pageSize, String sessionId) {
 
 		try {
 			
-//			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+
-//					SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
-			
-			URI uri = getServerURI(SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize));
+			String param = SUNNY_VEHICLE_REQUEST_PARAM+String.valueOf(pageSize);
+			if ( StringUtils.isNotBlank(sessionId))
+				param = param + "&sessionCode="+sessionId;
+					
+			URI uri = getServerURI(param);
 
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
 			logger.info("http client "+httpClient+ " request = "+request);

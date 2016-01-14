@@ -7,6 +7,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferViewUpdater;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.VehicleRequest;
 import com.dev.gis.connector.sunny.VehicleResponse;
@@ -33,6 +34,8 @@ public class GetOffersOperation implements IRunnableWithProgress {
 	public void run(IProgressMonitor monitor) throws InvocationTargetException,
 			InterruptedException {
 
+		String sessionId = ModelProvider.INSTANCE.sessionID;
+		
 		new SunnyOfferViewUpdater().clearView();
 		
 		
@@ -46,7 +49,7 @@ public class GetOffersOperation implements IRunnableWithProgress {
 		ShowTimer showTimer = new ShowTimer(monitor);
 		new Thread(showTimer).start();
 
-		this.response = service.getOffers(request, false, pageSize);
+		this.response = service.getOffers(request, false, pageSize, sessionId);
 		showTimer.setWork(false);
 		monitor.done();
 

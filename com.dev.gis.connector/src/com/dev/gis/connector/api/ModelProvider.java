@@ -24,6 +24,8 @@ public enum ModelProvider {
 
 	public long pageSize;
 
+	public String sessionID;
+	
 	public long pageNo;
 	
 	public String airport;

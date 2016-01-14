@@ -10,12 +10,8 @@ public class PageSizeControl extends ObjectTextControl {
 	
 	private static Logger logger = Logger.getLogger(PageSizeControl.class);
 
-	public static void createCityLocationSearch(Composite parent) {
-		new PageSizeControl(parent);
-	}
-
 	public PageSizeControl(Composite parent) {
-		super(parent, 100, true);
+		super(parent, 50, false);
 	}
 
 	public PageSizeControl(Composite parent, int size,  boolean span) {
@@ -31,13 +27,14 @@ public class PageSizeControl extends ObjectTextControl {
 	@Override
 	public void saveValue(String value) {
 		if ( StringUtils.isEmpty(value))
-			value = "5";
+			value = "10";
 		ModelProvider.INSTANCE.pageSize = Long.valueOf(value);
 		logger.info("page size : "+value);
-//		TaskProperties.getTaskProperties().setServerProperty(
-//				serverUrl.getText());
-//		TaskProperties.getTaskProperties().saveProperty();
-		
 	}
+	
+	protected String getDefaultValue() {
+		return "10";
+	}
+
 
 }

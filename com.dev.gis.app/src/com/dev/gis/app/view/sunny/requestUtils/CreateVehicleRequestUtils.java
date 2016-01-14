@@ -88,6 +88,7 @@ public class CreateVehicleRequestUtils {
 		if (offerFilter != null )
 			request.setFilter(offerFilter);
 		
+		
 		if ( !locationExist) {
 			createStationLocations(request);
 		}
@@ -168,6 +169,18 @@ public class CreateVehicleRequestUtils {
 		String servcatFilter  = SunnyModelProvider.INSTANCE.servcatFilter;
 		
 		boolean filterEnable = false;
+		
+		if ( SunnyModelProvider.INSTANCE.onlyAirportFlag || SunnyModelProvider.INSTANCE.onlyCityFlag) {
+			List<String> list = new ArrayList<String>();
+			if ( SunnyModelProvider.INSTANCE.onlyAirportFlag )
+				list.add("APT");
+			if ( SunnyModelProvider.INSTANCE.onlyCityFlag )
+				list.add("CTY");
+			if ( list.size() > 0) 
+				offerFilter.setStationLocTypeCodes(list.toArray(new String[0]));
+			filterEnable = true;;			
+		}
+
 		
 		if ( StringUtils.isNotEmpty(supplierFilter)) {
 			String[] parts = supplierFilter.split(",");

@@ -60,6 +60,10 @@ public enum SunnyModelProvider {
 
 	private Person customer;
 	
+	public boolean onlyAirportFlag = false;;
+	public boolean onlyCityFlag = false;;
+
+	
 	public long cityId;
 	public long dropoffCityId;
 

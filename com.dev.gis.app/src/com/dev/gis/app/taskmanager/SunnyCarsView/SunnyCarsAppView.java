@@ -76,6 +76,11 @@ public class SunnyCarsAppView extends RentCarsAppView {
 
 		SunnyAirportLocationSearch.createDropoffAirportLocationSearch(groupLocation);
 		
+		OnlyAirportCheckBox onlyAirports = new OnlyAirportCheckBox(groupLocation, "only airports");
+
+		OnlyCityCheckBox onlyCity = new OnlyCityCheckBox(groupLocation, "only city");
+
+		
 	}
 
 

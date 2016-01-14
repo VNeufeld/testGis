@@ -1,5 +1,7 @@
 package com.dev.gis.app.taskmanager.rentcars;
 
+import java.awt.Color;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -8,6 +10,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -17,6 +20,7 @@ import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.DropOffDateControl;
 import com.dev.gis.app.view.elements.PageSizeControl;
 import com.dev.gis.app.view.elements.PickupDateControl;
+import com.dev.gis.app.view.elements.SessionIdControl;
 import com.dev.gis.connector.sunny.VehicleResponse;
 import com.dev.gis.connector.sunny.VehicleSummary;
 import com.dev.gis.task.execution.api.IEditableTask;
@@ -77,8 +81,11 @@ public class RentCarsAppView extends TaskViewAbstract {
 	}
 
 	protected void createExecutionPanel(Group groupStamp) {
-		createPageSize(groupStamp);
-		new ButtonControl(groupStamp, "GetOffer", 0, getOffersSelectionListener());
+		final Composite groupExecution = createComposite(groupStamp, 6, -1,true);
+		new SessionIdControl(groupExecution);
+		createPageSize(groupExecution);
+		ButtonControl  bc =new ButtonControl(groupExecution, "GetOffer", 0, getOffersSelectionListener());
+		bc.getButton().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
 
 	}
 
@@ -95,7 +102,7 @@ public class RentCarsAppView extends TaskViewAbstract {
 		
 	}
 
-	protected void createPageSize(Group groupStamp) {
+	protected void createPageSize(Composite groupStamp) {
 		new PageSizeControl(groupStamp);
 		
 	}
