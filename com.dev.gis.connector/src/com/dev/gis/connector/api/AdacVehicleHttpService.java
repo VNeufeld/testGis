@@ -23,10 +23,12 @@ import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.PhoneNumber;
+import com.dev.gis.connector.joi.protocol.StationResponse;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleRequestFilter;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
+import com.dev.gis.connector.joi.protocol.VehicleResult;
 import com.dev.gis.connector.joi.protocol.VerifyCreditCardPaymentResponse;
 
 public class AdacVehicleHttpService {
@@ -238,10 +240,9 @@ public class AdacVehicleHttpService {
 
 	}
 	
-	public String getPickupStations(Offer offer) {
+	public StationResponse getPickupStations(Offer offer) {
 		String response = "PickupStations ";
 		try {
-			
 			
 			URI uri = getPickupStationURI(offer.getLink());
 			logger.info("getPickupStations Request = "+uri);
@@ -251,8 +252,37 @@ public class AdacVehicleHttpService {
 			{
 				response =  httpClient.sendGetRequest(uri);
 				logger.info("response = "+response);
+				return JsonUtils.createResponseClassFromJson(response, StationResponse.class);
 			}
-			return response;
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public StationResponse getDropoffStations(Offer offer, String pickupStationId) {
+		String response = "PickupStations ";
+		try {
+			String link = offer.getLink().toString();
+			int pos = link.indexOf("/vehicleRequest");
+			link = link.substring(pos);
+			int pos2 = link.indexOf("/offer");
+			link = link.substring(0,pos2);
+			link = link +"/dropOff?pickUpStation="+pickupStationId;
+			URI uri = getServerURI(link);
+			
+			logger.info("getDropofStations Request = "+uri);
+			
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( !dummy)
+			{
+				response =  httpClient.sendGetRequest(uri);
+				logger.info("response = "+response);
+				return JsonUtils.createResponseClassFromJson(response, StationResponse.class);
+			}
 			
 		} catch ( IOException e) {
 			logger.error(e,e);
@@ -462,8 +492,7 @@ public class AdacVehicleHttpService {
 
 
 
-	public static String recalculate(Offer selectedOffer, TravelInformation travelInformation) {
-		GisHttpClient httpClient = new GisHttpClient();
+	public VehicleResult recalculate(Offer selectedOffer, TravelInformation travelInformation) {
 		
 		try {
 			String link = selectedOffer.getBookLink().toString();
@@ -472,25 +501,27 @@ public class AdacVehicleHttpService {
 			pos = link.indexOf("/offer");
 			link = link.substring(0,pos);
 			link = link + "/recalculate";
-			//URI uri = new URI("https://avm-mobile.adac.de/test/vehicleRequest/1162967122/vehicle/77345424/recalculate");
-			// http://localhost:8080/joi/vehicleRequest/1127497613/vehicle/899766814/offer/fc3763ab-b892-4f60-b3f7-fbe72fe91525/recalculate
 			
-			URI uri = new URI(TaskProperties.getTaskProperties().getServerProperty()+link);
-			
-			
+			URI uri = getServerURI(link);
 			
 			logger.info("recalculate Request = "+uri);
-			
 			
 			String request = JsonUtils.convertRequestToJsonString(travelInformation);
 			logger.info("request = "+request);
 			
-			String response =  httpClient.startPostRequestAsJson(uri, request);
+			String response = null;
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( dummy)
+				response = JsonUtils.createDummyResponse("adac.recalculateResponse");
+			else
+				response =  httpClient.startPostRequestAsJson(uri, request);
+			
 			logger.info("response = "+response);
 			if ( response == null)
 				response = " no cars found ";
 			
-			return response;
+			if (response != null ) 
+				return JsonUtils.createResponseClassFromJson(response, VehicleResult.class);
 			
 		} catch ( IOException e) {
 			logger.error(e);

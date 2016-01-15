@@ -32,4 +32,24 @@ public class GetStationService implements IStationService{
 		
 	}
 
+	public List<StationModel> getDropoffStationService(int type, String search, String offerId, String stationId) {
+		
+		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+		VehicleHttpService service = serviceFactory.getVehicleJoiService();
+
+		StationResponse response = service.getDropOffStations(type,search, offerId, stationId);
+		
+		List<StationModel> stations = new ArrayList<StationModel>();
+		
+		for ( Station station : response.getStations()) {
+			StationModel stationModel = new StationModel(station.getId(), station.getIdentifier());
+			
+			stationModel.setSupplier(station.getSupplierId() + ":"+ station.getSupplierGroupId());
+			stations.add(stationModel);
+		}
+		
+		return stations;
+		
+	}
+	
 }

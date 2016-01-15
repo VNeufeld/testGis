@@ -65,6 +65,10 @@ public enum AdacModelProvider {
 	public String servcatFilter;
 	
 	public String stationFilter;
+	
+	public long selectedPickupStationId;
+	public long selectedDropoffStationId;
+
 
 	public void updateExtras(ExtraResponse response) {
 		extras.clear();

@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -11,9 +12,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.part.ViewPart;
 
+import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyOfferViewUpdater;
 import com.dev.gis.task.execution.api.ITaskResult;
 
 public abstract class TaskViewAbstract extends ViewPart {
+	
+	protected Logger logger = Logger.getLogger(getClass());
+
 
 	protected Composite parent;
 

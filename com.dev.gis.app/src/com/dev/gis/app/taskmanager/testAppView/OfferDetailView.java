@@ -1,13 +1,14 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
+import java.util.Calendar;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
@@ -17,13 +18,15 @@ import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.OfferDo;
+import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
+import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
-import com.dev.gis.task.execution.api.JoiVehicleConnector;
 
 public class OfferDetailView extends RentCarOfferDetailBasicView {
 	public static final String ID = "com.dev.gis.app.view.OfferDetailView";
@@ -34,8 +37,6 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 	
 	protected Offer selectedOffer = null;
 
-	protected TravelInformation travelInformation;
-	
 	protected AdacExtraListTable extraListTable;
 	
 	protected AdacInclusivesListTable inclusivesListTable;
@@ -53,6 +54,9 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 	protected OutputTextControls station = null;
 
 	protected OutputTextControls location = null;
+	
+	protected OutputTextControls recalculateResponse = null;
+
 	
 
 	@Override
@@ -73,9 +77,34 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		
 		station = new OutputTextControls(composite, "Stations :", 1500, 3 );
 		
+		final Composite station_composite = createComposite(groupStamp, 10, -1,  true);
+		AdacPickupStationControl pickupStationControl = new AdacPickupStationControl();
+		pickupStationControl.create(station_composite);
+
+		AdacDropoffStationControl dropoffStationControl = new AdacDropoffStationControl();
+		dropoffStationControl.create(station_composite);
+
+		
 		//location = new OutputTextControls(composite, "Locations :", 1500, 3 );		
 		
 	}
+	
+	protected Composite createRequestButtons(final Composite parent) {
+
+		final Composite composite = createComposite(parent, 4, -1,  true);
+
+		final Button buttonRecalculate = new Button(composite, SWT.PUSH	| SWT.LEFT);
+		buttonRecalculate.setText("Recalculate");
+
+		buttonRecalculate.addSelectionListener(getRecalculateSelectionListener());
+
+		recalculateResponse = new OutputTextControls(composite, "", -1, 2 );
+
+
+		return composite;
+
+	}
+
 
 	
 	public void showOffer(OfferDo offerDo) {
@@ -196,27 +225,40 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		return listener;
 	}
 
-	@Override
-	protected SelectionListener getPickupStationSelectionListener() {
-		AddPickupStationsListener listener = new AddPickupStationsListener();
-		return listener;
-	}
 	
 	protected class AddRecalculateListener extends AbstractListener {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
-			recalculateResponse.setText("running....");
 			
-			String dropOffStationId = ""; //locationInfoControl.getDropOffStationId();
-
-			if (StringUtils.isNotEmpty(dropOffStationId))
-				travelInformation.getDropOffLocation().setStationId(
-						Long.valueOf(dropOffStationId));
-
-			String response = JoiVehicleConnector.recalculate(selectedOffer,
-					travelInformation);
-			recalculateResponse.setText(response);
+			long dropOffStationId = AdacModelProvider.INSTANCE.selectedDropoffStationId; 
+			long pickupStationId = AdacModelProvider.INSTANCE.selectedPickupStationId;
+			
+			if ( dropOffStationId <= 0 && pickupStationId > 0) {
+				dropOffStationId = pickupStationId;
+			}
+			
+			if ( pickupStationId > 0 && dropOffStationId > 0) {
+			
+				TravelInformation travelInformation = new TravelInformation(pickupStationId,dropOffStationId);
+				
+				Calendar pickupDate = ModelProvider.INSTANCE.pickupDateTime;
+				Calendar dropoffDate = ModelProvider.INSTANCE.dropoffDateTime;
+				
+				travelInformation.setDates(pickupDate,dropoffDate);
+	
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
+	
+				VehicleResult response = service.recalculate(selectedOffer,travelInformation);
+				if ( response != null ) {
+					
+					recalculateResponse.setValue(response.getOfferList().get(0).getLink().toString());
+				}
+			}
+			else {
+				recalculateResponse.setValue("please, select pickupStationId and dropOffStationId!");
+			}
 
 		}
 
@@ -229,21 +271,6 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 			List<Extra> extras = extraListTable.getSelectedExtras();
 			BookingView.updateView(extras);
 
-		}
-
-	}
-
-	protected class AddPickupStationsListener extends AbstractListener {
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			pickupStationsResponse.setText("running....");
-			
-			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
-			String response  = service.getPickupStations(selectedOffer);
-			pickupStationsResponse.setText(response);
-			
 		}
 
 	}

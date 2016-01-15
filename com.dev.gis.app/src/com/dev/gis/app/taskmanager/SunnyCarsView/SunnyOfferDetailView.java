@@ -231,12 +231,16 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 				
 				SunnyOfferDo offer = SunnyModelProvider.INSTANCE.getOfferDO(response,acriss);
 				
-				OfferInformation offerInformation = service.selectOffer(offer.getLink());
-				if (offerInformation != null)
-					offer.addOfferInformation(offerInformation);
-				
-				showOffer(offer);
-				
+				if ( offer != null) {
+					logger.info("recalculate offer success. offerID = "+offer.getId().toString());
+					OfferInformation offerInformation = service.selectOffer(offer.getLink());
+					if (offerInformation != null)
+						offer.addOfferInformation(offerInformation);
+					
+					showOffer(offer);
+				}
+				else
+					logger.info("recalculate offer get error..");
 				
 			}
 			else

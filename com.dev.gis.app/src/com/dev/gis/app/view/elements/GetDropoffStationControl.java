@@ -5,27 +5,39 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
+import com.dev.gis.app.model.GetStationService;
+import com.dev.gis.app.model.IStationService;
+import com.dev.gis.app.model.StationModel;
 import com.dev.gis.app.taskmanager.SunnyCarsView.SelectDropoffStationDialog;
 import com.dev.gis.connector.api.SunnyModelProvider;
-import com.dev.gis.connector.sunny.Station;
 
 public class GetDropoffStationControl extends BasicControl{
 	
-	OutputTextControls doTextControls = null;
+	protected OutputTextControls doTextControls = null;
 	
 	public Composite create(final Composite parent) {
 		
-		Composite composite = createComposite(parent,3,1, true);
+		Composite composite = createControlComposite(parent);
 		
 		doTextControls = new OutputTextControls(composite, "DropoffStation",-1,1);
 		
-		AddDropoffStationsListener ap = new AddDropoffStationsListener(composite.getShell());
+		new ButtonControl(composite, " Get DropoffStations ",getDropoffStationListener(composite));
 		
-		new ButtonControl(composite, " Get DropoffStations ",ap);
+		showDetailsButton(composite);
 		
 		return composite;
 	}
 	
+	protected Composite createControlComposite(Composite parent) {
+		return createComposite(parent,3,1, true);
+	}
+	protected void showDetailsButton(Composite composite) {
+		
+	}
+	protected AbstractListener getDropoffStationListener(Composite composite) {
+		return new AddDropoffStationsListener(composite.getShell());
+	}
+
 	protected class AddDropoffStationsListener extends AbstractListener{
 		private final Shell shell;
 	
@@ -37,11 +49,13 @@ public class GetDropoffStationControl extends BasicControl{
 		public void widgetSelected(SelectionEvent arg0) {
 			String offerId = SunnyModelProvider.INSTANCE.getSelectedOfferId();	
 				
-			SelectDropoffStationDialog mpd = new SelectDropoffStationDialog(shell, offerId);
+			IStationService stationService = new GetStationService();
+
+			SelectDropoffStationDialog mpd = new SelectDropoffStationDialog(shell, offerId,stationService);
 			if (mpd.open() == Dialog.OK) {
-				Station st = mpd.getSelectedStation();
+				StationModel st = mpd.getSelectedStation();
 				if ( st != null)
-					doTextControls.setValue(st.getId()+ " "+st.getIdentifier());
+					doTextControls.setValue(st.getId()+ " "+st.getName());
 			}
 		}
 

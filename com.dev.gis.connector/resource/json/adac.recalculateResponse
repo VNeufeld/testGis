@@ -1,0 +1,233 @@
+{
+	"id": 1934259152,
+	"link": "http://localhost:8180/web-joi/joi/vehicleRequest/491587368/vehicle/1934259152",
+	"recalculateLink": "http://localhost:8180/web-joi/joi/vehicleRequest/491587368/vehicle/1934259152/recalculate",
+	"pickUpLocation": {
+		"stationId": 171654,
+		"cityId": 3427,
+		"countryId": 1,
+		"countryCode": "DE"
+	},
+	"dropOffLocation": {
+		"stationId": 171733
+	},
+	"vehicle": {
+		"aircondition": true,
+		"automatic": false,
+		"navigationSystem": false,
+		"allWheel": false,
+		"bodyStyle": 1,
+		"categoryId": 101,
+		"driverMinAge": 0,
+		"manufacturer": "B Opel Corsa",
+		"nrDoors": 4,
+		"nrLargeLuggage": 1,
+		"nrSeats": 4,
+		"nrSmallLuggage": 1,
+		"nrAdults": 5,
+		"nrChildren": 0,
+		"supplierId": 158039,
+		"vehicleGroup": {
+			"id": 111001,
+			"link": null,
+			"name": "ECMR"
+		},
+		"vehicleLargeImage": "http://www.adac.de/152573/Hertz/DE/large/ECMR.jpg",
+		"vehicleSmallImage": "http://www.adac.de/152573/Hertz/DE/small/ECMR.jpg",
+		"carTypes": [{
+			"id": 1,
+			"text": "Kleinwagen"
+		},
+		{
+			"id": 25,
+			"text": "Mit Klimaanlage"
+		}]
+	},
+	"offerList": [{
+		"id": "bc9c4dee-57ce-4fb1-a566-174d3d8ac2db",
+		"link": "http://localhost:8180/web-joi/joi/vehicleRequest/491587368/vehicle/1934259152/offer/bc9c4dee-57ce-4fb1-a566-174d3d8ac2db",
+		"bookLink": "http://localhost:8180/web-joi/joi/vehicleRequest/491587368/vehicle/1934259152/offer/bc9c4dee-57ce-4fb1-a566-174d3d8ac2db/book",
+		"supplierId": 158039,
+		"supplierGroupId": 157741,
+		"price": {
+			"currency": "EUR",
+			"amount": "159,79",
+			"decimalAmount": 159.79
+		},
+		"stdPrice": {
+			"currency": "EUR",
+			"amount": "159,79",
+			"decimalAmount": 159.79
+		},
+		"dailyPrice": {
+			"currency": "EUR",
+			"amount": "31,96",
+			"decimalAmount": 31.96
+		},
+		"status": "AVAILABLE",
+		"inclusives": [{
+			"id": 37,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/37",
+			"description": "Kilometer unbegrenzt",
+			"displayPriority": 1,
+			"itemClassFilter": false,
+			"itemClassId": 1,
+			"itemClassCode": "KM",
+			"itemClassName": "Kilometer",
+			"code": "KM999"
+		},
+		{
+			"id": 45,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/45",
+			"description": "Standortzuschlag",
+			"displayPriority": 7,
+			"itemClassFilter": false,
+			"itemClassId": 9,
+			"itemClassCode": "ZU",
+			"itemClassName": "Zuschläge",
+			"code": "SO"
+		},
+		{
+			"id": 153,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/153",
+			"description": "Alle Zusatzfahrer ohne Aufpreis und 500 Meilen/Punkte der Bonusprogramme",
+			"displayPriority": 4,
+			"itemClassFilter": false,
+			"itemClassId": 21,
+			"itemClassCode": "BOM",
+			"itemClassName": "Bonus",
+			"code": "BOHDE"
+		},
+		{
+			"id": 154,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/154",
+			"description": "Miles & More, Topbonus oder Deutschland Card",
+			"displayPriority": 6,
+			"itemClassFilter": false,
+			"itemClassId": 7,
+			"itemClassCode": "AD",
+			"itemClassName": "Zusatzfahrer",
+			"code": "ADDHDE"
+		},
+		{
+			"id": 94,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/inclusive/94",
+			"description": "wintertaugliche Bereifung für Anmietungen  1.11.-31.3.",
+			"displayPriority": 8,
+			"itemClassFilter": false,
+			"itemClassId": 15,
+			"itemClassCode": "WRI",
+			"itemClassName": "Winterreifen inklusive",
+			"code": "WRHC"
+		}],
+		"offeredPayment": "PAY_ON_ARRIVAL",
+		"member": true,
+		"noMember": false,
+		"hsgwOfferId": "",
+		"crossOfferFlag": false,
+		"availableExtras": [],
+		"serviceCatalogCode": "POA",
+		"serviceCatalogId": 4
+	}],
+	"texts": {
+		"supplierList": [{
+			"id": 158039,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/supplier/158039",
+			"supplierGroupId": 157741,
+			"logo": "http://www.rentfox.de/fileadmin/CarImages/Hertz/Logos/Logo.jpg",
+			"name": "Hertz Deutschland"
+		}],
+		"bodyStyleList": [{
+			"id": 1,
+			"text": "Kleinwagen"
+		}],
+		"stationList": [{
+			"id": 171654,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/station/171654",
+			"supplierId": 158039,
+			"stationName": "Frankfurt Flughafen (FRA)",
+			"supplierGroupId": 157741,
+			"stationPriority": 1,
+			"airportStation": true,
+			"airport": "FRA",
+			"assignedCityIds": [-1,
+			3427],
+			"modules": ["CAR"],
+			"countryId": 1,
+			"cityId": 3427,
+			"area": 269,
+			"address": {
+				
+			},
+			"info": {
+				"providesTransfer": false,
+				"outOfHourFee": {
+					"currency": null,
+					"amount": "0,00",
+					"decimalAmount": 0.00
+				}
+			},
+			"phone": {
+				"country": "",
+				"prefix": "",
+				"extension": ""
+			},
+			"fax": {
+				"country": "",
+				"prefix": "",
+				"extension": ""
+			},
+			"flightNoMandatory": false,
+			"longitude": "8.470384",
+			"latitude": "49.490439",
+			"countryCode": "DE"
+		},
+		{
+			"id": 171733,
+			"link": "http://localhost:8180/web-joi/joi/masterdata/station/171733",
+			"supplierId": 158039,
+			"stationName": "München Flughafen (MUC)",
+			"supplierGroupId": 157741,
+			"stationPriority": 1,
+			"airportStation": true,
+			"airport": "MUC",
+			"assignedCityIds": [-1,
+			3424],
+			"modules": ["CAR"],
+			"countryId": 1,
+			"cityId": 3424,
+			"area": 269,
+			"address": {
+				
+			},
+			"info": {
+				"providesTransfer": false,
+				"outOfHourFee": {
+					"currency": null,
+					"amount": "0,00",
+					"decimalAmount": 0.00
+				}
+			},
+			"phone": {
+				"country": "",
+				"prefix": "",
+				"extension": ""
+			},
+			"fax": {
+				"country": "",
+				"prefix": "",
+				"extension": ""
+			},
+			"flightNoMandatory": false,
+			"longitude": "11.787056",
+			"latitude": "48.353857",
+			"countryCode": "DE"
+		}],
+		"supplierGroupList": [{
+			"id": 157741,
+			"name": "Hertz (Deutschland) Autovermietung GmbH"
+		}]
+	},
+	"module": "CAR",
+	"remainingCacheSeconds": 3000
+}

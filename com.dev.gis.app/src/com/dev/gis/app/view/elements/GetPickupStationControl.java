@@ -13,19 +13,31 @@ import com.dev.gis.connector.api.SunnyModelProvider;
 
 public class GetPickupStationControl extends BasicControl{
 	
-	private OutputTextControls puTextControls = null;
+	protected OutputTextControls puTextControls = null;
 	
 	public Composite create(final Composite parent) {
 		
-		Composite composite = createComposite(parent,3,1, true);
+		Composite composite = createControlComposite(parent);
 		
 		puTextControls = new OutputTextControls(composite, "PickupStation",-1,1);
 		
-		AddPickupStationsListener ap = new AddPickupStationsListener(composite.getShell());
+		new ButtonControl(composite, " Get PickupStations ",getPickupStationListener(composite));
 		
-		new ButtonControl(composite, " Get PickupStations ",ap);
+		showDetailsButton(composite);
 		
 		return composite;
+	}
+
+	protected Composite createControlComposite(Composite parent) {
+		return createComposite(parent,3,1, true);
+	}
+	
+	protected AbstractListener getPickupStationListener(Composite composite) {
+		return new AddPickupStationsListener(composite.getShell());
+	}
+
+	protected void showDetailsButton(Composite composite) {
+		
 	}
 
 	protected class AddPickupStationsListener extends AbstractListener{

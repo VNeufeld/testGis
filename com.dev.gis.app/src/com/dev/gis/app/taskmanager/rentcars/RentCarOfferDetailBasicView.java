@@ -18,10 +18,6 @@ public abstract class RentCarOfferDetailBasicView extends TaskViewAbstract {
 	
 	protected OutputTextControls priceText = null;
 
-	protected Text pickupStationsResponse;
-
-	protected Text recalculateResponse;
-	
 	
 	
 	@Override
@@ -32,8 +28,9 @@ public abstract class RentCarOfferDetailBasicView extends TaskViewAbstract {
 				.grab(true, false).applyTo(offerGroup);
 
 		Composite rbComp = createRequestButtons(composite);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(rbComp);
+		if ( rbComp != null)
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+					.grab(true, false).applyTo(rbComp);
 
 		// Inclusives
 		addInclusivesGroup(composite);
@@ -109,35 +106,7 @@ public abstract class RentCarOfferDetailBasicView extends TaskViewAbstract {
 
 
 
-	protected Composite createRequestButtons(final Composite parent) {
-
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false)
-				.applyTo(composite);
-
-		final Button buttonRecalculate = new Button(composite, SWT.PUSH
-				| SWT.LEFT);
-		buttonRecalculate.setText("POST Recalculate");
-
-		buttonRecalculate.addSelectionListener(getRecalculateSelectionListener());
-
-		recalculateResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(recalculateResponse);
-
-		final Button buttonGetPickupStations = new Button(composite, SWT.PUSH
-				| SWT.LEFT);
-		buttonGetPickupStations.setText("Get PickupStations");
-		buttonGetPickupStations
-				.addSelectionListener(getPickupStationSelectionListener());
-
-		pickupStationsResponse = new Text(composite, SWT.BORDER | SWT.SINGLE);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, false).applyTo(pickupStationsResponse);
-
-		return composite;
-
-	}
+	protected abstract Composite createRequestButtons(final Composite parent);
 
 	protected SelectionListener getRecalculateSelectionListener() {
 		return null;

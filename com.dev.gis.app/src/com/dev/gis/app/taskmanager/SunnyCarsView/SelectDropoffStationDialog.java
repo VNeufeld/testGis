@@ -1,18 +1,15 @@
 package com.dev.gis.app.taskmanager.SunnyCarsView;
 
+import java.util.List;
+
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -21,36 +18,36 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
-import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.app.model.IStationService;
+import com.dev.gis.app.model.StationModel;
+import com.dev.gis.app.view.dialogs.StationListTable;
 import com.dev.gis.connector.api.SunnyModelProvider;
-import com.dev.gis.connector.api.VehicleHttpService;
-import com.dev.gis.connector.sunny.Hit;
-import com.dev.gis.connector.sunny.Station;
-import com.dev.gis.connector.sunny.StationResponse;
 
 public class SelectDropoffStationDialog extends Dialog {
 
-	private TableViewer tableStations;
 	private final String offerId;
 	
-	private Station selectedStation;
+	private StationModel selectedStation;
+
+	private StationListTable stationListTable;
+	private final IStationService stationService;
 
 
-	public SelectDropoffStationDialog(Shell parentShell, String offerId) {
+	public SelectDropoffStationDialog(Shell parentShell, String offerId,IStationService stationService) {
 		super(parentShell);
 		this.offerId = offerId;
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
+	    
+	    this.stationService = stationService;
 		
 	}
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
-		composite.getShell().setText("Get PickupStation : Select City Or Airport");
+		composite.getShell().setText("Get Dropoff Station : Select City Or Airport");
 		
 		composite.setLayout(new GridLayout(1, false));
 
@@ -79,19 +76,21 @@ public class SelectDropoffStationDialog extends Dialog {
 		
 		final Text location = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 		
-		if ( SunnyModelProvider.INSTANCE.dropoffCityId > 0) {
-			location.setText(String.valueOf(SunnyModelProvider.INSTANCE.dropoffCityId));
+		long cityId = getModelCityId();
+		String airport = getModelAirport();
+		long pickupStationId = getPickupStationId();
+		
+		if ( cityId > 0) {
+			location.setText(String.valueOf(cityId));
 			c.select(1);
 		}
-		else {
-			location.setText(SunnyModelProvider.INSTANCE.dropoffAirport);
+		else if ( airport != null){
+			location.setText(airport);
 			c.select(0);
 		}
 		
-		if ( SunnyModelProvider.INSTANCE.selectedPickupStationId > 0 )
-			puStation.setText(String.valueOf(SunnyModelProvider.INSTANCE.selectedPickupStationId)); 
-			
-		
+		if ( pickupStationId > 0 )
+			puStation.setText(String.valueOf(pickupStationId)); 
 		
 		
 		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
@@ -100,7 +99,7 @@ public class SelectDropoffStationDialog extends Dialog {
 		
 		final Button buttonGetPickup = new Button(groupStamp, SWT.PUSH | SWT.LEFT);
 		buttonGetPickup.setText("Start getDropoffStations");
-		buttonGetPickup.addSelectionListener(new DropoffStationsServiceListener(parent, c, location, puStation));
+		buttonGetPickup.addSelectionListener(new DropoffStationsServiceListener(parent, c, location, puStation , stationService));
 
 		final Group groupStations = new Group(composite, SWT.TITLE);
 		groupStations.setText("Stations:");
@@ -108,109 +107,65 @@ public class SelectDropoffStationDialog extends Dialog {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
 				.grab(true, true).applyTo(groupStations);
 		
-		createTableStaions(groupStations);
-		
+		//createTableStaions(groupStations);
+
+		DoubleClickListener dbl = new DoubleClickListener(this);
+		stationListTable = new StationListTable(null, groupStations, dbl);
+
 		return composite;
 	}
 	
-	private void createTableStaions(Composite parent) {
-		tableStations = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL // | SWT.CHECK
-				| SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
-		createColumns(parent, tableStations);
-		final Table table = tableStations.getTable();
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
+	protected String getModelAirport() {
+		return SunnyModelProvider.INSTANCE.dropoffAirport;
+	}
 
-		tableStations.setContentProvider(new ArrayContentProvider());
-		
-
-		// define layout for the viewer
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 1;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
-		tableStations.getControl().setLayoutData(gridData);
-		
-		tableStations.addDoubleClickListener(new DoubleClickListener(this));
-
-		
+	protected long getModelCityId() {
+		return SunnyModelProvider.INSTANCE.dropoffCityId;
 	}
 	
-	private void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Name", "Id", "Class" };
-		int[] bounds = { 200, 100, 100 };
-
-		// first column is for the first name
-		TableViewerColumn col = createTableViewerColumn(viewer,titles[0], bounds[0], 0);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Station o = (Station) element;
-				return o.getIdentifier() ;
-			}
-		});
-
-		// second column is supplierId
-		col = createTableViewerColumn(viewer,titles[1], bounds[1], 1);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Station o = (Station) element;
-				return ""+o.getId();
-			}
-		});
-
-		col = createTableViewerColumn(viewer,titles[2], bounds[2], 2);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Station o = (Station) element;
-				return o.getSupplierId() + ":"+ o.getSupplierGroupId();
-			}
-		});
-		
+	protected long getPickupStationId() {
+		return SunnyModelProvider.INSTANCE.selectedPickupStationId;
 	}
-	private TableViewerColumn createTableViewerColumn(TableViewer table, String title, int bound,
-			final int colNumber) {
-		final TableViewerColumn viewerColumn = new TableViewerColumn(
-				table, SWT.NONE);
-		final TableColumn column = viewerColumn.getColumn();
-		column.setText(title);
-		column.setWidth(bound);
-		column.setResizable(true);
-		column.setMoveable(true);
-		return viewerColumn;
-	}
+	
+	
+	
 	
 	protected class DropoffStationsServiceListener implements SelectionListener{
 		private final Composite parent;
 		private final Combo type;
 		private final Text location;
 		private final Text puStation;
+		
+		private IStationService stationService;
+
+		
 	
-		public DropoffStationsServiceListener(Composite parent, Combo c, Text location, Text puStation) {
+		public DropoffStationsServiceListener(Composite parent, Combo c, Text location, Text puStation, IStationService stationService) {
 			this.parent = parent;
 			this.type = c;
 			this.location = location;
 			this.puStation = puStation;
+			this.stationService = stationService;
 		}
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			
-			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			VehicleHttpService service = serviceFactory
-					.getVehicleJoiService();
+//			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+//			VehicleHttpService service = serviceFactory
+//					.getVehicleJoiService();
+//
+//			StationResponse response = service.getDropOffStations(type.getSelectionIndex(),location.getText(), offerId, puStation.getText());
+			
+			List<StationModel> stations = stationService.getDropoffStationService(type.getSelectionIndex(),location.getText(), offerId, puStation.getText());
+			
+			
+//			SunnyModelProvider.INSTANCE.updateDropoffStations(response);
+//			tableStations.setInput(SunnyModelProvider.INSTANCE.getDropoffStations());
+//			tableStations.refresh();
+			
+			stationListTable.update(stations);
 
-			StationResponse response = service.getDropOffStations(type.getSelectionIndex(),location.getText(), offerId, puStation.getText());
-			
-			SunnyModelProvider.INSTANCE.updateDropoffStations(response);
-			tableStations.setInput(SunnyModelProvider.INSTANCE.getDropoffStations());
-			tableStations.refresh();
-			
-			
 		}
 
 		@Override
@@ -230,42 +185,35 @@ public class SelectDropoffStationDialog extends Dialog {
 		//super.createButtonsForButtonBar(parent);
 	}
 	
-	void closeDialog(Station st) {
+	void closeDialog(StationModel st) {
 		this.selectedStation = st;
 		okPressed();
 	}
-	
 	private static class DoubleClickListener implements IDoubleClickListener {
 		SelectDropoffStationDialog parent = null;
 
 		public DoubleClickListener(
 				SelectDropoffStationDialog selectPickupStationDialog) {
-			// TODO Auto-generated constructor stub
 			parent = selectPickupStationDialog;
 		}
 
 		@Override
 		public void doubleClick(DoubleClickEvent event) {
 
-			TableViewer viewer = (TableViewer) event.getViewer();
 			IStructuredSelection thisSelection = (IStructuredSelection) event
 					.getSelection();
 			Object selectedNode = thisSelection.getFirstElement();
 			
-			Station st = (Station) selectedNode;
-			
+
+			StationModel st = (StationModel) selectedNode;
 			System.out.println("selectedNode " + st);
-			
 			parent.closeDialog(st);
-
-
-	        
 
 		}
 
 
 	}
-	public Station getSelectedStation() {
+	public StationModel getSelectedStation() {
 		return selectedStation;
 	}
 	

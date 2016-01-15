@@ -72,12 +72,14 @@ public class SelectPickupStationDialog extends Dialog {
 		
 		location.setText("PMI");
 		
-		if ( SunnyModelProvider.INSTANCE.cityId > 0) {
-			location.setText(String.valueOf(SunnyModelProvider.INSTANCE.cityId));
+		long cityId = getModelCityId();
+		String airport = getModelAirport();
+		if ( cityId > 0) {
+			location.setText(String.valueOf(cityId));
 			c.select(1);
 		}
-		else {
-			location.setText(SunnyModelProvider.INSTANCE.airport);
+		else if ( airport != null){
+			location.setText(airport);
 			c.select(0);
 		}
 		
@@ -102,6 +104,13 @@ public class SelectPickupStationDialog extends Dialog {
 		return composite;
 	}
 	
+	protected String getModelAirport() {
+		return SunnyModelProvider.INSTANCE.airport;
+	}
+
+	protected long getModelCityId() {
+		return SunnyModelProvider.INSTANCE.cityId;
+	}
 	
 	@Override
 	protected void okPressed() {
