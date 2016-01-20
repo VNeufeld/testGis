@@ -50,6 +50,8 @@ public class WriteSessionService implements Callable<String> {
 			
 			List<SessionFileService> splitterServicers = new ArrayList<SessionFileService>();
 			
+			LogEntryModel.getInstance().setProcessRunning();
+			
 			for (FileNameEntry entry : fileEntries) {
 				File file = entry.getFile();
 				logger.info("check file :"+file.getAbsolutePath());
@@ -81,6 +83,7 @@ public class WriteSessionService implements Callable<String> {
 
 	@Override
 	public String call() throws Exception {
+		
 		long start = System.currentTimeMillis();
 		logger.info("start splitter session " + sessionId);
 		searchSession();

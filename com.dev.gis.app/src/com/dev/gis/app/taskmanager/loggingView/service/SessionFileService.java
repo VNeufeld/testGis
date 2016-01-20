@@ -50,6 +50,12 @@ class SessionFileService implements Callable<List<LogEntry>> {
 
 	@Override
 	public List<LogEntry> call() throws Exception {
+		
+		if ( !LogEntryModel.getInstance().isProcessRunning())
+		{
+			return  new ArrayList<LogEntry>();
+		}
+		
 		long start = System.currentTimeMillis();
 		logger.info("start search session " + sessionId + " in file "
 				+ logFile.getAbsolutePath() + ". File size =  "+ logFile.length());
@@ -91,6 +97,8 @@ class SessionFileService implements Callable<List<LogEntry>> {
 				if (++count % 1000 == 0) {
 					logger.info("check " + count + " lines");
 					ProgressBarElement.updateProgressBar(readedSize,fileSize);
+					if ( !LogEntryModel.getInstance().isProcessRunning())
+						break;
 				}
 
 				boolean sessionFlagFound = StringUtils.containsIgnoreCase(s,sessionId);

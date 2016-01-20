@@ -22,12 +22,12 @@ public class StopProcessAction extends Action {
         setId(ICommandIds.CMD_STOP_PROCESS);
         // Associate the action with a pre-defined command, to allow key bindings.
         //setActionDefinitionId(ICommandIds.CMD_OPEN_MESSAGE);
-        setImageDescriptor(com.dev.gis.app.Activator.getImageDescriptor("/icons/sample.gif"));
+        setImageDescriptor(com.dev.gis.app.Activator.getImageDescriptor("/icons/delete.gif"));
     }
 
     public void run() {
     	
-        MessageDialog.openInformation(window.getShell(), "Open", "Open Message Dialog!");
+        //MessageDialog.openInformation(window.getShell(), "Open", "Open Message Dialog!");
         
     	LogEntryModel.getInstance().stopProcess();
     }

@@ -52,9 +52,8 @@ class SearchBookingFileService implements Callable<List<LogEntry>> {
 		List<LogEntry> r = readLogEntries(logFile, this.bookingId);
 
 		LogFileTableUpdater.updateFileStatus(logFile,"completed");					
-		
 
-		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
+		logger.info("end search booking in  " + (System.currentTimeMillis() - start) + " ms.");
 		return r;
 		
 	}

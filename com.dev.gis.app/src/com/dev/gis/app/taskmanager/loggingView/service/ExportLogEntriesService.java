@@ -11,10 +11,13 @@ import org.apache.log4j.Logger;
 
 import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
+import com.dev.gis.app.xmlutils.FilterUtils;
 
 public class ExportLogEntriesService implements Callable<String> {
 
 	private static Logger logger = Logger.getLogger(ExportLogEntriesService.class);
+	
+	String[] keys = { "PhoneNumber" , "GivenName", "Surname", "AddressLine" , "Email" , "CityName", "PostalCode" };
 
 	public ExportLogEntriesService() {
 
@@ -35,7 +38,12 @@ public class ExportLogEntriesService implements Callable<String> {
 
 		List<String> list = new ArrayList<String>();
 		for (LogEntry entry : entries) {
-			list.addAll(entry.getEntry());
+			List<String> logEntry = entry.getEntry();
+			for ( String xmlString : logEntry) {
+				xmlString = FilterUtils.shadowKeyWordsXml(xmlString, keys);
+				list.add(xmlString);
+			}
+			
 		}
 		FileUtils.writeLines(of, list);
 		
