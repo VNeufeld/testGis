@@ -24,6 +24,8 @@ public enum LoggingModelProvider {
 
 	
 	public boolean useDates;
+
+	public boolean useShadow;
 	
 	public int getThreadcounts() {
 		if ( threadCounts <= 0)

@@ -139,8 +139,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		if (!onlyLogging) {
 	        toolbar.add(switchToAppPerspectiveAction);
 	        toolbar.add(resetCurrentPerspectiveAction);
+	        toolbar.add(lastResponseAction);
 		}
         toolbar.add(stopProcessAction);
-        toolbar.add(lastResponseAction);
     }
 }

@@ -27,6 +27,7 @@ public class LoggingSettings {
 	public static final String PREFERENCE_BOOKING_PROPERTY = "logging.booking.session"; 
 	public static final String PREFERENCE_FILE_MATCH = "logging.input.matching"; 
 	public static final String PREFERENCE_USE_DATES = "logging.input.usedates"; 
+	public static final String PREFERENCE_USE_SHADOW = "logging.input.useshadow"; 
 	
 	
 	public static final String PREFERENCE_START_TIME_PROPERTY = "startTimeProperty"; 

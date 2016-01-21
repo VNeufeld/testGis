@@ -95,7 +95,6 @@ class SessionFileService implements Callable<List<LogEntry>> {
 
 				readedSize = readedSize + s.length();
 				if (++count % 1000 == 0) {
-					logger.info("check " + count + " lines");
 					ProgressBarElement.updateProgressBar(readedSize,fileSize);
 					if ( !LogEntryModel.getInstance().isProcessRunning())
 						break;

@@ -17,10 +17,33 @@ public class ExportLogEntriesService implements Callable<String> {
 
 	private static Logger logger = Logger.getLogger(ExportLogEntriesService.class);
 	
-	String[] keys = { "PhoneNumber" , "GivenName", "Surname", "AddressLine" , "Email" , "CityName", "PostalCode" };
-
+	String[] keys = { "PhoneNumber" , "GivenName", "Surname", "AddressLine" , "Email" , "CityName", "PostalCode", "Password", 
+			"CustomerNo", "CustomerNoExt", 
+			"Name", "FirstName", "Street", "ZipCode", "City" , "PhoneArea", "PhoneExt", "EMail", "Driver", "DriverFirstName"};
+	
 	public ExportLogEntriesService() {
 
+		readKeys();
+	}
+
+
+	private void readKeys() {
+		File f = new File("shadowKeys.txt");
+		try {
+			List<String> shadowKeys = FileUtils.readLines(f);
+			if (shadowKeys != null && shadowKeys.size() > 0 ) {
+				logger.info(" read "+shadowKeys.size()+ " keys.");
+				keys = shadowKeys.toArray(new String[0]);
+				for ( String key : keys)
+					logger.info(" shadow key : "+key);
+			}
+			else {
+				logger.info(" read "+shadowKeys.size()+ " keys.");
+			}
+		} catch (IOException e) {
+			logger.error(e.getMessage(),e);
+		}
+		
 	}
 
 
@@ -34,17 +57,19 @@ public class ExportLogEntriesService implements Callable<String> {
 
 		File of = new File(newFile);
 
-		logger.info("write sessions to :"+newFile);
+		logger.info("write entries to :"+newFile);
 
 		List<String> list = new ArrayList<String>();
 		for (LogEntry entry : entries) {
 			List<String> logEntry = entry.getEntry();
 			for ( String xmlString : logEntry) {
-				xmlString = FilterUtils.shadowKeyWordsXml(xmlString, keys);
+				if ( LoggingModelProvider.INSTANCE.useShadow)
+					xmlString = FilterUtils.shadowKeyWordsXml(xmlString, keys);
 				list.add(xmlString);
 			}
 			
 		}
+		logger.info("write lines " + list.size()+ "to :"+newFile);
 		FileUtils.writeLines(of, list);
 		
 		ProgressBarElement.updateFileName("write result in " + newFile);

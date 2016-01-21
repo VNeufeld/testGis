@@ -38,10 +38,12 @@ public class LogEntryTableView extends ViewPart {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(group);
 		
 		Composite composite = new Composite(group, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(4).equalWidth(false).applyTo(composite);
+		GridLayoutFactory.fillDefaults().numColumns(5).equalWidth(false).applyTo(composite);
 		LogOutputDirControl logOutputFileControl = new LogOutputDirControl(composite);
 		
 		new ButtonControl(composite, "Select Output File", 0,  selectFileListener(composite, logOutputFileControl));
+		
+		new UseShadowLoggingCheckBox(composite," shadow logging :");
 		
 		new ButtonControl(composite, "Export", 0,  exportFileListener(composite));
 
