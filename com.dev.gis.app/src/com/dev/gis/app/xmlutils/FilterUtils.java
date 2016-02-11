@@ -2,14 +2,14 @@ package com.dev.gis.app.xmlutils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-
-import com.dev.gis.app.taskmanager.loggingView.service.ExportLogEntriesService;
 
 
 
@@ -123,13 +123,14 @@ public class FilterUtils {
 		return xmlRequest;
 	}
 	
-	public static String shadowKeyWordsXml(String xmlString, String[] keys) {
+	
+	public static String shadowKeyWords(String xmlString, String[] shodowkeys) {
 		try {
 			String[] tags =getXmlTags(xmlString);
 			if ( tags != null) {
-				String[] values = getCriticalValues(xmlString,tags, keys);
-				String[] replaceValues = createReplaceValues(values); 
-				xmlString = StringUtils.replaceEach(xmlString, values, replaceValues);
+				String[] shadowValues = findValuesToShadow(xmlString,tags, shodowkeys);
+				String[] replacedValues = createReplaceValues(shadowValues);
+				xmlString = StringUtils.replaceEach(xmlString, shadowValues, replacedValues);
 			}
 		}
 		catch ( Exception err) {
@@ -137,6 +138,8 @@ public class FilterUtils {
 		}
 		return xmlString;
 	}
+	
+	
 	
 	private static String[] createReplaceValues(String[] values) {
 		List<String> replaceValues = new ArrayList<String>();
@@ -161,21 +164,54 @@ public class FilterUtils {
 		return replValues;
 	}
 
-	private static String[] getCriticalValues(String xmlString, String[] tags, String[] keys) {
+	private static String[] findValuesToShadow(String xmlString, String[] tags, String[] shadowKeys) {
+		Set<String> values = new HashSet<String>();
+		Set<String> keySet = new HashSet<String>(Arrays.asList(shadowKeys));
+
+		int count = tags.length;
+		for ( int i = 0; i < count; i++) {
+			if ( i < count -1 && ( tags[i+1].equals("/"+tags[i])  && contain(keySet, tags[i]))) {
+				String value = StringUtils.substringBetween(xmlString,tags[i]+">", "<"+tags[i+1]);
+				if ( StringUtils.isNotBlank(value) && value.length() > 2) {
+					if ( !values.contains(value))
+						values.add(value);
+				}
+				i++;
+			}
+			else {
+				if ( tags[i].contains("=")) {
+					for ( String key : shadowKeys) {
+						String value = getAttributeValue(tags[i],key);
+						if ( StringUtils.isNotBlank(value) && value.length() > 2) {
+							if ( !values.contains(value))
+								values.add(value);
+						}
+					}
+				}
+			}
+		}
+		List<String> valueList = new ArrayList<String>(values);
+		Collections.sort(valueList,new StringLengthComparator());
+		return valueList.toArray(new String[0]);
+	}
+	
+	private static String[] getCriticalMailValues(String xmlString, String[] tags, String[] keys) {
 		List<String> values = new ArrayList<String>();
 		Set<String> keySet = new HashSet<String>(Arrays.asList(keys));
 		int count = tags.length;
 		for ( int i = 0; i < count; i++) {
 			if ( i < count -1 && ( tags[i+1].equals("/"+tags[i])  && contain(keySet, tags[i]))) {
 				String value = StringUtils.substringBetween(xmlString,tags[i]+">", "<"+tags[i+1]);
-				values.add(value);
+				if ( StringUtils.isNotBlank(value) && value.length() > 2 && value.contains("@")) {
+					values.add(value);
+				}
 				i++;
 			}
 			else {
 				if ( tags[i].contains("=")) {
 					for ( String key : keys) {
 						String value = getAttributeValue(tags[i],key);
-						if ( StringUtils.isNotBlank(value) && value.length() > 2) {
+						if ( StringUtils.isNotBlank(value) && value.length() > 2 && value.contains("@")) {
 							values.add(value);
 						}
 					}
@@ -184,6 +220,7 @@ public class FilterUtils {
 		}
 		return values.toArray(new String[0]);
 	}
+
 
 	private static boolean contain(Set<String> keySet, String tag) {
 		if ( keySet.contains(tag))
@@ -201,21 +238,39 @@ public class FilterUtils {
 		String[] tags = StringUtils.substringsBetween(xmlString, "<", ">");
 		return tags;
 	}
-	private static String getAttributeValue(String text, String attr) {
-		int posAttribute = StringUtils.indexOf(text, attr);
-		if ( posAttribute >= 0) {
-			int pos1 =StringUtils.indexOf(text, "\"",posAttribute);
-			if ( pos1 > 0) {
-				int pos2 =StringUtils.indexOf(text, "\"",pos1+1);
-				if ( pos2 > 0 ) {
-					String value = StringUtils.substring(text,pos1+1, pos2);
-					return value;
+	private static String getAttributeValue(String xmlElement, String shadowKey) {
+		if ( StringUtils.isNotBlank(shadowKey) && shadowKey.length() > 2) {
+			// Attribute hat immer ein Leerzeichen vorher
+			int posAttribute = StringUtils.indexOf(xmlElement, " "+shadowKey);
+			if ( posAttribute >= 0) {
+				int pos1 =StringUtils.indexOf(xmlElement, "\"",posAttribute);
+				if ( pos1 > 0) {
+					int pos2 =StringUtils.indexOf(xmlElement, "\"",pos1+1);
+					if ( pos2 > 0 ) {
+						String value = StringUtils.substring(xmlElement,pos1+1, pos2);
+						return value;
+					}
 				}
+					
 			}
-				
 		}
 		return null;
 	}
 	
 
+	private static class StringLengthComparator implements Comparator<String>
+	{
+
+	    public int compare(String s1, String s2)
+	    {
+	    	if ( s1.length() > s2.length() )
+	    		return -1;
+	    	else if ( s1.length() < s2.length() )
+	    		return 1;
+
+	    	return 0;
+	    }
+
+	}
+	
 }

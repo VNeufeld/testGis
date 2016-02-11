@@ -8,6 +8,8 @@ import java.util.concurrent.Callable;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.MessageBox;
 
 import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
@@ -29,6 +31,11 @@ public class ExportLogEntriesService implements Callable<String> {
 
 	private void readKeys() {
 		File f = new File("shadowKeys.txt");
+		if ( !f.exists() ) {
+			logger.info("not shadowKeys file exists ");
+			return;
+		}
+		logger.info("read shadow file  "+f.getAbsolutePath());
 		try {
 			List<String> shadowKeys = FileUtils.readLines(f);
 			if (shadowKeys != null && shadowKeys.size() > 0 ) {
@@ -38,7 +45,7 @@ public class ExportLogEntriesService implements Callable<String> {
 					logger.info(" shadow key : "+key);
 			}
 			else {
-				logger.info(" read "+shadowKeys.size()+ " keys.");
+				logger.info(" no shodow keys found. ");
 			}
 		} catch (IOException e) {
 			logger.error(e.getMessage(),e);
@@ -59,12 +66,15 @@ public class ExportLogEntriesService implements Callable<String> {
 
 		logger.info("write entries to :"+newFile);
 
+		ProgressBarElement.updateFileName(" ");
+		
+
 		List<String> list = new ArrayList<String>();
 		for (LogEntry entry : entries) {
 			List<String> logEntry = entry.getEntry();
 			for ( String xmlString : logEntry) {
 				if ( LoggingModelProvider.INSTANCE.useShadow)
-					xmlString = FilterUtils.shadowKeyWordsXml(xmlString, keys);
+					xmlString = FilterUtils.shadowKeyWords(xmlString, keys);
 				list.add(xmlString);
 			}
 			
@@ -79,9 +89,9 @@ public class ExportLogEntriesService implements Callable<String> {
 	@Override
 	public String call() throws Exception {
 		long start = System.currentTimeMillis();
-		logger.info("start splitter session ");
+		logger.info("start export session ");
 		writeEntries();
-		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
+		logger.info("end export in  " + (System.currentTimeMillis() - start) + " ms.");
 		return null;
 	}
 

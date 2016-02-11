@@ -96,6 +96,7 @@ public class ProgressBarElement {
 
 	protected void updateProgressText(String text) {
 		pbText.setText(text);
+		pbText.setForeground(pbText.getDisplay().getSystemColor(SWT.COLOR_DARK_RED));
 		
 	}
 	
