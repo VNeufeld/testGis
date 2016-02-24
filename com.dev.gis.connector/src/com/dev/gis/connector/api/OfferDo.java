@@ -63,7 +63,10 @@ public class OfferDo extends  Offer {
 		this.setServiceCatalogId(vr.getOfferList().get(0).getServiceCatalogId());
 		
 		for ( Inclusive incl : vr.getOfferList().get(0).getInclusives()) {
-			if ( incl.getItemClassCode().equals("KM")) {
+			if ( "KM".equals(incl.getItemClassCode())) {
+				inclusiveKm = incl.getDescription();
+			}
+			else if ( incl.getId() == 37) {
 				inclusiveKm = incl.getDescription();
 			}
 		}

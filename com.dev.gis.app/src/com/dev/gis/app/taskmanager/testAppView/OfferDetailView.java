@@ -128,7 +128,8 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 
 			priceStd.setValue(offer.getStdPrice().toString());
 
-			priceDaily.setValue(offer.getDailyPrice().toString());
+			if ( offer.getDailyPrice() != null)
+				priceDaily.setValue(offer.getDailyPrice().toString());
 			
 			inclusivesListTable.update(selectedOffer.getInclusives());
 			
