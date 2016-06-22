@@ -69,6 +69,13 @@ public class SunnyOfferDo extends  Offer {
 
 		this.setOneWayTaxIncluded(offer.getOneWayTaxIncluded());
 		
+		this.setExtraExchangeRate(offer.getExtraExchangeRate());
+		
+		this.setOneWayFeeInSellCurrency(offer.getOneWayFeeInSellCurrency());
+
+		this.setOneWayFeeExchangeRate(offer.getOneWayFeeExchangeRate());
+		
+		
 	}
 
 	public String getInclusiveKm() {
@@ -101,6 +108,8 @@ public class SunnyOfferDo extends  Offer {
 		this.setServiceCatalogCode(offerInformation.getOffer().getServiceCatalogCode());
 		this.setServiceCatalogName(offerInformation.getOffer().getServiceCatalogName());
 		this.setServiceCatalogPrio(offerInformation.getOffer().getServiceCatalogPrio());
+
+		this.setExtraExchangeRate(offerInformation.getOffer().getExtraExchangeRate());
 		
 //		if ( offerInformation.getSupplierConditions() != null && offerInformation.getSupplierConditions().getSupplierConditionsUrl() != null )
 //			this.setSupplierConditionsUrl(offerInformation.getSupplierConditions().getSupplierConditionsUrl());

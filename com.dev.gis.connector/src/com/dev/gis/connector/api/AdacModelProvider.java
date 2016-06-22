@@ -68,6 +68,9 @@ public enum AdacModelProvider {
 	
 	public long selectedPickupStationId;
 	public long selectedDropoffStationId;
+	
+	public boolean authorization = true;
+
 
 
 	public void updateExtras(ExtraResponse response) {
@@ -98,9 +101,15 @@ public enum AdacModelProvider {
 			if ( vr.getOfferList().size() > 0 ) {
 				
 				//OfferDo offer = new OfferDo(vr);
-				OfferDo offer = createOffer(vr,suppliers, stations, bodyStyles);
-				
-				offerDos.add(offer);
+				for ( Offer of : vr.getOfferList()) {
+					OfferDo offer = createOffer(of,vr,suppliers, stations, bodyStyles);
+					
+					offerDos.add(offer);
+					
+				}
+//				OfferDo offer = createOffer(vr,suppliers, stations, bodyStyles);
+//				
+//				offerDos.add(offer);
 			}
 		}
 		
@@ -117,6 +126,8 @@ public enum AdacModelProvider {
 		
 	}
 	
+
+
 	private Map<Long, Station> createStationMap(VehicleResponse response) {
 		Map<Long, Station> stations = new HashMap<Long, Station>(); 
 		for ( Station station : response.getTexts().getStationList()) {
@@ -152,6 +163,21 @@ public enum AdacModelProvider {
 		
 		return offer;
 	}
+	
+	private OfferDo createOffer(Offer of,VehicleResult vr, Map<Long, Supplier> suppliers, Map<Long, Station> stations,
+			Map<Long, BodyStyleText> bodyStyles) {
+
+		OfferDo offer = new OfferDo(of, vr);
+		offer.setPickupStation(stations.get(offer.getPickUpStationId()));
+		offer.setDropoffStation(stations.get(offer.getDropOffStationId()));
+		offer.setSupplier(suppliers.get(offer.getSupplierId()));
+		BodyStyleText bdt = bodyStyles.get(offer.getModel().getVehicle().getBodyStyle());
+		if ( bdt != null)
+			offer.getModel().getVehicle().setBodyStyleText(bdt);
+		
+		return offer;
+	}
+	
 
 
 	private Map<Long, Supplier> createSupplierMap(VehicleResponse response) {

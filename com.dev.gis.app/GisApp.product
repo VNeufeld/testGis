@@ -21,7 +21,7 @@ Copyright 2015
 
    <windowImages i16="icons/sample2.gif"/>
 
-   <launcher>
+   <launcher name="BpcsTester">
       <solaris/>
       <win useIco="false">
          <bmp/>

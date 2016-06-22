@@ -2,6 +2,8 @@ package com.dev.gis.connector.api;
 
 import java.util.UUID;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.bpcs.mdcars.protocol.MoneyAmount;
 import com.dev.gis.connector.joi.protocol.Inclusive;
 import com.dev.gis.connector.joi.protocol.Offer;
@@ -66,7 +68,57 @@ public class OfferDo extends  Offer {
 			if ( "KM".equals(incl.getItemClassCode())) {
 				inclusiveKm = incl.getDescription();
 			}
-			else if ( incl.getId() == 37) {
+			else if ( incl.getId() == 73) {
+				inclusiveKm = incl.getDescription();
+			}
+		}
+		
+		group = vr.getVehicle().getVehicleGroup().getName() + "_" + vr.getVehicle().getVehicleGroup().getId();  
+		
+		travelInformation = new TravelInformation();
+		
+		travelInformation.setPickUpLocation(vr.getPickUpLocation());
+		travelInformation.setDropOffLocation(vr.getDropOffLocation());
+		
+		
+		
+	}
+
+	public OfferDo ( Offer of,VehicleResult vr) {
+		model = vr;
+		this.setName( vr.getVehicle().getManufacturer());
+		
+		this.offer = of;
+		
+		this.setLink(of.getLink());
+		this.setBookLink(of.getBookLink());
+		this.setSupplierId(of.getSupplierId());
+		long stationId = -1;
+		if ( vr.getPickUpLocation() != null )
+			stationId = vr.getPickUpLocation().getStationId();
+		this.setPickUpStationId(stationId);
+		if ( vr.getDropOffLocation() != null)
+			this.setDropOffStationId(vr.getDropOffLocation().getStationId());
+		
+		if ( of.getPrice() != null)
+			this.setPrice(of.getPrice());
+
+		UUID id = new UUID(0l, 0l);
+		if ( of.getId() != null)
+			id = of.getId();
+		this.setId(id);
+		
+		if ( "PAY_ON_ARRIVAL".equals(of.getOfferedPayment()))
+			prepaid = " poa ";
+		
+		this.setServiceCatalogCode(of.getServiceCatalogCode());
+		this.setServiceCatalogId(of.getServiceCatalogId());
+		
+		for ( Inclusive incl : of.getInclusives()) {
+			if ( "KM".equals(incl.getItemClassCode())) {
+				inclusiveKm = incl.getDescription();
+			}
+			else if ( incl.getId() == 73) {
 				inclusiveKm = incl.getDescription();
 			}
 		}

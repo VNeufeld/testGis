@@ -148,7 +148,7 @@ public class AdacCreateVehicleRequestUtils {
 			for ( String part : parts) {
 				suppliers.add(Long.parseLong(part));
 			}
-			offerFilter.setSuppliers(suppliers);
+			offerFilter.getSuppliers().addAll(suppliers);
 			
 			filterEnable = true;;			
 		}
@@ -159,7 +159,7 @@ public class AdacCreateVehicleRequestUtils {
 			for ( String part : parts) {
 				servcats.add(Long.parseLong(part));
 			}
-			offerFilter.setServiceCatalogs(servcats);
+			offerFilter.getServiceCatalogs().addAll(servcats);
 			
 			filterEnable = true;;			
 			

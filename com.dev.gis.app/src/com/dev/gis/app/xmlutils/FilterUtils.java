@@ -124,12 +124,20 @@ public class FilterUtils {
 	}
 	
 	
-	public static String shadowKeyWords(String xmlString, String[] shodowkeys) {
+	public static String shadowKeyWords(String xmlString, String[] shadowkeys, String[] shadowPhonekeys) {
 		try {
 			String[] tags =getXmlTags(xmlString);
 			if ( tags != null) {
-				String[] shadowValues = findValuesToShadow(xmlString,tags, shodowkeys);
+				
+				String[] shadowPhoneValues = findValuesToShadow(xmlString,tags, shadowPhonekeys);
+				String[] replacedPhoneValues = createReplacePhoneValues(shadowPhoneValues);
+				
+				xmlString = StringUtils.replaceEach(xmlString, shadowPhoneValues, replacedPhoneValues);
+				
+				
+				String[] shadowValues = findValuesToShadow(xmlString,tags, shadowkeys);
 				String[] replacedValues = createReplaceValues(shadowValues);
+				
 				xmlString = StringUtils.replaceEach(xmlString, shadowValues, replacedValues);
 			}
 		}
@@ -148,11 +156,11 @@ public class FilterUtils {
 				String replaceValue = value;
 				String parts[] = StringUtils.split(value, "@");
 				if ( parts.length == 2) {
-					replaceValue = StringUtils.repeat("x", parts[0].length());
+					replaceValue = StringUtils.repeat("*", parts[0].length());
 					replaceValue = replaceValue + "@" + parts[1];
 				}
 				else {
-					replaceValue = StringUtils.left(value, 2)+StringUtils.repeat("x", value.length()-2);
+					replaceValue = StringUtils.left(value, 2)+StringUtils.repeat("*", value.length()-2);
 				}
 				replaceValues.add(replaceValue);
 			}
@@ -164,6 +172,23 @@ public class FilterUtils {
 		return replValues;
 	}
 
+	private static String[] createReplacePhoneValues(String[] values) {
+		List<String> replaceValues = new ArrayList<String>();
+		for ( String value : values) {
+			if (StringUtils.isNotBlank(value) && value.length() > 1) {
+				String replaceValue = value;
+				replaceValue = StringUtils.repeat("*", value.length());
+				replaceValues.add(replaceValue);
+			}
+			else
+				replaceValues.add("XX0");
+		}
+		String[] replValues = replaceValues.toArray(new String[0]);
+
+		return replValues;
+	}
+
+	
 	private static String[] findValuesToShadow(String xmlString, String[] tags, String[] shadowKeys) {
 		Set<String> values = new HashSet<String>();
 		Set<String> keySet = new HashSet<String>(Arrays.asList(shadowKeys));

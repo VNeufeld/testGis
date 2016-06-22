@@ -270,7 +270,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="com.dev.gis.app.application"
-            name="LogAnalyzer">
+            name="BPCS Tester">
          <property
                name="aboutText"
                value="BPCS Tool&#x0A;Copyright 2015">
@@ -285,7 +285,7 @@
          </property>
          <property
                name="appName"
-               value="LogAnalyzer">
+               value="BPCS Tester">
          </property>
       </product>
    </extension>

@@ -46,6 +46,8 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 
 	private Text priceText = null;
 
+	private Text exchageRate = null;
+	
 	private Text carDescription = null;
 
 	private SunnyInclusivesListTable inclusivesListTable;
@@ -108,6 +110,10 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		priceLabel.setText("Preis:");
 		priceText = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
 
+		Label exchageRateLabel = new Label(groupStamp, SWT.NONE);
+		exchageRateLabel.setText("exchageRate :");
+		exchageRate = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
+		
 		Label carDescriptionLabel = new Label(groupStamp, SWT.NONE);
 		carDescriptionLabel.setText("Fahrzeug:");
 		carDescription = new Text(groupStamp, SWT.BORDER | SWT.SINGLE);
@@ -285,6 +291,10 @@ public class SunnyOfferDetailView extends TaskViewAbstract {
 		textOfferLink.setText(offer.getBookLink().toString());
 
 		priceText.setText(offer.getPrice().toString());
+		
+		
+		if (offer.getExtraExchangeRate() != null )
+			exchageRate.setText(offer.getExtraExchangeRate().toString());
 		
 		carDescription.setText(offer.getGroup()+ " : " + offer.getVehicle().getACRISS()
 				+ " Model : " + offer.getVehicle().getVehicleModel());

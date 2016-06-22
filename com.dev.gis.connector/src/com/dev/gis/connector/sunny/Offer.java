@@ -45,6 +45,9 @@ public class Offer extends Response {
 	private Boolean oneWayFeeIncluded;
 
 	private Boolean oneWayTaxIncluded;
+	
+	private MoneyAmount oneWayFeeInSellCurrency;
+	private double oneWayFeeExchangeRate;
 
 	private MoneyAmount outOfHourPrice;
 	
@@ -55,6 +58,8 @@ public class Offer extends Response {
 	private List<Inclusive> inclusives;
 	
 	private List<Extra> extras;
+	
+	private Double extraExchangeRate;
 	
 	
 	private String promoText;
@@ -398,6 +403,30 @@ public class Offer extends Response {
 
 	public void setOneWayTaxIncluded(Boolean oneWayTaxIncluded) {
 		this.oneWayTaxIncluded = oneWayTaxIncluded;
+	}
+
+	public Double getExtraExchangeRate() {
+		return extraExchangeRate;
+	}
+
+	public void setExtraExchangeRate(Double extraExchangeRate) {
+		this.extraExchangeRate = extraExchangeRate;
+	}
+
+	public MoneyAmount getOneWayFeeInSellCurrency() {
+		return oneWayFeeInSellCurrency;
+	}
+
+	public void setOneWayFeeInSellCurrency(MoneyAmount oneWayFeeInSellCurrency) {
+		this.oneWayFeeInSellCurrency = oneWayFeeInSellCurrency;
+	}
+
+	public double getOneWayFeeExchangeRate() {
+		return oneWayFeeExchangeRate;
+	}
+
+	public void setOneWayFeeExchangeRate(double oneWayFeeExchangeRate) {
+		this.oneWayFeeExchangeRate = oneWayFeeExchangeRate;
 	}
 	
 }

@@ -35,9 +35,11 @@ public class AdacOfferFilterDialog extends Dialog {
 	private Button aircondition;
 	private Button automatic;
 	
+	Map<Long,Button> serviceCatalogButtons = new HashMap<Long,Button>();
 	Map<Long,Button> bodyStylesButtons = new HashMap<Long,Button>();
-	Map<String,Button> inclusiveButtons = new HashMap<String,Button>();
 	Map<Long,Button> carTypesButtons = new HashMap<Long,Button>();
+	Map<Long,Button> inclusiveButtons = new HashMap<Long,Button>();
+	Map<Long,Button> supplierButtons = new HashMap<Long,Button>();
 
 	private Text min, max;
 
@@ -61,11 +63,11 @@ public class AdacOfferFilterDialog extends Dialog {
 
 		if (offerFilterTemplate != null) {
 			setSummary(composite, offerFilterTemplate);
-			setCarSuppliers(composite, offerFilterTemplate);
-			setStations(composite, offerFilterTemplate);
+			setSuppliers(composite, offerFilterTemplate);
+			//setStations(composite, offerFilterTemplate);
 			setServiceCatalogs(composite, offerFilterTemplate);
 			setBodyStyles(composite, offerFilterTemplate);
-			//setInclusives(composite, offerFilterTemplate);
+			setInclusives(composite, offerFilterTemplate);
 			setCarTypes(composite, offerFilterTemplate);
 		}
 
@@ -73,7 +75,7 @@ public class AdacOfferFilterDialog extends Dialog {
 		return composite;
 	}
 
-	private void setCarSuppliers(Composite composite,
+	private void setSuppliers(Composite composite,
 			OfferFilterTemplate offerFilterTemplate) {
 		final Group groupResult = new Group(composite, SWT.TITLE);
 		groupResult.setText("Suppliers:");
@@ -83,7 +85,7 @@ public class AdacOfferFilterDialog extends Dialog {
 		
 		List<FilterObject>  filter =   offerFilterTemplate.getSuppliers();
 		
-		defineFilter(groupResult, filter);
+		defineSupplierFilter(groupResult, filter);
 		
 	}
 
@@ -97,7 +99,7 @@ public class AdacOfferFilterDialog extends Dialog {
 		
 		List<FilterObject>  filter =   offerFilterTemplate.getServiceCatalogs();
 		
-		defineFilter(groupResult, filter);
+		defineServiceCatalogFilter(groupResult, filter);
 		
 	}
 
@@ -133,16 +135,52 @@ public class AdacOfferFilterDialog extends Dialog {
 		}
 	}
 
+	private void defineServiceCatalogFilter(final Group groupResult, List<FilterObject> filter) {
+		for (FilterObject b : filter ) {
+
+			String bb = b.getName()+ "("+b.getCount()+")";
+			Label l = new Label(groupResult, SWT.NONE);
+			l.setText(bb);
+			
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+					.grab(true, false).span(4, 1).applyTo(l);
+
+			Button select = new Button(groupResult, SWT.CHECK);
+			select.setText("Select");
+			serviceCatalogButtons.put(b.getId(), select);
+			
+
+		}
+	}
+	
+	private void defineSupplierFilter(final Group groupResult, List<FilterObject> filter) {
+		for (FilterObject b : filter ) {
+
+			String bb = b.getName()+ "("+b.getCount()+")";
+			Label l = new Label(groupResult, SWT.NONE);
+			l.setText(bb);
+			
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+					.grab(true, false).span(4, 1).applyTo(l);
+
+			Button select = new Button(groupResult, SWT.CHECK);
+			select.setText("Select");
+			supplierButtons.put(b.getId(), select);
+			
+
+		}
+	}
+	
 	private void setCarTypes(Composite composite,
 			OfferFilterTemplate offerFilterTemplate) {
 		
 		final Group groupResult = new Group(composite, SWT.TITLE);
-		groupResult.setText("Car classes:");
+		groupResult.setText("Car types:");
 		groupResult.setLayout(new GridLayout(5, false));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.grab(true, true).applyTo(groupResult);
 		
-		List<FilterObject>  carTypes =   offerFilterTemplate.getCarClasses();
+		List<FilterObject>  carTypes =   offerFilterTemplate.getCarTypes();
 		
 		defineFilter(groupResult, carTypes);
 		
@@ -160,6 +198,7 @@ public class AdacOfferFilterDialog extends Dialog {
 		if (offerFilterTemplate != null) {
 
 			// row1
+			if ( offerFilterTemplate.getMinPrice() != null) {
 			Label l1 = new Label(groupResult, SWT.NONE);
 			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 					.grab(true, false).span(2, 1).applyTo(l1);
@@ -212,6 +251,7 @@ public class AdacOfferFilterDialog extends Dialog {
 			automatic.setText(aut.getName()+ "("+aut.getCount()+ ")");
 			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 			.grab(true, false).span(5, 1).applyTo(automatic);
+			}
 
 		}
 
@@ -263,17 +303,14 @@ public class AdacOfferFilterDialog extends Dialog {
 			for (FilterObject b : items ) {
 				String bb = key+ " : "+b.getName()+ "("+b.getCount()+")";
 				Label l = new Label(groupResult, SWT.NONE);
+				long id = b.getId();
 				l.setText(bb);
 				GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
 				.grab(true, false).span(4, 1).applyTo(l);
 				Button select = new Button(groupResult, SWT.CHECK);
 				select.setText("Select");
 				String[] parts = b.getName().split(",");
-				if ( parts.length > 0) {
-					//int id = Integer.valueOf(parts[0]);
-					inclusiveButtons.put(parts[0], select);
-				}
-				
+				inclusiveButtons.put(id, select);
 			}
 			
 		}
@@ -291,12 +328,21 @@ public class AdacOfferFilterDialog extends Dialog {
 //		
 //		List<Long> bodyStyles = new ArrayList<Long>();
 //		
-//		for ( Long id : bodyStylesButtons.keySet() ) {
-//			Button select = bodyStylesButtons.get(id);
-//			if ( select.getSelection()) {
-//				bodyStyles.add(id);
-//			}
-//		}
+		for ( Long id : bodyStylesButtons.keySet() ) {
+			Button select = bodyStylesButtons.get(id);
+			if ( select.getSelection()) {
+				vehicleRequestFilter.getBodyStyles().add(id);
+			}
+		}
+		
+		for ( Long id : serviceCatalogButtons.keySet() ) {
+			Button select = serviceCatalogButtons.get(id);
+			if ( select.getSelection()) {
+				vehicleRequestFilter.getServiceCatalogs().add(id);
+			}
+		}
+		
+		
 //		Long[] ll = bodyStyles.toArray(new Long[0]);
 //		vehicleRequestFilter.setBodyStyles(ll);
 //		
@@ -306,14 +352,28 @@ public class AdacOfferFilterDialog extends Dialog {
 		
 		List<Long> incl = new ArrayList<Long>();
 		
-//		for ( Long id : inclusiveButtons.keySet() ) {
-//			Button select = inclusiveButtons.get(id);
-//			if ( select.getSelection()) {
-//				incl.add(id);
-//			}
-//		}
-//		Long[] inll = incl.toArray(new Long[0]);
-//		vehicleRequestFilter.setInclusives(inll);
+		for ( Long id : inclusiveButtons.keySet() ) {
+			Button select = inclusiveButtons.get(id);
+			if ( select.getSelection()) {
+				incl.add(id);
+			}
+		}
+		vehicleRequestFilter.getInclusives().addAll(incl);
+
+
+		for ( Long id : carTypesButtons.keySet() ) {
+			Button select = carTypesButtons.get(id);
+			if ( select.getSelection()) {
+				vehicleRequestFilter.getCarTypes().add(id);
+			}
+		}
+
+		for ( Long id : supplierButtons.keySet() ) {
+			Button select = supplierButtons.get(id);
+			if ( select.getSelection()) {
+				vehicleRequestFilter.getSuppliers().add(id);
+			}
+		}
 		
 		
 		super.okPressed();

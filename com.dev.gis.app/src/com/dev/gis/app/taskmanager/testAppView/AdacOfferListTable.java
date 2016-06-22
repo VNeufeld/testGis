@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -14,6 +15,7 @@ import com.dev.gis.app.view.listener.adac.AdacTooltipListener;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.Offer;
+import com.dev.gis.connector.joi.protocol.VehicleDescription;
 
 public class AdacOfferListTable extends AbstractListTable {
 	
@@ -35,7 +37,13 @@ public class AdacOfferListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	OfferDo o = (OfferDo) element;
-	        return o.getName();
+	    	String name = o.getName();
+	    	if ( StringUtils.isEmpty(name)) {
+	    		VehicleDescription vd = o.getModel().getVehicle();
+	    		name = vd.getBodyStyleText().getText();
+	    		
+	    	}
+	        return name;
 	      }
 	    });
 	    

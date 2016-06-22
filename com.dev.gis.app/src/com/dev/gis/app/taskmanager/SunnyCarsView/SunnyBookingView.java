@@ -49,43 +49,6 @@ public class SunnyBookingView extends TaskViewAbstract {
 	
 	private BookingControl bookingControl = null;
 
-	protected class AddGetBookingInfoListener extends AbstractListener {
-		
-		private final Shell shell;
-
-		public AddGetBookingInfoListener(Shell shell) {
-			this.shell = shell;
-		}
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			
-			try {
-				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-				VehicleHttpService service = serviceFactory
-						.getVehicleJoiService();
-				
-				BookingRequest response = service.getBookingInfo(selectedOffer);
-				if ( response != null) {
-					
-//					if ( response.getPayment() != null) {
-//						bsToken.setText(response.getPayment().getCreditCardPaymentReference());
-//						if ( response.getPayment().getCard() != null) {
-//							bsCrediCard.setText(response.getPayment().getCard().getOwnerName()+ " : " + response.getPayment().getCard().getCardNumber());
-//						}
-//						
-//					}
-					
-				}
-				
-			}
-			catch( Exception err) {
-				logger.error(err.getMessage(),err);
-				MessageDialog.openError(
-						shell,"Error",err.getMessage());
-			}
-		}
-	}
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -100,8 +63,6 @@ public class SunnyBookingView extends TaskViewAbstract {
 		createDriverGroup(composite);
 
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createCustomerGroup(composite));
-		
-		new ButtonControl(composite, "GetBookingInfo", 0,  new AddGetBookingInfoListener(parent.getShell()));
 		
 		bookingControl = BookingControl.createBookingControl(composite);
 		
@@ -191,7 +152,9 @@ public class SunnyBookingView extends TaskViewAbstract {
 		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 		VehicleHttpService service = serviceFactory
 				.getVehicleJoiService();
-		
+
+		service.putExtras(selectedOffer, selectedExtras);
+
 		BookingRequest response = service.getBookingInfo(selectedOffer);
 		
 		if ( response != null) {
@@ -200,16 +163,7 @@ public class SunnyBookingView extends TaskViewAbstract {
 			else
 				driver.setValue("");
 			
-//			if ( response.getPayment() != null) {
-//				bsToken.setText(response.getPayment().getCreditCardPaymentReference());
-//				if ( response.getPayment().getCard() != null) {
-//					bsCrediCard.setText(response.getPayment().getCard().getOwnerName()+ " : " + response.getPayment().getCard().getCardNumber());
-//				}
-//				
-//			}
-			
 		}
-		
 		
 		
 		offerInfoControl.setInitValues(selectedOffer,extras);

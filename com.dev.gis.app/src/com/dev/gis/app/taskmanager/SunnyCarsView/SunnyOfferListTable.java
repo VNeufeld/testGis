@@ -29,8 +29,8 @@ public class SunnyOfferListTable extends AbstractListTable {
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
 		String[] titles = { "BodyStyle", "Name", "Group", "Supplier", "Station",
-				"Service Catalog", "Price", "Status",  "Rating", "OneWay Fee", "Incl. km." };
-		int[] bounds = { 200,250, 100, 80, 80, 50, 120,50, 50, 120, 100 };
+				"Service Catalog", "Price", "Status",  "Rating", "OneWay Fee", "OneWay Fee in Sell Currency", "Incl. km." };
+		int[] bounds = { 200,250, 100, 80, 80, 50, 120,50, 50, 120, 120, 100 };
 
 		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -155,8 +155,23 @@ public class SunnyOfferListTable extends AbstractListTable {
 			}
 
 		});
-		
+
 		col = createTableViewerColumn(titles[10], bounds[10], 10);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				SunnyOfferDo o = (SunnyOfferDo) element;
+				String oneWay = "";
+				if (o.getOneWayFeeInSellCurrency() != null) {
+					oneWay = o.getOneWayFeeInSellCurrency().getAmount();
+					oneWay = oneWay + " " + o.getOneWayFeeInSellCurrency().getCurrency();
+				}
+				return oneWay;
+			}
+
+		});
+		
+		col = createTableViewerColumn(titles[11], bounds[11], 11);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {

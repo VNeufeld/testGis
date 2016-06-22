@@ -25,7 +25,7 @@ public class OfferFilterTemplate {
 	
 	private List<FilterObject> suppliers = new ArrayList<FilterObject>();
 
-	private List<FilterObject> carClasses = new ArrayList<FilterObject>();
+	private List<FilterObject> carTypes = new ArrayList<FilterObject>();
 	
 	private FilterObject automatic = new FilterObject("automatic",new Long(0));
 	private FilterObject aircondition = new FilterObject("aircondition",new Long(0));
@@ -111,12 +111,6 @@ public class OfferFilterTemplate {
 	public void setStatus(List<FilterObject> status) {
 		this.status = status;
 	}
-	public List<FilterObject> getCarClasses() {
-		return carClasses;
-	}
-	public void setCarClasses(List<FilterObject> carClasses) {
-		this.carClasses = carClasses;
-	}
 	public List<FilterObject> getServiceCatalogs() {
 		return serviceCatalogs;
 	}
@@ -124,5 +118,11 @@ public class OfferFilterTemplate {
 		this.serviceCatalogs = serviceCatalogs;
 	}
 
+	public List<FilterObject> getCarTypes() {
+		return carTypes;
+	}
+	public void setCarTypes(List<FilterObject> carTypes) {
+		this.carTypes = carTypes;
+	}
 	
 }

@@ -40,11 +40,15 @@ public class MoneyAmount extends BasicProtocol implements Comparable<MoneyAmount
 	public MoneyAmount(BigDecimal amount, String currency) {
 		this.amount = amount;
 		this.currency = currency;
+		if ( this.currency == null)
+			this.currency ="";
 	}
 
 	public MoneyAmount(String amount, String currency) {
 		setAmount(amount);
 		this.currency = currency;
+		if ( this.currency == null)
+			this.currency ="";
 	}
 
 	
@@ -80,6 +84,8 @@ public class MoneyAmount extends BasicProtocol implements Comparable<MoneyAmount
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
+		if ( this.currency == null)
+			this.currency = "";
 	}
 
 	public void setDecimalAmount(BigDecimal amount) {

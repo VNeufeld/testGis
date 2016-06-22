@@ -24,17 +24,16 @@ public class ShowJsonResponseDialog extends Dialog {
 //	private TaskItem tempItem = new TaskItem();
 	private String  requestPath = null;
 	//private ITaskDataProvider dataProvider;
-	private final String logText ;
+	private String logText ;
 
 	public ShowJsonResponseDialog(Shell parentShell, final String logText) {
 		super(parentShell);
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
 	    
 	    this.logText = ModelProvider.INSTANCE.lastResponse;
-
-		// setShellStyle(SWT.CLOSE | SWT.MODELESS | SWT.BORDER | SWT.TITLE);
-		//
-		// setBlockOnOpen(false);
+		if ( this.logText == null) {
+			this.logText = " Kein Response vorhanden .";
+		}
 	}
 
 	private void checkResource() {

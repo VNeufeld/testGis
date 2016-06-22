@@ -112,7 +112,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         //fileMenu.add(messagePopupAction);
         //fileMenu.add(openViewAction);
         //fileMenu.add(new Separator());
-		boolean onlyLogging = TaskProperties.getTaskProperties().isOnlyLogging();
+		//boolean onlyLogging = TaskProperties.getTaskProperties().isOnlyLogging();
 		
 
         perspectiveMenu.add(switchPerspectiveAction);
@@ -130,17 +130,17 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     }
     
     protected void fillCoolBar(ICoolBarManager coolBar) {
-		boolean onlyLogging = TaskProperties.getTaskProperties().isOnlyLogging();
     	
         IToolBarManager toolbar = new ToolBarManager(SWT.FLAT | SWT.RIGHT);
         coolBar.add(new ToolBarContributionItem(toolbar, "main"));   
         //toolbar.add(openViewAction);
         toolbar.add(switchPerspectiveAction);
-		if (!onlyLogging) {
-	        toolbar.add(switchToAppPerspectiveAction);
+		if ( !Application.ONLY_LOGGING){
+	        //toolbar.add(switchToAppPerspectiveAction);
 	        toolbar.add(resetCurrentPerspectiveAction);
 	        toolbar.add(lastResponseAction);
 		}
-        toolbar.add(stopProcessAction);
+		else
+			toolbar.add(stopProcessAction);
     }
 }

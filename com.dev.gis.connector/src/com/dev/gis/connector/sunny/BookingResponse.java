@@ -13,6 +13,19 @@ public class BookingResponse extends Response {
 	private String supplierBookingNo;
 
 	private MoneyAmount price;
+	
+	private MoneyAmount expectedPoaTotalPrice;
+	
+	private MoneyAmount oneWayFeeInSellCurrency;
+	
+	private MoneyAmount oneWayFee;
+	
+	private double exchangeRate;
+
+	private MoneyAmount extraPriceInSellCurrency;
+
+	private MoneyAmount extraPrice;
+	
 
 	@JsonDeserialize(using = AvailabilityJsonDesirializer.class)
 	private Availability status;
@@ -55,5 +68,53 @@ public class BookingResponse extends Response {
 
 	public void setStatus(Availability status) {
 		this.status = status;
+	}
+
+	public MoneyAmount getExpectedPoaTotalPrice() {
+		return expectedPoaTotalPrice;
+	}
+
+	public void setExpectedPoaTotalPrice(MoneyAmount expectedPoaTotalPrice) {
+		this.expectedPoaTotalPrice = expectedPoaTotalPrice;
+	}
+
+	public MoneyAmount getOneWayFeeInSellCurrency() {
+		return oneWayFeeInSellCurrency;
+	}
+
+	public void setOneWayFeeInSellCurrency(MoneyAmount oneWayFeeInSellCurrency) {
+		this.oneWayFeeInSellCurrency = oneWayFeeInSellCurrency;
+	}
+
+	public MoneyAmount getOneWayFee() {
+		return oneWayFee;
+	}
+
+	public void setOneWayFee(MoneyAmount oneWayFee) {
+		this.oneWayFee = oneWayFee;
+	}
+
+	public double getExchangeRate() {
+		return exchangeRate;
+	}
+
+	public void setExchangeRate(double exchangeRate) {
+		this.exchangeRate = exchangeRate;
+	}
+
+	public MoneyAmount getExtraPriceInSellCurrency() {
+		return extraPriceInSellCurrency;
+	}
+
+	public void setExtraPriceInSellCurrency(MoneyAmount extraPriceInSellCurrency) {
+		this.extraPriceInSellCurrency = extraPriceInSellCurrency;
+	}
+
+	public MoneyAmount getExtraPrice() {
+		return extraPrice;
+	}
+
+	public void setExtraPrice(MoneyAmount extraPrice) {
+		this.extraPrice = extraPrice;
 	}
 }

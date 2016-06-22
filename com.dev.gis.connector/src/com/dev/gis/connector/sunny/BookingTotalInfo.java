@@ -17,6 +17,13 @@ public class BookingTotalInfo {
 	private MoneyAmount insurancePrice;
 	private MoneyAmount totalPrice;
 	
+	private MoneyAmount totalExtraPriceInSellCurrency;
+	private MoneyAmount totalExtraPoaPrice;
+	private MoneyAmount oneWayFeeInSellCurrency;
+	private MoneyAmount oneWayFee;
+	private Double exchangeRate;
+	private MoneyAmount expectedTotalPrice;
+	
 	public MoneyAmount getExtrasPrice() {
 		return extrasPrice;
 	}
@@ -40,6 +47,42 @@ public class BookingTotalInfo {
 	}
 	public void setInsurancePrice(MoneyAmount insurancePrice) {
 		this.insurancePrice = insurancePrice;
+	}
+	public MoneyAmount getTotalExtraPriceInSellCurrency() {
+		return totalExtraPriceInSellCurrency;
+	}
+	public void setTotalExtraPriceInSellCurrency(MoneyAmount totalExtraPriceInSellCurrency) {
+		this.totalExtraPriceInSellCurrency = totalExtraPriceInSellCurrency;
+	}
+	public MoneyAmount getTotalExtraPoaPrice() {
+		return totalExtraPoaPrice;
+	}
+	public void setTotalExtraPoaPrice(MoneyAmount totalExtraPoaPrice) {
+		this.totalExtraPoaPrice = totalExtraPoaPrice;
+	}
+	public MoneyAmount getOneWayFeeInSellCurrency() {
+		return oneWayFeeInSellCurrency;
+	}
+	public void setOneWayFeeInSellCurrency(MoneyAmount oneWayFeeInSellCurrency) {
+		this.oneWayFeeInSellCurrency = oneWayFeeInSellCurrency;
+	}
+	public MoneyAmount getOneWayFee() {
+		return oneWayFee;
+	}
+	public void setOneWayFee(MoneyAmount oneWayFee) {
+		this.oneWayFee = oneWayFee;
+	}
+	public Double getExchangeRate() {
+		return exchangeRate;
+	}
+	public void setExchangeRate(Double exchangeRate) {
+		this.exchangeRate = exchangeRate;
+	}
+	public MoneyAmount getExpectedTotalPrice() {
+		return expectedTotalPrice;
+	}
+	public void setExpectedTotalPrice(MoneyAmount expectedTotalPrice) {
+		this.expectedTotalPrice = expectedTotalPrice;
 	}
 	
 

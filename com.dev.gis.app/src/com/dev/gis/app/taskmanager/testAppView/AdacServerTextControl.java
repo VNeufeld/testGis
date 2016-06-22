@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.testAppView;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Composite;
 
@@ -12,7 +13,7 @@ public class AdacServerTextControl extends ObjectTextControl {
 	private static final String PREFERENCE_PROPERTY = "ADAC_SERVER_PROPERTY";
 
 	public AdacServerTextControl(Composite parent) {
-		super(parent, 300, true);
+		super(parent, 300, false);
 	}
 
 	@Override
@@ -31,7 +32,11 @@ public class AdacServerTextControl extends ObjectTextControl {
 
 	@Override
 	protected String getDefaultValue() {
-		return readProperty(PREFERENCE_PROPERTY);
+		String defaultValue = readProperty(PREFERENCE_PROPERTY);
+		if ( StringUtils.isEmpty(defaultValue)) {
+			defaultValue = "http://localhost:8080/web-joi/joi";
+		}
+		return defaultValue;
 	}
 
 }

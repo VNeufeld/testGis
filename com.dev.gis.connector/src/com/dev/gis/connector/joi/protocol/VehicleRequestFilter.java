@@ -1,5 +1,6 @@
 package com.dev.gis.connector.joi.protocol;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -16,15 +17,19 @@ public class VehicleRequestFilter extends BasicProtocol {
 
 	private Set<Long> vehicleCategories;
 
-	private Set<Long> bodyStyles;
+	private final Set<Long> bodyStyles = new HashSet<Long>();
 
-	private Set<Long> serviceCatalogs;
+	private final Set<Long> serviceCatalogs= new HashSet<Long>();
 
-	private Set<Long> suppliers;
+	private final Set<Long> suppliers = new HashSet<Long>();
 	
 	private Set<Long> cities;
 
 	private Boolean airportStationsOnly;
+	
+	private final Set<Long> inclusives = new HashSet<Long>();
+	
+	private final Set<Long> carTypes =  new HashSet<Long>();
 
 	
 	
@@ -67,27 +72,23 @@ public class VehicleRequestFilter extends BasicProtocol {
 		this.airportStationsOnly = airportStationsOnly;
 	}
 
-	public void setBodyStyles(Set<Long> bodyShapes) {
-		this.bodyStyles = bodyShapes;
-	}
-
 	public void setCities(Set<Long> cities) {
 		this.cities = cities;
-	}
-
-	public void setServiceCatalogs(Set<Long> serviceCatalogs) {
-		this.serviceCatalogs = serviceCatalogs;
 	}
 	
 	public void setStations(Set<Long> stations) {
 		this.stations = stations;
 	}
 	
-	public void setSuppliers(Set<Long> suppliers) {
-		this.suppliers = suppliers;
-	}
-	
 	public void setVehicleCategories(Set<Long> vehicleCategories) {
 		this.vehicleCategories = vehicleCategories;
+	}
+
+	public Set<Long> getInclusives() {
+		return inclusives;
+	}
+
+	public Set<Long> getCarTypes() {
+		return carTypes;
 	}
 }

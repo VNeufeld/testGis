@@ -18,7 +18,7 @@ public class ShowResponseAction extends Action {
         setId(ICommandIds.CMD_SHOW_RESPONSE);
         // Associate the action with a pre-defined command, to allow key bindings.
         setActionDefinitionId(ICommandIds.CMD_SHOW_RESPONSE);
-        setImageDescriptor(com.dev.gis.app.Activator.getImageDescriptor("/icons/folder_go.png"));
+        setImageDescriptor(com.dev.gis.app.Activator.getImageDescriptor("/icons/collection.gif"));
     }
 
     public void run() {

@@ -101,7 +101,9 @@ public class AdacExtraListTable extends AbstractListTable {
 			@Override
 			public String getText(Object element) {
 				Extra o = (Extra) element;
-				return o.getPrice().getAmount().toString();
+				if ( o.getPrice() != null)
+					return o.getPrice().getAmount().toString();
+				return "";
 			}
 		});
 

@@ -21,11 +21,12 @@ public class AdacOperatorComboBox extends ObjectsComboBox{
 	}
 	
 	public static void createOperator() {
-		String ops = TaskProperties.getTaskProperties().getAdacOperators();
+		String ops = ""; //TaskProperties.getTaskProperties().getAdacOperators();
 		logger.info("create operator list "+ops);
 		operators.clear();
+		
 		if ( ops.isEmpty()) {
-			ops = "DE:152573; Internationl:1; RentFox:1081205;";
+			ops = "DE:152573;INT:1;RentFox:1081205;";
 		}
 		if ( !ops.isEmpty())
 		{

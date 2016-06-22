@@ -64,7 +64,11 @@ public class TestAppView extends RentCarsAppView {
 	@Override
 	protected void createBasicControls(final Group groupStamp) {
 		
-		new AdacServerTextControl(groupStamp);
+		Composite cc = createComposite(groupStamp, 3, -1, true);
+		
+		new AdacServerTextControl(cc);
+		
+		new AdacAuthorizationCheckBox(cc,"Authorization");
 		
 		new LanguageComboBox(groupStamp, 80);
 

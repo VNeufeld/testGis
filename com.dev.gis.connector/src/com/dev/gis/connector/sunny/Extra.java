@@ -2,6 +2,7 @@ package com.dev.gis.connector.sunny;
 
 import java.net.URI;
 
+import com.dev.gis.connector.joi.protocol.MoneyAmount;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -24,6 +25,10 @@ public class Extra extends BasicProtocol {
 	private String description;
 
 	private MoneyAmount totalPrice;
+	
+	
+	private MoneyAmount totalPriceInSellCurrency;
+	
 
 	// isn't use for HA
 	private int[] requiredItems;
@@ -59,6 +64,9 @@ public class Extra extends BasicProtocol {
 	private String dimension2;
 
 	private String dependency;
+
+	
+	private boolean selected = false;
 
 	
 	
@@ -247,6 +255,22 @@ public class Extra extends BasicProtocol {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public MoneyAmount getTotalPriceInSellCurrency() {
+		return totalPriceInSellCurrency;
+	}
+
+	public void setTotalPriceInSellCurrency(MoneyAmount totalPriceInSellCurrency) {
+		this.totalPriceInSellCurrency = totalPriceInSellCurrency;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 	
 }

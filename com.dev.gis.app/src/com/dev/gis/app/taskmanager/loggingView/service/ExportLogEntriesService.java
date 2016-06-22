@@ -22,10 +22,13 @@ public class ExportLogEntriesService implements Callable<String> {
 	String[] keys = { "PhoneNumber" , "GivenName", "Surname", "AddressLine" , "Email" , "CityName", "PostalCode", "Password", 
 			"CustomerNo", "CustomerNoExt", 
 			"Name", "FirstName", "Street", "ZipCode", "City" , "PhoneArea", "PhoneExt", "EMail", "Driver", "DriverFirstName"};
+
+	String[] phoneKeys = { "PhoneNumber" };
 	
 	public ExportLogEntriesService() {
 
 		readKeys();
+		readPhoneKeys();
 	}
 
 
@@ -53,6 +56,30 @@ public class ExportLogEntriesService implements Callable<String> {
 		
 	}
 
+	private void readPhoneKeys() {
+		File f = new File("shadowFullKeys.txt");
+		if ( !f.exists() ) {
+			logger.info("not shadowKeys file exists ");
+			return;
+		}
+		logger.info("read shadowFull file  "+f.getAbsolutePath());
+		try {
+			List<String> shadowKeys = FileUtils.readLines(f);
+			if (shadowKeys != null && shadowKeys.size() > 0 ) {
+				logger.info(" read "+shadowKeys.size()+ " keys.");
+				phoneKeys = shadowKeys.toArray(new String[0]);
+				for ( String key : phoneKeys)
+					logger.info(" shadow phone key : "+key);
+			}
+			else {
+				logger.info(" no shodow phone keys found. ");
+			}
+		} catch (IOException e) {
+			logger.error(e.getMessage(),e);
+		}
+		
+	}
+	
 
 	public void writeEntries() throws IOException {
 
@@ -74,7 +101,7 @@ public class ExportLogEntriesService implements Callable<String> {
 			List<String> logEntry = entry.getEntry();
 			for ( String xmlString : logEntry) {
 				if ( LoggingModelProvider.INSTANCE.useShadow)
-					xmlString = FilterUtils.shadowKeyWords(xmlString, keys);
+					xmlString = FilterUtils.shadowKeyWords(xmlString, keys, phoneKeys);
 				list.add(xmlString);
 			}
 			

@@ -2,6 +2,9 @@ package com.dev.gis.connector.sunny;
 
 import java.net.URI;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Supplier extends BasicProtocol {
 
 	private long id;
@@ -12,6 +15,8 @@ public class Supplier extends BasicProtocol {
 	
 	private long supplierGroupId;
 
+	private String supplierGroupName;
+	
 	private URI logo;
 	
 	private String name;
@@ -69,4 +74,13 @@ public class Supplier extends BasicProtocol {
 			this.name="";
 		return 31 * this.name.hashCode();
 	}
+
+	public String getSupplierGroupName() {
+		return supplierGroupName;
+	}
+
+	public void setSupplierGroupName(String supplierGroupName) {
+		this.supplierGroupName = supplierGroupName;
+	}
+
 }

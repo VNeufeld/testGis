@@ -20,6 +20,8 @@ import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.OfferDo;
+import com.dev.gis.connector.api.SunnyModelProvider;
+import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
@@ -27,6 +29,7 @@ import com.dev.gis.connector.joi.protocol.Offer;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
+import com.dev.gis.connector.sunny.OfferInformation;
 
 public class OfferDetailView extends RentCarOfferDetailBasicView {
 	public static final String ID = "com.dev.gis.app.view.OfferDetailView";
@@ -116,7 +119,7 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		if ( vehicleResult == null )
 			return;
 		
-		Offer offer = getOffer(vehicleResult);
+		Offer offer = offerDo.getOffer();  //getOffer(vehicleResult);
 		
 		if ( offer != null) {
 
@@ -133,14 +136,18 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 			
 			inclusivesListTable.update(selectedOffer.getInclusives());
 			
+			if ( offerDo.getSupplier() != null)
+				supplier.setValue(offerDo.getSupplier().getName() + " id : "+offerDo.getSupplier().getId() + " sgr : " + offerDo.getSupplier().getSupplierGroupId());
 			
-			supplier.setValue(offerDo.getSupplier().getName() + " id : "+offerDo.getSupplier().getId() + " sgr : " + offerDo.getSupplier().getSupplierGroupId());
 			serviceCatalog.setValue(offerDo.getServiceCatalogCode() + " id : "+offerDo.getServiceCatalogId());
-			String text = offerDo.getPickupStation().getId() + " Name : " + offerDo.getPickupStation().getStationName();
-			if ( offerDo.getDropoffStation() != null) {
-				text += ". DropOff : " + offerDo.getDropoffStation().getId() + " Name : " + offerDo.getDropoffStation().getStationName();
+			
+			if ( offerDo.getPickupStation() != null) {
+				String text = offerDo.getPickupStation().getId() + " Name : " + offerDo.getPickupStation().getStationName();
+				if ( offerDo.getDropoffStation() != null) {
+					text += ". DropOff : " + offerDo.getDropoffStation().getId() + " Name : " + offerDo.getDropoffStation().getStationName();
+				}
+				station.setValue(text);
 			}
-			station.setValue(text);
 			
 			
 		}
@@ -240,6 +247,11 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 			}
 			
 			if ( pickupStationId > 0 && dropOffStationId > 0) {
+
+				OfferDo offerDo = AdacModelProvider.INSTANCE.getSelectedOffer();
+				
+				long selectedServCat = offerDo.getServiceCatalogId(); 
+
 			
 				TravelInformation travelInformation = new TravelInformation(pickupStationId,dropOffStationId);
 				
@@ -254,7 +266,24 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 				VehicleResult response = service.recalculate(selectedOffer,travelInformation);
 				if ( response != null ) {
 					
-					recalculateResponse.setValue(response.getOfferList().get(0).getLink().toString());
+					Offer recalculatedOffer = null;
+					for ( Offer ofr : response.getOfferList()) {
+						if ( ofr.getServiceCatalogId() == selectedServCat) {
+							recalculatedOffer = ofr;
+						}
+							
+					}
+					if ( recalculatedOffer != null) {
+
+						recalculateResponse.setValue(recalculatedOffer.getLink().toString());
+					
+						logger.info("recalculate offer success. offerID = "+recalculatedOffer.getId().toString() + " price = " + recalculatedOffer.getPrice());
+						
+						OfferDo of = new OfferDo(recalculatedOffer,response);
+						
+						showOffer(of);
+					}
+					
 				}
 			}
 			else {

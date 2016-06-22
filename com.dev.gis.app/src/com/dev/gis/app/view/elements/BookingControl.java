@@ -14,7 +14,9 @@ import org.eclipse.swt.widgets.Shell;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.api.VehicleHttpService;
+import com.dev.gis.connector.sunny.BookingRequest;
 import com.dev.gis.connector.sunny.BookingResponse;
+import com.dev.gis.connector.sunny.BookingTotalInfo;
 import com.dev.gis.connector.sunny.Extra;
 
 public class BookingControl extends EditPartControl {
@@ -22,7 +24,14 @@ public class BookingControl extends EditPartControl {
 	
 	private OutputTextControls errorText;
 	private OutputTextControls bookingId;
+	private OutputTextControls bookingNo;
+	private OutputTextControls status;
 	private OutputTextControls bookingPreis;
+	private OutputTextControls oneWayPrice;
+	private OutputTextControls oneWayPriceSell;
+	private OutputTextControls extraPoaPrice;
+	private OutputTextControls extraPoaPriceSell;
+	private OutputTextControls expectedTotalPrice;
 	
 	private SunnyOfferDo selectedOffer;
 	private List<Extra> extras;
@@ -43,9 +52,22 @@ public class BookingControl extends EditPartControl {
 	@Override
 	protected void createElements(Group groupStamp) {
 		
-		bookingId = new OutputTextControls(groupStamp, "BookingId", -1,1 );
+		Composite bookingComposite = createComposite(groupStamp,2,-1, true);
 
-		bookingPreis = new OutputTextControls(groupStamp, "Price", -1,1 );
+		Composite priceComposite = createComposite(groupStamp,4,-1, true);
+		
+		bookingId = new OutputTextControls(bookingComposite, "BookingId", 300,1 );
+		bookingNo = new OutputTextControls(bookingComposite, "BookingNo", 300,1 );
+		status = new OutputTextControls(bookingComposite, "Status", 300,1 );
+		bookingPreis = new OutputTextControls(bookingComposite, "PrepaidPrice", 300,1 );
+
+		oneWayPriceSell = new OutputTextControls(priceComposite, "OneWayPriceSell", 300,1 );
+		oneWayPrice = new OutputTextControls(priceComposite, "OneWayPrice", 300,1 );
+
+		extraPoaPriceSell = new OutputTextControls(priceComposite, "ExtraPOAPriceSell", 300,1 );
+		extraPoaPrice = new OutputTextControls(priceComposite, "ExtraPOAPrice", 300,1 );
+
+		expectedTotalPrice = new OutputTextControls(priceComposite, "ExpectedTotalPrice", 300,1 );
 		
 		errorText = new OutputTextControls(groupStamp, "Error / Warning", -1,1 );
 
@@ -54,9 +76,14 @@ public class BookingControl extends EditPartControl {
 	@Override
 	protected void createButtons(Group groupStamp) {
 
-		new ButtonControl(groupStamp, "Verify", 0,  getVerifySelectionListener(getShell()));
+		Composite buttonComposite = createComposite(groupStamp,3,-1, true);
 
-		new ButtonControl(groupStamp, "Booking", 0,  getBookingSelectionListener(getShell()));
+		
+		new ButtonControl(buttonComposite, "GetBookingInfo", 0,  new AddGetBookingInfoListener(getShell()));
+
+		new ButtonControl(buttonComposite, "Verify", 0,  getVerifySelectionListener(getShell()));
+
+		new ButtonControl(buttonComposite, "Booking", 0,  getBookingSelectionListener(getShell()));
 		
 	}
 
@@ -90,17 +117,29 @@ public class BookingControl extends EditPartControl {
 				service.putExtras(selectedOffer, extras);
 	
 				BookingResponse response = service.bookOffer(selectedOffer);
-				String result = "";
 				if ( response != null) {
-					if ( response.getSupplierBookingNo() != null)
-						result = result + " BNR: "+response.getSupplierBookingNo();
+					if ( response.getSupplierBookingNo() != null) {
+						bookingNo.setValue(" BNR: "+response.getSupplierBookingNo());
+						bookingId.setValue(response.getBookingId());
+					}
+					status.setValue(""+response.getStatus());
+					
+					if ( response.getPrice() != null)
+						bookingPreis.setValue(response.getPrice().toString());
+					
+					if ( response.getOneWayFee() != null)
+						oneWayPrice.setValue(response.getOneWayFee().toString());
+					if ( response.getOneWayFeeInSellCurrency() != null)
+						oneWayPriceSell.setValue(response.getOneWayFeeInSellCurrency().toString());
 
-					bookingId.setValue(result);
+					if ( response.getExtraPrice() != null)
+						extraPoaPrice.setValue(response.getExtraPrice().toString());
+					if ( response.getExtraPriceInSellCurrency() != null)
+						extraPoaPriceSell.setValue(response.getExtraPriceInSellCurrency().toString());
+
+					if ( response.getExpectedPoaTotalPrice() != null)
+						expectedTotalPrice.setValue(response.getExpectedPoaTotalPrice().toString());
 					
-					result = " Status: "+response.getStatus();
-					result = result + " Preis: "+response.getPrice().toString();
-					
-					bookingPreis.setValue(result);
 					
 					showErrors( response );
 
@@ -138,17 +177,27 @@ public class BookingControl extends EditPartControl {
 				service.putExtras(selectedOffer, extras);
 	
 				BookingResponse response = service.verifyOffer(selectedOffer);
-				String result = "";
+
 				if ( response != null) {
-					if ( response.getSupplierBookingNo() != null)
-						result = result + " BNR: "+response.getSupplierBookingNo();
-					bookingId.setValue(result);
 					
-					result = " Status: "+response.getStatus();
+					status.setValue(""+response.getStatus());
+					
 					if ( response.getPrice() != null)
-						result = result + " Preis: "+response.getPrice().toString();
+						bookingPreis.setValue(response.getPrice().toString());
 					
-					bookingPreis.setValue(result);
+					if ( response.getOneWayFee() != null)
+						oneWayPrice.setValue(response.getOneWayFee().toString());
+					if ( response.getOneWayFeeInSellCurrency() != null)
+						oneWayPriceSell.setValue(response.getOneWayFeeInSellCurrency().toString());
+
+					if ( response.getExtraPrice() != null)
+						extraPoaPrice.setValue(response.getExtraPrice().toString());
+					if ( response.getExtraPriceInSellCurrency() != null)
+						extraPoaPriceSell.setValue(response.getExtraPriceInSellCurrency().toString());
+
+					if ( response.getExpectedPoaTotalPrice() != null)
+						expectedTotalPrice.setValue(response.getExpectedPoaTotalPrice().toString());
+
 					showErrors( response );
 				}
 			}
@@ -185,5 +234,64 @@ public class BookingControl extends EditPartControl {
 	
 	}
 
+	protected class AddGetBookingInfoListener extends AbstractListener {
+		
+		private final Shell shell;
+
+		public AddGetBookingInfoListener(Shell shell) {
+			this.shell = shell;
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			try {
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				VehicleHttpService service = serviceFactory
+						.getVehicleJoiService();
+	
+				service.putExtras(selectedOffer, extras);
+				
+				BookingRequest response = service.getBookingInfo(selectedOffer);
+				if ( response != null) {
+					BookingTotalInfo bookingTotalInfo = response.getBookingTotalInfo();
+					if ( bookingTotalInfo.getTotalPrice() != null)
+						bookingPreis.setValue(bookingTotalInfo.getTotalPrice().toString());
+					else
+						bookingPreis.setValue("");
+					
+					if ( bookingTotalInfo.getOneWayFee() != null)
+						oneWayPrice.setValue(bookingTotalInfo.getOneWayFee().toString());
+					else
+						oneWayPrice.setValue("");
+					
+					if ( bookingTotalInfo.getOneWayFeeInSellCurrency() != null)
+						oneWayPriceSell.setValue(bookingTotalInfo.getOneWayFeeInSellCurrency().toString());
+					else
+						oneWayPriceSell.setValue("");
+
+					if ( bookingTotalInfo.getTotalExtraPoaPrice() != null)
+						extraPoaPrice.setValue(bookingTotalInfo.getTotalExtraPoaPrice().toString());
+					else
+						extraPoaPrice.setValue("");
+					
+					if ( bookingTotalInfo.getTotalExtraPriceInSellCurrency() != null)
+						extraPoaPriceSell.setValue(bookingTotalInfo.getTotalExtraPriceInSellCurrency().toString());
+					else
+						extraPoaPriceSell.setValue("");
+
+					if ( bookingTotalInfo.getExpectedTotalPrice() != null)
+						expectedTotalPrice.setValue(bookingTotalInfo.getExpectedTotalPrice().toString());
+
+				}
+				
+			}
+			catch( Exception err) {
+				logger.error(err.getMessage(),err);
+				MessageDialog.openError(
+						shell,"Error",err.getMessage());
+			}
+		}
+	}
 	
 }

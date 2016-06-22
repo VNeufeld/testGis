@@ -7,6 +7,7 @@ package com.dev.gis.connector;
 import java.io.IOException;
 import java.net.URI;
 
+import org.apache.http.HttpHeaders;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.ResponseHandler;
@@ -21,9 +22,12 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.log4j.Logger;
 
+import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.VehicleHttpService;
 
 public class GisHttpClient {
+	
+	static final String HASH_PREFIX = "BPCS JOI interface";
 	
 	private static Logger logger = Logger.getLogger(GisHttpClient.class);
 	
@@ -69,6 +73,11 @@ public class GisHttpClient {
 	public String startPostRequestAsJson(URI uri, String jsonString)
 			throws  IOException {
 		try {
+			
+			boolean encode = AdacModelProvider.INSTANCE.authorization;
+			
+			
+			
 			HttpPost httpPost = new HttpPost(uri);
 	
 			StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
@@ -76,7 +85,16 @@ public class GisHttpClient {
 			httpPost.setEntity(entity);
 
 			httpPost.addHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));			
-			httpPost.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));			
+			httpPost.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));
+			
+			if ( encode ) {
+				String stringToHash = HASH_PREFIX + "POST" + jsonString;
+				String hashValue = Hash.calculateMD5Hash(stringToHash);
+				httpPost.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, "BPCS:"+hashValue));
+				logger.info("Hash Value = " + hashValue);
+				
+			}
+			
 			
 			logger.info("httpclient "+httpclient + ". Executing POST request " + httpPost.getURI());
 			
