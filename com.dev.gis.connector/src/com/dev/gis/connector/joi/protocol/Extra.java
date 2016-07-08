@@ -3,6 +3,9 @@ package com.dev.gis.connector.joi.protocol;
 import java.net.URI;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Extra extends BasicProtocol {
 
 	private long id;
@@ -43,6 +46,9 @@ public class Extra extends BasicProtocol {
 	private String value4;
 	private String dimension1;
 	private String dimension2;
+	
+	private boolean bookable = true;
+	
 
 	public String getCode() {
 		return code;
@@ -221,6 +227,14 @@ public class Extra extends BasicProtocol {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+
+	public boolean isBookable() {
+		return bookable;
+	}
+
+	public void setBookable(boolean bookable) {
+		this.bookable = bookable;
 	}
 	
 }

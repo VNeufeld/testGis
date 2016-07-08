@@ -53,8 +53,8 @@ public class AdacExtraListTable extends AbstractListTable {
 	
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-		String[] titles = { "Id", "Code", "Name", "Preis", "TotalPrice", "PayType","Mandatory" };
-		int[] bounds = { 50, 70, 300, 100, 100, 150, 100 };
+		String[] titles = { "Id", "Code", "Name", "Preis", "TotalPrice", "PayType","Mandatory", "Bookable" };
+		int[] bounds = { 50, 70, 300, 100, 100, 150, 100, 100 };
 
 		TableViewerColumn colx = createTableViewerColumn("Sel", 30, 0);
 		colx.setLabelProvider(new ColumnLabelProvider() {
@@ -133,6 +133,15 @@ public class AdacExtraListTable extends AbstractListTable {
 			public String getText(Object element) {
 				Extra o = (Extra) element;
 				return String.valueOf(o.isMandatory());
+			}
+		});
+
+		col = createTableViewerColumn(titles[7], bounds[7], 7);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Extra o = (Extra) element;
+				return String.valueOf(o.isBookable());
 			}
 		});
 		
