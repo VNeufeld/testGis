@@ -60,6 +60,8 @@ public enum SunnyModelProvider {
 
 	private Person customer;
 	
+	public Integer paymentType;
+	
 	public boolean onlyAirportFlag = false;;
 	public boolean onlyCityFlag = false;;
 

@@ -3,10 +3,12 @@ package com.dev.gis.connector.sunny;
 public enum PaymentType {
 
 	UNINITIALIZED(-1),
-
+	
 	CREDIT_CARD_PAYMENT(1), 
 	DEBIT_PAYMENT(2), 
-	INVOICE_PAYMENT(3);
+	AGENCY_PAYMENT(3),
+	IDEAL_PAYMENT(4);
+	
 
 	PaymentType(int ordinal) {
 		this.ordinal = ordinal;

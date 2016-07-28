@@ -24,6 +24,7 @@ import com.dev.gis.app.taskmanager.TaskViewAbstract;
 import com.dev.gis.app.view.elements.BookingControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.CreditCardControl;
+import com.dev.gis.app.view.elements.LanguageComboBox;
 import com.dev.gis.app.view.elements.OfferInfoControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
@@ -57,6 +58,8 @@ public class SunnyBookingView extends TaskViewAbstract {
 		composite.setLayout(new GridLayout(1, false));
 		
 		offerInfoControl = OfferInfoControl.createOfferInfoControl(composite);
+		
+		new PaymentTypeComboBox(composite, 80);
 		
 		CreditCardControl.createControl(composite);
 		

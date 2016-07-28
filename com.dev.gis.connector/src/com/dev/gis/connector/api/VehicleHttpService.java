@@ -23,6 +23,7 @@ import com.dev.gis.connector.sunny.OfferExtras;
 import com.dev.gis.connector.sunny.OfferFilter;
 import com.dev.gis.connector.sunny.OfferInformation;
 import com.dev.gis.connector.sunny.PayPageResponse;
+import com.dev.gis.connector.sunny.Payment;
 import com.dev.gis.connector.sunny.Person;
 import com.dev.gis.connector.sunny.PhoneNumber;
 import com.dev.gis.connector.sunny.Station;
@@ -44,6 +45,7 @@ public class VehicleHttpService {
 	public static String SUNNY_PAYPAMENT_PAYPAGE = "/payment/paypageurl";
 	public static String SUNNY_PAYPAMENT_VERIFY = "/payment/verify";
 	public static String SUNNY_BOOKING_DRIVER = "/booking/driver/put";
+	public static String SUNNY_BOOKING_PAYMENT = "/booking/payment/put";
 	public static String SUNNY_PUT_EXTRAS = "/request/extras/put";
 	public static String SUNNY_BOOKING_CUSTOMER = "/booking/customer/put";
 
@@ -597,6 +599,31 @@ public class VehicleHttpService {
 		
 		return null;
 	}
+	
+
+	public String putPayment(Payment payment) {
+		try {
+			
+			URI uri = getServerURI(SUNNY_BOOKING_PAYMENT);
+			
+
+			String request = JsonUtils.convertRequestToJsonString(payment);
+			logger.info("request = "+request);
+
+			String response =  httpClient.startPutRequestAsJson(uri, request);
+			
+			return response;
+
+			
+		} catch ( IOException e) {
+			logger.error(e.getMessage(),e);
+		} catch (URISyntaxException e) {
+			logger.error(e);
+		}
+		
+		return null;
+	}
+	
 
 	public String putCustomer(Offer selectedOffer, Text customerText) {
 		try {
