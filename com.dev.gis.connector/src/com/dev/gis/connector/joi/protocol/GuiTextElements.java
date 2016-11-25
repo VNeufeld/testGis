@@ -24,7 +24,7 @@ public class GuiTextElements extends BasicProtocol {
 
 	private List<PaymentInformation> paymentInfoList;
 
-	
+	private List<SupplierGroup> supplierGroupList = new ArrayList<>();
 
 	public List<BodyStyleText> getBodyStyleList() {
 		return bodyStyleList;
@@ -65,5 +65,13 @@ public class GuiTextElements extends BasicProtocol {
 
 	public void setSupplierList(List<Supplier> supplierList) {
 		this.supplierList = supplierList;
+	}
+
+	public List<SupplierGroup> getSupplierGroupList() {
+		return supplierGroupList;
+	}
+
+	public void setSupplierGroupList(List<SupplierGroup> supplierGroupList) {
+		this.supplierGroupList = supplierGroupList;
 	}
 }
