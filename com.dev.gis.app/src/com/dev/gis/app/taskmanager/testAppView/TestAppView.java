@@ -193,8 +193,9 @@ public class TestAppView extends RentCarsAppView {
 		
 		if ( response.getSessionId() != null)
 			sessionId.setValue(response.getSessionId());
-		requestId.setValue(String.valueOf(response.getRequestId()));		
-		pageNo.setValue("1");
+		requestId.setValue(String.valueOf(response.getRequestId()));	
+		if ( StringUtils.isEmpty(pageNo.getValue()))
+				pageNo.setValue("0");
 		
 		AdacModelProvider.INSTANCE.updateResponse(response);
 		
