@@ -35,6 +35,8 @@ public enum AdacModelProvider {
 	public String agencyNo;
 
 	public String memberNo;
+	
+	public String promotionCode;
 
 	public String paymentType;
 	

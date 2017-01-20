@@ -52,6 +52,8 @@ public class BookingView extends TaskViewAbstract {
 
 		new PaymentTypeControl(customerComposite);
 		
+		PromotionCodeTextControl.createPromotionCodeControl(customerComposite);
+		
 		bookingControl = AdacBookingControl.createBookingControl(composite);
 		
 	}

@@ -108,7 +108,7 @@ public class AdacBookingControl extends EditPartControl {
 
 				BookingResponse response = service.bookOffers(
 						AdacModelProvider.INSTANCE.getSelectedOffer(), bookingRequestId.getSelectedValue(),
-						AdacModelProvider.INSTANCE.getSelectedExtras(),paymentType, customer);
+						AdacModelProvider.INSTANCE.getSelectedExtras(),paymentType, customer , AdacModelProvider.INSTANCE.promotionCode);
 				if ( response == null) {
 					bookingId.setValue("");
 					errorText.setValue(" Booking response is null");
@@ -131,6 +131,10 @@ public class AdacBookingControl extends EditPartControl {
 				
 				MessageDialog.openError(
 						shell,"Error",err.getMessage());
+				
+				errorText.setValue(err.getMessage());
+				
+				
 			}
 
 		}
@@ -157,7 +161,7 @@ public class AdacBookingControl extends EditPartControl {
 
 				BookingRequest request = BookingRequestCreator
 						.createBookingRequest(AdacModelProvider.INSTANCE.getSelectedOffer(), 
-								AdacModelProvider.INSTANCE.getSelectedExtras());
+								AdacModelProvider.INSTANCE.getSelectedExtras(), AdacModelProvider.INSTANCE.memberNo);
 
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				AdacVehicleHttpService service = serviceFactory
@@ -165,7 +169,7 @@ public class AdacBookingControl extends EditPartControl {
 
 				// StartVerify
 				BookingResponse response = service.verifyOffers(request,
-						AdacModelProvider.INSTANCE.getSelectedOffer());
+						AdacModelProvider.INSTANCE.getSelectedOffer() , AdacModelProvider.INSTANCE.promotionCode);
 				bookingRequestId
 						.setSelectedValue(String.valueOf(response.getRequestId()));
 
@@ -181,6 +185,9 @@ public class AdacBookingControl extends EditPartControl {
 				
 				MessageDialog.openError(
 						shell,"Error",err.getMessage());
+				
+				errorText.setValue(err.getMessage());
+				
 			}
 
 		}

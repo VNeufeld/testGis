@@ -41,6 +41,8 @@ public enum SunnyModelProvider {
 	private List<Station> dropoffStations = new ArrayList<Station>();
 	
 	public String agencyNo;
+
+	public String agencyBookingCode;
 	
 	public String supplierFilter;
 

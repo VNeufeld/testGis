@@ -15,11 +15,11 @@ import com.dev.gis.connector.joi.protocol.PhoneNumber;
 public class BookingRequestCreator {
 
 	public static BookingRequest createBookingRequest(
-			Offer offer, List<Extra> selectedExtras) {
+			Offer offer, List<Extra> selectedExtras, String memberNo) {
 		
 		BookingRequest bookingRequest = new BookingRequest();
 
-		Customer customer = createCustomer();
+		Customer customer = createCustomer(memberNo);
 		
 		bookingRequest.setCustomer(customer);
 		
@@ -48,7 +48,7 @@ public class BookingRequestCreator {
 		return driver;
 	}
 
-	private static Customer createCustomer() {
+	private static Customer createCustomer(String memberNo) {
 		Customer customer = new Customer();
 		Person person = createDriver();
 		customer.setPerson(person);
@@ -59,7 +59,7 @@ public class BookingRequestCreator {
 		address.setCountry("DE");
 		address.setCountryId(Long.valueOf(49));
 		customer.setAddress(address);
-		customer.setExternalCustomerNo("111111111");
+		customer.setExternalCustomerNo(memberNo);
 		customer.setEMail("John-Appleseed@mac.com");
 		PhoneNumber ph = new PhoneNumber();
 		ph.setPrefix("");

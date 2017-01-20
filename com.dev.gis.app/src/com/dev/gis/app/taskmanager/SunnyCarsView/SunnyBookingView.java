@@ -21,6 +21,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.dev.gis.app.taskmanager.TaskViewAbstract;
+import com.dev.gis.app.view.elements.AgencyBookingCodeControl;
+import com.dev.gis.app.view.elements.AgencyNoTextControl;
 import com.dev.gis.app.view.elements.BookingControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.CreditCardControl;
@@ -66,6 +68,10 @@ public class SunnyBookingView extends TaskViewAbstract {
 		createDriverGroup(composite);
 
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).applyTo(createCustomerGroup(composite));
+
+		Composite agencyComposite = new Composite(composite, SWT.NONE);
+		agencyComposite.setLayout(new GridLayout(2, false));
+		new AgencyBookingCodeControl(agencyComposite);
 		
 		bookingControl = BookingControl.createBookingControl(composite);
 		

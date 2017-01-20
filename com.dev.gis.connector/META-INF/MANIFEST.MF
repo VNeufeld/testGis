@@ -19,5 +19,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.dev.gis.connector,
  com.dev.gis.connector.api,
+ com.dev.gis.connector.ext,
  com.dev.gis.connector.joi.protocol,
  com.dev.gis.connector.sunny

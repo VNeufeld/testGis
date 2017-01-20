@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
+import com.dev.gis.connector.ext.BusinessException;
 import com.dev.gis.connector.joi.protocol.Address;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
@@ -88,11 +89,16 @@ public class AdacVehicleHttpService {
 	}
 
 	// http://193.30.38.251/web-joi/joi/vehicleRequest/600354792/vehicle/940561578/offer/37c76ed6-0006-48c4-9ff7-bcc381e1004a/book
-	private URI getVerifyURI(URI offerLink) throws URISyntaxException {
+	private URI getVerifyURI(URI offerLink, String promotionCode ) throws URISyntaxException {
 		String link = offerLink.toString();
 		int pos = link.indexOf("/vehicleRequest");
 		link = link.substring(pos);
-		return getServerURI(link+"/book");
+		
+		link = link+"/book";
+		if ( StringUtils.isNotEmpty(promotionCode))
+			link = link +"?promotionCode="+promotionCode;
+
+		return getServerURI(link);
 	}
 	
 	private URI getPaypalURI(String link) throws URISyntaxException{
@@ -344,11 +350,12 @@ public class AdacVehicleHttpService {
 	}
 	
 	
-	public BookingResponse verifyOffers(BookingRequest bookingRequest, Offer selectedOffer) {
+	public BookingResponse verifyOffers(BookingRequest bookingRequest, Offer selectedOffer , String promotionCode) {
 
 		try {
 			logger.info("Verify Request URI = "+selectedOffer.getLink());
-			URI uri = getVerifyURI(selectedOffer.getLink());
+
+			URI uri = getVerifyURI(selectedOffer.getLink() , promotionCode);
 			logger.info("Verify Request URI = "+uri);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
@@ -368,7 +375,7 @@ public class AdacVehicleHttpService {
 	}
 	
 	public BookingResponse bookOffers(Offer selectedOffer,String bookingRequestId,
-			List<Extra> selectedExtras, int paymentType,Customer customer ) {
+			List<Extra> selectedExtras, int paymentType,Customer customer, String promotionCode ) {
 		
 
 		try {
@@ -376,6 +383,9 @@ public class AdacVehicleHttpService {
 			BookingRequest bookingRequest = new BookingRequest();
 			
 			String link = "/booking/"+bookingRequestId+"/book?validateOnly=false";
+			
+			if ( StringUtils.isNotEmpty(promotionCode))
+				link = link +"?promotionCode="+promotionCode;
 			
 			URI uri = getServerURI(link);
 			
@@ -492,7 +502,7 @@ public class AdacVehicleHttpService {
 
 
 
-	public VehicleResult recalculate(Offer selectedOffer, TravelInformation travelInformation) {
+	public VehicleResult recalculate(Offer selectedOffer, TravelInformation travelInformation , String promotionCode) {
 		
 		try {
 			String link = selectedOffer.getBookLink().toString();
@@ -501,6 +511,9 @@ public class AdacVehicleHttpService {
 			pos = link.indexOf("/offer");
 			link = link.substring(0,pos);
 			link = link + "/recalculate";
+			
+			if ( StringUtils.isNotEmpty(promotionCode))
+				link = link +"?promotionCode="+promotionCode;
 			
 			URI uri = getServerURI(link);
 			

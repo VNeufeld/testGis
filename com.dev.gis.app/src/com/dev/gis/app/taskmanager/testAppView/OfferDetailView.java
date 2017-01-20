@@ -22,6 +22,7 @@ import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.SunnyOfferDo;
+import com.dev.gis.connector.ext.BusinessException;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
@@ -79,6 +80,8 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		serviceCatalog = new OutputTextControls(composite, "ServiceCatalog:", 500, 1 );
 		
 		station = new OutputTextControls(composite, "Stations :", 1500, 3 );
+
+		PromotionCodeTextControl.createPromotionCodeControl(composite);
 		
 		final Composite station_composite = createComposite(groupStamp, 10, -1,  true);
 		AdacPickupStationControl pickupStationControl = new AdacPickupStationControl();
@@ -242,6 +245,8 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 			long dropOffStationId = AdacModelProvider.INSTANCE.selectedDropoffStationId; 
 			long pickupStationId = AdacModelProvider.INSTANCE.selectedPickupStationId;
 			
+			String promotionCode = AdacModelProvider.INSTANCE.promotionCode;
+			
 			if ( dropOffStationId <= 0 && pickupStationId > 0) {
 				dropOffStationId = pickupStationId;
 			}
@@ -263,27 +268,32 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
 	
-				VehicleResult response = service.recalculate(selectedOffer,travelInformation);
-				if ( response != null ) {
-					
-					Offer recalculatedOffer = null;
-					for ( Offer ofr : response.getOfferList()) {
-						if ( ofr.getServiceCatalogId() == selectedServCat) {
-							recalculatedOffer = ofr;
+				try {
+					VehicleResult response = service.recalculate(selectedOffer,travelInformation,promotionCode);
+					if ( response != null ) {
+						
+						Offer recalculatedOffer = null;
+						for ( Offer ofr : response.getOfferList()) {
+							if ( ofr.getServiceCatalogId() == selectedServCat) {
+								recalculatedOffer = ofr;
+							}
+								
 						}
+						if ( recalculatedOffer != null) {
+	
+							recalculateResponse.setValue(recalculatedOffer.getLink().toString());
+						
+							logger.info("recalculate offer success. offerID = "+recalculatedOffer.getId().toString() + " price = " + recalculatedOffer.getPrice());
 							
-					}
-					if ( recalculatedOffer != null) {
-
-						recalculateResponse.setValue(recalculatedOffer.getLink().toString());
-					
-						logger.info("recalculate offer success. offerID = "+recalculatedOffer.getId().toString() + " price = " + recalculatedOffer.getPrice());
+							OfferDo of = new OfferDo(recalculatedOffer,response);
+							
+							showOffer(of);
+						}
 						
-						OfferDo of = new OfferDo(recalculatedOffer,response);
-						
-						showOffer(of);
 					}
-					
+				}
+				catch(BusinessException ec){
+					recalculateResponse.setValue(ec.getMessage());
 				}
 			}
 			else {

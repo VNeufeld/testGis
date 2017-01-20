@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.BookingRequest;
@@ -100,6 +101,7 @@ public class BookingControl extends EditPartControl {
 		
 		private final Shell shell;
 
+
 		public AddBookingListener(Shell shell) {
 			this.shell = shell;
 		}
@@ -107,6 +109,9 @@ public class BookingControl extends EditPartControl {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
+			
+			String agencyBookingCode = SunnyModelProvider.INSTANCE.agencyBookingCode;
+			
 			
 			try {
 				//BookingRequestCreater 
@@ -116,7 +121,7 @@ public class BookingControl extends EditPartControl {
 	
 				service.putExtras(selectedOffer, extras);
 	
-				BookingResponse response = service.bookOffer(selectedOffer);
+				BookingResponse response = service.bookOffer(selectedOffer,agencyBookingCode);
 				if ( response != null) {
 					if ( response.getSupplierBookingNo() != null) {
 						bookingNo.setValue(" BNR: "+response.getSupplierBookingNo());
@@ -161,13 +166,15 @@ public class BookingControl extends EditPartControl {
 	protected class AddVerifyListener extends AbstractListener {
 		
 		private final Shell shell;
-
+		
 		public AddVerifyListener(Shell shell) {
 			this.shell = shell;
 		}
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
+
+			String agencyBookingCode = SunnyModelProvider.INSTANCE.agencyBookingCode;
 
 			try {
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
@@ -176,7 +183,7 @@ public class BookingControl extends EditPartControl {
 				
 				service.putExtras(selectedOffer, extras);
 	
-				BookingResponse response = service.verifyOffer(selectedOffer);
+				BookingResponse response = service.verifyOffer(selectedOffer,agencyBookingCode);
 
 				if ( response != null) {
 					

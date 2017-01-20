@@ -677,10 +677,14 @@ public class VehicleHttpService {
 		return null;
 	}
 
-	public BookingResponse bookOffer(Offer selectedOffer) {
+	public BookingResponse bookOffer(Offer selectedOffer, String agencyBookingCode) {
 		try {
 
 			String param = "/booking/offer/"+selectedOffer.getId().toString()+"/book";
+			
+			if ( StringUtils.isNotEmpty(agencyBookingCode))
+				param = param + "?agencyBookingCode="+agencyBookingCode;
+			
 			
 			URI uri = getServerURI(param);
 			
@@ -697,11 +701,14 @@ public class VehicleHttpService {
 		}
 	}
 	
-	public BookingResponse verifyOffer(Offer selectedOffer) {
+	public BookingResponse verifyOffer(Offer selectedOffer,String agencyBookingCode) {
 		try {
 
 			//String param = "/booking/offer/"+selectedOffer.getId().toString()+"/verify?test=true";
 			String param = "/booking/offer/"+selectedOffer.getId().toString()+"/verify";
+			if ( StringUtils.isNotEmpty(agencyBookingCode))
+				param = param + "?agencyBookingCode="+agencyBookingCode;
+			
 			
 			URI uri = getServerURI(param);
 			String response = "";

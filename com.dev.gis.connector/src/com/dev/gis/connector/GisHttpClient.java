@@ -21,9 +21,13 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.log4j.Logger;
+import org.apache.http.*;
+import org.apache.http.util.EntityUtils;
+
 
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.VehicleHttpService;
+import com.dev.gis.connector.ext.BusinessException;
 
 public class GisHttpClient {
 	
@@ -36,6 +40,36 @@ public class GisHttpClient {
 	private BasicHttpContext localContext = new BasicHttpContext();
 	// Create a response handler
 	private ResponseHandler<String> responseHandler = new BasicResponseHandler();
+	
+	protected ResponseHandler<String> getResponseHandler() {
+
+		ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+
+			@Override
+			public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
+				int status = response.getStatusLine().getStatusCode();
+				if (status >= 200 && status < 300) {
+					HttpEntity entity = response.getEntity();
+					return entity != null ? EntityUtils.toString(entity) : null;
+				} else {
+					String errorText = response.getStatusLine().getReasonPhrase();
+					String errorCode = String.valueOf(status);
+					logger.error(" errorCode : " +errorCode + " errorText " + errorText);
+					HttpEntity entity = response.getEntity();
+					if (entity == null )
+						throw new ClientProtocolException("Unexpected response status: " + status);
+					else {
+						String xml = EntityUtils.toString(entity);
+						logger.error(" error response : " + xml );
+						throw new BusinessException(xml);
+					}
+				}
+			}
+
+		};
+		return responseHandler;
+	}		
+	
 
 	public String sendGetRequest(URI uri)
 			throws IOException {
@@ -47,7 +81,7 @@ public class GisHttpClient {
 			httpget.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));			
 			logger.info("httpclient "+httpclient + ". Executing GET request " + httpget.getURI());
 			
-			String response = httpclient.execute(httpget, responseHandler,
+			String response = httpclient.execute(httpget, getResponseHandler(),
 					localContext);
 			logger.info("response = " + response);
 			logger.info("localContext " + localContext.toString());
@@ -62,8 +96,12 @@ public class GisHttpClient {
 			logger.info("responseHandler " + responseHandler.toString());
 			CookieStore cookieStore = httpclient.getCookieStore();
 			logger.info("cookieStore " + cookieStore);
-
-			logger.info(err.getMessage(), err);
+			if ( err instanceof BusinessException) {
+				logger.info(err.getMessage());
+				throw err;
+			}
+			else
+				logger.info(err.getMessage(), err);			
 			
 		}
 		return null;
@@ -99,7 +137,7 @@ public class GisHttpClient {
 			logger.info("httpclient "+httpclient + ". Executing POST request " + httpPost.getURI());
 			
 	
-			String response = httpclient.execute(httpPost, responseHandler,
+			String response = httpclient.execute(httpPost, getResponseHandler(),
 					localContext);
 			logger.info("response = " + response);
 			logger.info("localContext " + localContext.toString());
@@ -114,6 +152,12 @@ public class GisHttpClient {
 			logger.info("localContext " + localContext.toString());
 			logger.info("responseHandler " + responseHandler.toString());
 			logger.info(err.getMessage(), err);
+			if ( err instanceof BusinessException) {
+				logger.info(err.getMessage());
+				throw err;
+			}
+			else
+				logger.info(err.getMessage(), err);
 			
 		}
 		return null;
@@ -123,23 +167,39 @@ public class GisHttpClient {
 			throws  IOException {
 		HttpPut httput = new HttpPut(uri);
 
+		
 		StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
 
 		httput.setEntity(entity);
 		httput.addHeader("Accept", "application/json;charset=utf-8");
 		httput.setHeader("Content-Type", "application/json;charset=utf-8");
 
-		String response = httpclient.execute(httput, responseHandler,
-				localContext);
-
-		logger.info("response = " + response);
-		logger.info("localContext " + localContext.toString());
-
-		CookieStore cookieStore = httpclient.getCookieStore();
-		logger.info("cookieStore " + cookieStore);
-		logger.info("----------------------------------------");
-
-		return response;
+		try {
+			String response = httpclient.execute(httput, getResponseHandler(),
+					localContext);
+	
+			logger.info("response = " + response);
+			logger.info("localContext " + localContext.toString());
+	
+			CookieStore cookieStore = httpclient.getCookieStore();
+			logger.info("cookieStore " + cookieStore);
+			logger.info("----------------------------------------");
+	
+			return response;
+		}
+		catch(Exception err) {
+			logger.info("localContext " + localContext.toString());
+			logger.info("responseHandler " + responseHandler.toString());
+			logger.info(err.getMessage(), err);
+			if ( err instanceof BusinessException) {
+				logger.info(err.getMessage());
+				throw err;
+			}
+			else
+				logger.info(err.getMessage(), err);
+			
+		}
+		return null;		
 	}
 
 }
