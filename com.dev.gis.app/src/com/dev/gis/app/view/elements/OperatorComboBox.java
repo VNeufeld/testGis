@@ -11,9 +11,9 @@ public class OperatorComboBox extends ObjectsComboBox{
 
 	private static Logger logger = Logger.getLogger(OperatorComboBox.class);
 	
-	private final static String items[] = { "deu ( 1 )", "CH ( 2) ", " sunny (56 )" };
+	private final static String items[] = { "deu ( 1 )", "CH ( 29118) ", " sunny (56 )" };
 
-	private final static String values[] = { "1", "2", "56" };
+	private final static String values[] = { "1", "29118", "56" };
 	
 	
 	public OperatorComboBox(Composite parent, int size) {

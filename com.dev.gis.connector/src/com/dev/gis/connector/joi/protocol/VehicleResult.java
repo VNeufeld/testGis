@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="vehicleResult")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class VehicleResult extends BasicProtocol {
+public class VehicleResult extends Response {
 
 	private long id;
 

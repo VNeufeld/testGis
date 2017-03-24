@@ -23,7 +23,9 @@ import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.SunnyOfferDo;
 import com.dev.gis.connector.ext.BusinessException;
+import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
+import com.dev.gis.connector.joi.protocol.Error;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
 import com.dev.gis.connector.joi.protocol.Offer;
@@ -289,6 +291,8 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 							
 							showOffer(of);
 						}
+						else 
+							showErrors(response);
 						
 					}
 				}
@@ -303,6 +307,21 @@ public class OfferDetailView extends RentCarOfferDetailBasicView {
 		}
 
 	}
+	
+	private void showErrors(VehicleResult response) {
+		String message = "";
+		if ( response.getErrors() != null) {
+			for ( Error error : response.getErrors()) {
+				message = message + error.getErrorNumber()+ "  "+ error.getErrorText() + " " + error.getErrorType() + " ;";
+			}
+			
+		}
+		if ( message.length() > 0 ) {
+			recalculateResponse.setValue(message);
+		}
+		
+	}
+	
 
 	protected class AddBookingListener extends AbstractListener {
 

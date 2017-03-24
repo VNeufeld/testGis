@@ -385,7 +385,7 @@ public class AdacVehicleHttpService {
 			String link = "/booking/"+bookingRequestId+"/book?validateOnly=false";
 			
 			if ( StringUtils.isNotEmpty(promotionCode))
-				link = link +"?promotionCode="+promotionCode;
+				link = link +"&promotionCode="+promotionCode;
 			
 			URI uri = getServerURI(link);
 			

@@ -173,8 +173,8 @@ public class AdacBookingControl extends EditPartControl {
 				bookingRequestId
 						.setSelectedValue(String.valueOf(response.getRequestId()));
 
-
-				bookingPreis.setValue(response.getPrice().getAmount());
+				if (response.getPrice() != null )
+					bookingPreis.setValue(response.getPrice().getAmount());
 				
 				showErrors(response);					
 				

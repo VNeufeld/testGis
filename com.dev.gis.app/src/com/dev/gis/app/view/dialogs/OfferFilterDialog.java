@@ -34,6 +34,7 @@ public class OfferFilterDialog extends Dialog {
 	
 	Map<Long,Button> bodyStylesButtons = new HashMap<Long,Button>();
 	Map<Long,Button> inclusiveButtons = new HashMap<Long,Button>();
+	Map<String,Button> stationLocTypesButtons = new HashMap<String,Button>();
 
 	private Text min, max;
 
@@ -59,6 +60,7 @@ public class OfferFilterDialog extends Dialog {
 			setSummary(composite, offerFilterTemplate);
 			setBodyStyles(composite, offerFilterTemplate);
 			setInclusives(composite, offerFilterTemplate);
+			setStationLocType(composite, offerFilterTemplate);
 		}
 
 		composite.pack();
@@ -168,6 +170,40 @@ public class OfferFilterDialog extends Dialog {
 
 	}
 	
+	private void setStationLocType(Composite composite,
+			OfferFilterTemplate offerFilterTemplate) {
+
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Station Location Types:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		List<ObjectValuePair>  stationlocTypes =   offerFilterTemplate.getStationLocTypes();
+		
+		for (ObjectValuePair b : stationlocTypes ) {
+
+			String bb = b.getName()+ "("+b.getCount()+")";
+			Label l = new Label(groupResult, SWT.NONE);
+			l.setText(bb);
+			
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+					.grab(true, false).span(4, 1).applyTo(l);
+
+			Button select = new Button(groupResult, SWT.CHECK);
+			select.setText("Select");
+			
+			String[] parts = b.getName().split(",");
+			if ( parts.length > 0) {
+				stationLocTypesButtons.put(parts[0], select);
+			}
+			
+
+		}
+
+	}
+	
+	
 	private void setInclusives(Composite composite,
 			OfferFilterTemplate offerFilterTemplate) {
 
@@ -236,6 +272,17 @@ public class OfferFilterDialog extends Dialog {
 				offerFilter.getInclusives().add(id);
 			}
 		}
+
+		List<String> stationLocTypes = new ArrayList<String>();
+		for ( String code : stationLocTypesButtons.keySet() ) {
+			Button select = stationLocTypesButtons.get(code);
+			if ( select.getSelection()) {
+				stationLocTypes.add(code);
+			}
+		}
+		String[] llst = stationLocTypes.toArray(new String[0]);
+		offerFilter.setStationLocTypeCodes(llst);
+		
 		
 		super.okPressed();
 	}
