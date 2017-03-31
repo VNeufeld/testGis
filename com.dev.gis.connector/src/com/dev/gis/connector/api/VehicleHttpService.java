@@ -401,13 +401,18 @@ public class VehicleHttpService {
 
 	// http://localhost:8080/sunny-joi/joi/request/browse?page=2&pageSize=5&sort=desc
 
-	public VehicleResponse getBrowsePage(int pageNo, int pageSize) {
+	public VehicleResponse getBrowsePage(int pageNo, int pageSize, boolean usePriceComp) {
 		try {
+
+			String priceComp = "0";
+			if ( usePriceComp)
+				priceComp = "1";
 			
 			String params = SUNNY_BROWSE_REQUEST_PARAM;
 			params = params+"page="+pageNo;
 			params = params+"&pageSize="+pageSize;
 			params = params+"&sort="+"desc";
+			params = params+"&priceComp="+priceComp;
 
 			URI uri = getServerURI(params);
 

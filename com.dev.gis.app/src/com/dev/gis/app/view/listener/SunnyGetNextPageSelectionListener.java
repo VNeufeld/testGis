@@ -20,14 +20,16 @@ public class SunnyGetNextPageSelectionListener implements SelectionListener {
 	private final OutputTextControls pageNoControl;
 	private final CheckBox useFilterControl;
 	private final Shell shell;
+	private final CheckBox usePriceCompControl;
 
 
 	public SunnyGetNextPageSelectionListener(final Shell shell, OutputTextControls pageNo,
-			CheckBox useFilter) {
+			CheckBox useFilter, CheckBox priceComp) {
 		super();
 		this.pageNoControl = pageNo;
 		this.useFilterControl = useFilter;
 		this.shell = shell;
+		this.usePriceCompControl = priceComp;
 	}
 	
 
@@ -40,6 +42,8 @@ public class SunnyGetNextPageSelectionListener implements SelectionListener {
 	public void widgetSelected(SelectionEvent arg0) {
 		
 		boolean useFilter = useFilterControl.isSelected();
+
+		boolean usePriceComp = usePriceCompControl.isSelected();
 		
 		if ( pageNoControl.getValue().isEmpty() || !StringUtils.isNumeric(pageNoControl.getValue()))
 			pageNoControl.setValue("0");
@@ -59,9 +63,10 @@ public class SunnyGetNextPageSelectionListener implements SelectionListener {
 				pageNoControl.setValue("0");
 				
 			int pageNo = Integer.valueOf(pageNoControl.getValue());
+			
 		
 			if ( useFilter)
-				response = service.getBrowsePage(pageNo,pageSizeInt);
+				response = service.getBrowsePage(pageNo,pageSizeInt, usePriceComp);
 			else
 				response = service.getPage(pageNo);
 		}

@@ -144,7 +144,7 @@ public class RentCarsAppView extends TaskViewAbstract {
 	
 		final Group groupResult = new Group(composite, SWT.TITLE);
 		groupResult.setText("Result:");
-		groupResult.setLayout(new GridLayout(4, false));
+		groupResult.setLayout(new GridLayout(5, false));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING).grab(false, false).span(4, 1).applyTo(groupResult);
 
 		createResultFields(groupResult);

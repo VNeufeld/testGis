@@ -173,8 +173,8 @@ public class SunnyCarsAppView extends RentCarsAppView {
 	protected void updateParent(VehicleResponse response) {
 	}
 
-	private SelectionListener getNextPageSelectionListener(final OutputTextControls pageNo, final CheckBox useFilter) {
-		SunnyGetNextPageSelectionListener sgn = new SunnyGetNextPageSelectionListener(parent.getShell(), pageNo,useFilter );
+	private SelectionListener getNextPageSelectionListener(final OutputTextControls pageNo, final CheckBox useFilter, final CheckBox priceComp) {
+		SunnyGetNextPageSelectionListener sgn = new SunnyGetNextPageSelectionListener(parent.getShell(), pageNo,useFilter , priceComp);
 		return sgn;
 	}
 
@@ -211,7 +211,10 @@ public class SunnyCarsAppView extends RentCarsAppView {
 		pageCount = new OutputTextControls(cc, "PageCount", 100,1 );
 		
 		CheckBox useFilter = new CheckBox(groupResult, "use filter");
-		new ButtonControl(groupResult, "Show Page", 0,  getNextPageSelectionListener(pageNo, useFilter));
+		
+		CheckBox priceComp = new CheckBox(groupResult, "use price opt.");
+
+		new ButtonControl(groupResult, "Show Page", 0,  getNextPageSelectionListener(pageNo, useFilter, priceComp));
 
 	}
 
