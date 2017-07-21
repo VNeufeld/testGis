@@ -23,6 +23,8 @@ public class OfferFilterTemplate {
 
 	private Map<String, List<ObjectValuePair>> inclusives = new HashMap<String,List<ObjectValuePair>>();
 	
+	private List<ObjectValuePair> stationTransfers = new ArrayList<ObjectValuePair>();
+	
 	
 	private ObjectValuePair automatic;
 	private ObjectValuePair aircondition;
@@ -91,6 +93,12 @@ public class OfferFilterTemplate {
 	}
 	public void setInclusives(Map<String, List<ObjectValuePair>> inclusives) {
 		this.inclusives = inclusives;
+	}
+	public List<ObjectValuePair> getStationTransfers() {
+		return stationTransfers;
+	}
+	public void setStationTransfers(List<ObjectValuePair> stationTransfers) {
+		this.stationTransfers = stationTransfers;
 	}
 
 }

@@ -7,7 +7,8 @@ public enum PaymentType {
 	CREDIT_CARD_PAYMENT(1), 
 	DEBIT_PAYMENT(2), 
 	AGENCY_PAYMENT(3),
-	IDEAL_PAYMENT(4);
+	IDEAL_PAYMENT(4),
+	MRCASH_PAYMENT(8);
 	
 
 	PaymentType(int ordinal) {

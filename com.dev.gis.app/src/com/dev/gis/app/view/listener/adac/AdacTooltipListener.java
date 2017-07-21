@@ -72,7 +72,7 @@ public class AdacTooltipListener extends TooltipListener {
 		sb.append("BodyStyle : "+vd.getBodyStyleText().getText());
 		sb.append(" Acriss: "+vd.getVehicleGroup().getName());
 		sb.append("\n");
-		sb.append("Category: "+vd.getCategoryId());
+		sb.append("Category: "+vd.getCategoryId() + " navi " + vd.isNavigationSystem());
 		sb.append("\n");
 		sb.append("Doors: "+vd.getNrDoors()+ " Seats :"+vd.getNrSeats()+ " Adults :"+vd.getNrAdults() + " Children :"+vd.getNrChildren());
 		sb.append("\n");
@@ -85,7 +85,7 @@ public class AdacTooltipListener extends TooltipListener {
 		sb.append("\n");
 		sb.append("Luggage large : "+vd.getNrLargeLuggage() + " small : "+vd.getNrSmallLuggage());
 		sb.append("\n");
-		sb.append("Driver license : "+vd.getDriverLicense() + " min age : "+vd.getDriverMinAge());
+		sb.append("Driver license : "+vd.getDriverLicense() + " min time : "+ vd.getLicenseMinTime() + " " + vd.getLicenseDimension() + " min age : "+vd.getDriverMinAge());
 			
 		
 		sb.append("\n");

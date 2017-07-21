@@ -36,6 +36,8 @@ public class OfferFilterDialog extends Dialog {
 	Map<Long,Button> inclusiveButtons = new HashMap<Long,Button>();
 	Map<String,Button> stationLocTypesButtons = new HashMap<String,Button>();
 
+	Map<Long,Button> transferCatgoriesButtons = new HashMap<Long,Button>();
+
 	private Text min, max;
 
 	public OfferFilterDialog(Shell parentShell) {
@@ -61,11 +63,13 @@ public class OfferFilterDialog extends Dialog {
 			setBodyStyles(composite, offerFilterTemplate);
 			setInclusives(composite, offerFilterTemplate);
 			setStationLocType(composite, offerFilterTemplate);
+			setTransferCategories(composite, offerFilterTemplate);
 		}
 
 		composite.pack();
 		return composite;
 	}
+
 
 	private void setSummary(Composite composite,
 			OfferFilterTemplate offerFilterTemplate) {
@@ -170,6 +174,39 @@ public class OfferFilterDialog extends Dialog {
 
 	}
 	
+	
+	private void setTransferCategories(Composite composite, OfferFilterTemplate offerFilterTemplate) {
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Transfers:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		List<ObjectValuePair>  stationTransfers =   offerFilterTemplate.getStationTransfers();
+		
+		for (ObjectValuePair b : stationTransfers ) {
+
+			String bb = b.getName()+ "("+b.getCount()+")";
+			Label l = new Label(groupResult, SWT.NONE);
+			l.setText(bb);
+			
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+					.grab(true, false).span(4, 1).applyTo(l);
+
+			Button select = new Button(groupResult, SWT.CHECK);
+			select.setText("Select");
+			
+			String[] parts = b.getName().split(",");
+			if ( parts.length > 0) {
+				int id = Integer.valueOf(parts[0]);
+				transferCatgoriesButtons.put((long)id, select);
+			}
+			
+
+		}
+		
+	}
+
 	private void setStationLocType(Composite composite,
 			OfferFilterTemplate offerFilterTemplate) {
 
@@ -282,6 +319,17 @@ public class OfferFilterDialog extends Dialog {
 		}
 		String[] llst = stationLocTypes.toArray(new String[0]);
 		offerFilter.setStationLocTypeCodes(llst);
+		
+		List<Long> transferCategories = new ArrayList<Long>();
+		
+		for ( Long id : transferCatgoriesButtons.keySet() ) {
+			Button select = transferCatgoriesButtons.get(id);
+			if ( select.getSelection()) {
+				transferCategories.add(id);
+			}
+		}
+		Long[] trr = transferCategories.toArray(new Long[0]);
+		offerFilter.setTransferCategories(trr);
 		
 		
 		super.okPressed();

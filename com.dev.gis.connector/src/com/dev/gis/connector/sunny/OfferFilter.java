@@ -8,6 +8,9 @@ public class OfferFilter {
 	private BigDecimal minPrice;
 	private BigDecimal maxPrice;
 	private String[] stationLocTypeCodes;
+	
+	private Long[] transferCategories;
+	
 	// instead off fuelPolicy use inclusivesFilter
 	//private String[] fuelPolicy;
 	private Long[] fuelTypes;
@@ -90,6 +93,12 @@ public class OfferFilter {
 	}
 	public Set<Long> getInclusives() {
 		return inclusives;
+	}
+	public Long[] getTransferCategories() {
+		return transferCategories;
+	}
+	public void setTransferCategories(Long[] transferCategories) {
+		this.transferCategories = transferCategories;
 	}
 	
 

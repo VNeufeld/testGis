@@ -16,7 +16,7 @@ public class PaymentTypeComboBox extends ObjectsComboBox{
 	
 	private static Logger logger = Logger.getLogger(PaymentTypeComboBox.class);
 	
-	private final static String items[] = { "CreditCard", "DebitNote", "Agency", " iDeal" };
+	private final static String items[] = { "CreditCard", "DebitNote", "Agency", " iDeal", "Mr.Cach" };
 	
 	public PaymentTypeComboBox(Composite parent, int size) {
 		super(parent, size, true);
@@ -62,6 +62,8 @@ public class PaymentTypeComboBox extends ObjectsComboBox{
 				payment.setPaymentType(PaymentType.AGENCY_PAYMENT);
 			else if ( index == 3)
 				payment.setPaymentType(PaymentType.IDEAL_PAYMENT);
+			else if ( index == 4)
+				payment.setPaymentType(PaymentType.MRCASH_PAYMENT);
 		
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			VehicleHttpService service = serviceFactory.getVehicleJoiService();

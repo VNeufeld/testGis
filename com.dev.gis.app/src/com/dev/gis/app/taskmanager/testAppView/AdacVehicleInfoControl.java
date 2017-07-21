@@ -19,6 +19,7 @@ public class AdacVehicleInfoControl extends VehicleInfoOutputControl {
 					+ " Category : " + vehicle.getCategoryId()
 					+ " Group : " + vehicle.getVehicleGroup().getId()+ ":"+vehicle.getVehicleGroup().getName()
 					+ " BodyStyle : " + vehicle.getBodyStyle()
+					+ " Licence : " + vehicle.getLicenseMinTime() + " " + vehicle.getLicenseDimension()
 					
 					);
 		}

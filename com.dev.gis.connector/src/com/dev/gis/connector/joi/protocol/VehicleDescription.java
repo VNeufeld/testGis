@@ -20,6 +20,8 @@ public class VehicleDescription extends BasicProtocol {
 	
 	private boolean automatic;
 	
+	private boolean navigationSystem;
+	
 	private long bodyStyle;
 
 	private BodyStyleText bodyStyleText;
@@ -40,6 +42,8 @@ public class VehicleDescription extends BasicProtocol {
 
 	private String licenseMinTime;
 
+	private String licenseDimension;
+	
 	private String loadInformation;
 	
 	private List<String> cargoInformation;
@@ -306,5 +310,21 @@ public class VehicleDescription extends BasicProtocol {
 
 	public void setNrChildren(int nrChildren) {
 		this.nrChildren = nrChildren;
+	}
+
+	public String getLicenseDimension() {
+		return licenseDimension;
+	}
+
+	public void setLicenseDimension(String licenseDimension) {
+		this.licenseDimension = licenseDimension;
+	}
+
+	public boolean isNavigationSystem() {
+		return navigationSystem;
+	}
+
+	public void setNavigationSystem(boolean navigationSystem) {
+		this.navigationSystem = navigationSystem;
 	}
 }
