@@ -32,6 +32,8 @@ public class OfferFilterTemplate {
 	
 	private List<FilterObject> status = new ArrayList<FilterObject>();
 	
+	private List<FilterObject> paymentTypes = new ArrayList<FilterObject>();
+	
 	
 	private MoneyAmount minPrice;
 	
@@ -123,6 +125,12 @@ public class OfferFilterTemplate {
 	}
 	public void setCarTypes(List<FilterObject> carTypes) {
 		this.carTypes = carTypes;
+	}
+	public List<FilterObject> getPaymentTypes() {
+		return paymentTypes;
+	}
+	public void setPaymentTypes(List<FilterObject> paymentTypes) {
+		this.paymentTypes = paymentTypes;
 	}
 	
 }

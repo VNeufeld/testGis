@@ -23,7 +23,7 @@ public class PaymentTypeControl extends ObjectTextControl {
 
 	@Override
 	protected String getLabel() {
-		return "PaymentType : 1-KK, 8 - Paypals";
+		return "PaymentType : 1-KK, 8 - Paypals, 0 - POA";
 	}
 
 

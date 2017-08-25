@@ -31,6 +31,8 @@ public class VehicleRequestFilter extends BasicProtocol {
 	
 	private final Set<Long> carTypes =  new HashSet<Long>();
 
+	private final Set<Long> paymentTypes = new HashSet<Long>();
+	
 	
 	
 	@XmlElement(required=false)
@@ -90,5 +92,9 @@ public class VehicleRequestFilter extends BasicProtocol {
 
 	public Set<Long> getCarTypes() {
 		return carTypes;
+	}
+
+	public Set<Long> getPaymentTypes() {
+		return paymentTypes;
 	}
 }

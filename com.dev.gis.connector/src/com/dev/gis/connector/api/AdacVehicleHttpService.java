@@ -397,10 +397,11 @@ public class AdacVehicleHttpService {
 			
 			bookingRequest.setDriver(driver);
 			
-			
-			Payment payment = new Payment();
-			payment.setPaymentType(paymentType);  
-			bookingRequest.setPayment(payment);
+			if ( paymentType != 0) {
+				Payment payment = new Payment();
+				payment.setPaymentType(paymentType);  
+				bookingRequest.setPayment(payment);
+			}
 			
 			//bookingRequest.setAcceptedAvailability("13");
 			bookingRequest.setFlightNo("LH4711");

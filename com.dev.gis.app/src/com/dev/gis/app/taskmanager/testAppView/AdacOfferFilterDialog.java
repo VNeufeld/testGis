@@ -40,6 +40,7 @@ public class AdacOfferFilterDialog extends Dialog {
 	Map<Long,Button> carTypesButtons = new HashMap<Long,Button>();
 	Map<Long,Button> inclusiveButtons = new HashMap<Long,Button>();
 	Map<Long,Button> supplierButtons = new HashMap<Long,Button>();
+	Map<Long,Button> paymentTypesButtons = new HashMap<Long,Button>();
 
 	private Text min, max;
 
@@ -69,11 +70,13 @@ public class AdacOfferFilterDialog extends Dialog {
 			setBodyStyles(composite, offerFilterTemplate);
 			setInclusives(composite, offerFilterTemplate);
 			setCarTypes(composite, offerFilterTemplate);
+			setPaymentTypes(composite, offerFilterTemplate);
 		}
 
 		composite.pack();
 		return composite;
 	}
+
 
 	private void setSuppliers(Composite composite,
 			OfferFilterTemplate offerFilterTemplate) {
@@ -100,6 +103,39 @@ public class AdacOfferFilterDialog extends Dialog {
 		List<FilterObject>  filter =   offerFilterTemplate.getServiceCatalogs();
 		
 		defineServiceCatalogFilter(groupResult, filter);
+		
+	}
+	
+	private void setPaymentTypes(Composite composite, OfferFilterTemplate offerFilterTemplate) {
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("Payment types:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		List<FilterObject>  filter =   offerFilterTemplate.getPaymentTypes();
+		
+		definePaymentTypesFilter(groupResult, filter);
+		
+	}
+
+
+	private void definePaymentTypesFilter(Group groupResult, List<FilterObject> filter) {
+		for (FilterObject b : filter ) {
+
+			String bb = b.getName()+ "("+b.getCount()+")";
+			Label l = new Label(groupResult, SWT.NONE);
+			l.setText(bb);
+			
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+					.grab(true, false).span(4, 1).applyTo(l);
+
+			Button select = new Button(groupResult, SWT.CHECK);
+			select.setText("Select");
+			paymentTypesButtons.put(b.getId(), select);
+			
+
+		}
 		
 	}
 
@@ -375,6 +411,12 @@ public class AdacOfferFilterDialog extends Dialog {
 			}
 		}
 		
+		for ( Long id : paymentTypesButtons.keySet() ) {
+			Button select = paymentTypesButtons.get(id);
+			if ( select.getSelection()) {
+				vehicleRequestFilter.getPaymentTypes().add(id);
+			}
+		}
 		
 		super.okPressed();
 	}

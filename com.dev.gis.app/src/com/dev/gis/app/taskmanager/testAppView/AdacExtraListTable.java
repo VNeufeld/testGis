@@ -102,7 +102,7 @@ public class AdacExtraListTable extends AbstractListTable {
 			public String getText(Object element) {
 				Extra o = (Extra) element;
 				if ( o.getPrice() != null)
-					return o.getPrice().getAmount().toString();
+					return o.getPrice().toString();
 				return "";
 			}
 		});
@@ -113,7 +113,7 @@ public class AdacExtraListTable extends AbstractListTable {
 			public String getText(Object element) {
 				Extra o = (Extra) element;
 				if ( o.getTotalPrice() != null)
-					return o.getTotalPrice().getAmount().toString();
+					return o.getTotalPrice().toString();
 				return "";
 			}
 		});

@@ -102,7 +102,10 @@ public class AdacBookingControl extends EditPartControl {
 				
 				if ( "1".equals(AdacModelProvider.INSTANCE.paymentType))
 					paymentType = 1;   // KK
-				else
+				else if ( "0".equals(AdacModelProvider.INSTANCE.paymentType)) {
+					paymentType = 0;
+				}
+				else 
 					paymentType = 8;
 
 
