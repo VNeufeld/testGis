@@ -36,4 +36,10 @@ public class StationResponse extends Response
 	public void setStations(List<Station> stations) {
 		this.stations = stations;
 	}
+	
+	public Station getFirstStation() {
+		if (stations != null && !stations.isEmpty() )
+			return stations.get(0);
+		return null;
+	}
 }

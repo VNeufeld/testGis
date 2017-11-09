@@ -6,7 +6,7 @@ public class ShowTimer implements Runnable {
 	final IProgressMonitor monitor;
 	private boolean work = true;
 	
-	ShowTimer(IProgressMonitor monitor) {
+	public ShowTimer(IProgressMonitor monitor) {
 		this.monitor = monitor;
 	}
 

@@ -50,12 +50,22 @@ public class StationListTable extends AbstractListTable {
 			}
 		});
 
-		col = createTableViewerColumn(titles[1], bounds[1], 1);
+		col = createTableViewerColumn(titles[2], bounds[2], 2);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				StationModel o = (StationModel) element;
-				return o.getSupplier();
+				String text = "";
+				if ( o.getSupplierId() != null)
+					text = o.getSupplierId().toString();
+				if ( o.getStation() != null) {
+					text = text + " ";
+					if ( o.getStation().getAddress() != null)
+						text = text +o.getStation().getAddress().getCity();
+					else
+						text = text +o.getStation().getCityId();
+				}
+				return text;
 			}
 		});
 		

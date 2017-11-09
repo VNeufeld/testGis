@@ -5,8 +5,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="bookingResponse")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BookingResponse extends Response {
 
 	private boolean confirmed;
@@ -18,7 +21,8 @@ public class BookingResponse extends Response {
 	private MoneyAmount price;
 
 	private PayType[] acceptedPayTypes;
-
+	
+	private BookingTotalInfo bookingTotalInfo;
 	
 	
 	@XmlElement(required = false)
@@ -64,5 +68,13 @@ public class BookingResponse extends Response {
 
 	public void setSupplierBookingNo(String supplierBookingNo) {
 		this.supplierBookingNo = supplierBookingNo;
+	}
+
+	public BookingTotalInfo getBookingTotalInfo() {
+		return bookingTotalInfo;
+	}
+
+	public void setBookingTotalInfo(BookingTotalInfo bookingTotalInfo) {
+		this.bookingTotalInfo = bookingTotalInfo;
 	}
 }

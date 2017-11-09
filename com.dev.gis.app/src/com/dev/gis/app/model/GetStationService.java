@@ -3,8 +3,6 @@ package com.dev.gis.app.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.events.SelectionEvent;
-
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.sunny.Station;
@@ -50,6 +48,19 @@ public class GetStationService implements IStationService{
 		
 		return stations;
 		
+	}
+
+
+	@Override
+	public com.dev.gis.connector.joi.protocol.Station getStation(int station_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<StationModel> getStations(int locationType, String locationId, String searchText) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -26,7 +26,7 @@ public class AdacOperatorComboBox extends ObjectsComboBox{
 		operators.clear();
 		
 		if ( ops.isEmpty()) {
-			ops = "DE:152573;INT:1;RentFox:1081205;";
+			ops = "DE:152573;INT:1;RentFox:1081205;TCS:1931686";
 		}
 		if ( !ops.isEmpty())
 		{

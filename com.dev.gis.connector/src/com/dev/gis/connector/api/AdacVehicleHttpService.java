@@ -24,6 +24,7 @@ import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.PhoneNumber;
+import com.dev.gis.connector.joi.protocol.Station;
 import com.dev.gis.connector.joi.protocol.StationResponse;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
@@ -774,6 +775,55 @@ public class AdacVehicleHttpService {
 			logger.error(e);
 		}
 		
+		return null;
+	}
+	
+	public StationResponse getStations(long operatorId, int locationType, String locationId, String serchText) {
+		String response = "Stations ";
+		try {
+
+			String link = "/location/stations";
+			link = link + "?operator="+operatorId;
+			link = link + "&type="+locationType;
+			link = link +"&search="+serchText;
+			if (StringUtils.isNotEmpty(locationId)) {
+				link = link +"&locationId="+locationId;
+			}
+			
+			URI uri = getServerURI(link);
+			
+			logger.info("getStations Request = "+uri);
+			
+			response =  httpClient.sendGetRequest(uri);
+			logger.info("response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, StationResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public Station getStationInfo(int stationId) {
+		String response = "Stations ";
+		try {
+
+			String link = "/masterdata/station/"+stationId;
+			URI uri = getServerURI(link);
+			
+			logger.info("getStationInfo Request = "+uri);
+			
+			response =  httpClient.sendGetRequest(uri);
+			logger.info("response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, Station.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
 		return null;
 	}
 

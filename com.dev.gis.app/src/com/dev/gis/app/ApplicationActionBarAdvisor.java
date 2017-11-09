@@ -20,6 +20,7 @@ import org.eclipse.ui.application.IActionBarConfigurer;
 import com.dev.gis.app.actions.ResetCurrentPerspectiveAction;
 import com.dev.gis.app.actions.SwitchToLogPerspectiveAction;
 import com.dev.gis.app.actions.SwitchToAppPerspectiveAction;
+import com.dev.gis.app.actions.SwitchToClubMobilPerspectiveAction;
 import com.dev.gis.app.actions.SwitchToSunnyAppPerspectiveAction;
 import com.dev.gis.connector.api.TaskProperties;
 
@@ -39,6 +40,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private Action switchPerspectiveAction;
     private Action switchToAppPerspectiveAction;
     private Action switchToSunnyAppPerspectiveAction;
+    private Action switchToClubMobilAppPerspectiveAction;
     private Action resetCurrentPerspectiveAction;
     private Action lastResponseAction;
     private IWorkbenchAction preferencesAction;
@@ -86,6 +88,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         
         switchToSunnyAppPerspectiveAction = new SwitchToSunnyAppPerspectiveAction("Switch To Sunny App Perspective", window);
         register(switchToAppPerspectiveAction);
+        
+        switchToClubMobilAppPerspectiveAction= new SwitchToClubMobilPerspectiveAction("Switch To ClubMobil Perspective", window);
+        register(switchToClubMobilAppPerspectiveAction);
 
         preferencesAction = ActionFactory.PREFERENCES.create(window);
         register(preferencesAction);
@@ -119,6 +124,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		if ( !Application.ONLY_LOGGING){
 	        perspectiveMenu.add(switchToAppPerspectiveAction);
 	        perspectiveMenu.add(switchToSunnyAppPerspectiveAction);
+	        perspectiveMenu.add(switchToClubMobilAppPerspectiveAction);
 		}
         perspectiveMenu.add(new Separator());
         perspectiveMenu.add(resetCurrentPerspectiveAction);

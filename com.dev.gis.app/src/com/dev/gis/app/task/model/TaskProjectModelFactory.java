@@ -65,6 +65,8 @@ public class TaskProjectModelFactory {
 		add(TaskItem.createTask("3.SunnyCars Test (Joi)", "folder_edit.png", "test json http request SunnyCars"));
 		defaultGroup.getTasks().
 		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
+		defaultGroup.getTasks().
+		add(TaskItem.createTask("ClubMobil", "folder_edit.png", "ClubMobil APP"));
 	}
 
 }

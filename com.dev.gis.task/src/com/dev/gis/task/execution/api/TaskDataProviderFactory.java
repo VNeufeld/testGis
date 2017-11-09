@@ -2,6 +2,7 @@ package com.dev.gis.task.execution.api;
 
 import javax.xml.bind.JAXBException;
 
+import com.dev.gis.task.execution.impl.ClubMobilDataProvider;
 import com.dev.gis.task.execution.impl.DefaultTaskDataProvider;
 import com.dev.gis.task.execution.impl.EmlDataProvider;
 import com.dev.gis.task.execution.impl.GoogleMapDataProvider;
@@ -49,6 +50,10 @@ public class TaskDataProviderFactory {
 		}
 		else if ( name.contains("3.SunnyCars")) {
 			SunnyCarsDataProvider dataProvider = new SunnyCarsDataProvider();
+			return dataProvider;
+		}
+		else if ( name.contains("ClubMobil")) {
+			ClubMobilDataProvider dataProvider = new ClubMobilDataProvider();
 			return dataProvider;
 		}
 		

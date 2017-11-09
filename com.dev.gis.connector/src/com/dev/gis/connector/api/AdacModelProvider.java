@@ -72,6 +72,11 @@ public enum AdacModelProvider {
 	public long selectedDropoffStationId;
 	
 	public boolean authorization = true;
+	
+	public int locationType = 1;
+
+	public Station pickupStation;
+	public Station dropoffStation;
 
 
 

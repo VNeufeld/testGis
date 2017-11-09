@@ -21,7 +21,7 @@ public class LocationSearchText extends BasicControl {
 	
 	private final int size;
 	
-	private final String searchLabel;
+	protected final String searchLabel;
 	
 	private Text text;
 	
@@ -149,6 +149,9 @@ public class LocationSearchText extends BasicControl {
 	protected SelectionListener getSelectionListener() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public Composite getParent() {
+		return parent;
 	}
 	
 	 

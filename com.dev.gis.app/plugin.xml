@@ -24,9 +24,14 @@
             name="RCP Perspective">
       </perspective>
       <perspective
+            class="com.dev.gis.app.ClubMobilPerspective"
+            id="com.dev.gis.app.clubmobil.perspective"
+            name="Sunny App Perspective">
+      </perspective>
+      <perspective
             class="com.dev.gis.app.SunnyAppPerspective"
             id="com.dev.gis.app.sunnyapp.perspective"
-            name="Sunny App Perspective">
+            name="ClubMobil Perspective">
       </perspective>
    </extension>
    <extension
@@ -170,6 +175,14 @@
             name="Sunny Booking Details"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="com.dev.gis.app.taskmanager.clubMobilView.ClubMobilView"
+            icon="icons/yellow_1.gif"
+            id="com.dev.gis.app.task.ClubMobilAppView"
+            name="ClubMobil Test"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -227,6 +240,12 @@
             description="Switch To App Perspektive"
             id="com.dev.gis.app.switch.app"
             name="SwitchToApp">
+      </command>
+      <command
+            categoryId="com.dev.gis.app.category1"
+            description="Switch To ClubMobil Perspektive"
+            id="com.dev.gis.app.switch.clubmobil.app"
+            name="SwitchTClubMobilApp">
       </command>
       <command
             categoryId="com.dev.gis.app.category1"

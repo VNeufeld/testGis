@@ -15,6 +15,7 @@ public interface ICommandIds {
     public static final String CMD_SWITCH_PERSPECTIVE = "com.dev.gis.app.switch";
     public static final String CMD_SWITCH_TO_APP_PERSPECTIVE = "com.dev.gis.app.switch.app";
     public static final String CMD_SWITCH_TO_SUNNY_APP_PERSPECTIVE = "com.dev.gis.app.switch.sunny.app";
+    public static final String CMD_SWITCH_TO_CLUBMOBIL_PERSPECTIVE = "com.dev.gis.app.switch.clubmobil.app";
     public static final String CMD_RESET_PERSPECTIVE = "com.dev.gis.app.perspective.reset";
     public static final String CMD_SHOW_RESPONSE = "com.dev.gis.app.showResponse";
     

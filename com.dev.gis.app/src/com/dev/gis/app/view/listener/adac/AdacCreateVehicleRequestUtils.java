@@ -28,6 +28,8 @@ public class AdacCreateVehicleRequestUtils {
 	public static VehicleRequest createVehicleRequest() {
 		
 		VehicleRequest request = createRequest();
+		if (request == null )
+			return null;
 
 		Administration admin = createAdministrator();
 		
@@ -50,28 +52,59 @@ public class AdacCreateVehicleRequestUtils {
 		
 		long cityId = AdacModelProvider.INSTANCE.cityId;
 		long dropoffCityId = AdacModelProvider.INSTANCE.dropoffCityId;
-		
-		
-		
 		boolean locationExist = false;
-		if (cityId > 0 ) {
-			pickUpLocation.setCityId(cityId);
+
+		if (AdacModelProvider.INSTANCE.locationType == 1 ) {
+			com.dev.gis.connector.joi.protocol.Station pickupStation = AdacModelProvider.INSTANCE.pickupStation;
+			com.dev.gis.connector.joi.protocol.Station dropOffStation = AdacModelProvider.INSTANCE.dropoffStation;
+			if ( dropOffStation == null)
+				dropOffStation = pickupStation;
+			
+			if (pickupStation == null ) {
+				logger.info("pickupStation is null");
+				return null;
+			}
+			
+			pickUpLocation.setStationId(pickupStation.getId());
+			
+			Station s = new Station(0);
+			if ( pickupStation.getSupplierId() != null)
+				s.setSupplierId(pickupStation.getSupplierId().longValue());
+			s.setId(pickupStation.getId());
+			pickUpLocation.setStation(s);
+			
+			dropOffLocation.setStationId(dropOffStation.getId());
+			
+			Station ss = new Station(0);
+			if ( dropOffStation.getSupplierId() != null)
+				ss.setSupplierId(dropOffStation.getSupplierId().longValue());
+			ss.setId(dropOffStation.getId());
+			dropOffLocation.setStation(ss);
+			
+
+			locationExist = true;		    
+			
 		}
-		if (dropoffCityId > 0)
-			dropOffLocation.setCityId(dropoffCityId);
-		
-		if ( StringUtils.isNotEmpty(aptCode)) {
-			pickUpLocation.setAirport(aptCode);
-		}			
-		if ( StringUtils.isNotEmpty(dropOffAptCode))
-			dropOffLocation.setAirport(dropOffAptCode);
-		
-		if ((cityId > 0 || StringUtils.isNotEmpty(aptCode) ) && ( dropoffCityId >0 && StringUtils.isNotEmpty(dropOffAptCode))) {
-		    locationExist = true;		    
-		}
-		
-		if ( !locationExist) {
-			logger.warn(" NO Location is selected ");
+		else {
+			if (cityId > 0 ) {
+				pickUpLocation.setCityId(cityId);
+			}
+			if (dropoffCityId > 0)
+				dropOffLocation.setCityId(dropoffCityId);
+			
+			if ( StringUtils.isNotEmpty(aptCode)) {
+				pickUpLocation.setAirport(aptCode);
+			}			
+			if ( StringUtils.isNotEmpty(dropOffAptCode))
+				dropOffLocation.setAirport(dropOffAptCode);
+			
+			if ((cityId > 0 || StringUtils.isNotEmpty(aptCode) ) && ( dropoffCityId >0 && StringUtils.isNotEmpty(dropOffAptCode))) {
+			    locationExist = true;		    
+			}
+			
+			if ( !locationExist) {
+				logger.warn(" NO Location is selected ");
+			}
 		}
 		
 
