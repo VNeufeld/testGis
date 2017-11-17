@@ -114,4 +114,11 @@ public class JoiHttpServiceFactory {
 		return  new  VehicleHttpService(getGisHttpClientInstance());
 		
 	}
+	
+	public ClubMobilHttpService getClubMobilleJoiService() {
+		
+		return  new  ClubMobilHttpService(getGisHttpClientInstance());
+		
+	}
+
 }

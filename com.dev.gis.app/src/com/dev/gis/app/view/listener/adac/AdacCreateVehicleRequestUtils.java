@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.connector.api.AdacModelProvider;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.TaskProperties;
@@ -55,8 +56,8 @@ public class AdacCreateVehicleRequestUtils {
 		boolean locationExist = false;
 
 		if (AdacModelProvider.INSTANCE.locationType == 1 ) {
-			com.dev.gis.connector.joi.protocol.Station pickupStation = AdacModelProvider.INSTANCE.pickupStation;
-			com.dev.gis.connector.joi.protocol.Station dropOffStation = AdacModelProvider.INSTANCE.dropoffStation;
+			com.dev.gis.connector.joi.protocol.Station pickupStation = ClubMobilModelProvider.INSTANCE.pickupStation;
+			com.dev.gis.connector.joi.protocol.Station dropOffStation = ClubMobilModelProvider.INSTANCE.dropoffStation;
 			if ( dropOffStation == null)
 				dropOffStation = pickupStation;
 			

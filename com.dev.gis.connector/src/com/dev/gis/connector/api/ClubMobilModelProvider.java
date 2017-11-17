@@ -15,8 +15,15 @@ import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.connector.joi.protocol.VehicleResult;
 
 
-public enum AdacModelProvider {
+public enum ClubMobilModelProvider {
 	INSTANCE;
+	
+	
+	public String loginUser;
+
+	public String loginPassword;
+
+	public String changePasword;
 	
 	private final List<OfferDo> offerDos = new ArrayList<OfferDo>();
 
@@ -74,6 +81,9 @@ public enum AdacModelProvider {
 	public boolean authorization = true;
 	
 	public int locationType = 1;
+
+	public Station pickupStation;
+	public Station dropoffStation;
 
 
 

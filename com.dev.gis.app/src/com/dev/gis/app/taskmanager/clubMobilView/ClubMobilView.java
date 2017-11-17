@@ -57,20 +57,21 @@ public class ClubMobilView extends RentCarsAppView {
 
 	private OutputTextControls pageNo = null;
 	
+	private ClubMobilLoginControl loginControl = null;
 	
 	
 	@Override
 	protected void createBasicControls(final Group groupStamp) {
 		
+		loginControl = new ClubMobilLoginControl(groupStamp);
+		
 		Composite cc = createComposite(groupStamp, 3, -1, true);
 		
-		new AdacServerTextControl(cc);
-		
-		//new AdacAuthorizationCheckBox(cc,"Authorization");
+		new ClubMobilServerTextControl(cc);
 		
 		new LanguageComboBox(groupStamp, 80);
 
-		new AdacOperatorComboBox(groupStamp, 80);
+		new ClubMobilOperatorComboBox(groupStamp, 80);
 		
 		createLocationGroup(groupStamp);
 		

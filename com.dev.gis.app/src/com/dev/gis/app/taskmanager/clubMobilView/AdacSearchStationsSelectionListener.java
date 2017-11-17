@@ -9,6 +9,7 @@ import com.dev.gis.app.model.StationModel;
 import com.dev.gis.app.view.elements.LocationSearchText;
 import com.dev.gis.app.view.listener.SearchCitySelectionListener;
 import com.dev.gis.connector.api.AdacModelProvider;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 
 
 public class AdacSearchStationsSelectionListener extends SearchCitySelectionListener {
@@ -35,9 +36,9 @@ public class AdacSearchStationsSelectionListener extends SearchCitySelectionList
 					if ( this.parent instanceof AdacStationSearch ) {
 						AdacStationSearch search = (AdacStationSearch) parent;
 						if ( search.isPickup() )
-							AdacModelProvider.INSTANCE.pickupStation = st.getStation();
+							ClubMobilModelProvider.INSTANCE.pickupStation = st.getStation();
 						else
-							AdacModelProvider.INSTANCE.dropoffStation = st.getStation();
+							ClubMobilModelProvider.INSTANCE.dropoffStation = st.getStation();
 						
 						parent.saveValue(""+st.getStation().getId());
 

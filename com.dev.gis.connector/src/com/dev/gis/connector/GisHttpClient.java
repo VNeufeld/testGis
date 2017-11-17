@@ -26,6 +26,7 @@ import org.apache.http.util.EntityUtils;
 
 
 import com.dev.gis.connector.api.AdacModelProvider;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.VehicleHttpService;
 import com.dev.gis.connector.ext.BusinessException;
 
@@ -112,7 +113,7 @@ public class GisHttpClient {
 			throws  IOException {
 		try {
 			
-			boolean encode = AdacModelProvider.INSTANCE.authorization;
+			boolean encode = ClubMobilModelProvider.INSTANCE.authorization;
 			
 			
 			

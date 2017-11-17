@@ -21,11 +21,17 @@ import com.dev.gis.app.model.AdacGetStationService;
 import com.dev.gis.app.model.IStationService;
 import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.connector.api.AdacModelProvider;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.joi.protocol.Station;
 
 public class AdacStationSearch extends CityLocationSearch {
 
 	private static Logger logger = Logger.getLogger(AdacStationSearch.class);
+	
+	private static final String PREFERENCE_PROPERTY_PICKUP = "CM_PICKUP_STATION";
+	private static final String PREFERENCE_PROPERTY_DROPOFF = "CM_DROPOFF_STATION";
+	
+	
 	private boolean isPickup = true;
 	private Text text;
 
@@ -139,11 +145,11 @@ public class AdacStationSearch extends CityLocationSearch {
 
 			if ( isPickup ) {
 				logger.info("selected pickup station : " + value);
-				saveProperty("ADAC_PICKUP_STATION", value);
+				saveProperty(PREFERENCE_PROPERTY_PICKUP, value);
 			}
 			else {
 				logger.info("selected dropoff station : " + value);
-				saveProperty("ADAC_DROPOFF_STATION", value);
+				saveProperty(PREFERENCE_PROPERTY_DROPOFF, value);
 			}
 			
 			String stationId = value;
@@ -156,9 +162,9 @@ public class AdacStationSearch extends CityLocationSearch {
 	protected String getDefaultValue() {
 		String station_id = "0001"; 
 		if ( isPickup ) 
-			station_id = readProperty("ADAC_PICKUP_STATION");
+			station_id = readProperty(PREFERENCE_PROPERTY_PICKUP);
 		else
-			station_id = readProperty("ADAC_DROPOFF_STATION");
+			station_id = readProperty(PREFERENCE_PROPERTY_DROPOFF);
 
 		if ( isPickup)
 			logger.info("saved pickup station_id "+ station_id );
@@ -179,9 +185,9 @@ public class AdacStationSearch extends CityLocationSearch {
 				Station station= stationService.getStation(stationId);
 				if ( station != null) {
 					if ( isPickup )
-						AdacModelProvider.INSTANCE.pickupStation = station;
+						ClubMobilModelProvider.INSTANCE.pickupStation = station;
 					else
-						AdacModelProvider.INSTANCE.dropoffStation = station;
+						ClubMobilModelProvider.INSTANCE.dropoffStation = station;
 
 					station_id = station.getId()+ " "+station.getStationName();
 					
