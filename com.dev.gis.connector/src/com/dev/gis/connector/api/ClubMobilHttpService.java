@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.bpcs.mdcars.json.protocol.CredentialResponse;
+import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
@@ -702,12 +703,26 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
-	public CredentialResponse login(Credential credentialRequest, boolean changePwd) {
+	public CredentialResponse login(Credential credentialRequest) {
 
 		try {
+			
+			boolean test = true;
+			
+			if ( test) {
+				CredentialResponse response = new CredentialResponse();
+				Clerk clerk = new Clerk();
+				response.setClerk(clerk);
+				response.setStatus(1);
+				Credential credential = new Credential();
+				credential.setReset(false);
+				response.setCredential(credential);
+				clerk.setName("Müller");
+				clerk.setFirstName("Helmut");
+				return response;
+			}
+			
 			String link = CLUBMOBIL_CREDENTIALS;
-			if ( changePwd && !StringUtils.isEmpty(credentialRequest.getNewpwd()))
-				link = link + "?change=1";
 
 			URI uri = getServerURI(link);
 			
@@ -726,5 +741,29 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
+	public CredentialResponse changePwd(Credential credentialRequest) {
+
+		try {
+			
+			
+			String link = CLUBMOBIL_CREDENTIALS;
+			link = link + "?change=1";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(credentialRequest);
+			logger.info(" request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, CredentialResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
 	
 }

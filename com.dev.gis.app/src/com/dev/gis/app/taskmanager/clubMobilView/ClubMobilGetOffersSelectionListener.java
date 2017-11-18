@@ -43,7 +43,7 @@ public class ClubMobilGetOffersSelectionListener implements SelectionListener {
 
 
 	private void getOffer() {
-		VehicleRequest request = AdacCreateVehicleRequestUtils.createVehicleRequest();
+		VehicleRequest request = ClubMobilCreateVehicleRequestUtils.createVehicleRequest();
 		
 		int pageSizeInt = (int)ModelProvider.INSTANCE.pageSize;
 

@@ -1,6 +1,5 @@
 package com.dev.gis.app.view.elements;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Composite;
 
@@ -15,7 +14,7 @@ public class LanguageComboBox extends ObjectsComboBox{
 	private final static String items[] = { "deu ( DE )", "eng ( EN) " };
 	
 	public LanguageComboBox(Composite parent, int size) {
-		super(parent, size, true);
+		super(parent, size, false);
 	}
 
 	public final String getSelectedLanguage() {

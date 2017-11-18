@@ -5,10 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
-import com.dev.gis.app.taskmanager.testAppView.OfferViewUpdater;
 import com.dev.gis.app.view.sunny.requestUtils.ShowTimer;
 import com.dev.gis.connector.api.AdacModelProvider;
-import com.dev.gis.connector.api.AdacVehicleHttpService;
+import com.dev.gis.connector.api.ClubMobilHttpService;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
@@ -38,8 +38,8 @@ public class ClubMobilGetOffersOperation implements IRunnableWithProgress {
 		new ClubMobilOfferViewUpdater().clearView();
 
 		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-		AdacVehicleHttpService service = serviceFactory
-				.getAdacVehicleJoiService();
+		ClubMobilHttpService service = serviceFactory
+				.getClubMobilleJoiService();
 
 		monitor.setTaskName("create Vehicle...");
 		monitor.beginTask(" running HSGW GetCars ", 15000);
@@ -47,7 +47,7 @@ public class ClubMobilGetOffersOperation implements IRunnableWithProgress {
 		ShowTimer showTimer = new ShowTimer(monitor);
 		new Thread(showTimer).start();
 
-		boolean crossOfferFlag = AdacModelProvider.INSTANCE.crossOfferFlag;
+		boolean crossOfferFlag = ClubMobilModelProvider.INSTANCE.crossOfferFlag;
 
 		this.response = service.getOffers(request, false, pageSize,
 				crossOfferFlag);

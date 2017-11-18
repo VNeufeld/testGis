@@ -49,7 +49,7 @@ public class ClubMobilOperatorComboBox extends ObjectsComboBox{
 	
 	
 	public ClubMobilOperatorComboBox(Composite parent, int size) {
-		super(parent, size, true);
+		super(parent, size, false);
 		
 	}
 

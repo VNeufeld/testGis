@@ -48,7 +48,7 @@ public class AdacOperatorComboBox extends ObjectsComboBox{
 	
 	
 	public AdacOperatorComboBox(Composite parent, int size) {
-		super(parent, size, true);
+		super(parent, size, false);
 		
 	}
 

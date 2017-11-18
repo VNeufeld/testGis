@@ -21,6 +21,7 @@ import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyCityLocationSearch;
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyExtServcatFilterTextControl;
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyExtStationFilterTextControl;
 import com.dev.gis.app.taskmanager.SunnyCarsView.SunnyExtSupplierFilterTextControl;
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilOperatorComboBox;
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
 import com.dev.gis.app.view.elements.AirportLocationSearch;
 import com.dev.gis.app.view.elements.ButtonControl;
@@ -70,9 +71,9 @@ public class TestAppView extends RentCarsAppView {
 		
 		new AdacAuthorizationCheckBox(cc,"Authorization");
 		
-		new LanguageComboBox(groupStamp, 80);
-
+		Composite ccl = createComposite(groupStamp, 6, -1, true);
 		new AdacOperatorComboBox(groupStamp, 80);
+		new LanguageComboBox(ccl, 80);
 		
 		createLocationGroup(groupStamp);
 		

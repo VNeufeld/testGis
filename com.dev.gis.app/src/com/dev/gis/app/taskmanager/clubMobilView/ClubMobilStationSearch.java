@@ -24,9 +24,9 @@ import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.joi.protocol.Station;
 
-public class AdacStationSearch extends CityLocationSearch {
+public class ClubMobilStationSearch extends CityLocationSearch {
 
-	private static Logger logger = Logger.getLogger(AdacStationSearch.class);
+	private static Logger logger = Logger.getLogger(ClubMobilStationSearch.class);
 	
 	private static final String PREFERENCE_PROPERTY_PICKUP = "CM_PICKUP_STATION";
 	private static final String PREFERENCE_PROPERTY_DROPOFF = "CM_DROPOFF_STATION";
@@ -37,20 +37,20 @@ public class AdacStationSearch extends CityLocationSearch {
 
 
 	public static void createPickupCityLocationSearch(Composite parent) {
-		AdacStationSearch xx = new AdacStationSearch(parent,"Pickup Station : ");
+		ClubMobilStationSearch xx = new ClubMobilStationSearch(parent,"Pickup Station : ");
 		xx.isPickup = true;
 		xx.create();
 		
 	}
 
 	public static void createDropoffCityLocationSearch(Composite parent) {
-		AdacStationSearch xx = new AdacStationSearch(parent,"DropoffStation : ");
+		ClubMobilStationSearch xx = new ClubMobilStationSearch(parent,"DropoffStation : ");
 		xx.isPickup = false;
 		xx.create();
 		
 	}
 	
-	private AdacStationSearch(Composite parent, String label) {
+	private ClubMobilStationSearch(Composite parent, String label) {
 		super(parent, label);
 
 	}
@@ -131,7 +131,7 @@ public class AdacStationSearch extends CityLocationSearch {
 
 	@Override
 	protected SelectionListener getSelectionListener(Shell shell, Text text) {
-		SelectionListener selectionListener = new AdacSearchStationsSelectionListener(
+		SelectionListener selectionListener = new ClubMobilSearchStationsSelectionListener(
 				shell, text, this);
 		return selectionListener;
 	}

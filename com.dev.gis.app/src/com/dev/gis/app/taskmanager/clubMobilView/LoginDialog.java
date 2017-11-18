@@ -16,8 +16,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import com.bpcs.mdcars.json.protocol.CredentialResponse;
+import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
@@ -37,10 +39,15 @@ public class LoginDialog extends Dialog {
 
 	protected OutputTextControls loginResult = null;
 	
-	private  ChangePasswordTextControl changePasswordCtl;
+	private  ChangePasswordTextControl changePasswordCtl = null;
 	
-	public LoginDialog(Shell parentShell) {
+	private final boolean change_pwd;
+	
+	private Clerk clerk;
+	
+	public LoginDialog(Shell parentShell, boolean change_pwd) {
 		super(parentShell);
+		this.change_pwd = change_pwd; 
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
 		
 	}
@@ -49,17 +56,18 @@ public class LoginDialog extends Dialog {
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
  	    parent.setLayout(new GridLayout(1, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(500, 600).applyTo(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(500, 400).applyTo(composite);
  	    
  	    new UserTextControl(composite, 300, true);
 
  	    new PasswordTextControl(composite, 300, true);
- 	    
- 	    changePasswordCtl = new  ChangePasswordTextControl(composite, 300, true);
+ 	    if ( change_pwd)
+ 	    	changePasswordCtl = new  ChangePasswordTextControl(composite, 300, true);
  	    
 		new ButtonControl(composite, "Login", 0,  getLoginListener(getShell()));
 		
-		new ButtonControl(composite, "Change Password", 0,  getChangePwdListener(getShell()));
+		if ( change_pwd)
+			new ButtonControl(composite, "Change Password", 0,  getChangePwdListener(getShell()));
 		
 		tokenControl = new OutputTextControls(composite, "token:", 500, 1 );
 
@@ -91,43 +99,44 @@ public class LoginDialog extends Dialog {
 			try {
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
-				Token token = service.getToken();
-				logger.info("get Token " + token.getToken());
-
-				tokenControl.setValue(token.getToken() + " exp : "+token.getExpired());
 				
 				String user = ClubMobilModelProvider.INSTANCE.loginUser;
 				String pwd = ClubMobilModelProvider.INSTANCE.loginPassword;
 				
-				//user = encrypt(user,token);
-				pwd = encrypt(pwd,token);
+				pwd = encrypt(pwd);
 
 				Credential credential = new Credential(); 
 				credential.setUser(user);
 				credential.setPwd(pwd);
-				credential.setToken(token.getToken());
+				
 						
-				CredentialResponse credentialResponse = service.login(credential, false);
+				CredentialResponse credentialResponse = service.login(credential);
 				if ( credentialResponse.getClerk() == null) {
 					if ( !credentialResponse.getErrors().isEmpty())
 						showErrors(credentialResponse.getErrors().get(0).getErrorText());
 					else
-						showErrors("Login not Successfull");
+						showErrors("Login not successfull");
 				}
 				else {
 					String result = credentialResponse.getClerk().getName() + " " + credentialResponse.getClerk().getFirstName();
-					if (credentialResponse.getCredential().isReset())
-						result = result + " pwd change needed";
+
 					Date pwdValidTo = credentialResponse.getCredential().getPwdValidTo();
+					String expiredTIme = "";
 					if ( pwdValidTo != null) {
-						org.joda.time.LocalDate ld = new LocalDate(pwdValidTo);;
-						result = result + " pwd valid to " + ld.toString("yyyy-MM-dd");
+						org.joda.time.LocalDateTime ld = new LocalDateTime(pwdValidTo);;
+						expiredTIme = expiredTIme + " pwd valid to " + ld.toString("yyyy-MM-dd");
 					}
+					
+					if (credentialResponse.getCredential().isReset()) {
+						result = result + " pwd change needed";
+						String message = " Password is nicht mehr gültig und muss geändert werden.  Ablaufzeit " + expiredTIme;
+						MessageDialog.openInformation(getShell(), "Info", message);
+						
+					}
+					clerk = credentialResponse.getClerk();
 					
 					loginResult.setValue(result);
 				}
-				logger.info("get credentialResponse " + credentialResponse);
-				
 					
 			}
 			catch(BusinessException err) {
@@ -143,7 +152,6 @@ public class LoginDialog extends Dialog {
 				else
 					showErrors(err.getMessage());
 				
-				
 			}
 			catch(Exception err) {
 				logger.error(err.getMessage());
@@ -154,7 +162,7 @@ public class LoginDialog extends Dialog {
 
 		}
 
-		private String encrypt(String pwd, Token token) {
+		private String encrypt(String pwd) {
 			String shaHex = DigestUtils.shaHex(pwd);
 			System.out.println("shaHex = " + shaHex);
 			return shaHex;
@@ -182,51 +190,27 @@ public class LoginDialog extends Dialog {
 			try {
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
-				Token token = service.getToken();
-				logger.info("get Token " + token.getToken());
-
-				tokenControl.setValue(token.getToken() + " exp : "+token.getExpired());
 				
 				String user = ClubMobilModelProvider.INSTANCE.loginUser;
 				String pwd = ClubMobilModelProvider.INSTANCE.loginPassword;
 				
 				String newPwd = ClubMobilModelProvider.INSTANCE.changePasword;
+				
+				pwd = encrypt(pwd);
+				newPwd = encrypt(newPwd);
+
 				logger.info("newPwd = " + newPwd);
 				
-				//user = encrypt(user,token);
-				pwd = encrypt(pwd,token);
-				newPwd = encrypt(newPwd,token);
-
 				Credential credential = new Credential(); 
 				credential.setUser(user);
 				credential.setPwd(pwd);
-				credential.setToken(token.getToken());
 				credential.setNewpwd(newPwd);
-				
 						
-				CredentialResponse credentialResponse = service.login(credential, true);
-				if ( credentialResponse.getClerk() == null) {
-					if ( !credentialResponse.getErrors().isEmpty())
-						showErrors(credentialResponse.getErrors().get(0).getErrorText());
-					else
-						showErrors("Login not Successfull");
-				}
-				else {
-					String result = credentialResponse.getClerk().getName() + " " + credentialResponse.getClerk().getFirstName();
-					if (credentialResponse.getCredential().isReset())
-						result = result + " pwd change needed";
-					Date pwdValidTo = credentialResponse.getCredential().getPwdValidTo();
-					if ( pwdValidTo != null) {
-						org.joda.time.LocalDate ld = new LocalDate(pwdValidTo);;
-						result = result + " pwd valid to " + ld.toString("yyyy-MM-dd");
-					}
-					loginResult.setValue(result);
-					if ( credentialResponse.getStatus() > 0) {
-						MessageDialog.openInformation(getShell(), "Info", "Password erfolgreich geändert. Bitte melden Sie sich mit dem neuen Passwort an");
-					}
-				}
-				logger.info("get credentialResponse " + credentialResponse);
+				CredentialResponse credentialResponse = service.changePwd(credential);
 				
+				if ( credentialResponse.getStatus() > 0) {
+					MessageDialog.openInformation(getShell(), "Info", "Password erfolgreich geändert. Bitte melden Sie sich mit dem neuen Passwort an");
+				}
 					
 			}
 			catch(BusinessException err) {
@@ -253,9 +237,8 @@ public class LoginDialog extends Dialog {
 
 		}
 
-		private String encrypt(String pwd, Token token) {
+		private String encrypt(String pwd) {
 			String shaHex = DigestUtils.shaHex(pwd);
-			System.out.println("shaHex = " + shaHex);
 			return shaHex;
 		}
 
@@ -288,6 +271,10 @@ public class LoginDialog extends Dialog {
 		ObjectMapper mapper = new ObjectMapper();
 		T result = mapper.readValue(jsonString, claszz);
 		return result;
+	}
+
+	public Clerk getClerk() {
+		return clerk;
 	}
 
 }

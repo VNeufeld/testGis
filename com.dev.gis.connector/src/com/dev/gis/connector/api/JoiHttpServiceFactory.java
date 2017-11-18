@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 
 import org.apache.log4j.Logger;
 
+import com.dev.gis.connector.ClubMobilHttpClient;
 import com.dev.gis.connector.GisHttpClient;
 
 public class JoiHttpServiceFactory {
@@ -19,12 +20,26 @@ public class JoiHttpServiceFactory {
 	
 
 	private static GisHttpClient getGisHttpClientInstance() {
+		if ( httpClient != null && httpClient instanceof ClubMobilHttpClient )
+			httpClient = null;
+
 		if ( httpClient == null)
 			httpClient = new GisHttpClient();
 		
 		return httpClient;
 		
 	}
+	private static GisHttpClient getClubMobilHttpClientInstance() {
+		if ( httpClient != null && httpClient instanceof GisHttpClient )
+			httpClient = null;
+			
+		if ( httpClient == null)
+			httpClient = new ClubMobilHttpClient();
+		
+		return httpClient;
+		
+	}
+
 	private URI getServerURI() throws URISyntaxException {
 		
 		String server = SunnyModelProvider.INSTANCE.serverUrl;
@@ -117,7 +132,7 @@ public class JoiHttpServiceFactory {
 	
 	public ClubMobilHttpService getClubMobilleJoiService() {
 		
-		return  new  ClubMobilHttpService(getGisHttpClientInstance());
+		return  new  ClubMobilHttpService(getClubMobilHttpClientInstance());
 		
 	}
 

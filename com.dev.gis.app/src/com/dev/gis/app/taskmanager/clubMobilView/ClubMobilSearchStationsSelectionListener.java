@@ -12,12 +12,12 @@ import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 
 
-public class AdacSearchStationsSelectionListener extends SearchCitySelectionListener {
+public class ClubMobilSearchStationsSelectionListener extends SearchCitySelectionListener {
 
 	protected final Text stationText;
 
 
-	public AdacSearchStationsSelectionListener(final Shell shell, Text cityText, LocationSearchText parent) {
+	public ClubMobilSearchStationsSelectionListener(final Shell shell, Text cityText, LocationSearchText parent) {
 		super(shell, cityText, parent);
 		this.stationText = cityText;
 		
@@ -33,8 +33,8 @@ public class AdacSearchStationsSelectionListener extends SearchCitySelectionList
 			if ( st != null) {
 				stationText.setText(st.getId()+ " "+st.getName());
 				if ( st.getId() != null) {
-					if ( this.parent instanceof AdacStationSearch ) {
-						AdacStationSearch search = (AdacStationSearch) parent;
+					if ( this.parent instanceof ClubMobilStationSearch ) {
+						ClubMobilStationSearch search = (ClubMobilStationSearch) parent;
 						if ( search.isPickup() )
 							ClubMobilModelProvider.INSTANCE.pickupStation = st.getStation();
 						else
