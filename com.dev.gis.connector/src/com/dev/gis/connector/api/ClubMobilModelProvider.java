@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bpcs.mdcars.model.Clerk;
+import com.bpcs.mdcars.model.Customer;
 import com.dev.gis.connector.joi.protocol.BodyStyleText;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
@@ -22,11 +23,15 @@ public enum ClubMobilModelProvider {
 	
 	public String loginUser;
 
+	public String customerNo;
+	
 	public String loginPassword;
 
 	public String changePasword;
 	
 	public Clerk clerk;
+	
+	public Customer customer;
 	
 	private final List<OfferDo> offerDos = new ArrayList<OfferDo>();
 

@@ -77,15 +77,52 @@ public class GisHttpClient {
 			
 			HttpGet httpget = new HttpGet(uri);
 			httpget.addHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));			
-			httpget.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));			
+			httpget.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));
+			
 			logger.info("httpclient "+httpclient + ". Executing GET request " + httpget.getURI());
+			
+			createSecurityHashForGet( httpget);
 			
 			String response = httpclient.execute(httpget, getResponseHandler(),
 					localContext);
+			
 			logger.info("response = " + response);
 			logger.info("localContext " + localContext.toString());
+			
+			return response;
+
+		} 
+		catch(Exception err) {
+			logger.info("localContext " + localContext.toString());
+			logger.info("responseHandler " + responseHandler.toString());
 			CookieStore cookieStore = httpclient.getCookieStore();
 			logger.info("cookieStore " + cookieStore);
+			if ( err instanceof BusinessException) {
+				logger.info(err.getMessage());
+				throw err;
+			}
+			else
+				logger.info(err.getMessage(), err);			
+			
+		}
+		return null;
+	}
+
+	public String sendGetRequestWithoutToken(URI uri)
+			throws IOException {
+
+		try {
+			
+			HttpGet httpget = new HttpGet(uri);
+			httpget.addHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));			
+			httpget.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));
+			
+			logger.info("httpclient "+httpclient + ". Executing GET request without token " + httpget.getURI());
+			
+			String response = httpclient.execute(httpget, getResponseHandler(),
+					localContext);
+			
+			logger.info("response = " + response);
 			
 			return response;
 
@@ -107,6 +144,12 @@ public class GisHttpClient {
 	}
 	
 
+	protected void createSecurityHashForGet(HttpGet httpget) throws UnsupportedEncodingException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	public String startPostRequestAsJson(URI uri, String jsonString)
 			throws  IOException {
 		try {
@@ -125,17 +168,13 @@ public class GisHttpClient {
 			
 			createSecurityHash(jsonString, httpPost);
 			
-			
 			logger.info("httpclient "+httpclient + ". Executing POST request " + httpPost.getURI());
-			
 	
 			String response = httpclient.execute(httpPost, getResponseHandler(),
 					localContext);
 			logger.info("response = " + response);
 			logger.info("localContext " + localContext.toString());
 	
-			CookieStore cookieStore = httpclient.getCookieStore();
-			logger.info("cookieStore " + cookieStore);
 			logger.info("----------------------------------------");
 	
 			return response;

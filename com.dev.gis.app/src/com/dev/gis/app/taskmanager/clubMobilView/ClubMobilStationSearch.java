@@ -21,7 +21,9 @@ import com.dev.gis.app.model.AdacGetStationService;
 import com.dev.gis.app.model.IStationService;
 import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.connector.api.AdacModelProvider;
+import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.Station;
 
 public class ClubMobilStationSearch extends CityLocationSearch {
@@ -178,11 +180,12 @@ public class ClubMobilStationSearch extends CityLocationSearch {
 	}
 
 	private String setStation(String station_id) {
-		IStationService stationService = new AdacGetStationService(null);
+		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+		ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 		try {
 			if (StringUtils.isNotEmpty(station_id) && StringUtils.isNumeric(station_id)) {
 				int stationId = Integer.parseInt(station_id);
-				Station station= stationService.getStation(stationId);
+				Station station= service.getStationInfo(stationId);
 				if ( station != null) {
 					if ( isPickup )
 						ClubMobilModelProvider.INSTANCE.pickupStation = station;

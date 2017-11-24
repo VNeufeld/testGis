@@ -28,18 +28,25 @@ public class ClubMobilLoginControl extends BasicControl {
 	private final Composite parent;
 	
 	private OutputTextControls result = null;
+	private OutputTextControls clerkPartner = null;
 
 	public ClubMobilLoginControl(Composite groupStamp) {
 		
 		parent = groupStamp;
 
-		Composite cc = createComposite(groupStamp, 4, -1, true);
-		
-		new ButtonControl(cc, "Login", 0,  getLoginListener(getShell(), false));
-		
-		result = new OutputTextControls(cc, "login", 500, 1 );
+		final Group group = createGroupSpannAll(groupStamp, "Login",4);
 
-		new ButtonControl(cc, "Change PWD", 0,  getLoginListener(getShell(), true));
+		Composite ccc = createComposite(group, 2, -1, true);
+		
+		result = new OutputTextControls(ccc, "ClerkInfo", 500, 1 );
+		clerkPartner = new OutputTextControls(ccc, "clerkPartner", 500, 1 );
+
+		new ButtonControl(group, "Login", 0,  getLoginListener(getShell(), false));
+
+		new ButtonControl(group, "Change PWD", 0,  getLoginListener(getShell(), true));
+
+		
+		
 
 	}
 	
@@ -74,14 +81,32 @@ public class ClubMobilLoginControl extends BasicControl {
 					Clerk clerk = mpd.getClerk();
 					if ( clerk != null) {
 						ClubMobilModelProvider.INSTANCE.clerk = clerk;
-						result.setValue("Clerk : " + clerk.getName());
+						result.setValue("Clerk : " + clerk.getName() + "," + clerk.getFirstName() + ";  type=" + clerk.getClerkType() + "; typeId="+clerk.getClerkTypeId());
+						clerkPartner.setValue(" PartnerNr : " + clerk.getPartnerNr() + "; PartnerArt = " + clerk.getPartnerArt());
+						
 					}
-					else
-						result.setValue("Clerk not found");
+					else {
+						if (!change_pwd) {
+							result.setValue("Clerk not found");
+						}
+						else 
+							result.setValue("");
+						clerkPartner.setValue("");
+						ClubMobilModelProvider.INSTANCE.clerk = null;
+					}
 						
 				}
-				else
-					result.setValue("Clerk not found");
+				else {
+					Clerk clerk = ClubMobilModelProvider.INSTANCE.clerk;
+					if ( clerk != null) {
+						result.setValue("Clerk : " + clerk.getName() + "," + clerk.getFirstName() + ";  type=" + clerk.getClerkType() + "; typeId="+clerk.getClerkTypeId());
+						clerkPartner.setValue(" PartnerNr : " + clerk.getPartnerNr() + "; PartnerArt = " + clerk.getPartnerArt());
+					}
+					else {
+						result.setValue("");
+						clerkPartner.setValue("");
+					}
+				}
 			}
 			catch(Exception err) {
 				showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));

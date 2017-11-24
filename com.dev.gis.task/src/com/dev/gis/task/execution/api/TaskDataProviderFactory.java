@@ -2,6 +2,8 @@ package com.dev.gis.task.execution.api;
 
 import javax.xml.bind.JAXBException;
 
+import com.dev.gis.task.execution.impl.ClubMobilCheckOutDataProvider;
+import com.dev.gis.task.execution.impl.ClubMobilCheckOutTask;
 import com.dev.gis.task.execution.impl.ClubMobilDataProvider;
 import com.dev.gis.task.execution.impl.DefaultTaskDataProvider;
 import com.dev.gis.task.execution.impl.EmlDataProvider;
@@ -54,6 +56,10 @@ public class TaskDataProviderFactory {
 		}
 		else if ( name.contains("ClubMobil")) {
 			ClubMobilDataProvider dataProvider = new ClubMobilDataProvider();
+			return dataProvider;
+		}
+		else if ( name.contains("CM CheckOut")) {
+			ClubMobilCheckOutDataProvider dataProvider = new ClubMobilCheckOutDataProvider();
 			return dataProvider;
 		}
 		

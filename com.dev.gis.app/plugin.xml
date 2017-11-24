@@ -183,6 +183,14 @@
             name="ClubMobil Test"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.clubMobilView.ClubMobilCheckOutView"
+            icon="icons/webapp_file.gif"
+            id="com.dev.gis.app.task.ClubMobilCheckOutView"
+            name="ClubMobil Check Out Test"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

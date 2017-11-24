@@ -1,19 +1,15 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.dev.gis.app.view.elements.CityLocationSearch;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.ModelProvider;
-import com.dev.gis.connector.api.SunnyModelProvider;
 import com.dev.gis.connector.api.TaskProperties;
 import com.dev.gis.connector.joi.protocol.Administration;
 import com.dev.gis.connector.joi.protocol.DayAndHour;
@@ -112,20 +108,19 @@ public class ClubMobilCreateVehicleRequestUtils {
 		ti.setPickUpLocation(pickUpLocation);
 		ti.setDropOffLocation(dropOffLocation);
 		
-		Calendar pickupDate = ModelProvider.INSTANCE.pickupDateTime;
-		Calendar dropoffDate = ModelProvider.INSTANCE.dropoffDateTime;
+		Calendar checkOutDate = ModelProvider.INSTANCE.pickupDateTime;
+		Calendar checkInfDate = ModelProvider.INSTANCE.dropoffDateTime;
 		
-		DayAndHour dh = createDate(pickupDate);
+		DayAndHour dh = createDate(checkOutDate);
 		ti.setPickUpTime(dh);
 
-		dh = createDate(dropoffDate);
+		dh = createDate(checkInfDate);
 		ti.setDropOffTime(dh);
 
 		request.setTravel(ti);
 
-		request.setModule(AdacModelProvider.INSTANCE.module);
-		
-		//request.setPayment(1);
+		// only PKW in ClubMobil
+		request.setModule(1);
 		
 		VehicleRequestFilter filter = createFilter();
 		if ( filter != null)
@@ -160,7 +155,7 @@ public class ClubMobilCreateVehicleRequestUtils {
 			lang = "en-EN";
 		admin.setLanguage(lang);
 
-		admin.setOperator(AdacModelProvider.INSTANCE.operatorId);
+		admin.setOperator(ClubMobilModelProvider.INSTANCE.operatorId);
 		admin.setSalesChannel(TaskProperties.SALES_CHANNEL);
 		admin.setCalledFrom(TaskProperties.CALLED_FROM_RENTFOX);
 		

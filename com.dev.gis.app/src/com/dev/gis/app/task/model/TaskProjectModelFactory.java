@@ -67,6 +67,10 @@ public class TaskProjectModelFactory {
 		add(TaskItem.createTask(ITaskDataProvider.TASK_APP_BOOKING, "folder_edit.png", "test ADAC APP"));
 		defaultGroup.getTasks().
 		add(TaskItem.createTask("ClubMobil", "folder_edit.png", "ClubMobil APP"));
+
+		defaultGroup.getTasks().
+		add(TaskItem.createTask("CM CheckOut", "folder_edit.png", "ClubMobil CheckOut APP"));
+		
 	}
 
 }

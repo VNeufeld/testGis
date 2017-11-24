@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.bpcs.mdcars.json.protocol.CredentialResponse;
+import com.bpcs.mdcars.json.protocol.GetCustomerResponse;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.dev.gis.connector.GisHttpClient;
@@ -41,6 +42,7 @@ public class ClubMobilHttpService {
 
 	public static String CLUBMOBIL_CREDENTIALS = "/credentials";
 	public static String CLUBMOBIL_CREDENTIALS_GETTOKEN = "/credentials/getToken";
+	public static String CLUBMOBIL_MASTERDATA = "/masterdata";
 	
 	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?ratingView=1&sort=asc&pageSize=";
 	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
@@ -683,31 +685,11 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
-	public Token getToken() {
-		String response = " ";
-		try {
-
-			URI uri = getServerURI(CLUBMOBIL_CREDENTIALS_GETTOKEN);
-			
-			logger.info("getToken Request = "+uri);
-			
-			response =  httpClient.sendGetRequest(uri);
-			logger.info("response = "+response);
-			return JsonUtils.createResponseClassFromJson(response, Token.class);
-			
-		} catch ( IOException e) {
-			logger.error(e,e);
-		} catch (URISyntaxException e) {
-			logger.error(e,e);
-		}
-		return null;
-	}
-
 	public CredentialResponse login(Credential credentialRequest) {
 
 		try {
 			
-			boolean test = true;
+			boolean test = false;
 			
 			if ( test) {
 				CredentialResponse response = new CredentialResponse();
@@ -722,7 +704,7 @@ public class ClubMobilHttpService {
 				return response;
 			}
 			
-			String link = CLUBMOBIL_CREDENTIALS;
+			String link = CLUBMOBIL_CREDENTIALS+ "/login";
 
 			URI uri = getServerURI(link);
 			
@@ -746,8 +728,8 @@ public class ClubMobilHttpService {
 		try {
 			
 			
-			String link = CLUBMOBIL_CREDENTIALS;
-			link = link + "?change=1";
+			String link = CLUBMOBIL_CREDENTIALS+ "/changePwd";
+			
 
 			URI uri = getServerURI(link);
 			
@@ -765,5 +747,26 @@ public class ClubMobilHttpService {
 		}
 		return null;
 	}
-	
+
+	public GetCustomerResponse getCustomer(String customerNo) {
+		try {
+			
+			
+			String link = CLUBMOBIL_MASTERDATA+ "/getCustomer";
+			link = link + "?memberNo="+customerNo;
+
+			URI uri = getServerURI(link);
+
+			String response =  httpClient.sendGetRequest(uri);
+			logger.info("response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, GetCustomerResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
 }

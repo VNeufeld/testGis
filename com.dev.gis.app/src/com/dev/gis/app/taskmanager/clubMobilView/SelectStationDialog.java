@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.Dialog;
@@ -26,7 +27,12 @@ import com.dev.gis.app.model.StationModel;
 import com.dev.gis.app.view.dialogs.StationListTable;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.connector.api.AdacModelProvider;
+import com.dev.gis.connector.api.ClubMobilHttpService;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.SunnyModelProvider;
+import com.dev.gis.connector.joi.protocol.Station;
+import com.dev.gis.connector.joi.protocol.StationResponse;
 
 public class SelectStationDialog extends Dialog {
 
@@ -165,6 +171,7 @@ public class SelectStationDialog extends Dialog {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
+			final long operator = ClubMobilModelProvider.INSTANCE.operatorId;
 			
 			int type = locationTypeCombo.getSelectionIndex();
 			String locationId = location.getText();
@@ -173,11 +180,23 @@ public class SelectStationDialog extends Dialog {
 			else
 				type = 2;
 
-			IStationService stationService = new AdacGetStationService(null);
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
+			
 
 			String searchText = searchTextCtl.getText();
+			StationResponse response  =service.getStations(operator,type,locationId, searchText);
+			List<StationModel> stations = new ArrayList<StationModel>();
 			
-			List<StationModel> stations = stationService.getStations(type,locationId, searchText);
+			for ( Station station : response.getStations()) {
+				StationModel stationModel = new StationModel(station.getId(), station.getStationName());
+				
+				stationModel.setSupplier(station.getSupplierId() + ":"+ station.getSupplierGroupId());
+				stationModel.setSupplierId(station.getSupplierId());
+				stationModel.setStation(station);
+				stations.add(stationModel);
+			}
+
 			stationListTable.update(stations);
 			
 		}

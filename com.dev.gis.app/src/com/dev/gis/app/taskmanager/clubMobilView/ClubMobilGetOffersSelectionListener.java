@@ -59,6 +59,15 @@ public class ClubMobilGetOffersSelectionListener implements SelectionListener {
 				response = getOfferOperation.getResponse();
 	
 				if (response != null) {
+					
+					if ( response.getResultList().size() == 0) {
+						if ( !response.getErrors().isEmpty()) {
+							MessageDialog.openError(
+									shell,"Error",response.getErrors().get(0).getErrorText());
+							
+						}
+					}
+					
 					new ClubMobilOfferViewUpdater().showResponse(response);
 					ModelProvider.INSTANCE.pageNo = 0;
 				}

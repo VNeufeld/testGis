@@ -63,11 +63,11 @@ public class LoginDialog extends Dialog {
  	    new PasswordTextControl(composite, 300, true);
  	    if ( change_pwd)
  	    	changePasswordCtl = new  ChangePasswordTextControl(composite, 300, true);
- 	    
-		new ButtonControl(composite, "Login", 0,  getLoginListener(getShell()));
 		
 		if ( change_pwd)
 			new ButtonControl(composite, "Change Password", 0,  getChangePwdListener(getShell()));
+		else
+			new ButtonControl(composite, "Login", 0,  getLoginListener(getShell()));
 		
 		tokenControl = new OutputTextControls(composite, "token:", 500, 1 );
 
@@ -207,11 +207,17 @@ public class LoginDialog extends Dialog {
 				credential.setNewpwd(newPwd);
 						
 				CredentialResponse credentialResponse = service.changePwd(credential);
-				
-				if ( credentialResponse.getStatus() > 0) {
-					MessageDialog.openInformation(getShell(), "Info", "Password erfolgreich geändert. Bitte melden Sie sich mit dem neuen Passwort an");
+				if ( credentialResponse.getClerk() == null) {
+					if ( !credentialResponse.getErrors().isEmpty())
+						showErrors(credentialResponse.getErrors().get(0).getErrorText());
+					else
+						showErrors("Login not successfull");
 				}
-					
+				else {
+					if ( credentialResponse.getStatus() > 0) {
+						MessageDialog.openInformation(getShell(), "Info", "Password erfolgreich geändert. Bitte melden Sie sich mit dem neuen Passwort an");
+					}
+				}
 			}
 			catch(BusinessException err) {
 				logger.error(err.getMessage());
