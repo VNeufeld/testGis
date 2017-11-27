@@ -6,7 +6,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import com.dev.gis.app.view.sunny.requestUtils.ShowTimer;
-import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;

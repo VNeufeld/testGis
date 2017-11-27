@@ -1,29 +1,20 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
-import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.CheckBox;
 import com.dev.gis.app.view.elements.LanguageComboBox;
 import com.dev.gis.app.view.elements.OutputTextControls;
-import com.dev.gis.app.view.elements.PageSizeControl;
 import com.dev.gis.app.view.listener.adac.AdacGetNextFilterPageSelectionListener;
-import com.dev.gis.app.view.listener.adac.AdacSelectChangedOfferClickListener;
-import com.dev.gis.app.view.listener.adac.AdacSelectOfferDoubleClickListener;
 import com.dev.gis.app.view.listener.adac.AdacShowOfferFilterSelectionListener;
-import com.dev.gis.connector.api.ClubMobilModelProvider;
-import com.dev.gis.connector.joi.protocol.VehicleResponse;
 import com.dev.gis.task.execution.api.IEditableTask;
 
 public class ClubMobilCheckOutView extends RentCarsAppView {
@@ -32,20 +23,27 @@ public class ClubMobilCheckOutView extends RentCarsAppView {
 
 	public static final String ID = IEditableTask.ID_ClubMobilCheckOutView;
 	
-	private OutputTextControls countVehicles = null;
+	private ClubMobilReservationListTable reservationListTable;
 
-	private OutputTextControls sessionId = null;
+	
+	@Override
+	public void createPartControl(Composite parent) {
 
-	private OutputTextControls requestId = null;
-	
-	private ClubMobilOfferListTable offerListTable;
-	
-	private OutputTextControls offerId = null;
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayout(new GridLayout(1, false));
+		
+		final Group groupStamp = new Group(composite, SWT.TITLE);
+		groupStamp.setText("Inputs:");
+		groupStamp.setLayout(new GridLayout(4, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(false, false).applyTo(groupStamp);
+		
+		createBasicControls(groupStamp);
+		
+		new ClubMobilReservationListControl(composite);
+		
+	}
 
-	private OutputTextControls pageNo = null;
-	
-	
-	
 	
 	@Override
 	protected void createBasicControls(final Group groupStamp) {
@@ -62,97 +60,53 @@ public class ClubMobilCheckOutView extends RentCarsAppView {
 
 		new ClubMobilCustomerControl(groupStamp);
 		
-		new ClubMobilReservationListControl(groupStamp);
-		
-	}
-	
-
-	
-	protected void createPageSize(Group groupStamp) {
-		Composite cc = createComposite(groupStamp, 4, -1, false);
-		cc.setBackground(cc.getDisplay().getSystemColor(SWT.COLOR_LIST_SELECTION));
-		new PageSizeControl(cc, 50, false);
-
-		ButtonControl bb = new ButtonControl(cc, "GetOffer", 0, getOffersSelectionListener());
-		bb.getButton().setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
-
-	}
-	protected void createExecutionPanel(Group groupStamp) {
-		createPageSize(groupStamp);
-
-	}
-
-	
-	
-	
-	@Override
-	protected ISelectionChangedListener getSelectChangedOfferClickListener() {
-		AdacSelectChangedOfferClickListener ss = new AdacSelectChangedOfferClickListener(offerId);
-		return ss;
-	}
-
-	@Override
-	protected IDoubleClickListener getSelectOfferDoubleClickListener() {
-		AdacSelectOfferDoubleClickListener ssd = new AdacSelectOfferDoubleClickListener();
-		return ssd;
-	}
-
-	@Override
-	protected SelectionListener getOffersSelectionListener() {
-		ClubMobilGetOffersSelectionListener listener = new ClubMobilGetOffersSelectionListener(parent.getShell()); 
-		return listener;
-	}
-	
-	public void showVehicleResponse(VehicleResponse response) {
-		
-		countVehicles.setValue(String.valueOf(response.getResultList().size()));
-		
-		if ( response.getSessionId() != null)
-			sessionId.setValue(response.getSessionId());
-		requestId.setValue(String.valueOf(response.getRequestId()));	
-		if ( StringUtils.isEmpty(pageNo.getValue()))
-				pageNo.setValue("0");
-		
-		ClubMobilModelProvider.INSTANCE.updateResponse(response);
-		
-		offerListTable.update();
 		
 	}
 
-	public void clearView() {
-		ClubMobilModelProvider.INSTANCE.clearView();
-		offerListTable.getViewer().setInput(ClubMobilModelProvider.INSTANCE.getOfferDos());
-		offerListTable.getViewer().refresh();
+	private Composite addReservationGroup(Composite composite) {
+		final Group group = new Group(composite, SWT.TITLE);
+		group.setText("Reservation List:");
+		group.setLayout(new GridLayout(1, true));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		
+		this.reservationListTable = new ClubMobilReservationListTable(getSite(),
+				group, null, null);
 
+		
+		return group;
 	}
+	
 
 	@Override
 	protected void createResultFields(Group groupResult) {
 		
-		Composite cc = createComposite(groupResult, 6, -1, false);
-
-		requestId = new OutputTextControls(cc, "Request ID", 150, 1 );
-		sessionId = new OutputTextControls(cc, "Session ID", 300,1 );
-		countVehicles = new OutputTextControls(cc, "Count of Vehicles", 100,1 );
-
-		Composite ccAll = createComposite(groupResult, 2, -1, true);
-
-		Composite ccLeft = createComposite(ccAll, 6, 1, false);
-
-		Composite ccRight = createComposite(ccAll, 2, 1, true);
+//		new ClubMobilReservationListControl(groupResult);
 		
-		Group grRight = createGroupSpannAll(ccRight, "VehicleProperries",2);
 		
-		offerId = new OutputTextControls(ccLeft, "OfferId", 300 );
-		
-		{ // buttons
-			Composite buttonComposite = createComposite(ccLeft, 2, -1, false);
-			new ButtonControl(buttonComposite, "show filterTemplate", 0,  showOfferFilterTemplate());
-		}
-		createNextPage(ccLeft);
-		
-		OutputTextControls xxx = new OutputTextControls(grRight, "XXX", 300 );
-		OutputTextControls yyy = new OutputTextControls(grRight, "YYY", 300 );
+//		Composite cc = createComposite(groupResult, 6, -1, false);
+//
+//		requestId = new OutputTextControls(cc, "Request ID", 150, 1 );
+//		sessionId = new OutputTextControls(cc, "Session ID", 300,1 );
+//		countVehicles = new OutputTextControls(cc, "Count of Vehicles", 100,1 );
+//
+//		Composite ccAll = createComposite(groupResult, 2, -1, true);
+//
+//		Composite ccLeft = createComposite(ccAll, 6, 1, false);
+//
+//		Composite ccRight = createComposite(ccAll, 2, 1, true);
+//		
+//		Group grRight = createGroupSpannAll(ccRight, "VehicleProperries",2);
+//		
+//		offerId = new OutputTextControls(ccLeft, "OfferId", 300 );
+//		
+//		{ // buttons
+//			Composite buttonComposite = createComposite(ccLeft, 2, -1, false);
+//			new ButtonControl(buttonComposite, "show filterTemplate", 0,  showOfferFilterTemplate());
+//		}
+//		createNextPage(ccLeft);
+//		
+//		OutputTextControls xxx = new OutputTextControls(grRight, "XXX", 300 );
+//		OutputTextControls yyy = new OutputTextControls(grRight, "YYY", 300 );
 		
 	}
 
@@ -165,37 +119,16 @@ public class ClubMobilCheckOutView extends RentCarsAppView {
 		return listener;
 	}
 
-	@Override
-	protected void createNextPage(Composite groupResult) {
-		// http://localhost:8080/web-joi/joi/vehicleRequest/673406724?pageNo=1
-		pageNo = new OutputTextControls(groupResult, "PageNo", 100,1 );
-		pageNo.setValue("0");
-		CheckBox useFilter = new CheckBox(groupResult, "use filter");
-		new ButtonControl(groupResult, "Show Page", 0,  selectNextPageSelectionListener(pageNo, useFilter));
-
-	}
+//	@Override
+//	protected void createNextPage(Composite groupResult) {
+//		// http://localhost:8080/web-joi/joi/vehicleRequest/673406724?pageNo=1
+//		pageNo = new OutputTextControls(groupResult, "PageNo", 100,1 );
+//		pageNo.setValue("0");
+//		CheckBox useFilter = new CheckBox(groupResult, "use filter");
+//		new ButtonControl(groupResult, "Show Page", 0,  selectNextPageSelectionListener(pageNo, useFilter));
+//
+//	}
 	
-	
-	private void createResultOfferListTable(Composite composite) {
-		final Group groupOffers = new Group(composite, SWT.TITLE);
-		groupOffers.setText("Ofers:");
-		
-		groupOffers.setLayout(new GridLayout(1, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(groupOffers);
-		
-		this.offerListTable = new ClubMobilOfferListTable(getSite(),
-				groupOffers, getSelectOfferDoubleClickListener(), getSelectChangedOfferClickListener() );
-	}
-
-
-	@Override
-	protected void createResultTables(Composite composite) {
-
-		createResultOfferListTable(composite);
-
-	}
-
 
 	
 }

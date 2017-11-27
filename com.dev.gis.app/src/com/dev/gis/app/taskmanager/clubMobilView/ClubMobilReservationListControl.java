@@ -1,8 +1,9 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -11,12 +12,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
-import com.bpcs.mdcars.model.Customer;
-import com.bpcs.mdcars.model.Person;
+import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
+import com.dev.gis.app.view.listener.adac.AdacSelectChangedOfferClickListener;
+import com.dev.gis.app.view.listener.adac.AdacSelectOfferDoubleClickListener;
+import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
+import com.dev.gis.connector.api.JoiHttpServiceFactory;
 
 public class ClubMobilReservationListControl extends BasicControl {
 	
@@ -24,17 +28,16 @@ public class ClubMobilReservationListControl extends BasicControl {
 	
 	private OutputTextControls result = null;
 	
-	
 	private ReservationNoTextControl reservationNoTextControl;
 	
-	private ClubMobilOfferListTable reservationListTable;
+	private ClubMobilReservationListTable reservationListTable;
 
 
 	public ClubMobilReservationListControl(Composite groupStamp) {
 		
 		parent = groupStamp;
 
-		final Group group = createGroupSpannAll(groupStamp, "Reservation",4);
+		final Group group = createGroupSpannAllRows(groupStamp, "Reservation",4,4);
 		
 		Composite cc = createComposite(group, 2, -1, true);
 		result = new OutputTextControls(cc, "ReservationInfo", 500, 1 );
@@ -43,9 +46,9 @@ public class ClubMobilReservationListControl extends BasicControl {
 		
 		reservationNoTextControl = new ReservationNoTextControl(cc2, 300, false);
 
-		new ButtonControl(cc2, "GetReservation", 0,  getReservationListener(getShell(), false));
+		new ButtonControl(cc2, "GetReservationList", 0,  getReservationListener(getShell(), false));
 
-		createReservationListTable(group);
+		createReservationListTable(groupStamp);
 
 	}
 	
@@ -73,22 +76,15 @@ public class ClubMobilReservationListControl extends BasicControl {
 		public void widgetSelected(SelectionEvent arg0) {
 			
 			try {
-				CustomerDialog mpd = new CustomerDialog(shell);
-				if (mpd.open() == Dialog.OK) {
-					Customer customer = mpd.getCustomer();
-					if ( customer != null) {
-						ClubMobilModelProvider.INSTANCE.customer = customer;
-						Person person = customer.getPerson();
-						result.setValue("Customer : MemberNo : " + customer.getCustomerNo()+ " Person : "+ person.getName() + "," + person.getFirstName() );
-					}
-					else {
-						ClubMobilModelProvider.INSTANCE.customer = null;
-						result.setValue("" );
-						
-					}
-				}
-				else {
-				}
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
+				
+				ReservationListResponse reservationListResponse = service.getReservationList(reservationNoTextControl.getSelectedValue());
+				
+				ClubMobilModelProvider.INSTANCE.reservationListResponse = reservationListResponse;
+				
+				updateTable();
+				
 			}
 			catch(Exception err) {
 				showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
@@ -97,6 +93,11 @@ public class ClubMobilReservationListControl extends BasicControl {
 
 		}
 
+
+	}
+	
+	private void updateTable() {
+		reservationListTable.update();
 	}
 	
 	private void createReservationListTable(Composite composite) {
@@ -104,11 +105,17 @@ public class ClubMobilReservationListControl extends BasicControl {
 		groupOffers.setText("Reservations:");
 		
 		groupOffers.setLayout(new GridLayout(1, false));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-				.grab(true, true).applyTo(groupOffers);
+//		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
+//				.grab(true, true).applyTo(groupOffers);
 		
-		this.reservationListTable = new ClubMobilOfferListTable(null,
-				groupOffers, null, null);
+		GridDataFactory.fillDefaults().span(1, 4)
+		.align(SWT.FILL, SWT.FILL).grab(true, true)
+		.applyTo(groupOffers);
+		
+		
+		this.reservationListTable = new ClubMobilReservationListTable(null,
+				groupOffers, getSelectReservationDoubleClickListener(), getSelectChangedReservationClickListener());
+		
 	}
 	
 	protected void showErrors(com.dev.gis.connector.sunny.Error error) {
@@ -119,5 +126,17 @@ public class ClubMobilReservationListControl extends BasicControl {
 				getShell(),"Error",message);
 		
 	}
+	
+	protected ISelectionChangedListener getSelectChangedReservationClickListener() {
+//		AdacSelectChangedOfferClickListener ss = new AdacSelectChangedOfferClickListener(offerId);
+//		return ss;
+		return null;
+	}
+
+	protected IDoubleClickListener getSelectReservationDoubleClickListener() {
+		ClubMobilSelectReservationDoubleClickListener ssd = new ClubMobilSelectReservationDoubleClickListener();
+		return ssd;
+	}
+
 
 }

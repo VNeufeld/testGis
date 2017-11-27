@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Customer;
 import com.dev.gis.connector.joi.protocol.BodyStyleText;
@@ -32,6 +33,8 @@ public enum ClubMobilModelProvider {
 	public Clerk clerk;
 	
 	public Customer customer;
+	
+	public ReservationListResponse reservationListResponse;
 	
 	private final List<OfferDo> offerDos = new ArrayList<OfferDo>();
 

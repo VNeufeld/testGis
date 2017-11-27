@@ -89,5 +89,20 @@ public class BasicControl {
 		return groupResult;
 	}
 
+	protected Group createGroupSpannAllRows(final Composite parent,String title, int columns, int rows) {
+		
+		GridLayout gd = (GridLayout)parent.getLayout();
+		int col = gd.numColumns;
+		
+		final Group groupResult = new Group(parent, SWT.TITLE);
+		groupResult.setText(title);		
+		GridLayoutFactory.fillDefaults().numColumns(columns).equalWidth(false).applyTo(groupResult);
+
+		GridDataFactory.fillDefaults().span(col, rows)
+					.align(SWT.FILL, SWT.BEGINNING).grab(true, false)
+					.applyTo(groupResult);
+
+		return groupResult;
+	}
 	
 }
