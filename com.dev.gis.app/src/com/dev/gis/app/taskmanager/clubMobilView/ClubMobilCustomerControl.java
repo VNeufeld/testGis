@@ -30,8 +30,6 @@ public class ClubMobilCustomerControl extends BasicControl {
 		result = new OutputTextControls(group, "CustomerInfo", 500, 1 );
 
 		new ButtonControl(group, "GetCustomer", 0,  getCustomerListener(getShell(), false));
-
-		
 		
 
 	}
@@ -92,6 +90,10 @@ public class ClubMobilCustomerControl extends BasicControl {
 		MessageDialog.openError(
 				getShell(),"Error",message);
 		
+	}
+
+	public OutputTextControls getResult() {
+		return result;
 	}
 
 }

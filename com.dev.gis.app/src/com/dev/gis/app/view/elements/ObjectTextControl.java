@@ -14,16 +14,31 @@ import org.eclipse.swt.widgets.Text;
 
 public class ObjectTextControl extends BasicControl {
 	
-	private final int size; 
+	private int size; 
 	
 	private Text text;
 	
 	protected String selectedValue;
 
-	private final Composite parent;
+	private  Composite parent;
+	
+	private String label = "XXX";
+	
+	public ObjectTextControl(Composite parent, int size, boolean span, String label) {
+		this.label = label;
+		init(parent, size, span);
+	}
+
 	
 	public ObjectTextControl(Composite parent, int size, boolean span) {
 		super();
+		init(parent, size, span);
+
+		
+	}
+
+
+	private void init(Composite parent, int size, boolean span) {
 		this.parent = parent;
 		this.size = size;
 		
@@ -68,8 +83,6 @@ public class ObjectTextControl extends BasicControl {
 				saveValue(selectedValue);
 			}
 		});
-
-		
 	}
 	protected String getDefaultValue() {
 		return "5";
@@ -108,7 +121,7 @@ public class ObjectTextControl extends BasicControl {
 		return 0;
 	}
 	protected String getLabel() {
-		return " XXX";
+		return label;
 	}
 	public String getSelectedValue() {
 		return selectedValue;

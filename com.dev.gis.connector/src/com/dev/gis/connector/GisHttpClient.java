@@ -40,6 +40,8 @@ public class GisHttpClient {
 	// Create a response handler
 	private ResponseHandler<String> responseHandler = new BasicResponseHandler();
 	
+	private String savedSessionId = null;
+	
 	protected ResponseHandler<String> getResponseHandler() {
 
 		ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
@@ -83,11 +85,17 @@ public class GisHttpClient {
 			
 			createSecurityHashForGet( httpget);
 			
+			
+			
 			String response = httpclient.execute(httpget, getResponseHandler(),
 					localContext);
 			
 			logger.info("response = " + response);
 			logger.info("localContext " + localContext.toString());
+			
+			String sessionId = (String)localContext.getAttribute("JSESSIONID");
+			logger.info("sessionId " + sessionId);
+			
 			
 			return response;
 
@@ -118,10 +126,17 @@ public class GisHttpClient {
 			httpget.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));
 			
 			logger.info("httpclient "+httpclient + ". Executing GET request without token " + httpget.getURI());
-			
+
 			String response = httpclient.execute(httpget, getResponseHandler(),
 					localContext);
 			
+			logger.info("localContext " + localContext.toString());
+			
+			String sessionId = (String)localContext.getAttribute("JSESSIONID");
+			logger.info("sessionId " + sessionId);
+			
+			CookieStore cookieStore = httpclient.getCookieStore();
+			logger.info("cookieStore " + cookieStore);
 			logger.info("response = " + response);
 			
 			return response;
@@ -174,6 +189,10 @@ public class GisHttpClient {
 					localContext);
 			logger.info("response = " + response);
 			logger.info("localContext " + localContext.toString());
+			
+			String sessionId = (String)localContext.getAttribute("JSESSIONID");
+			logger.info("sessionId " + sessionId);
+			
 	
 			logger.info("----------------------------------------");
 	

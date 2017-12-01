@@ -18,5 +18,6 @@ public interface ICommandIds {
     public static final String CMD_SWITCH_TO_CLUBMOBIL_PERSPECTIVE = "com.dev.gis.app.switch.clubmobil.app";
     public static final String CMD_RESET_PERSPECTIVE = "com.dev.gis.app.perspective.reset";
     public static final String CMD_SHOW_RESPONSE = "com.dev.gis.app.showResponse";
+    public static final String CMD_LOGIN_CLUBMOBIL = "com.dev.gis.app.loginClubMobil";
     
 }

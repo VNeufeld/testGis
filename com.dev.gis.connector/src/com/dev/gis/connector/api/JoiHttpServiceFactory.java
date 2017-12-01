@@ -30,7 +30,7 @@ public class JoiHttpServiceFactory {
 		
 	}
 	private static GisHttpClient getClubMobilHttpClientInstance() {
-		if ( httpClient != null && httpClient instanceof GisHttpClient )
+		if ( httpClient != null && !( httpClient instanceof ClubMobilHttpClient ))
 			httpClient = null;
 			
 		if ( httpClient == null)

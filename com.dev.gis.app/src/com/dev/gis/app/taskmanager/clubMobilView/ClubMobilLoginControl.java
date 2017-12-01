@@ -1,10 +1,7 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
-import java.net.URI;
-
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
@@ -12,23 +9,17 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
 import com.bpcs.mdcars.model.Clerk;
-import com.dev.gis.app.view.dialogs.BSCreditCardDialog;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
-import com.dev.gis.connector.api.AdacModelProvider;
-import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
-import com.dev.gis.connector.api.JoiHttpServiceFactory;
-import com.dev.gis.connector.joi.protocol.CreditCard;
-import com.dev.gis.connector.joi.protocol.VerifyCreditCardPaymentResponse;
 
 public class ClubMobilLoginControl extends BasicControl {
 	
 	private final Composite parent;
 	
 	private OutputTextControls result = null;
-	private OutputTextControls clerkPartner = null;
+	//private OutputTextControls clerkPartner = null;
 
 	public ClubMobilLoginControl(Composite groupStamp) {
 		
@@ -36,14 +27,15 @@ public class ClubMobilLoginControl extends BasicControl {
 
 		final Group group = createGroupSpannAll(groupStamp, "Login",4);
 
-		Composite ccc = createComposite(group, 2, -1, true);
 		
+
+		Composite ccc = createComposite(group, 3, -1, false);
 		result = new OutputTextControls(ccc, "ClerkInfo", 500, 1 );
-		clerkPartner = new OutputTextControls(ccc, "clerkPartner", 500, 1 );
+		new ButtonControl(ccc, "Login", 0,  getLoginListener(getShell(), false));
+		//clerkPartner = new OutputTextControls(ccc, "clerkPartner", 500, 1 );
 
-		new ButtonControl(group, "Login", 0,  getLoginListener(getShell(), false));
 
-		new ButtonControl(group, "Change PWD", 0,  getLoginListener(getShell(), true));
+		//new ButtonControl(group, "Change PWD", 0,  getLoginListener(getShell(), true));
 
 		
 		
@@ -74,24 +66,20 @@ public class ClubMobilLoginControl extends BasicControl {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
-			
+			String clerkResult = "";
 			try {
-				LoginDialog mpd = new LoginDialog(shell,change_pwd);
+				LoginDialog mpd = new LoginDialog(shell);
 				if (mpd.open() == Dialog.OK) {
 					Clerk clerk = mpd.getClerk();
 					if ( clerk != null) {
+						clerkResult = "Clerk : " + clerk.getName() + "," + clerk.getFirstName() + ";  type=" + clerk.getClerkType() + "; typeId="+clerk.getClerkTypeId();
+						clerkResult = clerkResult + " " + " PartnerNr : " + clerk.getPartnerNr() + "; PartnerArt = " + clerk.getPartnerArt();
 						ClubMobilModelProvider.INSTANCE.clerk = clerk;
-						result.setValue("Clerk : " + clerk.getName() + "," + clerk.getFirstName() + ";  type=" + clerk.getClerkType() + "; typeId="+clerk.getClerkTypeId());
-						clerkPartner.setValue(" PartnerNr : " + clerk.getPartnerNr() + "; PartnerArt = " + clerk.getPartnerArt());
+						result.setValue(clerkResult);
 						
 					}
 					else {
-						if (!change_pwd) {
-							result.setValue("Clerk not found");
-						}
-						else 
-							result.setValue("");
-						clerkPartner.setValue("");
+						result.setValue("Clerk not found");
 						ClubMobilModelProvider.INSTANCE.clerk = null;
 					}
 						
@@ -99,12 +87,12 @@ public class ClubMobilLoginControl extends BasicControl {
 				else {
 					Clerk clerk = ClubMobilModelProvider.INSTANCE.clerk;
 					if ( clerk != null) {
-						result.setValue("Clerk : " + clerk.getName() + "," + clerk.getFirstName() + ";  type=" + clerk.getClerkType() + "; typeId="+clerk.getClerkTypeId());
-						clerkPartner.setValue(" PartnerNr : " + clerk.getPartnerNr() + "; PartnerArt = " + clerk.getPartnerArt());
+						clerkResult = "Clerk : " + clerk.getName() + "," + clerk.getFirstName() + ";  type=" + clerk.getClerkType() + "; typeId="+clerk.getClerkTypeId();
+						clerkResult = clerkResult + " " + " PartnerNr : " + clerk.getPartnerNr() + "; PartnerArt = " + clerk.getPartnerArt();
+						result.setValue(clerkResult);
 					}
 					else {
 						result.setValue("");
-						clerkPartner.setValue("");
 					}
 				}
 			}

@@ -3,18 +3,17 @@ package com.dev.gis.app.taskmanager.clubMobilView;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
+import com.bpcs.mdcars.model.Person;
+import com.bpcs.mdcars.model.ReservationDetails;
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
-import com.dev.gis.app.view.elements.CheckBox;
-import com.dev.gis.app.view.elements.LanguageComboBox;
-import com.dev.gis.app.view.elements.OutputTextControls;
-import com.dev.gis.app.view.listener.adac.AdacGetNextFilterPageSelectionListener;
-import com.dev.gis.app.view.listener.adac.AdacShowOfferFilterSelectionListener;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.task.execution.api.IEditableTask;
 
 public class ClubMobilCheckOutView extends RentCarsAppView {
@@ -23,7 +22,11 @@ public class ClubMobilCheckOutView extends RentCarsAppView {
 
 	public static final String ID = IEditableTask.ID_ClubMobilCheckOutView;
 	
-	private ClubMobilReservationListTable reservationListTable;
+	private ClubMobilCustomerControl clubMobilCustomerControl;
+	
+	private ClubMobilPaymentControl clubMobilPaymentControl;
+	
+	private ClubMobilReservationListControl clubMobilResControl;
 
 	
 	@Override
@@ -40,8 +43,13 @@ public class ClubMobilCheckOutView extends RentCarsAppView {
 		
 		createBasicControls(groupStamp);
 		
-		new ClubMobilReservationListControl(composite);
+		clubMobilResControl = new ClubMobilReservationListControl(composite);
 		
+		clubMobilCustomerControl = new ClubMobilCustomerControl(composite);
+		
+		clubMobilPaymentControl = new ClubMobilPaymentControl(composite);
+
+		new ClubMobilSaveReservationControl(composite);	
 	}
 
 	
@@ -53,82 +61,59 @@ public class ClubMobilCheckOutView extends RentCarsAppView {
 		new ClubMobilAuthorizationCheckBox(cc,"Authorization");
 
 		new ClubMobilLoginControl(groupStamp);
-		
-		Composite ccl = createComposite(groupStamp, 6, -1, true);
-		new ClubMobilOperatorComboBox(ccl, 80);
-		new LanguageComboBox(ccl, 80);
-
-		new ClubMobilCustomerControl(groupStamp);
-		
-		
-	}
-
-	private Composite addReservationGroup(Composite composite) {
-		final Group group = new Group(composite, SWT.TITLE);
-		group.setText("Reservation List:");
-		group.setLayout(new GridLayout(1, true));
-		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		
-		this.reservationListTable = new ClubMobilReservationListTable(getSite(),
-				group, null, null);
 
 		
-		return group;
+		
 	}
 	
+	public static void updateCustomerControl(final String text) {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					logger.info(" showResult : run instanceNum = "+1 );
+					// Show protocol, show results
+					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					ClubMobilCheckOutView viewPart =  (ClubMobilCheckOutView)wp.showView(
+							ID, 
+							Integer.toString(1), 
+							IWorkbenchPage.VIEW_ACTIVATE);
+					
+					
+					ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
+					if ( details != null) {
+						if ( details.getCustomer() != null && details.getCustomer().getPerson() != null) {
+							Person person = details.getCustomer().getPerson();
+							viewPart.getClubMobilCustomerControl().getResult().setValue(person.getName() + " " + person.getFirstName());
+						}
+						viewPart.getClubMobilPaymentControl().getResult().setValue(details.getPayment().getCard().getCardNumber());
+						
+						viewPart.getClubMobilResControl().update();
+					}
+					
+				} catch (PartInitException e) {
+					logger.error(e.getMessage(),e);
+				}
+			}
+		});
 
-	@Override
-	protected void createResultFields(Group groupResult) {
-		
-//		new ClubMobilReservationListControl(groupResult);
-		
-		
-//		Composite cc = createComposite(groupResult, 6, -1, false);
-//
-//		requestId = new OutputTextControls(cc, "Request ID", 150, 1 );
-//		sessionId = new OutputTextControls(cc, "Session ID", 300,1 );
-//		countVehicles = new OutputTextControls(cc, "Count of Vehicles", 100,1 );
-//
-//		Composite ccAll = createComposite(groupResult, 2, -1, true);
-//
-//		Composite ccLeft = createComposite(ccAll, 6, 1, false);
-//
-//		Composite ccRight = createComposite(ccAll, 2, 1, true);
-//		
-//		Group grRight = createGroupSpannAll(ccRight, "VehicleProperries",2);
-//		
-//		offerId = new OutputTextControls(ccLeft, "OfferId", 300 );
-//		
-//		{ // buttons
-//			Composite buttonComposite = createComposite(ccLeft, 2, -1, false);
-//			new ButtonControl(buttonComposite, "show filterTemplate", 0,  showOfferFilterTemplate());
-//		}
-//		createNextPage(ccLeft);
-//		
-//		OutputTextControls xxx = new OutputTextControls(grRight, "XXX", 300 );
-//		OutputTextControls yyy = new OutputTextControls(grRight, "YYY", 300 );
-		
 	}
 
-	private SelectionListener showOfferFilterTemplate() {
-		return new AdacShowOfferFilterSelectionListener(parent.getShell());
+
+	public ClubMobilCustomerControl getClubMobilCustomerControl() {
+		return clubMobilCustomerControl;
 	}
 
-	protected SelectionListener selectNextPageSelectionListener(final OutputTextControls pageNo, final CheckBox useFilter) {
-		AdacGetNextFilterPageSelectionListener listener = new AdacGetNextFilterPageSelectionListener(parent.getShell(),pageNo,useFilter);
-		return listener;
+
+	public ClubMobilPaymentControl getClubMobilPaymentControl() {
+		return clubMobilPaymentControl;
 	}
 
-//	@Override
-//	protected void createNextPage(Composite groupResult) {
-//		// http://localhost:8080/web-joi/joi/vehicleRequest/673406724?pageNo=1
-//		pageNo = new OutputTextControls(groupResult, "PageNo", 100,1 );
-//		pageNo.setValue("0");
-//		CheckBox useFilter = new CheckBox(groupResult, "use filter");
-//		new ButtonControl(groupResult, "Show Page", 0,  selectNextPageSelectionListener(pageNo, useFilter));
-//
-//	}
-	
+
+	public ClubMobilReservationListControl getClubMobilResControl() {
+		return clubMobilResControl;
+	}
 
 	
 }

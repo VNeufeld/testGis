@@ -43,6 +43,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     private Action switchToClubMobilAppPerspectiveAction;
     private Action resetCurrentPerspectiveAction;
     private Action lastResponseAction;
+    private Action lolginClubMobilction;
     private IWorkbenchAction preferencesAction;
 
     public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
@@ -96,7 +97,10 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         register(preferencesAction);
         
         lastResponseAction = new ShowResponseAction("Show last response", window);
-        register(lastResponseAction);        
+        register(lastResponseAction);
+        
+        lolginClubMobilction = new LoginAction("Login ClubMobil", window);
+        register(lolginClubMobilction);
         
     }
     
@@ -145,6 +149,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	        //toolbar.add(switchToAppPerspectiveAction);
 	        toolbar.add(resetCurrentPerspectiveAction);
 	        toolbar.add(lastResponseAction);
+	        toolbar.add(lolginClubMobilction);
 		}
 		else
 			toolbar.add(stopProcessAction);

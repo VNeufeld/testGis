@@ -273,6 +273,12 @@
             id="com.dev.gis.app.showResponse"
             name="Show Response">
       </command>
+      <command
+            categoryId="com.dev.gis.app.category1"
+            description="Login ClubMobil"
+            id="com.dev.gis.app.loginClubMobil"
+            name="Login ClubMobil">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">

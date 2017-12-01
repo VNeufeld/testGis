@@ -45,6 +45,14 @@ public class LoginDialog extends Dialog {
 	
 	private Clerk clerk;
 	
+	public LoginDialog(Shell parentShell) {
+		super(parentShell);
+		this.change_pwd = false; 
+	    setShellStyle(getShellStyle() | SWT.RESIZE);
+		
+	}
+
+	
 	public LoginDialog(Shell parentShell, boolean change_pwd) {
 		super(parentShell);
 		this.change_pwd = change_pwd; 
@@ -64,10 +72,9 @@ public class LoginDialog extends Dialog {
  	    if ( change_pwd)
  	    	changePasswordCtl = new  ChangePasswordTextControl(composite, 300, true);
 		
+		new ButtonControl(composite, "Login", 0,  getLoginListener(getShell()));
 		if ( change_pwd)
 			new ButtonControl(composite, "Change Password", 0,  getChangePwdListener(getShell()));
-		else
-			new ButtonControl(composite, "Login", 0,  getLoginListener(getShell()));
 		
 		tokenControl = new OutputTextControls(composite, "token:", 500, 1 );
 

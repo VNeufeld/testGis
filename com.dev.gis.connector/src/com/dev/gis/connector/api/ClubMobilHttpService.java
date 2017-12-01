@@ -12,6 +12,7 @@ import com.bpcs.mdcars.json.protocol.CredentialResponse;
 import com.bpcs.mdcars.json.protocol.GetCustomerResponse;
 import com.bpcs.mdcars.json.protocol.ReservationListFilterRequest;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
+import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.dev.gis.connector.GisHttpClient;
@@ -712,10 +713,10 @@ public class ClubMobilHttpService {
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(credentialRequest);
-			logger.info(" request = "+request);
+			logger.info(" login request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("response = "+response);
+			logger.info("login response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, CredentialResponse.class);
 			
 		} catch ( IOException e) {
@@ -797,5 +798,79 @@ public class ClubMobilHttpService {
 		}
 		return null;
 	}
+
+	public ReservationResponse getReservation(Integer reservationId) {
+		try {
+			
+			
+			String link = CLUBMOBIL_CHECKOUT+ "/getReservation";
+			
+			ReservationListFilterRequest reservationListFilterRequest = new ReservationListFilterRequest();
+			reservationListFilterRequest.setName(reservationId.toString());
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(reservationListFilterRequest);
+			logger.info(" request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, ReservationResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public void putPayment(com.bpcs.mdcars.model.Payment payment) {
+		try {
+			
+			
+			String link = CLUBMOBIL_CHECKOUT+ "/payment/put";
+			
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(payment);
+			logger.info(" request = "+request);
+
+			String response =  httpClient.startPutRequestAsJson(uri, request);
+			logger.info("response = "+response);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+	}
+	
+	public ReservationResponse saveReservation() {
+		try {
+			
+			
+			String link = CLUBMOBIL_CHECKOUT+ "/saveReservation";
+			
+			ReservationListFilterRequest reservationListFilterRequest = new ReservationListFilterRequest();
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(reservationListFilterRequest);
+			logger.info(" request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, ReservationResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
 	
 }

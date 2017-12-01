@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
+import com.bpcs.mdcars.model.ReservationDetails;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
@@ -31,12 +32,11 @@ public class ClubMobilReservationListControl extends BasicControl {
 	private ReservationNoTextControl reservationNoTextControl;
 	
 	private ClubMobilReservationListTable reservationListTable;
-
-
+	
 	public ClubMobilReservationListControl(Composite groupStamp) {
 		
 		parent = groupStamp;
-
+		
 		final Group group = createGroupSpannAllRows(groupStamp, "Reservation",4,4);
 		
 		Composite cc = createComposite(group, 2, -1, true);
@@ -136,6 +136,14 @@ public class ClubMobilReservationListControl extends BasicControl {
 	protected IDoubleClickListener getSelectReservationDoubleClickListener() {
 		ClubMobilSelectReservationDoubleClickListener ssd = new ClubMobilSelectReservationDoubleClickListener();
 		return ssd;
+	}
+
+	public void update() {
+		
+		ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
+		
+		result.setValue(details.getReservationNo());
+		
 	}
 
 
