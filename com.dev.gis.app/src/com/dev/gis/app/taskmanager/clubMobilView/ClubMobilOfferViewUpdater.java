@@ -29,7 +29,7 @@ public class ClubMobilOfferViewUpdater  {
 					logger.info(" showResult : run instanceNum = "+instanceNum );
 					// Show protocol, show results
 					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					OfferDetailView viewPart =  (OfferDetailView)wp.showView(
+					ClubMobilOfferDetailView viewPart =  (ClubMobilOfferDetailView)wp.showView(
 							viewID, 
 							Integer.toString(instanceNum), 
 							IWorkbenchPage.VIEW_ACTIVATE);

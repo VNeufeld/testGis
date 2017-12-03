@@ -1,26 +1,15 @@
-package com.dev.gis.app.view.listener.adac;
+package com.dev.gis.app.taskmanager.clubMobilView;
 
-import org.apache.log4j.Logger;
 import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 
-import com.dev.gis.app.taskmanager.testAppView.OfferViewUpdater;
+import com.dev.gis.app.view.listener.adac.AdacSelectOfferDoubleClickListener;
 import com.dev.gis.connector.api.OfferDo;
 
 
-public class AdacSelectOfferDoubleClickListener implements IDoubleClickListener {
+public class SelectOfferClubMobilDoubleClickListener extends AdacSelectOfferDoubleClickListener {
 	
-	protected Logger logger = Logger.getLogger(getClass());
-
-	public AdacSelectOfferDoubleClickListener() {
-		super();
-		logger.info("create AdacSelectOfferDoubleClickListener. ");
-
-	}
-
-
 	@Override
 	public void doubleClick(DoubleClickEvent event) {
 
@@ -31,7 +20,7 @@ public class AdacSelectOfferDoubleClickListener implements IDoubleClickListener 
 
 		OfferDo offer = (OfferDo) selectedNode;
 
-        new OfferViewUpdater().showOffer(offer);
+        new ClubMobilOfferViewUpdater().showOffer(offer);
 
 		logger.info("selectedNode " + offer);
 		

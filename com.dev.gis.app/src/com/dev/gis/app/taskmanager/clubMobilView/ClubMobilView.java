@@ -230,7 +230,7 @@ public class ClubMobilView extends RentCarsAppView {
 
 	@Override
 	protected IDoubleClickListener getSelectOfferDoubleClickListener() {
-		AdacSelectOfferDoubleClickListener ssd = new AdacSelectOfferDoubleClickListener();
+		SelectOfferClubMobilDoubleClickListener ssd = new SelectOfferClubMobilDoubleClickListener();
 		return ssd;
 	}
 
