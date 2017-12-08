@@ -51,7 +51,7 @@ public class ClubMobilCreateVehicleRequestUtils {
 		long dropoffCityId = AdacModelProvider.INSTANCE.dropoffCityId;
 		boolean locationExist = false;
 
-		if (AdacModelProvider.INSTANCE.locationType == 1 ) {
+		if (ClubMobilModelProvider.INSTANCE.locationType == 1 ) {
 			com.dev.gis.connector.joi.protocol.Station pickupStation = ClubMobilModelProvider.INSTANCE.pickupStation;
 			com.dev.gis.connector.joi.protocol.Station dropOffStation = ClubMobilModelProvider.INSTANCE.dropoffStation;
 			if ( dropOffStation == null)

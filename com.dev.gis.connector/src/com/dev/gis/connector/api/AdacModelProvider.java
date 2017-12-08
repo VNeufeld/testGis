@@ -79,7 +79,8 @@ public enum AdacModelProvider {
 
 	public void updateExtras(ExtraResponse response) {
 		extras.clear();
-		extras.addAll(response.getExtras());
+		if ( response.getExtras() != null)
+			extras.addAll(response.getExtras());
 	}
 
 

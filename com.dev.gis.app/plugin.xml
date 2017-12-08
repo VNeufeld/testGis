@@ -191,6 +191,23 @@
             name="ClubMobil Check Out Test"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.clubMobilView.ClubMobilOfferDetailView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.taskmanager.clubMobilView.ClubMobilOfferDetailView"
+            name="ClubMobil Offer Details"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.clubMobilView.ClubMobilBookingView"
+            icon="icons/sample.gif"
+            id="com.dev.gis.app.view.ClubMobilBookingView"
+            name="ClubMobil Booking View"
+            restorable="true">
+      </view>
+      
    </extension>
    <extension
          point="org.eclipse.ui.commands">

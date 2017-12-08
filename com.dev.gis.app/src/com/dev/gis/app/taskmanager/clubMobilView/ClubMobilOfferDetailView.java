@@ -3,6 +3,7 @@ package com.dev.gis.app.taskmanager.clubMobilView;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -24,6 +25,8 @@ import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.AdacModelProvider;
 import com.dev.gis.connector.api.AdacVehicleHttpService;
+import com.dev.gis.connector.api.ClubMobilHttpService;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.api.ModelProvider;
 import com.dev.gis.connector.api.OfferDo;
@@ -42,15 +45,15 @@ import com.dev.gis.connector.joi.protocol.VehicleResult;
 import com.dev.gis.connector.sunny.OfferInformation;
 
 public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
-	public static final String ID = "com.dev.gis.app.view.OfferDetailView";
+	private static Logger logger = Logger.getLogger(ClubMobilOfferDetailView.class);
+	
+	public static final String ID = "com.dev.gis.app.taskmanager.clubMobilView.ClubMobilOfferDetailView";
 
 	protected AdacVehicleInfoControl vehicleInfo;
-
-	//protected AdacLocationInfoControl locationInfoControl;
 	
 	protected Offer selectedOffer = null;
 
-	protected AdacExtraListTable extraListTable;
+	protected ClubMobilExtraListTable extraListTable;
 	
 	protected AdacInclusivesListTable inclusivesListTable;
 	
@@ -126,7 +129,7 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 		
 		VehicleResult vehicleResult = offerDo.getModel();
 		
-		AdacModelProvider.INSTANCE.setSelectedOffer(offerDo);
+		ClubMobilModelProvider.INSTANCE.setSelectedOffer(offerDo);
 		
 		if ( vehicleResult == null )
 			return;
@@ -205,14 +208,14 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 	@Override
 	protected  void addExtraGroup(Composite composite) {
 		final Group group = new Group(composite, SWT.TITLE);
-		group.setText("Extras:");
+		group.setText("CM Extras:");
 		group.setLayout(new GridLayout(1, true));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
 		.grab(true, true).applyTo(group);
 		
 		new ButtonControl(group, "Get Extras", 0,  new AddGetExtrasListener());
 		
-		extraListTable = new AdacExtraListTable(getSite(), group, null);
+		extraListTable = new ClubMobilExtraListTable(getSite(), group, null);
 		
 
 	}
@@ -241,7 +244,7 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 
 	@Override
 	protected SelectionListener getBookingViewSelectionListener() {
-		AddBookingListener listener = new AddBookingListener();
+		AddClubMobilBookingListener listener = new AddClubMobilBookingListener();
 		return listener;
 	}
 
@@ -330,12 +333,12 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 	}
 	
 
-	protected class AddBookingListener extends AbstractListener {
+	protected class AddClubMobilBookingListener extends AbstractListener {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			List<Extra> extras = extraListTable.getSelectedExtras();
-			BookingView.updateView(extras);
+			ClubMobilBookingView.updateView(extras);
 
 		}
 
@@ -347,9 +350,20 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 		public void widgetSelected(SelectionEvent arg0) {
 			
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
-			ExtraResponse response  = service.getExtras(selectedOffer);
-			extraListTable.refresh(response);
+			ClubMobilHttpService service = serviceFactory
+					.getClubMobilleJoiService();
+			
+			try {
+				ExtraResponse response  = service.getExtras(selectedOffer);
+				
+				ClubMobilUtils.showErrors(response);
+				
+				extraListTable.refresh(response);
+			}
+			catch(Exception err) {
+				logger.error(err.getMessage(),err);
+				ClubMobilUtils.showErrors(err.getClass().getSimpleName() + " " +err.getMessage());
+			}
 		}
 	}
 

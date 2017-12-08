@@ -11,7 +11,7 @@ public class LanguageComboBox extends ObjectsComboBox{
 	
 	private static Logger logger = Logger.getLogger(LanguageComboBox.class);
 	
-	private final static String items[] = { "deu ( DE )", "eng ( EN) " };
+	private final static String items[] = { "deu ( DE )", "eng ( EN) ", "ned ( NL )" };
 	
 	public LanguageComboBox(Composite parent, int size) {
 		super(parent, size, false);
@@ -46,6 +46,8 @@ public class LanguageComboBox extends ObjectsComboBox{
 		String selectedLanguage;
 		if ( st.contains("EN"))
 			selectedLanguage = "EN";
+		else if ( st.contains("NL"))
+			selectedLanguage = "NL";
 		else
 			selectedLanguage = "DE";
 		

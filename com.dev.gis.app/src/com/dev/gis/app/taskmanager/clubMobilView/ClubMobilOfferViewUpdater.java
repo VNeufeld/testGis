@@ -5,7 +5,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import com.dev.gis.app.taskmanager.testAppView.OfferDetailView;
 import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 
@@ -13,7 +12,7 @@ public class ClubMobilOfferViewUpdater  {
 	private Logger logger = Logger.getLogger(ClubMobilOfferViewUpdater.class);
 	private int instanceNum = 0;
 	
-	private String viewID = OfferDetailView.ID;
+	private String viewID = ClubMobilOfferDetailView.ID;
 
 	public ClubMobilOfferViewUpdater() {
 	}
