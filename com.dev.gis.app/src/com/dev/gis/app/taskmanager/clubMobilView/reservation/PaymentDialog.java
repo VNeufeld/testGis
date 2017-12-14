@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.clubMobilView;
+package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
 import java.io.IOException;
 
@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import com.bpcs.mdcars.model.ReservationDetails;
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;

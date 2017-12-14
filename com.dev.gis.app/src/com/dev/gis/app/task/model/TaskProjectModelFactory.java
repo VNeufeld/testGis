@@ -69,7 +69,10 @@ public class TaskProjectModelFactory {
 		add(TaskItem.createTask("ClubMobil", "folder_edit.png", "ClubMobil APP"));
 
 		defaultGroup.getTasks().
-		add(TaskItem.createTask("CM CheckOut", "folder_edit.png", "ClubMobil CheckOut APP"));
+		add(TaskItem.createTask("CM Reservation", "folder_edit.png", "ClubMobil CheckOut APP"));
+
+		defaultGroup.getTasks().
+		add(TaskItem.createTask("CM Disposition", "folder_edit.png", "ClubMobil Disposition APP"));
 		
 	}
 

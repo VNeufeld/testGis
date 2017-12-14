@@ -12,15 +12,18 @@ import org.eclipse.ui.PlatformUI;
 
 import com.bpcs.mdcars.model.Person;
 import com.bpcs.mdcars.model.ReservationDetails;
+import com.dev.gis.app.taskmanager.clubMobilView.reservation.ClubMobilPaymentControl;
+import com.dev.gis.app.taskmanager.clubMobilView.reservation.ClubMobilReservationListControl;
+import com.dev.gis.app.taskmanager.clubMobilView.reservation.ClubMobilSaveReservationControl;
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.task.execution.api.IEditableTask;
 
-public class ClubMobilCheckOutView extends RentCarsAppView {
+public class ClubMobilReservationView extends RentCarsAppView {
 	
-	private static Logger logger = Logger.getLogger(ClubMobilCheckOutView.class);
+	private static Logger logger = Logger.getLogger(ClubMobilReservationView.class);
 
-	public static final String ID = IEditableTask.ID_ClubMobilCheckOutView;
+	public static final String ID = IEditableTask.ID_ClubMobilReservationView;
 	
 	private ClubMobilCustomerControl clubMobilCustomerControl;
 	
@@ -49,7 +52,7 @@ public class ClubMobilCheckOutView extends RentCarsAppView {
 		
 		clubMobilPaymentControl = new ClubMobilPaymentControl(composite);
 
-		new ClubMobilSaveReservationControl(composite);	
+		new ClubMobilSaveReservationControl(composite, clubMobilResControl);	
 	}
 
 	
@@ -75,7 +78,7 @@ public class ClubMobilCheckOutView extends RentCarsAppView {
 					logger.info(" showResult : run instanceNum = "+1 );
 					// Show protocol, show results
 					IWorkbenchPage   wp = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					ClubMobilCheckOutView viewPart =  (ClubMobilCheckOutView)wp.showView(
+					ClubMobilReservationView viewPart =  (ClubMobilReservationView)wp.showView(
 							ID, 
 							Integer.toString(1), 
 							IWorkbenchPage.VIEW_ACTIVATE);

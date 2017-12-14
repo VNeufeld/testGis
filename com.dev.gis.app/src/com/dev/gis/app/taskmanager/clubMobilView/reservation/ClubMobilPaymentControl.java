@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.clubMobilView;
+package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
 import com.bpcs.mdcars.model.ReservationDetails;
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;

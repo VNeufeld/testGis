@@ -9,7 +9,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.bpcs.mdcars.json.protocol.CredentialResponse;
+import com.bpcs.mdcars.json.protocol.DispositionDetailRequest;
+import com.bpcs.mdcars.json.protocol.DispositionListResponse;
+import com.bpcs.mdcars.json.protocol.DispositionResponse;
 import com.bpcs.mdcars.json.protocol.GetCustomerResponse;
+import com.bpcs.mdcars.json.protocol.GetDispoListRequest;
 import com.bpcs.mdcars.json.protocol.ReservationListFilterRequest;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
@@ -46,7 +50,8 @@ public class ClubMobilHttpService {
 	public static String CLUBMOBIL_CREDENTIALS = "/credentials";
 	public static String CLUBMOBIL_CREDENTIALS_GETTOKEN = "/credentials/getToken";
 	public static String CLUBMOBIL_MASTERDATA = "/masterdata";
-	public static String CLUBMOBIL_CHECKOUT = "/checkOut";
+	public static String CLUBMOBIL_RESERVATION = "/reservation";
+	public static String CLUBMOBIL_DISPOSITION = "/disposition";
 	
 	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?ratingView=1&sort=asc&pageSize=";
 	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
@@ -657,7 +662,7 @@ public class ClubMobilHttpService {
 			logger.info("getStations Request = "+uri);
 			
 			response =  httpClient.sendGetRequest(uri);
-			logger.info("response = "+response);
+			logger.info("getStations response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, StationResponse.class);
 			
 		} catch ( IOException e) {
@@ -678,7 +683,7 @@ public class ClubMobilHttpService {
 			logger.info("getStationInfo Request = "+uri);
 			
 			response =  httpClient.sendGetRequest(uri);
-			logger.info("response = "+response);
+			logger.info("getStationInfo response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, Station.class);
 			
 		} catch ( IOException e) {
@@ -738,10 +743,10 @@ public class ClubMobilHttpService {
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(credentialRequest);
-			logger.info(" request = "+request);
+			logger.info("changePwd request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("response = "+response);
+			logger.info("changePwd response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, CredentialResponse.class);
 			
 		} catch ( IOException e) {
@@ -754,6 +759,7 @@ public class ClubMobilHttpService {
 
 	public GetCustomerResponse getCustomer(String customerNo) {
 		try {
+			logger.info("getCustomer GETRequest customerNo = "+customerNo);
 			
 			
 			String link = CLUBMOBIL_MASTERDATA+ "/getCustomer";
@@ -762,7 +768,7 @@ public class ClubMobilHttpService {
 			URI uri = getServerURI(link);
 
 			String response =  httpClient.sendGetRequest(uri);
-			logger.info("response = "+response);
+			logger.info("getCustomer response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, GetCustomerResponse.class);
 			
 		} catch ( IOException e) {
@@ -777,7 +783,7 @@ public class ClubMobilHttpService {
 		try {
 			
 			
-			String link = CLUBMOBIL_CHECKOUT+ "/reservationList";
+			String link = CLUBMOBIL_RESERVATION+ "/reservationList";
 			
 			ReservationListFilterRequest reservationListFilterRequest = new ReservationListFilterRequest();
 			reservationListFilterRequest.setName(criterium);
@@ -785,10 +791,10 @@ public class ClubMobilHttpService {
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(reservationListFilterRequest);
-			logger.info(" request = "+request);
+			logger.info("getReservationList request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("response = "+response);
+			logger.info("getReservationList response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, ReservationListResponse.class);
 			
 		} catch ( IOException e) {
@@ -803,7 +809,7 @@ public class ClubMobilHttpService {
 		try {
 			
 			
-			String link = CLUBMOBIL_CHECKOUT+ "/getReservation";
+			String link = CLUBMOBIL_RESERVATION+ "/getReservation";
 			
 			ReservationListFilterRequest reservationListFilterRequest = new ReservationListFilterRequest();
 			reservationListFilterRequest.setName(reservationId.toString());
@@ -811,10 +817,10 @@ public class ClubMobilHttpService {
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(reservationListFilterRequest);
-			logger.info(" request = "+request);
+			logger.info("getReservation request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("response = "+response);
+			logger.info("getReservation response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, ReservationResponse.class);
 			
 		} catch ( IOException e) {
@@ -829,16 +835,16 @@ public class ClubMobilHttpService {
 		try {
 			
 			
-			String link = CLUBMOBIL_CHECKOUT+ "/payment/put";
+			String link = CLUBMOBIL_RESERVATION+ "/payment/put";
 			
 
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(payment);
-			logger.info(" request = "+request);
+			logger.info("putPayment request = "+request);
 
 			String response =  httpClient.startPutRequestAsJson(uri, request);
-			logger.info("response = "+response);
+			logger.info("putPayment response = "+response);
 			
 		} catch ( IOException e) {
 			logger.error(e,e);
@@ -847,22 +853,68 @@ public class ClubMobilHttpService {
 		}
 	}
 	
-	public ReservationResponse saveReservation() {
+	public ReservationResponse checkOutReservation() {
 		try {
 			
 			
-			String link = CLUBMOBIL_CHECKOUT+ "/saveReservation";
+			String link = CLUBMOBIL_RESERVATION+ "/checkOut";
 			
 			ReservationListFilterRequest reservationListFilterRequest = new ReservationListFilterRequest();
 
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(reservationListFilterRequest);
-			logger.info(" request = "+request);
+			logger.info("checkOutReservation request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("response = "+response);
+			logger.info("checkOutReservation response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, ReservationResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public DispositionListResponse getDispositionList(GetDispoListRequest getDispoListRequest) {
+
+		try {
+			
+			String link = CLUBMOBIL_DISPOSITION+ "/dispositionList";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(getDispoListRequest);
+			logger.info("getDispositionList request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("getDispositionList response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DispositionListResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public DispositionResponse addDisposition(DispositionDetailRequest dispositionDetailRequest) {
+
+		try {
+			
+			String link = CLUBMOBIL_DISPOSITION+ "/addDispo";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(dispositionDetailRequest);
+			logger.info("addDispo request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("addDispo response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DispositionResponse.class);
 			
 		} catch ( IOException e) {
 			logger.error(e,e);

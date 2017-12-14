@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bpcs.mdcars.json.protocol.DispositionListResponse;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Customer;
 import com.bpcs.mdcars.model.ReservationDetails;
+import com.bpcs.mdcars.model.ReservationInfo;
 import com.dev.gis.connector.joi.protocol.BodyStyleText;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
@@ -37,7 +39,11 @@ public enum ClubMobilModelProvider {
 	
 	public ReservationListResponse reservationListResponse;
 	
+	public DispositionListResponse dispositionListResponse;
+	
 	public ReservationDetails  selectedReservation;
+
+	public ReservationInfo  selectedReservationInfo;
 	
 	
 	private final List<OfferDo> offerDos = new ArrayList<OfferDo>();
@@ -100,6 +106,7 @@ public enum ClubMobilModelProvider {
 	public Station pickupStation;
 	public Station dropoffStation;
 
+	public Station dispoStation;
 
 
 	public void updateExtras(ExtraResponse response) {

@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.clubMobilView;
+package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -9,6 +9,7 @@ import org.eclipse.jface.viewers.TableViewer;
 
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.bpcs.mdcars.model.ReservationInfo;
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilReservationView;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
@@ -44,7 +45,7 @@ public class ClubMobilSelectReservationDoubleClickListener implements IDoubleCli
 			ReservationResponse reservationResponse = service.getReservation(reservation.getReservationId());
 			logger.info("select reservation " + reservationResponse.getReservationDetails().getReservationId());
 			ClubMobilModelProvider.INSTANCE.selectedReservation = reservationResponse.getReservationDetails();
-			ClubMobilCheckOutView.updateCustomerControl(" selected reservation ");
+			ClubMobilReservationView.updateCustomerControl(" selected reservation ");
 			
 			
 

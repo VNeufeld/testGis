@@ -40,8 +40,6 @@ public class JsonUtils {
 		//String result = mapper.writerWithDefaultPrettyPrinter(  ).writeValueAsString( request );
 		String result = mapper.writeValueAsString( request );
 		
-		System.out.println("result " + result);
-		
 		return result;
 	}
 	

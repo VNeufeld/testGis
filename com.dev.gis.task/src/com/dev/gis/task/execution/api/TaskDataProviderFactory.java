@@ -2,9 +2,10 @@ package com.dev.gis.task.execution.api;
 
 import javax.xml.bind.JAXBException;
 
-import com.dev.gis.task.execution.impl.ClubMobilCheckOutDataProvider;
-import com.dev.gis.task.execution.impl.ClubMobilCheckOutTask;
+import com.dev.gis.task.execution.impl.ClubMobilReservationDataProvider;
+import com.dev.gis.task.execution.impl.ClubMobilReservationTask;
 import com.dev.gis.task.execution.impl.ClubMobilDataProvider;
+import com.dev.gis.task.execution.impl.ClubMobilDispositionDataProvider;
 import com.dev.gis.task.execution.impl.DefaultTaskDataProvider;
 import com.dev.gis.task.execution.impl.EmlDataProvider;
 import com.dev.gis.task.execution.impl.GoogleMapDataProvider;
@@ -58,8 +59,12 @@ public class TaskDataProviderFactory {
 			ClubMobilDataProvider dataProvider = new ClubMobilDataProvider();
 			return dataProvider;
 		}
-		else if ( name.contains("CM CheckOut")) {
-			ClubMobilCheckOutDataProvider dataProvider = new ClubMobilCheckOutDataProvider();
+		else if ( name.contains("CM Reservation")) {
+			ClubMobilReservationDataProvider dataProvider = new ClubMobilReservationDataProvider();
+			return dataProvider;
+		}
+		else if ( name.contains("CM Disposition")) {
+			ClubMobilDispositionDataProvider dataProvider = new ClubMobilDispositionDataProvider();
 			return dataProvider;
 		}
 		

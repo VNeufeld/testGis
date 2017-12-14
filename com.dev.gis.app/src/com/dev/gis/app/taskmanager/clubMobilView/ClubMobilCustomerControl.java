@@ -64,7 +64,7 @@ public class ClubMobilCustomerControl extends BasicControl {
 					if ( customer != null) {
 						ClubMobilModelProvider.INSTANCE.customer = customer;
 						Person person = customer.getPerson();
-						result.setValue("Customer : MemberNo : " + customer.getCustomerNo()+ " Person : "+ person.getName() + "," + person.getFirstName() );
+						result.setValue("Customer : MemberNo : " + customer.getCommonCustomerInfo().getCustomerNo()+ " Person : "+ person.getName() + "," + person.getFirstName() );
 					}
 					else {
 						ClubMobilModelProvider.INSTANCE.customer = null;

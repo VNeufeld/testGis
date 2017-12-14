@@ -90,12 +90,8 @@ public class GisHttpClient {
 			String response = httpclient.execute(httpget, getResponseHandler(),
 					localContext);
 			
-			logger.info("response = " + response);
-			logger.info("localContext " + localContext.toString());
-			
-			String sessionId = (String)localContext.getAttribute("JSESSIONID");
-			logger.info("sessionId " + sessionId);
-			
+//			logger.info("response = " + response);
+			logger.debug("localContext " + localContext.toString());
 			
 			return response;
 
@@ -130,14 +126,13 @@ public class GisHttpClient {
 			String response = httpclient.execute(httpget, getResponseHandler(),
 					localContext);
 			
-			logger.info("localContext " + localContext.toString());
+			//logger.info("localContext " + localContext.toString());
 			
 			String sessionId = (String)localContext.getAttribute("JSESSIONID");
-			logger.info("sessionId " + sessionId);
 			
 			CookieStore cookieStore = httpclient.getCookieStore();
-			logger.info("cookieStore " + cookieStore);
-			logger.info("response = " + response);
+			//logger.info("cookieStore " + cookieStore);
+			//logger.info("response = " + response);
 			
 			return response;
 
@@ -187,14 +182,10 @@ public class GisHttpClient {
 	
 			String response = httpclient.execute(httpPost, getResponseHandler(),
 					localContext);
-			logger.info("response = " + response);
-			logger.info("localContext " + localContext.toString());
+			logger.debug("localContext " + localContext.toString());
 			
-			String sessionId = (String)localContext.getAttribute("JSESSIONID");
-			logger.info("sessionId " + sessionId);
-			
-	
-			logger.info("----------------------------------------");
+//			String sessionId = (String)localContext.getAttribute("JSESSIONID");
+//			logger.info("sessionId " + sessionId);
 	
 			return response;
 		}
@@ -241,12 +232,9 @@ public class GisHttpClient {
 			String response = httpclient.execute(httput, getResponseHandler(),
 					localContext);
 	
-			logger.info("response = " + response);
-			logger.info("localContext " + localContext.toString());
+			logger.debug("localContext " + localContext.toString());
 	
 			CookieStore cookieStore = httpclient.getCookieStore();
-			logger.info("cookieStore " + cookieStore);
-			logger.info("----------------------------------------");
 	
 			return response;
 		}

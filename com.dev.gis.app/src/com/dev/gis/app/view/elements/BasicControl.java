@@ -2,6 +2,7 @@ package com.dev.gis.app.view.elements;
 
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -103,6 +104,15 @@ public class BasicControl {
 					.applyTo(groupResult);
 
 		return groupResult;
+	}
+
+	protected void showErrors(com.dev.gis.connector.sunny.Error error) {
+		
+		String message = "";
+		message = message + error.getErrorNumber()+ "  "+ error.getErrorText() + " " + error.getErrorType() + " ;";
+		MessageDialog.openError(
+				null,"Error",message);
+		
 	}
 	
 }

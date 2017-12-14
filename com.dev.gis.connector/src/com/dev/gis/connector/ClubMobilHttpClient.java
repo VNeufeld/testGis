@@ -70,10 +70,10 @@ public class ClubMobilHttpClient extends GisHttpClient {
 
 			URI uri = getServerURI(CLUBMOBIL_CREDENTIALS_GETTOKEN);
 			
-			logger.info("getToken Request = "+uri);
+			//logger.info("getToken Request = "+uri);
 			
 			response =  sendGetRequestWithoutToken(uri);
-			logger.info("response = "+response);
+			//logger.info("getToken response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, Token.class);
 			
 		} catch ( IOException e) {

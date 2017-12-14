@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.clubMobilView;
+package com.dev.gis.app.taskmanager.clubMobilView.dispo;
 
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -7,15 +7,20 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPartSite;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
+import com.bpcs.mdcars.model.DispositionInfo;
 import com.bpcs.mdcars.model.ReservationInfo;
 import com.dev.gis.app.view.elements.AbstractListTable;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 
-public class ClubMobilReservationListTable extends AbstractListTable {
+public class ClubMobilDispostionListTable extends AbstractListTable {
 	
-	
-	public ClubMobilReservationListTable(IWorkbenchPartSite site,final Composite parent, 
+	final DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+
+	public ClubMobilDispostionListTable(IWorkbenchPartSite site,final Composite parent, 
 			IDoubleClickListener selectOfferListener, 
 			ISelectionChangedListener selectionChangedListener  ) {
 		super(site,parent,selectOfferListener,selectionChangedListener);
@@ -23,16 +28,16 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-	    String[] titles = { "ResNo", "Pos", "ResId", "Name", "Car",  "Price" };
-	    int[] bounds = { 100, 50, 100, 300, 300,  200};
+	    String[] titles = { "DispoNo", "CarId", "StationId", "ScheduleFrom", "ScheduleTo",  "" };
+	    int[] bounds = { 100, 250, 250, 300, 300,  10};
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	ReservationInfo o = (ReservationInfo) element;
-	        return o.getReservationNo();
+	    	DispositionInfo o = (DispositionInfo) element;
+	        return ""+o.getId();
 	      }
 	    });
 	    
@@ -40,11 +45,11 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	ReservationInfo o = (ReservationInfo) element;
-	    	if ( o.getResPosNo() != null)
-	    		return o.getResPosNo().toString();
+	    	DispositionInfo o = (DispositionInfo) element;
+	    	if ( o.getCarId() != null)
+	    		return o.getCarId().toString();
 	    	else
-	    		return "1";
+	    		return "-1";
 	      }
 	    });
 	    
@@ -54,9 +59,9 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	ReservationInfo o = (ReservationInfo) element;
-	    	if ( o.getReservationId() != null)
-	    		return o.getReservationId().toString();
+	    	DispositionInfo o = (DispositionInfo) element;
+	    	if ( o.getStationId() != null)
+	    		return o.getStationId().toString();
 	    	else
 	    		return "0";
 	      }
@@ -66,8 +71,13 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	ReservationInfo o = (ReservationInfo) element;
-    		return o.getCustomer().getPerson().getName();
+	    	DispositionInfo o = (DispositionInfo) element;
+	    	if ( o.getScheduleFrom() != null) {
+		    	DateTime dt = new DateTime(o.getScheduleFrom().toDate());
+	    		return dt.toString(timeFormatter);
+	    	}
+	    	else
+	    		return "";
 	      }
 	    });
 
@@ -75,8 +85,13 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	ReservationInfo o = (ReservationInfo) element;
-    		return o.getCarType() + "/" + o.getCarGroupId();
+	    	DispositionInfo o = (DispositionInfo) element;
+	    	if ( o.getScheduleTo() != null) {
+		    	DateTime dt = new DateTime(o.getScheduleTo().toDate());
+	    		return dt.toString(timeFormatter);
+	    	}
+	    	else
+	    		return "";
 	      }
 	    });
 	    
@@ -85,8 +100,7 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	ReservationInfo o = (ReservationInfo) element;
-    		return o.getPrice().toString();
+    		return "";
 	      }
 
 	    });
@@ -97,8 +111,8 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 
 	@Override
 	public void update() {
-		if ( ClubMobilModelProvider.INSTANCE.reservationListResponse != null)
-			getViewer().setInput(ClubMobilModelProvider.INSTANCE.reservationListResponse.getBookingList());
+		if ( ClubMobilModelProvider.INSTANCE.dispositionListResponse != null)
+			getViewer().setInput(ClubMobilModelProvider.INSTANCE.dispositionListResponse.getDispoList());
 		else
 			getViewer().setInput(null);
 		getViewer().refresh();

@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.clubMobilView;
+package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -17,8 +17,6 @@ import com.bpcs.mdcars.model.ReservationDetails;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
-import com.dev.gis.app.view.listener.adac.AdacSelectChangedOfferClickListener;
-import com.dev.gis.app.view.listener.adac.AdacSelectOfferDoubleClickListener;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
@@ -128,9 +126,8 @@ public class ClubMobilReservationListControl extends BasicControl {
 	}
 	
 	protected ISelectionChangedListener getSelectChangedReservationClickListener() {
-//		AdacSelectChangedOfferClickListener ss = new AdacSelectChangedOfferClickListener(offerId);
-//		return ss;
-		return null;
+		ClubMobilSelectReservationListener ss = new ClubMobilSelectReservationListener(result);
+		return ss;
 	}
 
 	protected IDoubleClickListener getSelectReservationDoubleClickListener() {
@@ -144,6 +141,10 @@ public class ClubMobilReservationListControl extends BasicControl {
 		
 		result.setValue(details.getReservationNo());
 		
+	}
+
+	public ClubMobilReservationListTable getReservationListTable() {
+		return reservationListTable;
 	}
 
 

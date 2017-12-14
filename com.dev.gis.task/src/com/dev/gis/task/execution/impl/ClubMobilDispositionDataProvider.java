@@ -6,13 +6,13 @@ import com.dev.gis.task.execution.api.ITask;
 import com.dev.gis.task.execution.api.ITaskDataProvider;
 import com.dev.gis.task.execution.impl.AbstractDataProvider;
 
-public class ClubMobilCheckOutDataProvider extends AbstractDataProvider implements ITaskDataProvider {
-	private ClubMobilCheckOutTask task = null;
+public class ClubMobilDispositionDataProvider extends AbstractDataProvider implements ITaskDataProvider {
+	private ClubMobilDispositionTask task = null;
 
 
-	public ClubMobilCheckOutDataProvider() {
+	public ClubMobilDispositionDataProvider() {
 		super(null);
-		this.task = new ClubMobilCheckOutTask();
+		this.task = new ClubMobilDispositionTask();
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class ClubMobilCheckOutDataProvider extends AbstractDataProvider implemen
 
 	@Override
 	public void loadTask(String name) throws JAXBException {
-		task = new ClubMobilCheckOutTask();
+		task = new ClubMobilDispositionTask();
 		
 	}
 

@@ -35,7 +35,7 @@ public class ClubMobilStationSearch extends CityLocationSearch {
 	
 	
 	private boolean isPickup = true;
-	private Text text;
+	protected Text text;
 
 
 	public static void createPickupCityLocationSearch(Composite parent) {
@@ -52,7 +52,7 @@ public class ClubMobilStationSearch extends CityLocationSearch {
 		
 	}
 	
-	private ClubMobilStationSearch(Composite parent, String label) {
+	protected ClubMobilStationSearch(Composite parent, String label) {
 		super(parent, label);
 
 	}
