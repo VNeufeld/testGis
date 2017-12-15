@@ -30,16 +30,14 @@ public class CheckOutDialog extends AbstractReservationDialog {
 		reservationNo = new ObjectTextControl(composite, 300, true, "ReservationNo");
 
 		Composite ccc = createComposite(composite, 3, -1, true);
-		customerNoTextControl = new CustomerNoTextControl(ccc, 300, true);
+		customerNoTextControl = new CustomerNoTextControl(ccc, 300, false);
 		new ButtonControl(ccc, "edit Customer", 0,  null);
 
-		Composite cc = createComposite(composite, 3, -1, true);
-		carInfo = new ObjectTextControl(cc, 300, false, "Car Info");
-		new ButtonControl(cc, "select Car   ", 0,  null);
+		carInfo = new ObjectTextControl(ccc, 300, false, "Car Info");
+		new ButtonControl(ccc, "select Car   ", 0,  null);
 
-		Composite cce = createComposite(composite, 3, -1, true);
-		extras = new ObjectTextControl(cce, 300, false, "Extras");
-		new ButtonControl(cce, "select Extras", 0,  null);
+		extras = new ObjectTextControl(ccc, 300, false, "Extras");
+		new ButtonControl(ccc, "select Extras", 0,  null);
 		
 
 		if ( ClubMobilModelProvider.INSTANCE.selectedReservationInfo  != null)
