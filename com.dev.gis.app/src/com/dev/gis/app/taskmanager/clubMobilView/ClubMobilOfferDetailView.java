@@ -53,7 +53,7 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 	
 	protected Offer selectedOffer = null;
 
-	protected ClubMobilExtraListTable extraListTable;
+	//protected ClubMobilExtraListTable extraListTable;
 	
 	protected AdacInclusivesListTable inclusivesListTable;
 	
@@ -72,6 +72,8 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 	protected OutputTextControls location = null;
 	
 	protected OutputTextControls recalculateResponse = null;
+	
+	private ClubMobilExtrasControl clubMobilExtrasControl;
 
 	
 
@@ -178,7 +180,7 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 		
 		//locationInfoControl.update(offerDo.getTravelInformation());
 		
-		extraListTable.refresh(new ExtraResponse());
+		clubMobilExtrasControl.refresh(new ExtraResponse());
 
 	}
 
@@ -207,16 +209,8 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 	
 	@Override
 	protected  void addExtraGroup(Composite composite) {
-		final Group group = new Group(composite, SWT.TITLE);
-		group.setText("CM Extras:");
-		group.setLayout(new GridLayout(1, true));
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-		.grab(true, true).applyTo(group);
 		
-		new ButtonControl(group, "Get Extras", 0,  new AddGetExtrasListener());
-		
-		extraListTable = new ClubMobilExtraListTable(getSite(), group, null);
-		
+		clubMobilExtrasControl = new ClubMobilExtrasControl(composite);
 
 	}
 	
@@ -337,36 +331,12 @@ public class ClubMobilOfferDetailView extends RentCarOfferDetailBasicView {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
-			List<Extra> extras = extraListTable.getSelectedExtras();
+			List<Extra> extras = clubMobilExtrasControl.getSelectedExtras();
 			ClubMobilBookingView.updateView(extras);
 
 		}
 
 	}
-
-	protected class AddGetExtrasListener extends AbstractListener {
-
-		@Override
-		public void widgetSelected(SelectionEvent arg0) {
-			
-			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			ClubMobilHttpService service = serviceFactory
-					.getClubMobilleJoiService();
-			
-			try {
-				ExtraResponse response  = service.getExtras(selectedOffer);
-				
-				ClubMobilUtils.showErrors(response);
-				
-				extraListTable.refresh(response);
-			}
-			catch(Exception err) {
-				logger.error(err.getMessage(),err);
-				ClubMobilUtils.showErrors(err.getClass().getSimpleName() + " " +err.getMessage());
-			}
-		}
-	}
-
 	
 
 }

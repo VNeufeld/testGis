@@ -5,6 +5,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilEquipmentsControl;
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilExtrasControl;
 import com.dev.gis.app.taskmanager.clubMobilView.CustomerNoTextControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
@@ -19,6 +21,8 @@ public class CheckOutDialog extends AbstractReservationDialog {
 	private ObjectTextControl carInfo;
 
 	private ObjectTextControl extras;
+	
+	private ClubMobilEquipmentsControl clubMobilExtrasControl;
 	
 	public CheckOutDialog(Shell parentShell, ClubMobilReservationListControl clubMobilResControl) {
 		super(parentShell);
@@ -38,6 +42,8 @@ public class CheckOutDialog extends AbstractReservationDialog {
 
 		extras = new ObjectTextControl(ccc, 300, false, "Extras");
 		new ButtonControl(ccc, "select Extras", 0,  null);
+		
+		clubMobilExtrasControl = new ClubMobilEquipmentsControl(composite);
 		
 
 		if ( ClubMobilModelProvider.INSTANCE.selectedReservationInfo  != null)

@@ -262,7 +262,8 @@ public class ClubMobilHttpService {
 		}
 
 	}
-	
+
+
 	public StationResponse getPickupStations(Offer offer) {
 		String response = "PickupStations ";
 		try {
@@ -924,5 +925,30 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
+	public ExtraResponse getEquipments() {
+		ExtraResponse extraResponse =  null;
+		try {
+
+			String link = CLUBMOBIL_RESERVATION+ "/equipments";
+			URI uri = getServerURI(link);
+
+			logger.info("GetEquipments Request = "+uri);
+			
+			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();
+			if ( dummy)
+				extraResponse = getExtrasDummy();
+			else {
+				String response =  httpClient.sendGetRequest(uri);
+				logger.info("response = "+response);
+				extraResponse = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
+			}
+			return extraResponse;
+			
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
+		}
+
+	}
 	
 }
