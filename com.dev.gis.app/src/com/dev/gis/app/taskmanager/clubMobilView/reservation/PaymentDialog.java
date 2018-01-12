@@ -13,7 +13,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bpcs.mdcars.model.CreditCard;
 import com.bpcs.mdcars.model.ReservationDetails;
+import com.bpcs.mdcars.protocol.Payment;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
@@ -74,11 +76,22 @@ public class PaymentDialog extends Dialog {
 				
 				String creditCardNo = creditCardNoCtrl.getSelectedValue();
 				ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
-				
-				details.getPayment().getCard().setCardNumber(creditCardNo);
-				
-						
-				service.putPayment(details.getPayment());
+				if ( details != null) {
+					if ( details.getPaymentTransactions().isEmpty()){
+						com.bpcs.mdcars.model.Payment payment = new com.bpcs.mdcars.model.Payment();
+						details.getPaymentTransactions().add(payment);
+					}
+					
+					if ( !details.getPaymentTransactions().isEmpty()){
+						com.bpcs.mdcars.model.Payment payment = details.getPaymentTransactions().get(0);
+					
+						if ( payment.getCard() == null)
+							payment.setCard(new CreditCard());
+						payment.getCard().setCardNumber(creditCardNo);
+							
+						service.putPayment(payment);
+					}
+				}
 				
 				closeOk();
 					

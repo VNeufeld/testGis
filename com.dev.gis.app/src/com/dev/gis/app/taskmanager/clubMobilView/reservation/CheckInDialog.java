@@ -7,26 +7,24 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilEquipmentsControl;
-import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilExtrasControl;
-import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilReservationExtrasControl;
 import com.dev.gis.app.taskmanager.clubMobilView.CustomerNoTextControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 
-public class CheckOutDialog extends AbstractReservationDialog {
+public class CheckInDialog extends AbstractReservationDialog {
 	
 	private CustomerNoTextControl customerNoTextControl;
 	
 	private ObjectTextControl reservationNo;
 
 	private ObjectTextControl carInfo;
-
+	
 	private final Shell shell;
 	
 	private ClubMobilReservationListControl clubMobilResControl;
 	
-	public CheckOutDialog(Shell parentShell, ClubMobilReservationListControl clubMobilResControl) {
+	public CheckInDialog(Shell parentShell, ClubMobilReservationListControl clubMobilResControl) {
 		super(parentShell);
 		this.shell = parentShell;
 		this.clubMobilResControl =  clubMobilResControl;
@@ -44,8 +42,7 @@ public class CheckOutDialog extends AbstractReservationDialog {
 		carInfo = new ObjectTextControl(ccc, 300, false, "Car Info");
 		new ButtonControl(ccc, "select Car   ", 0,  null);
 
-		
-		new ClubMobilReservationExtrasControl(composite);
+		new ClubMobilEquipmentsControl(composite);
 		
 		if ( ClubMobilModelProvider.INSTANCE.selectedReservationInfo  != null)
 			reservationNo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservationInfo.getReservationNo());
@@ -56,7 +53,7 @@ public class CheckOutDialog extends AbstractReservationDialog {
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		
-		createButton(parent, IDialogConstants.OK_ID, "Check Out",
+		createButton(parent, IDialogConstants.OK_ID, "Check In",
 				false);
 
 		createButton(parent, IDialogConstants.CANCEL_ID,

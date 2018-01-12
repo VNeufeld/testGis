@@ -42,10 +42,7 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	ReservationInfo o = (ReservationInfo) element;
-	    	if ( o.getResPosNo() != null)
-	    		return o.getResPosNo().toString();
-	    	else
-	    		return "1";
+    		return ""+o.getReservationPosNo();
 	      }
 	    });
 	    
@@ -56,10 +53,7 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	ReservationInfo o = (ReservationInfo) element;
-	    	if ( o.getReservationId() != null)
-	    		return o.getReservationId().toString();
-	    	else
-	    		return "0";
+    		return ""+o.getRentalId();
 	      }
 	    });
 
@@ -77,7 +71,7 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	ReservationInfo o = (ReservationInfo) element;
-    		return o.getCarType() + "/" + o.getCarGroupId();
+    		return o.getCarType() + "/" + o.getCarCategoryId();
 	      }
 	    });
 	    
@@ -99,7 +93,7 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	@Override
 	public void update() {
 		if ( ClubMobilModelProvider.INSTANCE.reservationListResponse != null)
-			getViewer().setInput(ClubMobilModelProvider.INSTANCE.reservationListResponse.getBookingList());
+			getViewer().setInput(ClubMobilModelProvider.INSTANCE.reservationListResponse.getReservationInfoList());
 		else
 			getViewer().setInput(null);
 		getViewer().refresh();

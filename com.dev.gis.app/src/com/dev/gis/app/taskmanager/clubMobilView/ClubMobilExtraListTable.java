@@ -37,6 +37,7 @@ public class ClubMobilExtraListTable extends AdacExtraListTable {
 		ClubMobilModelProvider.INSTANCE.updateExtras(response);
 		getViewer().setInput(ClubMobilModelProvider.INSTANCE.getExtras());
 		getViewer().refresh();
+		logger.info("refresh CM Extras" + ClubMobilModelProvider.INSTANCE.getExtras().size());
 		
 	}
 

@@ -26,7 +26,7 @@ public class ClubMobilSaveReservationControl extends BasicControl {
 		
 		new ButtonControl(ccc, "CheckOut", 0,  new CheckOutReservationListener(getShell(), clubMobilResControl));
 
-		new ButtonControl(ccc, "CheckIn", 0,  getSavelListener(getShell()));
+		new ButtonControl(ccc, "CheckIn", 0,  new CheckInReservationListener(getShell(), clubMobilResControl));
 
 		new ButtonControl(ccc, "Cancel", 0,  getSavelListener(getShell()));
 		

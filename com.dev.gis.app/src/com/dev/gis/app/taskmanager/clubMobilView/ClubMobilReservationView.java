@@ -10,6 +10,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.bpcs.mdcars.model.Payment;
 import com.bpcs.mdcars.model.Person;
 import com.bpcs.mdcars.model.ReservationDetails;
 import com.dev.gis.app.taskmanager.clubMobilView.reservation.ClubMobilPaymentControl;
@@ -90,7 +91,13 @@ public class ClubMobilReservationView extends RentCarsAppView {
 							Person person = details.getCustomer().getPerson();
 							viewPart.getClubMobilCustomerControl().getResult().setValue(person.getName() + " " + person.getFirstName());
 						}
-						viewPart.getClubMobilPaymentControl().getResult().setValue(details.getPayment().getCard().getCardNumber());
+						if ( !details.getPaymentTransactions().isEmpty()) {
+							Payment payment = details.getPaymentTransactions().get(0); 
+							String cardNumber = "-";
+							if ( payment.getCard() != null)
+								cardNumber = payment.getCard().getCardNumber();
+							viewPart.getClubMobilPaymentControl().getResult().setValue(cardNumber);
+						}
 						
 						viewPart.getClubMobilResControl().update();
 					}
