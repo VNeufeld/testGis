@@ -9,6 +9,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.bpcs.mdcars.json.protocol.CredentialResponse;
+import com.bpcs.mdcars.json.protocol.DefectDetailRequest;
+import com.bpcs.mdcars.json.protocol.DefectListFilterRequest;
+import com.bpcs.mdcars.json.protocol.DefectListResponse;
+import com.bpcs.mdcars.json.protocol.DefectResponse;
 import com.bpcs.mdcars.json.protocol.DispositionDetailRequest;
 import com.bpcs.mdcars.json.protocol.DispositionListResponse;
 import com.bpcs.mdcars.json.protocol.DispositionResponse;
@@ -53,6 +57,7 @@ public class ClubMobilHttpService {
 	public static String CLUBMOBIL_MASTERDATA = "/masterdata";
 	public static String CLUBMOBIL_RESERVATION = "/reservation";
 	public static String CLUBMOBIL_DISPOSITION = "/disposition";
+	public static String CLUBMOBIL_DEFECT = "/defect";
 	
 	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?ratingView=1&sort=asc&pageSize=";
 	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
@@ -1048,6 +1053,50 @@ public class ClubMobilHttpService {
 		}
 		return null;
 		
+	}
+
+	public DefectListResponse getDefectsList(DefectListFilterRequest defectRequest) {
+		try {
+			
+			String link = CLUBMOBIL_DEFECT+ "/defectList";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(defectRequest);
+			logger.info("getDefectList request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("getDefectList response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DefectListResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public DefectResponse addDefect(DefectDetailRequest defectDetailRequest) {
+		try {
+			
+			String link = CLUBMOBIL_DEFECT+ "/addDefect";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(defectDetailRequest);
+			logger.info("getDefectList request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("getDefectList response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DefectResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
 	}
 	
 }

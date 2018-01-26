@@ -73,6 +73,9 @@ public class TaskProjectModelFactory {
 
 		defaultGroup.getTasks().
 		add(TaskItem.createTask("CM Disposition", "folder_edit.png", "ClubMobil Disposition APP"));
+
+		defaultGroup.getTasks().
+		add(TaskItem.createTask("CM Defects", "folder_edit.png", "ClubMobil Defects APP"));
 		
 	}
 

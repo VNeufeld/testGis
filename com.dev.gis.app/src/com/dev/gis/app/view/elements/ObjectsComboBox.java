@@ -23,7 +23,7 @@ public abstract class ObjectsComboBox extends BasicControl{
 	
 	protected String selectedValue;
 
-	private final Composite parent;
+	protected final Composite parent;
 	
 	public ObjectsComboBox(Composite parent, int size, boolean span) {
 		super();

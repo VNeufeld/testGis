@@ -215,6 +215,14 @@
             name="ClubMobil Disposition"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            class="com.dev.gis.app.taskmanager.clubMobilView.ClubMobilDefectsView"
+            icon="icons/webapp_file.gif"
+            id="com.dev.gis.app.task.ClubMobilDefectsView"
+            name="ClubMobil Defects"
+            restorable="true">
+      </view>
       
    </extension>
    <extension

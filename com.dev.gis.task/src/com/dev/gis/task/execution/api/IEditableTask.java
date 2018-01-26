@@ -9,6 +9,7 @@ public interface IEditableTask extends ITask {
 	public static String ID_ClubMobilAppView = "com.dev.gis.app.task.ClubMobilAppView";
 	public static String ID_ClubMobilReservationView = "com.dev.gis.app.task.ClubMobilReservationView";
 	public static String ID_ClubMobilDispositionView = "com.dev.gis.app.task.ClubMobilDispositionView";
+	public static String ID_ClubMobilDefectsView = "com.dev.gis.app.task.ClubMobilDefectsView";
 	
 	
 	

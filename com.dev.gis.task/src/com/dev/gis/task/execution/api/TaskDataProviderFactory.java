@@ -5,6 +5,7 @@ import javax.xml.bind.JAXBException;
 import com.dev.gis.task.execution.impl.ClubMobilReservationDataProvider;
 import com.dev.gis.task.execution.impl.ClubMobilReservationTask;
 import com.dev.gis.task.execution.impl.ClubMobilDataProvider;
+import com.dev.gis.task.execution.impl.ClubMobilDefectsDataProvider;
 import com.dev.gis.task.execution.impl.ClubMobilDispositionDataProvider;
 import com.dev.gis.task.execution.impl.DefaultTaskDataProvider;
 import com.dev.gis.task.execution.impl.EmlDataProvider;
@@ -65,6 +66,10 @@ public class TaskDataProviderFactory {
 		}
 		else if ( name.contains("CM Disposition")) {
 			ClubMobilDispositionDataProvider dataProvider = new ClubMobilDispositionDataProvider();
+			return dataProvider;
+		}
+		else if ( name.contains("CM Defects")) {
+			ClubMobilDefectsDataProvider dataProvider = new ClubMobilDefectsDataProvider();
 			return dataProvider;
 		}
 		

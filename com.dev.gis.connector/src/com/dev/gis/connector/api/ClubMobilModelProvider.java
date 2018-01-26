@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bpcs.mdcars.json.protocol.DefectListResponse;
 import com.bpcs.mdcars.json.protocol.DispositionListResponse;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.bpcs.mdcars.model.Clerk;
@@ -40,6 +41,8 @@ public enum ClubMobilModelProvider {
 	public ReservationListResponse reservationListResponse;
 	
 	public DispositionListResponse dispositionListResponse;
+
+	public DefectListResponse defectListResponse;
 	
 	public ReservationDetails  selectedReservation;
 
