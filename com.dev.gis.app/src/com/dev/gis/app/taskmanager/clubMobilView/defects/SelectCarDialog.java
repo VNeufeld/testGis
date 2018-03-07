@@ -31,8 +31,8 @@ import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 
-public class AddDefectDialog extends Dialog {
-	private static Logger logger = Logger.getLogger(AddDefectDialog.class);
+public class SelectCarDialog extends Dialog {
+	private static Logger logger = Logger.getLogger(SelectCarDialog.class);
 
 	final DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
@@ -55,7 +55,7 @@ public class AddDefectDialog extends Dialog {
 	private ObjectTextControl totalAmount;
 
 	
-	public AddDefectDialog(Shell parentShell) {
+	public SelectCarDialog(Shell parentShell) {
 		super(parentShell);
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
 		

@@ -71,6 +71,9 @@ public class VehicleDescription extends BasicProtocol {
 	private String weightTotal;
 	private String weightUse;
 
+	private String carId;
+	private String licensePlate;
+	private String defectDescription;
 
 	
 	
@@ -326,5 +329,29 @@ public class VehicleDescription extends BasicProtocol {
 
 	public void setNavigationSystem(boolean navigationSystem) {
 		this.navigationSystem = navigationSystem;
+	}
+
+	public String getCarId() {
+		return carId;
+	}
+
+	public void setCarId(String carId) {
+		this.carId = carId;
+	}
+
+	public String getLicensePlate() {
+		return licensePlate;
+	}
+
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
+	}
+
+	public String getDefectDescription() {
+		return defectDescription;
+	}
+
+	public void setDefectDescription(String defectDescription) {
+		this.defectDescription = defectDescription;
 	}
 }

@@ -20,20 +20,13 @@ public class ClubMobilDispoStationSearch extends ClubMobilStationSearch {
 
 
 	public static void createDispoStationSearch(Composite parent) {
-		ClubMobilDispoStationSearch xx = new ClubMobilDispoStationSearch(parent,"Dispo Station : ");
+		ClubMobilDispoStationSearch xx = new ClubMobilDispoStationSearch(parent,"Station : ");
 		xx.create();
-		
 	}
-
 	
 	private ClubMobilDispoStationSearch(Composite parent, String label) {
 		super(parent, label);
-
 	}
-	
-	
-
-
 
 	@Override
 	public void saveValue(String value) {

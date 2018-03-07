@@ -74,6 +74,8 @@ public enum AdacModelProvider {
 	public boolean authorization = true;
 	
 	public int locationType = 1;
+	
+	public  com.dev.gis.connector.joi.protocol.BookingResponse bookingResponse;
 
 
 

@@ -28,8 +28,8 @@ public class ClubMobilOfferListTable extends AbstractListTable {
 
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-	    String[] titles = { "Name", "Car", "Supplier", "Station", "Service Catalog",  "Price", "Incl. km.", "Prepaid", "OneWay Fee", };
-	    int[] bounds = { 200, 150, 100, 100, 100,  200, 100, 100, 200 };
+	    String[] titles = { "Name", "Car", "Supplier", "Station", "Service Catalog",  "Price", "Incl. km.", "Prepaid", "OneWay Fee", "BusinessSegment", "defectDesc."};
+	    int[] bounds = { 300, 250, 100, 100, 100,  200, 100, 100, 200 , 200, 200};
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -38,12 +38,22 @@ public class ClubMobilOfferListTable extends AbstractListTable {
 	      public String getText(Object element) {
 	    	OfferDo o = (OfferDo) element;
 	    	String name = o.getName();
+	    	
+    		VehicleDescription vd = o.getModel().getVehicle();
 	    	if ( StringUtils.isEmpty(name)) {
-	    		VehicleDescription vd = o.getModel().getVehicle();
 	    		name = vd.getBodyStyleText().getText();
-	    		
 	    	}
-	        return name;
+	    	String result = "";
+    		String carId = vd.getCarId();
+    		String licensePlate = vd.getLicensePlate();
+    		
+    		if (StringUtils.isNotEmpty(licensePlate) )
+    			result = licensePlate;
+    		if (StringUtils.isNotEmpty(carId) )
+    			result = result + " id:"+carId;
+    		
+			result = result + " "+name;
+	        return result;
 	      }
 	    });
 	    
@@ -141,6 +151,36 @@ public class ClubMobilOfferListTable extends AbstractListTable {
 	      }
 	    });
 	    
+	    col = createTableViewerColumn(titles[9], bounds[9], 9);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	OfferDo o = (OfferDo) element;
+			Offer offer = o.getOffer();
+			
+			String businessSegment = offer.getBusinessSegmentCode();
+			if ( businessSegment == null)
+				businessSegment = " n/a";
+					
+	    	return  businessSegment;
+	    	
+	      }
+	    });
+	    
+	    col = createTableViewerColumn(titles[10], bounds[10], 10);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	OfferDo o = (OfferDo) element;
+			VehicleDescription vd = o.getModel().getVehicle();
+			String result = vd.getDefectDescription();
+			if ( result == null)
+				result = "";
+	    	return  result;
+	    	
+	      }
+	    });
+
 
 	  }
 

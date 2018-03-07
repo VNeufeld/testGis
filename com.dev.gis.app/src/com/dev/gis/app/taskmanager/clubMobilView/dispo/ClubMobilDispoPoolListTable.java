@@ -11,16 +11,17 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.bpcs.mdcars.model.DispoPoolCar;
 import com.bpcs.mdcars.model.DispositionInfo;
 import com.bpcs.mdcars.model.ReservationInfo;
 import com.dev.gis.app.view.elements.AbstractListTable;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 
-public class ClubMobilDispostionListTable extends AbstractListTable {
+public class ClubMobilDispoPoolListTable extends AbstractListTable {
 	
 	final DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
-	public ClubMobilDispostionListTable(IWorkbenchPartSite site,final Composite parent, 
+	public ClubMobilDispoPoolListTable(IWorkbenchPartSite site,final Composite parent, 
 			IDoubleClickListener selectOfferListener, 
 			ISelectionChangedListener selectionChangedListener  ) {
 		super(site,parent,selectOfferListener,selectionChangedListener);
@@ -28,15 +29,15 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-	    String[] titles = { "Id", "CarId", "licensePlate", "StationId", "ConfirmFrom", "ConfirmTo", "ScheduleFrom",  "Status" };
-	    int[] bounds = { 100, 200, 200,100, 200, 200, 200, 100};
+	    String[] titles = { "Id", "CarId", "Status", "AsignedCarId", "StationId", "Created", "CreatedBy",  "" };
+	    int[] bounds = { 100, 250, 100, 100, 100, 300, 300,  10};
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	DispositionInfo o = (DispositionInfo) element;
+	    	  DispoPoolCar o = (DispoPoolCar) element;
 	        return ""+o.getId();
 	      }
 	    });
@@ -45,11 +46,11 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	DispositionInfo o = (DispositionInfo) element;
-	    	if ( o.getCarId() != null)
-	    		return o.getCarId().toString();
-	    	else
-	    		return "-1";
+	    	  DispoPoolCar o = (DispoPoolCar) element;
+		    	if ( o.getCarId() != null)
+		    		return o.getCarId().toString();
+		    	else
+		    		return "-1";
 	      }
 	    });
 	    
@@ -57,8 +58,9 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	DispositionInfo o = (DispositionInfo) element;
-    		return o.getLicensePlate();
+	    	DispoPoolCar o = (DispoPoolCar) element;
+	    	String status = ""+o.getStatus()+ " "+o.getStatusText();
+    		return status;
 	      }
 	    });
 
@@ -67,25 +69,24 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	DispositionInfo o = (DispositionInfo) element;
-	    	if ( o.getStationId() != null)
-	    		return o.getStationId().toString();
+		    	DispoPoolCar o = (DispoPoolCar) element;
+	    	if ( o.getAssignedCar_id() != null)
+	    		return o.getAssignedCar_id().toString();
 	    	else
-	    		return "0";
+	    		return "-1";
 	      }
 	    });
-
+	    
+	    
 	    col = createTableViewerColumn(titles[4], bounds[4], 4);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	DispositionInfo o = (DispositionInfo) element;
-	    	if ( o.getConfirmFrom() != null) {
-		    	DateTime dt = new DateTime(o.getConfirmFrom().toDate());
-	    		return dt.toString(timeFormatter);
-	    	}
-	    	else
-	    		return "";
+		    	DispoPoolCar o = (DispoPoolCar) element;
+		    	if ( o.getStationId() != null)
+		    		return o.getStationId().toString();
+		    	else
+		    		return "0";
 	      }
 	    });
 
@@ -93,36 +94,35 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	DispositionInfo o = (DispositionInfo) element;
-	    	if ( o.getConfirmTo() != null) {
-		    	DateTime dt = new DateTime(o.getConfirmTo().toDate());
+	    	DispoPoolCar o = (DispoPoolCar) element;
+	    	if ( o.getResultWhen() != null) {
+		    	DateTime dt = new DateTime(o.getResultWhen().toDate());
 	    		return dt.toString(timeFormatter);
 	    	}
 	    	else
 	    		return "";
 	      }
 	    });
-	    
+
 	    col = createTableViewerColumn(titles[6], bounds[6], 6);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-	    	DispositionInfo o = (DispositionInfo) element;
-	    	if ( o.getConfirmTo() != null) {
-		    	DateTime dt = new DateTime(o.getScheduleFrom().toDate());
-	    		return dt.toString(timeFormatter);
-	    	}
-	    	else
-	    		return "";
+		    	DispoPoolCar o = (DispoPoolCar) element;
+		    	if ( o.getResultBy() != null) {
+		    		return o.getResultBy();
+		    	}
+		    	else
+		    		return "";
 	      }
 	    });
+	    
 	    
 	    col = createTableViewerColumn(titles[7], bounds[7], 7);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
-		    	DispositionInfo o = (DispositionInfo) element;
-		    	return ""+o.getStatus();
+    		return "";
 	      }
 
 	    });
@@ -133,8 +133,8 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 
 	@Override
 	public void update() {
-		if ( ClubMobilModelProvider.INSTANCE.dispositionListResponse != null)
-			getViewer().setInput(ClubMobilModelProvider.INSTANCE.dispositionListResponse.getDispoList());
+		if ( ClubMobilModelProvider.INSTANCE.dispoPoolListResponse != null)
+			getViewer().setInput(ClubMobilModelProvider.INSTANCE.dispoPoolListResponse.getDispoPoolCarList());
 		else
 			getViewer().setInput(null);
 		getViewer().refresh();

@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 
+import com.bpcs.mdcars.json.protocol.DispositionListResponse;
+import com.bpcs.mdcars.model.ServiceError;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.Error;
 import com.dev.gis.connector.joi.protocol.Response;
@@ -49,6 +51,32 @@ public class ClubMobilUtils {
 					null,"Error",message);
 			
 		}
+		
+	}
+
+	public static void showErrors(DispositionListResponse response) {
+		String message = "Error : ";
+		boolean isError = false;
+		if ( response.getErrors() != null) {
+			for ( ServiceError error : response.getErrors()) {
+				message = message + error.getErrorNumber()+ "  "+ error.getErrorText() + " " + error.getErrorType() + " ;";
+				isError = true;
+			}
+			
+		}
+		if (isError ) {
+			MessageDialog.openError(
+					null,"Error",message);
+			
+		}
+		
+	}
+
+	public static void showErrors(ServiceError serviceError) {
+		String message = "Error : ";
+		message = message + serviceError.getErrorNumber()+ "  "+ serviceError.getErrorText() + " " + serviceError.getErrorType() + " ;";
+			MessageDialog.openError(
+					null,"Error",message);
 		
 	}
 	

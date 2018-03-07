@@ -131,7 +131,7 @@ public class ClubMobilReservationListControl extends BasicControl {
 	}
 
 	protected IDoubleClickListener getSelectReservationDoubleClickListener() {
-		ClubMobilSelectReservationDoubleClickListener ssd = new ClubMobilSelectReservationDoubleClickListener();
+		ClubMobilSelectReservationDoubleClickListener ssd = new ClubMobilSelectReservationDoubleClickListener(getShell());
 		return ssd;
 	}
 

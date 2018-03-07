@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name="vehicleRequest")
-@XmlType(propOrder = {"administration", "demandedObject", "customer", "module", "travelSpecification", "serviceCatalogId", "promoCode", "specialId", "payment", "filter" })
 public class VehicleRequest extends Request {
 
 	private Customer customer;
@@ -30,6 +29,14 @@ public class VehicleRequest extends Request {
 	 * Integer.MIN_VALUE: not initialized
 	 */
 	private Integer serviceCatalogId = null;
+	
+	private Integer businessSegmentId = null;
+	
+	private String  reservationNo = null;
+	
+	private String  rentalNo = null;
+	
+	private Integer insuranceId;
 
 	private TravelInformation travel;
 	
@@ -109,5 +116,37 @@ public class VehicleRequest extends Request {
 	
 	public void setModule(int module) {
 		this.module = module;
+	}
+
+	public Integer getBusinessSegmentId() {
+		return businessSegmentId;
+	}
+
+	public void setBusinessSegmentId(Integer businessSegmentId) {
+		this.businessSegmentId = businessSegmentId;
+	}
+
+	public String getReservationNo() {
+		return reservationNo;
+	}
+
+	public void setReservationNo(String reservationNo) {
+		this.reservationNo = reservationNo;
+	}
+
+	public String getRentalNo() {
+		return rentalNo;
+	}
+
+	public void setRentalNo(String rentalNo) {
+		this.rentalNo = rentalNo;
+	}
+
+	public Integer getInsuranceId() {
+		return insuranceId;
+	}
+
+	public void setInsuranceId(Integer insuranceId) {
+		this.insuranceId = insuranceId;
 	}
 }

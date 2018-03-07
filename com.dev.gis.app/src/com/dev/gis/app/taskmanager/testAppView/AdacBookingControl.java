@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.app.taskmanager.bookingView.BookingRequestCreator;
+import com.dev.gis.app.view.dialogs.BookingTotaInfoDialog;
 import com.dev.gis.app.view.elements.BookingRequestIdControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.EditPartControl;
@@ -65,6 +66,8 @@ public class AdacBookingControl extends EditPartControl {
 		new ButtonControl(groupStamp, "Verify", 0,  getVerifySelectionListener(getShell()));
 
 		new ButtonControl(groupStamp, "Booking", 0,  getBookingSelectionListener(getShell()));
+
+		new ButtonControl(groupStamp, "Show Total Info", 0,  getTotaInfoListener(getShell()));
 		
 	}
 
@@ -74,6 +77,10 @@ public class AdacBookingControl extends EditPartControl {
 
 	private SelectionListener getVerifySelectionListener(final Shell shell) {
 		return new AddVerifyListener(shell);		
+	}
+
+	private SelectionListener getTotaInfoListener(final Shell shell) {
+		return new TotaInfoListener(shell);		
 	}
 	
 	protected class AddBookingCompleteListener extends AbstractListener {
@@ -183,6 +190,9 @@ public class AdacBookingControl extends EditPartControl {
 				
 				AdacModelProvider.INSTANCE.setBookingRequestId(String.valueOf(response.getRequestId()));
 				
+				AdacModelProvider.INSTANCE.bookingResponse = response;
+				
+				
 			} catch (Exception err) {
 				logger.error(err.getMessage(),err);
 				
@@ -196,6 +206,25 @@ public class AdacBookingControl extends EditPartControl {
 		}
 
 	}
+	
+	protected class TotaInfoListener extends AbstractListener {
+		
+		private final Shell shell;
+
+		public TotaInfoListener(Shell shell) {
+			this.shell = shell;
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			BookingTotaInfoDialog dlg = new BookingTotaInfoDialog(shell);
+			dlg.open();
+
+
+		}
+
+	}
+	
 	
 	private void clearFields() {
 		errorText.setValue("");

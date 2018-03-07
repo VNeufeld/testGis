@@ -6,8 +6,10 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bpcs.mdcars.json.protocol.DispoPoolListResponse;
 import com.bpcs.mdcars.json.protocol.DispositionListResponse;
 import com.bpcs.mdcars.json.protocol.GetDispoListRequest;
+import com.bpcs.mdcars.model.DispositionInfo;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
@@ -35,7 +37,6 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 		new ButtonControl(ccc, "Get DispoList", 0,  getDispoListener(getShell()));
 
 		new ButtonControl(ccc, "Add Car", 0,  getAddCarListener(getShell()));
-		
 
 	}
 	
@@ -72,7 +73,9 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 					stationId =  ClubMobilModelProvider.INSTANCE.dispoStation.getId();
 				}
 				if ( stationId != null) {
-					AddDispoCarDialog dialog = new AddDispoCarDialog(shell);
+					DispositionInfo dispositionInfo = new DispositionInfo();
+					dispositionInfo.setStationId(stationId.intValue());
+					AddDispoCarDialog dialog = new AddDispoCarDialog(shell,dispositionInfo);
 					if (dialog.open() == Dialog.OK) {
 						
 					}
@@ -132,6 +135,8 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 
 
 	}
+	
+	
 	
 	private void updateTable() {
 		dispoListTable.update();

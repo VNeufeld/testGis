@@ -5,17 +5,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Composite;
 
-import com.bpcs.mdcars.model.DefectLocation;
-import com.bpcs.mdcars.model.DefectLocationClass;
-import com.bpcs.mdcars.model.DefectSize;
 import com.bpcs.mdcars.model.DefectType;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 
 public class SelectDefectTypeComboBox extends DynamicComboBox{
 	
 	private static Logger logger = Logger.getLogger(SelectDefectTypeComboBox.class);
-	
-	private int[] dynValues ;
 	
 	public SelectDefectTypeComboBox(Composite parent, int size) {
 		super(parent, size, true);

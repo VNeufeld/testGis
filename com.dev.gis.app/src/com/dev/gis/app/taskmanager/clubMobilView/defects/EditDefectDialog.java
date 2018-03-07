@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.clubMobilView.defects;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -11,6 +12,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -31,8 +33,8 @@ import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 
-public class AddDefectDialog extends Dialog {
-	private static Logger logger = Logger.getLogger(AddDefectDialog.class);
+public class EditDefectDialog extends Dialog {
+	private static Logger logger = Logger.getLogger(EditDefectDialog.class);
 
 	final DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
@@ -53,11 +55,17 @@ public class AddDefectDialog extends Dialog {
 	private SelectDefectTypeComboBox  defectTypeComboBox;
 
 	private ObjectTextControl totalAmount;
+	
+	private ObjectTextControl repairStatus;
+	
+	
+	private final DefectDescription defect;
 
 	
-	public AddDefectDialog(Shell parentShell) {
+	public EditDefectDialog(Shell parentShell, DefectDescription defect) {
 		super(parentShell);
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
+	    this.defect = defect;
 		
 	}
 	
@@ -69,35 +77,54 @@ public class AddDefectDialog extends Dialog {
 		
 		
 		Composite composite = (Composite) super.createDialogArea(parent);
-		composite.getShell().setText("Add Defects. CarId : " );
+		composite.getShell().setText("Edit Defects. CarId : " );
 		
 		composite.setLayout(new GridLayout(1, false));
 
-		LocalDate scheduleF = new LocalDate();
-		LocalDate schedulet = new LocalDate();
-		schedulet = schedulet.plusDays(40);
+		DateTime defectTime = defect.getDefectDate().getDateTime();
+		DateTime receiptTime = defect.getReceiptDate().getDateTime();
 		
 		carId = new ObjectTextControl(composite, 300, false, "CarId ");
-		carId.setSelectedValue("223");
+		carId.setSelectedValue(""+defect.getCarId());
 		
 		defectDate = new ObjectTextControl(composite, 300, false, "defect Date ");
 		
-		defectDate.setSelectedValue(scheduleF.toString(timeFormatter));
+		defectDate.setSelectedValue(defectTime.toString(timeFormatter));
 		
 		receiptDate = new ObjectTextControl(composite, 300, false, "receipt Date ");
-		receiptDate.setSelectedValue(schedulet.toString(timeFormatter));
+		receiptDate.setSelectedValue(receiptTime.toString(timeFormatter));
 		
 		Composite ccc = createComposite(composite, 3, -1, false);
 		
 		defectClassComboBox = new SelectDefectClassComboBox(ccc, 80);
+		if ( defect.getDefectLocationClass() != null)
+			defectClassComboBox.selectValue(defect.getDefectLocationClass().getId());
+		
 		defectLocationComboBox = new SelectDefectLocationComboBox(ccc, 80);
+		if ( defect.getDefectLocation() != null)
+			defectLocationComboBox.selectValue(defect.getDefectLocation().getId());
+
 		defectPartsComboBox = new SelectDefectPartsComboBox(ccc, 80);
+		if ( defect.getDefectPart() != null)
+			defectPartsComboBox.selectValue(defect.getDefectPart().getId());
+		
 		defectSizeComboBox = new SelectDefectSizeComboBox(ccc, 80);
+		if ( defect.getDefectSize() != null)
+			defectSizeComboBox.selectValue(defect.getDefectSize().getId());
+
 		defectTypeComboBox = new SelectDefectTypeComboBox(ccc, 80);
+		if ( defect.getDefectType() != null)
+			defectTypeComboBox.selectValue(defect.getDefectType().getId());
+
+		repairStatus = new ObjectTextControl(composite, 300, false, "repairStatus ");
+		repairStatus.setSelectedValue(""+defect.getRepairStatus());
 		
 		totalAmount = new ObjectTextControl(composite, 300, false, "Total Amount");
+		if ( defect.getTotalAmount() != null)
+			totalAmount.setSelectedValue(defect.getTotalAmount().getAmount());
 		
-		new ButtonControl(composite, "Add", addDefectListener());
+		
+		new ButtonControl(composite, "Save", addDefectListener());
 		
 		return composite;
 	}
@@ -121,60 +148,63 @@ public class AddDefectDialog extends Dialog {
 				
 				
 				DefectDetailRequest request = new DefectDetailRequest();
-				DefectDescription info = new DefectDescription();
-				request.setDefectDescription(info);
+				request.setDefectDescription(defect);
 				
 				int defectClassId = defectClassComboBox.getSelectedValue();
 				if ( defectClassId > 0 ) {
 					DefectLocationClass defectLocationClass = new DefectLocationClass();
 					defectLocationClass.setId(defectClassId);
-					info.setDefectLocationClass(defectLocationClass);
+					defect.setDefectLocationClass(defectLocationClass);
 				}
 
 				int defectLocId = defectLocationComboBox.getSelectedValue();
 				if ( defectLocId > 0 ) {
 					DefectLocation defectLocation = new DefectLocation();
 					defectLocation.setId(defectLocId);
-					info.setDefectLocation(defectLocation);
+					defect.setDefectLocation(defectLocation);
 				}
 
 				int defectPartId = defectPartsComboBox.getSelectedValue();
 				if ( defectPartId > 0 ) {
 					DefectPart defectPart = new DefectPart();
 					defectPart.setId(defectPartId);
-					info.setDefectPart(defectPart);
+					defect.setDefectPart(defectPart);
 				}
 
 				int defectSizeId = defectSizeComboBox.getSelectedValue();
 				if ( defectSizeId > 0 ) {
 					DefectSize defectSize = new DefectSize();
 					defectSize.setId(defectSizeId);
-					info.setDefectSize(defectSize);
+					defect.setDefectSize(defectSize);
 				}
 
 				int defectTypeId = defectTypeComboBox.getSelectedValue();
 				if ( defectTypeId > 0 ) {
 					DefectType defectType = new DefectType();
 					defectType.setId(defectTypeId);
-					info.setDefectType(defectType);
+					defect.setDefectType(defectType);
 				}
 				
 				LocalDate scheduleF = LocalDate.parse(defectDate.getSelectedValue(), timeFormatter);
 				logger.info("defectDate = " + scheduleF.toString(timeFormatter));
-				info.setDefectDate(new DayAndHour(scheduleF.toDate()));
+				defect.setDefectDate(new DayAndHour(scheduleF.toDate()));
 				
 
 				LocalDate scheduleT = LocalDate.parse(receiptDate.getSelectedValue(), timeFormatter);
 				logger.info("receiptDate = " + scheduleT.toString(timeFormatter));
-				info.setReceiptDate(new DayAndHour(scheduleT.toDate()));
+				defect.setReceiptDate(new DayAndHour(scheduleT.toDate()));
 
-				info.setCarId(Integer.valueOf(carId.getSelectedValue()));
+				defect.setCarId(Integer.valueOf(carId.getSelectedValue()));
 				
 				String sTotalAmount = totalAmount.getSelectedValue();
 				MoneyAmount ma = new MoneyAmount(sTotalAmount, "EUR");
-				info.setTotalAmount(ma);
+				defect.setTotalAmount(ma);
 				
-				DefectResponse defectResponse = service.addDefect(request);
+				String rs = repairStatus.getSelectedValue();
+				if ( StringUtils.isNotEmpty(rs)) {
+					defect.setRepairStatus(Integer.valueOf(rs));
+				}
+				DefectResponse defectResponse = service.saveDefect(request);
 				
 				okPressed();
 //				

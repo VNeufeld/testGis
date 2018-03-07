@@ -12,7 +12,6 @@ public class SelectDefectClassComboBox extends DynamicComboBox{
 	
 	private static Logger logger = Logger.getLogger(SelectDefectClassComboBox.class);
 	
-	private int[] dynValues ;
 	
 	public SelectDefectClassComboBox(Composite parent, int size) {
 		super(parent, size, true);

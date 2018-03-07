@@ -104,13 +104,24 @@ public class ClubMobilChangeDefectsControl extends BasicControl {
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 				
 				Long stationId = null;
+				Integer carId = null;
 				if ( ClubMobilModelProvider.INSTANCE.dispoStation != null ) {
 					stationId =  ClubMobilModelProvider.INSTANCE.dispoStation.getId();
 				}
 				
+				if ( ClubMobilModelProvider.INSTANCE.selectedDispoCar != null ) {
+					if ( ClubMobilModelProvider.INSTANCE.selectedDispoCar.getCarId() != null ) {
+						carId = ClubMobilModelProvider.INSTANCE.selectedDispoCar.getCarId();
+					}
+				}
+				
+				
 				DefectListFilterRequest request = new DefectListFilterRequest();
 				if (stationId != null)
 					request.setStationId(stationId.intValue());
+				if ( carId != null) {
+					request.setCarId(carId.intValue());
+				}
 
 				DefectListResponse defectListResponse = service.getDefectsList(request);
 				

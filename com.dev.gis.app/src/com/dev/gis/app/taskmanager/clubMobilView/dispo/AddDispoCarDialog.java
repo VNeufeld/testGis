@@ -20,6 +20,7 @@ import com.bpcs.mdcars.model.DispositionInfo;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
+import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
@@ -29,15 +30,24 @@ public class AddDispoCarDialog extends Dialog {
 
 	final DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
-	private ObjectTextControl carId;
+	private OutputTextControls storageGenId;
+	
+	private OutputTextControls carId;
 
-	private ObjectTextControl scheduleFrom;
+	private ObjectTextControl confirmFrom;
 
-	private ObjectTextControl scheduleTo;
+	private ObjectTextControl confirmTo;
+	
+	private ObjectTextControl licensePlate;
+	
+	
+	private final DispositionInfo dispoInfo;
 
-	public AddDispoCarDialog(Shell parentShell) {
+	public AddDispoCarDialog(Shell parentShell, DispositionInfo dispoInfo) {
 		super(parentShell);
 	    setShellStyle(getShellStyle() | SWT.RESIZE);
+	    
+	    this.dispoInfo = dispoInfo;
 		
 	}
 	
@@ -60,30 +70,45 @@ public class AddDispoCarDialog extends Dialog {
 		LocalDate scheduleF = new LocalDate();
 		LocalDate schedulet = new LocalDate();
 		schedulet = schedulet.plusDays(40);
+
+		storageGenId = new OutputTextControls(composite, "storageGenId", 300);
+		storageGenId.setValue(""+dispoInfo.getId());
 		
-		carId = new ObjectTextControl(composite, 300, false, "CarId ");
-		carId.setSelectedValue("207");
+		if ( dispoInfo.getCarId() != null) {
+			carId = new OutputTextControls(composite, "CarId", 300);
+			carId.setValue(""+dispoInfo.getCarId());
+		}
 		
-		scheduleFrom = new ObjectTextControl(composite, 300, false, "scheduleFrom ");
+		licensePlate = new ObjectTextControl(composite, 300, false, "licensePlate ");
+		if ( dispoInfo.getLicensePlate() != null)
+			licensePlate.setSelectedValue(""+dispoInfo.getLicensePlate());
 		
-		scheduleFrom.setSelectedValue(scheduleF.toString(timeFormatter));
+//		confirmFrom = new ObjectTextControl(composite, 300, false, "confirmFrom ");
+//		
+//		confirmFrom.setSelectedValue(scheduleF.toString(timeFormatter));
+//		
+//		confirmTo = new ObjectTextControl(composite, 300, false, "scheduleTo ");
+//		confirmTo.setSelectedValue(schedulet.toString(timeFormatter));
 		
-		scheduleTo = new ObjectTextControl(composite, 300, false, "scheduleTo ");
-		scheduleTo.setSelectedValue(schedulet.toString(timeFormatter));
-		
-		new ButtonControl(composite, "Add", addDispoListener());
+		new ButtonControl(composite, "Assign Car", assignDispoListener());
+
+		new ButtonControl(composite, "Remove Car", removeDispoListener());
 		
 		return composite;
 	}
 	
-	protected SelectionListener addDispoListener() {
-		return new ClubMobilAddDispoListener();
+	protected SelectionListener assignDispoListener() {
+		return new ClubMobilAssignDispoListener();
+	}
+
+	protected SelectionListener removeDispoListener() {
+		return new ClubMobilRemoveDispoListener();
 	}
 	
-	private class ClubMobilAddDispoListener implements SelectionListener {
+	private class ClubMobilAssignDispoListener implements SelectionListener {
 		
 
-		public ClubMobilAddDispoListener() {
+		public ClubMobilAssignDispoListener() {
 		}
 
 		@Override
@@ -104,24 +129,29 @@ public class AddDispoCarDialog extends Dialog {
 				if ( stationId != null)
 					info.setStationId(stationId.intValue());
 				
-				LocalDate scheduleF = LocalDate.parse(scheduleFrom.getSelectedValue(), timeFormatter);
-				logger.info("scheduleF = " + scheduleF.toString(timeFormatter));
-				info.setScheduleFrom(new DayAndHour(scheduleF.toDate()));
+				info.setCarId(dispoInfo.getCarId());
 				
-
-				LocalDate scheduleT = LocalDate.parse(scheduleTo.getSelectedValue(), timeFormatter);
-				logger.info("scheduleT = " + scheduleT.toString(timeFormatter));
-				info.setScheduleTo(new DayAndHour(scheduleT.toDate()));
-
-				info.setCarId(Integer.valueOf(carId.getSelectedValue()));
+				info.setId(dispoInfo.getId());
 				
-				DispositionResponse dispositionListResponse = service.addDisposition(request);
+//				LocalDate scheduleF = LocalDate.parse(confirmFrom.getSelectedValue(), timeFormatter);
+//				logger.info("confirmFrom = " + scheduleF.toString(timeFormatter));
+//				info.setScheduleFrom(new DayAndHour(scheduleF.toDate()));
+//				
+//
+//				LocalDate scheduleT = LocalDate.parse(confirmTo.getSelectedValue(), timeFormatter);
+//				logger.info("confirmTo = " + scheduleT.toString(timeFormatter));
+//				info.setScheduleTo(new DayAndHour(scheduleT.toDate()));
+
+//				info.setCarId(Integer.valueOf(carId.getSelectedValue()));
+
+				info.setLicensePlate(licensePlate.getSelectedValue());
+				
+				DispositionResponse dispositionResponse = service.assignDisposition(request);
+				if ( dispositionResponse.getErrors() != null && dispositionResponse.getErrors().size() > 0) {
+					ClubMobilUtils.showErrors(dispositionResponse.getErrors().get(0));
+				}
 				
 				okPressed();
-//				
-//				ClubMobilModelProvider.INSTANCE.dispositionListResponse = dispositionListResponse;
-				
-				//updateTable();
 				
 			}
 			catch(Exception err) {
@@ -140,6 +170,57 @@ public class AddDispoCarDialog extends Dialog {
 
 	}
 
+	private class ClubMobilRemoveDispoListener implements SelectionListener {
+		
+
+		public ClubMobilRemoveDispoListener() {
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			try {
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
+				
+				Long stationId = null;
+				if ( ClubMobilModelProvider.INSTANCE.dispoStation != null ) {
+					stationId =  ClubMobilModelProvider.INSTANCE.dispoStation.getId();
+				}
+				
+				DispositionDetailRequest request = new DispositionDetailRequest();
+				DispositionInfo info = new DispositionInfo();
+				request.setDispositionInfo(info);
+				if ( stationId != null)
+					info.setStationId(stationId.intValue());
+				
+				info.setCarId(dispoInfo.getCarId());
+				info.setId(dispoInfo.getId());
+				
+				
+				DispositionResponse dispositionResponse = service.removeDisposition(request);
+				if ( dispositionResponse.getErrors() != null && dispositionResponse.getErrors().size() > 0) {
+					ClubMobilUtils.showErrors(dispositionResponse.getErrors().get(0));
+				}
+				
+				okPressed();
+				
+			}
+			catch(Exception err) {
+				ClubMobilUtils.showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
+				
+			}
+
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+	}
 	
 	@Override
 	protected void okPressed() {

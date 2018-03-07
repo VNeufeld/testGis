@@ -51,7 +51,10 @@ public class Offer extends BasicProtocol {
 	private boolean member;
 	
 	private boolean noMember;
-
+	
+	private long businessSegmentId;
+	
+	private String businessSegmentCode;
 	
 	
 	public URI getBookLink() {
@@ -219,5 +222,21 @@ public class Offer extends BasicProtocol {
 
 	public void setDailyPrice(MoneyAmount dailyPrice) {
 		this.dailyPrice = dailyPrice;
+	}
+
+	public long getBusinessSegmentId() {
+		return businessSegmentId;
+	}
+
+	public void setBusinessSegmentId(long businessSegmentId) {
+		this.businessSegmentId = businessSegmentId;
+	}
+
+	public String getBusinessSegmentCode() {
+		return businessSegmentCode;
+	}
+
+	public void setBusinessSegmentCode(String businessSegmentCode) {
+		this.businessSegmentCode = businessSegmentCode;
 	}
 }

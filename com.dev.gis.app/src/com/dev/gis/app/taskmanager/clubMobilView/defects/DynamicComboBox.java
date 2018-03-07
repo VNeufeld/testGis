@@ -24,6 +24,8 @@ public class DynamicComboBox extends BasicControl{
 	
 	protected int selectedValue;
 
+	protected int[] dynValues = new int[0] ;
+	
 	protected final Composite parent;
 	
 	public DynamicComboBox(Composite parent, int size, boolean span) {
@@ -107,7 +109,19 @@ public class DynamicComboBox extends BasicControl{
 		return "NO";
 	}
 
+	public void selectValue(int id) {
+		int index = -1;
+		for ( int i = 0; i < dynValues.length; i++) {
+			if ( dynValues[i] == id) {
+				index = i;
+				break;
+			}
+		}
+		if ( index > -1) {
+			comboList.select(index);
+		}
 	
+	}
 	public int getSelectedValue() {
 		return selectedValue;
 	}

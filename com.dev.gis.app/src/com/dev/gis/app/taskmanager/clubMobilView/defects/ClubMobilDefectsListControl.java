@@ -4,32 +4,31 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilCarListControl;
+import com.dev.gis.app.taskmanager.clubMobilView.dispo.ClubMobilDispoStationSearch;
 import com.dev.gis.app.view.elements.BasicControl;
+import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 
 public class ClubMobilDefectsListControl extends BasicControl {
 	
 	private final Composite parent;
 	
-	private OutputTextControls result = null;
-	
 	private ClubMobilDefectsListTable defectListTable;
+	
+	private ClubMobilCarListControl carListControl;
 	
 	public ClubMobilDefectsListControl(Composite groupStamp) {
 		
 		parent = groupStamp;
-		
-		final Group group = createGroupSpannAllRows(groupStamp, "Defects",4,4);
-		
-		Composite cc = createComposite(group, 2, -1, true);
-		result = new OutputTextControls(cc, "DispoInfo", 500, 1 );
 
-		Composite cc2 = createComposite(group, 3, -1, true);
+		carListControl = new ClubMobilCarListControl(groupStamp);
 		
 		createDispositionListTable(groupStamp);
 		
@@ -37,7 +36,7 @@ public class ClubMobilDefectsListControl extends BasicControl {
 
 
 	}
-	
+
 	protected Composite getParent() {
 		return parent;
 	}
@@ -50,11 +49,9 @@ public class ClubMobilDefectsListControl extends BasicControl {
 	
 	private void createDispositionListTable(Composite composite) {
 		final Group groupOffers = new Group(composite, SWT.TITLE);
-		groupOffers.setText("Car List:");
+		groupOffers.setText("Defect List:");
 		
 		groupOffers.setLayout(new GridLayout(1, false));
-//		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
-//				.grab(true, true).applyTo(groupOffers);
 		
 		GridDataFactory.fillDefaults().span(1, 4)
 		.align(SWT.FILL, SWT.FILL).grab(true, true)
@@ -72,7 +69,7 @@ public class ClubMobilDefectsListControl extends BasicControl {
 	}
 
 	protected IDoubleClickListener getSelectReservationDoubleClickListener() {
-		return null;
+		return new ClubMobilSelectDefectDoubleClickListener(getShell());
 	}
 
 	public void update() {

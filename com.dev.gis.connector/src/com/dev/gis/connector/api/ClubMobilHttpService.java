@@ -13,14 +13,20 @@ import com.bpcs.mdcars.json.protocol.DefectDetailRequest;
 import com.bpcs.mdcars.json.protocol.DefectListFilterRequest;
 import com.bpcs.mdcars.json.protocol.DefectListResponse;
 import com.bpcs.mdcars.json.protocol.DefectResponse;
+import com.bpcs.mdcars.json.protocol.DispoPoolListResponse;
+import com.bpcs.mdcars.json.protocol.DispoPoolRequest;
+import com.bpcs.mdcars.json.protocol.DispoPoolResponse;
 import com.bpcs.mdcars.json.protocol.DispositionDetailRequest;
 import com.bpcs.mdcars.json.protocol.DispositionListResponse;
 import com.bpcs.mdcars.json.protocol.DispositionResponse;
+import com.bpcs.mdcars.json.protocol.GetCMPaymentInfoRequest;
+import com.bpcs.mdcars.json.protocol.GetCMPaymentInfoResponse;
 import com.bpcs.mdcars.json.protocol.GetCustomerResponse;
 import com.bpcs.mdcars.json.protocol.GetDispoListRequest;
 import com.bpcs.mdcars.json.protocol.ReservationListFilterRequest;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
+import com.bpcs.mdcars.json.protocol.SetCMPaymentTransactionRequest;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.bpcs.mdcars.model.DayAndHour;
@@ -58,6 +64,8 @@ public class ClubMobilHttpService {
 	public static String CLUBMOBIL_RESERVATION = "/reservation";
 	public static String CLUBMOBIL_DISPOSITION = "/disposition";
 	public static String CLUBMOBIL_DEFECT = "/defect";
+
+	public static String CLUBMOBIL_PAYMENT = "/payment";
 	
 	public static String SUNNY_VEHICLE_REQUEST_PARAM = "/request?ratingView=1&sort=asc&pageSize=";
 	public static String SUNNY_NEXT_PAGE_REQUEST_PARAM = "/request/browsepage?page=";
@@ -932,19 +940,19 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
-	public DispositionResponse addDisposition(DispositionDetailRequest dispositionDetailRequest) {
+	public DispositionResponse assignDisposition(DispositionDetailRequest dispositionDetailRequest) {
 
 		try {
 			
-			String link = CLUBMOBIL_DISPOSITION+ "/addDispo";
+			String link = CLUBMOBIL_DISPOSITION+ "/assignDispo";
 
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(dispositionDetailRequest);
-			logger.info("addDispo request = "+request);
+			logger.info("assignDispo request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("addDispo response = "+response);
+			logger.info("assignDispo response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, DispositionResponse.class);
 			
 		} catch ( IOException e) {
@@ -954,6 +962,74 @@ public class ClubMobilHttpService {
 		}
 		return null;
 	}
+	
+	public DispoPoolListResponse getDispoPoolList(GetDispoListRequest getDispoListRequest) {
+
+		try {
+			
+			String link = CLUBMOBIL_DISPOSITION+ "/dispoPoolList";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(getDispoListRequest);
+			logger.info("getDispoPoolList request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("getDispoPoolList response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DispoPoolListResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public DispoPoolResponse addDispoToPool(DispoPoolRequest dispoPoolRequest) {
+		try {
+			
+			String link = CLUBMOBIL_DISPOSITION+ "/addDispoPool";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(dispoPoolRequest);
+			logger.info("addDispoToPool request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("addDispoToPool response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DispoPoolResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public DispoPoolResponse updateDispoToPool(DispoPoolRequest dispoPoolRequest) {
+		try {
+			
+			String link = CLUBMOBIL_DISPOSITION+ "/updateDispoPool";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(dispoPoolRequest);
+			logger.info("addDispoToPool request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("addDispoToPool response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DispoPoolResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+	
 
 	public ExtraResponse getEquipments() {
 		ExtraResponse extraResponse =  null;
@@ -1098,5 +1174,94 @@ public class ClubMobilHttpService {
 		}
 		return null;
 	}
+
+	public DefectResponse saveDefect(DefectDetailRequest defectDetailRequest) {
+		try {
+			
+			String link = CLUBMOBIL_DEFECT+ "/saveDefect";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(defectDetailRequest);
+			logger.info("getDefectList request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("getDefectList response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DefectResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public DispositionResponse removeDisposition(DispositionDetailRequest dispoRequest) {
+		try {
+			
+			String link = CLUBMOBIL_DISPOSITION+ "/removeDispo";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(dispoRequest);
+			logger.info("removeDispo request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("removeDispo response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, DispositionResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public GetCMPaymentInfoResponse getPaymentInfo(GetCMPaymentInfoRequest getPaymentRequest) {
+		try {
+			
+			String link = CLUBMOBIL_PAYMENT+ "/cmPaymentInfo";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(getPaymentRequest);
+			logger.info("getPaymentInfo request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("getPaymentInfo response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, GetCMPaymentInfoResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public GetCMPaymentInfoResponse addPaymentInfo(SetCMPaymentTransactionRequest addPaymentRequest) {
+		try {
+			
+			String link = CLUBMOBIL_PAYMENT+ "/cmAddPaymentTransaction";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(addPaymentRequest);
+			logger.info("addPaymentInfo request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("addPaymentInfo response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, GetCMPaymentInfoResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
 	
 }

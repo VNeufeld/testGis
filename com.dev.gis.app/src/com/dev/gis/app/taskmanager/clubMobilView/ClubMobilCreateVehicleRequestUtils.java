@@ -47,6 +47,32 @@ public class ClubMobilCreateVehicleRequestUtils {
 		String aptCode = StringUtils.trimToEmpty(AdacModelProvider.INSTANCE.airport);
 		String dropOffAptCode = StringUtils.trimToEmpty(AdacModelProvider.INSTANCE.dropoffAirport);
 		
+		String businessSegmentValue =  ClubMobilModelProvider.INSTANCE.businessSegmentId;
+		if ( StringUtils.isNotEmpty(businessSegmentValue)) {
+			try {
+				request.setBusinessSegmentId(Integer.valueOf(businessSegmentValue));
+			}
+			catch(Exception err) {
+				
+			}
+		}
+		
+		String insurancetValue =  ClubMobilModelProvider.INSTANCE.insuranceId;
+		if ( StringUtils.isNotEmpty(insurancetValue)) {
+			try {
+				request.setInsuranceId(Integer.valueOf(insurancetValue));
+			}
+			catch(Exception err) {
+				
+			}
+		}
+
+
+		request.setReservationNo(ClubMobilModelProvider.INSTANCE.reservationNo);
+		
+		request.setRentalNo(ClubMobilModelProvider.INSTANCE.rentalNo);
+
+		
 		long cityId = AdacModelProvider.INSTANCE.cityId;
 		long dropoffCityId = AdacModelProvider.INSTANCE.dropoffCityId;
 		boolean locationExist = false;

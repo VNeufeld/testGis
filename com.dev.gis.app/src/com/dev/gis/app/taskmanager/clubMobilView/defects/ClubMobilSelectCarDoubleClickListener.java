@@ -1,4 +1,4 @@
-package com.dev.gis.app.taskmanager.clubMobilView.reservation;
+package com.dev.gis.app.taskmanager.clubMobilView.defects;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.Dialog;
@@ -9,24 +9,30 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bpcs.mdcars.json.protocol.DefectListResponse;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
+import com.bpcs.mdcars.model.DefectDescription;
+import com.bpcs.mdcars.model.DispositionInfo;
 import com.bpcs.mdcars.model.ReservationInfo;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilReservationView;
+import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 
 
-public class ClubMobilSelectReservationDoubleClickListener implements IDoubleClickListener {
+public class ClubMobilSelectCarDoubleClickListener implements IDoubleClickListener {
 	
-	private static Logger logger = Logger.getLogger(ClubMobilSelectReservationDoubleClickListener.class);
+	private static Logger logger = Logger.getLogger(ClubMobilSelectCarDoubleClickListener.class);
 	
 	private final Shell shell;
+	private ObjectTextControl selectedCar;
 	
-	public ClubMobilSelectReservationDoubleClickListener(Shell shell) {
+	public ClubMobilSelectCarDoubleClickListener(Shell shell, ObjectTextControl selectedCar) {
 		super();
-		logger.info("create ClubMobilSelectReservationDoubleClickListener. ");
+		logger.info("create ClubMobilSelectCarDoubleClickListener. ");
 		this.shell = shell;
+		this.selectedCar = selectedCar;
 
 	}
 
@@ -39,25 +45,17 @@ public class ClubMobilSelectReservationDoubleClickListener implements IDoubleCli
 		
 		Object selectedNode = thisSelection.getFirstElement();
 
-		ReservationInfo reservation = (ReservationInfo) selectedNode;
-
-		logger.info("selectedNode " + reservation.getReservationNo());
-		
-		JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-		ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
+    	DispositionInfo dispoCar = (DispositionInfo) selectedNode;
+    	
+		logger.info("selectedNode " + dispoCar.getId());
 
 		try {
-			ReservationResponse reservationResponse = service.getReservation(reservation.getRentalId());
-			logger.info("select reservation " + reservationResponse.getReservationDetails().getRentalId());
-			ClubMobilModelProvider.INSTANCE.selectedReservation = reservationResponse.getReservationDetails();
-			ClubMobilReservationView.updateCustomerControl(" selected reservation ");
-			
-			CheckOutDialog mpd = new CheckOutDialog(shell, null);
-			mpd.open();
-			
+			ClubMobilModelProvider.INSTANCE.selectedDispoCar = dispoCar;
+			selectedCar.setSelectedValue(dispoCar.getCarId().toString());
 
 		}
 		catch(Exception err) {
+			logger.error(err.getMessage(),err);
 			showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
 		}			
 		
@@ -70,6 +68,11 @@ public class ClubMobilSelectReservationDoubleClickListener implements IDoubleCli
 		MessageDialog.openError(
 				null,"Error",message);
 		
+	}
+
+
+	public void setSelectedCar(ObjectTextControl selectedCar) {
+		this.selectedCar = selectedCar;
 	}
 
 }

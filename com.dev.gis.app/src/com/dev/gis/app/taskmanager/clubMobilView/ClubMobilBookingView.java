@@ -45,7 +45,9 @@ public class ClubMobilBookingView extends TaskViewAbstract {
 		
 		offerInfoControl = ClubMobilOfferInfoControl.createOfferInfoControl(composite);
 		
-		Composite paymentComposite = createGroupSpannAll(composite,"CM Payment",2);
+		Composite paymentComposite = createGroupSpannAll(composite,"CM Payment",3);
+
+		PaymentControlControl.createControl(paymentComposite);
 
 		ClubMobilCreditCardControl.createControl(paymentComposite);
 		

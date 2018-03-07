@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.bpcs.mdcars.json.protocol.DefectListResponse;
+import com.bpcs.mdcars.json.protocol.DispoPoolListResponse;
 import com.bpcs.mdcars.json.protocol.DispositionListResponse;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Customer;
+import com.bpcs.mdcars.model.DispositionInfo;
 import com.bpcs.mdcars.model.ReservationDetails;
 import com.bpcs.mdcars.model.ReservationInfo;
 import com.dev.gis.connector.joi.protocol.BodyStyleText;
@@ -42,12 +44,17 @@ public enum ClubMobilModelProvider {
 	
 	public DispositionListResponse dispositionListResponse;
 
+	public DispoPoolListResponse dispoPoolListResponse;
+
 	public DefectListResponse defectListResponse;
 	
 	public ReservationDetails  selectedReservation;
 
 	public ReservationInfo  selectedReservationInfo;
+
+	public DispositionInfo  selectedDispoCar;
 	
+	public Integer selectedDispoPoolId;
 	
 	private final List<OfferDo> offerDos = new ArrayList<OfferDo>();
 
@@ -110,6 +117,14 @@ public enum ClubMobilModelProvider {
 	public Station dropoffStation;
 
 	public Station dispoStation;
+	
+	public String businessSegmentId;
+	
+	public String reservationNo;
+
+	public String rentalNo;
+
+	public String insuranceId;
 
 
 	public void updateExtras(ExtraResponse response) {

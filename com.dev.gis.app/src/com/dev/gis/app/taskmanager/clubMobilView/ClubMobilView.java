@@ -178,7 +178,7 @@ public class ClubMobilView extends RentCarsAppView {
 	
 	protected Button createRadioButtonsCarAndTruck(final Group groupStamp) {
 		Composite rbComposite = new Composite(groupStamp, SWT.NONE);
-		rbComposite.setLayout(new GridLayout(2, true));
+		rbComposite.setLayout(new GridLayout(6, false));
 		GridDataFactory.fillDefaults().span(4, 1)
 				.align(SWT.FILL, SWT.BEGINNING).grab(true, false)
 				.applyTo(rbComposite);
@@ -214,7 +214,17 @@ public class ClubMobilView extends RentCarsAppView {
 			}
 		};
 		buttonTruck.addSelectionListener(sl);
+		
+		Composite cc = createComposite(rbComposite, 8, -1, false);
+		
+		new BusinessSegmentTextControl(cc, 100, false);
 
+		new ReservationNoTextControl(cc, 200, false);
+
+		new RentalNoTextControl(cc, 200, false);
+
+		new InsuranceNoTextControl(cc, 200, false);
+		
 		return buttonTruck;
 	}
 	
