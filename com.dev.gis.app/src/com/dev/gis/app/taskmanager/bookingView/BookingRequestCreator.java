@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dev.gis.connector.joi.protocol.Address;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
+import com.dev.gis.connector.joi.protocol.CMVerifyRequest;
 import com.dev.gis.connector.joi.protocol.Customer;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.MoneyAmount;
@@ -40,6 +41,34 @@ public class BookingRequestCreator {
 		bookingRequest.setExtras(selectedExtras);
 		return bookingRequest;
 	}
+	
+	public static CMVerifyRequest createVerifyRequest(
+			Offer offer, List<Extra> selectedExtras, String memberNo) {
+		
+		CMVerifyRequest bookingRequest = new CMVerifyRequest();
+
+//		Customer customer = createCustomer(memberNo);
+//		
+//		bookingRequest.setCustomer(customer);
+//		
+//		Person driver = createDriver();
+//		
+//		bookingRequest.setDriver(driver);
+//		Payment payment = new Payment();
+//		payment.setPaymentType(1);
+		
+		//payment.setPaymentType(PaymentType.PAYPAL_PAYMENT);
+		
+		//bookingRequest.setAcceptedAvailability("13");
+//		bookingRequest.setFlightNo("LH4711");
+//		bookingRequest.setTransferType(1);
+//		bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
+		//bookingRequest.setPayment(payment);
+		
+		bookingRequest.setExtras(selectedExtras);
+		return bookingRequest;
+	}
+	
 	private static Person createDriver() {
 		Person driver = new Person();
 		driver.setName("Meier");

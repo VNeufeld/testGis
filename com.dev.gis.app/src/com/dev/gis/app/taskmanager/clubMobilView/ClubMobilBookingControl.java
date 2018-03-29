@@ -21,8 +21,8 @@ import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
-import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
+import com.dev.gis.connector.joi.protocol.CMVerifyRequest;
 import com.dev.gis.connector.joi.protocol.Customer;
 import com.dev.gis.connector.joi.protocol.Error;
 
@@ -120,8 +120,8 @@ public class ClubMobilBookingControl extends AdacBookingControl {
 					return;
 				}
 				
-				if (StringUtils.isNotEmpty(response.getBookingId())) {
-						bookingId.setValue(response.getBookingId());
+				if (StringUtils.isNotEmpty(response.getReservationId())) {
+						bookingId.setValue(response.getReservationId());
 						String result = " Status: "; //+response.getStatus();
 						result = result + " Preis: "+response.getPrice().toString();
 						bookingPreis.setValue(result);
@@ -164,8 +164,8 @@ public class ClubMobilBookingControl extends AdacBookingControl {
 			clearFields();
 			try {
 
-				BookingRequest request = BookingRequestCreator
-						.createBookingRequest(ClubMobilModelProvider.INSTANCE.getSelectedOffer(), 
+				CMVerifyRequest request = BookingRequestCreator
+						.createVerifyRequest(ClubMobilModelProvider.INSTANCE.getSelectedOffer(), 
 								ClubMobilModelProvider.INSTANCE.getSelectedExtras(), AdacModelProvider.INSTANCE.memberNo);
 
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();

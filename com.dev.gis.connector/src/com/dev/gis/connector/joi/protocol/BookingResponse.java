@@ -16,6 +16,8 @@ public class BookingResponse extends Response {
 
 	private String bookingId = null;
 
+	private String reservationId = null;
+	
 	private String supplierBookingNo;
 
 	private MoneyAmount price;
@@ -76,5 +78,13 @@ public class BookingResponse extends Response {
 
 	public void setBookingTotalInfo(BookingTotalInfo bookingTotalInfo) {
 		this.bookingTotalInfo = bookingTotalInfo;
+	}
+
+	public String getReservationId() {
+		return reservationId;
+	}
+
+	public void setReservationId(String reservationId) {
+		this.reservationId = reservationId;
 	}
 }

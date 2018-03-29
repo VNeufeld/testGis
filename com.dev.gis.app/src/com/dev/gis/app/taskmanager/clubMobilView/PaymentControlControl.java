@@ -13,6 +13,7 @@ import com.bpcs.mdcars.json.protocol.GetCMPaymentInfoResponse;
 import com.bpcs.mdcars.json.protocol.SetCMPaymentTransactionRequest;
 import com.bpcs.mdcars.model.MoneyAmount;
 import com.bpcs.mdcars.model.Payment;
+import com.bpcs.mdcars.model.PaymentTransaction;
 import com.bpcs.mdcars.model.PaymentType;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.EditPartControl;
@@ -29,6 +30,12 @@ public class PaymentControlControl extends EditPartControl {
 	private ObjectTextControl rentalNo;
 
 	private ObjectTextControl paymentRef;
+
+	private ObjectTextControl payer;
+
+	private ObjectTextControl issueText;
+
+	private ObjectTextControl paymentId;
 	
 	protected OutputTextControls paypalInfo = null;
 
@@ -49,6 +56,12 @@ public class PaymentControlControl extends EditPartControl {
 		rentalNo = new ObjectTextControl(groupStamp, 300, false, "rentalNo ");
 
 		paymentRef = new ObjectTextControl(groupStamp, 300, false, "paymentRef ");
+
+		payer = new ObjectTextControl(groupStamp, 300, false, "payer ");
+
+		issueText = new ObjectTextControl(groupStamp, 300, false, "issueText ");
+
+		paymentId = new ObjectTextControl(groupStamp, 300, false, "paymentId");
 		
 		paypalInfo = new OutputTextControls(groupStamp, "Info", -1, 1);
 
@@ -112,6 +125,15 @@ public class PaymentControlControl extends EditPartControl {
 				
 				GetCMPaymentInfoResponse response = service.getPaymentInfo(request);
 				paypalInfo.setValue(response.getOpenAmount().toString());
+				PaymentTransaction pt = null;
+				if ( !response.getPaymentTransactions().isEmpty())
+					pt = response.getPaymentTransactions().get(0);
+				if ( pt != null) {
+					paymentRef.setSelectedValue(pt.getExtPaymentReference());
+					paymentId.setSelectedValue(pt.getPaymentId());
+					issueText.setSelectedValue(pt.getIssueText());
+					payer.setSelectedValue(pt.getPayer());
+				}
 
 			} catch (Exception err) {
 				paypalInfo.setValue("");
@@ -150,12 +172,15 @@ public class PaymentControlControl extends EditPartControl {
 				SetCMPaymentTransactionRequest request = new SetCMPaymentTransactionRequest();
 				request.setRentalNo(sRentalNo);
 				
-				Payment payment = new Payment() ;
-				payment.setPaymentType(PaymentType.CACH_PAYMENT);
-				payment.setAmount(new MoneyAmount("225,00", "EUR"));
-				payment.setPaymentReference(sPaymentRef);
+				PaymentTransaction payment = new PaymentTransaction() ;
+				payment.setPaymentType(PaymentType.CASH_PAYMENT);
+				payment.setPaidAmount(new MoneyAmount("225,00", "EUR"));
+				payment.setExtPaymentReference(sPaymentRef);
+				payment.setIssueText(issueText.getSelectedValue());
+				payment.setPayer(payer.getSelectedValue());
+				payment.setPaymentId(paymentId.getSelectedValue());
 				
-				request.setPayment(payment);
+				request.setPaymentTransaction(payment);
 				
 
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();

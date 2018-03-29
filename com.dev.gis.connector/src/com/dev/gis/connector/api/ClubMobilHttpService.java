@@ -35,6 +35,8 @@ import com.dev.gis.connector.JsonUtils;
 import com.dev.gis.connector.joi.protocol.Address;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
+import com.dev.gis.connector.joi.protocol.CMBookingRequest;
+import com.dev.gis.connector.joi.protocol.CMVerifyRequest;
 import com.dev.gis.connector.joi.protocol.Customer;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
@@ -382,7 +384,7 @@ public class ClubMobilHttpService {
 	}
 	
 	
-	public BookingResponse verifyOffers(BookingRequest bookingRequest, Offer selectedOffer , String promotionCode) {
+	public BookingResponse verifyOffers(CMVerifyRequest bookingRequest, Offer selectedOffer , String promotionCode) {
 
 		try {
 			logger.info("Verify Request URI = "+selectedOffer.getLink());
@@ -393,7 +395,7 @@ public class ClubMobilHttpService {
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
 			logger.info("Verify Request = "+request);
 			
-			String response =  httpClient.startPutRequestAsJson(uri, request);
+			String response =  httpClient.startPostRequestAsJson(uri, request);
 			logger.info("Verify Response = "+response);
 			
 			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
@@ -412,7 +414,7 @@ public class ClubMobilHttpService {
 
 		try {
 			// joi/booking/${varBookingCacheId}/book?validateOnly=false
-			BookingRequest bookingRequest = new BookingRequest();
+			CMBookingRequest bookingRequest = new CMBookingRequest();
 			
 			String link = "/booking/"+bookingRequestId+"/book?validateOnly=false";
 			
@@ -423,29 +425,16 @@ public class ClubMobilHttpService {
 			
 			logger.info("Book Request URI = "+uri);
 			
-			bookingRequest.setCustomer(customer);
-			
-			Person driver = createDriver();
-			
-			bookingRequest.setDriver(driver);
-			
-			if ( paymentType != 0) {
-				Payment payment = new Payment();
-				payment.setPaymentType(paymentType);  
-				bookingRequest.setPayment(payment);
-			}
-			
 			//bookingRequest.setAcceptedAvailability("13");
 			bookingRequest.setFlightNo("LH4711");
 			bookingRequest.setTransferType(1);
-			bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
 			
 			bookingRequest.setExtras(selectedExtras);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
 			logger.info("book Request = "+request);
 			
-			String response =  httpClient.startPutRequestAsJson(uri, request);
+			String response =  httpClient.startPostRequestAsJson(uri, request);
 			logger.info("book Response = "+response);
 			
 			BookingResponse vh = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
@@ -877,6 +866,8 @@ public class ClubMobilHttpService {
 
 			URI uri = getServerURI(link);
 			
+			logger.info("putCustomer Request URI = "+uri);
+			
 			String request = JsonUtils.convertRequestToJsonString(customer);
 			logger.info("putCustomer request = "+request);
 
@@ -890,6 +881,30 @@ public class ClubMobilHttpService {
 		}
 	}
 
+	public void putDriver(com.bpcs.mdcars.model.Customer customer) {
+		try {
+			
+			
+			String link = CLUBMOBIL_RESERVATION+ "/driver/put";
+			
+
+			URI uri = getServerURI(link);
+			logger.info("putDriver Request URI = "+uri);
+			
+			
+			String request = JsonUtils.convertRequestToJsonString(customer);
+			logger.info("putDriver request = "+request);
+
+			String response =  httpClient.startPutRequestAsJson(uri, request);
+			logger.info("putDriver response = "+response);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+	}
+	
 	
 	public ReservationResponse checkOutReservation() {
 		try {
@@ -1161,10 +1176,10 @@ public class ClubMobilHttpService {
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(defectDetailRequest);
-			logger.info("getDefectList request = "+request);
+			logger.info("addDefect request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("getDefectList response = "+response);
+			logger.info("addDefect response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, DefectResponse.class);
 			
 		} catch ( IOException e) {
@@ -1183,10 +1198,10 @@ public class ClubMobilHttpService {
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(defectDetailRequest);
-			logger.info("getDefectList request = "+request);
+			logger.info("saveDefect request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("getDefectList response = "+response);
+			logger.info("saveDefect response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, DefectResponse.class);
 			
 		} catch ( IOException e) {
