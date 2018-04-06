@@ -812,15 +812,15 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
-	public ReservationResponse getReservation(Integer reservationId) {
+	public ReservationResponse getReservation(String reservationNo) {
 		try {
 			
 			
-			String link = CLUBMOBIL_RESERVATION+ "/getReservation?reservationId="+reservationId.toString();
+			String link = CLUBMOBIL_RESERVATION+ "/getReservation?reservationNo="+reservationNo;
 			
 			URI uri = getServerURI(link);
 			
-			logger.info("getReservation reservationId = "+reservationId);
+			logger.info("getReservation reservationNo = "+reservationNo);
 
 			String response =  httpClient.sendGetRequest(uri);
 			

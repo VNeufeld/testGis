@@ -6,6 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilCustomerControl;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilEquipmentsControl;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilExtrasControl;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilReservationExtrasControl;
@@ -38,9 +39,11 @@ public class CheckOutDialog extends AbstractReservationDialog {
 		reservationNo = new ObjectTextControl(composite, 300, true, "ReservationNo");
 
 		Composite ccc = createComposite(composite, 3, -1, true);
-		customerNoTextControl = new CustomerNoTextControl(ccc, 300, false);
-		new ButtonControl(ccc, "edit Customer", 0,  null);
-
+//		customerNoTextControl = new CustomerNoTextControl(ccc, 300, false);
+//		new ButtonControl(ccc, "edit Customer", 0,  null);
+		
+		new ClubMobilCustomerControl(ccc);
+		
 		carInfo = new ObjectTextControl(ccc, 300, false, "Car Info");
 		new ButtonControl(ccc, "select Car   ", 0,  null);
 
@@ -50,7 +53,7 @@ public class CheckOutDialog extends AbstractReservationDialog {
 		if ( ClubMobilModelProvider.INSTANCE.selectedReservationInfo  != null)
 			reservationNo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservationInfo.getReservationNo());
 
-		new ButtonControl(composite, "select Payment", 0,  new PaymentListener(shell));
+		//new ButtonControl(composite, "select Payment", 0,  new PaymentListener(shell));
 	}
 
 	@Override

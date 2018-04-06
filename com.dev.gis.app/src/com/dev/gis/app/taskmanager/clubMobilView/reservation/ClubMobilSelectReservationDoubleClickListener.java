@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.bpcs.mdcars.model.ReservationInfo;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilReservationView;
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
@@ -47,14 +48,15 @@ public class ClubMobilSelectReservationDoubleClickListener implements IDoubleCli
 		ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 
 		try {
-			ReservationResponse reservationResponse = service.getReservation(reservation.getRentalId());
-			logger.info("select reservation " + reservationResponse.getReservationDetails().getRentalId());
+			ReservationResponse reservationResponse = service.getReservation(reservation.getReservationNo());
+			logger.info("select reservation " + reservationResponse.getReservationDetails().getReservationNo());
 			ClubMobilModelProvider.INSTANCE.selectedReservation = reservationResponse.getReservationDetails();
-			ClubMobilReservationView.updateCustomerControl(" selected reservation ");
 			
 			CheckOutDialog mpd = new CheckOutDialog(shell, null);
-			mpd.open();
-			
+			if (mpd.open() == Dialog.OK) {
+				executeRestService();
+			}
+			ClubMobilReservationView.updateCustomerControl(" selected reservation ");
 
 		}
 		catch(Exception err) {
@@ -62,6 +64,23 @@ public class ClubMobilSelectReservationDoubleClickListener implements IDoubleCli
 		}			
 		
 	}
+	
+	protected void executeRestService() {
+		try {
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
+			ReservationResponse reservationResponse = service.checkOutReservation();
+			ClubMobilModelProvider.INSTANCE.selectedReservation = reservationResponse.getReservationDetails();
+			MessageDialog.openInformation(null,"Info"," CheckOut successfull");
+			
+		}
+		catch(Exception err) {
+			ClubMobilUtils.showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
+			
+		}
+
+	}
+
 
 	protected void showErrors(com.dev.gis.connector.sunny.Error error) {
 		

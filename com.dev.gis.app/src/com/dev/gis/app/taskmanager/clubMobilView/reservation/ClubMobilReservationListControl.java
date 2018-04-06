@@ -29,6 +29,9 @@ public class ClubMobilReservationListControl extends BasicControl {
 	
 	private ReservationNoTextControl reservationNoTextControl;
 	
+	private OutputTextControls rentalNo = null;
+
+	
 	private ClubMobilReservationListTable reservationListTable;
 	
 	public ClubMobilReservationListControl(Composite groupStamp) {
@@ -44,6 +47,8 @@ public class ClubMobilReservationListControl extends BasicControl {
 		
 		reservationNoTextControl = new ReservationNoTextControl(cc2, 300, false);
 
+		rentalNo = new OutputTextControls(cc, "RentalNo", 500, 1 );
+		
 		new ButtonControl(cc2, "GetReservationList", 0,  getReservationListener(getShell(), false));
 
 		createReservationListTable(groupStamp);
@@ -140,6 +145,11 @@ public class ClubMobilReservationListControl extends BasicControl {
 		ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
 		
 		result.setValue(details.getReservationNo());
+		
+		if ( details.getRentalNo() != null)
+			rentalNo.setValue(details.getRentalNo());
+		
+		reservationNoTextControl.setSelectedValue(details.getReservationNo());
 		
 	}
 

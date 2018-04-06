@@ -24,6 +24,7 @@ import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.bpcs.mdcars.model.Customer;
 import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
@@ -39,7 +40,10 @@ public class CustomerDialog extends Dialog {
 	private Customer customer;
 	
 	protected OutputTextControls customerResult = null;
+	
+	private ObjectTextControl name;
 
+	private ObjectTextControl firstName;
 	
 	private CustomerNoTextControl customerNoTextControl;
 	
@@ -60,6 +64,14 @@ public class CustomerDialog extends Dialog {
 		new ButtonControl(composite, "GetCustomer", 0,  getListener(getShell()));
 
 		customerResult = new OutputTextControls(composite, "customerResult:", 500, 1 );
+		
+		name = new ObjectTextControl(composite, 300, true, "Name");
+
+		firstName = new ObjectTextControl(composite, 300, true, "FirstName");
+		
+		new ButtonControl(composite, "PutCustomer", 0,  new ClubMobilPutCustomerListener(getShell(), false));
+
+		new ButtonControl(composite, "PutDriver", 0,  new ClubMobilPutCustomerListener(getShell(), true));
 		
 		return composite;
 	}
@@ -96,6 +108,9 @@ public class CustomerDialog extends Dialog {
 					String result = response.getCustomer().getPerson().getName() + " " + response.getCustomer().getPerson().getFirstName();
 					customer = response.getCustomer();
 					customerResult.setValue(result);
+					
+					name.setSelectedValue(response.getCustomer().getPerson().getName());
+					firstName.setSelectedValue(response.getCustomer().getPerson().getFirstName());
 				}
 					
 			}
@@ -131,6 +146,73 @@ public class CustomerDialog extends Dialog {
 
 	}
 	
+	private class ClubMobilPutCustomerListener implements SelectionListener {
+		
+		private final Shell shell;
+		private boolean driver = false;
+
+		public ClubMobilPutCustomerListener(Shell shell, boolean driver) {
+			this.shell = shell;
+			this.driver = driver;
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			try {
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
+				
+				if (customer != null) {
+					customer.getPerson().setName(name.getSelectedValue());
+					customer.getPerson().setFirstName(firstName.getSelectedValue());
+				}
+				else {
+					showErrors("No Customer is definded");
+				}
+						
+				if ( driver ) {
+					service.putDriver(customer);
+					MessageDialog.openInformation(getShell(),"Info","Put Driver in the session");
+				}
+				else {
+					service.putCustomer(customer);
+					MessageDialog.openInformation(getShell(),"Info","Put Customer in the session");
+				}
+				
+					
+			}
+			catch(BusinessException err) {
+				logger.error(err.getMessage());
+				 com.dev.gis.connector.joi.protocol.Error error = null;
+				try {
+					error = convertJsonStringToObject(err.getMessage(),com.dev.gis.connector.joi.protocol.Error.class);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				if ( error != null)
+					showErrors(error.getErrorText());
+				else
+					showErrors(err.getMessage());
+				
+			}
+			catch(Exception err) {
+				logger.error(err.getMessage());
+				String errName = err.getClass().getName();
+				showErrors(new com.dev.gis.connector.sunny.Error(1,1, errName + " : " +err.getMessage()));
+				
+			}
+
+		}
+
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	}
 	
 	protected void showErrors(com.dev.gis.connector.sunny.Error error) {
 		

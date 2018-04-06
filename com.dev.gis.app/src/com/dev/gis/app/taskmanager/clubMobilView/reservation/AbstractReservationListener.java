@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
@@ -32,6 +33,8 @@ public class AbstractReservationListener implements SelectionListener {
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 			callService(service);
+			MessageDialog.openInformation(null,"Info"," CheckOut successfull");
+			
 		}
 		catch(Exception err) {
 			ClubMobilUtils.showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
