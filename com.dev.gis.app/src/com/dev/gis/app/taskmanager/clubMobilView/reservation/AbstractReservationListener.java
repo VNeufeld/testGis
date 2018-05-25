@@ -1,14 +1,22 @@
 package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
+import com.bpcs.mdcars.json.protocol.CheckOutRequest;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
+import com.dev.gis.app.taskmanager.clubMobilView.CustomerDialog;
 import com.dev.gis.connector.api.ClubMobilHttpService;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.joi.protocol.VehicleDescription;
 
 public class AbstractReservationListener implements SelectionListener {
+
+	protected Logger logger = Logger.getLogger(this.getClass());
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
@@ -33,7 +41,6 @@ public class AbstractReservationListener implements SelectionListener {
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 			callService(service);
-			MessageDialog.openInformation(null,"Info"," CheckOut successfull");
 			
 		}
 		catch(Exception err) {
@@ -46,5 +53,7 @@ public class AbstractReservationListener implements SelectionListener {
 	protected void callService(ClubMobilHttpService service) {
 		
 	}
+
+	
 
 }

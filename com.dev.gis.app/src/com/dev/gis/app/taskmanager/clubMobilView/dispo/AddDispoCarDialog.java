@@ -15,6 +15,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import com.bpcs.mdcars.json.protocol.DispositionDetailRequest;
 import com.bpcs.mdcars.json.protocol.DispositionResponse;
+import com.bpcs.mdcars.model.CarRentalInfo;
 import com.bpcs.mdcars.model.DayAndHour;
 import com.bpcs.mdcars.model.DispositionInfo;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
@@ -34,6 +35,8 @@ public class AddDispoCarDialog extends Dialog {
 	
 	private OutputTextControls carId;
 
+	private OutputTextControls carChargeId;
+	
 	private ObjectTextControl confirmFrom;
 
 	private ObjectTextControl confirmTo;
@@ -65,7 +68,7 @@ public class AddDispoCarDialog extends Dialog {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		composite.getShell().setText("Add Car to Dispo. Stations : " + stationId);
 		
-		composite.setLayout(new GridLayout(1, false));
+		composite.setLayout(new GridLayout(2, false));
 
 		LocalDate scheduleF = new LocalDate();
 		LocalDate schedulet = new LocalDate();
@@ -73,6 +76,10 @@ public class AddDispoCarDialog extends Dialog {
 
 		storageGenId = new OutputTextControls(composite, "storageGenId", 300);
 		storageGenId.setValue(""+dispoInfo.getId());
+		
+		carChargeId = new OutputTextControls(composite, "carChargeId", 300);
+		if ( dispoInfo.getCarRentalInfo() != null)
+			carChargeId.setValue(""+dispoInfo.getCarRentalInfo().getCarChargeId());
 		
 		if ( dispoInfo.getCarId() != null) {
 			carId = new OutputTextControls(composite, "CarId", 300);
@@ -132,6 +139,8 @@ public class AddDispoCarDialog extends Dialog {
 				info.setCarId(dispoInfo.getCarId());
 				
 				info.setId(dispoInfo.getId());
+				
+				info.setCarRentalInfo(dispoInfo.getCarRentalInfo());
 				
 //				LocalDate scheduleF = LocalDate.parse(confirmFrom.getSelectedValue(), timeFormatter);
 //				logger.info("confirmFrom = " + scheduleF.toString(timeFormatter));

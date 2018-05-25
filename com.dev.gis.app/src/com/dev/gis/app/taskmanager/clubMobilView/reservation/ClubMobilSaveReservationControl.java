@@ -18,16 +18,18 @@ public class ClubMobilSaveReservationControl extends BasicControl {
 		
 		parent = groupStamp;
 
-		Composite ccc = createComposite(groupStamp, 5, -1, false);
+		Composite ccc = createComposite(groupStamp, 6, -1, false);
 
 		new ButtonControl(ccc, "Show Reservation", 0,  getSavelListener(getShell()));
 
 		new ButtonControl(ccc, "Change Reservation", 0,  getSavelListener(getShell()));
 		
-		new ButtonControl(ccc, "CheckOut", 0,  new CheckOutReservationListener(getShell(), clubMobilResControl));
+		new ButtonControl(ccc, "CheckOut", 0,  new CheckOutReservationListener(getShell()));
 
 		new ButtonControl(ccc, "CheckIn", 0,  new CheckInReservationListener(getShell(), clubMobilResControl));
 
+		new ButtonControl(ccc, "Payment", 0,  new PaymentListener(getShell()));
+		
 		new ButtonControl(ccc, "Cancel", 0,  getSavelListener(getShell()));
 		
 
@@ -42,7 +44,7 @@ public class ClubMobilSaveReservationControl extends BasicControl {
 	}
 
 	protected SelectionListener getSavelListener(Shell shell) {
-		return new CheckOutReservationListener(shell, null);
+		return new CheckOutReservationListener(shell);
 	}
 	
 	public OutputTextControls getResult() {

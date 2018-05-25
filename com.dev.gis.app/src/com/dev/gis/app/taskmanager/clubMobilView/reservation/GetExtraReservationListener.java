@@ -5,23 +5,22 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.connector.api.ClubMobilHttpService;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 
-
+// not used more
 public class GetExtraReservationListener extends AbstractReservationListener{
 	private final Shell shell;
-	private ClubMobilReservationListControl clubMobilResControl;
 
-	public GetExtraReservationListener(Shell shell, ClubMobilReservationListControl clubMobilResControl) {
+	public GetExtraReservationListener(Shell shell) {
 		this.shell = shell;
-		this.clubMobilResControl = clubMobilResControl;
 	}
 	
 	protected void callService(ClubMobilHttpService service) {
-		service.checkOutReservation();
+		service.checkOutReservation(null);
 	}
 	
 	protected void executeEvent(SelectionEvent e) {
-		CheckOutDialog mpd = new CheckOutDialog(shell, clubMobilResControl);
+		CheckOutDialog mpd = new CheckOutDialog(shell);
 		if (mpd.open() == Dialog.OK) {
 			executeRestService();
 		}

@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -15,11 +16,13 @@ import com.bpcs.mdcars.model.MoneyAmount;
 import com.bpcs.mdcars.model.Payment;
 import com.bpcs.mdcars.model.PaymentTransaction;
 import com.bpcs.mdcars.model.PaymentType;
+import com.bpcs.mdcars.model.ReservationDetails;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.EditPartControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.ClubMobilHttpService;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 
 public class PaymentControlControl extends EditPartControl {
@@ -66,12 +69,16 @@ public class PaymentControlControl extends EditPartControl {
 		paypalInfo = new OutputTextControls(groupStamp, "Info", -1, 1);
 
 		errorText = new OutputTextControls(groupStamp, "Error / Warning", -1, 1);
+		
+		ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
+		if ( details != null)
+			rentalNo.setSelectedValue(details.getRentalNo()== null ? "" : details.getRentalNo());
 
 	}
 
 	@Override
 	protected void createButtons(Group groupStamp) {
-		Composite cp = createComposite(groupStamp, 1, -1, true);
+		Composite cp = createComposite(groupStamp, 2, -1, true);
 
 		new ButtonControl(cp, "Get Payment", 250, getPaymentListener(getShell()));
 
@@ -116,6 +123,11 @@ public class PaymentControlControl extends EditPartControl {
 				clearFields();
 				
 				String sRentalNo = rentalNo.getSelectedValue();
+				
+				if ( StringUtils.isEmpty(sRentalNo)) {
+					ClubMobilUtils.showErrors("please select rentalNo");
+					return;
+				}
 				
 				GetCMPaymentInfoRequest request = new GetCMPaymentInfoRequest();
 				request.setRentalNo(sRentalNo);

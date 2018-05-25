@@ -6,14 +6,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name = "location")
-@XmlType(propOrder =
-	{ "station", "stationId", "airport", "cityId", "area", "countryId", "countryCode" })
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class Location extends BasicProtocol {
 
 	private Station station = null;
+	
+	private long supplierId;
 	
 	private long stationId;
 
@@ -101,5 +104,13 @@ public class Location extends BasicProtocol {
 	
 	public void setStationId(long stationId) {
 		this.stationId = stationId;
+	}
+
+	public long getSupplierId() {
+		return supplierId;
+	}
+
+	public void setSupplierId(long supplierId) {
+		this.supplierId = supplierId;
 	}
 }

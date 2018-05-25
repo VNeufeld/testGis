@@ -108,7 +108,7 @@ public class ClubMobilBookingView extends TaskViewAbstract {
 				customer.setEMail("bgt@adac.de");
 				
 				PhoneNumber phone = new PhoneNumber();
-				phone.setExtension("08963456543");
+				phone.setNumber("08963456543");
 				customer.setPhone(phone);
 				
 				// StartVerify
@@ -120,7 +120,7 @@ public class ClubMobilBookingView extends TaskViewAbstract {
 				customer.setPerson(person);
 				
 				phone = new PhoneNumber();
-				phone.setExtension("0172/63456543");
+				phone.setNumber("0172/63456543");
 				customer.setPhone(phone);
 				
 				service.putDriver(customer);

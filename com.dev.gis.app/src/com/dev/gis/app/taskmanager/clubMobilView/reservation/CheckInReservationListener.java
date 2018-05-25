@@ -1,6 +1,7 @@
 package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Shell;
 
@@ -17,6 +18,7 @@ public class CheckInReservationListener extends AbstractReservationListener{
 	
 	protected void callService(ClubMobilHttpService service) {
 		service.checkInReservation();
+		MessageDialog.openInformation(null,"Info"," CheckIn successfull");
 	}
 	
 	protected void executeEvent(SelectionEvent e) {

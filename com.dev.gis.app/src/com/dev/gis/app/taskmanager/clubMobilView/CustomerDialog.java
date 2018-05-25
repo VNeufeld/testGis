@@ -170,6 +170,7 @@ public class CustomerDialog extends Dialog {
 				else {
 					showErrors("No Customer is definded");
 				}
+				customer.setEMail("test.test@test.com");
 						
 				if ( driver ) {
 					service.putDriver(customer);

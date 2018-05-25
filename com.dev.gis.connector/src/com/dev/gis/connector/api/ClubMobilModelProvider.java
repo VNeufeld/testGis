@@ -126,7 +126,10 @@ public enum ClubMobilModelProvider {
 
 	public String insuranceId;
 
+	public String checkInCarKm;
 
+	public String checkInCarFuel;
+	
 	public void updateExtras(ExtraResponse response) {
 		extras.clear();
 		if ( response.getExtras() != null)

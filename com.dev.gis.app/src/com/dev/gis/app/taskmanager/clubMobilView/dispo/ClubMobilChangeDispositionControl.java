@@ -36,7 +36,7 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 
 		new ButtonControl(ccc, "Get DispoList", 0,  getDispoListener(getShell()));
 
-		new ButtonControl(ccc, "Add Car", 0,  getAddCarListener(getShell()));
+		//new ButtonControl(ccc, "Add Car", 0,  getAddCarListener(getShell()));
 
 	}
 	

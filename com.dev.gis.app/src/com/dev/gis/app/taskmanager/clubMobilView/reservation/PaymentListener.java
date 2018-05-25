@@ -24,17 +24,6 @@ public class PaymentListener implements SelectionListener {
 		try {
 			PaymentDialog mpd = new PaymentDialog(shell);
 			mpd.open();
-			
-			ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
-			
-			if ( !details.getPaymentTransactions().isEmpty()){
-				com.bpcs.mdcars.model.Payment payment = details.getPaymentTransactions().get(0);
-			
-				if ( payment.getCard() == null) {
-					payment.setCard(new CreditCard());
-					payment.getCard().setCardNumber("-");
-				}
-			}
 
 		}
 		catch(Exception err) {

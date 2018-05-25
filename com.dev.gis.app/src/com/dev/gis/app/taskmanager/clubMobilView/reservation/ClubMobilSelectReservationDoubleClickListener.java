@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -9,6 +10,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bpcs.mdcars.json.protocol.CheckOutRequest;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.bpcs.mdcars.model.ReservationInfo;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilReservationView;
@@ -16,6 +18,7 @@ import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.joi.protocol.VehicleDescription;
 
 
 public class ClubMobilSelectReservationDoubleClickListener implements IDoubleClickListener {
@@ -52,9 +55,10 @@ public class ClubMobilSelectReservationDoubleClickListener implements IDoubleCli
 			logger.info("select reservation " + reservationResponse.getReservationDetails().getReservationNo());
 			ClubMobilModelProvider.INSTANCE.selectedReservation = reservationResponse.getReservationDetails();
 			
-			CheckOutDialog mpd = new CheckOutDialog(shell, null);
+			CheckOutDialog mpd = new CheckOutDialog(shell);
 			if (mpd.open() == Dialog.OK) {
-				executeRestService();
+				executeCheckoutService();
+				
 			}
 			ClubMobilReservationView.updateCustomerControl(" selected reservation ");
 
@@ -65,11 +69,15 @@ public class ClubMobilSelectReservationDoubleClickListener implements IDoubleCli
 		
 	}
 	
-	protected void executeRestService() {
+	protected void executeCheckoutService() {
 		try {
+			logger.info("call checkOutRequest");
 			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 			ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
-			ReservationResponse reservationResponse = service.checkOutReservation();
+			
+			CheckOutRequest checkOutRequest =ClubMobilUtils.createCheckOutRequest();
+			
+			ReservationResponse reservationResponse = service.checkOutReservation(checkOutRequest);
 			ClubMobilModelProvider.INSTANCE.selectedReservation = reservationResponse.getReservationDetails();
 			MessageDialog.openInformation(null,"Info"," CheckOut successfull");
 			

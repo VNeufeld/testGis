@@ -28,8 +28,8 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-	    String[] titles = { "Id", "CarId", "licensePlate", "StationId", "ConfirmFrom", "ConfirmTo", "ScheduleFrom",  "Status" };
-	    int[] bounds = { 100, 200, 200,100, 200, 200, 200, 100};
+	    String[] titles = { "Id", "CarId / ChargeId", "Type", "LicensePlate", "ConfirmFrom", "ConfirmTo", "ScheduleFrom",  "Status", "restMileage", "chargeValidTo" };
+	    int[] bounds = { 100, 150, 150, 150, 200, 200, 200, 100, 150,200};
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -46,10 +46,13 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	DispositionInfo o = (DispositionInfo) element;
+	    	String res = "";
 	    	if ( o.getCarId() != null)
-	    		return o.getCarId().toString();
-	    	else
-	    		return "-1";
+	    		res= o.getCarId().toString();
+	    	if ( o.getCarRentalInfo() != null)
+	    		res = res + " / "+ o.getCarRentalInfo().getCarChargeId();
+	    	
+	    	return res;
 	      }
 	    });
 	    
@@ -58,23 +61,19 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	DispositionInfo o = (DispositionInfo) element;
-    		return o.getLicensePlate();
+    		return o.getCarType();
 	      }
 	    });
 
-	    // second column is supplierId
 	    col = createTableViewerColumn(titles[3], bounds[3], 3);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
 	    	DispositionInfo o = (DispositionInfo) element;
-	    	if ( o.getStationId() != null)
-	    		return o.getStationId().toString();
-	    	else
-	    		return "0";
+    		return o.getLicensePlate();
 	      }
 	    });
-
+	    
 	    col = createTableViewerColumn(titles[4], bounds[4], 4);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
@@ -127,6 +126,30 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 
 	    });
 
+	    col = createTableViewerColumn(titles[8], bounds[8], 8);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+		    	DispositionInfo o = (DispositionInfo) element;
+		    	if ( o.getCarRentalInfo() != null && o.getCarRentalInfo().getRestMileage() != null)
+		    		return o.getCarRentalInfo().getRestMileage().toString();
+		    	return "";
+	      }
+
+	    });
+
+	    col = createTableViewerColumn(titles[9], bounds[9], 9);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+		    	DispositionInfo o = (DispositionInfo) element;
+		    	if ( o.getCarRentalInfo() != null && o.getCarRentalInfo().getValidTo() != null)
+		    		return o.getCarRentalInfo().getValidTo();
+		    	return "";
+	      }
+
+	    });
+	    
 	  }
 
 

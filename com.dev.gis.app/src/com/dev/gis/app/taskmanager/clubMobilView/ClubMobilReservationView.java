@@ -10,10 +10,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
-import com.bpcs.mdcars.model.Payment;
 import com.bpcs.mdcars.model.Person;
 import com.bpcs.mdcars.model.ReservationDetails;
-import com.dev.gis.app.taskmanager.clubMobilView.reservation.ClubMobilPaymentControl;
 import com.dev.gis.app.taskmanager.clubMobilView.reservation.ClubMobilReservationListControl;
 import com.dev.gis.app.taskmanager.clubMobilView.reservation.ClubMobilSaveReservationControl;
 import com.dev.gis.app.taskmanager.rentcars.RentCarsAppView;
@@ -27,8 +25,6 @@ public class ClubMobilReservationView extends RentCarsAppView {
 	public static final String ID = IEditableTask.ID_ClubMobilReservationView;
 	
 	private ClubMobilCustomerControl clubMobilCustomerControl;
-	
-	private ClubMobilPaymentControl clubMobilPaymentControl;
 	
 	private ClubMobilReservationListControl clubMobilResControl;
 
@@ -49,9 +45,7 @@ public class ClubMobilReservationView extends RentCarsAppView {
 		
 		clubMobilResControl = new ClubMobilReservationListControl(composite);
 		
-		clubMobilCustomerControl = new ClubMobilCustomerControl(composite);
-		
-		clubMobilPaymentControl = new ClubMobilPaymentControl(composite);
+		//clubMobilCustomerControl = new ClubMobilCustomerControl(composite);
 
 		new ClubMobilSaveReservationControl(composite, clubMobilResControl);	
 	}
@@ -87,18 +81,6 @@ public class ClubMobilReservationView extends RentCarsAppView {
 					
 					ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
 					if ( details != null) {
-						if ( details.getCustomer() != null && details.getCustomer().getPerson() != null) {
-							Person person = details.getCustomer().getPerson();
-							viewPart.getClubMobilCustomerControl().getResult().setValue(person.getName() + " " + person.getFirstName());
-						}
-						if ( !details.getPaymentTransactions().isEmpty()) {
-							Payment payment = details.getPaymentTransactions().get(0); 
-							String cardNumber = "-";
-							if ( payment.getCard() != null)
-								cardNumber = payment.getCard().getCardNumber();
-							viewPart.getClubMobilPaymentControl().getResult().setValue(cardNumber);
-						}
-						
 						viewPart.getClubMobilResControl().update();
 					}
 					
@@ -115,10 +97,6 @@ public class ClubMobilReservationView extends RentCarsAppView {
 		return clubMobilCustomerControl;
 	}
 
-
-	public ClubMobilPaymentControl getClubMobilPaymentControl() {
-		return clubMobilPaymentControl;
-	}
 
 
 	public ClubMobilReservationListControl getClubMobilResControl() {

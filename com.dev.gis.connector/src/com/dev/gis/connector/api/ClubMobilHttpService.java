@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.bpcs.mdcars.json.protocol.CheckOutRequest;
 import com.bpcs.mdcars.json.protocol.CredentialResponse;
 import com.bpcs.mdcars.json.protocol.DefectDetailRequest;
 import com.bpcs.mdcars.json.protocol.DefectListFilterRequest;
@@ -27,6 +28,8 @@ import com.bpcs.mdcars.json.protocol.ReservationListFilterRequest;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.bpcs.mdcars.json.protocol.SetCMPaymentTransactionRequest;
+import com.bpcs.mdcars.model.CarRentalInfo;
+import com.bpcs.mdcars.model.CheckInDetails;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.bpcs.mdcars.model.DayAndHour;
@@ -906,13 +909,11 @@ public class ClubMobilHttpService {
 	}
 	
 	
-	public ReservationResponse checkOutReservation() {
+	public ReservationResponse checkOutReservation(CheckOutRequest checkOutRequest) {
 		try {
 			
 			
 			String link = CLUBMOBIL_RESERVATION+ "/checkOut";
-			
-			ReservationListFilterRequest reservationListFilterRequest = new ReservationListFilterRequest();
 
 			URI uri = getServerURI(link);
 			
@@ -1113,6 +1114,7 @@ public class ClubMobilHttpService {
 
 			String response =  httpClient.startPutRequestAsJson(uri, request);
 			logger.info("putExtras response = "+response);
+			
 			extraResponse = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
 			return extraResponse;
 		} catch ( Exception e) {
@@ -1121,6 +1123,30 @@ public class ClubMobilHttpService {
 		}
 	}
 
+	public ReservationResponse putEquipments(List<Extra> extras) {
+		
+		ReservationResponse reservationResponse =  null;
+		
+		try {
+			
+			String link = CLUBMOBIL_RESERVATION+ "/equipments/put";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(extras);
+			logger.info("putEquipments request = "+request);
+
+			String response =  httpClient.startPutRequestAsJson(uri, request);
+			logger.info("putEquipments response = "+response);
+			
+			reservationResponse = JsonUtils.createResponseClassFromJson(response, ReservationResponse.class);
+			return reservationResponse;
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
+		}
+	}
+	
 	public ReservationResponse checkInReservation() {
 		try {
 			
@@ -1269,6 +1295,29 @@ public class ClubMobilHttpService {
 			String response =  httpClient.startPostRequestAsJson(uri, request);
 			logger.info("addPaymentInfo response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, GetCMPaymentInfoResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+	public ReservationResponse updateReservation(CheckInDetails checkInDetails) {
+		try {
+			
+			
+			String link = CLUBMOBIL_RESERVATION+ "/update";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(checkInDetails);
+			logger.info("updateReservation request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("updateReservation response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, ReservationResponse.class);
 			
 		} catch ( IOException e) {
 			logger.error(e,e);

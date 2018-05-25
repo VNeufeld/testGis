@@ -2,14 +2,18 @@ package com.dev.gis.app.taskmanager.clubMobilView;
 
 import java.io.IOException;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 
+import com.bpcs.mdcars.json.protocol.CheckOutRequest;
 import com.bpcs.mdcars.json.protocol.DispositionListResponse;
 import com.bpcs.mdcars.model.ServiceError;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.Error;
 import com.dev.gis.connector.joi.protocol.Response;
+import com.dev.gis.connector.joi.protocol.VehicleDescription;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ClubMobilUtils {
@@ -79,5 +83,30 @@ public class ClubMobilUtils {
 					null,"Error",message);
 		
 	}
+	
+	public static CheckOutRequest createCheckOutRequest() {
+		CheckOutRequest checkOutRequest = new CheckOutRequest();
+		if ( ClubMobilModelProvider.INSTANCE.getSelectedOffer() != null ) {
+			com.dev.gis.connector.joi.protocol.Offer offer = ClubMobilModelProvider.INSTANCE.getSelectedOffer().getOffer();
+			VehicleDescription vehicle = ClubMobilModelProvider.INSTANCE.getSelectedOffer().getModel().getVehicle();
+			if ( vehicle != null && StringUtils.isNotEmpty(vehicle.getCarId())) {
+				checkOutRequest.setCarId(Integer.valueOf(vehicle.getCarId()));
+			}
+			checkOutRequest.setBusinessSegmentId((int)offer.getBusinessSegmentId());
+			
+		}
+		if ( ClubMobilModelProvider.INSTANCE.selectedReservation != null) {
+			checkOutRequest.setCheckOutDate(ClubMobilModelProvider.INSTANCE.selectedReservation.getCheckOutDate());
+			checkOutRequest.setCheckInDate(ClubMobilModelProvider.INSTANCE.selectedReservation.getCheckInDate());
+			checkOutRequest.setCheckOutStationId(ClubMobilModelProvider.INSTANCE.selectedReservation.getCheckOutStationId());
+			checkOutRequest.setCheckInStationId(ClubMobilModelProvider.INSTANCE.selectedReservation.getCheckInStationId());
+
+			checkOutRequest.setReservationNo(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationNo());
+			
+		}
+
+		return checkOutRequest;
+	}
+
 	
 }

@@ -3,57 +3,54 @@ package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilCustomerControl;
-import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilEquipmentsControl;
-import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilExtrasControl;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilReservationExtrasControl;
-import com.dev.gis.app.taskmanager.clubMobilView.CustomerNoTextControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
+import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 
 public class CheckOutDialog extends AbstractReservationDialog {
 	
-	private CustomerNoTextControl customerNoTextControl;
-	
 	private ObjectTextControl reservationNo;
 
-	private ObjectTextControl carInfo;
+	private OutputTextControls carInfo;
 
 	private final Shell shell;
 	
-	private ClubMobilReservationListControl clubMobilResControl;
-	
-	public CheckOutDialog(Shell parentShell, ClubMobilReservationListControl clubMobilResControl) {
+	public CheckOutDialog(Shell parentShell) {
 		super(parentShell);
 		this.shell = parentShell;
-		this.clubMobilResControl =  clubMobilResControl;
 	}
 
 	protected void fillDialogArea(Composite composite) {
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(500, 500).applyTo(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(900, 500).applyTo(composite);
 		
 		reservationNo = new ObjectTextControl(composite, 300, true, "ReservationNo");
 
-		Composite ccc = createComposite(composite, 3, -1, true);
-//		customerNoTextControl = new CustomerNoTextControl(ccc, 300, false);
-//		new ButtonControl(ccc, "edit Customer", 0,  null);
+		new ClubMobilCustomerControl(composite);
 		
-		new ClubMobilCustomerControl(ccc);
+		Composite ccc = createComposite(composite, 4, -1, true);
 		
-		carInfo = new ObjectTextControl(ccc, 300, false, "Car Info");
-		new ButtonControl(ccc, "select Car   ", 0,  null);
-
+		carInfo = new OutputTextControls(ccc, "Car Info",500, 1);
+		new ButtonControl(ccc, "show Car", 0,  new ClubMobilCarInfoListener(getShell()));
 		
 		new ClubMobilReservationExtrasControl(composite);
 		
-		if ( ClubMobilModelProvider.INSTANCE.selectedReservationInfo  != null)
-			reservationNo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservationInfo.getReservationNo());
+		if ( ClubMobilModelProvider.INSTANCE.selectedReservation  != null) {
+			reservationNo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationNo());
+			
+			String carInfoText = "booked car id = ";
+			carInfoText = carInfoText + ClubMobilModelProvider.INSTANCE.selectedReservation.getCarId() + 
+					" Type :" + ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getAcrissCode();
+			carInfo.setValue(carInfoText);
+		}
 
-		//new ButtonControl(composite, "select Payment", 0,  new PaymentListener(shell));
 	}
 
 	@Override
@@ -70,6 +67,30 @@ public class CheckOutDialog extends AbstractReservationDialog {
 	protected void okPressed() {
 		setReturnCode(OK);
 		close();
+	}
+
+	private class ClubMobilCarInfoListener implements SelectionListener {
+		
+		private final Shell shell;
+
+		public ClubMobilCarInfoListener(Shell shell) {
+			this.shell = shell;
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			CarInfoDialog mpd = new CarInfoDialog(shell);
+			mpd.open();
+
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
 	}
 	
 }
