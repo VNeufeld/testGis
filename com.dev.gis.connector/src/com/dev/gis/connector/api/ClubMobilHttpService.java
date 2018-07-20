@@ -28,7 +28,6 @@ import com.bpcs.mdcars.json.protocol.ReservationListFilterRequest;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.bpcs.mdcars.json.protocol.SetCMPaymentTransactionRequest;
-import com.bpcs.mdcars.model.CarRentalInfo;
 import com.bpcs.mdcars.model.CheckInDetails;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
@@ -36,23 +35,19 @@ import com.bpcs.mdcars.model.DayAndHour;
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
 import com.dev.gis.connector.joi.protocol.Address;
-import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.CMBookingRequest;
 import com.dev.gis.connector.joi.protocol.CMVerifyRequest;
 import com.dev.gis.connector.joi.protocol.Customer;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
-import com.dev.gis.connector.joi.protocol.MoneyAmount;
 import com.dev.gis.connector.joi.protocol.Offer;
-import com.dev.gis.connector.joi.protocol.Payment;
 import com.dev.gis.connector.joi.protocol.PaypalDoCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.PaypalSetCheckoutResponse;
 import com.dev.gis.connector.joi.protocol.Person;
 import com.dev.gis.connector.joi.protocol.PhoneNumber;
 import com.dev.gis.connector.joi.protocol.Station;
 import com.dev.gis.connector.joi.protocol.StationResponse;
-import com.dev.gis.connector.joi.protocol.Token;
 import com.dev.gis.connector.joi.protocol.TravelInformation;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleRequestFilter;
@@ -135,6 +130,30 @@ public class ClubMobilHttpService {
 			link = link +"?promotionCode="+promotionCode;
 
 		return getServerURI(link);
+	}
+
+	private URI getCheckoutURI(URI offerLink, String promotionCode ) throws URISyntaxException {
+		String link = offerLink.toString();
+		int pos = link.indexOf("/vehicleRequest");
+		link = link.substring(pos);
+		
+		String checkoutUrl = CLUBMOBIL_RESERVATION+ "/checkOut";
+		
+		checkoutUrl = checkoutUrl + link;
+
+		return getServerURI(checkoutUrl);
+	}
+
+	private URI getResExtraseURI(URI offerLink, String promotionCode ) throws URISyntaxException {
+		String link = offerLink.toString();
+		int pos = link.indexOf("/vehicleRequest");
+		link = link.substring(pos);
+		
+		String checkoutUrl = CLUBMOBIL_RESERVATION+ "/extras";
+		
+		checkoutUrl = checkoutUrl + link;
+
+		return getServerURI(checkoutUrl);
 	}
 	
 	private URI getPaypalURI(String link) throws URISyntaxException{
@@ -702,6 +721,7 @@ public class ClubMobilHttpService {
 	}
 
 	public CredentialResponse login(Credential credentialRequest) {
+		boolean auth = ClubMobilModelProvider.INSTANCE.authorization;
 
 		try {
 			
@@ -720,6 +740,13 @@ public class ClubMobilHttpService {
 				return response;
 			}
 			
+			// Login soll ohne authorization funktionieren
+			if ( auth) {
+				ClubMobilModelProvider.INSTANCE.authorization = false;
+				logger.info("remove auth flag");
+
+			}
+			
 			String link = CLUBMOBIL_CREDENTIALS+ "/login";
 
 			URI uri = getServerURI(link);
@@ -729,6 +756,8 @@ public class ClubMobilHttpService {
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
 			logger.info("login response = "+response);
+			
+			
 			return JsonUtils.createResponseClassFromJson(response, CredentialResponse.class);
 			
 		} catch ( IOException e) {
@@ -736,6 +765,13 @@ public class ClubMobilHttpService {
 		} catch (URISyntaxException e) {
 			logger.error(e,e);
 		}
+		finally {
+			if ( auth) {
+				ClubMobilModelProvider.INSTANCE.authorization = true;
+				logger.info("set auth flag again");
+			}
+		}
+		
 		return null;
 	}
 
@@ -786,17 +822,11 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
-	public ReservationListResponse getReservationList(String criterium) {
+	public ReservationListResponse getReservationList(ReservationListFilterRequest reservationListFilterRequest) {
 		try {
 			
 			
 			String link = CLUBMOBIL_RESERVATION+ "/reservationList";
-			
-			ReservationListFilterRequest reservationListFilterRequest = new ReservationListFilterRequest();
-			reservationListFilterRequest.setDriverName(criterium);
-			reservationListFilterRequest.setDateFrom(new DayAndHour("2018-06-12", "10:00"));
-			reservationListFilterRequest.setStationId(2345);
-			reservationListFilterRequest.setReservationPattern("N-1223");
 
 			URI uri = getServerURI(link);
 			
@@ -911,14 +941,24 @@ public class ClubMobilHttpService {
 	
 	public ReservationResponse checkOutReservation(CheckOutRequest checkOutRequest) {
 		try {
+			com.dev.gis.connector.joi.protocol.Offer offer = null;
 			
-			
-			String link = CLUBMOBIL_RESERVATION+ "/checkOut";
+			if ( ClubMobilModelProvider.INSTANCE.getSelectedOffer() != null)
+				offer = ClubMobilModelProvider.INSTANCE.getSelectedOffer().getOffer();
 
-			URI uri = getServerURI(link);
+			String id = "0";
+			if ( offer != null)
+				id = offer.getLink().toString();
+
+			logger.info("offer id = " + id);
 			
-			String dummyStr = "test";
-			String request = JsonUtils.convertRequestToJsonString(dummyStr);
+
+			//URI uri = getServerURI(link);
+			
+			URI uri = getCheckoutURI(offer.getLink(),null);
+			logger.info("checkOut uri = " + uri.toString());
+			
+			String request = JsonUtils.convertRequestToJsonString(checkOutRequest);
 			logger.info("checkOutReservation request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
@@ -1076,10 +1116,19 @@ public class ClubMobilHttpService {
 	public ExtraResponse getReservationExtras() {
 		ExtraResponse extraResponse =  null;
 		try {
+			com.dev.gis.connector.joi.protocol.Offer offer = null;
+			
+			if ( ClubMobilModelProvider.INSTANCE.getSelectedOffer() != null)
+				offer = ClubMobilModelProvider.INSTANCE.getSelectedOffer().getOffer();
 
-			String link = CLUBMOBIL_RESERVATION+ "/extras";
-			URI uri = getServerURI(link);
+			String id = "0";
+			if ( offer != null)
+				id = offer.getLink().toString();
 
+			logger.info("offer id = " + id);
+
+			URI uri = getResExtraseURI(offer.getLink(),null);
+			
 			logger.info("GetExtras Request = "+uri);
 			
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();

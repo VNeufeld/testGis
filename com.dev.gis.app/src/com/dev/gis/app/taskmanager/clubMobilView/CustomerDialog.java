@@ -1,9 +1,7 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
 import java.io.IOException;
-import java.util.Date;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -15,22 +13,15 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 
-import com.bpcs.mdcars.json.protocol.CredentialResponse;
 import com.bpcs.mdcars.json.protocol.GetCustomerResponse;
-import com.bpcs.mdcars.model.Clerk;
-import com.bpcs.mdcars.model.Credential;
 import com.bpcs.mdcars.model.Customer;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.ClubMobilHttpService;
-import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.ext.BusinessException;
-import com.dev.gis.connector.joi.protocol.Token;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CustomerDialog extends Dialog {

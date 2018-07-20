@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
 import com.bpcs.mdcars.model.CreditCard;
+import com.bpcs.mdcars.model.PaymentTransaction;
 import com.bpcs.mdcars.model.ReservationDetails;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.app.view.elements.BasicControl;
@@ -61,17 +62,6 @@ public class ClubMobilPaymentControl extends BasicControl {
 				mpd.open();
 				
 				ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
-				
-				if ( !details.getPaymentTransactions().isEmpty()){
-					com.bpcs.mdcars.model.Payment payment = details.getPaymentTransactions().get(0);
-				
-					if ( payment.getCard() == null) {
-						payment.setCard(new CreditCard());
-						payment.getCard().setCardNumber("-");
-					}
-					result.setValue(payment.getCard().getCardNumber());
-				}
-
 
 			}
 			catch(Exception err) {

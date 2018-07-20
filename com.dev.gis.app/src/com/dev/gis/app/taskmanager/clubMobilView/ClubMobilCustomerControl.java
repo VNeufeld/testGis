@@ -38,8 +38,12 @@ public class ClubMobilCustomerControl extends BasicControl {
 				Person person = ClubMobilModelProvider.INSTANCE.selectedReservation.getCustomer().getPerson();
 				String customerNo = "";
 				if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCustomer().getCommonCustomerInfo() != null)
-					customerNo = ClubMobilModelProvider.INSTANCE.selectedReservation.getCustomer().getCommonCustomerInfo().getCustomerNo();
-				result.setValue("MemberNo : " +customerNo+ " Person : "+ person.getName() + "," + person.getFirstName() );
+					customerNo = ClubMobilModelProvider.INSTANCE.selectedReservation.getCustomer().getCommonCustomerInfo().getMemberNo();
+
+				if ( person != null)
+					result.setValue("MemberNo : " +customerNo+ " Person : "+ person.getName() + "," + person.getFirstName() );
+				else
+					result.setValue("MemberNo : " +customerNo);
 			}
 			
 		}
@@ -78,7 +82,7 @@ public class ClubMobilCustomerControl extends BasicControl {
 					if ( customer != null) {
 						ClubMobilModelProvider.INSTANCE.customer = customer;
 						Person person = customer.getPerson();
-						result.setValue("Customer : MemberNo : " + customer.getCommonCustomerInfo().getCustomerNo()+ " Person : "+ person.getName() + "," + person.getFirstName() );
+						result.setValue("Customer : MemberNo : " + customer.getCommonCustomerInfo().getMemberNo()+ " Person : "+ person.getName() + "," + person.getFirstName() );
 						
 						if ( ClubMobilModelProvider.INSTANCE.selectedReservation  != null) {
 							ClubMobilModelProvider.INSTANCE.selectedReservation.setCustomer(customer);

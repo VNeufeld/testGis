@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -12,10 +13,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bpcs.mdcars.json.protocol.ReservationListFilterRequest;
 import com.bpcs.mdcars.json.protocol.ReservationListResponse;
+import com.bpcs.mdcars.model.Clerk;
+import com.bpcs.mdcars.model.DayAndHour;
 import com.bpcs.mdcars.model.ReservationDetails;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
+import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
@@ -31,6 +36,16 @@ public class ClubMobilReservationListControl extends BasicControl {
 	
 	private OutputTextControls rentalNo = null;
 
+	private ObjectTextControl station = null;
+	private ObjectTextControl customer = null;
+	private ObjectTextControl adamMember = null;
+	private ObjectTextControl resDateFrom = null;
+	private ObjectTextControl resDateTo = null;
+	private ObjectTextControl checkOutDateFrom = null;
+	private ObjectTextControl checkOutDateTo = null;
+	private ObjectTextControl rentalStatus = null;
+	private ObjectTextControl carLicensePlate = null;
+	
 	
 	private ClubMobilReservationListTable reservationListTable;
 	
@@ -46,6 +61,33 @@ public class ClubMobilReservationListControl extends BasicControl {
 		Composite cc2 = createComposite(group, 3, -1, true);
 		
 		reservationNoTextControl = new ReservationNoTextControl(cc2, 300, false);
+
+		Composite cc3 = createComposite(group, 16, -1, true);
+		Composite cc4 = createComposite(group, 16, -1, true);
+		
+		station = new ObjectTextControl(cc3, 100, false, "StationId");
+		customer = new ObjectTextControl(cc3, 100, false, "Customer");
+		adamMember = new ObjectTextControl(cc3, 100, false, "Member");
+		rentalStatus = new ObjectTextControl(cc3, 100, false, "rentalStatus");
+		carLicensePlate = new ObjectTextControl(cc3, 100, false, "carLicensePlate");
+		resDateFrom = new ObjectTextControl(cc4, 100, false, "resDateFrom");
+		resDateTo = new ObjectTextControl(cc4, 100, false, "resDateTo");
+		checkOutDateFrom = new ObjectTextControl(cc4, 100, false, "checkOutDateFrom");
+		checkOutDateTo = new ObjectTextControl(cc4, 100, false, "checkOutDateTo");
+
+		com.dev.gis.connector.joi.protocol.Station pickupStation = ClubMobilModelProvider.INSTANCE.pickupStation;
+		if ( pickupStation != null && pickupStation.getId() > 0 )
+			station.setSelectedValue(""+pickupStation.getId());
+		else
+			station.setSelectedValue("");
+		customer.setSelectedValue("");
+		adamMember.setSelectedValue("");
+		resDateFrom.setSelectedValue("");
+		resDateTo.setSelectedValue("");
+		checkOutDateFrom.setSelectedValue("");
+		checkOutDateTo.setSelectedValue("");
+		rentalStatus.setSelectedValue("");
+
 
 		rentalNo = new OutputTextControls(cc, "RentalNo", 500, 1 );
 		
@@ -82,7 +124,9 @@ public class ClubMobilReservationListControl extends BasicControl {
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 				
-				ReservationListResponse reservationListResponse = service.getReservationList(reservationNoTextControl.getSelectedValue());
+				ReservationListFilterRequest reservationListFilterRequest = createFilter();
+				
+				ReservationListResponse reservationListResponse = service.getReservationList(reservationListFilterRequest);
 				
 				ClubMobilModelProvider.INSTANCE.reservationListResponse = reservationListResponse;
 				
@@ -97,6 +141,49 @@ public class ClubMobilReservationListControl extends BasicControl {
 		}
 
 
+
+	}
+
+	private ReservationListFilterRequest createFilter() {
+		
+		ReservationListFilterRequest request = new ReservationListFilterRequest();
+		Integer stationId = null;
+		Clerk clerk = ClubMobilModelProvider.INSTANCE.clerk;
+		if ( StringUtils.isNotEmpty(station.getSelectedValue())) {
+			try {	stationId = Integer.parseInt(station.getSelectedValue());	}
+			catch(Exception err) {}
+		}
+		request.setReservationPattern(reservationNoTextControl.getSelectedValue());
+		request.setStationId(stationId);
+		
+		request.setCustomerNoPattern(customer.getSelectedValue());
+		request.setMemberNoPattern(adamMember.getSelectedValue());
+
+		request.setCarLicensePlatePattern(carLicensePlate.getSelectedValue());
+
+		if ( StringUtils.isNotEmpty(resDateFrom.getSelectedValue())) {
+			request.setReservationDateFrom(new DayAndHour(resDateFrom.getSelectedValue(), "00:00"));
+		}
+
+		if ( StringUtils.isNotEmpty(resDateTo.getSelectedValue())) {
+			request.setReservationDateTo(new DayAndHour(resDateTo.getSelectedValue(), "23:59"));
+		}
+
+		if ( StringUtils.isNotEmpty(checkOutDateFrom.getSelectedValue())) {
+			request.setCheckOutDateFrom(new DayAndHour(checkOutDateFrom.getSelectedValue(), "00:00"));
+		}
+
+		if ( StringUtils.isNotEmpty(checkOutDateTo.getSelectedValue())) {
+			request.setCheckOutDateTo(new DayAndHour(checkOutDateTo.getSelectedValue(), "23:59"));
+		}
+		if ( StringUtils.isNotEmpty(rentalStatus.getSelectedValue())) {
+			int status = 1; 
+			try {	status = Integer.parseInt(rentalStatus.getSelectedValue());	}
+			catch(Exception err) {}
+			request.getRentalStatus().add(status);
+		}
+		
+		return request;
 	}
 	
 	private void updateTable() {

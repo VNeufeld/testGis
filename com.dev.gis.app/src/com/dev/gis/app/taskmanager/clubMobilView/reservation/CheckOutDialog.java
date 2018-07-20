@@ -1,5 +1,6 @@
 package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
@@ -17,6 +18,8 @@ import com.dev.gis.connector.api.ClubMobilModelProvider;
 
 public class CheckOutDialog extends AbstractReservationDialog {
 	
+	private static Logger logger = Logger.getLogger(CheckOutDialog.class);
+	
 	private ObjectTextControl reservationNo;
 
 	private OutputTextControls carInfo;
@@ -31,24 +34,39 @@ public class CheckOutDialog extends AbstractReservationDialog {
 	protected void fillDialogArea(Composite composite) {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(900, 500).applyTo(composite);
 		
-		reservationNo = new ObjectTextControl(composite, 300, true, "ReservationNo");
-
-		new ClubMobilCustomerControl(composite);
+		try {
 		
-		Composite ccc = createComposite(composite, 4, -1, true);
-		
-		carInfo = new OutputTextControls(ccc, "Car Info",500, 1);
-		new ButtonControl(ccc, "show Car", 0,  new ClubMobilCarInfoListener(getShell()));
-		
-		new ClubMobilReservationExtrasControl(composite);
-		
-		if ( ClubMobilModelProvider.INSTANCE.selectedReservation  != null) {
-			reservationNo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationNo());
+			logger.info("fillDialogArea");
 			
-			String carInfoText = "booked car id = ";
-			carInfoText = carInfoText + ClubMobilModelProvider.INSTANCE.selectedReservation.getCarId() + 
-					" Type :" + ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getAcrissCode();
-			carInfo.setValue(carInfoText);
+			reservationNo = new ObjectTextControl(composite, 300, true, "ReservationNo");
+	
+			new ClubMobilCustomerControl(composite);
+			
+			Composite ccc = createComposite(composite, 4, -1, true);
+			
+			carInfo = new OutputTextControls(ccc, "Car Info",500, 1);
+			new ButtonControl(ccc, "show Car", 0,  new ClubMobilCarInfoListener(getShell()));
+			
+			new ClubMobilReservationExtrasControl(composite);
+			
+			if ( ClubMobilModelProvider.INSTANCE.selectedReservation  != null) {
+				logger.info("reservationNo");
+				
+				reservationNo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationNo());
+				
+				String carInfoText = "booked car id = ";
+	//			carInfoText = carInfoText + ClubMobilModelProvider.INSTANCE.selectedReservation.getCarId() + 
+	//					" Type :" + ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getAcrissCode();
+				//carInfoText = carInfoText + ClubMobilModelProvider.INSTANCE.selectedReservation.getCarId();
+				
+				logger.info("reservationNo2");
+				
+				carInfo.setValue(carInfoText);
+			}
+			logger.info("fillDialogArea end");
+		}
+		catch(Exception ex) {
+			logger.error(ex.getMessage(),ex);
 		}
 
 	}

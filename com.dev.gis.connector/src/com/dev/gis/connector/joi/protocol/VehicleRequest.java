@@ -31,10 +31,8 @@ public class VehicleRequest extends Request {
 	private Integer serviceCatalogId = null;
 	
 	private Integer businessSegmentId = null;
-	
-	private String  reservationNo = null;
-	
-	private String  rentalNo = null;
+
+	private Integer bookingId = null;
 	
 	private Integer insuranceId;
 
@@ -126,27 +124,19 @@ public class VehicleRequest extends Request {
 		this.businessSegmentId = businessSegmentId;
 	}
 
-	public String getReservationNo() {
-		return reservationNo;
-	}
-
-	public void setReservationNo(String reservationNo) {
-		this.reservationNo = reservationNo;
-	}
-
-	public String getRentalNo() {
-		return rentalNo;
-	}
-
-	public void setRentalNo(String rentalNo) {
-		this.rentalNo = rentalNo;
-	}
-
 	public Integer getInsuranceId() {
 		return insuranceId;
 	}
 
 	public void setInsuranceId(Integer insuranceId) {
 		this.insuranceId = insuranceId;
+	}
+
+	public Integer getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(Integer bookingId) {
+		this.bookingId = bookingId;
 	}
 }

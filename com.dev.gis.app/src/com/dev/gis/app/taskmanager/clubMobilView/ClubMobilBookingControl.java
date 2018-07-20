@@ -123,7 +123,8 @@ public class ClubMobilBookingControl extends AdacBookingControl {
 				if (StringUtils.isNotEmpty(response.getReservationId())) {
 						bookingId.setValue(response.getReservationId());
 						String result = " Status: "; //+response.getStatus();
-						result = result + " Preis: "+response.getPrice().toString();
+						if ( response.getPrice() != null)
+							result = result + " Preis: "+response.getPrice().toString();
 						bookingPreis.setValue(result);
 				}
 				else {

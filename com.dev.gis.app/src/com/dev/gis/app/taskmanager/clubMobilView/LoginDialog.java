@@ -15,19 +15,18 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 import com.bpcs.mdcars.json.protocol.CredentialResponse;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
+import com.bpcs.mdcars.model.Token;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.ext.BusinessException;
-import com.dev.gis.connector.joi.protocol.Token;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LoginDialog extends Dialog {
@@ -44,6 +43,8 @@ public class LoginDialog extends Dialog {
 	private final boolean change_pwd;
 	
 	private Clerk clerk;
+	
+	private Token token;
 	
 	public LoginDialog(Shell parentShell) {
 		super(parentShell);
@@ -110,7 +111,7 @@ public class LoginDialog extends Dialog {
 				String user = ClubMobilModelProvider.INSTANCE.loginUser;
 				String pwd = ClubMobilModelProvider.INSTANCE.loginPassword;
 				
-				pwd = encrypt(pwd);
+				//pwd = encrypt(pwd);
 
 				Credential credential = new Credential(); 
 				credential.setUser(user);
@@ -141,6 +142,10 @@ public class LoginDialog extends Dialog {
 						
 					}
 					clerk = credentialResponse.getClerk();
+					
+					token = credentialResponse.getToken();
+					
+					tokenControl.setValue(token.getToken());
 					
 					loginResult.setValue(result);
 				}
@@ -288,6 +293,16 @@ public class LoginDialog extends Dialog {
 
 	public Clerk getClerk() {
 		return clerk;
+	}
+
+
+	public Token getToken() {
+		return token;
+	}
+
+
+	public void setToken(Token token) {
+		this.token = token;
 	}
 
 }

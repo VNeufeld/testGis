@@ -68,10 +68,9 @@ public class ClubMobilCreateVehicleRequestUtils {
 		}
 
 
-		request.setReservationNo(ClubMobilModelProvider.INSTANCE.reservationNo);
+		if ( StringUtils.isNotEmpty(ClubMobilModelProvider.INSTANCE.reservationNo))
+			request.setBookingId(Integer.valueOf(ClubMobilModelProvider.INSTANCE.reservationNo));
 		
-		request.setRentalNo(ClubMobilModelProvider.INSTANCE.rentalNo);
-
 		
 		long cityId = AdacModelProvider.INSTANCE.cityId;
 		long dropoffCityId = AdacModelProvider.INSTANCE.dropoffCityId;

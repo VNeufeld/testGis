@@ -24,8 +24,8 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-	    String[] titles = { "ResNo", "Pos", "ResId", "Name", "Car",  "Price" };
-	    int[] bounds = { 100, 50, 100, 300, 300,  200};
+	    String[] titles = { "ResNo", "Pos", "ResId", "Name / MemberNo/ CustomerId", "reservationDate", "checkOutDate", "checkInDate", "Car",  "Price" };
+	    int[] bounds = { 100, 50, 100, 300, 300, 300, 300, 200, 200};
 
 	    // first column is for the first name
 	    TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
@@ -62,7 +62,16 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	ReservationInfo o = (ReservationInfo) element;
-    		return o.getCustomer().getPerson().getName();
+	    	String value = "";
+	    	if ( o.getCustomer() != null) {
+	    		if ( o.getCustomer().getPerson() != null)
+	    			value = o.getCustomer().getPerson().getName() + " "+ o.getCustomer().getPerson().getFirstName() ;
+	    		if ( o.getCustomer().getCommonCustomerInfo() != null) {
+	    			value = value + " / " + o.getCustomer().getCommonCustomerInfo().getMemberNo();
+	    			value = value + " / " + o.getCustomer().getCommonCustomerInfo().getCustomerNo();
+	    		}
+	    	}
+    		return value;
 	      }
 	    });
 
@@ -71,20 +80,61 @@ public class ClubMobilReservationListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 	    	ReservationInfo o = (ReservationInfo) element;
-    		return o.getCarType() + "/" + o.getCarCategoryId();
+	    	
+	    	if ( o.getReservationDate() != null)
+	    		return o.getReservationDate().getDate() + " "+ o.getReservationDate().getTime();
+	    	return "";
 	      }
 	    });
-	    
-	    
+
 	    col = createTableViewerColumn(titles[5], bounds[5], 5);
 	    col.setLabelProvider(new ColumnLabelProvider() {
 	      @Override
 	      public String getText(Object element) {
 	    	ReservationInfo o = (ReservationInfo) element;
-    		return o.getPrice().toString();
+	    	
+	    	if ( o.getCheckOutDate() != null)
+	    		return o.getCheckOutDate().getDate() + " "+ o.getCheckOutDate().getTime();
+	    	return "";
 	      }
-
 	    });
+
+	    col = createTableViewerColumn(titles[6], bounds[6], 6);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	ReservationInfo o = (ReservationInfo) element;
+	    	
+	    	if ( o.getCheckInDate() != null)
+	    		return o.getCheckInDate().getDate() + " "+ o.getCheckInDate().getTime();
+	    	return "";
+	      }
+	    });
+	    
+	    col = createTableViewerColumn(titles[7], bounds[7], 7);
+	    col.setLabelProvider(new ColumnLabelProvider() {
+	      @Override
+	      public String getText(Object element) {
+	    	ReservationInfo o = (ReservationInfo) element;
+	    	
+	    	if ( o.getCarId() != null)
+	    		return o.getCarId().toString();
+	    	return "";
+	      }
+	    });
+	    
+	    
+//	    col = createTableViewerColumn(titles[5], bounds[5], 5);
+//	    col.setLabelProvider(new ColumnLabelProvider() {
+//	      @Override
+//	      public String getText(Object element) {
+//	    	ReservationInfo o = (ReservationInfo) element;
+//	    	if ( o.getPrice() != null)
+//	    		return o.getPrice().toString();
+//    		return "";
+//	      }
+//
+//	    });
 
 	  }
 

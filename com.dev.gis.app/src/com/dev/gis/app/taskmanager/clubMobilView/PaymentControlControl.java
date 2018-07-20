@@ -136,15 +136,17 @@ public class PaymentControlControl extends EditPartControl {
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 				
 				GetCMPaymentInfoResponse response = service.getPaymentInfo(request);
-				paypalInfo.setValue(response.getOpenAmount().toString());
-				PaymentTransaction pt = null;
-				if ( !response.getPaymentTransactions().isEmpty())
-					pt = response.getPaymentTransactions().get(0);
-				if ( pt != null) {
-					paymentRef.setSelectedValue(pt.getExtPaymentReference());
-					paymentId.setSelectedValue(pt.getPaymentId());
-					issueText.setSelectedValue(pt.getIssueText());
-					payer.setSelectedValue(pt.getPayer());
+				paypalInfo.setValue(response.getPaymentInfo().getOpenAmount().toString());
+				if ( response.getPaymentInfo() != null) {
+					PaymentTransaction pt = null;
+					if ( !response.getPaymentInfo().getPaymentTransactions().isEmpty())
+						pt = response.getPaymentInfo().getPaymentTransactions().get(0);
+					if ( pt != null) {
+						paymentRef.setSelectedValue(pt.getExtPaymentReference());
+						paymentId.setSelectedValue(pt.getPaymentId());
+						issueText.setSelectedValue(pt.getIssueText());
+						payer.setSelectedValue(pt.getPayer());
+					}
 				}
 
 			} catch (Exception err) {
@@ -199,7 +201,7 @@ public class PaymentControlControl extends EditPartControl {
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 				
 				GetCMPaymentInfoResponse response = service.addPaymentInfo(request);
-				paypalInfo.setValue(response.getOpenAmount().toString());
+				paypalInfo.setValue(response.getPaymentInfo().getOpenAmount().toString());
 
 			} catch (Exception err) {
 				paypalInfo.setValue("");

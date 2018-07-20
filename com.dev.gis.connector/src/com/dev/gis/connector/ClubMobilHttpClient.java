@@ -10,8 +10,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicHeader;
 
+import com.bpcs.mdcars.model.Token;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
-import com.dev.gis.connector.joi.protocol.Token;
 
 public class ClubMobilHttpClient extends GisHttpClient {
 	public static String CLUBMOBIL_CREDENTIALS_GETTOKEN = "/credentials/getToken";
@@ -23,17 +23,20 @@ public class ClubMobilHttpClient extends GisHttpClient {
 		boolean encode = ClubMobilModelProvider.INSTANCE.authorization;
 		if ( encode ) {
 			logger.info("createSecurityHash ");
-			Token token = getToken();
+			Token token = ClubMobilModelProvider.INSTANCE.sessionToken;
 			if  ( token != null) {
 				logger.info("Token = " + token.getToken());
-				String stringToHash = API_KEY + token.getToken();
-				String hashValue = Hash.calculateMD5Hash(stringToHash);
-				httpPost.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, "BPCS:"+hashValue));
-				httpPost.addHeader(new BasicHeader("Token", token.getToken()));
+				String hashValue = Hash.calculateSHA256Hash(token.getToken());
+				httpPost.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, hashValue));
+				//httpPost.addHeader(new BasicHeader("Token", token.getToken()));
 				logger.info("Hash Value = " + hashValue);
 			}
-			
+			else
+				logger.info("no token found in the session;");
 		}
+		else
+			logger.info("authorization not needed.");
+		
 	}
 	private URI getServerURI(String param ) throws URISyntaxException {
 		
@@ -49,17 +52,21 @@ public class ClubMobilHttpClient extends GisHttpClient {
 		boolean encode = ClubMobilModelProvider.INSTANCE.authorization;
 		if ( encode ) {
 			logger.info("createSecurityHash ");
-			Token token = getToken();
+			Token token = ClubMobilModelProvider.INSTANCE.sessionToken;
 			if  ( token != null) {
 				logger.info("Token = " + token.getToken());
-				String stringToHash = API_KEY + token.getToken();
-				String hashValue = Hash.calculateMD5Hash(stringToHash);
-				httpget.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, "BPCS:"+hashValue));
+				String hashValue = Hash.calculateSHA256Hash(token.getToken());
+				httpget.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, hashValue));
 				httpget.addHeader(new BasicHeader("Token", token.getToken()));
 				logger.info("Hash Value = " + hashValue);
 			}
+			else
+				logger.info("no token found in the session;");
 			
 		}
+		else
+			logger.info("authorization not needed.");
+		
 		
 	}
 

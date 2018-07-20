@@ -26,6 +26,23 @@ public class Hash {
 		return result;
 	}
 
+	public static String calculateSHA256Hash (String stringToHash) throws UnsupportedEncodingException {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.reset();
+			md.update(stringToHash.getBytes("UTF8"));
+			final byte[] resultByte = md.digest();
+			char[] encodedBytes = Hex.encodeHex(resultByte);
+			final String result = new String (encodedBytes);
+			logger.debug("during hash: result: " + result);
+			return result;
+		}
+		catch(Exception err) {
+			logger.error(err.getMessage());
+		}
+		return null;
+	}
+
 	private static MessageDigest getMessageDigest () {
 		MessageDigest md = null;
 

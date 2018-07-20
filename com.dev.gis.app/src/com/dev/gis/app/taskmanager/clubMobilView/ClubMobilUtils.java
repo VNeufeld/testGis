@@ -93,6 +93,7 @@ public class ClubMobilUtils {
 				checkOutRequest.setCarId(Integer.valueOf(vehicle.getCarId()));
 			}
 			checkOutRequest.setBusinessSegmentId((int)offer.getBusinessSegmentId());
+			offer.getPrice();
 			
 		}
 		if ( ClubMobilModelProvider.INSTANCE.selectedReservation != null) {

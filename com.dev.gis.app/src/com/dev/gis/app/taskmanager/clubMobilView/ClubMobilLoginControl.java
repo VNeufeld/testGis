@@ -77,6 +77,8 @@ public class ClubMobilLoginControl extends BasicControl {
 						ClubMobilModelProvider.INSTANCE.clerk = clerk;
 						result.setValue(clerkResult);
 						
+						ClubMobilModelProvider.INSTANCE.sessionToken = mpd.getToken();
+						
 					}
 					else {
 						result.setValue("Clerk not found");

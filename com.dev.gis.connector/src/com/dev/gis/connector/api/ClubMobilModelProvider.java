@@ -14,6 +14,7 @@ import com.bpcs.mdcars.model.Customer;
 import com.bpcs.mdcars.model.DispositionInfo;
 import com.bpcs.mdcars.model.ReservationDetails;
 import com.bpcs.mdcars.model.ReservationInfo;
+import com.bpcs.mdcars.model.Token;
 import com.dev.gis.connector.joi.protocol.BodyStyleText;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
@@ -37,6 +38,8 @@ public enum ClubMobilModelProvider {
 	public String changePasword;
 	
 	public Clerk clerk;
+
+	public Token sessionToken;
 	
 	public Customer customer;
 	
@@ -123,6 +126,8 @@ public enum ClubMobilModelProvider {
 	public String reservationNo;
 
 	public String rentalNo;
+	
+	public String bookingId;
 
 	public String insuranceId;
 

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
@@ -50,12 +51,17 @@ public class GisHttpClient {
 			public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
 				int status = response.getStatusLine().getStatusCode();
 				if (status >= 200 && status < 300) {
+					for ( Header header : response.getAllHeaders()) {
+						logger.info(" header : " + header.getName() + " value : " + header.getValue());
+					}
+					
 					HttpEntity entity = response.getEntity();
 					return entity != null ? EntityUtils.toString(entity) : null;
 				} else {
 					String errorText = response.getStatusLine().getReasonPhrase();
 					String errorCode = String.valueOf(status);
 					logger.error(" errorCode : " +errorCode + " errorText " + errorText);
+					
 					HttpEntity entity = response.getEntity();
 					if (entity == null )
 						throw new ClientProtocolException("Unexpected response status: " + status);
