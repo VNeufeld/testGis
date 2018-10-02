@@ -35,6 +35,8 @@ public class CustomerDialog extends Dialog {
 	private ObjectTextControl name;
 
 	private ObjectTextControl firstName;
+
+	private ObjectTextControl company;
 	
 	private CustomerNoTextControl customerNoTextControl;
 	
@@ -59,6 +61,8 @@ public class CustomerDialog extends Dialog {
 		name = new ObjectTextControl(composite, 300, true, "Name");
 
 		firstName = new ObjectTextControl(composite, 300, true, "FirstName");
+		
+		company = new ObjectTextControl(composite, 300, true, "Company");
 		
 		new ButtonControl(composite, "PutCustomer", 0,  new ClubMobilPutCustomerListener(getShell(), false));
 
@@ -102,6 +106,10 @@ public class CustomerDialog extends Dialog {
 					
 					name.setSelectedValue(response.getCustomer().getPerson().getName());
 					firstName.setSelectedValue(response.getCustomer().getPerson().getFirstName());
+					if ( response.getCustomer().getAddress().getCompany() != null)
+						company.setSelectedValue(response.getCustomer().getAddress().getCompany());
+					else
+						company.setSelectedValue("");
 				}
 					
 			}
@@ -157,11 +165,18 @@ public class CustomerDialog extends Dialog {
 				if (customer != null) {
 					customer.getPerson().setName(name.getSelectedValue());
 					customer.getPerson().setFirstName(firstName.getSelectedValue());
+					customer.getPerson().setDrivingLicenseNo("1234567IOU");
+					customer.getPerson().setDrivingLicenseSince("2008-10-15");
+					customer.getPerson().setIdentityCardNo("IDENT_000001");
+					customer.getPerson().setIdentityCardValidTo("1020-10-15");
+					customer.getAddress().setCompany(company.getSelectedValue());
 				}
 				else {
 					showErrors("No Customer is definded");
 				}
 				customer.setEMail("test.test@test.com");
+				
+				
 						
 				if ( driver ) {
 					service.putDriver(customer);

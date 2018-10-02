@@ -17,7 +17,7 @@ public class CheckInReservationListener extends AbstractReservationListener{
 	}
 	
 	protected void callService(ClubMobilHttpService service) {
-		service.checkInReservation();
+		service.checkInReservation(null);
 		MessageDialog.openInformation(null,"Info"," CheckIn successfull");
 	}
 	

@@ -53,7 +53,7 @@ public class ClubMobilBookingControl extends AdacBookingControl {
 		
 		bookingRequestId = new BookingRequestIdControl(groupStamp);
 		
-		bookingId = new OutputTextControls(groupStamp, "BookingId", -1,1 );
+		bookingId = new OutputTextControls(groupStamp, "ReservationNo", -1,1 );
 
 		bookingPreis = new OutputTextControls(groupStamp, "Price", -1,1 );
 		
@@ -120,16 +120,14 @@ public class ClubMobilBookingControl extends AdacBookingControl {
 					return;
 				}
 				
-				if (StringUtils.isNotEmpty(response.getReservationId())) {
-						bookingId.setValue(response.getReservationId());
+				if (StringUtils.isNotEmpty(response.getReservationNo())) {
+						bookingId.setValue(response.getReservationNo());
 						String result = " Status: "; //+response.getStatus();
 						if ( response.getPrice() != null)
 							result = result + " Preis: "+response.getPrice().toString();
 						bookingPreis.setValue(result);
 				}
-				else {
-					showErrors(response);					
-				}
+				showErrors(response);					
 				
 
 			} catch (Exception err) {

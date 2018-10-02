@@ -87,6 +87,7 @@ public class ClubMobilReservationListControl extends BasicControl {
 		checkOutDateFrom.setSelectedValue("");
 		checkOutDateTo.setSelectedValue("");
 		rentalStatus.setSelectedValue("");
+		carLicensePlate.setSelectedValue("");
 
 
 		rentalNo = new OutputTextControls(cc, "RentalNo", 500, 1 );
@@ -153,11 +154,11 @@ public class ClubMobilReservationListControl extends BasicControl {
 			try {	stationId = Integer.parseInt(station.getSelectedValue());	}
 			catch(Exception err) {}
 		}
-		request.setReservationPattern(reservationNoTextControl.getSelectedValue());
+		request.setRentalNoPattern(reservationNoTextControl.getSelectedValue());
 		request.setStationId(stationId);
 		
 		request.setCustomerNoPattern(customer.getSelectedValue());
-		request.setMemberNoPattern(adamMember.getSelectedValue());
+		request.setMemberNo(adamMember.getSelectedValue());
 
 		request.setCarLicensePlatePattern(carLicensePlate.getSelectedValue());
 

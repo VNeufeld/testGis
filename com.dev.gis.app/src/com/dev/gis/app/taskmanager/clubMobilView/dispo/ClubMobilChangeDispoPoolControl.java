@@ -39,9 +39,9 @@ public class ClubMobilChangeDispoPoolControl extends BasicControl {
 
 		new ButtonControl(ccc, "Get DispoPool", 0,  getDispoPoolListener(getShell()));
 		
-		new ButtonControl(ccc, "Add DispoPool", 0,  addDispoPoolListener(getShell()));
+		//new ButtonControl(ccc, "Add DispoPool", 0,  addDispoPoolListener(getShell()));
 
-		new ButtonControl(ccc, "Remove DispoPool", 0,  updateDispoPoolListener(getShell()));
+		//new ButtonControl(ccc, "Remove DispoPool", 0,  updateDispoPoolListener(getShell()));
 		
 	}
 	
@@ -57,13 +57,13 @@ public class ClubMobilChangeDispoPoolControl extends BasicControl {
 		return new ClubMobilGetDispoPoolListener(shell);
 	}
 	
-	protected SelectionListener addDispoPoolListener(Shell shell) {
-		return new ClubMobilAddDispoPoolListener(shell);
-	}
+//	protected SelectionListener addDispoPoolListener(Shell shell) {
+//		return new ClubMobilAddDispoPoolListener(shell);
+//	}
 
-	protected SelectionListener updateDispoPoolListener(Shell shell) {
-		return new ClubMobilUpdateDispoPoolListener(shell);
-	}
+//	protected SelectionListener updateDispoPoolListener(Shell shell) {
+//		return new ClubMobilUpdateDispoPoolListener(shell);
+//	}
 	
 	public OutputTextControls getResult() {
 		return result;

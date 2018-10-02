@@ -11,14 +11,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.connector.api.ClubMobilHttpService;
-import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
-import com.dev.gis.connector.joi.protocol.Offer;
 
 public class ClubMobilReservationExtrasControl extends BasicControl {
 	
@@ -49,15 +48,22 @@ public class ClubMobilReservationExtrasControl extends BasicControl {
 	protected  void addExtraGroup(Composite composite) {
 		final Group group = new Group(composite, SWT.TITLE);
 		group.setText("CM Extras:");
-		group.setLayout(new GridLayout(1, true));
+		group.setLayout(new GridLayout(2, true));
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL)
 		.grab(true, true).applyTo(group);
-		
-		new ButtonControl(group, "Get Extras", 0,  new AddGetExtrasListener());
+
+		Composite ccd = createComposite(group, 3, -1, true);
+
+		new ButtonControl(ccd, "Get Extras", 0,  new AddGetExtrasListener());
+		new ButtonControl(ccd, "Get Equipments", 0,  new AddGetEquipmentsListener());
+		new ButtonControl(ccd, "Get Additionals", 0,  new AddGetAdditionalsListener());
 		
 		extraListTable = new ClubMobilExtraListTable(null, group, null);
 
-		new ButtonControl(group, "Select Extras", 0,  new AddSelectExtrasListener());
+		Composite cc = createComposite(group, 3, -1, true);
+
+		new ButtonControl(cc, "Select Extras", 0,  new AddSelectExtrasListener());
+		new ButtonControl(cc, "Select Fehl-Equipments", 0,  new AddSelectEquipmentsListener());
 		
 
 	}
@@ -113,6 +119,89 @@ public class ClubMobilReservationExtrasControl extends BasicControl {
 		}
 
 	}
+
+	protected class AddSelectEquipmentsListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			ClubMobilHttpService service = serviceFactory
+					.getClubMobilleJoiService();
+			try {
+				
+				ReservationResponse response = service.putEquipments(getSelectedExtras());
+				
+				//ClubMobilUtils.showErrors(response);
+			}
+			catch(Exception err) {
+				logger.error(err.getMessage(),err);
+				ClubMobilUtils.showErrors(err.getClass().getSimpleName() + " " +err.getMessage());
+			}
+		}
+
+	}
+	
+	protected class AddGetEquipmentsListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			ClubMobilHttpService service = serviceFactory
+					.getClubMobilleJoiService();
+			
+			
+			try {
+				
+				
+				ExtraResponse response  = service.getEquipments();
+				
+				if ( response != null && response.getExtras() != null)
+					logger.info("ClubMobilExtrasControl found equipments : " +response.getExtras().size());
+				
+				
+				ClubMobilUtils.showErrors(response);
+				
+				extraListTable.refresh(response);
+			}
+			catch(Exception err) {
+				logger.error(err.getMessage(),err);
+				ClubMobilUtils.showErrors(err.getClass().getSimpleName() + " " +err.getMessage());
+			}
+		}
+	}
+
+	protected class AddGetAdditionalsListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			ClubMobilHttpService service = serviceFactory
+					.getClubMobilleJoiService();
+			
+			
+			try {
+				
+				
+				ExtraResponse response  = service.getAdditionals();
+				
+				if ( response != null && response.getExtras() != null)
+					logger.info("ClubMobilExtrasControl found additionals : " +response.getExtras().size());
+				
+				
+				ClubMobilUtils.showErrors(response);
+				
+				extraListTable.refresh(response);
+			}
+			catch(Exception err) {
+				logger.error(err.getMessage(),err);
+				ClubMobilUtils.showErrors(err.getClass().getSimpleName() + " " +err.getMessage());
+			}
+		}
+	}
+
 	
 	public void refresh(ExtraResponse response) {
 		extraListTable.refresh(response);

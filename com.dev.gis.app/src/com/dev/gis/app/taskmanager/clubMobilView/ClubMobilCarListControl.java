@@ -96,7 +96,7 @@ public class ClubMobilCarListControl extends BasicControl {
 				if (stationId != null)
 					request.setStationId(stationId.intValue());
 
-				DispositionListResponse dispositionListResponse = service.getDispositionList(request);
+				DispositionListResponse dispositionListResponse = service.getAvailCarList(request);
 				
 				ClubMobilUtils.showErrors(dispositionListResponse);
 				

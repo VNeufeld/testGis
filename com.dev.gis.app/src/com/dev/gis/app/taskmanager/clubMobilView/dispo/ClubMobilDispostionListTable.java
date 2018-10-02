@@ -28,7 +28,7 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-	    String[] titles = { "Id", "CarId / ChargeId", "Type", "LicensePlate", "ConfirmFrom", "ConfirmTo", "ScheduleFrom",  "Status", "restMileage", "chargeValidTo" };
+	    String[] titles = { "Id", "CarId / ChargeId", "Type", "LicensePlate", "ConfirmFrom", "ConfirmTo", "ScheduleFrom",  "AvailStatus", "restMileage", "chargeValidTo" };
 	    int[] bounds = { 100, 150, 150, 150, 200, 200, 200, 100, 150,200};
 
 	    // first column is for the first name
@@ -121,7 +121,7 @@ public class ClubMobilDispostionListTable extends AbstractListTable {
 	      @Override
 	      public String getText(Object element) {
 		    	DispositionInfo o = (DispositionInfo) element;
-		    	return ""+o.getStatus();
+		    	return o.getAvailStatus();
 	      }
 
 	    });

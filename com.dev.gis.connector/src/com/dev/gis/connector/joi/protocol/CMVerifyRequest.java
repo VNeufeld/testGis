@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import com.bpcs.mdcars.soap.protocol.CustomerRequirements;
 import com.dev.gis.connector.joi.protocol.Extra;
 
 public class CMVerifyRequest extends BasicProtocol {
@@ -18,6 +19,9 @@ public class CMVerifyRequest extends BasicProtocol {
 	private String flightNo;
 
 	private List<Extra> extras;
+	
+	private CustomerRequirements customerRequirements;
+
 
 
 	@XmlElement(required = false)
@@ -63,6 +67,14 @@ public class CMVerifyRequest extends BasicProtocol {
 
 	public void setTransferType(int transferType) {
 		this.transferType = transferType;
+	}
+
+	public CustomerRequirements getCustomerRequirements() {
+		return customerRequirements;
+	}
+
+	public void setCustomerRequirements(CustomerRequirements customerRequirements) {
+		this.customerRequirements = customerRequirements;
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.bpcs.mdcars.model.Address;
+import com.bpcs.mdcars.soap.protocol.CustomerRequirements;
 import com.dev.gis.connector.joi.protocol.Extra;
 
 public class CMBookingRequest extends BasicProtocol {
@@ -23,6 +24,8 @@ public class CMBookingRequest extends BasicProtocol {
 	private Address dropDownService;
 
 	private List<Extra> extras;
+	
+	private CustomerRequirements customerRequirements;
 
 	@XmlElement(required = false)
 	public Address getDropDownService() {
@@ -90,6 +93,16 @@ public class CMBookingRequest extends BasicProtocol {
 
 	public void setTransferType(int transferType) {
 		this.transferType = transferType;
+	}
+
+
+	public CustomerRequirements getCustomerRequirements() {
+		return customerRequirements;
+	}
+
+
+	public void setCustomerRequirements(CustomerRequirements customerRequirements) {
+		this.customerRequirements = customerRequirements;
 	}
 
 	

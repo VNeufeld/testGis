@@ -26,7 +26,7 @@ public class SelectDefectClassComboBox extends DynamicComboBox{
 
 		try {
 			if ( ClubMobilModelProvider.INSTANCE.defectListResponse != null) {
-				List<DefectLocationClass>  locClasses = ClubMobilModelProvider.INSTANCE.defectListResponse.getDefectClasses();
+				List<DefectLocationClass>  locClasses = ClubMobilModelProvider.INSTANCE.defectListResponse.getDefectLocationClasses();
 				int lSize = locClasses.size();
 				logger.info("createDynamicItems = " + lSize);
 				

@@ -1,6 +1,12 @@
 package com.dev.gis.app.taskmanager.clubMobilView.reservation;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -8,12 +14,18 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilCreateVehicleRequestUtils;
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilOfferListTable;
+import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilOfferViewUpdater;
+import com.dev.gis.app.taskmanager.clubMobilView.SelectOfferClubMobilDoubleClickListener;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
+import com.dev.gis.app.view.listener.adac.AdacSelectChangedOfferClickListener;
+import com.dev.gis.app.view.listener.adac.AdacSelectOfferDoubleClickListener;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
+import com.dev.gis.connector.api.OfferDo;
 import com.dev.gis.connector.joi.protocol.VehicleRequest;
 import com.dev.gis.connector.joi.protocol.VehicleResponse;
 
@@ -26,6 +38,9 @@ public class CarInfoDialog extends AbstractReservationDialog {
 	private OutputTextControls carId;
 
 	private OutputTextControls licensePlateCtl;
+	
+	private ClubMobilOfferListTable offerListTable;
+
 	
 
 	private final Shell shell;
@@ -63,9 +78,24 @@ public class CarInfoDialog extends AbstractReservationDialog {
 			
 		}
 		
+		this.offerListTable = new ClubMobilOfferListTable(null,
+				composite, 	getSelectOfferDoubleClickListener(), getSelectChangedOfferClickListener() );
+
+
+		
 		new ButtonControl(ccc, "get Cars", 0,  new ClubMobilCarInfoListener(getShell()));
 
 
+	}
+
+	protected ISelectionChangedListener getSelectChangedOfferClickListener() {
+		AdacSelectChangedOfferClickListener ss = new AdacSelectChangedOfferClickListener(carId);
+		return ss;
+	}
+
+	protected IDoubleClickListener getSelectOfferDoubleClickListener() {
+		SelectCarClubMobilDoubleClickListener ssd = new SelectCarClubMobilDoubleClickListener();
+		return ssd;
 	}
 
 	protected void okPressed() {
@@ -83,13 +113,32 @@ public class CarInfoDialog extends AbstractReservationDialog {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
+			
+			if ( ClubMobilModelProvider.INSTANCE.selectedReservation != null) {
+				ClubMobilModelProvider.INSTANCE.reservationNo = ""+ClubMobilModelProvider.INSTANCE.selectedReservation.getRentalId();
+			}
+			
+			
 			VehicleRequest request = ClubMobilCreateVehicleRequestUtils.createVehicleRequest();
 			
-			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-			ClubMobilHttpService service = serviceFactory
-					.getClubMobilleJoiService();
+			if ( request == null) {
+				MessageDialog.openError(
+						null,"Error","Can#T create vehicle request ");
+	
+			}
+			else {
+			
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				ClubMobilHttpService service = serviceFactory
+						.getClubMobilleJoiService();
+	
+				VehicleResponse response = service.getOffers(request, false, 10, false );
+				
+				ClubMobilModelProvider.INSTANCE.updateResponse(response);
+				
+				offerListTable.update();
+			}
 
-			VehicleResponse response = service.getOffers(request, false, 10, false );
 
 		}
 
@@ -100,5 +149,32 @@ public class CarInfoDialog extends AbstractReservationDialog {
 		}
 
 	}
+	private class SelectCarClubMobilDoubleClickListener extends AdacSelectOfferDoubleClickListener {
+		
+		@Override
+		public void doubleClick(DoubleClickEvent event) {
+
+			TableViewer viewer = (TableViewer) event.getViewer();
+			IStructuredSelection thisSelection = (IStructuredSelection) event.getSelection();
+			
+			Object selectedNode = thisSelection.getFirstElement();
+
+			OfferDo offer = (OfferDo) selectedNode;
+
+			logger.info("selectedNodeOffer " + offer.getModel().getVehicle().getCarId());
+			
+			carId.setValue(offer.getModel().getVehicle().getCarId());
+			
+			carInfo.setSelectedValue(offer.getModel().getVehicle().getManufacturer());
+			
+			licensePlateCtl.setValue(offer.getModel().getVehicle().getLicensePlate());
+			
+			ClubMobilModelProvider.INSTANCE.setSelectedOffer(offer);
+			
+			
+		}
+
+
+	}	
 	
 }

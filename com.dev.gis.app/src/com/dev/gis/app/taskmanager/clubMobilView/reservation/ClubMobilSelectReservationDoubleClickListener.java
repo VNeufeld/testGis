@@ -51,7 +51,7 @@ public class ClubMobilSelectReservationDoubleClickListener implements IDoubleCli
 		ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 
 		try {
-			ReservationResponse reservationResponse = service.getReservation(reservation.getReservationNo());
+			ReservationResponse reservationResponse = service.getReservation(reservation.getRentalId());
 			logger.info("select reservation " + reservationResponse.getReservationDetails().getReservationNo());
 			ClubMobilModelProvider.INSTANCE.selectedReservation = reservationResponse.getReservationDetails();
 			

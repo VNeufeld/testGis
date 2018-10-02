@@ -28,7 +28,7 @@ public class ClubMobilOfferListTable extends AbstractListTable {
 
 	@Override
 	public void createColumns(Composite parent, TableViewer viewer) {
-	    String[] titles = { "Name", "Car", "Supplier", "Station", "Service Catalog",  "Price", "Incl. km.", "Prepaid", "OneWay Fee", "BusinessSegment", "defectDesc."};
+	    String[] titles = { "Name", "Car", "Supplier", "Station", "Service Catalog",  "Price", "Incl. km.", "Prepaid", "OneWayFee", "BusinessSegment", "defectDesc."};
 	    int[] bounds = { 300, 250, 100, 100, 100,  200, 100, 100, 200 , 200, 200};
 
 	    // first column is for the first name

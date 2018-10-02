@@ -14,6 +14,7 @@ import com.bpcs.mdcars.json.protocol.GetCMPaymentInfoResponse;
 import com.bpcs.mdcars.json.protocol.SetCMPaymentTransactionRequest;
 import com.bpcs.mdcars.model.MoneyAmount;
 import com.bpcs.mdcars.model.Payment;
+import com.bpcs.mdcars.model.PaymentMethod;
 import com.bpcs.mdcars.model.PaymentTransaction;
 import com.bpcs.mdcars.model.PaymentType;
 import com.bpcs.mdcars.model.ReservationDetails;
@@ -30,7 +31,7 @@ public class PaymentControlControl extends EditPartControl {
 
 	protected OutputTextControls errorText;
 
-	private ObjectTextControl rentalNo;
+	private ObjectTextControl rentalId;
 
 	private ObjectTextControl paymentRef;
 
@@ -56,7 +57,7 @@ public class PaymentControlControl extends EditPartControl {
 	@Override
 	protected void createElements(Group groupStamp) {
 
-		rentalNo = new ObjectTextControl(groupStamp, 300, false, "rentalNo ");
+		rentalId = new ObjectTextControl(groupStamp, 300, false, "rentalId ");
 
 		paymentRef = new ObjectTextControl(groupStamp, 300, false, "paymentRef ");
 
@@ -71,8 +72,20 @@ public class PaymentControlControl extends EditPartControl {
 		errorText = new OutputTextControls(groupStamp, "Error / Warning", -1, 1);
 		
 		ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
-		if ( details != null)
-			rentalNo.setSelectedValue(details.getRentalNo()== null ? "" : details.getRentalNo());
+		if ( details != null) {
+			rentalId.setSelectedValue(""+details.getRentalId());
+			try {
+				payer.setSelectedValue(""+details.getCustomer().getCommonCustomerInfo().getCustomerId());
+			}
+			catch(Exception err) {
+				logger.error(err.getMessage(),err);
+			}
+		}
+		paymentRef.setSelectedValue("");
+		issueText.setSelectedValue("");
+		paymentId.setSelectedValue("");
+		paypalInfo.setValue("");
+		errorText.setValue("");
 
 	}
 
@@ -121,16 +134,14 @@ public class PaymentControlControl extends EditPartControl {
 
 			try {
 				clearFields();
-				
-				String sRentalNo = rentalNo.getSelectedValue();
-				
-				if ( StringUtils.isEmpty(sRentalNo)) {
-					ClubMobilUtils.showErrors("please select rentalNo");
-					return;
-				}
+				int rentalId = 0;
+				ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
+				if ( details != null)
+					rentalId = details.getRentalId();
 				
 				GetCMPaymentInfoRequest request = new GetCMPaymentInfoRequest();
-				request.setRentalNo(sRentalNo);
+				request.setRentalId(rentalId);
+				request.setPayerId(details.getCustomer().getCommonCustomerInfo().getCustomerId());
 
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
@@ -142,14 +153,19 @@ public class PaymentControlControl extends EditPartControl {
 					if ( !response.getPaymentInfo().getPaymentTransactions().isEmpty())
 						pt = response.getPaymentInfo().getPaymentTransactions().get(0);
 					if ( pt != null) {
-						paymentRef.setSelectedValue(pt.getExtPaymentReference());
-						paymentId.setSelectedValue(pt.getPaymentId());
-						issueText.setSelectedValue(pt.getIssueText());
-						payer.setSelectedValue(pt.getPayer());
+						if ( pt.getExtPaymentReference() != null)
+							paymentRef.setSelectedValue(pt.getExtPaymentReference());
+						if ( pt.getPaymentId() != null)
+							paymentId.setSelectedValue(pt.getPaymentId());
+						if ( pt.getIssueText() != null)
+							issueText.setSelectedValue(pt.getIssueText());
+						if (pt.getPayer() != null )
+							payer.setSelectedValue(pt.getPayer());
 					}
 				}
 
 			} catch (Exception err) {
+				logger.error(err.getMessage(),err);
 				paypalInfo.setValue("");
 				showErrors(new com.dev.gis.connector.sunny.Error(1, 1,
 						err.getMessage()));
@@ -180,14 +196,18 @@ public class PaymentControlControl extends EditPartControl {
 			try {
 				clearFields();
 				
-				String sRentalNo = rentalNo.getSelectedValue();
+				int rentalId = 0;
+				ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
+				if ( details != null)
+					rentalId = details.getRentalId();
+
 				String sPaymentRef = paymentRef.getSelectedValue();
 				
 				SetCMPaymentTransactionRequest request = new SetCMPaymentTransactionRequest();
-				request.setRentalNo(sRentalNo);
+				request.setRentalId(rentalId);
 				
 				PaymentTransaction payment = new PaymentTransaction() ;
-				payment.setPaymentType(PaymentType.CASH_PAYMENT);
+				payment.setPaymentMethod(PaymentMethod.CASH_PAYMENT);
 				payment.setPaidAmount(new MoneyAmount("225,00", "EUR"));
 				payment.setExtPaymentReference(sPaymentRef);
 				payment.setIssueText(issueText.getSelectedValue());

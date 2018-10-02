@@ -24,19 +24,18 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 	
 	private OutputTextControls result = null;
 	
-	private final ClubMobilDispostionListTable dispoListTable;
+	private final ClubMobilDispostionListTable availCarListTable;
 
-	public ClubMobilChangeDispositionControl(Composite groupStamp, ClubMobilDispostionListTable dispoListTable) {
+	public ClubMobilChangeDispositionControl(Composite groupStamp, ClubMobilDispostionListTable availCarListTable) {
 		
-		this.dispoListTable = dispoListTable;
+		this.availCarListTable = availCarListTable;
 		
 		parent = groupStamp;
 
 		Composite ccc = createComposite(groupStamp, 3, -1, false);
 
-		new ButtonControl(ccc, "Get DispoList", 0,  getDispoListener(getShell()));
+		new ButtonControl(ccc, "Get Avail Cars", 0,  getAvailCarListListener(getShell()));
 
-		//new ButtonControl(ccc, "Add Car", 0,  getAddCarListener(getShell()));
 
 	}
 	
@@ -48,12 +47,12 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 		return parent.getShell();
 	}
 
-	protected SelectionListener getAddCarListener(Shell shell) {
-		return new ClubMobilAddDispoListener(shell);
-	}
+//	protected SelectionListener getAddCarListener(Shell shell) {
+//		return new ClubMobilAddDispoListener(shell);
+//	}
 
-	protected SelectionListener getDispoListener(Shell shell) {
-		return new ClubMobilGetDispoListener(shell);
+	protected SelectionListener getAvailCarListListener(Shell shell) {
+		return new ClubMobilGetAvailCarListListener(shell);
 	}
 	
 	private class ClubMobilAddDispoListener extends AbstractListener {
@@ -95,11 +94,11 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 		return result;
 	}
 	
-	private class ClubMobilGetDispoListener extends AbstractListener {
+	private class ClubMobilGetAvailCarListListener extends AbstractListener {
 		
 		private final Shell shell;
 
-		public ClubMobilGetDispoListener(Shell shell) {
+		public ClubMobilGetAvailCarListListener(Shell shell) {
 			this.shell = shell;
 		}
 
@@ -119,7 +118,7 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 				if (stationId != null)
 					request.setStationId(stationId.intValue());
 
-				DispositionListResponse dispositionListResponse = service.getDispositionList(request);
+				DispositionListResponse dispositionListResponse = service.getAvailCarList(request);
 				
 				ClubMobilModelProvider.INSTANCE.dispositionListResponse = dispositionListResponse;
 				
@@ -139,7 +138,7 @@ public class ClubMobilChangeDispositionControl extends BasicControl {
 	
 	
 	private void updateTable() {
-		dispoListTable.update();
+		availCarListTable.update();
 	}
 
 

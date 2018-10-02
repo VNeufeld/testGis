@@ -27,7 +27,7 @@ public class ClubMobilHttpClient extends GisHttpClient {
 			if  ( token != null) {
 				logger.info("Token = " + token.getToken());
 				String hashValue = Hash.calculateSHA256Hash(token.getToken());
-				httpPost.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, hashValue));
+				httpPost.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, token.getToken()));
 				//httpPost.addHeader(new BasicHeader("Token", token.getToken()));
 				logger.info("Hash Value = " + hashValue);
 			}
@@ -55,10 +55,10 @@ public class ClubMobilHttpClient extends GisHttpClient {
 			Token token = ClubMobilModelProvider.INSTANCE.sessionToken;
 			if  ( token != null) {
 				logger.info("Token = " + token.getToken());
-				String hashValue = Hash.calculateSHA256Hash(token.getToken());
-				httpget.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, hashValue));
+				//String hashValue = Hash.calculateSHA256Hash(token.getToken());
+				httpget.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, token.getToken()));
 				httpget.addHeader(new BasicHeader("Token", token.getToken()));
-				logger.info("Hash Value = " + hashValue);
+				//logger.info("Hash Value = " + hashValue);
 			}
 			else
 				logger.info("no token found in the session;");

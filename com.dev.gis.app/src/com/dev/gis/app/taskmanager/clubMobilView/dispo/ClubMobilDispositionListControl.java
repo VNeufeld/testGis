@@ -28,7 +28,7 @@ public class ClubMobilDispositionListControl extends BasicControl {
 	
 	private OutputTextControls result = null;
 	
-	private ClubMobilDispostionListTable dispoListTable;
+	private ClubMobilDispostionListTable availCarListTable;
 
 	private ClubMobilDispoPoolListTable dispoPoolListTable;
 	
@@ -45,9 +45,9 @@ public class ClubMobilDispositionListControl extends BasicControl {
 		
 		ClubMobilDispoStationSearch.createDispoStationSearch(cc2); 
 		
-		createDispositionListTable(groupStamp);
+		createAvailCarListTable(groupStamp);
 		
-		new ClubMobilChangeDispositionControl(groupStamp, dispoListTable);	
+		new ClubMobilChangeDispositionControl(groupStamp, availCarListTable);	
 		
 		createDispoPoolListTable(groupStamp);		
 
@@ -65,7 +65,7 @@ public class ClubMobilDispositionListControl extends BasicControl {
 
 	
 	
-	private void createDispositionListTable(Composite composite) {
+	private void createAvailCarListTable(Composite composite) {
 		final Group groupOffers = new Group(composite, SWT.TITLE);
 		groupOffers.setText("Car List:");
 		
@@ -78,7 +78,7 @@ public class ClubMobilDispositionListControl extends BasicControl {
 		.applyTo(groupOffers);
 		
 		
-		this.dispoListTable = new ClubMobilDispostionListTable(null,
+		this.availCarListTable = new ClubMobilDispostionListTable(null,
 				groupOffers, getSelectDispolistDoubleClickListener(), getSelectChangedReservationClickListener());
 		
 	}
@@ -112,7 +112,7 @@ public class ClubMobilDispositionListControl extends BasicControl {
 	}
 
 	public void update() {
-		dispoListTable.update();
+		availCarListTable.update();
 	}
 
 	private static class ClubMobilSelectDispoPoolDoubleClickListener implements IDoubleClickListener {

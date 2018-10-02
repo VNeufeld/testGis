@@ -1,5 +1,7 @@
 package com.dev.gis.app.taskmanager.clubMobilView.dispo;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
@@ -13,10 +15,12 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.bpcs.mdcars.json.protocol.DispoPoolRequest;
+import com.bpcs.mdcars.json.protocol.DispoPoolResponse;
 import com.bpcs.mdcars.json.protocol.DispositionDetailRequest;
 import com.bpcs.mdcars.json.protocol.DispositionResponse;
-import com.bpcs.mdcars.model.CarRentalInfo;
 import com.bpcs.mdcars.model.DayAndHour;
+import com.bpcs.mdcars.model.DispoPoolCar;
 import com.bpcs.mdcars.model.DispositionInfo;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
 import com.dev.gis.app.view.elements.ButtonControl;
@@ -42,8 +46,7 @@ public class AddDispoCarDialog extends Dialog {
 	private ObjectTextControl confirmTo;
 	
 	private ObjectTextControl licensePlate;
-	
-	
+
 	private final DispositionInfo dispoInfo;
 
 	public AddDispoCarDialog(Shell parentShell, DispositionInfo dispoInfo) {
@@ -68,7 +71,7 @@ public class AddDispoCarDialog extends Dialog {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		composite.getShell().setText("Add Car to Dispo. Stations : " + stationId);
 		
-		composite.setLayout(new GridLayout(2, false));
+		composite.setLayout(new GridLayout(5, false));
 
 		LocalDate scheduleF = new LocalDate();
 		LocalDate schedulet = new LocalDate();
@@ -90,32 +93,46 @@ public class AddDispoCarDialog extends Dialog {
 		if ( dispoInfo.getLicensePlate() != null)
 			licensePlate.setSelectedValue(""+dispoInfo.getLicensePlate());
 		
-//		confirmFrom = new ObjectTextControl(composite, 300, false, "confirmFrom ");
-//		
-//		confirmFrom.setSelectedValue(scheduleF.toString(timeFormatter));
-//		
-//		confirmTo = new ObjectTextControl(composite, 300, false, "scheduleTo ");
-//		confirmTo.setSelectedValue(schedulet.toString(timeFormatter));
+		Composite buttonAreas = (Composite) super.createDialogArea(parent);
+		buttonAreas.setLayout(new GridLayout(4, false));
 		
-		new ButtonControl(composite, "Assign Car", assignDispoListener());
+		new ButtonControl(buttonAreas, "Assign Car ( Einsteurung ) ", assignDispoListener(6));
 
-		new ButtonControl(composite, "Remove Car", removeDispoListener());
+		new ButtonControl(buttonAreas, "Sonderreiningung ( Einsteurung ) ", assignDispoListener(5));
+
+		new ButtonControl(buttonAreas, "Direkte Versetung ( Einsteurung ) ", assignDispoListener(7));
+		
+		new ButtonControl(buttonAreas, "Add to DispoPool", addToDispoPool());
+
+		new ButtonControl(buttonAreas, "Bereit zur Aussteuerung", removeDispoListener(4));
+
+		new ButtonControl(buttonAreas, "Aussteuerung", removeDispoListener(1));
+
+		new ButtonControl(buttonAreas, "Werkstatt CO", removeDispoListener(2));
+
+		new ButtonControl(buttonAreas, "Direkte Versetzung", removeDispoListener(3));
+
 		
 		return composite;
 	}
 	
-	protected SelectionListener assignDispoListener() {
-		return new ClubMobilAssignDispoListener();
+	protected SelectionListener assignDispoListener(int code) {
+		return new ClubMobilAssignDispoListener(code);
+	}
+	protected SelectionListener addToDispoPool() {
+		return new ClubMobilAddDispoPoolListener();
 	}
 
-	protected SelectionListener removeDispoListener() {
-		return new ClubMobilRemoveDispoListener();
+	protected SelectionListener removeDispoListener(int code) {
+		return new ClubMobilRemoveDispoListener(code);
 	}
 	
 	private class ClubMobilAssignDispoListener implements SelectionListener {
-		
 
-		public ClubMobilAssignDispoListener() {
+		int actionCode;
+
+		public ClubMobilAssignDispoListener(int code) {
+			this.actionCode = code;
 		}
 
 		@Override
@@ -131,29 +148,15 @@ public class AddDispoCarDialog extends Dialog {
 				}
 				
 				DispositionDetailRequest request = new DispositionDetailRequest();
-				DispositionInfo info = new DispositionInfo();
-				request.setDispositionInfo(info);
-				if ( stationId != null)
-					info.setStationId(stationId.intValue());
+				request.setActionCode(actionCode);
 				
-				info.setCarId(dispoInfo.getCarId());
+				if ( stationId != null) {
+					request.setCheckInStationId(stationId.intValue());
+					request.setCheckOutStationId(stationId.intValue());
+				}
 				
-				info.setId(dispoInfo.getId());
+				request.setLicensePlate(licensePlate.getSelectedValue());
 				
-				info.setCarRentalInfo(dispoInfo.getCarRentalInfo());
-				
-//				LocalDate scheduleF = LocalDate.parse(confirmFrom.getSelectedValue(), timeFormatter);
-//				logger.info("confirmFrom = " + scheduleF.toString(timeFormatter));
-//				info.setScheduleFrom(new DayAndHour(scheduleF.toDate()));
-//				
-//
-//				LocalDate scheduleT = LocalDate.parse(confirmTo.getSelectedValue(), timeFormatter);
-//				logger.info("confirmTo = " + scheduleT.toString(timeFormatter));
-//				info.setScheduleTo(new DayAndHour(scheduleT.toDate()));
-
-//				info.setCarId(Integer.valueOf(carId.getSelectedValue()));
-
-				info.setLicensePlate(licensePlate.getSelectedValue());
 				
 				DispositionResponse dispositionResponse = service.assignDisposition(request);
 				if ( dispositionResponse.getErrors() != null && dispositionResponse.getErrors().size() > 0) {
@@ -180,9 +183,10 @@ public class AddDispoCarDialog extends Dialog {
 	}
 
 	private class ClubMobilRemoveDispoListener implements SelectionListener {
-		
+		private int code;
 
-		public ClubMobilRemoveDispoListener() {
+		public ClubMobilRemoveDispoListener(int code) {
+			this.code = code;
 		}
 
 		@Override
@@ -197,11 +201,29 @@ public class AddDispoCarDialog extends Dialog {
 					stationId =  ClubMobilModelProvider.INSTANCE.dispoStation.getId();
 				}
 				
+				// for "direkte versetzung"
+				Long targetStationId = stationId;
+				
 				DispositionDetailRequest request = new DispositionDetailRequest();
+				request.setActionCode(code);
+
+				if ( targetStationId != null)
+					request.setCheckInStationId(targetStationId.intValue());
+
+				if ( stationId != null)
+					request.setCheckOutStationId(stationId.intValue());
+
+				request.setCarId(dispoInfo.getCarId());
+				request.setLicensePlate(licensePlate.getSelectedValue());
+				
+				DayAndHour today = new DayAndHour(new Date());
+				request.setCheckOutDate(today);
+				
 				DispositionInfo info = new DispositionInfo();
 				request.setDispositionInfo(info);
 				if ( stationId != null)
 					info.setStationId(stationId.intValue());
+				
 				
 				info.setCarId(dispoInfo.getCarId());
 				info.setId(dispoInfo.getId());
@@ -230,6 +252,59 @@ public class AddDispoCarDialog extends Dialog {
 
 
 	}
+	
+	private class ClubMobilAddDispoPoolListener implements SelectionListener {
+		
+
+		public ClubMobilAddDispoPoolListener() {
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			try {
+				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
+				
+				Long stationId = null;
+				if ( ClubMobilModelProvider.INSTANCE.dispoStation != null ) {
+					stationId =  ClubMobilModelProvider.INSTANCE.dispoStation.getId();
+				}
+				
+				DispoPoolRequest request = new DispoPoolRequest();
+				if (stationId != null)
+					request.setStationId(stationId.intValue());
+				request.setCreatedBy(ClubMobilModelProvider.INSTANCE.loginUser);
+				
+				DispoPoolCar dispoPoolCar = new DispoPoolCar();
+				dispoPoolCar.setCarId(dispoInfo.getCarId());
+				
+				request.getDispoPoolCars().add(dispoPoolCar);
+
+				DispoPoolResponse dispoPoolResponse = service.addDispoToPool(request);
+				
+				if ( dispoPoolResponse.getErrors() != null && dispoPoolResponse.getErrors().size() > 0) {
+					ClubMobilUtils.showErrors(dispoPoolResponse.getErrors().get(0));
+				}
+				okPressed();
+				
+				
+			}
+			catch(Exception err) {
+				ClubMobilUtils.showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
+				
+			}
+
+		}
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	}
+
 	
 	@Override
 	protected void okPressed() {

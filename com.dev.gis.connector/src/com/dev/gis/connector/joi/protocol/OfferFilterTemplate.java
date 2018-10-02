@@ -34,6 +34,13 @@ public class OfferFilterTemplate {
 	
 	private List<FilterObject> paymentTypes = new ArrayList<FilterObject>();
 	
+	private List<FilterObject> carProperties = new ArrayList<FilterObject>();
+
+	private final List<FilterObject> driverAges = new ArrayList<FilterObject>();
+	
+	private final List<FilterObject> adults = new ArrayList<FilterObject>();
+
+
 	
 	private MoneyAmount minPrice;
 	
@@ -131,6 +138,18 @@ public class OfferFilterTemplate {
 	}
 	public void setPaymentTypes(List<FilterObject> paymentTypes) {
 		this.paymentTypes = paymentTypes;
+	}
+	public List<FilterObject> getCarProperties() {
+		return carProperties;
+	}
+	public void setCarProperties(List<FilterObject> carProperties) {
+		this.carProperties = carProperties;
+	}
+	public List<FilterObject> getDriverAges() {
+		return driverAges;
+	}
+	public List<FilterObject> getAdults() {
+		return adults;
 	}
 	
 }

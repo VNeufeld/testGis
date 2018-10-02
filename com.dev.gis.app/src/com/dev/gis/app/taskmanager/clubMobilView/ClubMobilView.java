@@ -304,11 +304,11 @@ public class ClubMobilView extends RentCarsAppView {
 	}
 
 	private SelectionListener showOfferFilterTemplate() {
-		return new AdacShowOfferFilterSelectionListener(parent.getShell());
+		return new CMShowOfferFilterSelectionListener(parent.getShell());
 	}
 
 	protected SelectionListener selectNextPageSelectionListener(final OutputTextControls pageNo, final CheckBox useFilter) {
-		AdacGetNextFilterPageSelectionListener listener = new AdacGetNextFilterPageSelectionListener(parent.getShell(),pageNo,useFilter);
+		ClubMobilFilterPageSelectionListener listener = new ClubMobilFilterPageSelectionListener(parent.getShell(),pageNo,useFilter);
 		return listener;
 	}
 

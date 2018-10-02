@@ -11,9 +11,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.joda.time.DateTime;
 
+import com.bpcs.mdcars.json.protocol.CheckInRequest;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.bpcs.mdcars.model.CarRentalInfo;
-import com.bpcs.mdcars.model.CheckInDetails;
 import com.bpcs.mdcars.model.DayAndHour;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilCustomerControl;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilEquipmentsControl;
@@ -23,7 +23,6 @@ import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.Extra;
-import com.dev.gis.connector.joi.protocol.ExtraResponse;
 
 public class CheckInDialog extends AbstractReservationDialog {
 	
@@ -52,6 +51,9 @@ public class CheckInDialog extends AbstractReservationDialog {
 	protected void fillDialogArea(Composite composite) {
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).hint(900, 500).applyTo(composite);
 		
+		logger.info("fillDialogArea");
+
+		
 		reservationNo = new ObjectTextControl(composite, 300, true, "ReservationNo");
 
 		Composite ccc = createComposite(composite, 3, -1, true);
@@ -65,25 +67,34 @@ public class CheckInDialog extends AbstractReservationDialog {
 		
 		clubMobilEquipmentsControl = new ClubMobilEquipmentsControl(composite);
 		
-		if ( ClubMobilModelProvider.INSTANCE.selectedReservation  != null) {
-			reservationNo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationNo());
-			
-			String carInfo = "booked car id = ";
-			carInfo = carInfo + ClubMobilModelProvider.INSTANCE.selectedReservation.getCarId() + 
-					" Type :" + ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getAcrissCode();
-			
-			carInfoText.setSelectedValue(carInfo);
-			
-			if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo() != null ) {
+		try {
 		
-				if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getCurrentMileage() != null)
-					carKmInfo.setSelectedValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getCurrentMileage().toString());
-	
-				if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getTankFillingProc() != null)
-					carFuelInfo.setSelectedValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getTankFillingProc().toString());
-			}
+			if ( ClubMobilModelProvider.INSTANCE.selectedReservation  != null) {
+				reservationNo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationNo());
+				
+				String carInfo = "booked car id = ";
+				carInfo = carInfo + ClubMobilModelProvider.INSTANCE.selectedReservation.getCarId();
+						//" Type :" + ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getAcrissCode();
+				
+				carInfoText.setSelectedValue(carInfo);
+				
+				if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo() != null ) {
 			
+					if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getCurrentMileage() != null)
+						carKmInfo.setSelectedValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getCurrentMileage().toString());
+		
+					if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getTankFillingProc() != null)
+						carFuelInfo.setSelectedValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getTankFillingProc().toString());
+				}
+				
+			}
 		}
+		catch(Exception err) {
+			logger.error(err.getMessage(),err);
+		}
+		
+		logger.info("fillDialogArea end");
+
 
 		//PaymentControlControl.createControl(composite);
 		
@@ -122,7 +133,7 @@ public class CheckInDialog extends AbstractReservationDialog {
 			service.putEquipments(equipments);
 			
 			
-			CheckInDetails checkInDetails = new CheckInDetails();
+			CheckInRequest checkInDetails = new CheckInRequest();
 			
 			CarRentalInfo carRentalInfo =  new CarRentalInfo();
 			
