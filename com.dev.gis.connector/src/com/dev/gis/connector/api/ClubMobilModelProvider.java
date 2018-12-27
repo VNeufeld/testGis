@@ -42,6 +42,8 @@ public enum ClubMobilModelProvider {
 	public Token sessionToken;
 	
 	public Customer customer;
+
+	public Customer driver;
 	
 	public ReservationListResponse reservationListResponse;
 	
@@ -70,6 +72,10 @@ public enum ClubMobilModelProvider {
 	private List<Extra> extras = new ArrayList<Extra>();
 	
 	private final List<Extra> selectedExtras = new ArrayList<Extra>();
+
+	private final List<Extra> selectedEquipments = new ArrayList<Extra>();
+	
+	private final List<Extra> selectedAdditionals = new ArrayList<Extra>();
 	
 	private String bookingRequestId;
 	
@@ -296,6 +302,16 @@ public enum ClubMobilModelProvider {
 
 	public void setBookingRequestId(String bookingRequestId) {
 		this.bookingRequestId = bookingRequestId;
+	}
+
+
+	public List<Extra> getSelectedEquipments() {
+		return selectedEquipments;
+	}
+
+
+	public List<Extra> getSelectedAdditionals() {
+		return selectedAdditionals;
 	}
 
 	

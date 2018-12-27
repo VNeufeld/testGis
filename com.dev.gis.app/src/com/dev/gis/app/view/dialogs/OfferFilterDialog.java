@@ -38,6 +38,8 @@ public class OfferFilterDialog extends Dialog {
 
 	Map<Long,Button> transferCatgoriesButtons = new HashMap<Long,Button>();
 
+	Map<Long,Button> carTypesButtons = new HashMap<Long,Button>();
+
 	private Text min, max;
 
 	public OfferFilterDialog(Shell parentShell) {
@@ -61,6 +63,7 @@ public class OfferFilterDialog extends Dialog {
 		if (offerFilterTemplate != null) {
 			setSummary(composite, offerFilterTemplate);
 			setBodyStyles(composite, offerFilterTemplate);
+			setCarTypes(composite, offerFilterTemplate);
 			setInclusives(composite, offerFilterTemplate);
 			setStationLocType(composite, offerFilterTemplate);
 			setTransferCategories(composite, offerFilterTemplate);
@@ -69,6 +72,7 @@ public class OfferFilterDialog extends Dialog {
 		composite.pack();
 		return composite;
 	}
+
 
 
 	private void setSummary(Composite composite,
@@ -174,7 +178,31 @@ public class OfferFilterDialog extends Dialog {
 
 	}
 	
-	
+	private void setCarTypes(Composite composite, OfferFilterTemplate offerFilterTemplate) {
+		final Group groupResult = new Group(composite, SWT.TITLE);
+		groupResult.setText("CarTypes:");
+		groupResult.setLayout(new GridLayout(5, false));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+				.grab(true, true).applyTo(groupResult);
+		
+		List<ObjectValuePair>  carTypes =   offerFilterTemplate.getCarTypes();
+		
+		for (ObjectValuePair b : carTypes ) {
+
+			String bb = b.getName()+ "("+b.getCount()+")";
+			Label l = new Label(groupResult, SWT.NONE);
+			l.setText(bb);
+			
+			GridDataFactory.fillDefaults().align(SWT.FILL, SWT.BEGINNING)
+					.grab(true, false).span(4, 1).applyTo(l);
+
+			Button select = new Button(groupResult, SWT.CHECK);
+			select.setText("Select");
+			
+			carTypesButtons.put(b.getId(), select);
+		}
+	}
+
 	private void setTransferCategories(Composite composite, OfferFilterTemplate offerFilterTemplate) {
 		final Group groupResult = new Group(composite, SWT.TITLE);
 		groupResult.setText("Transfers:");
@@ -330,8 +358,18 @@ public class OfferFilterDialog extends Dialog {
 		}
 		Long[] trr = transferCategories.toArray(new Long[0]);
 		offerFilter.setTransferCategories(trr);
-		
-		
+
+		List<Long> carTypes = new ArrayList<Long>();
+
+		for ( Long id : carTypesButtons.keySet() ) {
+			Button select = carTypesButtons.get(id);
+			if ( select.getSelection()) {
+				carTypes.add(id);
+			}
+		}
+		Long[] lll = carTypes.toArray(new Long[0]);
+		offerFilter.setCarTypes(lll);
+
 		super.okPressed();
 	}
 

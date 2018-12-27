@@ -48,6 +48,8 @@ public class Extra extends BasicProtocol {
 	private String dimension2;
 	
 	private boolean bookable = true;
+
+	private String classCode;
 	
 
 	public String getCode() {
@@ -235,6 +237,14 @@ public class Extra extends BasicProtocol {
 
 	public void setBookable(boolean bookable) {
 		this.bookable = bookable;
+	}
+
+	public String getClassCode() {
+		return classCode;
+	}
+
+	public void setClassCode(String classCode) {
+		this.classCode = classCode;
 	}
 	
 }

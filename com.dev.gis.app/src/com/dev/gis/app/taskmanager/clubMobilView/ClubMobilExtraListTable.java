@@ -12,6 +12,7 @@ import com.dev.gis.app.taskmanager.testAppView.AdacExtraListTable;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
+import com.dev.gis.connector.joi.protocol.ExtraResponseCM;
 
 public class ClubMobilExtraListTable extends AdacExtraListTable {
 	private static Logger logger = Logger.getLogger(ClubMobilExtraListTable.class);

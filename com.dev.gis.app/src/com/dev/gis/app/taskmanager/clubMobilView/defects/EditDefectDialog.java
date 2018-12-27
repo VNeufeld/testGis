@@ -20,11 +20,13 @@ import org.joda.time.format.DateTimeFormatter;
 import com.bpcs.mdcars.json.protocol.DefectDetailRequest;
 import com.bpcs.mdcars.json.protocol.DefectResponse;
 import com.bpcs.mdcars.model.DayAndHour;
+import com.bpcs.mdcars.model.DefectCategory;
 import com.bpcs.mdcars.model.DefectDescription;
 import com.bpcs.mdcars.model.DefectLocation;
 import com.bpcs.mdcars.model.DefectLocationClass;
 import com.bpcs.mdcars.model.DefectPart;
 import com.bpcs.mdcars.model.DefectSize;
+import com.bpcs.mdcars.model.DefectSpecial;
 import com.bpcs.mdcars.model.DefectType;
 import com.bpcs.mdcars.model.MoneyAmount;
 import com.dev.gis.app.taskmanager.clubMobilView.ClubMobilUtils;
@@ -204,6 +206,17 @@ public class EditDefectDialog extends Dialog {
 				if ( StringUtils.isNotEmpty(rs)) {
 					defect.setRepairStatus(Integer.valueOf(rs));
 				}
+				
+				defect.setDmpDescription("Test DMP Description BPCS Tester ");
+				
+				DefectCategory defectCategory = new DefectCategory();
+				defectCategory.setId(1);
+				defect.setDefectCategory(defectCategory);
+				
+				DefectSpecial defectSpecial = new DefectSpecial();
+				defectSpecial.setId(1);
+				defect.setDefectSpecial(defectSpecial);
+				
 				DefectResponse defectResponse = service.saveDefect(request);
 				
 				okPressed();

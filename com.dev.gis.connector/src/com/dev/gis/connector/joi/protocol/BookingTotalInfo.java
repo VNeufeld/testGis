@@ -35,10 +35,15 @@ public class BookingTotalInfo {
 	private MoneyAmount totalPrepaidPrice;
 	private MoneyAmount totalPoaPriceInSellCurrency;
 	
+	private MoneyAmount totalAdditionalsPrice;
+
+	
 	private final List<Extra> extras = new ArrayList<Extra>();
 	
-	private final List<Inclusive> inclusives = new ArrayList<Inclusive>(); ;
+	private final List<Inclusive> inclusives = new ArrayList<Inclusive>(); 
 	
+	private final List<Extra> selectedAdditional = new ArrayList<Extra>();
+
 	
 	public MoneyAmount getCarPrice() {
 		return carPrice;
@@ -132,6 +137,15 @@ public class BookingTotalInfo {
 	}
 	public void setTotalPrepaidPrice(MoneyAmount totalPrepaidPrice) {
 		this.totalPrepaidPrice = totalPrepaidPrice;
+	}
+	public MoneyAmount getTotalAdditionalsPrice() {
+		return totalAdditionalsPrice;
+	}
+	public void setTotalAdditionalsPrice(MoneyAmount totalAdditionalsPrice) {
+		this.totalAdditionalsPrice = totalAdditionalsPrice;
+	}
+	public List<Extra> getSelectedAdditional() {
+		return selectedAdditional;
 	}
 
 

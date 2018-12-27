@@ -125,7 +125,17 @@ public class LoginDialog extends Dialog {
 					else
 						showErrors("Login not successfull");
 				}
-				else {
+				else if ( credentialResponse.isSmsCheckNeeded()){
+					String smdCode = credentialResponse.getSmsSecurityCode();
+					credentialResponse = service.loginTwoFactor(smdCode);
+					clerk = credentialResponse.getClerk();
+					token = credentialResponse.getToken();
+					tokenControl.setValue(token.getToken());
+					String result = credentialResponse.getClerk().getName() + " " + credentialResponse.getClerk().getFirstName();
+					loginResult.setValue(result);
+					
+				}
+				else if (credentialResponse.getCredential().isReset()) {
 					String result = credentialResponse.getClerk().getName() + " " + credentialResponse.getClerk().getFirstName();
 
 					Date pwdValidTo = credentialResponse.getCredential().getPwdValidTo();
@@ -134,13 +144,13 @@ public class LoginDialog extends Dialog {
 						org.joda.time.LocalDateTime ld = new LocalDateTime(pwdValidTo);;
 						expiredTIme = expiredTIme + " pwd valid to " + ld.toString("yyyy-MM-dd");
 					}
-					
-					if (credentialResponse.getCredential().isReset()) {
-						result = result + " pwd change needed";
-						String message = " Password is nicht mehr gültig und muss geändert werden.  Ablaufzeit " + expiredTIme;
-						MessageDialog.openInformation(getShell(), "Info", message);
+					result = result + " pwd change needed";
+					String message = " Password is nicht mehr gültig und muss geändert werden.  Ablaufzeit " + expiredTIme;
+					MessageDialog.openInformation(getShell(), "Info", message);
 						
-					}
+				}
+				else {
+					String result = credentialResponse.getClerk().getName() + " " + credentialResponse.getClerk().getFirstName();
 					clerk = credentialResponse.getClerk();
 					
 					token = credentialResponse.getToken();
@@ -148,6 +158,7 @@ public class LoginDialog extends Dialog {
 					tokenControl.setValue(token.getToken());
 					
 					loginResult.setValue(result);
+					
 				}
 					
 			}
@@ -208,8 +219,8 @@ public class LoginDialog extends Dialog {
 				
 				String newPwd = ClubMobilModelProvider.INSTANCE.changePasword;
 				
-				pwd = encrypt(pwd);
-				newPwd = encrypt(newPwd);
+//				pwd = encrypt(pwd);
+//				newPwd = encrypt(newPwd);
 
 				logger.info("newPwd = " + newPwd);
 				
@@ -226,7 +237,7 @@ public class LoginDialog extends Dialog {
 						showErrors("Login not successfull");
 				}
 				else {
-					if ( credentialResponse.getStatus() > 0) {
+					if ( credentialResponse.getStatus() == 0) {
 						MessageDialog.openInformation(getShell(), "Info", "Password erfolgreich geändert. Bitte melden Sie sich mit dem neuen Passwort an");
 					}
 				}

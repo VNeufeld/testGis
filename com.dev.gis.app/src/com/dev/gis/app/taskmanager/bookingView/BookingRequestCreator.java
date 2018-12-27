@@ -1,7 +1,9 @@
 package com.dev.gis.app.taskmanager.bookingView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.joi.protocol.Address;
 import com.dev.gis.connector.joi.protocol.BookingRequest;
 import com.dev.gis.connector.joi.protocol.CMVerifyRequest;
@@ -64,11 +66,28 @@ public class BookingRequestCreator {
 //		bookingRequest.setTransferType(1);
 //		bookingRequest.setPriceLimit(new MoneyAmount("1000, 00","EUR"));
 		//bookingRequest.setPayment(payment);
-		
-		bookingRequest.setExtras(selectedExtras);
+		bookingRequest.setCustomer(ClubMobilModelProvider.INSTANCE.customer);
+		bookingRequest.setDriver(ClubMobilModelProvider.INSTANCE.driver);
+		if ( selectedExtras != null && !selectedExtras.isEmpty()) {
+			List<com.bpcs.mdcars.model.Extra> extras = convert(selectedExtras);
+			bookingRequest.setExtras(extras);
+		}
 		return bookingRequest;
 	}
 	
+	private static List<com.bpcs.mdcars.model.Extra> convert(List<Extra> selectedExtras) {
+		if ( selectedExtras != null && !selectedExtras.isEmpty()) {
+			List<com.bpcs.mdcars.model.Extra> extras = new ArrayList<com.bpcs.mdcars.model.Extra>();
+			for ( Extra extra : selectedExtras) {
+				com.bpcs.mdcars.model.Extra ex = new com.bpcs.mdcars.model.Extra();
+				ex.setId(extra.getId());
+				extras.add(ex);
+			}
+			return extras;
+		}
+		return null;
+	}
+
 	private static Person createDriver() {
 		Person driver = new Person();
 		driver.setName("Meier");

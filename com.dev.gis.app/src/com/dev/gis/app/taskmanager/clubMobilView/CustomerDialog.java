@@ -20,6 +20,7 @@ import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.ClubMobilHttpService;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.ext.BusinessException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -170,6 +171,8 @@ public class CustomerDialog extends Dialog {
 					customer.getPerson().setIdentityCardNo("IDENT_000001");
 					customer.getPerson().setIdentityCardValidTo("1020-10-15");
 					customer.getAddress().setCompany(company.getSelectedValue());
+					customer.getAddress().setCountry("DE");
+					customer.getAddress().setCountryId(1);
 				}
 				else {
 					showErrors("No Customer is definded");
@@ -180,10 +183,13 @@ public class CustomerDialog extends Dialog {
 						
 				if ( driver ) {
 					service.putDriver(customer);
+					ClubMobilModelProvider.INSTANCE.driver = customer;
+					
 					MessageDialog.openInformation(getShell(),"Info","Put Driver in the session");
 				}
 				else {
 					service.putCustomer(customer);
+					ClubMobilModelProvider.INSTANCE.customer = customer;
 					MessageDialog.openInformation(getShell(),"Info","Put Customer in the session");
 				}
 				

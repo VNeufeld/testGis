@@ -78,13 +78,13 @@ public class CheckInDialog extends AbstractReservationDialog {
 				
 				carInfoText.setSelectedValue(carInfo);
 				
-				if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo() != null ) {
+				if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCoRentalInfo() != null ) {
 			
-					if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getCurrentMileage() != null)
-						carKmInfo.setSelectedValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getCurrentMileage().toString());
+					if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCoRentalInfo().getCurrentMileage() != null)
+						carKmInfo.setSelectedValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCoRentalInfo().getCurrentMileage().toString());
 		
-					if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getTankFillingProc() != null)
-						carFuelInfo.setSelectedValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCarRentalInfo().getTankFillingProc().toString());
+					if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getCoRentalInfo().getTankFillingProc() != null)
+						carFuelInfo.setSelectedValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCoRentalInfo().getTankFillingProc().toString());
 				}
 				
 			}

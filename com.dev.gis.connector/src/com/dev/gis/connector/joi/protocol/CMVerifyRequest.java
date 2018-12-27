@@ -18,16 +18,16 @@ public class CMVerifyRequest extends BasicProtocol {
 
 	private String flightNo;
 
-	private List<Extra> extras;
 	
 	private CustomerRequirements customerRequirements;
+	
+	private com.bpcs.mdcars.model.Customer customer;
+	
+	private com.bpcs.mdcars.model.Customer driver;
+
+	private List<com.bpcs.mdcars.model.Extra> extras;
 
 
-
-	@XmlElement(required = false)
-	public List<Extra> getExtras() {
-		return extras;
-	}
 
 	@XmlElement(required = false)
 	public String getFlightNo() {
@@ -39,10 +39,6 @@ public class CMVerifyRequest extends BasicProtocol {
 		return promoCode;
 	}
 
-
-	public void setExtras(List<Extra> extras) {
-		this.extras = extras;
-	}
 
 	public void setFlightNo(String flightNo) {
 		this.flightNo = flightNo;
@@ -75,6 +71,30 @@ public class CMVerifyRequest extends BasicProtocol {
 
 	public void setCustomerRequirements(CustomerRequirements customerRequirements) {
 		this.customerRequirements = customerRequirements;
+	}
+
+	public List<com.bpcs.mdcars.model.Extra> getExtras() {
+		return extras;
+	}
+
+	public void setExtras(List<com.bpcs.mdcars.model.Extra> extras) {
+		this.extras = extras;
+	}
+
+	public com.bpcs.mdcars.model.Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(com.bpcs.mdcars.model.Customer customer) {
+		this.customer = customer;
+	}
+
+	public com.bpcs.mdcars.model.Customer getDriver() {
+		return driver;
+	}
+
+	public void setDriver(com.bpcs.mdcars.model.Customer driver) {
+		this.driver = driver;
 	}
 
 

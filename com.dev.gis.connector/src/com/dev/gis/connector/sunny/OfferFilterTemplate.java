@@ -25,6 +25,8 @@ public class OfferFilterTemplate {
 	
 	private List<ObjectValuePair> stationTransfers = new ArrayList<ObjectValuePair>();
 	
+	private List<ObjectValuePair> carTypes = new ArrayList<ObjectValuePair>();
+
 	
 	private ObjectValuePair automatic;
 	private ObjectValuePair aircondition;
@@ -99,6 +101,12 @@ public class OfferFilterTemplate {
 	}
 	public void setStationTransfers(List<ObjectValuePair> stationTransfers) {
 		this.stationTransfers = stationTransfers;
+	}
+	public List<ObjectValuePair> getCarTypes() {
+		return carTypes;
+	}
+	public void setCarTypes(List<ObjectValuePair> carTypes) {
+		this.carTypes = carTypes;
 	}
 
 }

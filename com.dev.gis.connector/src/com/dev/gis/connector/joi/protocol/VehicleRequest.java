@@ -36,6 +36,8 @@ public class VehicleRequest extends Request {
 	
 	private Integer insuranceId;
 
+	private Integer adacMember = 1;
+	
 	private TravelInformation travel;
 	
 	private int payment;
@@ -138,5 +140,13 @@ public class VehicleRequest extends Request {
 
 	public void setBookingId(Integer bookingId) {
 		this.bookingId = bookingId;
+	}
+
+	public Integer getAdacMember() {
+		return adacMember;
+	}
+
+	public void setAdacMember(Integer adacMember) {
+		this.adacMember = adacMember;
 	}
 }

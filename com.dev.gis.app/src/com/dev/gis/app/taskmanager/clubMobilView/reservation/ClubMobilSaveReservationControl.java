@@ -40,7 +40,7 @@ public class ClubMobilSaveReservationControl extends BasicControl {
 		
 		new ButtonControl(ccc, "Cancel", 0,  getSavelListener(getShell()));
 
-		new ButtonControl(ccc, "Upload", 0,  getUploadListener(getShell()));
+		new ButtonControl(ccc, "Documentation", 0,  getUploadListener(getShell()));
 
 		new ButtonControl(ccc, "GetComments", 0,  getCommentsListener(getShell(), 1));
 

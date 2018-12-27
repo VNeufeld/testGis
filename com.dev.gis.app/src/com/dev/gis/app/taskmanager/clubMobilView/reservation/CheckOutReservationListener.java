@@ -20,6 +20,7 @@ public class CheckOutReservationListener extends AbstractReservationListener{
 	protected void callService(ClubMobilHttpService service) {
 		CheckOutRequest checkOutRequest = ClubMobilUtils.createCheckOutRequest();
 		ClubMobilModelProvider.INSTANCE.getSelectedOffer();
+		checkOutRequest.setRentalNo("X");
 		logger.info("call checkOutRequest " + checkOutRequest);
 		service.checkOutReservation(checkOutRequest);
 		MessageDialog.openInformation(null,"Info"," CheckOut successfull");

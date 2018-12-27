@@ -69,11 +69,12 @@ public class CarInfoDialog extends AbstractReservationDialog {
 			carId.setValue(""+ClubMobilModelProvider.INSTANCE.selectedReservation.getCarId());
 			
 			if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar() != null) {
-				carInfo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getAcrissCode());
+				if ( ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getAcrissCode()  != null)
+					carInfo.setSelectedValue(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getAcrissCode());
 				
 				String licensePlate = ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationCar().getLicensePlate();
-				
-				licensePlateCtl.setValue(licensePlate);
+				if ( licensePlate != null)
+					licensePlateCtl.setValue(licensePlate);
 			}
 			
 		}
@@ -123,7 +124,7 @@ public class CarInfoDialog extends AbstractReservationDialog {
 			
 			if ( request == null) {
 				MessageDialog.openError(
-						null,"Error","Can#T create vehicle request ");
+						null,"Error","Can'tT create vehicle request - check station and date ");
 	
 			}
 			else {
@@ -132,7 +133,7 @@ public class CarInfoDialog extends AbstractReservationDialog {
 				ClubMobilHttpService service = serviceFactory
 						.getClubMobilleJoiService();
 	
-				VehicleResponse response = service.getOffers(request, false, 10, false );
+				VehicleResponse response = service.getOffers(request, false, 100, false );
 				
 				ClubMobilModelProvider.INSTANCE.updateResponse(response);
 				

@@ -1,6 +1,5 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -13,10 +12,8 @@ import com.bpcs.mdcars.json.protocol.GetCMPaymentInfoRequest;
 import com.bpcs.mdcars.json.protocol.GetCMPaymentInfoResponse;
 import com.bpcs.mdcars.json.protocol.SetCMPaymentTransactionRequest;
 import com.bpcs.mdcars.model.MoneyAmount;
-import com.bpcs.mdcars.model.Payment;
 import com.bpcs.mdcars.model.PaymentMethod;
 import com.bpcs.mdcars.model.PaymentTransaction;
-import com.bpcs.mdcars.model.PaymentType;
 import com.bpcs.mdcars.model.ReservationDetails;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.EditPartControl;
@@ -35,14 +32,17 @@ public class PaymentControlControl extends EditPartControl {
 
 	private ObjectTextControl paymentRef;
 
-	private ObjectTextControl payer;
-
-	private ObjectTextControl issueText;
+	private OutputTextControls payer;
 
 	private ObjectTextControl paymentId;
-	
-	protected OutputTextControls paypalInfo = null;
 
+	private ObjectTextControl payedAmount;
+	
+	protected OutputTextControls openAmount = null;
+
+	protected OutputTextControls totalAmount = null;
+
+	
 	public static PaymentControlControl createControl(Composite parent) {
 		PaymentControlControl bc = new PaymentControlControl(parent);
 		bc.createGroupControl(parent, "Payment");
@@ -61,31 +61,28 @@ public class PaymentControlControl extends EditPartControl {
 
 		paymentRef = new ObjectTextControl(groupStamp, 300, false, "paymentRef ");
 
-		payer = new ObjectTextControl(groupStamp, 300, false, "payer ");
-
-		issueText = new ObjectTextControl(groupStamp, 300, false, "issueText ");
+		payer = new OutputTextControls(groupStamp, "Payer", -1, 1);
 
 		paymentId = new ObjectTextControl(groupStamp, 300, false, "paymentId");
+
+		totalAmount = new OutputTextControls(groupStamp, "TotalAmount", -1, 1);
 		
-		paypalInfo = new OutputTextControls(groupStamp, "Info", -1, 1);
+		openAmount = new OutputTextControls(groupStamp, "OpenAmount", -1, 1);
+		
+		payedAmount = new ObjectTextControl(groupStamp, 300, false, "PayedAmount");
 
 		errorText = new OutputTextControls(groupStamp, "Error / Warning", -1, 1);
 		
 		ReservationDetails details = ClubMobilModelProvider.INSTANCE.selectedReservation;
 		if ( details != null) {
 			rentalId.setSelectedValue(""+details.getRentalId());
-			try {
-				payer.setSelectedValue(""+details.getCustomer().getCommonCustomerInfo().getCustomerId());
-			}
-			catch(Exception err) {
-				logger.error(err.getMessage(),err);
-			}
 		}
 		paymentRef.setSelectedValue("");
-		issueText.setSelectedValue("");
+		totalAmount.setValue("");
 		paymentId.setSelectedValue("");
-		paypalInfo.setValue("");
+		openAmount.setValue("");
 		errorText.setValue("");
+		payedAmount.saveValue("");
 
 	}
 
@@ -141,32 +138,25 @@ public class PaymentControlControl extends EditPartControl {
 				
 				GetCMPaymentInfoRequest request = new GetCMPaymentInfoRequest();
 				request.setRentalId(rentalId);
-				request.setPayerId(details.getCustomer().getCommonCustomerInfo().getCustomerId());
+				request.setPayerId(details.getDriver().getCommonCustomerInfo().getCustomerId());
 
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 				
 				GetCMPaymentInfoResponse response = service.getPaymentInfo(request);
-				paypalInfo.setValue(response.getPaymentInfo().getOpenAmount().toString());
 				if ( response.getPaymentInfo() != null) {
-					PaymentTransaction pt = null;
-					if ( !response.getPaymentInfo().getPaymentTransactions().isEmpty())
-						pt = response.getPaymentInfo().getPaymentTransactions().get(0);
-					if ( pt != null) {
-						if ( pt.getExtPaymentReference() != null)
-							paymentRef.setSelectedValue(pt.getExtPaymentReference());
-						if ( pt.getPaymentId() != null)
-							paymentId.setSelectedValue(pt.getPaymentId());
-						if ( pt.getIssueText() != null)
-							issueText.setSelectedValue(pt.getIssueText());
-						if (pt.getPayer() != null )
-							payer.setSelectedValue(pt.getPayer());
-					}
+					openAmount.setValue(response.getPaymentInfo().getOpenAmount().toString());
+					totalAmount.setValue(response.getPaymentInfo().getTotalAmount().toString());
+					payer.setValue(response.getPaymentInfo().getPayerName());
+					payedAmount.setSelectedValue(response.getPaymentInfo().getPaidAmount().toString());
 				}
+				else
+					showErrors(new com.dev.gis.connector.sunny.Error(1, 1,
+							"PaymentInfo is null"));
 
 			} catch (Exception err) {
 				logger.error(err.getMessage(),err);
-				paypalInfo.setValue("");
+				openAmount.setValue("");
 				showErrors(new com.dev.gis.connector.sunny.Error(1, 1,
 						err.getMessage()));
 
@@ -175,7 +165,7 @@ public class PaymentControlControl extends EditPartControl {
 		}
 
 		private void clearFields() {
-			paypalInfo.setValue("");
+			openAmount.setValue("");
 			errorText.setValue("");
 			
 		}
@@ -207,12 +197,12 @@ public class PaymentControlControl extends EditPartControl {
 				request.setRentalId(rentalId);
 				
 				PaymentTransaction payment = new PaymentTransaction() ;
-				payment.setPaymentMethod(PaymentMethod.CASH_PAYMENT);
-				payment.setPaidAmount(new MoneyAmount("225,00", "EUR"));
+				if ( paymentId.getSelectedValue().equals("13"))
+					payment.setPaymentMethod(PaymentMethod.CASH_PAYMENT);
+				else
+					payment.setPaymentMethod(PaymentMethod.REMITTANCE);
+				payment.setPaidAmount(new MoneyAmount(payedAmount.getSelectedValue(), "EUR"));
 				payment.setExtPaymentReference(sPaymentRef);
-				payment.setIssueText(issueText.getSelectedValue());
-				payment.setPayer(payer.getSelectedValue());
-				payment.setPaymentId(paymentId.getSelectedValue());
 				
 				request.setPaymentTransaction(payment);
 				
@@ -221,10 +211,19 @@ public class PaymentControlControl extends EditPartControl {
 				ClubMobilHttpService service = serviceFactory.getClubMobilleJoiService();
 				
 				GetCMPaymentInfoResponse response = service.addPaymentInfo(request);
-				paypalInfo.setValue(response.getPaymentInfo().getOpenAmount().toString());
+				if ( response.getPaymentInfo() != null) {
+					openAmount.setValue(response.getPaymentInfo().getOpenAmount().toString());
+					totalAmount.setValue(response.getPaymentInfo().getTotalAmount().toString());
+					payer.setValue(response.getPaymentInfo().getPayerName());
+					payedAmount.setSelectedValue(response.getPaymentInfo().getPaidAmount().toString());
+				}
+				else
+					showErrors(new com.dev.gis.connector.sunny.Error(1, 1,
+							"PaymentInfo is null"));
+
 
 			} catch (Exception err) {
-				paypalInfo.setValue("");
+				openAmount.setValue("");
 				showErrors(new com.dev.gis.connector.sunny.Error(1, 1,
 						err.getMessage()));
 
@@ -233,7 +232,7 @@ public class PaymentControlControl extends EditPartControl {
 		}
 
 		private void clearFields() {
-			paypalInfo.setValue("");
+			openAmount.setValue("");
 			errorText.setValue("");
 			
 		}

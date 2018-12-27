@@ -1,5 +1,7 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,13 +13,19 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
+import com.bpcs.mdcars.json.protocol.CalculateAdditionalsRequest;
 import com.bpcs.mdcars.json.protocol.ReservationResponse;
+import com.bpcs.mdcars.model.CarRentalInfo;
+import com.bpcs.mdcars.model.ItemClass;
+import com.bpcs.mdcars.model.MoneyAmount;
 import com.dev.gis.app.view.elements.BasicControl;
 import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.connector.api.ClubMobilHttpService;
+import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
+import com.dev.gis.connector.joi.protocol.ExtraResponseCM;
 
 public class ClubMobilReservationExtrasControl extends BasicControl {
 	
@@ -64,6 +72,7 @@ public class ClubMobilReservationExtrasControl extends BasicControl {
 
 		new ButtonControl(cc, "Select Extras", 0,  new AddSelectExtrasListener());
 		new ButtonControl(cc, "Select Fehl-Equipments", 0,  new AddSelectEquipmentsListener());
+		new ButtonControl(cc, "CalculateAddPrices", 0,  new CalculateAddPriceListener());
 		
 
 	}
@@ -109,6 +118,8 @@ public class ClubMobilReservationExtrasControl extends BasicControl {
 			try {
 				
 				ExtraResponse response = service.putExtras(getSelectedExtras());
+				ClubMobilModelProvider.INSTANCE.getSelectedExtras().clear();
+				ClubMobilModelProvider.INSTANCE.getSelectedExtras().addAll(getSelectedExtras());
 				
 				ClubMobilUtils.showErrors(response);
 			}
@@ -131,6 +142,9 @@ public class ClubMobilReservationExtrasControl extends BasicControl {
 			try {
 				
 				ReservationResponse response = service.putEquipments(getSelectedExtras());
+
+				ClubMobilModelProvider.INSTANCE.getSelectedEquipments().clear();
+				ClubMobilModelProvider.INSTANCE.getSelectedEquipments().addAll(getSelectedExtras());
 				
 				//ClubMobilUtils.showErrors(response);
 			}
@@ -200,6 +214,66 @@ public class ClubMobilReservationExtrasControl extends BasicControl {
 				ClubMobilUtils.showErrors(err.getClass().getSimpleName() + " " +err.getMessage());
 			}
 		}
+	}
+	
+	protected class CalculateAddPriceListener extends AbstractListener {
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			
+			JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+			ClubMobilHttpService service = serviceFactory
+					.getClubMobilleJoiService();
+			try {
+				CalculateAdditionalsRequest calculateAdditionalsRequest = new CalculateAdditionalsRequest();
+				List<Extra> selectedExtras = getSelectedExtras();
+				
+				ClubMobilModelProvider.INSTANCE.getSelectedAdditionals().clear();
+				ClubMobilModelProvider.INSTANCE.getSelectedAdditionals().addAll(getSelectedExtras());
+				
+				List<com.bpcs.mdcars.model.Extra> modelExtras = convertToModelExtras(selectedExtras);
+				calculateAdditionalsRequest.getBookingAdditionals().addAll(modelExtras);
+				
+				CarRentalInfo carRentalInfo = new CarRentalInfo();
+				carRentalInfo.setCurrentMileage(BigDecimal.valueOf(50000.0));
+				calculateAdditionalsRequest.setCarRentalInfo(carRentalInfo);
+				
+				ExtraResponse response = service.calculateAdditionals(calculateAdditionalsRequest);
+				
+				extraListTable.refresh(response);
+				
+				ClubMobilUtils.showErrors(response);
+			}
+			catch(Exception err) {
+				logger.error(err.getMessage(),err);
+				ClubMobilUtils.showErrors(err.getClass().getSimpleName() + " " +err.getMessage());
+			}
+		}
+
+
+	}
+	
+	private List<com.bpcs.mdcars.model.Extra> convertToModelExtras(List<Extra> selectedExtras) {
+		List<com.bpcs.mdcars.model.Extra> modelExtras = new ArrayList<com.bpcs.mdcars.model.Extra>();
+		for ( Extra extra : selectedExtras) {
+			com.bpcs.mdcars.model.Extra modelExtra = new com.bpcs.mdcars.model.Extra();
+			modelExtra.setBookable(extra.isBookable());
+			modelExtra.setCode(extra.getCode());
+			modelExtra.setClassCode(extra.getClassCode());
+
+			modelExtra.setId(extra.getId());
+			modelExtra.setName(extra.getName());
+			modelExtra.setPrice(new MoneyAmount(extra.getPrice().getAmount(),extra.getPrice().getCurrency()));
+			modelExtra.setTotalPrice(new MoneyAmount(extra.getTotalPrice().getAmount(),extra.getTotalPrice().getCurrency()));
+
+			modelExtra.setValue1(extra.getValue1());
+			modelExtra.setValue2(extra.getValue2());
+			modelExtra.setValue3(extra.getValue3());
+			modelExtra.setValue4(extra.getValue4());
+			
+			modelExtras.add(modelExtra);
+		}
+		return modelExtras;
 	}
 
 	

@@ -3,15 +3,20 @@ package com.dev.gis.connector.api;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.bpcs.mdcars.json.protocol.CalculateAdditionalsRequest;
 import com.bpcs.mdcars.json.protocol.CheckInRequest;
 import com.bpcs.mdcars.json.protocol.CheckOutRequest;
 import com.bpcs.mdcars.json.protocol.CommentListResponse;
 import com.bpcs.mdcars.json.protocol.CommentMessageRequest;
+import com.bpcs.mdcars.json.protocol.CreateDocumentRequest;
+import com.bpcs.mdcars.json.protocol.CreateDocumentResponse;
+import com.bpcs.mdcars.json.protocol.CredentialRequest;
 import com.bpcs.mdcars.json.protocol.CredentialResponse;
 import com.bpcs.mdcars.json.protocol.DefectDetailRequest;
 import com.bpcs.mdcars.json.protocol.DefectListFilterRequest;
@@ -35,9 +40,11 @@ import com.bpcs.mdcars.json.protocol.ReservationResponse;
 import com.bpcs.mdcars.json.protocol.SetCMPaymentTransactionRequest;
 import com.bpcs.mdcars.json.protocol.UploadRequest;
 import com.bpcs.mdcars.json.protocol.UploadResponse;
+import com.bpcs.mdcars.model.Administration;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.bpcs.mdcars.model.ReservationDetails;
+import com.bpcs.mdcars.model.UploadPictureInfo;
 import com.bpcs.mdcars.soap.protocol.CustomerRequirements;
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
@@ -160,6 +167,17 @@ public class ClubMobilHttpService {
 		link = link.substring(pos);
 		
 		String checkoutUrl = CLUBMOBIL_RESERVATION+ "/extras";
+		
+		checkoutUrl = checkoutUrl + link;
+
+		return getServerURI(checkoutUrl);
+	}
+	private URI getResInfoURI(URI offerLink ) throws URISyntaxException {
+		String link = offerLink.toString();
+		int pos = link.indexOf("/vehicleRequest");
+		link = link.substring(pos);
+		
+		String checkoutUrl = CLUBMOBIL_RESERVATION+ "/info";
 		
 		checkoutUrl = checkoutUrl + link;
 
@@ -450,7 +468,8 @@ public class ClubMobilHttpService {
 	}
 	
 	public BookingResponse bookOffers(Offer selectedOffer,String bookingRequestId,
-			List<Extra> selectedExtras, int paymentType,Customer customer, String promotionCode ) {
+			List<com.bpcs.mdcars.model.Extra> extras, 
+			int paymentType,com.bpcs.mdcars.model.Customer customer, String promotionCode ) {
 		
 
 		try {
@@ -470,7 +489,7 @@ public class ClubMobilHttpService {
 			bookingRequest.setFlightNo("LH4711");
 			bookingRequest.setTransferType(1);
 			
-			bookingRequest.setExtras(selectedExtras);
+			bookingRequest.setExtras(extras);
 			
 			CustomerRequirements customerRequirements = new CustomerRequirements();
 			customerRequirements.setAutomatic(1);
@@ -480,6 +499,8 @@ public class ClubMobilHttpService {
 			customerRequirements.setTowedLoad(1);
 			
 			bookingRequest.setCustomerRequirements(customerRequirements);
+			
+			bookingRequest.setCustomer(customer);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
 			logger.info("book Request = "+request);
@@ -779,10 +800,18 @@ public class ClubMobilHttpService {
 
 			URI uri = getServerURI(link);
 			
-			String request = JsonUtils.convertRequestToJsonString(credentialRequest);
-			logger.info(" login request = "+request);
+			CredentialRequest request = new CredentialRequest();
+			Administration admin = new Administration();
+			admin.setCalledFrom(9);
+			request.setAdministration(admin);
+			request.setCredential(credentialRequest);
+			credentialRequest.setCalledFrom(9);
 
-			String response =  httpClient.startPostRequestAsJson(uri, request);
+			
+			String requestXml = JsonUtils.convertRequestToJsonString(credentialRequest);
+			logger.info(" login request = "+requestXml);
+
+			String response =  httpClient.startPostRequestAsJson(uri, requestXml);
 			logger.info("login response = "+response);
 			
 			
@@ -813,10 +842,18 @@ public class ClubMobilHttpService {
 
 			URI uri = getServerURI(link);
 			
-			String request = JsonUtils.convertRequestToJsonString(credentialRequest);
-			logger.info("changePwd request = "+request);
+			CredentialRequest request = new CredentialRequest();
+			Administration admin = new Administration();
+			admin.setCalledFrom(9);
+			request.setAdministration(admin);
+			request.setCredential(credentialRequest);
+			
+			credentialRequest.setCalledFrom(9);
+			
+			String requestXml = JsonUtils.convertRequestToJsonString(credentialRequest);
+			logger.info("changePwd request = "+requestXml);
 
-			String response =  httpClient.startPostRequestAsJson(uri, request);
+			String response =  httpClient.startPostRequestAsJson(uri, requestXml);
 			logger.info("changePwd response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, CredentialResponse.class);
 			
@@ -1001,6 +1038,29 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
+	public ReservationResponse checkOutReservationFin(CheckOutRequest checkOutRequest) {
+		try {
+			String link = CLUBMOBIL_RESERVATION+ "/checkOut";
+
+			URI uri = getServerURI(link);
+			
+			logger.info("checkOut uri = " + uri.toString());
+			
+			String request = JsonUtils.convertRequestToJsonString(checkOutRequest);
+			logger.info("checkOutReservation request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("checkOutReservation response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, ReservationResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+	
 	public DispositionListResponse getAvailCarList(GetDispoListRequest getDispoListRequest) {
 
 		try {
@@ -1255,10 +1315,10 @@ public class ClubMobilHttpService {
 			URI uri = getServerURI(link);
 			
 			String request = JsonUtils.convertRequestToJsonString(checkInRequest);
-			logger.info("checkOutReservation request = "+request);
+			logger.info("checkInReservation request = "+request);
 
 			String response =  httpClient.startPostRequestAsJson(uri, request);
-			logger.info("checkOutReservation response = "+response);
+			logger.info("checkInReservation response = "+response);
 			return JsonUtils.createResponseClassFromJson(response, ReservationResponse.class);
 			
 		} catch ( IOException e) {
@@ -1519,13 +1579,28 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
-	public UploadResponse upload2(String bss, int rentalId) {
+	public UploadResponse uploadReservationImage(String bss, int rentalId, String fileName) {
 		try {
 			
-			String link = CLUBMOBIL_RESERVATION+ "/saveSignature";
+			String link = CLUBMOBIL_RESERVATION+ "/uploadImage";
 			UploadRequest uploadRequest = new UploadRequest();
-			uploadRequest.setBase64Image(bss);
 			uploadRequest.setRentalId(rentalId);
+			uploadRequest.setCarId(123);
+			
+			List<UploadPictureInfo> pictures = new ArrayList<UploadPictureInfo>();
+			uploadRequest.setPictures(pictures);
+			
+			UploadPictureInfo p1 = new UploadPictureInfo();
+			p1.setType("gif");
+			p1.setName("bpcs_im");
+			p1.setBase64Image(bss);
+			uploadRequest.getPictures().add ( p1);
+
+			UploadPictureInfo p2 = new UploadPictureInfo();
+			p2.setType("jpg");
+			p2.setName("bpcs_jpg");
+			p2.setBase64Image(bss);
+			uploadRequest.getPictures().add ( p2);
 
 			URI uri = getServerURI(link);
 			
@@ -1541,6 +1616,110 @@ public class ClubMobilHttpService {
 		} catch (URISyntaxException e) {
 			logger.error(e,e);
 		}
+		return null;
+	}
+	
+	public CreateDocumentResponse createDomecument(CreateDocumentRequest  createDocumentRequest) {
+		try {
+			
+			String link = CLUBMOBIL_RESERVATION+ "/createDocument";
+
+			URI uri = getServerURI(link);
+			
+			String request = JsonUtils.convertRequestToJsonString(createDocumentRequest);
+			logger.info("createDomecument request = "+request);
+
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("createDomecument response = "+response);
+			return JsonUtils.createResponseClassFromJson(response, CreateDocumentResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		return null;
+	}
+
+
+	public ExtraResponse calculateAdditionals(CalculateAdditionalsRequest calculateAdditionalsRequest) {
+		ExtraResponse extraResponse =  null;
+		try {
+
+			String link = CLUBMOBIL_RESERVATION+ "/calculateAdditionals";
+			URI uri = getServerURI(link);
+
+			String request = JsonUtils.convertRequestToJsonString(calculateAdditionalsRequest);
+			logger.info("calculateAdditionals request = "+request);
+			
+			String response =  httpClient.startPostRequestAsJson(uri, request);
+			logger.info("calculateAdditionals = "+response);
+			extraResponse = JsonUtils.createResponseClassFromJson(response, ExtraResponse.class);
+			
+			return extraResponse;
+			
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
+		}
+	}
+
+	public BookingResponse getReservationInfo() {
+		BookingResponse bookingResponse =  null;
+		try {
+			com.dev.gis.connector.joi.protocol.Offer offer = null;
+			
+			if ( ClubMobilModelProvider.INSTANCE.getSelectedOffer() != null)
+				offer = ClubMobilModelProvider.INSTANCE.getSelectedOffer().getOffer();
+
+			String id = "0";
+			if ( offer != null)
+				id = offer.getLink().toString();
+
+			logger.info("offer id = " + id);
+
+			URI uri = getResInfoURI(offer.getLink());
+			
+			logger.info("GetBookingInfo Request = "+uri);
+			
+			String response =  httpClient.sendGetRequest(uri);
+			logger.info("GetBookingInfo Response = "+response);
+			bookingResponse = JsonUtils.createResponseClassFromJson(response, BookingResponse.class);
+			return bookingResponse;
+			
+		} catch ( Exception e) {
+			logger.error(e.getMessage(),e);
+			throw new VehicleServiceException(e.getMessage());
+		}
+	}
+
+	public CredentialResponse loginTwoFactor(String smdCode) {
+		try {
+			
+			
+			String link = CLUBMOBIL_CREDENTIALS+ "/setTwoFactorCode";
+
+			URI uri = getServerURI(link);
+			
+			Credential credentialRequest = new Credential();
+			credentialRequest.setSmsSecurityCode(smdCode);
+			
+			String requestXml = JsonUtils.convertRequestToJsonString(credentialRequest);
+			logger.info(" setTwoFactorCode request = "+requestXml);
+
+			String response =  httpClient.startPostRequestAsJson(uri, requestXml);
+			logger.info("setTwoFactorCode response = "+response);
+			
+			return JsonUtils.createResponseClassFromJson(response, CredentialResponse.class);
+			
+		} catch ( IOException e) {
+			logger.error(e,e);
+		} catch (URISyntaxException e) {
+			logger.error(e,e);
+		}
+		finally {
+		}
+		
 		return null;
 	}
 

@@ -1,6 +1,10 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -8,6 +12,8 @@ import org.eclipse.swt.SWT;
 
 import com.bpcs.mdcars.json.protocol.CheckOutRequest;
 import com.bpcs.mdcars.json.protocol.DispositionListResponse;
+import com.bpcs.mdcars.model.CarRentalInfo;
+import com.bpcs.mdcars.model.Extra;
 import com.bpcs.mdcars.model.ServiceError;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
@@ -103,11 +109,33 @@ public class ClubMobilUtils {
 			checkOutRequest.setCheckInStationId(ClubMobilModelProvider.INSTANCE.selectedReservation.getCheckInStationId());
 
 			checkOutRequest.setReservationNo(ClubMobilModelProvider.INSTANCE.selectedReservation.getReservationNo());
+			checkOutRequest.setBookingId(ClubMobilModelProvider.INSTANCE.selectedReservation.getRentalId());
+			
+			CarRentalInfo carRentalInfo = new CarRentalInfo();
+			carRentalInfo.setCurrentMileage(BigDecimal.valueOf(15000));
+			carRentalInfo.setTankFillingProc(BigDecimal.valueOf(100));
+			checkOutRequest.setCarRentalInfo(carRentalInfo);
 			
 		}
+		checkOutRequest.setCustomer(ClubMobilModelProvider.INSTANCE.customer);
+		checkOutRequest.setDriver(ClubMobilModelProvider.INSTANCE.driver);
+
+		checkOutRequest.getBookingExtra().addAll(convert(ClubMobilModelProvider.INSTANCE.getSelectedExtras()));
 
 		return checkOutRequest;
 	}
 
-	
+	private static List<com.bpcs.mdcars.model.Extra> convert(List<com.dev.gis.connector.joi.protocol.Extra> list) {
+		if ( list != null && !list.isEmpty()) {
+			List<com.bpcs.mdcars.model.Extra> extras = new ArrayList<com.bpcs.mdcars.model.Extra>();
+			for ( com.dev.gis.connector.joi.protocol.Extra extra : list) {
+				com.bpcs.mdcars.model.Extra ex = new com.bpcs.mdcars.model.Extra();
+				ex.setId(extra.getId());
+				extras.add(ex);
+			}
+			return extras;
+		}
+		return null;
+	}
+
 }

@@ -1,5 +1,8 @@
 package com.dev.gis.app.taskmanager.clubMobilView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -17,14 +20,13 @@ import com.dev.gis.app.view.elements.ButtonControl;
 import com.dev.gis.app.view.elements.ObjectTextControl;
 import com.dev.gis.app.view.elements.OutputTextControls;
 import com.dev.gis.connector.api.AdacModelProvider;
-import com.dev.gis.connector.api.AdacVehicleHttpService;
 import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.CMVerifyRequest;
-import com.dev.gis.connector.joi.protocol.Customer;
 import com.dev.gis.connector.joi.protocol.Error;
+import com.dev.gis.connector.joi.protocol.Extra;
 
 public class ClubMobilBookingControl extends AdacBookingControl {
 	private static Logger logger = Logger.getLogger(ClubMobilBookingControl.class);
@@ -100,7 +102,7 @@ public class ClubMobilBookingControl extends AdacBookingControl {
 				
 				int paymentType = 8;  // paypal
 				
-				Customer customer = AdacVehicleHttpService.createCustomer(AdacModelProvider.INSTANCE.memberNo);
+				com.bpcs.mdcars.model.Customer customer = ClubMobilModelProvider.INSTANCE.customer;
 				
 				if ( "1".equals(AdacModelProvider.INSTANCE.paymentType))
 					paymentType = 1;   // KK
@@ -112,8 +114,11 @@ public class ClubMobilBookingControl extends AdacBookingControl {
 
 
 				BookingResponse response = service.bookOffers(
-						ClubMobilModelProvider.INSTANCE.getSelectedOffer(), bookingRequestId.getSelectedValue(),
-						ClubMobilModelProvider.INSTANCE.getSelectedExtras(),paymentType, customer , AdacModelProvider.INSTANCE.promotionCode);
+						ClubMobilModelProvider.INSTANCE.getSelectedOffer(), 
+						bookingRequestId.getSelectedValue(),
+						convert(ClubMobilModelProvider.INSTANCE.getSelectedExtras()),
+						paymentType, customer , 
+						AdacModelProvider.INSTANCE.promotionCode);
 				if ( response == null) {
 					bookingId.setValue("");
 					errorText.setValue(" Booking response is null");
@@ -144,7 +149,18 @@ public class ClubMobilBookingControl extends AdacBookingControl {
 		}
 
 	}
-
+	private static List<com.bpcs.mdcars.model.Extra> convert(List<Extra> selectedExtras) {
+		if ( selectedExtras != null && !selectedExtras.isEmpty()) {
+			List<com.bpcs.mdcars.model.Extra> extras = new ArrayList<com.bpcs.mdcars.model.Extra>();
+			for ( Extra extra : selectedExtras) {
+				com.bpcs.mdcars.model.Extra ex = new com.bpcs.mdcars.model.Extra();
+				ex.setId(extra.getId());
+				extras.add(ex);
+			}
+			return extras;
+		}
+		return null;
+	}
 
 
 	

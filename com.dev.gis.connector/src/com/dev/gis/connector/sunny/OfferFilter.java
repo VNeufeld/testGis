@@ -24,6 +24,8 @@ public class OfferFilter {
 	
 	private final Set<Long> inclusives = new HashSet<Long>();	
 	
+	private Long[] carTypes;
+	
 	public BigDecimal getMinPrice() {
 		return minPrice;
 	}
@@ -99,6 +101,12 @@ public class OfferFilter {
 	}
 	public void setTransferCategories(Long[] transferCategories) {
 		this.transferCategories = transferCategories;
+	}
+	public Long[] getCarTypes() {
+		return carTypes;
+	}
+	public void setCarTypes(Long[] carTypes) {
+		this.carTypes = carTypes;
 	}
 	
 
