@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.bpcs.mdcars.model.Address;
+import com.bpcs.mdcars.model.CarPoolInfo;
 import com.bpcs.mdcars.soap.protocol.CustomerRequirements;
 
 public class CMBookingRequest extends BasicProtocol {
@@ -30,6 +31,7 @@ public class CMBookingRequest extends BasicProtocol {
 
 	private List<com.bpcs.mdcars.model.Extra> extras;
 
+	private CarPoolInfo carPoolInfo;
 
 	@XmlElement(required = false)
 	public Address getDropDownService() {
@@ -128,6 +130,16 @@ public class CMBookingRequest extends BasicProtocol {
 
 	public void setExtras(List<com.bpcs.mdcars.model.Extra> extras) {
 		this.extras = extras;
+	}
+
+
+	public CarPoolInfo getCarPoolInfo() {
+		return carPoolInfo;
+	}
+
+
+	public void setCarPoolInfo(CarPoolInfo carPoolInfo) {
+		this.carPoolInfo = carPoolInfo;
 	}
 
 	

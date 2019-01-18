@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import com.bpcs.mdcars.model.CarPoolInfo;
 import com.bpcs.mdcars.soap.protocol.CustomerRequirements;
 import com.dev.gis.connector.joi.protocol.Extra;
 
@@ -27,6 +28,7 @@ public class CMVerifyRequest extends BasicProtocol {
 
 	private List<com.bpcs.mdcars.model.Extra> extras;
 
+	private CarPoolInfo carPoolInfo;
 
 
 	@XmlElement(required = false)
@@ -95,6 +97,14 @@ public class CMVerifyRequest extends BasicProtocol {
 
 	public void setDriver(com.bpcs.mdcars.model.Customer driver) {
 		this.driver = driver;
+	}
+
+	public CarPoolInfo getCarPoolInfo() {
+		return carPoolInfo;
+	}
+
+	public void setCarPoolInfo(CarPoolInfo carPoolInfo) {
+		this.carPoolInfo = carPoolInfo;
 	}
 
 

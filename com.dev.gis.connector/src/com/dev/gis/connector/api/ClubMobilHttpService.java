@@ -41,6 +41,7 @@ import com.bpcs.mdcars.json.protocol.SetCMPaymentTransactionRequest;
 import com.bpcs.mdcars.json.protocol.UploadRequest;
 import com.bpcs.mdcars.json.protocol.UploadResponse;
 import com.bpcs.mdcars.model.Administration;
+import com.bpcs.mdcars.model.CarPoolInfo;
 import com.bpcs.mdcars.model.Clerk;
 import com.bpcs.mdcars.model.Credential;
 import com.bpcs.mdcars.model.ReservationDetails;
@@ -498,9 +499,26 @@ public class ClubMobilHttpService {
 			customerRequirements.setFuelType(2);  // Diesel
 			customerRequirements.setTowedLoad(1);
 			
+			
+			
+			
 			bookingRequest.setCustomerRequirements(customerRequirements);
 			
 			bookingRequest.setCustomer(customer);
+			
+			
+			CarPoolInfo carPoolInfo = new CarPoolInfo();
+			
+			carPoolInfo.setDepartmentId(6);
+			carPoolInfo.setCostCenterId("10044140");
+			carPoolInfo.setRentalDestination("Hamburg");
+			carPoolInfo.setRentalPassengerCount(2);
+			carPoolInfo.setRentalReason("Seminar");
+			carPoolInfo.setSuperiorDepartmentCode("abc");
+			carPoolInfo.setSuperiorFirstName("Helmut");
+			carPoolInfo.setSuperiorLastName("Müller");
+			
+			bookingRequest.setCarPoolInfo(carPoolInfo);
 
 			String request = JsonUtils.convertRequestToJsonString(bookingRequest);
 			logger.info("book Request = "+request);

@@ -176,7 +176,7 @@ public class AddDefectDialog extends Dialog {
 				MoneyAmount ma = new MoneyAmount(sTotalAmount, "EUR");
 				info.setTotalAmount(ma);
 				
-				info.setDmpDescription("Test DMP Description BPCS Tester ");
+				info.setDescription("Test Description BPCS Tester ");
 				
 				DefectCategory defectCategory = new DefectCategory();
 				defectCategory.setId(1);
