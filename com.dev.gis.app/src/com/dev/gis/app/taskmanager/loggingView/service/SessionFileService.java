@@ -28,6 +28,7 @@ class SessionFileService implements Callable<List<LogEntry>> {
 	final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
 	final String ADAC_DATE_TIME_SHORT_FORMAT = "dd.MM.yyyy HH:mm:ss";
 	final String DATE_TIME_FORMAT_SUNNY = "yyyy-MM-dd HH:mm:ss,SSS";
+	final String WEBJOI_TIME_FORMAT = "HH:mm:ss,SSS";
 	
 
 	private final static Logger logger = Logger
@@ -234,7 +235,14 @@ class SessionFileService implements Callable<List<LogEntry>> {
 	}
 
 	protected Date getTimeString(String s) {
-		if (s == null || s.length() <= 25) 
+		if (s == null ) 
+			return null;
+		
+		Date date1 = checkWebJoiTimeFormat(s);
+		if ( date1 != null)
+			return date1; 
+
+		if ( s.length() < 25) 
 			return null;
 		
 		Date date = checkAdacFormat(s);
@@ -244,6 +252,23 @@ class SessionFileService implements Callable<List<LogEntry>> {
 		return date;
 
 	}
+	private Date checkWebJoiTimeFormat(String s) {
+		try {
+			if ( s.length() < 12)
+				return null;
+			String time = s.substring(0, 12);
+			if (time.charAt(2) == ':' && time.charAt(5) == ':') {
+				SimpleDateFormat stf = new SimpleDateFormat(WEBJOI_TIME_FORMAT);
+				Date d = stf.parse(time);
+				return d;
+			}
+		}
+		catch(Exception err) {
+			
+		}
+		return null;
+	}
+
 	protected Date checkAdacFormat(String s) {
 		Date date = checkAdacLongFormat(s);
 		if ( date != null)
