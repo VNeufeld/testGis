@@ -16,6 +16,7 @@ import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LogEntryTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
+import com.dev.gis.app.taskmanager.loggingView.StopButtonListener;
 
 public class SearchThreadService implements Callable<String> {
 
@@ -79,6 +80,7 @@ public class SearchThreadService implements Callable<String> {
 		logger.info("start splitter session " + searchText);
 		searchSession();
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
+		StopButtonListener.terminate = false;
 		return null;
 	}
 

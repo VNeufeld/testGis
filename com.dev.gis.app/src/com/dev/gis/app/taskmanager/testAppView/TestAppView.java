@@ -12,6 +12,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
@@ -60,15 +61,15 @@ public class TestAppView extends RentCarsAppView {
 
 	private OutputTextControls pageNo = null;
 	
-	
+
 	
 	@Override
 	protected void createBasicControls(final Group groupStamp) {
 		
 		Composite cc = createComposite(groupStamp, 3, -1, true);
 		
-		new AdacServerTextControl(cc);
-		
+		//new AdacServerTextControl(cc);
+		new AdacDropDownTextControl(cc);
 		new AdacAuthorizationCheckBox(cc,"Authorization");
 		
 		Composite ccl = createComposite(groupStamp, 6, -1, true);

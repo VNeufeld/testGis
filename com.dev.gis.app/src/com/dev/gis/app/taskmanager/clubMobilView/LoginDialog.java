@@ -27,6 +27,8 @@ import com.dev.gis.connector.api.ClubMobilHttpService;
 import com.dev.gis.connector.api.ClubMobilModelProvider;
 import com.dev.gis.connector.api.JoiHttpServiceFactory;
 import com.dev.gis.connector.ext.BusinessException;
+import com.dev.gis.connector.joi.protocol.CredentialLocal;
+import com.dev.gis.connector.joi.protocol.CredentialResponseLocal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LoginDialog extends Dialog {
@@ -113,12 +115,12 @@ public class LoginDialog extends Dialog {
 				
 				//pwd = encrypt(pwd);
 
-				Credential credential = new Credential(); 
+				CredentialLocal credential = new CredentialLocal(); 
 				credential.setUser(user);
 				credential.setPwd(pwd);
 				
 						
-				CredentialResponse credentialResponse = service.login(credential);
+				CredentialResponseLocal credentialResponse =service.login(credential);
 				if ( credentialResponse.getClerk() == null) {
 					if ( !credentialResponse.getErrors().isEmpty())
 						showErrors(credentialResponse.getErrors().get(0).getErrorText());

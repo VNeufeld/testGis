@@ -56,44 +56,45 @@ public class AdacCreditCardControl extends CreditCardControl {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
-			
-			try {
-				bsUrl.setValue("running adac");
-				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
-				AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
-
-				String bookingRequestId = AdacModelProvider.INSTANCE.getBookingRequestId();
-
-				URI bsuri = service.getBSPayPageUrl(bookingRequestId);
-				if ( bsuri != null) {
-					bsUrl.setValue(bsuri.toString());
-					
-					BSCreditCardDialog mpd = new BSCreditCardDialog(shell, bsuri);
-					if (mpd.open() == Dialog.OK) {
-						VerifyCreditCardPaymentResponse response = service.getBSPayPageResult(bookingRequestId);
-						if ( response != null && response.getCard() != null) {
-							CreditCard cc = response.getCard();
-							String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
-							bsToken.setValue(token);
-							
-							String card = cc.getCardNumber() + " "+cc.getOwnerName();
-							bsCrediCard.setValue(card);
-							
-						}
-						else
-							showErrors(new com.dev.gis.connector.sunny.Error(1,1," Error in PayPage Verify "));
-					}
-					
-				}
-				else
-					showErrors(new com.dev.gis.connector.sunny.Error(1,1," Error in PayPage GetUrl "));
-			}
-			catch(Exception err) {
-				bsToken.setValue("");
-				bsCrediCard.setValue("");
-				showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
-				
-			}
+			PayOneDialog pod = new PayOneDialog(shell);
+			pod.open();
+//			try {
+//				bsUrl.setValue("running adac");
+//				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
+//				AdacVehicleHttpService service = serviceFactory.getAdacVehicleJoiService();
+//
+//				String bookingRequestId = AdacModelProvider.INSTANCE.getBookingRequestId();
+//
+//				URI bsuri = service.getBSPayPageUrl(bookingRequestId);
+//				if ( bsuri != null) {
+//					bsUrl.setValue(bsuri.toString());
+//					
+//					BSCreditCardDialog mpd = new BSCreditCardDialog(shell, bsuri);
+//					if (mpd.open() == Dialog.OK) {
+//						VerifyCreditCardPaymentResponse response = service.getBSPayPageResult(bookingRequestId);
+//						if ( response != null && response.getCard() != null) {
+//							CreditCard cc = response.getCard();
+//							String token = cc.getCardAliasNo() + " ( "+cc.getCardTresorNo() + " )";
+//							bsToken.setValue(token);
+//							
+//							String card = cc.getCardNumber() + " "+cc.getOwnerName();
+//							bsCrediCard.setValue(card);
+//							
+//						}
+//						else
+//							showErrors(new com.dev.gis.connector.sunny.Error(1,1," Error in PayPage Verify "));
+//					}
+//					
+//				}
+//				else
+//					showErrors(new com.dev.gis.connector.sunny.Error(1,1," Error in PayPage GetUrl "));
+//			}
+//			catch(Exception err) {
+//				bsToken.setValue("");
+//				bsCrediCard.setValue("");
+//				showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
+//				
+//			}
 
 		}
 

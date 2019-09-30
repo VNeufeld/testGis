@@ -2,6 +2,9 @@ package com.dev.gis.app.view.elements;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -39,8 +42,14 @@ public class OutputTextControls extends BasicControl {
 		super();
 		this.parent = parent;
 
-		new Label(parent, SWT.NONE).setText(label);
-
+		Label l =new Label(parent, SWT.RIGHT|SWT.BORDER);
+		//l.setEditable(false);
+		l.setText(label);
+	
+		//c.dispose();
+		   GridData labelGridData = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+		    labelGridData.widthHint = 160;
+		    l.setLayoutData(labelGridData);
 		text = new Text(this.parent, SWT.BORDER | SWT.SINGLE);
 
 		if (size < 0) {

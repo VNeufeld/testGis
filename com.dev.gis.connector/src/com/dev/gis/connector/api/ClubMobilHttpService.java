@@ -53,6 +53,8 @@ import com.dev.gis.connector.joi.protocol.Address;
 import com.dev.gis.connector.joi.protocol.BookingResponse;
 import com.dev.gis.connector.joi.protocol.CMBookingRequest;
 import com.dev.gis.connector.joi.protocol.CMVerifyRequest;
+import com.dev.gis.connector.joi.protocol.CredentialLocal;
+import com.dev.gis.connector.joi.protocol.CredentialResponseLocal;
 import com.dev.gis.connector.joi.protocol.Customer;
 import com.dev.gis.connector.joi.protocol.Extra;
 import com.dev.gis.connector.joi.protocol.ExtraResponse;
@@ -787,7 +789,7 @@ public class ClubMobilHttpService {
 		return null;
 	}
 
-	public CredentialResponse login(Credential credentialRequest) {
+	public CredentialResponseLocal login(CredentialLocal credentialRequest) {
 		boolean auth = ClubMobilModelProvider.INSTANCE.authorization;
 
 		try {
@@ -795,11 +797,11 @@ public class ClubMobilHttpService {
 			boolean test = false;
 			
 			if ( test) {
-				CredentialResponse response = new CredentialResponse();
+				CredentialResponseLocal response = new CredentialResponseLocal();
 				Clerk clerk = new Clerk();
 				response.setClerk(clerk);
 				response.setStatus(1);
-				Credential credential = new Credential();
+				CredentialLocal credential = new CredentialLocal();
 				credential.setReset(false);
 				response.setCredential(credential);
 				clerk.setName("Müller");
@@ -818,11 +820,11 @@ public class ClubMobilHttpService {
 
 			URI uri = getServerURI(link);
 			
-			CredentialRequest request = new CredentialRequest();
+		//	CredentialRequest request = new CredentialRequest();
 			Administration admin = new Administration();
 			admin.setCalledFrom(9);
-			request.setAdministration(admin);
-			request.setCredential(credentialRequest);
+		//	request.setAdministration(admin);
+		//	request.setCredential(credentialRequest);
 			credentialRequest.setCalledFrom(9);
 
 			
@@ -833,7 +835,7 @@ public class ClubMobilHttpService {
 			logger.info("login response = "+response);
 			
 			
-			return JsonUtils.createResponseClassFromJson(response, CredentialResponse.class);
+			return JsonUtils.createResponseClassFromJson(response, CredentialResponseLocal.class);
 			
 		} catch ( IOException e) {
 			logger.error(e,e);
@@ -1711,7 +1713,7 @@ public class ClubMobilHttpService {
 		}
 	}
 
-	public CredentialResponse loginTwoFactor(String smdCode) {
+	public CredentialResponseLocal loginTwoFactor(String smdCode) {
 		try {
 			
 			
@@ -1728,7 +1730,7 @@ public class ClubMobilHttpService {
 			String response =  httpClient.startPostRequestAsJson(uri, requestXml);
 			logger.info("setTwoFactorCode response = "+response);
 			
-			return JsonUtils.createResponseClassFromJson(response, CredentialResponse.class);
+			return JsonUtils.createResponseClassFromJson(response, CredentialResponseLocal.class);
 			
 		} catch ( IOException e) {
 			logger.error(e,e);

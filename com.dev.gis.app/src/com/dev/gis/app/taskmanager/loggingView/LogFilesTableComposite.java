@@ -27,7 +27,7 @@ public class LogFilesTableComposite extends BasicControl{
 		gdComposite2.grabExcessVerticalSpace = false;
 		gdComposite2.horizontalAlignment = SWT.FILL;
 		gdComposite2.verticalAlignment = SWT.FILL;
-
+		gdComposite2.horizontalSpan=2;
 
 		Composite composite = new Composite(parent, SWT.RIGHT);
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(composite);
@@ -55,7 +55,6 @@ public class LogFilesTableComposite extends BasicControl{
 
 		Composite compositeFileSearch = new Composite(groupTable, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(compositeFileSearch);
-
 		GridData gridData2 = new GridData();
 		gridData2.horizontalAlignment = GridData.FILL;
 		gridData2.horizontalSpan = 2;
@@ -79,6 +78,7 @@ public class LogFilesTableComposite extends BasicControl{
 		compositeTable.setLayoutData(gridData);
 
 		logFilesTable = new LogFilesTable(compositeTable, partSite);
+	
 	}
 
 	public void update() {

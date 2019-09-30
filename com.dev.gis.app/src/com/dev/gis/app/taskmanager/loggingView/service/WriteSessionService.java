@@ -16,6 +16,7 @@ import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LogEntryTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
+import com.dev.gis.app.taskmanager.loggingView.StopButtonListener;
 
 public class WriteSessionService implements Callable<String> {
 
@@ -87,6 +88,7 @@ public class WriteSessionService implements Callable<String> {
 		long start = System.currentTimeMillis();
 		logger.info("start splitter session " + sessionId);
 		searchSession();
+		StopButtonListener.terminate = false;
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
 		return null;
 	}

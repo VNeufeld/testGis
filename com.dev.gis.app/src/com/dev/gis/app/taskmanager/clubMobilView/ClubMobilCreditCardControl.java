@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import com.dev.gis.app.taskmanager.testAppView.AdacCreditCardControl;
+import com.dev.gis.app.taskmanager.testAppView.PayOneDialog;
 import com.dev.gis.app.view.dialogs.BSCreditCardDialog;
 import com.dev.gis.app.view.elements.CreditCardControl;
 import com.dev.gis.connector.api.AdacModelProvider;
@@ -47,8 +48,8 @@ public class ClubMobilCreditCardControl extends AdacCreditCardControl {
 
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
-			
-			try {
+			PayOneDialog pod = new PayOneDialog(shell);
+		/*	try {
 				bsUrl.setValue("running adac");
 				
 				JoiHttpServiceFactory serviceFactory = new JoiHttpServiceFactory();
@@ -87,7 +88,7 @@ public class ClubMobilCreditCardControl extends AdacCreditCardControl {
 				bsCrediCard.setValue("");
 				showErrors(new com.dev.gis.connector.sunny.Error(1,1, err.getMessage()));
 				
-			}
+			}*/
 
 		}
 

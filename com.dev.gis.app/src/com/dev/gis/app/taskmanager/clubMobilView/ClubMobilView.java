@@ -58,7 +58,8 @@ public class ClubMobilView extends RentCarsAppView {
 	protected void createBasicControls(final Group groupStamp) {
 		
 		Composite cc = createComposite(groupStamp, 3, -1, true);
-		new ClubMobilServerTextControl(cc);
+		new ClubMobilDropDownControl(cc);
+	//	new ClubMobilServerTextControl(cc);
 		new ClubMobilAuthorizationCheckBox(cc,"Authorization");
 
 		new ClubMobilLoginControl(groupStamp);
@@ -91,14 +92,14 @@ public class ClubMobilView extends RentCarsAppView {
 
 		final Group groupLocation = createGroupSpannAll(groupStamp, "Location",4);
 
-		createLocationRadioButton(groupLocation);
+	//	createLocationRadioButton(groupLocation);
 
-		AdacCityLocationSearch.createPickupCityLocationSearch(groupLocation); 
+		//AdacCityLocationSearch.createPickupCityLocationSearch(groupLocation); 
 
 		//AdacAirportLocationSearch.createPickupAirportLocationSearch(groupLocation);
 
 		
-		AdacCityLocationSearch.createDropoffCityLocationSearch(groupLocation); 
+		//AdacCityLocationSearch.createDropoffCityLocationSearch(groupLocation); 
 
 		//AdacAirportLocationSearch.createDropoffAirportLocationSearch(groupLocation);
 		
