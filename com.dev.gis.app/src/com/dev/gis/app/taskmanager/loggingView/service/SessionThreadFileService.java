@@ -1,6 +1,7 @@
 package com.dev.gis.app.taskmanager.loggingView.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,7 +47,7 @@ class SessionThreadFileService extends SessionFileService {
 
 	}
 
-	private List<LogEntry> readLogEntries(File file) {
+	private List<LogEntry> readLogEntries(File file) throws IOException {
 		List<LogEntry> entries = new ArrayList<LogEntry>();
 		long count = 0;
 
