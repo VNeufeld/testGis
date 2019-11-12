@@ -21,6 +21,7 @@ public class BasicControl {
 		final IEclipsePreferences preferences = ConfigurationScope.INSTANCE
 				.getNode(PREFERENCE_PATH);
 		String value = preferences.get(property,"");
+		
 		return value;
 
 	}

@@ -7,12 +7,15 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * @author bre
  *         The class provides the minimal content of a response in the JOI
  *         context.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @XmlTransient
 public class Response extends BasicProtocol {
 
@@ -21,7 +24,7 @@ public class Response extends BasicProtocol {
 	private long requestId;
 	
 	private String sessionId;
-
+	
 
 	private List<Error> errors = new ArrayList<>();
 

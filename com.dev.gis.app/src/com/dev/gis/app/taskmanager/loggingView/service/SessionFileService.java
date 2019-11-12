@@ -23,8 +23,11 @@ import com.dev.gis.app.taskmanager.loggingView.LogEntryTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.LoggingAppView;
 import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
+import com.dev.gis.app.taskmanager.loggingView.StopButtonListener;
 
-class SessionFileService implements Callable<List<LogEntry>> {
+public class SessionFileService implements Callable<List<LogEntry>> {
+	
+	
 	
 	final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
 	final String ADAC_DATE_TIME_SHORT_FORMAT = "dd.MM.yyyy HH:mm:ss";
@@ -52,7 +55,9 @@ class SessionFileService implements Callable<List<LogEntry>> {
 
 	@Override
 	public List<LogEntry> call() throws Exception {
-		
+		if(StopButtonListener.terminate) {
+			return new ArrayList<LogEntry>();
+		}
 		if ( !LogEntryModel.getInstance().isProcessRunning())
 		{
 			return  new ArrayList<LogEntry>();

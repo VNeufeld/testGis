@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -34,6 +35,7 @@ public class LoggingAppView extends TaskViewAbstract {
 	
 	SearchBookingIdTextControl searchBookingIdTextControl;
 	
+	ButtonControl stopButtonElement;
 	
 	private SearchSessionIdTextControl searchSessionIdTextControl;
 	
@@ -42,7 +44,7 @@ public class LoggingAppView extends TaskViewAbstract {
 	public void createPartControl(final Composite parent) {
 		
 		final Composite group = new Composite(parent, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(false).applyTo(group);
+		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(false).applyTo(group);
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, true).applyTo(group);
 		
 		Composite composite1 = createCompositeRowLeft(group);
@@ -61,7 +63,8 @@ public class LoggingAppView extends TaskViewAbstract {
 
 		progressBarElement = new ProgressBarElement();
 		progressBarElement.create(group);
-
+		
+		stopButtonElement = new ButtonControl(group, "StopButton", new StopButtonListener() );
 		createOutputText(group);
 
 		
@@ -124,7 +127,7 @@ public class LoggingAppView extends TaskViewAbstract {
 
 		Composite composite = new Composite(group, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(false).applyTo(composite);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(2, 1).applyTo(composite);
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.FILL).grab(true, false).span(3, 1).applyTo(composite);
 
 		GridData gdMultiText = new GridData();
 		gdMultiText.grabExcessHorizontalSpace = true;

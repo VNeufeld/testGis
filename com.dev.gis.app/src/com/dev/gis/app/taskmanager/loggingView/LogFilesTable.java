@@ -81,8 +81,9 @@ public class LogFilesTable {
 		gridData.horizontalAlignment = GridData.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
+		gridData.horizontalSpan = 3;
 		viewer.getControl().setLayoutData(gridData);
-		
+	
 //		TableColumnLayout tableLayout = new TableColumnLayout();
 //		parent.setLayout(tableLayout);
 

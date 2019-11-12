@@ -16,6 +16,7 @@ import com.dev.gis.app.task.model.FileNameEntryModel;
 import com.dev.gis.app.task.model.LogEntryModel;
 import com.dev.gis.app.taskmanager.loggingView.LogBookingEntryView;
 import com.dev.gis.app.taskmanager.loggingView.LogViewUpdater;
+import com.dev.gis.app.taskmanager.loggingView.StopButtonListener;
 
 public class FindBookingService implements Callable<String> {
 
@@ -97,6 +98,7 @@ public class FindBookingService implements Callable<String> {
 		logger.info("start searching booking " + bookingId);
 		searchBooking();
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
+		StopButtonListener.terminate = false;
 		return null;
 	}
 

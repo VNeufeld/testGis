@@ -51,7 +51,9 @@ public class SunnyCarsAppView extends RentCarsAppView {
 	protected void createBasicControls(Group groupStamp) {
 		super.createBasicControls(groupStamp);
 		
-		new ServerTextControl(groupStamp);
+		new SunnyDropDownControl(groupStamp); 
+		
+		//new ServerTextControl(groupStamp);
 		
 		new AgencyNoTextControl(groupStamp);
 		

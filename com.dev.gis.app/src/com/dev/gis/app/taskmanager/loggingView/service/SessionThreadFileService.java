@@ -13,16 +13,18 @@ import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.dev.gis.app.task.model.LogEntryModel;
+import com.dev.gis.app.taskmanager.loggingView.LogEntryTableUpdater;
+import com.dev.gis.app.taskmanager.loggingView.LogFileTableUpdater;
 import com.dev.gis.app.taskmanager.loggingView.ProgressBarElement;
+import com.dev.gis.app.taskmanager.loggingView.StopButtonListener;
 
 class SessionThreadFileService extends SessionFileService {
-	
+
 	final String DATE_TIME_FORMAT = "dd.MM.yyyy HH:mm:ss,SSS";
 	final String DATE_TIME_FORMAT_SUNNY = "yyyy-MM-dd HH:mm:ss,SSS";
-	
 
-	private final static Logger logger = Logger
-			.getLogger(SessionThreadFileService.class);
+	private final static Logger logger = Logger.getLogger(SessionThreadFileService.class);
 
 	private final String threadText;
 
@@ -34,13 +36,28 @@ class SessionThreadFileService extends SessionFileService {
 
 	@Override
 	public List<LogEntry> call() throws Exception {
+		if (StopButtonListener.terminate) {
+			return new ArrayList<LogEntry>();
+		}
+		if ( !LogEntryModel.getInstance().isProcessRunning())
+		{
+			return  new ArrayList<LogEntry>();
+		}
+		
 		long start = System.currentTimeMillis();
-		logger.info("start search thread session " + sessionId + "/"+ threadText+" in file "
-				+ logFile.getAbsolutePath() + ". File size =  "+ logFile.length());
+		logger.info("start search thread session " + sessionId + "/" + threadText + " in file "
+				+ logFile.getAbsolutePath() + ". File size =  " + logFile.length());
+
+		LogFileTableUpdater.updateFileStatus(logFile,"running");					
 		
-		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size "+logFile.length());
-		
+		ProgressBarElement.updateFileName("search in " + logFile.getName() + ".  File size " + logFile.length());
+
 		List<LogEntry> logEntries = readLogEntries(logFile);
+		
+		LogEntryTableUpdater.showResult(logEntries, logEntryView);
+		
+		LogFileTableUpdater.updateFileStatus(logFile,"completed");					
+		
 
 		logger.info("end splitt in  " + (System.currentTimeMillis() - start) + " ms.");
 		return logEntries;
@@ -50,6 +67,9 @@ class SessionThreadFileService extends SessionFileService {
 	private List<LogEntry> readLogEntries(File file) throws IOException {
 		List<LogEntry> entries = new ArrayList<LogEntry>();
 		long count = 0;
+		long fileSize = file.length();
+
+		long readedSize = 0;
 
 		LineIterator li = null;
 		try {
@@ -59,8 +79,16 @@ class SessionThreadFileService extends SessionFileService {
 			boolean searchNextLinewithTime = false;
 			while (li.hasNext()) {
 				String s = li.nextLine();
+				
+				readedSize = readedSize + s.length();
+				if (++count % 1000 == 0) {
+					ProgressBarElement.updateProgressBar(readedSize, fileSize);
+					if (!LogEntryModel.getInstance().isProcessRunning())
+						break;
 
-				boolean sessionFlagFound = StringUtils.containsIgnoreCase(s,sessionId) && StringUtils.containsIgnoreCase(s,threadText);
+				}
+				boolean sessionFlagFound = StringUtils.containsIgnoreCase(s, sessionId)
+						&& StringUtils.containsIgnoreCase(s, threadText);
 				Date time = getTimeString(s);
 
 				if (firstSessionIdNotFound) {
@@ -69,21 +97,19 @@ class SessionThreadFileService extends SessionFileService {
 						if (time == null) {
 							entry = tryFoundPreviousEntryWithDate();
 						} else {
-							entry = new LogEntry(time, s,index);
+							entry = new LogEntry(time, s, index);
 						}
 						firstSessionIdNotFound = false;
 						searchNextLinewithTime = true;
 					}
 				} else {
 					if (searchNextLinewithTime && time == null) {
-						if ( entry != null)
+						if (entry != null)
 							entry.addString(s);
-					}
-					else if (time != null) {
+					} else if (time != null) {
 
 						if (entry != null) // completed prev. entry
-								entries.add(entry);
-						
+							entries.add(entry);
 
 						if (sessionFlagFound) { // begin new entry
 							entry = new LogEntry(time, s, index);
@@ -100,13 +126,13 @@ class SessionThreadFileService extends SessionFileService {
 
 			}
 			if (entry != null)
-				if ( matchSession(entry))
+				if (matchSession(entry))
 					entries.add(entry);
 
 		} catch (Exception e2) {
 			logger.error(e2.getMessage(), e2);
 		} finally {
-			if ( li != null)
+			if (li != null)
 				li.close();
 		}
 
@@ -116,17 +142,16 @@ class SessionThreadFileService extends SessionFileService {
 	}
 
 	private boolean matchSession(LogEntry entry) {
-		for ( String s: entry.getEntry()) {
-			if ( s.contains("sessionId=\"")){
+		for (String s : entry.getEntry()) {
+			if (s.contains("sessionId=\"")) {
 				String ssid = StringUtils.substringBetween(s, "sessionId=\"", "\"");
-				if ( ssid != null && ssid.equals(sessionId)) 
+				if (ssid != null && ssid.equals(sessionId))
 					return true;
 				return false;
 			}
-			
+
 		}
 		return true;
 	}
 
-	
 }

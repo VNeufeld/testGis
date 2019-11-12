@@ -23,6 +23,7 @@ public class GetStationService implements IStationService{
 			StationModel stationModel = new StationModel(station.getId(), station.getIdentifier());
 			
 			stationModel.setSupplier(station.getSupplierId() + ":"+ station.getSupplierGroupId());
+			stationModel.setSupplierId(station.getSupplierId());
 			stations.add(stationModel);
 		}
 		

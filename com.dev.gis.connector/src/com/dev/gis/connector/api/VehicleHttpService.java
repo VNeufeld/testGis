@@ -10,9 +10,16 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Text;
 
+
 import com.dev.gis.connector.GisHttpClient;
 import com.dev.gis.connector.JsonUtils;
+import com.dev.gis.connector.ext.BusinessException;
+import com.dev.gis.connector.joi.protocol.Administration;
+import com.dev.gis.connector.joi.protocol.PayOnePaymentResponse;
+import com.dev.gis.connector.joi.protocol.PaymentPayOne;
+import com.dev.gis.connector.joi.protocol.PaymentPayOneRequest;
 import com.dev.gis.connector.sunny.Address;
+import com.dev.gis.connector.sunny.Agency;
 import com.dev.gis.connector.sunny.BookingRequest;
 import com.dev.gis.connector.sunny.BookingResponse;
 import com.dev.gis.connector.sunny.Customer;
@@ -48,7 +55,7 @@ public class VehicleHttpService {
 	public static String SUNNY_BOOKING_PAYMENT = "/booking/payment/put";
 	public static String SUNNY_PUT_EXTRAS = "/request/extras/put";
 	public static String SUNNY_BOOKING_CUSTOMER = "/booking/customer/put";
-
+	public static String PayOne_Payment = "/booking/verifyCreditCardPayone";
 	
 	private static String varPayerId = "G53SL5V9APQV2";
 	
@@ -81,7 +88,12 @@ public class VehicleHttpService {
 				param = param + "&sessionCode="+sessionId;
 					
 			URI uri = getServerURI(param);
-
+			
+//			Agency agency = vehicleRequest.getAgency();
+//			agency.setAgencyId(Long.parseLong(agency.getAgencyNo()));
+//			agency.setAgencyNo("");
+//			vehicleRequest.setAgency(agency);
+			
 			String request = JsonUtils.convertRequestToJsonString(vehicleRequest);
 			logger.info("http client "+httpClient+ " request = "+request);
 			
@@ -334,7 +346,55 @@ public class VehicleHttpService {
 		return null;
 
 	}
-
+	public PayOnePaymentResponse getPayOnePaymentResult(PaymentPayOne ppo) {
+		PayOnePaymentResponse popr = null ;
+		PaymentPayOneRequest ppor = new PaymentPayOneRequest();
+		ppor.setBookingId(ppo.getBookingRequestId());
+		ppor.setCardExpireDate(ppo.getCardExpire());
+		ppor.setCardOwner(ppo.getOwner());
+		ppor.setCardType(ppo.getCardTypeString());
+		ppor.setPseudoCardPan(ppo.getpCardPan());
+		ppor.setTruncatedCardPan(ppo.gettCardPan());
+		Administration admin = new Administration();
+		String language = "de-DE";
+		admin.setLanguage(language);
+		admin.setSalesChannel(3);
+		admin.setCalledFrom(15);
+		admin.setBroker(false);
+		ppor.setAdmin(admin);
+		try {
+			String request= JsonUtils.convertRequestToJsonString(ppor);
+			logger.info("PayoneRequest: " + request);
+			URI uri = new URI(AdacModelProvider.INSTANCE.serverUrl+PayOne_Payment);
+			String response = httpClient.startPostRequestAsJson(uri, request);
+			logger.info("PayoneResponse: " + response);
+			 popr = JsonUtils.createResponseClassFromJson(response, PayOnePaymentResponse.class);
+			return popr;
+		} catch (IOException | URISyntaxException | BusinessException e) {
+			// TODO Auto-generated catch block
+			if(e instanceof BusinessException) {
+				popr = new PayOnePaymentResponse();
+				logger.info(e.getMessage());
+				com.dev.gis.connector.joi.protocol.Error error = null;
+				try {
+					 error = JsonUtils.createResponseClassFromJson(e.getMessage(), com.dev.gis.connector.joi.protocol.Error.class);
+					
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				com.dev.gis.connector.joi.protocol.Error[] errors = new com.dev.gis.connector.joi.protocol.Error[1];
+				errors[0] = error;
+				popr.setErrors(errors);
+				return popr;
+				
+			}
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+	}
 	public VerifyCreditCardPaymentResponse getPayPageResult() {
 		try {
 			boolean dummy = TaskProperties.getTaskProperties().isUseDummy();

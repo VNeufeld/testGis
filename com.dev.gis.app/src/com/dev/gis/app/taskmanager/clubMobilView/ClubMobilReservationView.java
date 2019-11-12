@@ -55,7 +55,8 @@ public class ClubMobilReservationView extends RentCarsAppView {
 	protected void createBasicControls(final Group groupStamp) {
 		
 		Composite cc = createComposite(groupStamp, 3, -1, true);
-		new ClubMobilServerTextControl(cc);
+		new ClubMobilDropDownControl(cc);
+		//new ClubMobilServerTextControl(cc);
 		new ClubMobilAuthorizationCheckBox(cc,"Authorization");
 
 		new ClubMobilLoginControl(groupStamp);

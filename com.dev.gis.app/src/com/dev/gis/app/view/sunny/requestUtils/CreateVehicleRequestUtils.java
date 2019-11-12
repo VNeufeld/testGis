@@ -30,6 +30,7 @@ public class CreateVehicleRequestUtils {
 		
 		Agency agency = new Agency();
 		agency.setAgencyNo(SunnyModelProvider.INSTANCE.agencyNo);
+		agency.setAgencyId(Long.parseLong(agency.getAgencyNo()));
 		request.setAgency(agency);
 		return request;
 		
