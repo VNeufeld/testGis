@@ -19,15 +19,23 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
@@ -44,10 +52,25 @@ public class GisHttpClient {
 	protected Logger logger = Logger.getLogger(Class.class);
 	
 	private final static String CHARSET_UTF8 = "UTF-8";
-	private DefaultHttpClient httpclient = new DefaultHttpClient();
-	private BasicHttpContext localContext = new BasicHttpContext();
+	
+	int timeout = 10000;
+	RequestConfig requestConfig = RequestConfig.custom()
+			.setConnectTimeout(timeout)
+			.setConnectionRequestTimeout(timeout)
+			.setSocketTimeout(timeout)
+			.setCookieSpec(CookieSpecs.STANDARD)
+			.build();
+
+	CloseableHttpClient httpclient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+
+	HttpClientContext localContext = createContext();
+
+	//private CloseableHttpClient httpclient = HttpClients.createDefault();
+	
 	// Create a response handler
 	private ResponseHandler<String> responseHandler = new BasicResponseHandler();
+	
+	private String AWSALB_Cookie = null;
 	
 	private String savedSessionId = null;
 	
@@ -99,7 +122,11 @@ public class GisHttpClient {
 			
 			createSecurityHashForGet( httpget);
 			
-			
+			CookieStore cookieStore = localContext.getCookieStore();
+			List<Cookie> cookies = cookieStore.getCookies();
+			for( Cookie cookie : cookies) {
+				logger.info("cookie " + cookie.getName() + " value : " +cookie.getValue());
+			}
 			
 			String response = httpclient.execute(httpget, getResponseHandler(),
 					localContext);
@@ -113,8 +140,6 @@ public class GisHttpClient {
 		catch(Exception err) {
 			logger.info("localContext " + localContext.toString());
 			logger.info("responseHandler " + responseHandler.toString());
-			CookieStore cookieStore = httpclient.getCookieStore();
-			logger.info("cookieStore " + cookieStore);
 			if ( err instanceof BusinessException) {
 				logger.info(err.getMessage());
 				throw err;
@@ -128,7 +153,7 @@ public class GisHttpClient {
 
 	public String sendGetRequestWithoutToken(URI uri)
 			throws IOException {
-
+		
 		try {
 			
 			HttpGet httpget = new HttpGet(uri);
@@ -144,18 +169,12 @@ public class GisHttpClient {
 			
 			String sessionId = (String)localContext.getAttribute("JSESSIONID");
 			
-			CookieStore cookieStore = httpclient.getCookieStore();
-			//logger.info("cookieStore " + cookieStore);
-			//logger.info("response = " + response);
-			
 			return response;
 
 		} 
 		catch(Exception err) {
 			logger.info("localContext " + localContext.toString());
 			logger.info("responseHandler " + responseHandler.toString());
-			CookieStore cookieStore = httpclient.getCookieStore();
-			logger.info("cookieStore " + cookieStore);
 			if ( err instanceof BusinessException) {
 				logger.info(err.getMessage());
 				throw err;
@@ -176,19 +195,11 @@ public class GisHttpClient {
 
 	public String startPostRequestAsJson(URI uri, String jsonString)
 			throws  IOException {
+		
+		
 		try {
 			
-			
-			
-			
-			HttpPost httpPost = new HttpPost(uri);
-	
-			StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
-	
-			httpPost.setEntity(entity);
-
-			httpPost.addHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));			
-			httpPost.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));
+			HttpPost httpPost = createHttpPost(uri, jsonString);
 			
 			createSecurityHash(jsonString, httpPost);
 			
@@ -198,8 +209,15 @@ public class GisHttpClient {
 					localContext);
 			logger.info("localContext " + localContext.toString());
 			
-			String sessionId = (String)localContext.getAttribute("JSESSIONID");
-			logger.info("sessionId " + sessionId);
+			CookieStore cookieStore = localContext.getCookieStore();
+			List<Cookie> cookies = cookieStore.getCookies();
+			for( Cookie cookie : cookies) {
+				logger.info("cookie " + cookie.getName() + " value : " +cookie.getValue());
+				if ( cookie.getName().equals("AWSALB")) {
+					AWSALB_Cookie = cookie.getValue();
+				}
+			}
+
 	
 			return response;
 		}
@@ -220,6 +238,7 @@ public class GisHttpClient {
 
 	public String startUpload(URI uri, byte[] image, String fileName)
 			throws  IOException {
+		
 		try {
 			
 			//uri = new URI("http://localhost:8080/cm-web-joi/upload");
@@ -288,7 +307,6 @@ public class GisHttpClient {
 			throws  IOException {
 		HttpPut httput = new HttpPut(uri);
 
-		
 		StringEntity entity = new StringEntity(jsonString, CHARSET_UTF8);
 
 		httput.setEntity(entity);
@@ -300,8 +318,6 @@ public class GisHttpClient {
 					localContext);
 	
 			logger.debug("localContext " + localContext.toString());
-	
-			CookieStore cookieStore = httpclient.getCookieStore();
 	
 			return response;
 		}
@@ -318,6 +334,27 @@ public class GisHttpClient {
 			
 		}
 		return null;		
+	}
+
+	private HttpClientContext createContext() {
+		HttpClientContext context = HttpClientContext.create();
+
+		// Use custom cookie store if necessary.
+		CookieStore cookieStore = new BasicCookieStore();
+		context.setCookieStore(cookieStore);
+
+		return context;
+	}
+	protected HttpPost createHttpPost(URI uri, String xml) {
+		HttpPost httpPost = new HttpPost(uri);
+
+		StringEntity entity = new StringEntity(xml, "utf-8");
+
+		httpPost.setEntity(entity);
+		httpPost.addHeader(new BasicHeader("Content-Type", "application/json;charset=utf-8"));			
+		httpPost.addHeader(new BasicHeader("Accept", "application/json;charset=utf-8"));
+		
+		return httpPost;
 	}
 
 }
