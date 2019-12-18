@@ -12,11 +12,16 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import com.bpcs.mdcars.json.protocol.CreateDocumentRequest;
@@ -54,6 +59,16 @@ public class UploadDialog extends Dialog {
 		new ButtonControl(composite, "Upload", 0,  getUploadListener(getShell()));
 		
 		new ButtonControl(composite, "createDocument", 0,  createDocumentListener(getShell()));
+		
+		Canvas canvas = new Canvas(composite, SWT.NONE);
+		final Image image = new Image(getShell().getDisplay(), "C:/temp/daniel-2003.jpg");
+//		Label myLabel = new Label( composite, SWT.NONE );
+//		myLabel.setImage( image );
+		canvas.addPaintListener(new PaintListener() {
+			  public void paintControl(PaintEvent e) {
+			    e.gc.drawImage(image, 0, 0, image.getImageData().width,image.getImageData().height, 0, 0, 100,100);        
+			  }
+			});
 
 		return composite;
 	}
